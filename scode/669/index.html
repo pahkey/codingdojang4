@@ -1,0 +1,1675 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="어떤 자연수(n)를 제곱해서 만들어지는 수를 제곱수(n2, 완전제곱수)라고 한다. 밑(n)이 20이하인 제곱수는 아래와 같다.
+
+1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, ...">
+    <title>제곱수 계산기 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">제곱수 계산기</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">6</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 2</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>어떤 자연수(n)를 제곱해서 만들어지는 수를 제곱수(n<sup>2</sup>, 완전제곱수)라고 한다. 밑(n)이 20이하인 제곱수는 아래와 같다.</p>
+<p>1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, 256, 289, 324, 361, 400</p>
+<p>자연수는 제곱수가 아닌 n의 n<sup>2<sup>k</sup></sup> 꼴로 나타낼 수 있다. (k &gt;= 0인 정수)</p>
+<p>3 = 3<sup>1</sup> = 3<sup>2<sup>0</sup></sup>, 4 = 2<sup>2</sup> = 2<sup>2<sup>1</sup></sup>, 16 = 4<sup>2</sup> = 2<sup>4</sup> = 2<sup>2<sup>2</sup></sup>, 81 = 9<sup>2</sup> = 3<sup>4</sup> = 3<sup>2<sup>2</sup></sup>, 256 = 16<sup>2</sup> = 4<sup>4</sup> = 2<sup>8</sup> = 2<sup>2<sup>3</sup></sup></p>
+<p><strong>문제1</strong></p>
+<p>어떤 자연수를 입력받아서 그 수가 제곱수인지 계산하여 출력하는 프로그램을 만들어보자.</p>
+<h5 id="input">Input 예시</h5>
+<pre><code class="no-highlight">1
+15
+16
+50
+64
+100
+256
+</code></pre>
+
+<h5 id="output">Output 예시</h5>
+<pre><code class="no-highlight">true
+false
+true
+false
+true
+true
+true
+</code></pre>
+
+<p><strong>문제2</strong></p>
+<p>어떤 자연수를 입력받아서 <strong>제곱수가 아닌 n</strong> 과 <strong>k</strong> 값을 계산한 후 <strong>n(k)</strong> 로 출력한다. 단, 1은 k를 0으로 출력한다</p>
+<h5 id="input_1">Input 예시</h5>
+<pre><code class="no-highlight">1
+15
+16
+50
+64
+100
+256
+</code></pre>
+
+<h5 id="output_1">Output 예시</h5>
+<pre><code class="no-highlight">1(0)
+15(0)
+2(2)
+50(0)
+8(1)
+10(1)
+2(3)
+</code></pre>
+
+<p><strong>문제3</strong></p>
+<p>그리고 <strong>n(k)</strong> 로 입력을 받아서 해당하는 수를 계산한다. 이때 n은 제곱수여도 상관없다. 단, n = 1은 1로 계산한다.</p>
+<h5 id="input_2">Input 예시</h5>
+<pre><code class="no-highlight">1(0)
+1(16)
+2(4)
+3(2)
+4(2)
+5(0)
+6(1)
+</code></pre>
+
+<h5 id="output_2">Output 예시</h5>
+<pre><code class="no-highlight">1
+1
+65536
+81
+256
+5
+36
+</code></pre>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2019/08/02 16:23</p>
+                    <p class="static-profile" style="margin:0;padding:0;">AY</p>
+                </div>
+            </div>
+
+            
+                <a name="comment_2943"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">사실상 문제 세 개인데 하나로 써 둬서 문제를 읽다 보면 혼란스럽습니다 =&gt; 직접 수정헀음</span>
+                    -
+                    <span style="font-size:11px;">
+                        Noname,
+                        2023/01/07 14:23
+                    </span>
+                </div>
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>26개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_18763"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>python 3.7</p>
+<pre><code class="python">def sq(num, knum = 0):
+    if (num**(1/2))%1 == 0:
+        return sq(int(num**(1/2)), knum+1)
+    else:
+        return str(num)+&quot;(&quot;+str(knum)+&quot;)&quot;
+
+date = input()
+if &quot;(&quot; in date:
+    n, k = list(map(int, date[:-1].split(&quot;(&quot;)))
+    print(n**(2**k))
+elif int(date) == 1:
+    print(&quot;1(0)&quot;)
+else:
+    print(sq(int(date)))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/08/02 17:34</p>
+                                <p class="static-profile" style="margin:0;padding:0;">AY</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18793"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>어떤 수가 제곱수인 경우 그  제곱근의 정수부를 제곱하면 원래 수와 같아지는 것을 제곱수 판별법으로 이용했습니다.</p>
+<p>Python 3.7</p>
+<pre><code class="python">a = input()
+
+def int_sq_root(num): # compute integer square root if exists. OTW return 0
+    b = int(num**(1/2))
+    if( num - b**2 == 0):
+        return b
+    else: return 0
+
+
+if '(' in a:  # if of the form 'a(b)', compute the number
+    print( int(a[:a.find('(')])**(2**int(a[a.find('(')+1:a.find(')')])))
+elif int_sq_root(int(a)) ==0 or int(a)==1: # input number is not a squre..
+    print( &quot;%s(0)&quot; % a)
+else:
+    count = 1
+    base = int_sq_root(int(a))
+    while int_sq_root(base)!= 0:
+        count+=1
+        base = int_sq_root(base)
+    print( &quot;%d(%d)&quot; %(base,count))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/08/05 01:17</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Sechi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18917"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">while True:
+    user=input(&quot;Input integer or n(k): &quot;)
+    if '(' not in user:
+        n=int(user)
+        k=0
+        if n==1:
+            print(&quot;1(0)&quot;)
+        else:
+            while (n**0.5)%1==0:
+                n=int(n**0.5)
+                k+=1
+            print(&quot;{}({})&quot;.format(n,k))
+    else:
+        user=user[:-1]
+        [n,k]=[int(x) for x in user.split('(')]
+        print(n**(2**k))
+    print()
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/08/12 18:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">ykleeac</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18830"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.*;
+
+public class ExponentCheck {
+    public static Scanner console = new Scanner(System.in);
+    public static void main(String[] args) {
+        System.out.print(&quot;Enter: &quot;); //collects user input
+        String input = console.nextLine();
+
+        while(!input.equalsIgnoreCase(&quot;quit&quot;)) {
+            try {
+                int n = 0;
+                int k = 1;
+                if(input.contains(&quot;(&quot;)) {
+                    n = Integer.parseInt(input.substring(0, 1));
+                    k = Integer.parseInt(input.substring(input.indexOf(&quot;(&quot;) + 1,input.length() - 1));
+                    System.out.println((int) Math.pow(n, Math.pow(2,  k)));
+                } else {
+                    int num = Integer.parseInt(input);  
+                    if(root(num) == 0 || num == 1) {
+                        n = num;
+                        k = 0;
+                    } else {
+                        n = root(num);
+                        while(root(n) != 0) {
+                            k++;
+                            n = root(n);
+                        }
+                    }
+                    System.out.println(n + &quot;(&quot; + k + &quot;)&quot;);
+                }
+            } catch(NumberFormatException nfe) {
+                System.out.println(&quot;Invalid format&quot;);
+            }
+            System.out.println();
+            System.out.print(&quot;Enter: &quot;);
+            input = console.nextLine();
+        }
+    }
+
+    public static int root(int num) {
+        int n = (int) Math.sqrt(num);
+        if(num - Math.pow(n, 2) == 0) return n;
+        else return 0;
+    }
+}
+</code></pre>
+
+<p>NumberFormatException에 대비한 try/catch 구문과 input이 quit일 때까지 출력을 반복하는 while 루프도 포함시켰습니다. 파이썬으로 작성하신 분들과 비교하니 코드가 훨씬 기네요;;</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/08/06 13:58</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박어진</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18883"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3.7 사용. </p>
+<pre><code class="python">def Get_nk(num):
+    n, k = int(num**0.5), 0
+    while(num != 1 and n**2 == num):
+            num, n, k = n, int(num**0.5), k+1
+    return  &quot;{}({})&quot;.format(num, k) 
+
+def Get_num(str_nk):
+    nk_lst = str_nk[:-1].split(&quot;(&quot;)
+    n, k = int(nk_lst[0]), int(nk_lst[1])
+    return  n**(2**k) 
+
+usr_input=input()
+result = Get_num(usr_input) if &quot;(&quot; in usr_input else Get_nk(int(usr_input))
+print(result)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/08/09 09:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">왕초보</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18933"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n=input(&quot;INPUT NUMBER or N(K) : &quot;)
+if &quot;(&quot; not in n:
+    u=int(n)
+    if u==1:
+        print(&quot;1(0)&quot;)
+    else:
+        k=0
+        while u**0.5==int(u**0.5):
+            u=u**0.5
+            k+=1
+        print(f&quot;{int(u)}({k})&quot;)
+else:
+    n=n[:-1]
+    u,k=list(map(int,n.split(&quot;(&quot;)))
+    print(u**(2**k))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/08/14 04:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이우석</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18949"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def sq(num, knum = 0):
+    if (num**(1/2))%1 == 0:
+        return sq(int(num**(1/2)), knum+1)
+    else:
+        return str(num)+&quot;(&quot;+str(knum)+&quot;)&quot;
+
+date = input()
+if &quot;(&quot; in date:
+    n, k = list(map(int, date[:-1].split(&quot;(&quot;)))
+    print(n**(2**k))
+elif int(date) == 1:
+    print(&quot;1(0)&quot;)
+else:
+    print(sq(int(date)))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/08/14 17:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">cond_b</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18999"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>javascript로 작성</p>
+<pre><code class="javascript">getSqrt = (n, count = 0) =&gt; {
+    if (typeof (n) === 'number') {
+        if (n === 1) { return &quot;1(0)&quot; }
+        if (!checkFloat(Math.sqrt(n))) {
+            count++;
+            return getSqrt(Math.sqrt(n), count)
+        } else {
+            return `${n}(${count})`
+        }
+    } else {
+        n = n.replace(&quot;)&quot;, &quot;&quot;)
+        arr = n.split(&quot;(&quot;)
+        answer = parseInt(arr[0])
+        for(let i=0; i&lt; parseInt(arr[1]); i++) {
+            answer = answer*answer
+        }
+
+        return answer
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/08/21 22:03</p>
+                                <p class="static-profile" style="margin:0;padding:0;">임담</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19097"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C#</p>
+<pre><code>    static void Main(string[] args)
+    {
+        string inp = "";
+        int inp_n = 0;
+
+        while (inp != "end")
+        {
+            Console.Write("자연수 입력 (종료 : end): ");
+            inp = Console.ReadLine();
+            if (inp == "end")
+                continue;
+
+            if(inp.Contains("(") &amp;&amp; inp.Contains(")"))
+            {
+                string[] tmp;
+                tmp = inp.Split(new char[] { '(', ')'});
+
+                if (int.TryParse(tmp[0], out int tmp0) == true &amp;&amp; int.TryParse(tmp[1], out int tmp1) == true)
+                    Console.WriteLine("{0}",Math.Pow(tmp0, Math.Pow(2, tmp1)));
+                else
+                    Console.WriteLine("다시");
+
+                continue;
+            }
+            bool gostop = int.TryParse(inp, out inp_n);
+            if (gostop == false || inp_n &lt; 1 || inp_n &gt; 1000)
+            {
+                Console.WriteLine("다시");
+                continue;
+            }
+
+            if (inp_n == 1)
+            {
+                Console.WriteLine("1 (0)");
+                continue;
+            }
+
+            int n = 2, k = 0;
+            while (n &lt;= inp_n)
+            {
+                while (Math.Pow(n, Math.Pow(2, k)) &lt; inp_n)
+                {
+                    k++;
+                }
+                if (Math.Pow(n, Math.Pow(2, k)) == inp_n)
+                    break;
+                n++;
+                k = 0;
+            }
+            Console.WriteLine("{0} ({1})", n, k);
+
+        }
+
+    }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/08/29 15:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">류원형</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19100"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="javascript">function sq(x) {
+    let n = x ** 0.5;
+    if (Number.isInteger(n)) {
+        let res = sq(n);
+        res[1] += 1;
+        return res;
+    } else {
+        return [x, 0];
+    }
+}
+
+const isq = (n, k) =&gt; n**2**k;
+
+console.log(sq(64)); // [8, 1]
+console.log(isq(...sq(64))); // 64
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/08/29 17:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19406"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C#</p>
+<p>자연수 <code>N</code>을  <code>N = n**(2**k)</code> 형태로 표현하기 위해 양변에 로그를 2회(base <code>n</code>, base <code>2</code>) 취하여 <code>k = log_2(log_n(N))</code> 값이 0 이상의 정수인 경우를 찾는 방법을 선택했습니다.</p>
+<pre><code class="cs">using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace CD237
+{
+    class Program
+    {
+        static void Main()
+        {
+            var inputCases1 = new List&lt;int&gt;() { 1, 15, 16, 49, 64, 100, 256 };
+            foreach (int inputCase in inputCases1)
+            {
+                var rst = GetPowerOfNaturalNumber(inputCase);
+                Console.WriteLine($&quot;{inputCase} = {rst.Item1}({rst.Item2}), 제곱수 여부: {rst.Item3}&quot;);
+            }
+
+            var inputCases2 = new List&lt;string&gt;() {&quot;1(0)&quot;, &quot;1(16)&quot;, &quot;2(4)&quot;, &quot;3(2)&quot;, &quot;4(2)&quot;, &quot;5(0)&quot;, &quot;6(1)&quot; };
+            foreach (var inputCase in inputCases2)
+            {
+                int[] separated = 
+                    inputCase.Split(new char[] { '(', ')' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(s=&gt;int.Parse(s)).ToArray();
+                Console.WriteLine($&quot;{inputCase} -&gt; {GetNaturalNumber(separated[0], separated[1])}&quot;);
+            }
+        }
+
+        // output1 계산 - (n, k, 제곱수 여부)의 튜플 반환
+        static (int, int, bool) GetPowerOfNaturalNumber(int N)
+        {
+            if (N == 1) { return (1, 0, true); }
+            int n = 0;
+            double k;
+            do
+            {
+                k = Math.Log(Math.Log(N, ++n), 2);
+            } while (k != (int)k || k &lt; 0);
+            return (n, (int)k, Math.Sqrt(N) == (int)Math.Sqrt(N));
+        }
+
+        // output2 계산
+        static int GetNaturalNumber(int n, int k) =&gt; (int)Math.Pow(n, Math.Pow(2, k));
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/09/24 11:16</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19698"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package d237_square_calculator;
+import java.util.Scanner;
+public class SquareCalculator {
+
+    long square_find(long input) {
+        long i=1;
+        for(i=1; i&lt;input; i++) {
+            if(i*i==input) break;
+        }
+        return i; //제곱수가 아닐 경우에는 input을 그대로 반환하게 된다.
+    }
+
+    public static void main(String[] args) {
+        SquareCalculator sq = new SquareCalculator();
+        Scanner sc = new Scanner(System.in);
+        long input=1, output;
+        int i;
+
+        while(input!=0) {
+            i=0;
+            input = sc.nextLong();
+            output = input;
+            while (output!=sq.square_find(output)) {
+                output=sq.square_find(output);
+                i++;
+            }
+            System.out.println(output + &quot;(&quot;+i+&quot;)&quot;);
+        }
+    }
+}
+</code></pre>
+
+<pre><code class="java">1
+1(0)
+15
+15(0)
+16
+2(2)
+49
+7(1)
+64
+8(1)
+100
+10(1)
+256
+2(3)
+
+</code></pre>
+
+<pre><code class="java">package d237_square_calculator;
+import java.util.Scanner;
+public class SquareCalcul2 {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        long input=1;
+        long square_n;
+
+        while(input!=0) {
+            input = sc.nextLong();
+            square_n = sc.nextLong();
+
+            while(square_n!=0) {
+                input = input*input;
+                square_n--;
+            }
+            System.out.println(input);
+        }
+    }
+}
+
+</code></pre>
+
+<pre><code class="java">1 0
+1
+1 16
+1
+2 4
+65536
+3 2
+81
+4 2
+256
+5 0
+5
+6 1
+36
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/10/17 16:26</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Katherine</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19802"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>while True:
+ num = int(input('수를 입력하시오.'))
+ print(num**2)
+</code></pre>
+
+<p>파이썬으로 했고 영구적입니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/11/01 18:33</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박지훈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20401"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from math import sqrt
+
+
+# n(k) 출력
+n = int(input())
+k = 0
+
+while 1:
+    if sqrt(n) % 1 == 0:
+        k += 1
+        n = sqrt(n)
+    else:
+        break
+
+
+print('%d(%d)' % (n, k))
+
+
+# n(k)입력 받는 함수
+temp = input()
+n = int(temp[0])
+k = int(temp[2:int(len(temp))-1])
+
+print(n**2**k)
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/12/30 14:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">농창</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20429"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n=input(&quot;숫자를 입력하거나 n(k)를 입력하십시오: &quot;)
+if &quot;(&quot; in n:
+    n=n[:-1]
+    n=n.split(&quot;(&quot;)
+    result=int(n[0])**2**int(n[1])
+    print(result)
+else:
+    n=int(n)
+    k=0
+    if n==1:
+        print(&quot;1(0)&quot;)
+    else:
+        while (n**(1/2))%1==0:
+            n=int(n**(1/2))
+            k+=1
+        print(&quot;%d(%d)&quot; %(n,k))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/01 17:15</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박시원</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_21365"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def square(N):
+    check = 0
+    n = N
+    while(True):
+        if n**0.5 - int(n**0.5) == 0:
+            check += 1
+            n = n**0.5
+        elif n**0.5 - int(n**0.5) != 1:
+            return str(int(n))+&quot;(&quot;+str(int(check))+&quot;)&quot;
+
+def make(N):
+    n = &quot;&quot;
+    checklist1 = list()
+    checklist2 = list()
+    check = 0
+    mainlist = list(N)
+    for i in range(len(mainlist)):
+        if mainlist[i] == '(':
+            check = 1
+        if check == 0:
+            checklist1.append(mainlist[i])
+        elif check == 1:
+            checklist2.append(mainlist[i])
+    checklist2.pop(0)
+    checklist2.pop(len(checklist2)-1)
+    for j in range(len(checklist1)):
+        n += checklist1[j]
+    check = &quot;&quot;
+    for k in range(len(checklist2)):
+        check += checklist2[k]
+    n = int(n)
+    check = int(check)
+    for i in range(check):
+        n *= n
+    return n
+
+N =input()
+try:
+    N = int(N)
+    print(square(N))
+except ValueError:
+    print(make(N))
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/03/11 17:34</p>
+                                <p class="static-profile" style="margin:0;padding:0;">BlakeLee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_21586"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">num=int(input('Input  a number...'))
+n,k=num,0
+
+while (n !=1 and (int(n**0.5) == n**0.5)):
+    n,k=int(n**0.5), k+1
+
+print(n,'(',k,')')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/03/30 12:53</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Buckshot</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2642"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">&lt;결과&gt;
+
+Input  a number...1
+1 ( 0 )
+
+Input  a number...15
+15 ( 0 )
+
+Input  a number...16
+2 ( 2 )
+
+Input  a number...49
+7 ( 1 )
+
+Input  a number...64
+8 ( 1 )
+
+Input  a number...100
+10 ( 1 )
+
+Input  a number...256
+2 ( 3 )</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Buckshot,
+                                    2020/03/30 12:53
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22410"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import re
+def sqn(num1, k):   # n(k)로 자연수를 변환하는 함수
+    if num1 != (num1**.5) * (num1**.5):
+        print('{}({})'.format(int(num1), k))
+        return k, num1
+    else:
+        k += 1
+        sqn((num1**.5), k)
+
+def t_sqn(num2):    # n(k) 형태를 자연수로 역변환하는 함수
+    print('{}'.format(t_in2[0]**(2**t_in2[1])))
+
+if __name__ == '__main__':
+    in1, k = 256, 0
+    sqn(in1, k)
+    in2 = '4(2)'
+    t_in2 = list(map(int, re.findall('[0-9]', in2)))
+    t_sqn(t_in2)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/24 10:29</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hwaseong Nam</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22681"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#inputA
+import math
+def find(a):
+    if math.sqrt(a) != int(math.sqrt(a)):
+        return print(a,'(0)')
+    elif a ==1:
+        return print(a,'(0)')
+    else:
+        count = 0
+        while math.sqrt(a) == int(math.sqrt(a)):
+            a = math.sqrt(a)
+            count += 1    
+    return print(int(a),count)
+
+#inputB
+def rev_find(a,b):
+    return a**2**b
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/07/05 15:27</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Money_Coding</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22947"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import math
+
+def sol(inp) :
+    counter = 0
+    while True :
+        sq = math.sqrt(inp)
+        if sq == int(sq) and sq != 1 :
+            counter += 1
+            inp = sq
+        else :
+            return &quot;%s(%s)&quot;%(inp, counter)
+
+if __name__ == &quot;__main__&quot; :
+    print(sol(1))
+    print(sol(15))
+    print(sol(16))
+    print(sol(49))
+    print(sol(64))
+    print(sol(100))
+    print(sol(256))
+</code></pre>
+
+<p>결과</p>
+<pre><code>1(0)
+15(0)
+2.0(2)
+7.0(1)
+8.0(1)
+10.0(1)
+2.0(3)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/08/18 16:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GG</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24608"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import math
+temp = 256
+n = 0
+while 1:
+    if pow(int(math.sqrt(temp)), 2) == temp:
+        temp = int(math.sqrt(temp))
+        n += 1
+    else:
+        break
+print('{}({})'.format(temp, n))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/02/03 19:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김민수</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27066"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from math import *
+
+#1번
+
+n = int(input(&quot;자연수 n을 입력하시오&quot;))
+
+def fun_k (i):
+    k=0
+    a=i
+    while a%2==0:
+        a//=2
+        k+=1
+    return k
+
+def convert(i):
+    a=i
+    k=0
+    if not sqrt(a).is_integer():
+        return i,k
+    else:
+        while sqrt(a).is_integer():
+            if a == sqrt(a):
+                break
+            elif sqrt(a).is_integer():
+                a=sqrt(a)
+                k+=1
+        return int(a),k
+
+print(convert(n))
+
+# 2번
+a = input(&quot;n(k)를 입력하시오&quot;).rstrip(')').split('(')
+
+def convert1 (a):
+    n =int(a[0])
+    k =int(a[1])
+    return n**(2**k)
+
+print(convert1(a))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/22 21:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">양캠부부</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28917"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>dart</p>
+<pre><code>import 'dart:math';
+
+bool isInt(num x) =&gt; x is int || x == x.truncateToDouble();
+bool isSquareNumber(int x) =&gt; isInt(sqrt(x));
+
+List&lt;int&gt; toTwosSquare(int x) {  
+  int k = 0;
+  while (x != 1) {
+    double x_sqrt = sqrt(x);
+    if (!isInt(x_sqrt)) break;
+    k++;
+    x = x_sqrt.truncate();
+  }  
+  return [x, k];
+}
+
+void main() {
+  List data1 = [1, 15, 16, 50, 64, 100, 256];
+  List data3 = [[1, 0], [1, 16], [2, 4], [3, 2], [4, 2], [5, 0], [6, 1]];  
+
+  for (int x in data1) {    
+    List res = toTwosSquare(x);
+    print('$x: ${isSquareNumber(x)}, ${toTwosSquare(x)}');
+  }
+
+  for (List&lt;int&gt; list in data3) {
+    int n = list[0], k = list[1];
+    print(&quot;$n($k): ${pow(n, pow(2, k))}&quot;);
+  }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/01/07 15:11</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29229"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import math
+
+def get_num():
+    while (1):
+        input_num = input(&quot;자연수 입력 : &quot;)
+        try:
+            input_num = int(input_num)
+            break
+        except:
+            print(&quot;잘못된 입력입니다.&quot;)
+    return input_num
+
+def ex_1():
+    input_num = get_num()
+
+    if math.sqrt(input_num).is_integer():
+        print(&quot;True&quot;)
+    else:
+        print(&quot;False&quot;)
+
+
+def ex_2():
+    input_num = get_num()
+    val_dic = {}
+    i = 2
+
+    while input_num != 1:
+        if input_num % i == 0:
+            if i not in val_dic:
+                val_dic[i] = -1
+            val_dic[i] += 1
+            input_num /= i
+        else:
+            i += 1
+
+    for i, j in val_dic.items():
+        print(f&quot;{i}({j})&quot;)
+
+def ex_3():
+    while(True):
+        input_value = input(&quot;입력 : &quot;)
+        try:
+            spl_value = input_value.split(&quot;(&quot;)
+            input_num = int(spl_value[0])
+            range_num = int(spl_value[1][:-1])
+            break
+        except ValueError:
+            print(&quot;잘못된 입력입니다.&quot;)
+
+    result = input_num ** (range_num + 1)
+    print(result)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/04/05 13:28</p>
+                                <p class="static-profile" style="margin:0;padding:0;">HoHyeon Kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29503"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">using System;
+
+namespace solution
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.Write(&quot;제곱수인지 자연수를 입력해 보세요: &quot;);
+            int su = int.Parse(Console.ReadLine());
+            Console.WriteLine(isSquareNumber(su));
+            Console.WriteLine(&quot;{0} :  {1}&quot;, su, calNK(su));
+
+            Console.Write(&quot;\n  n(k) 로 입력하세요: &quot;);
+            string nk = Console.ReadLine();
+            Console.WriteLine(&quot;{0} :  {1}&quot;, nk, calcNK(nk));
+        }        
+
+        private static bool isSquareNumber(int su)
+        {
+            int n = (int)Math.Sqrt(su);
+            return n * n == su;
+        }
+
+        private static string calNK(int su)
+        {
+            if (su == 1)
+                return &quot;1(0)&quot;;
+            int k = 0;
+            while (isSquareNumber(su))
+            {
+                k++;
+                su = (int)Math.Sqrt(su);
+            }
+            return su + &quot;(&quot; + k + &quot;)&quot;;
+        }
+
+        private static int calcNK(string nk)
+        {
+            int n = 0, k = 0;
+            string str = &quot;&quot;;
+            for (int i = 0; i &lt; nk.Length; i++)
+            {
+                if (nk[i] == '(')
+                {
+                    n = int.Parse(str);
+                    str = &quot;&quot;;
+                }
+                else if (nk[i] == ')')
+                    k = int.Parse(str);
+                else
+                    str += nk[i];
+            }
+
+            return (int)Math.Pow(n, Math.Pow(2, k));
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/07/29 22:55</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29970"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">python 3.8
+
+# 문제1의 해
+from math import sqrt
+
+inp = &quot;&quot;&quot;1
+15
+16
+50
+64
+100
+256&quot;&quot;&quot;
+
+any_n =[int(n) for n in inp.split(&quot;\n&quot;)]
+for n in any_n:
+    if sqrt(n) == int(sqrt(n)):
+        print(True)
+    else:
+        print(False)
+
+# 문제2의 해
+def NonSquareNum(n):
+    nsn = [i for i in range(1, n+1) if sqrt(i) != int(sqrt(i)) ]
+    return nsn
+
+for i in any_n:
+    if not NonSquareNum(i) :
+        print(f&quot;{i}(0)&quot;)
+    for n in NonSquareNum(i):
+        for k in range(10): # range(10)에서 10은 입력된 정수보다는 작은 임의의 값.
+            if n**(2**k) == i:
+                print(f&quot;{n}({k})&quot;)
+
+# 문제2의 다른 해
+from math import log2, log
+for i in any_n:
+    if not NonSquareNum(i) :
+        print(f&quot;{i} : {i}(0)&quot;)
+    for n in NonSquareNum(i):
+        result = log(i) / log(n)
+        k = log2(result)
+        if k == int(k):
+            print(f&quot;{i} : {n}({int(k)})&quot;)
+
+
+# 문제3의 해
+import re
+
+inp_v = &quot;&quot;&quot;1(0)
+1(16)
+2(4)
+3(2)
+4(2)
+5(0)
+6(1)&quot;&quot;&quot;
+
+any_inp =[v for v in inp_v.split(&quot;\n&quot;)]
+print(any_inp)
+for v in any_inp:
+    n, k = map(int, re.findall(r'\d+', v))
+    print(f&quot;{v} = {n**(2**k)}&quot;)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2024/04/14 11:53</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김맹준</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

@@ -1,0 +1,1114 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="콘웨이의 생명 게임(Conway&#39;s game of life)은 영국의 수학자 존 호튼 콘웨이가 고안해낸 세포 자동자 게임이다. 
+바둑판처럼 정사각형의 여러 칸으로 나뉘어진 공간에서 한 칸에 한 마리씩 있는 세포들의 삶과 죽음이 펼쳐지는 게임이라...">
+    <title>콘웨이의 생명 게임(Conway&#39;s game of life) - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">콘웨이의 생명 게임(Conway&#39;s game of life)</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">5</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 3</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>콘웨이의 생명 게임(Conway's game of life)은 영국의 수학자 존 호튼 콘웨이가 고안해낸 세포 자동자 게임이다. 
+바둑판처럼 정사각형의 여러 칸으로 나뉘어진 공간에서 한 칸에 한 마리씩 있는 세포들의 삶과 죽음이 펼쳐지는 게임이라 할 수 있다. 
+규칙은 단순하지만 만들어 낼 수 있는 패턴이 무수히 많아서 관심을 끈 게임이기도 하며, 컴퓨터 과학에서도 다루고 있는 게임이다.</p>
+<p>----- 규칙 ------</p>
+<p>다음 세대로 넘어갈 때 세포들의 생사가 결정되는데, 인접한 8개의 칸을 기준으로 하며 그 기준은 다음과 같다.</p>
+<p>어떤 칸과 인접한 8칸 중 정확히 3칸에 세포가 살아 있다면 해당 칸의 세포는 그 다음 세대에 살 수 있다. 
+(계속 살아 있거나 죽은 상태에서 살아난다.)</p>
+<p>어떤 칸과 인접한 8칸 중 정확히 2칸에 세포가 살아 있다면 해당 칸의 세포는 살아 있는 상태 혹은 죽은 상태를 계속 유지한다.</p>
+<p>그 이외의 경우[1] 해당 칸의 세포는 다음 세대에 고립돼 죽거나 혹은 주위가 너무 복잡해져서 죽는다. 
+(계속 죽어 있거나 이미 살아 있는 상태라면 죽는다.)</p>
+<h6 id="_1"></h6>
+<p>우리의 목표는 다음과 같다.</p>
+<p>1.총 격자의 크기 n x n 에서 n 을 입력 받는다.</p>
+<p>2.살아있는 세포는 1, 죽은세포는 0으로 표시한다.</p>
+<p>3.초기값(처음에 살아있는 세포의 위치)를 (x,y) 형태로 입력받는다. 이때 특정 숫자 혹은 숫자쌍이나 단어를 입력할때까지 계속 입력받는다.(입력종료)
+ (또는 파일로 불러와도 된다.)</p>
+<p>3.시행횟수(세대 수)를 입력하고 n세대가 지난 후의 결과를 n*n행렬이나 배열 형태로 반환한다.</p>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">행렬</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2018/05/03 15:22</p>
+                    <p class="static-profile" style="margin:0;padding:0;">Hyuk</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>12개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_12103"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">2</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n = int(input('격자 크기 : '))
+board = []
+for i in range(n):
+    x = []
+    for j in range(n):
+        x.append(0)
+    board.append(x)
+
+a = input('처음에 살아있을 세포 위치 (x y) (끝내기:0)\n')
+while a!='0':
+    x, y = map(int, a.split())
+    board[x][y] = 1
+    a = input()
+
+def nextgene(b):
+    change = []
+    for i in range(n):
+        for j in range(n):
+            cells = []
+            for x in range(max(i-1, 0), min(i+2, n)):
+                for y in range(max(j-1, 0), min(j+2, n)):
+                    cells.append(b[x][y])
+            c = cells.count(1)
+            if c==3:
+                change.append((i, j, 1))
+            elif c==2:
+                pass
+            else:
+                change.append((i, j, 0))
+    for x in change:
+        b[x[0]][x[1]] = x[2]
+    return b
+
+for i in range(int(input(&quot;몇 세대 까지? : &quot;))):
+    for i in board:
+        print(''.join(map(str, i)))
+    print()
+    board = nextgene(board)
+
+for i in board:
+    print(''.join(map(str,i)))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/07 18:53</p>
+                                <p class="static-profile" style="margin:0;padding:0;">차우정</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12078"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>시간 복잡도는 test * n * n * 8 이 되겠네요. 규칙 따라가면서 짜봤습니다.</p>
+<pre><code class="scala">    val num = scala.io.StdIn.readInt() // 격자 크기
+    val board = Array.ofDim[Int](num, num) // n*n 격자
+    import scala.util.control.Breaks._
+    breakable {
+      while(true){
+        val Array(a, b) = scala.io.StdIn.readLine().split(&quot; &quot;).map(_.toInt) // 살아있는 세포 위치
+        if(a == -1 &amp;&amp; b == -1) break()
+        board(a)(b) = 1
+      }
+    }
+    val t = scala.io.StdIn.readInt() // 시행횟수
+
+    def cntAlive(idx1: Int, idx2: Int):Boolean = { // 살아있는 세포 인지 파악
+      if(idx1 &lt; 0 || idx1 &gt;= num || idx2 &lt; 0 || idx2 &gt;= num || board(idx1)(idx2) == 0) false
+      else true
+    }
+    val direction = List((0,1),(1,0),(-1,0),(0,-1),(1,-1),(-1,1),(1,1),(-1,-1)) // 8 가지 방향
+    for(i &lt;- 1 to t){
+      for(j &lt;- 0 until num; k &lt;- 0 until num){
+        var cnt = 0 //살아있는 세포 수 세기
+        for((a, b) &lt;- direction){
+          if(cntAlive(j + a, k + b)) cnt += 1
+        }
+        cnt match {
+          case 2 =&gt; board(j)(k)
+          case 3 =&gt; board(j)(k) = 1
+          case _ =&gt; board(j)(k) = 0
+        }
+      }
+    }
+    board.map(_.toList).toList.foreach(println)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/06 23:38</p>
+                                <p class="static-profile" style="margin:0;padding:0;">한강희</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12241"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>따로 주석이 필요 없게끔 코드를 작성했습니다.</p>
+<pre><code class="java">import java.util.NoSuchElementException;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+public class ConwaysGameOfLife {
+    private int generation = 0;
+    private Cell cell = null;
+
+    private ConwaysGameOfLife() {}
+
+    private static void print(String out) {
+        System.out.print(out);
+    }
+
+    private static void println(String out) {
+        System.out.println(out);
+    }
+
+    private static String readLine() {
+        Scanner scanner = new Scanner(System.in);
+        try {
+            return scanner.nextLine();
+        } catch (NoSuchElementException | IllegalStateException e) {
+            e.printStackTrace();
+        }
+        return &quot;&quot;;
+    }
+
+    public static void main(String[] args) {
+        ConwaysGameOfLife game = new ConwaysGameOfLife();
+        game.getInput();
+        game.play();
+        game.showResult();
+    }
+
+    private void getInput() {
+        inputSizeofSquare();
+        inputCellAlive();
+        inputGeneration();
+    }
+
+    private void inputSizeofSquare() {
+        print(&quot;input size of square (X =&gt; X * X): &quot;);
+        String input = readLine();
+        int size = 0;
+        try {
+            size = Integer.valueOf(input);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        setCellSize(size);
+    }
+
+    private void inputCellAlive() {
+        while (true) {
+            print(&quot;[type \&quot;enough\&quot; to stop] input alive cell (x,y): &quot;);
+            String input = readLine();
+            if (input.equals(&quot;enough&quot;)) {
+                break;
+            }
+            StringTokenizer tokenizer = new StringTokenizer(input, &quot;,&quot;);
+            int x, y;
+            try {
+                x = Integer.valueOf(tokenizer.nextToken());
+                y = Integer.valueOf(tokenizer.nextToken());
+            } catch (NumberFormatException | NoSuchElementException e) {
+                e.printStackTrace();
+                x = 0;
+                y = 0;
+                continue;
+            }
+            cell.setAlive(x, y);
+        }
+    }
+
+    private void inputGeneration() {
+        print(&quot;Nth Generation: &quot;);
+        String input = readLine();
+        try {
+            setGeneration(Integer.valueOf(input));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void play() {
+        for (int i = 0; i &lt; generation; i++) {
+            cell.step();
+        }
+    }
+
+    private void showResult() {
+        cell.draw();
+    }
+
+    private void setCellSize(int cellSize) {
+        cell = new Cell(cellSize);
+    }
+
+    private void setGeneration(int generation) {
+        this.generation = generation;
+    }
+
+    class Cell {
+        private final int cellSize;
+        private final boolean[][] cell;
+
+        Cell(int x) {
+            cellSize = x;
+            cell = new boolean[x][x];
+
+            for (boolean[] b : cell) {
+                for (boolean c : b) {
+                    c = false;
+                }
+            }
+        }
+
+        boolean isAlive(int x, int y) {
+            return cell[x][y];
+        }
+
+        void setAlive(int x, int y) {
+            cell[x][y] = true;
+        }
+
+        private int countAdjacentCellsAlive(int x, int y) {
+            int count = 0;
+            for (int i = x - 1; i &lt;= x + 1; i++) {
+                if (i &lt; 0 || i &gt;= cellSize) {
+                    continue;
+                }
+                for (int j = y - 1; j &lt;= y + 1; j++) {
+                    if (j &lt; 0 || j &gt;= cellSize) {
+                        continue;
+                    }
+                    if (i == x &amp;&amp; j == y) {
+                        continue;
+                    }
+                    if (cell[i][j]) {
+                        count++;
+                    }
+                }
+            }
+
+            return count;
+        }
+
+        private void step() {
+            for (int i = 0; i &lt; cellSize; i++) {
+                for (int j = 0; j &lt; cellSize; j++) {
+                    int count = countAdjacentCellsAlive(i, j);
+                    if (count == 3) {
+                        cell[i][j] = true;
+                    } else if (count != 2) {
+                        cell[i][j] = false;
+                    }
+                }
+            }
+        }
+
+        void draw() {
+            println(&quot;show result...&quot;);
+            for (int i = 0; i &lt; cellSize; i++) {
+                println(&quot;&quot;);
+                for (int j = 0; j &lt; cellSize; j++) {
+                    if (cell[i][j]) {
+                        print(&quot;[ O ]&quot;);
+                    } else {
+                        print(&quot;[ X ]&quot;);
+                    }
+                }
+                println(&quot;&quot;);
+            }
+        }
+    }
+}
+</code></pre>
+
+<p>입력 및 결과 입니다.</p>
+<p>input size of square (X =&gt; X * X): 6
+[type "enough" to stop] input alive cell (x,y): 0,0
+[type "enough" to stop] input alive cell (x,y): 0,4
+[type "enough" to stop] input alive cell (x,y): 0,5
+[type "enough" to stop] input alive cell (x,y): 1,0
+[type "enough" to stop] input alive cell (x,y): 1,3
+[type "enough" to stop] input alive cell (x,y): 1,4
+[type "enough" to stop] input alive cell (x,y): 1,5
+[type "enough" to stop] input alive cell (x,y): 2,2
+[type "enough" to stop] input alive cell (x,y): 2,4
+[type "enough" to stop] input alive cell (x,y): 3,0
+[type "enough" to stop] input alive cell (x,y): 3,1
+[type "enough" to stop] input alive cell (x,y): 3,2
+[type "enough" to stop] input alive cell (x,y): 3,4
+[type "enough" to stop] input alive cell (x,y): 3,5
+[type "enough" to stop] input alive cell (x,y): 4,4
+[type "enough" to stop] input alive cell (x,y): 4,2
+[type "enough" to stop] input alive cell (x,y): 4,1
+[type "enough" to stop] input alive cell (x,y): 5,1
+[type "enough" to stop] input alive cell (x,y): 5,3
+[type "enough" to stop] input alive cell (x,y): 5,5
+[type "enough" to stop] input alive cell (x,y): enough
+Nth Generation: 4
+show result...</p>
+<p>[ X ][ X ][ X ][ X ][ X ][ X ]</p>
+<p>[ X ][ X ][ O ][ X ][ O ][ O ]</p>
+<p>[ X ][ X ][ O ][ X ][ X ][ O ]</p>
+<p>[ X ][ O ][ O ][ X ][ O ][ O ]</p>
+<p>[ O ][ X ][ X ][ X ][ X ][ X ]</p>
+<p>[ X ][ O ][ O ][ O ][ O ][ X ]</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/13 15:08</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Wilde Oscar</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12343"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<pre><code class="ruby">require 'matrix'
+
+def play_life_game
+  # initialize grid
+  live, dead, n = 1, 0, gets.to_i
+  grid, idxes = Matrix.zero(n), (0...n).map {|row| [row].product [*0...n] }
+  alive_cells = File.readlines(&quot;input.dat&quot;).map {|ln| ln.split.map(&amp;:to_i) }
+  alive_cells.each {|pos| col,row = pos; grid.send(:[]=, row, col, live) }
+
+  # make generations
+  cnt = -&gt;g,r,c { g.minor(r-(r&lt;=&gt;0)..r+1, c-(c&lt;=&gt;0)..c+1).sum - g[r,c] }
+  nxt = -&gt;g,r,c,lives=cnt[g,r,c] { lives == 3 ? live : (lives == 2 ? g[r,c] : dead) }
+  make = -&gt;prev,_ { Matrix[*idxes.map {|row| row.map {|idx| nxt[prev, *idx]}}] }
+  puts gets.to_i.times.reduce(grid, &amp;make).to_a.map(&amp;:join)
+end
+</code></pre>
+
+<p><strong>Input file</strong></p>
+<pre><code class="ruby">1 0
+2 1
+0 2
+1 2
+2 2
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby"># glider pattern
+$stdin = StringIO.new(&quot;4\n0\n&quot;) # generation 0 time
+expect { play_life_game }.to output( &quot;0100\n&quot; +
+                                     &quot;0010\n&quot; +
+                                     &quot;1110\n&quot; +
+                                     &quot;0000\n&quot; ).to_stdout
+$stdin = StringIO.new(&quot;4\n4\n&quot;) # generation 4 times
+expect { play_life_game }.to output( &quot;0000\n&quot; + 
+                                     &quot;0010\n&quot; +
+                                     &quot;0001\n&quot; +
+                                     &quot;0111\n&quot; ).to_stdout
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/15 22:11</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12480"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">__author__ = 'SANG WOOK KIM'
+
+class conway_game():
+    import numpy as np
+
+    def __init__(self, n = 6, x = 2):
+        self.n = n # size of map
+        self.x = x # number of generation
+
+    def mapping(self, input_loc):
+        map = np.zeros((self.n,self.n), dtype = int)
+        for loc in input_loc:
+            x,y = loc
+            try:
+                map[int(x)][int(y)] = 1
+            except:
+                pass
+        return map
+
+    def generation(self, map):
+        live_cell = []
+        #n = self.n
+        for x in range(1,self.n-1):
+            for y in range(1, self.n-1):
+                criterion = map[x][y]
+                number_one = 0
+                for i in range(x-1, x+2):
+                    for j in range(y-1, y+2):
+                        if map[i][j] == 1 and (i, j) != (x, y): 
+                            number_one += 1
+                if number_one == 3 :
+                    live_cell.append((x,y))
+                elif number_one == 2 and criterion == 1 :
+                    live_cell.append((x,y))
+        return live_cell
+
+    def ask_input(self):
+        input_loc = []
+        while (True):
+            loc = input(&quot;세포가 살아있는 곳의 좌표를 입력해주세요 &lt;break 입력 시 입력 종료&gt; &gt;&gt;&gt; &quot;)
+            if loc == 'break':
+                break
+            input_loc.append((loc[0], loc[-1]))
+        return input_loc
+
+    def forward(self):
+        for time in range(self.x):
+            if time == 0:
+                input_loc = self.ask_input()
+
+            map = self.mapping(input_loc)
+            print(map)
+            input_loc = self.generation(map)
+            print(input_loc)
+        map = self.mapping(input_loc)
+        print('\n***final result***\n')
+        print(map)
+        return map
+
+conway = conway_game(n = 6, x = 2)
+result = conway.forward()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/24 00:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김상욱</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12974"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import numpy as np
+import random
+
+def summ_around(row,col,board):
+    ans=0
+    moving = [[-1,-1],[0,-1],[1,-1], # 왼쪽열 세로로 3개
+              [-1,0],[1,0], # 해당열 위아래 2개
+              [-1,1],[0,1],[1,1]] # 오른쪽열 세로로 3개
+    for step in moving:
+        t1 = row +step[0]
+        t2 = col +step[1]
+        if t1&lt;0 or t2&lt;0 or t1&gt;= board.shape[0] or t2&gt;= board.shape[1]:
+            continue
+        ans += board[t1,t2]
+    return(ans)
+
+def solution(n)
+    copy = board.copy()
+    for _ in range(n):
+        for i in range(n):
+            for j in range(n):
+                t1=summ_around(i,j,copy) # 근처 8개의 합을 구하기 
+                if t1 ==3:
+                    copy[i,j]=1
+                elif t1==2:
+                    continue
+                else:
+                    copy[i,j]=0
+    return(copy)
+
+print('n을 입력하세요')
+k = input()
+n= int(k)
+board = np.zeros(n*n).reshape([n,n])
+while True:
+    print('x좌표값을 입력하세요');x= int(input())
+    print('y좌표값을 입력하세요');y= int(input())
+    if x&lt;0 or y&lt;0 or x&gt;= board.shape[0] or y&gt;= board.shape[1]:
+        break
+    board[x,y]=1
+solution(n)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/12 21:14</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Seohyun Choi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13203"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def conway_init(con,init):
+    arr = [[0 for j in range(con)] for i in range(con)]
+    for i in init:
+        arr[i[0]][i[1]] = 1
+    return arr
+
+def conway_nearlife(board,x,y):
+    return sum(board[x+i][y+j] for i in range(-1,2)
+                               for j in range(-1,2) if x+i &gt;= 0 and x+i &lt; len(board) and y+j &gt;=0 and y+j &lt; len(board[0]))-board[x][y]
+
+def conway_gen(mat, count):
+    new = []
+    for i in range(len(mat)): new.append(mat[i][:])
+    for i in range(len(mat)):
+        for j in range(len(mat[0])):
+            nearlife = conway_nearlife(mat,i,j)
+            if nearlife == 3: new[i][j] = 1
+            elif nearlife == 2: pass
+            else: new[i][j] = 0
+    if count == 1: return new
+    count -= 1
+    return conway_gen(new, count)
+
+if __name__==&quot;__main__&quot;:
+    init_coord = set()
+    n = int(input('격자 크기: '))
+    while 1:
+        coord = input(('초기값을 (x,y)형태로 입력(입력종료는 엔터): '))
+        if coord == '': break
+        if isinstance(eval(coord), tuple):
+            if eval(coord)[0] &lt; n and eval(coord)[1] &lt; n and len(eval(coord)) == 2:
+                init_coord.add(eval(coord))
+    print('\n초기값: {}\n'.format(init_coord))
+    g = int(input('세대수: '))
+
+    x = conway_init(n,init_coord)
+
+    print('\n0세대')
+    for i in range(n):
+        for j in range(n):
+            print('{} '.format(x[i][j]),end='')
+        print('')
+    result = conway_gen(x,g)
+    print('\n{}세대'.format(g))
+    for i in range(n):
+        for j in range(n):
+            print('{} '.format(result[i][j]),end='')
+        print('')
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/28 04:29</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14144"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def parse(raw_data):
+    data = [int(x) for x in raw_data.split()]
+    N = data.pop(0)
+    arr = [[0 for y in range(N)] for x in range(N)]
+    x, y = data.pop(0), data.pop(0)
+    while x &gt;= 0: # (-1, -1) 전까지
+        arr[x][y] = 1
+        x, y = data.pop(0), data.pop(0)
+    return N, arr, data[0]
+
+def cells_around(N, board, x, y):
+    offset = [(-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (1, -1), (0, -1), (-1, -1)]
+    return sum([board[x + dx][y + dy] for (dx, dy) in offset if x + dx in range(N) and y + dy in range(N)])
+
+def next_gen(N, cur):
+    next = [[0 for y in range(N)] for x in range(N)]
+    for i in range(N):
+        for j in range(N):
+            cells = cells_around(N, cur, i, j)
+            if cells is 3:
+                next[i][j] = 1
+            elif cells is 2:
+                next[i][j] = cur[i][j]
+
+    return next
+
+N, board, G = parse(raw_data)
+for i in range(G):
+    board = next_gen(N, board)
+    print(i + 1,'th generation:')
+    for row in board:
+        print(row)
+    print()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/16 15:06</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15904"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">size = int(input(&quot;격자의 크기 &quot;))  # 격자의 크기 입력
+
+
+def make_square(square_size):
+    square = []
+    for p in range(square_size):  # 크기가 n*n 인 격자 생성
+        in_list = []
+        for q in range(square_size):
+            in_list.append(0)
+        square.append(in_list)
+    return square
+
+
+def enter_cell(cell_list):  # 살아있는 세포의 위치 입력
+    print(&quot;세포의 위치를 입력합니다. 그만하려면 end를 입력&quot;)
+    while 1:
+        location = input(&quot;x,y로 좌표 입력. 최대값은 %d : &quot; % (size)).split(',')
+        print(location)
+        if len(location) == 2:
+            cell_list[int(location[0]) - 1][int(location[1]) - 1] = 1
+        else:
+            break
+
+
+def check_cell(x, y, cell_list):  # x,y cell주변의 세포 값 확인 함수 return으로 cell의 개수 리턴
+    cell_count = 0
+    pm = [-1, 0, 1]
+    for r in pm:
+        for c in pm:
+            if x+r &lt; 0 or y+c &lt; 0 or x+r &gt;= size or y+c &gt;= size:  # x,y의 값을 변화시켰을때 범위를 넘어가는 경우를 방지
+                continue
+            elif r == 0 and c == 0:
+                continue
+            else:
+                if cell_list[x+r][y+c]:
+                    cell_count += 1
+    return cell_count
+
+
+def next_generation(count, cell_list):  # 시행횟수 count입력 받음
+    while count &gt; 0:
+        temp = make_square(size)
+        for a in range(size):
+            for b in range(size):
+                if check_cell(a, b, cell_list) == 2:
+                    temp[a][b] = cell_list[a][b]
+                elif check_cell(a, b, cell_list) == 3:
+                    temp[a][b] = 1
+                else:
+                    temp[a][b] = 0
+        cell_list = temp
+        count -= 1
+    return cell_list
+
+
+cell = make_square(size)
+enter_cell(cell)
+try_count = int(input(&quot;시행 횟수(세대 수)? &quot;))
+cell = next_generation(try_count, cell)
+
+
+for c in cell:
+    print(c)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/01/09 15:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">농창</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17974"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import random
+import copy
+
+direc = ((-1,-1),(-1,0),(-1,1),(0,-1),(0,1),(1,-1),(1,0),(1,1))
+
+def display(L):
+    for line in L:
+        print(' '.join(map(str, line)))
+
+def conway(L, k):
+    for _ in range(k):
+        T = [[0 for i in range(n)] for j in range(n)]
+        for x in range(n):
+            for y in range(n):
+                c = 0
+                for dx, dy in direc:
+                    nx = x + dx
+                    ny = y + dy                
+                    if 0 &lt;= nx &lt; n and 0 &lt;= ny &lt; n and L[nx][ny] == 1:
+                        c += 1
+                if c == 3:
+                    T[x][y] = 1
+                elif c == 2:
+                    T[x][y] = L[x][y]
+                else:
+                    T[x][y] = 0
+    display(L)
+
+
+n = 7
+L = [[int(random.random() &lt; 0.4) for i in range(n)] for j in range(n)]
+display(L)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/21 23:03</p>
+                                <p class="static-profile" style="margin:0;padding:0;">messi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20708"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3입니다</p>
+<p>인접한 세포의 수를 세는 함수를 정의한 다음에 시행했습니다.</p>
+<pre><code class="python">n, N = tuple(map(int, input('한 변의 길이와 시행 횟수 입력 (공백으로 구분):').split()))  # 격자 한변의 길이, 총 시행 횟수
+sqr = [[0 for _ in range(n)] for _ in range(n)]  # n * n의 격자 생성
+
+print('처음에 살아있는 세포의 위치 입력 ((x, y) 또는 x, y 형태)')
+while True:  # 0이나 빈칸이 입력될 때 까지 (x, y)의 좌표를 받는다
+    temp = input()
+    if temp == '0' or temp == '':
+        break
+    alive = tuple(map(int, temp.strip('()').split(',')))
+    sqr[alive[0]][alive[1]] = 1
+
+
+def adj(grid, i0, j0):  # 인접한 1의 개수를 세는 함수
+    count = 0
+    for di in (-1, 0, 1):
+        if i0 + di not in range(n):
+            continue
+        for dj in (-1, 0, 1):
+            if j0 + dj not in range(n):
+                continue
+            elif di == 0 and dj == 0:
+                continue
+            count += grid[i0 + di][j0 + dj]
+    return count
+
+
+# 규칙
+
+print('######## 초기 상태 ########')
+for k in range(n):
+    for m in range(n):
+        print(sqr[k][m], end=' ')
+    print()
+print()
+
+for i in range(N):
+    print('######## {} 번째 시행 ########'.format(i + 1))
+    temp = [[0 for _ in range(n)] for _ in range(n)]
+    for k in range(n):
+        for m in range(n):
+            temp[k][m] = int(adj(sqr, k, m) == 3) + sqr[k][m] * (adj(sqr, k, m) == 2)
+            print(temp[k][m], end=' ')
+        print()
+    print()
+
+    sqr = temp.copy()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/23 21:28</p>
+                                <p class="static-profile" style="margin:0;padding:0;">우재용</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_25455"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">'''
+Conway's game of life
+'''
+
+def printspace(space):
+    for i in range(1, len(space)-1):
+        for j in range(1, len(space)):
+            if space[i][j] == 1:
+                print('■', end=' ')
+            else:
+                print('□', end=' ')
+        print()
+
+size = int(input('input size of space: '))
+space = [[0 for i in range(size+2)] for i in range(size+2)]
+while True:
+    try:
+        x, y = map(lambda x: int(x.strip()), input('input position of alive cell: ').split())
+        space[y][x] = 1
+        printspace(space)
+    except:
+        break
+
+gen = int(input('input number of generation: '))
+
+for i in range(gen):
+    for y in range(1, size+1):
+        for x in range(1, size+1):
+            neighbor = sum(space[y-1][x-1:x+2]) + sum(space[y+1][x-1:x+2]) + space[y][x-1] + space[y][x+1]
+            if neighbor == 3:
+                space[y][x] = 1
+            elif neighbor == 2:
+                pass
+            else:
+                space[y][x] = 0
+    print(f'after {i+1}th generation')
+    printspace(space)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/05/27 10:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">songci</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

@@ -1,0 +1,847 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="문제는 2개입니다.
+문제1
+네 개의 4로 257을 만드세요.
+문제2
+다섯 개의 4로 65532를 만드세요.
+단, 조건이 있습니다.
+이 수들을 만들 때 주어진 개수의 4, 덧셈, 뺄셈, 곱셈, 나눗셈, 거듭제곱만 사용 가능합니다.
+조금...">
+    <title>여러 개의 4 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">여러 개의 4</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">1</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 2</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>문제는 2개입니다.
+문제1
+네 개의 4로 257을 만드세요.
+문제2
+다섯 개의 4로 65532를 만드세요.
+단, 조건이 있습니다.
+이 수들을 만들 때 주어진 개수의 4, 덧셈, 뺄셈, 곱셈, 나눗셈, 거듭제곱만 사용 가능합니다.
+조금 생각하면 누구나 맞힐 수 있습니다.</p>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">곱셈과 제곱</span>
+                
+                    <span class="label label-tag label-xs">2^n</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2021/01/14 13:04</p>
+                    <p class="static-profile" style="margin:0;padding:0;">이준우</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>18개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_24423"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">2</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import math
+def solution(N, number, cnt):
+    #N/N and N
+    if N == number:
+        return 1
+    answer = []
+    stack = [0]
+
+    pow_ = [(N, str(N))]
+    start = 1
+    while True:
+        r = int(str(N) * start)
+        if math.pow(N, r) &gt; number:
+            stack.append(set(pow_))
+            break
+        if math.pow(N, start) == number:
+            answer.append(&quot;%d^%d&quot; %(N, start))
+        pow_.append((math.pow(N, r), &quot;%d^%d&quot; %(N, r)))
+        start += 1
+
+    for i in range(2, cnt + 1): #number of N
+        arr = {(int(str(N) * i), str(N) * i)}
+
+        for j in range(1, i // 2 + 1):
+            for k, k_s in stack[j]: #k = N * j
+                for l, l_s in stack[i - j]: #l = N * (i - j)
+                    arr.add((k + l, k_s + &quot;+&quot; + l_s))
+                    if k &gt; l:
+                        arr.add((k - l, k_s + &quot;-&quot; + l_s))
+                    else:
+                        arr.add((l - k, l_s + &quot;-&quot; + k_s))
+                    arr.add((k * l, k_s + &quot;*&quot; + l_s))
+                    if k != 0:
+                        arr.add((l // k, l_s + &quot;/&quot; + k_s))
+                    if l != 0:
+                        arr.add((k // l, k_s + &quot;/&quot; + l_s))
+
+        for n, s in arr:
+            if number == n and s.count(&quot;4&quot;) == cnt:
+                answer.append(s)
+        stack.append(arr)
+    return answer
+
+if __name__ == &quot;__main__&quot;:
+    first_Q = solution(4, 257, 4)
+    for i in first_Q:
+        print(i)
+
+    second_Q = solution(4, 65532, 5)
+    for i in second_Q:
+        print(i)
+
+</code></pre>
+
+<p>후... 할말하않...</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/01/20 14:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김주영</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24321"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import math
+#1 4의 4승 + 4 / 4
+print(int(math.pow(4,4) + 4/4))
+#2 4의 4승 * 4의 4승 - 4
+print(int(math.pow(4,4) * math.pow(4,4) - 4))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/01/14 17:03</p>
+                                <p class="static-profile" style="margin:0;padding:0;">JohnRay</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24322"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>python 3.8.7입니다.</p>
+<pre><code class="python">&gt;&gt;&gt; #문제1
+&gt;&gt;&gt; 4 ** 4 + 4 / 4
+257.0
+&gt;&gt;&gt; #문제2
+&gt;&gt;&gt; 4 ** 4 * 4 ** 4 - 4
+65532
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/01/14 21:08</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이준우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24352"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="c">#include&lt;stdio.h&gt;
+#include&lt;math.h&gt;
+
+int main()
+{
+    int i;
+
+    i=pow(4,4)+4/4;
+
+    printf(&quot;4^4+4/4=%d\n&quot;,i);
+
+    i=pow(4,4)*pow(4,4)-4;
+
+    printf(&quot;4^4*4^4-4=%d&quot;,i);
+
+    getch();
+    return 0;
+}
+</code></pre>
+
+<p>이건 코딩이라긴 보단 수수깨끼네요</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/01/15 22:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">June</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24416"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">4 ** 4 + 4 / 4
+
+4**4*4**4-4
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/01/20 10:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">손우민</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24477"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>관건은 숫자를 키우는 거네요. 거듭제곱을 잘 이용하는게 포인트인 듯 합니다.
+우선 순위를 명시하기 위해 괄호를 사용했습니다.</p>
+<h3 id="1">문제1</h3>
+<blockquote>
+<p>(4 ** 4) + (4 // 4)</p>
+</blockquote>
+<h3 id="2">문제2</h3>
+<blockquote>
+<p>(4 <strong> 4) * (4 </strong> 4) -4</p>
+</blockquote>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/01/24 00:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">형제는못말려</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24490"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#1. 네개의 4로 257을 만들기
+
+import itertools
+
+calc = [&quot;**&quot;,&quot;*&quot;,'+',&quot;/&quot;,&quot;-&quot;,]
+
+for i in itertools.product(calc,calc,calc): #  리스트 경우의수 만들기
+    expr = &quot;&quot;.join([&quot;4&quot;+j for j in i]+[&quot;4&quot;]) ## 4가 포함된 경우의 수 
+     if expr.count(&quot;4**4**4&quot;) &gt; 0: #큰수 계산 제거(시간절약)
+        continue
+    sum = eval(expr) # 산식계산
+    if sum == 257 or sum == 257.0:
+        print(expr,&quot;=&quot;,sum )
+
+
+#2. 다섯개의 4로 65532 만들기
+
+import itertools
+
+calc = [&quot;**&quot;,&quot;*&quot;,'+',&quot;/&quot;,&quot;-&quot;,]
+
+for i in itertools.product(calc,calc,calc,calc): #  리스트 경우의수 만들기
+    expr = &quot;&quot;.join([&quot;4&quot;+j for j in i]+[&quot;4&quot;]) ## 4가 포함된 경우의 수 
+    if expr.count(&quot;4**4**4&quot;) &gt; 0: #큰수 계산 제거(시간절약)
+        continue
+    sum = eval(expr) # 산식계산
+    if sum == 65532 or sum == 65532.0:
+        print(expr,&quot;=&quot;,sum )
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/01/25 17:26</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이상해라</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24531"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">print('문제 1:',int(4**4+(4/4)))
+print('문제 2:',(4**4)*(4**4)-4)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/01/30 22:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">BlakeLee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24646"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">print(4 ** 4 + int(4 / 4))
+print((4 * 4) ** 4 - 4)
+</code></pre>
+
+<p>파이썬 3.9.1</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/02/05 14:33</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김민수</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25116"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def make257with4():
+    &quot;&quot;&quot;
+    257 = 2 ** 8 + 1
+    257 = 4 ** 4 + 4/4
+    &quot;&quot;&quot;
+    return 4 ** 4 + 4 /4
+
+def make65532with4():
+    &quot;&quot;&quot;
+    65532 = 4 * 3 * 43 * 127
+    65532 = 4 * 129 * 127
+    65532 = 4 * (128 + 1) * (128 - 1)
+    65532 = 4 * (2**7 + 1) * (2**7 - 1)
+    65532 = 4 * (2**14 - 1)
+    65532 = 4 * (4**7 - 1)
+    65532 = 4**8 - 4
+    65532 = 4**(4+4) - 4
+    &quot;&quot;&quot;
+    return 4 ** 4 + 4 ** 4 - 4
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/04/05 14:13</p>
+                                <p class="static-profile" style="margin:0;padding:0;">돈 벌면 뭐하노</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25131"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">num = [4,4,4,4,4]
+print(int(num[0]**num[1]+num[2]/num[3]))
+print(num[0]**num[1]*num[2]**num[3]-num[4])
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/04/07 09:12</p>
+                                <p class="static-profile" style="margin:0;padding:0;">팀운</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25241"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">q1 = 4**4+4/4
+q2 = 4**4**4**4-4
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/04/25 06:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">농창</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27200"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">
+
+
+#1
+from math import *
+
+print((4**4)+(4/4))
+
+
+#2
+print((4*4)**(4)-(sqrt(4)+sqrt(4)))
+
+
+</code></pre>
+
+<p>제곱근을 이용했는데 조건에 맞는지 모르겠네요..</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/30 23:32</p>
+                                <p class="static-profile" style="margin:0;padding:0;">양캠부부</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27919"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>(4^4)*(4^4)-4</p>
+<p>4^4+4/4)</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/05/10 17:38</p>
+                                <p class="static-profile" style="margin:0;padding:0;">yunjae</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28913"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>dart</p>
+<pre><code>import 'dart:math';
+
+void main(List&lt;String&gt; arguments) {
+  print(pow(4, 4) + 4 ~/ 4);
+  print(pow(4, 4) * pow(4, 4) - 4);
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/01/06 00:16</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29116"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>print(4**4+(4/4))
+
+
+
+print((4*4)**4-4)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/03/09 21:06</p>
+                                <p class="static-profile" style="margin:0;padding:0;">조랭이떡</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29413"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">using System;
+using System.Collections.Generic;
+
+namespace solution2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //int N = 257;
+            //int trial = 4;
+            int N = 65532;
+            int trial = 5;
+
+            List&lt;string&gt; list = new List&lt;string&gt;();
+            list.Add(&quot;없슴&quot;);
+            makeN(1, 4, &quot;4&quot;, N, trial, list);
+            if(list.Count == 1)
+                makeN(2, Math.Pow(4,4), &quot;4^^4&quot;, N, trial, list);
+            Console.WriteLine(&quot;\n   {0} = {1}&quot;, list[list.Count-1], N);
+        }
+
+        private static void makeN(int cnt, double sum, string str, int N, int trial, List&lt;string&gt; list)
+        {
+            if(sum == N &amp;&amp; cnt == trial)
+            {
+                list.Add(str);
+                return;
+            }
+            if (cnt &gt; trial)
+                return;
+
+            makeN(cnt + 1, sum * 4, str + &quot; x 4 &quot;, N, trial, list);
+            makeN(cnt + 1, sum + 4, str + &quot; + 4 &quot;, N, trial, list);
+            makeN(cnt + 1, sum - 4, str + &quot; - 4 &quot;, N, trial, list);
+            int tmp = (int)Math.Pow(sum, 4);
+            makeN(cnt + 1, tmp, str + &quot;^^4 &quot;, N, trial,list);
+            tmp = (int)Math.Pow(4, 4);
+            makeN(cnt + 2, sum * tmp, str + &quot; x 4^^4&quot;, N, trial,list);
+            makeN(cnt + 2, sum + tmp, str + &quot; + 4^^4&quot;, N, trial, list);
+            makeN(cnt + 2, sum - tmp, str + &quot; - 4^^4&quot;, N, trial, list);
+            makeN(cnt + 2, sum + 1, str + &quot; + 4/4 &quot;, N, trial,list);            
+            makeN(cnt + 2, sum - 1, str + &quot; - 4/4 &quot;, N, trial,list);
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/07/13 13:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29414"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def makeSu(cnt, sum, s):
+    global list
+    global N
+    global su
+
+    if cnt == N and sum == su:
+        list.append(s)
+        return
+    if cnt &gt;= N:
+        return
+
+    makeSu(cnt + 1, sum + 4, s + ' + 4')
+    makeSu(cnt + 1, sum - 4, s + ' - 4')
+    makeSu(cnt + 1, sum * 4, s + ' x 4')
+    makeSu(cnt + 1, sum ** 4, s + ' ^^4')
+    makeSu(cnt + 2, sum + (4 * 4), s + ' + 4 x 4')
+    makeSu(cnt + 2, sum - (4 * 4), s + ' - 4 x 4')
+    makeSu(cnt + 2, sum * (4 ** 4), s + ' x 4^^4')
+    makeSu(cnt + 2, sum + (4 ** 4), s + ' + 4^^4')
+    makeSu(cnt + 2, sum + (4 / 4), s + ' + 4/4')
+    makeSu(cnt + 2, sum - (4 / 4), s + ' - 4/4')
+
+
+list = ['없음']
+# su = 257
+# N = 4
+
+su = 65532
+N = 5
+
+makeSu(1, 4, '4')
+print(list[-1] , '= ', su)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/07/13 13:26</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

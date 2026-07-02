@@ -1,0 +1,2085 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="**문제**
+
+당신은 상식은행의 입출금 처리 프로그램을 만들고 있다. 상식은행의 입출금 요청 입력 양식에는 금액을 입력하는 난이 있다. 이 난은 한국식 통화 표기법으로 입력하도록 되어 있다. 한국식 통화 표기법은 한국인이 흔히 사용하는 구두식...">
+    <title>엉터리 한글 통화 해석 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">엉터리 한글 통화 해석</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">7</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 4</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p><strong>문제</strong></p>
+<p>당신은 상식은행의 입출금 처리 프로그램을 만들고 있다. 상식은행의 입출금 요청 입력 양식에는 금액을 입력하는 난이 있다. 이 난은 한국식 통화 표기법으로 입력하도록 되어 있다. 한국식 통화 표기법은 한국인이 흔히 사용하는 구두식 표현으로, 다음과 같은 방식이다.</p>
+<pre><code class="no-highlight">1) &quot;일&quot;, &quot;이&quot;, &quot;삼&quot;, &quot;사&quot;, &quot;오&quot;, &quot;육&quot;, &quot;칠&quot;, &quot;팔&quot;, &quot;구&quot;로 1, 2, 3, 4, 5, 6, 7, 8, 9를 표현한다.
+
+2) &quot;십&quot;, &quot;백&quot;, &quot;천&quot;으로 각각 10, 100, 1000의 자리를 표현한다.
+
+3) &quot;만&quot;, &quot;억&quot;, &quot;조&quot;, &quot;경&quot;으로 각각 10000, 100000000, 1000000000000, 10000000000000000의 자리를 표현한다.
+
+4) 위의 1), 2), 3)의 조합을 통해 각종 수를 표기한다.
+
+5) 값이 0인 자리수의 표현은 생략된다.
+
+6) 한국인들의 습관에 따라, 값이 1인 &quot;십&quot;, &quot;백&quot;, &quot;천&quot;, &quot;만&quot; 자리수의 &quot;일&quot; 표현은 생략되어 단순히 &quot;십&quot;, &quot;백&quot;, &quot;천&quot;, &quot;만&quot; 등으로 표기하기도 한다. &quot;억&quot;, &quot;조&quot;, &quot;경&quot; 등은 이에 해당되지 않는다.
+
+7) 0은 &quot;영&quot;으로 표기한다.
+
+8) 한국인들의 습관에 따라, &quot;n억m천&quot;은 (n*억 + m*천)이 아니라, (n*억 + m천만)으로 해석해야 한다. 따라서 (n*억 + m*천)값은 표현되지 않는다.
+</code></pre>
+
+<p>입출금 처리를 지원하기 위해서는 입출금 요청 양식에 입력된 한글 통화 표기를 수로 변환하여야 한다. 한글 통화 표기법에 따라 작성된 문자열을 입력받아 수로 변환하는 프로그램을 작성하시오. 단, 이 프로그램은 수로 변환할 수 없는 문자열이 입력될 경우 false를 출력해야 한다.</p>
+<p><strong>입출력 예</strong></p>
+<pre><code class="no-highlight">&quot;영&quot; -&gt; 0
+
+&quot;일&quot; -&gt; 1
+
+&quot;칠&quot; -&gt; 7
+
+&quot;이천오&quot; 2005
+
+&quot;구천&quot; -&gt; 9000
+
+&quot;일십만&quot; -&gt; 100000
+
+&quot;십만&quot; -&gt; 100000
+
+&quot;일억오천&quot; -&gt; 150000000
+
+&quot;일억오천만&quot; -&gt; 150000000
+
+&quot;억오천만&quot; -&gt; false
+
+&quot;사천구십칠조이천만삼백십육&quot; -&gt; 4097000020000316
+</code></pre>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2014/03/05 17:51</p>
+                    <p class="static-profile" style="margin:0;padding:0;">박연오</p>
+                </div>
+            </div>
+
+            
+                <a name="comment_1293"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">어려워요 ㅠ ㅠ
+오늘은 이걸로 시간을 보낼듯~~~</span>
+                    -
+                    <span style="font-size:11px;">
+                        무명소졸,
+                        2014/03/06 13:28
+                    </span>
+                </div>
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>16개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_1176"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">2</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3.4 로 시도해 보았습니다. 부족하지만, 사족을 달자면..</p>
+<p>1) dictionary로 한글을 숫자로 바꿀수 있도록 했습니다. (아래 코드의 count_dict)</p>
+<p>2) 아래와 같이 수를 세가지로 나누어 list를 만들었습니다.</p>
+<p>a_list = ["일","이","삼","사","오","육","칠","팔","구"],  b_list = ["십","백","천"],  c_list = ["만","억","조","경"]</p>
+<p>3) input string을 list로 변환한후  계산을 total, subtotal, 그리고 나머지 (아래 코드에서는 a) 로 나누어 수행했습니다. total 은 10000 이상, subtotal은 10 - 9999, a는 0-9 를 계산하는 유닛으로 사용 합니다. 각 수는 a_list 에 속하면 a, b_list 에 속하면 b, c_list 에 속하면 c에 배정합니다. 
+예를 들어 "삼천이백오억" 이라면 앞에서 부터</p>
+<p>삼 : a = 3</p>
+<p>천 : b = 1000, subtotal += a*b, (즉 3000 이 됩니다), 그리고 a 는 0 으로 reset 합니다. </p>
+<p>이 : a = 2</p>
+<p>백 : b = 100, subtotal += a*b (즉 3200 이 됩니다), 그리고 a 는 0 으로 reset 합니다. </p>
+<p>오 : a = 5</p>
+<p>억 : c = 10**8, subtotal = subtotal + a (즉 3205 가 됩니다), total = subtotal * c, 그리고 subtotal을 0 으로 reset 합니다. </p>
+<p>4) 마지막 답은 total, subtotal, a 를 모두 더해서 구했습니다.</p>
+<p>5) 예외 조항들은 조건문으로 해결했습니다.</p>
+<pre><code class="python">def korean2number(string):
+    count_dict = {&quot;일&quot;:1,&quot;이&quot;:2,&quot;삼&quot;:3,&quot;사&quot;:4,&quot;오&quot;:5,&quot;육&quot;:6,&quot;칠&quot;:7,&quot;팔&quot;:8,&quot;구&quot;:9,&quot;십&quot;:10,&quot;백&quot;:100,&quot;천&quot;:1000,&quot;만&quot;:10**4,&quot;억&quot;:10**8,&quot;조&quot;:10**12,&quot;경&quot;:10**16}
+    a_list = [&quot;일&quot;,&quot;이&quot;,&quot;삼&quot;,&quot;사&quot;,&quot;오&quot;,&quot;육&quot;,&quot;칠&quot;,&quot;팔&quot;,&quot;구&quot;]
+    b_list = [&quot;십&quot;,&quot;백&quot;,&quot;천&quot;]
+    c_list = [&quot;만&quot;,&quot;억&quot;,&quot;조&quot;,&quot;경&quot;]
+
+    if string == &quot;영&quot;:
+        return 0
+    else:
+        data = list(string)
+        subtotal = 0
+        total = 0
+        a = 0
+        for i in range(len(data)):
+            count = count_dict.get(data[i])            
+            if data[i] in a_list:
+                a = count
+            if data[i] in b_list:
+                b = count
+                if a == 0:
+                    a = 1
+                if data[i] == data[-1] == &quot;천&quot; and total &gt;= 10**8:
+                    subtotal = a * b * 10000
+                else:
+                    subtotal += a * b
+                a = 0
+            if data[i] in c_list:
+                c = count
+                if subtotal == 0 and a == 0:
+                    if c == &quot;만&quot;:
+                        a = 1
+                    else:
+                        return False
+                if subtotal == 0:
+                    total += a * c
+                    a = 0
+                else:
+                    total += (subtotal + a) * c
+                    subtotal = 0
+                    a = 0
+
+        total = total + subtotal + a
+
+    return total
+
+string = input()
+print(korean2number(string))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/11/03 22:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">돌구늬ㅋ~썬</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_382"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<pre><code class="ruby">def korean_expression(s)
+    return 0 if s == &quot;영&quot; # special case : 0
+    return false if s.empty?
+
+    digits = {&quot;일&quot; =&gt; 1, &quot;이&quot; =&gt; 2, &quot;삼&quot; =&gt; 3, &quot;사&quot; =&gt; 4, &quot;오&quot; =&gt; 5, &quot;육&quot; =&gt; 6, &quot;칠&quot; =&gt; 7, &quot;팔&quot; =&gt; 8, &quot;구&quot; =&gt; 9}     
+    small_units = {&quot;십&quot; =&gt; 10, &quot;백&quot; =&gt; 100, &quot;천&quot; =&gt; 1000}
+    large_units = {&quot;만&quot; =&gt; 10000, &quot;억&quot; =&gt; 10 ** 8, &quot;조&quot; =&gt; 10 ** 12, &quot;경&quot; =&gt; 10 ** 16}
+
+    digit_pattern = /[#{digits.keys.join(&quot;&quot;)}]/ #[0-9]
+    small_unit_pattern = /[#{small_units.keys.join(&quot;&quot;)}]/ # 10, 100, 1000
+    large_unit_pattern = /[#{large_units.keys.join(&quot;&quot;)}]/ # 10^4, 10 ^ 8, 10 ^ 12
+
+
+    result_number = 0   
+    s.sub!(/(#{digit_pattern})억(#{digit_pattern}?)천(?!만)/, &quot;\\1억\\2천만&quot;) 
+
+    #irregular character
+    return false unless s =~ /^(#{digit_pattern}|#{small_unit_pattern}|#{large_unit_pattern})+$/
+
+    #separate original input by 만, 억, 조...
+    fragments = s.scan /(?:#{digit_pattern}?#{small_unit_pattern})*#{digit_pattern}?#{large_unit_pattern}?/ 
+
+    #calculate the value of each fragments
+    last_large_unit = 10 ** 20
+    fragments.each do |frag|
+        next if frag.empty?
+        last_num = nil
+        fragments_result = 0
+        fragments_unit = 1
+
+        last_small_unit = 999999999
+
+
+        frag.each_char do |c|                       
+            if c =~ digit_pattern 
+                return false if last_num != nil #consecutive digit occur
+                last_num = digits[c]
+            elsif c =~ small_unit_pattern
+                #삼백이천?
+                return false if last_small_unit &lt; small_units[c]
+                last_small_unit = small_units[c]
+
+                fragments_result += last_num * small_units[c] if last_num != nil 
+                fragments_result += small_units[c] if last_num == nil
+
+                last_num = nil
+            elsif c =~ large_unit_pattern
+                fragments_unit = large_units[c]
+            else
+                #some irregular case
+                return false
+            end
+        end
+
+        #삼천억이십조?
+        return false if last_large_unit &lt; fragments_unit 
+        last_large_unit = fragments_unit
+
+        # rule 6        
+        return false if fragments_unit &gt;= 10 ** 8 &amp;&amp; last_num == nil &amp;&amp; fragments_result == 0                       
+        fragments_result += last_num if last_num != nil 
+        fragments_result = 1 if fragments_unit == 10000 &amp;&amp; last_num == nil &amp;&amp; fragments_result == 0
+
+        result_number += fragments_result * fragments_unit
+    end
+    result_number
+end
+
+p korean_expression &quot;영&quot;
+p korean_expression &quot;일&quot;
+p korean_expression &quot;칠&quot;
+p korean_expression &quot;이천오&quot;
+p korean_expression &quot;구천&quot;
+p korean_expression &quot;일십만&quot;
+p korean_expression &quot;십만&quot;
+p korean_expression &quot;일억오천&quot;
+p korean_expression &quot;일억오천만&quot;
+p korean_expression &quot;억오천만&quot;
+p korean_expression &quot;사천구십칠조이천만삼백십육&quot;
+p korean_expression &quot;사천구십조이천만삼백십육&quot;
+p korean_expression &quot;이천만삼백십육사천구십조&quot;
+p korean_expression &quot;사억오천만구십칠조&quot;
+p korean_expression &quot;사억오천만구십칠조a&quot;
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/03/06 14:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Kim Jaeju</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_383"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>이게 제대로 된건지 모르겠네요.
+아직 내공이 미력해서~ 그래도 한번 올려 봅니다.</p>
+<pre><code class="python">import re
+
+def convertLabel(inputKoreaWord):
+    amount = {&quot;영&quot;:0,&quot;일&quot;:1,&quot;이&quot;:2,&quot;삼&quot;:3,&quot;사&quot;:4,&quot;오&quot;:5,&quot;육&quot;:6,&quot;칠&quot;:7,&quot;팔&quot;:8,&quot;구&quot;:9}
+    unit   = {&quot;십&quot;:10,&quot;백&quot;:100,&quot;천&quot;:1000,&quot;만&quot;:10000,&quot;억&quot;:100000000,&quot;조&quot;:1000000000000,&quot;경&quot;:10000000000000000}
+
+
+    p = re.compile('.*?[경조억만]|.*?[십백천]|.*?[일이삼사오육칠팔구]')
+
+    _lists = p.findall(inputKoreaWord)
+    total = 0
+    for kword in _lists:
+        if len(kword) == 2 and kword[0] in ['십','백','천','만']:
+                    kword =&quot;일&quot; + kword
+
+
+        if len(kword) &gt; 2:
+            subtotal = 0
+            subindex = 0
+
+            for k in (kword[:-1]):
+
+                if k in amount.keys():
+                    subk = amount[k] 
+                    if len(kword[:-1])-1 == subindex:
+                        subtotal = subtotal + subk
+
+                else:
+                    #print(unit[k])
+                    subtotal = subtotal + subk * unit[k]
+                    #print(str(subtotal))
+
+                subindex = subindex + 1
+            subtotal = subtotal * unit[kword[-1]]
+            total = total + subtotal            
+        else:
+            #print(kword)
+            subtotal = 0
+            subindex = 0
+            subk =     0
+            for k in kword:
+
+                if subindex == 0 and k in ['십','백','천','만']:
+                    subk = 1
+                if k in amount.keys():
+
+                    subk = amount[k] 
+                    if len(kword)-1 == subindex:
+                        subtotal = subtotal + subk
+                        #print(subtotal)
+
+                else:
+                    if(subk==0):
+                        return False
+                    subtotal = subtotal + subk * unit[k]
+                    #print(str(subtotal))
+
+                subindex = subindex + 1
+            total = total + subtotal    
+
+
+        #print(subtotal)
+
+
+
+    print(&quot;[&quot;+&quot; &quot;*3+inputKoreaWord+&quot;-&gt;&quot;+str(total)+&quot; &quot;*3+&quot;]&quot;)
+
+
+convertLabel(&quot;영&quot;)
+convertLabel(&quot;일&quot;) 
+convertLabel(&quot;칠&quot;)
+convertLabel(&quot;이천오&quot;)
+convertLabel(&quot;구천&quot;)
+convertLabel(&quot;일십만&quot;)
+convertLabel(&quot;십만&quot;)
+convertLabel(&quot;일억오천&quot;)
+convertLabel(&quot;일억오천만&quot;)
+convertLabel(&quot;사천구십칠조이천만삼백십육&quot;)
+convertLabel(&quot;억오천만&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/03/06 16:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">무명소졸</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_534"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>프로젝트 시 사용해 볼 요량으로 자바로 만들어 봤습니다.</p>
+<p>한글을 숫자로 바꾸는거에 더해서 숫자도 한글로 역변환 가능하도록 기능을 추가 했습니다.</p>
+<pre><code class="java">public class KoreanExpression { 
+    class Ko {
+        String hname;
+        long value;
+
+        public Ko(String hname, long value) {
+            this.hname = hname;
+            this.value = value;
+        }
+
+        public String getHname() {
+            return hname;
+        }
+        public long getValue() {
+            return value;
+        }
+    }
+
+    Ko[] Num = new Ko[] {
+        new Ko(&quot;영&quot;, 0),
+        new Ko(&quot;일&quot;, 1), 
+        new Ko(&quot;이&quot;, 2), 
+        new Ko(&quot;삼&quot;, 3), 
+        new Ko(&quot;사&quot;, 4), 
+        new Ko(&quot;오&quot;, 5), 
+        new Ko(&quot;육&quot;, 6), 
+        new Ko(&quot;칠&quot;, 7), 
+        new Ko(&quot;팔&quot;, 8), 
+        new Ko(&quot;구&quot;, 9),
+        new Ko(&quot;&quot;, 1),
+    };
+
+    Ko[] Range = new Ko[] {
+        new Ko(&quot;천&quot;, 1000),
+        new Ko(&quot;백&quot;, 100),   
+        new Ko(&quot;십&quot;, 10),
+    };
+
+    Ko[] Unit = new Ko[] {
+        new Ko(&quot;경&quot;, 10000000000000000L),
+        new Ko(&quot;조&quot;, 1000000000000L),    
+        new Ko(&quot;억&quot;, 100000000),
+        new Ko(&quot;만&quot;, 10000),
+    };  
+
+    public long toNumeric(String s) {
+        for(Ko num: Num) {
+            if (num.getHname().equals(s)) {
+                return num.getValue();
+            }
+        }
+        return 0;
+    }
+
+    public String toKo(long n) {
+        if (n==0) return &quot;&quot;;
+        for(Ko num: Num) {
+            if (num.getValue() == n) {
+                return num.getHname();
+            }
+        }
+        return &quot;&quot;;
+    }   
+
+    /*
+     * 천, 백, 십 구간
+     */
+    public long getRange(String s) {
+        long result = 0;
+        for(Ko range: Range) {
+            String t[] = s.split(range.getHname(), -1);
+            if (t.length &gt; 1) {
+                for(Ko num: Num) {
+                    if (num.getHname().equals(t[0])) {
+                        long a = toNumeric(t[0]);
+                        result += a * range.getValue();
+                        s = t[1];
+                    }
+                }
+            }
+        }
+
+        if(!&quot;&quot;.equals(s)) {
+            result += toNumeric(s);
+        }
+
+        return result;
+    }
+
+    /*
+     * 일억오천 -&gt; 일억오천만
+     */
+    public String fakeNum(String s) {
+        String pat = &quot;(\\W+)억(\\W+)천$&quot;;
+        return s.replaceAll(pat, &quot;$1억$2천만&quot;);
+    }
+
+    public long ko2num(String ko) {     
+        ko = fakeNum(ko);
+        long result = 0;
+
+        for(Ko unit: Unit) {
+            String t[] = ko.split(unit.getHname(), -1);
+            if (t.length &gt; 1) {
+                if (&quot;&quot;.equals(t[0])) {
+                    return -1;
+                }
+                result += getRange(t[0]) * unit.getValue(); 
+                ko = t[1];
+            }
+        }
+
+        result += getRange(ko);
+        return result;
+    }
+
+    public String fakeKo(String s) {
+        if (&quot;&quot;.equals(s)) {
+            s = &quot;영&quot;;
+        }
+        String pat = &quot;일([천|백|만|십])&quot;;
+        s = s.replaceAll(pat, &quot;$1&quot;);
+        return s;
+    }   
+
+    public String getRange(long num) {
+        StringBuffer sb = new StringBuffer();
+        for(Ko range: Range) {
+            long r = num/range.getValue();
+            if(r &gt; 0) {
+                sb.append(toKo(r)+range.getHname());
+                num = num - r * range.getValue();
+            }
+        }
+        sb.append(toKo(num));
+        return sb.toString();
+    }   
+
+    public String num2ko(long num) {
+        StringBuffer sb = new StringBuffer();       
+        for(Ko unit: Unit) {
+            long r = num / unit.getValue();
+            String _r = getRange(r);
+            if (!&quot;&quot;.equals(_r)) {
+                sb.append(_r).append(unit.getHname());
+            }
+            num = num % unit.getValue();
+        }
+        sb.append(getRange(num));       
+        return fakeKo(sb.toString());
+    }
+}
+</code></pre>
+
+<p>다음은 테스트 코드입니다.</p>
+<pre><code class="java">import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+
+public class KoreanExpressionTest {
+
+    @Test
+    public void testKo2Num() {
+        KoreanExpression ke = new KoreanExpression();
+        assertEquals(0, ke.ko2num(&quot;영&quot;));
+        assertEquals(1, ke.ko2num(&quot;일&quot;));
+        assertEquals(7, ke.ko2num(&quot;칠&quot;));
+        assertEquals(2005, ke.ko2num(&quot;이천오&quot;));
+        assertEquals(9000, ke.ko2num(&quot;구천&quot;));
+        assertEquals(9530, ke.ko2num(&quot;구천오백삼십&quot;));
+        assertEquals(1000, ke.ko2num(&quot;일천&quot;));
+        assertEquals(1000, ke.ko2num(&quot;천&quot;));
+        assertEquals(100000, ke.ko2num(&quot;일십만&quot;));
+        assertEquals(100000, ke.ko2num(&quot;십만&quot;));
+        assertEquals(150000000, ke.ko2num(&quot;일억오천만&quot;));
+        assertEquals(150000000, ke.ko2num(&quot;일억오천&quot;));
+        assertEquals(-1, ke.ko2num(&quot;억오천만&quot;));
+        assertEquals(4097000020000316L, ke.ko2num(&quot;사천구십칠조이천만삼백십육&quot;));
+    }
+
+    @Test
+    public void testNum2Ko() {
+        KoreanExpression ke = new KoreanExpression();
+        assertEquals(&quot;영&quot;, ke.num2ko(0));
+        assertEquals(&quot;일&quot;, ke.num2ko(1));
+        assertEquals(&quot;칠&quot;, ke.num2ko(7));
+        assertEquals(&quot;구천오백삼십&quot;, ke.num2ko(9530));
+        assertEquals(&quot;구천&quot;, ke.num2ko(9000));
+        assertEquals(&quot;이천오&quot;, ke.num2ko(2005));
+        assertEquals(&quot;천&quot;, ke.num2ko(1000));
+        assertEquals(&quot;십만&quot;, ke.num2ko(100000));
+        assertEquals(&quot;일억오천만&quot;, ke.num2ko(150000000));
+        assertEquals(&quot;사천구십칠조이천만삼백십육&quot;, ke.num2ko(4097000020000316L));
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/03/27 16:28</p>
+                                <p class="static-profile" style="margin:0;padding:0;">pahkey</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1406"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">짱짱이십니다^^</span>
+                                -
+                                <span style="font-size:11px;">
+                                    무명소졸,
+                                    2014/03/28 10:43
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2774"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <ul>
+<li>python으로 작성하였습니다.</li>
+</ul>
+<pre><code class="python">
+currency={u&quot;영&quot;:0,u&quot;일&quot;:1,u&quot;이&quot;:2,u&quot;삼&quot;:3,u&quot;사&quot;:4,u&quot;오&quot;:5,u&quot;육&quot;:6,u&quot;칠&quot;:7,u&quot;팔&quot;:8,u&quot;구&quot;:9,
+         u&quot;십&quot;:10,u&quot;백&quot;:100,u&quot;천&quot;:1000,u&quot;만&quot;:10000,u&quot;억&quot;:100000000,u&quot;조&quot;:1000000000000,u&quot;경&quot;:10000000000000000}
+
+
+def isValid(s): #더있겠지만,우선 문제의 조건으로 기재된 억,조,경 앞에 일이 생략된경우만 처리
+    for idx in range(len(s)):
+        if idx==0:
+            if(s[0]==u&quot;억&quot; or s[0]==u&quot;조&quot; or s[0]==u&quot;경&quot;):
+                return False
+        elif s[idx]==u&quot;억&quot;:
+            if(s[idx-1]==u&quot;조&quot; or s[idx-1]==u&quot;경&quot;):
+                return False
+        elif s[idx]==u&quot;조&quot;:
+            if(s[idx-1]==u&quot;경&quot;):
+                return False
+    return True
+
+def calCurrency(s):
+
+    if not isValid(s):
+        return &quot;False&quot;
+
+
+
+    if s.find(u&quot;억&quot;)&gt;0 and s[-1]==u&quot;천&quot;:
+        s+=u&quot;만&quot;
+
+    res=&quot;&quot;;mul=1
+    for idx in range(len(s)-1,-1,-1):
+
+        if(currency[s[idx]]&gt;9 and currency[s[idx]]&gt;mul):#가장 큰 자리수를 저장
+            mul=currency[s[idx]];
+
+        if idx==len(s)-1:
+            res+=&quot;(&quot;+str(currency[s[idx]])
+
+        elif currency[s[idx+1]]&lt;currency[s[idx]]: #더뒤보다 큰자리가 올때: 새로운 숫자 그룹 시작
+            res+=&quot;)+(&quot;+str(currency[s[idx]])
+
+            if(currency[s[idx]]&lt;mul):#저장된 자리수를 사용 ie.사천십칠조 천의 경우 새로운 숫자그룹이 시작되지만 사실은 뒤에 조를 자리수로 적용해야
+                res+=&quot;*&quot;+str(mul)
+
+        else:#뒤숫자보다 작은자리 :수표현으로 사용됨
+            res+=&quot;*&quot;+str(currency[s[idx]])
+
+    res+=&quot;)&quot;
+
+    return res
+
+
+
+s0=u&quot;영&quot; #-&gt;0
+s1=u&quot;일&quot; #-&gt; 1
+s2=u&quot;칠&quot; #-&gt; 7
+s3=u&quot;이천오&quot;#-&gt;2005
+s4=u&quot;구천&quot;#-&gt; 9000
+s5=u&quot;일십만&quot; #-&gt; 100000
+s6=u&quot;십만&quot; #-&gt; 100000
+s7=u&quot;일억오천&quot; #-&gt; 150000000
+s8=u&quot;일억오천만&quot; #-&gt; 150000000
+s9=u&quot;억오천만&quot; #-&gt; false
+s10= u&quot;팔만천구십칠경이천만십이조이백십육&quot; #-&gt; 4097000020000316
+s= u&quot;사천구십칠조이천만삼백십육&quot; #-&gt; 4097000020000316
+
+print eval(calCurrency(s0))
+print eval(calCurrency(s1))
+print eval(calCurrency(s2))
+print eval(calCurrency(s3))
+print eval(calCurrency(s4))
+print eval(calCurrency(s5))
+print eval(calCurrency(s6))
+print eval(calCurrency(s7))
+print eval(calCurrency(s8))
+print eval(calCurrency(s9))
+print eval(calCurrency(s10))
+print calCurrency(s10)
+print eval(calCurrency(s))
+print calCurrency(s)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/01/12 16:29</p>
+                                <p class="static-profile" style="margin:0;padding:0;">씨니컬우기님</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3287"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<pre><code class="ruby">num = &quot;영일이삼사오육칠팔구&quot;.chars.zip([*0..9]).to_h
+digit = &quot;십백천만억조경&quot;.chars.zip([*1..4,8,12,16].map {|e|10**e}).to_h
+
+chunk = -&gt;str { str.chars.map {|n| num[n]||digit[n]}.chunk_while {|i,j|i&lt;j} }
+pairs = -&gt;str { chunk[str].map {|n,*d| d.size&gt;0? [n,[*d].reduce(:*)] : [1,n]} }
+revised = -&gt;str { pairs[str].tap {|e| e[-1][-1]=10**7 if e[-2,2]&amp;.map(&amp;:last)==[10**8,10**3] }}
+
+valid = -&gt;str { chunk[str].none? {|e| e[0]&gt;=10**8} }
+kr_cur = -&gt;str { valid[str]? revised[str].reduce(0) {|sum,(n,d)| d&gt;sum ? (sum+n)*d : sum+(n*d)} : false}
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby">case1 = %w(영 일 칠 이천오 구천 일십만 십만)
+case2 = %w(일억오천 일억오천만 억오천만 사천구십칠조이천만삼백십육)
+expect(case1.map &amp;kr_cur).to eq [0, 1, 7, 2005, 9000, 10**5, 10**5]
+expect(case2.map &amp;kr_cur).to eq [15*10**7, 15*10**7, false, 4097000020000316]
+</code></pre>
+
+<p><strong>풀이</strong></p>
+<pre><code class="ruby"># 해쉬생성. chunk(구조화) &gt; pair(보정) &gt; kr_cur(계산). 3개 함수가 전부.
+# revised, valid 함수는 각각 6번(교정), 8번(필터링) 예외 적용
+1.[수, 자리수] 형식의 pair로 만들기 : ex) 천오백만 =&gt; [1,1000],[5,100],[1,10000]
+2. pair를 곱해서 이전 pair들의 합과 더해나감 : ex) 0 + (1*1000) =&gt; 0 + (1*1000)+(1*500)
+3. 이전 pair까지의 합 보다 자리수가 클 경우 둘을 곱함. ex) 1500 &lt; 10000 ? 1500*10000
+</code></pre>
+
+<p>1~8번 규칙, 테스트데이터 이외의 예외(가령, 오백오백, 삼오십, 오십구백 등)는 고려하지 않음. 필요시 valid에 조건만 추가하면 ok.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/03/25 23:09</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4120"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Dephi 2010</p>
+<pre><code class="delphi">function fnHangultoNumber(s: string): Int64;
+const
+  C_X: array [0 .. 4] of Int64 = (1, 10000, 100000000, 1000000000000, 10000000000000000);
+  C_X2: array [0 .. 3] of Integer = (1, 10, 100, 1000);
+  C_U: string = '만억조경';
+  C_V: string = '영일이삼사오육칠팔구십백천';
+var                                           
+  U, V: array [0 .. 5] of Integer;
+  i, n1, n2, val, val2, nCnt: Integer;
+begin
+  result := -1;
+  nCnt := 0;
+  // 데이터 초기화 
+  for i := 0 to 5 do
+  begin
+    U[i] := 0;
+    V[i] := 0;
+  end;
+
+  val := 0;
+  val2 := 0;
+  for i := 1 to Length(s) do
+  begin
+    n1 := pos(s[i], C_U);
+    if n1 &gt; 0 then // 만,천,억,조,경 
+    begin
+      U[nCnt] := n1;
+      V[nCnt] := val + val2;
+      val := 0; // 합계 
+      val2 := 0; // 마지막 자리 숫자 
+      if i = Length(s) then // 끝자리면 빠져나가기 
+        break;
+      Inc(nCnt);  //단위 변경
+    end
+    else
+    begin
+      n2 := pos(s[i], C_V); //단위 내 값
+
+      if n2 = 0 then //숫자 단위가 아니면 Error
+        exit(-1);
+      if n2 &gt;= 11 then //십백천
+      begin
+        val := val + Max(val2, 1) * C_X2[n2 - 10];
+        val2 := 0;
+      end
+      else
+        val2 := n2 - 1; // 마지막 자리 숫자 기록 - 일십백천에 사용
+    end;
+  end;
+
+  if val + val2 &gt; 0 then //마지막 숫자처리 없으면 반영함.
+    V[nCnt] := val + val2;
+
+  result := 0;
+  for i := 0 to nCnt do // 단위 Error Check 및 숫자 합산
+  begin
+    if ((i &gt; 0) and (U[i - 1] &lt; U[i])) or (V[i] = 0) then
+      exit(-1); // 단위 Eror
+    result := result + V[i] * C_X[U[i]]; //단위내값 * 단위(만,억,조,경) 합산
+  end;
+end;
+
+
+procedure TForm4.btn한글통화변경Click(Sender: TObject);
+Const
+  C_Str: array [0 .. 10] of string = ('영', '일', '칠', '이천오', '구천', '일십만', '십만', '일억오천', '일억오천만',
+    '억오천만', '사천구십칠조이천만삼백십육');
+var
+  s: string;
+  i: Integer;
+begin
+  for i := 0 to 10 do
+  begin
+    s := C_Str[i];
+    Memo1.Lines.Add(s + #9 + ' =&gt; ' + format('%d', [fnHangultoNumber(s)]));
+  end;
+end;
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/07/10 14:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">강 경수</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5271"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">public class test7 {
+    public static HashMap&lt;Character, Long&gt; nM = new HashMap&lt;&gt;();
+    public static HashMap&lt;Character, Long&gt; nM2 = new HashMap&lt;&gt;();
+    public static HashMap&lt;Character, Long&gt; nM3 = new HashMap&lt;&gt;();
+    public static void main(String args[]){
+        process1();
+    }
+    public static void process1(){
+        nM.put('영', 0L);
+        nM.put('일', 1L);
+        nM.put('이', 2L);
+        nM.put('삼', 3L);
+        nM.put('사', 4L);
+        nM.put('오', 5L);
+        nM.put('육', 6L);
+        nM.put('칠', 7L);
+        nM.put('팔', 8L);
+        nM.put('구', 9L);
+        nM2.put('십', 10L);
+        nM2.put('백', 100L);
+        nM2.put('천', 1000L);
+        nM3.put('만', 10000L);
+        nM3.put('억', 100000000L);
+        nM3.put('조', 1000000000000L);
+        nM3.put('경', 10000000000000000L);
+        Scanner sc = new Scanner(System.in);
+        String numS = sc.nextLine();
+        process2(numS);
+    }
+    public static void process2(String numS){
+        long sum = 0L;
+        long dw = 1L;
+        long dwsum = 0L;
+        boolean dwb = false;
+        for(int i=0;i&lt;numS.length();i++){
+            if(nM.get(numS.charAt(i))!=null){
+                if(i==numS.length()-1)
+                    sum+=dwsum+nM.get(numS.charAt(i));
+                else
+                    dw = nM.get(numS.charAt(i));
+                dwb = true;
+                System.out.println(dw);
+            }else if(nM2.get(numS.charAt(i))!=null){
+                dwsum +=dw * nM2.get(numS.charAt(i));
+                if(i==numS.length()-1){
+                    if('천'==numS.charAt(i)&amp;&amp;i&gt;2&amp;&amp;('억'==numS.charAt(i-1)||'억'==numS.charAt(i-2))){
+                        dwsum *=10000;
+                    }
+                    sum+=dwsum;
+                }
+                dwb = false;
+            }else if(nM3.get(numS.charAt(i))!=null){
+                if(('억'==numS.charAt(i)||'조'==numS.charAt(i)||'경'==numS.charAt(i))&amp;&amp;dwsum==0){
+                    if(dw &lt;2&amp;&amp;!dwb){
+                        System.out.println(&quot;억 조 경 은 단위가 필요해&quot;);
+                        return;
+                    }
+                }
+                sum +=dwsum*nM3.get(numS.charAt(i));
+                if(dwb)
+                    sum+=dw*nM3.get(numS.charAt(i));
+                dwsum = 0;
+                dw = 1;
+                dwb = false;
+            }
+        }
+        System.out.println(sum);
+    }
+}
+
+</code></pre>
+
+<p>많이 부족합니다 지적 부탁드려요!</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/11/15 12:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김 지수</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5344"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>영
+high : 0
+low : 0
+0</p>
+<p>일
+high : 0
+low : 1
+1</p>
+<p>칠
+high : 0
+low : 7
+7</p>
+<p>이천오
+high : 0
+low : 2005
+2005</p>
+<p>구천
+high : 0
+low : 9000
+9000</p>
+<p>일십만
+high : 0
+low : 100000
+100000</p>
+<p>십만
+high : 0
+low : 100000
+100000</p>
+<p>일억오천
+high : 1
+low : 50000000
+150000000</p>
+<p>일억오천만
+high : 1
+low : 50000000
+150000000</p>
+<p>억오천만
+false</p>
+<p>사천구십칠조이천만삼백십육
+high : 40970000
+low : 20000316
+4097000020000316</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;math.h&gt;
+#include &lt;string.h&gt;
+#define MAX_COLS 1000000
+
+struct Map {
+    int high;
+    int low;
+    char* cval;
+}m[17];
+
+void executeMaping ();
+
+int main() {
+    executeMaping();
+
+    char input[MAX_COLS] = &quot;사천구십칠조이천만삼백십육&quot;;
+    char* temp = input;
+
+    int i = 0;
+
+    int high = 0;
+    int low = 0;
+    int t = 1, tsum = 0;
+    bool eof = false;
+    int b = 0;
+
+    char* temp2 = input;
+    for(int i=0;i&lt;strlen(input)/2;i++) {
+        if(!strncmp(temp2, m[14].cval, 2) &amp;&amp; i != strlen(input)/2-1) b++;
+        if(b==1)
+            if(!strncmp(temp2, m[13].cval, 2))
+                b++;
+        temp2 = temp2 + 2;
+    }
+    if(b==1)
+        strcat(input, &quot;만&quot;);
+    printf(&quot;%s\n&quot;, input);
+    for(int i=0;i&lt;strlen(input)/2;i++) {
+        int index = 0;
+        while(strncmp(temp, m[index].cval, 2)) {
+            index++;
+        }
+        if(index == 0) {
+            low = 0;
+            break;
+        }
+
+        if(index &gt; 0 &amp;&amp; index &lt; 10) {
+            t = m[index].low;
+        }   
+        if(index &lt; 13 &amp;&amp; index &gt;= 10) {
+            if(t==0) tsum = tsum + 1 * m[index].low;
+            else tsum = tsum + t * m[index].low;
+            t=0;
+        }
+
+       if(index &gt;= 13) {
+           if(i==0)
+               eof = true;
+           if(t!=1)
+                tsum = tsum + t;
+            if(m[index].low != 0) {
+                if(tsum == 0) tsum = 1;
+                low = tsum * m[index].low;
+                tsum  = 0;
+            }
+            if(m[index].high != 0) {
+                if(tsum == 0) tsum = 1;
+                high = tsum * m[index].high;
+                tsum = 0;
+            }
+        } else if(i == strlen(input)/2-1) {
+            tsum = tsum + t;
+            low = low+tsum;
+        }
+
+        temp=temp+2;
+    }
+    printf(&quot;high : %d\n&quot;, high);
+    printf(&quot;low : %d\n&quot;, low);
+
+
+    if(eof == false) {
+        if(high!=0) {
+            printf(&quot;%d&quot;, high);
+            int num = low;
+            int len = num;
+            int count = 0;
+            do {
+                num = int(num/10);
+                count++;
+            }while(num &gt; 0);
+            for(int i=0;i&lt;7-count;i++)
+                printf(&quot;0&quot;);
+        }
+        printf(&quot;%d&quot;, low);
+    } else
+        printf(&quot;false&quot;);
+    return 0;
+}
+
+void executeMaping () {
+    m[0].cval = &quot;영&quot;;
+    m[0].high = 0;
+    m[0].low = 0;
+
+    m[1].cval = &quot;일&quot;;
+    m[1].high = 0;
+    m[1].low = 1;
+
+    m[2].cval = &quot;이&quot;;
+    m[2].high = 0;
+    m[2].low = 2;
+
+    m[3].cval = &quot;삼&quot;;
+    m[3].high = 0;
+    m[3].low = 3;
+
+    m[4].cval = &quot;사&quot;;
+    m[4].high = 0;
+    m[4].low = 4;
+
+    m[5].cval = &quot;오&quot;;
+    m[5].high = 0;
+    m[5].low = 5;
+
+    m[6].cval = &quot;육&quot;;
+    m[6].high = 0;
+    m[6].low = 6;
+
+    m[7].cval = &quot;칠&quot;;
+    m[7].high = 0;
+    m[7].low = 7;
+
+    m[8].cval = &quot;팔&quot;;
+    m[8].high = 0;
+    m[8].low = 8;
+
+    m[9].cval = &quot;구&quot;;
+    m[9].high = 0;
+    m[9].low = 9;
+
+    m[10].cval = &quot;십&quot;;
+    m[10].high = 0;
+    m[10].low = 10;
+
+    m[11].cval = &quot;백&quot;;
+    m[11].high = 0;
+    m[11].low = 100;
+
+    m[12].cval = &quot;천&quot;;
+    m[12].high = 0;
+    m[12].low = 1000;
+
+    m[13].cval = &quot;만&quot;;
+    m[13].high = 0;
+    m[13].low = 10000;
+
+    m[14].cval = &quot;억&quot;;
+    m[14].high = 1;
+    m[14].low = 0;
+
+    m[15].cval = &quot;조&quot;;
+    m[15].high = 10000;
+    m[15].low = 0;
+
+    m[16].cval = &quot;경&quot;;
+    m[16].high = 100000000;
+    m[16].low = 0;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/11/22 15:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">코딩초보</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7405"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">// 한글 통화 해석 - C#
+using System;
+
+namespace KoreaMoney
+{
+    class Program
+    {
+        static long translater(string select, out long result)
+        {
+            result = 0;
+            if (checker(select) == false)
+                return -1;
+            if (select.Contains(&quot;경&quot;))
+            {
+                string temp = select.Split('경')[0];
+                if (temp == &quot;&quot;)
+                    return -1;
+                result += translater_num(temp) * 10000000000000000;
+            }
+            if (select.Contains(&quot;조&quot;))
+            {
+                string temp = select.Split('조')[0];
+                if (temp.Contains(&quot;경&quot;))
+                    temp = temp.Split('경')[1];
+                if (temp == &quot;&quot;)
+                    return -1;
+                result += translater_num(temp) * 1000000000000;
+            }
+            if (select.Contains(&quot;억&quot;))
+            {
+                string temp = select.Split('억')[0];
+                if (temp.Contains(&quot;조&quot;))
+                    temp = temp.Split('조')[1];
+                else if (temp.Contains(&quot;경&quot;))
+                    temp = temp.Split('경')[1];
+                if (temp == &quot;&quot;)
+                    return -1;
+                result += translater_num(temp) * 100000000;
+            }
+            if (select.Contains(&quot;만&quot;))
+            {
+                string temp = select.Split('만')[0];
+                if (temp.Contains(&quot;억&quot;))
+                    temp = temp.Split('억')[1];
+                else if (temp.Contains(&quot;조&quot;))
+                    temp = temp.Split('조')[1];
+                else if (temp.Contains(&quot;경&quot;))
+                    temp = temp.Split('경')[1];
+                result += translater_num(temp) * 10000;
+            }
+            if (!select.Contains(&quot;만&quot;))
+                if (!select.Contains(&quot;억&quot;))
+                    if (!select.Contains(&quot;조&quot;))
+                        if (!select.Contains(&quot;경&quot;))
+                            result += translater_num(select);
+                        else
+                            result += translater_num(select.Split('경')[1]) * 1000000000000;
+                    else
+                        result += translater_num(select.Split('조')[1]) * 100000000;
+                else
+                    result += translater_num(select.Split('억')[1]) * 10000;
+            else
+                result += translater_num(select.Split('만')[1]);
+            return result;
+        }
+        static long translater_num(string select)
+        {
+            long result = 0;
+            if (select.Contains(&quot;천&quot;))
+            {
+                string temp = select.Split('천')[0];
+                result += translater_dec(temp, 1) * 1000;
+            }
+            if (select.Contains(&quot;백&quot;))
+            {
+                string temp = select.Split('백')[0];
+                if (temp.Contains(&quot;천&quot;))
+                    temp = temp.Split('천')[1];
+                result += translater_dec(temp, 1) * 100;
+            }
+            if (select.Contains(&quot;십&quot;))
+            {
+                string temp = select.Split('십')[0];
+                if (temp.Contains(&quot;백&quot;))
+                    temp = temp.Split('백')[1];
+                else if (temp.Contains(&quot;천&quot;))
+                    temp = temp.Split('천')[1];
+                result += translater_dec(temp, 1) * 10;
+            }
+            if (!select.Contains(&quot;십&quot;))
+                if (!select.Contains(&quot;백&quot;))
+                    if (!select.Contains(&quot;천&quot;))
+                        result += translater_dec(select, 0);
+                    else
+                        result += translater_dec(select.Split('천')[1], 0);
+                else
+                    result += translater_dec(select.Split('백')[1], 0);
+            else
+                result += translater_dec(select.Split('십')[1], 0);
+            return result;
+        }
+        static int translater_dec(string select, int i)
+        {
+            switch (select)
+            {
+                case &quot;&quot;:
+                    if (i == 0)
+                        return 0;
+                    else
+                        return 1;
+                case &quot;영&quot;:
+                    return 0;
+                case &quot;일&quot;:
+                    return 1;
+                case &quot;이&quot;:
+                    return 2;
+                case &quot;삼&quot;:
+                    return 3;
+                case &quot;사&quot;:
+                    return 4;
+                case &quot;오&quot;:
+                    return 5;
+                case &quot;육&quot;:
+                    return 6;
+                case &quot;칠&quot;:
+                    return 7;
+                case &quot;팔&quot;:
+                    return 8;
+                case &quot;구&quot;:
+                    return 9;
+                default:
+                    return 0;
+            }
+        }
+        static bool checker(string select)
+        {
+            select = select.Replace(&quot;영&quot;, &quot;&quot;);
+            select = select.Replace(&quot;일&quot;, &quot;&quot;);
+            select = select.Replace(&quot;이&quot;, &quot;&quot;);
+            select = select.Replace(&quot;삼&quot;, &quot;&quot;);
+            select = select.Replace(&quot;사&quot;, &quot;&quot;);
+            select = select.Replace(&quot;오&quot;, &quot;&quot;);
+            select = select.Replace(&quot;육&quot;, &quot;&quot;);
+            select = select.Replace(&quot;칠&quot;, &quot;&quot;);
+            select = select.Replace(&quot;팔&quot;, &quot;&quot;);
+            select = select.Replace(&quot;구&quot;, &quot;&quot;);
+            select = select.Replace(&quot;십&quot;, &quot;&quot;);
+            select = select.Replace(&quot;백&quot;, &quot;&quot;);
+            select = select.Replace(&quot;천&quot;, &quot;&quot;);
+            select = select.Replace(&quot;만&quot;, &quot;&quot;);
+            select = select.Replace(&quot;억&quot;, &quot;&quot;);
+            select = select.Replace(&quot;조&quot;, &quot;&quot;);
+            select = select.Replace(&quot;경&quot;, &quot;&quot;);
+            if (select == &quot;&quot;)
+                return true;
+            else
+                return false;
+        }
+        static void Main(string[] args)
+        {
+            Console.WriteLine(&quot;상식은행: 액수를 말하세요. 끝의 원은 생략합니다.&quot;);
+            string select = Console.ReadLine(); long result;
+            Console.WriteLine(&quot;요청하신 액수는 {0}입니다.&quot;, select);
+            result = translater(select, out result);
+            if (result == -1)
+                Console.WriteLine(&quot;지원하지 않는 문자입니다.&quot;);
+            else
+                Console.WriteLine(&quot;숫자로 변환하면 {0}원입니다.&quot;, result);
+
+        }
+    }
+}
+</code></pre>
+
+<p>거의 6-7시간 걸렸네요. 제 실력으로는 꽤나 깁니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/07 10:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jeong Hoon Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8736"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>만 단위로 한 번 자르고, 잘라낸 조각들을 다시 십 단위로 잘라서 처리합니다.</p>
+<p>틀린 데이터가 없다고 가정하면 어렵지 않은데 False를 체크해야 해서 까다롭네요.</p>
+<p>경-조-억-만, 천-백-십 의 순서가 맞아야 하기 때문에 나오는 순서대로 막 처리하면 안 됩니다.</p>
+<p>즉 아래 입력 데이터 중에서 '삼만이억', '삽십사천' 같은 건 False 가 나와야 합니다.</p>
+<p>그리고 잘못 입력되는 경우가 꽤 많기 때문에 대부분 오류는 사전 dic을 참조할 때 자연스럽게 예외가 발생하도록 했습니다.</p>
+<pre><code class="python">
+
+
+d1 = {'만':10000, '억':100000000, '조':1000000000000, '경':10000000000000000}
+d2 = {'십':10, '백':100, '천':1000}
+d3 = {'일':1, '이':2, '삼':3, '사':4, '오':5, '육':6, '칠':7, '팔':8, '구':9}
+
+# 'xxxx경', 'xxxx조', 'xxxx억', 'xxxx만', 'xxxx' 순서대로 리턴
+def cut1(krw):
+    for u in '경조억만':
+        if u in krw:
+            if krw[0] == u:
+                raise Exception
+
+            i = krw.index(u)
+            yield krw[:i], d1[u]
+            krw = krw[i+1:]
+
+    if krw:
+        yield krw, 1
+
+# 'x천', 'x백', 'x십', 'x' 순서
+def cut2(krw):
+    for u in '천백십':
+        if u in krw:
+            yield d3[krw[0]] * d2[krw[1]]
+            krw = krw[2:]
+
+    if krw:
+        yield d3[krw]
+
+def remove_exceptions(krw): 
+    # 6) 십, 백, 천, 만 -&gt; 생략된 '일' 삽입
+    ret = ''
+    for i in range(len(krw)):
+        if krw[i] in '십백천' and (i == 0 or krw[i-1] not in '일이삼사오육칠팔구') or \
+            krw[i] == '만' and (i == 0 or krw[i-1] in '경조억'):
+            ret += '일'
+        ret += krw[i]
+
+    # 8) &quot;n억m천&quot; -&gt; 'n억m천만'
+    if len(ret) &gt;= 3 and ret[-3] == '억' and ret[-1] == '천':
+        ret += '만'
+
+    return ret
+
+def ktod(krw):
+    if krw == '영':
+        return 0
+
+    krw = remove_exceptions(krw)
+    num = 0
+    for slice, base in cut1(krw):
+        for n in cut2(slice):
+            num += n * base
+
+    return num
+
+data = ['영', '일', '칠', '이천오', '구천', '일십만', '십만', '일억오천', '일억오천만', '억오천만', '사천구십칠조이천만삼백십육', '만오천', '일억만오백이십', '삼만이억', '삽십사천']
+for krw in data:
+    try:        
+        print(krw, '-&gt;', ktod(krw))
+    except:
+        print(krw, '-&gt;', False)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/09/06 18:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13439"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import re
+
+def inter_cur(s):
+    inter = {&quot;일&quot;:'+1', &quot;이&quot;:'+2', &quot;삼&quot;:'+3', &quot;사&quot;:'+4', &quot;오&quot;:'+5', &quot;육&quot;:'+6', &quot;칠&quot;:'+7', &quot;팔&quot;:'+8', &quot;구&quot;:'+9', &quot;영&quot;:'+0', '십':'*10', '백':'*100', '천':'*1000', '만': '*10000', '억': '*100000000', '조': '*1000000000000', '경': '*10000000000000000'}
+    result,e = 0,0
+
+    # 만과 일이 생략된 구문의 전처리
+    if re.match('^[^조경]*억[^만]*$',s): s = s+'만'
+    pre = lambda p: '영' if not p else (''.join('일'+i.group()[-1] if not i.group()[:-1] else i.group() for i in re.finditer('.*?[천백십]',p)) + ('영' if p[-1] in ('천','백','십') else p[-1]))
+
+    # 4자리수 변환
+    partinter = lambda x: ''.join(inter[i] for i in pre(x))
+
+    # 경조억만 잘라서 처리
+    for i in re.finditer('.*?[경조억만]',s):
+        if len(i.group()) == 1 and i.group() in ('경','조','억'): return False
+        if i.group() == '만': result += 10000
+        else: result += eval('('+partinter(i.group()[:-1])+')'+inter[i.group()[-1]])
+        e = i.end()
+    # 만자리 아래 자리수 처리
+    result += eval(partinter(s[e:]))
+
+    return result
+
+inv = (&quot;영&quot;, &quot;일&quot;, &quot;칠&quot;, &quot;이천오&quot;, &quot;구천&quot;, &quot;일십만&quot;, &quot;십만&quot;, &quot;일억오천&quot;, &quot;일억오천만&quot;, &quot;억오천만&quot;, &quot;사천구십칠조이천만삼백십육&quot;)
+for i in inv:
+    print(f'{i} &gt;&gt;&gt; {inter_cur(i)}')
+</code></pre>
+
+<pre><code>영 &gt;&gt;&gt; 0
+일 &gt;&gt;&gt; 1
+칠 &gt;&gt;&gt; 7
+이천오 &gt;&gt;&gt; 2005
+구천 &gt;&gt;&gt; 9000
+일십만 &gt;&gt;&gt; 100000
+십만 &gt;&gt;&gt; 100000
+일억오천 &gt;&gt;&gt; 150000000
+일억오천만 &gt;&gt;&gt; 150000000
+억오천만 &gt;&gt;&gt; False
+사천구십칠조이천만삼백십육 &gt;&gt;&gt; 4097000020000316
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/08 16:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25232"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">num = {&quot;영&quot;:0,&quot;일&quot;:1, &quot;이&quot;:2, &quot;삼&quot;:3, &quot;사&quot;:4, &quot;오&quot;:5, &quot;육&quot;:6, &quot;칠&quot;:7, &quot;팔&quot;:8, &quot;구&quot;:9, &quot;십&quot;:10, &quot;백&quot;:100, &quot;천&quot;:1000, &quot;만&quot;:10000, &quot;억&quot;:100000000, &quot;조&quot;:1000000000000, &quot;경&quot;: 10000000000000000 }
+#and i==0
+a = &quot;사천구십칠조이천만삼백십육&quot;
+won = []
+total = 1
+for i in range(len(a)):
+    if a[0]=='억' or a[0]=='조' or a[0]=='경':
+        won.append(-1)
+        break
+    elif len(a)==4 and a[1]=='억' and a[3]=='천':
+        total = (num[a[0]]*num['억'])+(num[a[2]]*num['천']*10000)
+        won.append(total)
+        break
+    elif len(a)==1:
+        won.append(num[a[i]])
+    elif (total==1 and i==0) :
+        total=1
+        total*=num[a[i]]
+    elif a[i]=='만' or a[i]=='천' or a[i]=='백' or a[i]=='십' or a[i]=='억' or a[i]=='조' or a[i]=='경' :
+        total*=num[a[i]]
+        if i&lt;len(a)-1:
+            if  a[i+1]=='만' or a[i+1]=='천' or a[i+1]=='백' or a[i+1]=='십' or a[i+1]=='억' or a[i+1]=='조' or a[i+1]=='경' :
+                pass
+            else:
+                won.append(total)
+        else:
+            won.append(total)
+    else:
+        total=1
+        total*=num[a[i]]
+        if i==len(a)-1:
+            won.append(total)
+if -1 in won:
+    print(&quot;False&quot;)
+else:
+    print(won)
+    print(sum(won))
+
+
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/04/20 22:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">fox.j</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29844"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def convert_to_number(P):
+    a_dic = {&quot;일&quot;:1,&quot;이&quot;:2,&quot;삼&quot;:3,&quot;사&quot;:4,&quot;오&quot;:5,&quot;육&quot;:6,&quot;칠&quot;:7,&quot;팔&quot;:8,&quot;구&quot;:9}
+    b_dic = {&quot;십&quot;:10,&quot;백&quot;:100,&quot;천&quot;:1000}
+    c_dic = {&quot;만&quot;:10**4,&quot;억&quot;:10**8,&quot;조&quot;:10**12,&quot;경&quot;:10**16}
+
+    subval = []
+    valu = 0
+
+    for p in P:
+        if p in a_dic:
+            subval.append(a_dic[p])
+        elif p in b_dic:
+            if len(subval)==0 or subval[-1]&gt;=10:
+                subval.append(1)
+            subval[-1] *= b_dic[p]
+        elif p in c_dic:
+            if len(subval)==0:
+                return -1
+            valu += sum(subval) * c_dic[p]
+            subval.clear()
+
+    if len(subval)&gt;0:
+        return valu + sum(subval)
+    else:
+        return valu
+
+
+inp = [&quot;영&quot;,&quot;일&quot;,&quot;칠&quot;,&quot;이천오&quot;,&quot;구천&quot;,&quot;일십만&quot;,&quot;십만&quot;,&quot;일억오천&quot;,&quot;일억오천만&quot;,&quot;억오천만&quot;,&quot;사천구십칠조이천만삼백십육&quot;]
+for P in inp:
+    converted_value = convert_to_number(P)
+    if converted_value == -1:
+        print(P, ' --&gt; ','false')
+    else:
+        print(P, ' --&gt; ', converted_value)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2024/01/24 21:45</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_30180"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>JAVA입니다.</p>
+<pre><code class="java">package question3.엉터리_한글_통화_해석;
+
+import java.util.Hashtable;
+
+public class KoreanCurrency {
+
+    public static void main(String[] args) {
+        String input = &quot;사천구십칠조이천만삼백십육&quot;;
+        long result = currencyConvert(input);
+        System.out.println((result == -1) ? false : result);
+    }
+
+    static long currencyConvert(String input) {
+        //한글을 통화로 변환, 변환 불가 시 -1 반환
+        Hashtable&lt;Character, Integer&gt; digit = new Hashtable&lt;Character, Integer&gt;();
+        //각 자리의 숫자
+        digit.put('일', 1);
+        digit.put('이', 2);
+        digit.put('삼', 3);
+        digit.put('사', 4);
+        digit.put('오', 5);
+        digit.put('육', 6);
+        digit.put('칠', 7);
+        digit.put('팔', 8);
+        digit.put('구', 9);
+
+        Hashtable&lt;Character, Integer&gt; decimal1 = new Hashtable&lt;Character, Integer&gt;();
+        //자릿수를 지수로 표현
+        decimal1.put('십', 1);
+        decimal1.put('백', 2);
+        decimal1.put('천', 3);
+
+        Hashtable&lt;Character, Integer&gt; decimal2 = new Hashtable&lt;Character, Integer&gt;();
+        decimal2.put('만', 4);
+        decimal2.put('억', 8);
+        decimal2.put('조', 12);
+        decimal2.put('경', 16);
+
+        char[] chars = input.toCharArray();
+
+        int curDigit = 0; //현재 자릿수
+        int curNum = 0; //만 단위별 합계
+        long totNum = 0; //현재 금액 합계
+        String prevKind = &quot;&quot;; //이전에 읽은 문자의 종류
+        boolean convention = false; //억+천 조합
+
+        if(input.equals(&quot;영&quot;)) {
+            return 0;
+        }
+
+        for (char c : chars) {
+            if(digit.containsKey(c)) {
+                if(prevKind.equals(&quot;digit&quot;)) {
+                    //숫자가 두 번 연속한 경우는 불가
+                    return -1;
+                }
+
+                prevKind = &quot;digit&quot;;
+                curDigit = digit.get(c);
+            }
+            else if(decimal1.containsKey(c)){
+                if(curDigit == 0) {
+                    curDigit = 1;
+                    //십, 천, 백 단위에서는 앞에 숫자가 없어도 1로 취급
+                }
+
+                if(convention &amp;&amp; c == '천' &amp;&amp; !input.contains(&quot;만&quot;)) {
+                    totNum += curDigit * 10000000;
+                    //억+천 조합에서는 천을 천만으로 계산
+                }
+                else {
+                    convention = false;
+                    curNum += curDigit * Math.pow(10, decimal1.get(c));
+                }
+                prevKind = &quot;decimal1&quot;;
+                curDigit = 0;
+            }
+            else if(decimal2.containsKey(c)) {
+                if(curDigit == 0 &amp;&amp; curNum == 0) {
+                    if(c != '만') {
+                        return -1;
+                        //억, 조, 경 단위는 앞에 반드시 숫자가 와야 함
+                    }
+                    curDigit = 1;
+                }
+
+                if(c == '억') {
+                    convention = true;
+                    //억+천 조합의 가능성이 생김
+                }
+
+                totNum += (curNum + curDigit) * Math.pow(10, decimal2.get(c));
+
+                prevKind = &quot;decimal2&quot;;
+                curNum = 0;
+                curDigit = 0;
+            }
+            else {
+                return -1;
+            }
+        }
+
+        if(curDigit != -1) {
+            totNum += (curNum + curDigit);
+        }
+
+        return totNum;
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2025/02/06 23:00</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박준우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_30354"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">zero={'영':0}
+one={'일':1}
+two={'이':2}
+three={'삼':3}
+four={'사':4}
+five={'오':5}
+six={'육':6}
+seven={'칠':7}
+eight={'팔':8}
+nine={'구':9}
+ten={'십':10}
+hundred={'백':100}
+thousand={'천':1000}
+ten_thousand={'만':10000}
+hundred_million={'억':100000000}
+trillion={'조':1000000000000}
+ten_million_billion={'경':10000000000000000}
+
+input_money=input()
+print(input_money)
+input_money=input_money.strip('&quot;')
+
+list_money=list(input_money)
+print(list_money)
+
+output=True
+if list_money[0]=='억' or list_money[0]=='조' or list_money[0]=='경':
+    output=False
+if len(list_money)&gt;=3:
+    print(list_money[-3])
+    print(list_money[-1])
+    if list_money[-3]=='억' and list_money[-1]=='천':
+        list_money.append('만')
+print(list_money)
+
+digits=1
+money=list()
+count=0
+while count&lt;len(list_money):
+    if list_money[count] in ten_million_billion.keys():
+        money.append(ten_million_billion[list_money[count]])
+    if list_money[count] in trillion.keys():
+        money.append(trillion[list_money[count]])
+    if list_money[count] in hundred_million.keys():
+        money.append(hundred_million[list_money[count]])
+    if list_money[count] in ten_thousand.keys():
+        money.append(ten_thousand[list_money[count]])
+    if list_money[count] in thousand.keys():
+        money.append(thousand[list_money[count]])
+    if list_money[count] in hundred.keys():
+        money.append(hundred[list_money[count]])
+    if list_money[count] in ten.keys():
+        money.append(ten[list_money[count]])
+
+    if list_money[count] in nine.keys():
+        digits=nine[list_money[count]]
+        money.append(digits)
+    if list_money[count] in eight.keys():
+        digits=eight[list_money[count]]
+        money.append(digits)
+    if list_money[count] in seven.keys():
+        digits=seven[list_money[count]]
+        money.append(digits)
+    if list_money[count] in six.keys():
+        digits=six[list_money[count]]
+        money.append(digits)
+    if list_money[count] in five.keys():
+        digits=five[list_money[count]]
+        money.append(digits)
+    if list_money[count] in four.keys():
+        digits=four[list_money[count]]
+        money.append(digits)
+    if list_money[count] in three.keys():
+        digits=three[list_money[count]]
+        money.append(digits)
+    if list_money[count] in two.keys():
+        digits=two[list_money[count]]
+        money.append(digits)
+    if list_money[count] in one.keys():
+        digits=one[list_money[count]]
+        money.append(digits)
+    if list_money[count] in zero.keys():
+        digits=zero[list_money[count]]
+        money.append(digits)
+    count+=1
+print(money)
+
+list_basics=list()
+for a,b in enumerate(money):
+    if b==10 or b==100 or b==1000 or b==10000 or b==100000000 or b==1000000000000 or b==10000000000000000:
+        list_basics.append([a,b])
+print(list_basics)
+
+c=0
+check=False
+multiply=False
+for a in range(len(list_basics)):
+    for b in range(c,list_basics[a][0]):
+        if money[b]==10 or money[b]==100 or money[b]==1000 or money[b]==10000 or money[b]==100000000 or money[b]==1000000000000 or money[b]==10000000000000000:
+            if money[b]&lt;list_basics[a][1]:
+                money[b]*=list_basics[a][1]
+                multiply=True
+                print(money)
+            if multiply and b==(list_basics[a][0]-1) and money[b]&gt;list_basics[a][1]:
+                check=True
+    if multiply:
+        c=list_basics[a][0]
+        multiply=False
+    if check:
+        del money[c]
+        for d in range(len(list_basics)):
+            list_basics[d][0]-=1
+        print(list_basics)
+        check=False
+print(money)
+
+count=0
+digits=-1
+basics=1
+total=0
+while True:
+    if (count!=len(money)) and (money[count]==0 or money[count]==1 or money[count]==2 or money[count]==3 or money[count]==4 or money[count]==5 or money[count]==6 or money[count]==7 or money[count]==8 or money[count]==9):
+        digits=money[count]
+        count+=1
+    if digits==-1:digits=1
+    if (count!=len(money)) and money[count]&gt;=10 :
+        basics=basics*money[count]
+        count+=1
+    total+=(digits*basics)
+    digits=-1
+    basics=1
+    if count==len(money):
+        break
+
+if output:
+    print(total)
+else:
+    print('false')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2026/06/27 09:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박성우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

@@ -1,0 +1,1829 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="밥 아저씨는 돈을 힘들게 모은 끝에 한 토지를 구입했다.
+
+밥 아저씨는 그 토지에 유명한 식물을 심을려고 하는데,
+
+그 식물은 주변 √n 미터 안에 다른 식물이 있으면 자라지 못한 다고 한다.
+
+그러므로 토지의 넓이를 n으로 나누어야 ...">
+    <title>농장 분할 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">농장 분할</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">2</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 2</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>밥 아저씨는 돈을 힘들게 모은 끝에 한 토지를 구입했다.</p>
+<p>밥 아저씨는 그 토지에 유명한 식물을 심을려고 하는데,</p>
+<p>그 식물은 주변 √n 미터 안에 다른 식물이 있으면 자라지 못한 다고 한다.</p>
+<p>그러므로 토지의 넓이를 n으로 나누어야 한다.</p>
+<p>토지의 가로와 세로의 길이를 입력받을때, 최대 심을 수 있는 식물의 개수는?</p>
+<p>(단, n의 값은 식이 성립하는 n의 범위 중에서 최대여야 한다.)</p>
+<p>예)</p>
+<pre><code class="python">640  400
+
+1980 640
+</code></pre>
+
+<p>답)</p>
+<pre><code class="python">40
+
+3168
+</code></pre>
+
+<p>단 반드시 그 나무를 중심으로 한 √n 영역이 필요하다.
+그리고 그 영역이 다른 영역과 겹치면 안된다.</p>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">재귀함수</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2018/05/27 22:00</p>
+                    <p class="static-profile" style="margin:0;padding:0;">김영성</p>
+                </div>
+            </div>
+
+            
+                <a name="comment_2229"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">문제가 이해하기 어렵네요, 좀 더 쉽게 문제를 설명해 주세요.</span>
+                    -
+                    <span style="font-size:11px;">
+                        pahkey,
+                        2018/05/28 09:16
+                    </span>
+                </div>
+            
+                <a name="comment_2230"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">제가 이해한 바로는....식물하나가 자라는데 n x n 크기의 당이 필요하고... 답으로 유추해보건데 남는땅이없어야 하는 거 맞죠?
+n 을 두 수의 최대공약수로 두고 풀라는 말 같은데 맞나요?</span>
+                    -
+                    <span style="font-size:11px;">
+                        Hyuk,
+                        2018/05/28 10:08
+                    </span>
+                </div>
+            
+                <a name="comment_2231"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">네</span>
+                    -
+                    <span style="font-size:11px;">
+                        김영성,
+                        2018/05/29 20:52
+                    </span>
+                </div>
+            
+                <a name="comment_2369"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">문제의 표현이 조금 애매합니다. 나무 한 그루를 심기 위해서는 
+
+1. 반드시 그 나무를 중심으로 한 n*n 크기의 영역이 필요하다.
+2. 그 영역이 다른 나무의 영역과 겹치지 않아야 한다.
+
+라는 말이 추가되면 좋겠습니다.
+
+그렇지 않으면 꼭지점에도 심을 수 있기 때문에, 
+예를 들어 6*4 에서 2*2로 나눠 6 그루가 아니라 각 정사각형의 꼭지점과 무게중심을 모두 더해서 18그루를 심을 수 있습니다.</span>
+                    -
+                    <span style="font-size:11px;">
+                        Noname,
+                        2018/09/08 01:02
+                    </span>
+                </div>
+            
+                <a name="comment_2370"></a>
+                <div class="comment_line comment-content">
+                    
+                        <span style="color:orangered;">+1</span>
+                    
+                    <span style="white-space:pre-wrap;">그렇게 생각할 수도 있군요 수정 하였습니다</span>
+                    -
+                    <span style="font-size:11px;">
+                        김영성,
+                        2018/09/08 17:35
+                    </span>
+                </div>
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>38개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_12719"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">2</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">
+다시 올립니다. 
+    public static int SqureBoard(int length, int height)
+    {
+
+        if(length&gt;height)
+        {
+            length = length-height;
+        }
+        else if(length&lt;height)
+        {
+            height = height-length;
+        }
+        else
+        {
+            return length;
+        }
+
+        return SqureBoard(length,height);
+    }
+
+public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        int l = 640, h =400;
+        int a = SqureBoard(l,h); // a=80
+        int squre = (l/a)*(h/a);    //흠....
+        System.out.print(squre);
+
+    }
+
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/31 20:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박용훈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12856"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from math import gcd
+
+n1, n2 = 1980, 640
+print(n1 * n2 // gcd(n1, n2)**2)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/06 01:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">재즐보프</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14483"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">public static void main(String[] args) {
+        int a = 1980;
+        int b = 640;
+        System.out.println((a * b) / (int) Math.pow(gcd(a, b), 2));
+    }
+
+    private static int gcd(int a, int b) {
+        while (b != 0) {
+            int temp = a % b;
+            a = b;
+            b = temp;
+        }
+        return a;
+    }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/02 21:12</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김지훈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12535"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬입니다.</p>
+<pre><code class="python">a, b = tuple(map(int, input('토지의 가로 세로 길이를 입력하세요 ex) 120 260 \n 입력 : ').split()))
+c = a*b
+while a: a, b = max(a, b) % min(a, b), min(a, b)   # n = gcd(a, b) = b
+print(c/b**2)             # result = a/gcd(a,b) * b/gcd(a,b) = a*b / gcd(a,b)**2
+</code></pre>
+
+<h1 id="_1">결과</h1>
+<pre><code class="python">토지의 가로 세로 길이를 입력하세요 ex) 120 260 
+ 입력 : 1980 640
+3168.0
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/28 10:24</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hyuk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12540"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬으로 </p>
+<pre><code class="python">import re
+
+a, b = [int(x) for x in re.findall(&quot;[0-9]+&quot;, input(&quot;토지 너비*길이를 입력하세요: &quot;))[:2]]  # 첫 두 개의 정수를 a,b에
+
+gcd = lambda x,y: x if x == y else gcd(max(x, y)-min(x,y), min(x,y))  # 최대공약수 (유클리드)
+
+print(&quot;%d&quot; % (a/gcd(a,b) * b/gcd(a,b)))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/28 13:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Gene Byun</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13042"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+
+int min( int x, int y )
+{
+    if( x &lt;= y ) return x;
+    else return y;
+}
+
+int max( int x, int y )
+{
+    if( x &gt;= y ) return x;
+    else return y;
+}
+
+int main(int argc, char * argv[])
+{
+    int i, num;
+    int x = atoi(argv[1]);
+    int y = atoi(argv[2]);
+    int max_common_divisor = 1;
+    int min_num = min(x,y);
+    int max_num = max(x,y);
+
+retry:
+    num = max_num % min_num;
+    if( num == 0 )
+    {
+        max_common_divisor = min_num;
+    }
+    else
+    {
+        max_num = min_num;
+        min_num = num;
+        goto retry;
+    }
+
+    printf(&quot;max common divisor : %d\n&quot;, max_common_divisor);
+    printf(&quot;plant number : %d\n&quot;, (x * y) / (max_common_divisor*max_common_divisor));
+    return 0;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/20 08:41</p>
+                                <p class="static-profile" style="margin:0;padding:0;">구름과비</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13162"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def gcd(a, b):
+    if a &lt; b: a, b = b, a
+    while b: a, b = b, a % b
+    return a
+
+w = int(input('농장 가로 길이: '))
+h = int(input('농장 세로 길이: '))
+n = gcd(w,h)
+print('최대식물수: {}'.format(w/n*h/n))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/26 01:25</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13182"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace CD169
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.Write(&quot;토지의 가로 세로 길이 입력 (ex. 640 400): &quot;);
+            // split on whitespace
+            var input = Console.ReadLine()
+                .Split(new char[0], StringSplitOptions.RemoveEmptyEntries).ToList(); 
+            var landSize = new List&lt;int&gt;();
+            input.ForEach(item =&gt; landSize.Add(int.Parse(item)));
+
+            int a = landSize.Max(), b = landSize.Min();
+            int landArea = a * b, plantArea = GCD(a, b) * GCD(a, b);
+            Console.WriteLine((int)(landArea/plantArea));
+        }
+
+        // a, b (a &gt; b)의 최대공약수(유클리드 호제법)
+        static int GCD(int a, int b)
+        {
+            if (b == 0) { return a; }
+            else { return GCD(b, a % b); }
+        }
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/27 09:34</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13501"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>최대공약수 함수는 써보고 싶지 않아서.......</p>
+<pre><code class="python">def square(a,b):
+          Max = max(a,b)
+          Min = min(a,b)
+          n = Max%Min
+          if n != 0:
+                    square(Min,n)
+          else:
+                    print(Min)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/10 22:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김영성</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2524"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">가로3,세로6 일 경우, n=3 이 되어서 반경 3×3 = 9 이내에는 작물을 심을 수 없어야 하는데 가로3세로6인 땅에는 길이 9는 존재 못하는게 아닌가요?? 저의 읽기능력이 좋지 못하여서 리해가 잘 안 되네요 T.T</span>
+                                -
+                                <span style="font-size:11px;">
+                                    암살자까마귀,
+                                    2019/05/03 10:32
+                                </span>
+                            </div>
+                        
+                            <a name="comment_2528"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">한 변의 길이가 3이아닌 √n, sqrt(3)을 의미하는 거랍니다. 이문제는 최대공약수 문제이니 참고하시면 좋겠네요</span>
+                                -
+                                <span style="font-size:11px;">
+                                    김영성,
+                                    2019/05/03 18:32
+                                </span>
+                            </div>
+                        
+                            <a name="comment_2529"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">글을 다시보니 오해할만한 소지가 충분했네요. 수정하였고 오류 알려주셔서 감사합니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    김영성,
+                                    2019/05/03 18:33
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14089"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from math import gcd
+
+a, b = 1980, 640
+print(a * b // gcd(a, b)**2)
+5
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/13 14:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">S.H</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14484"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">// ========================================
+        int num1 = 640;
+        int num2 = 400;
+
+        int a = gcd(num1, num2);
+        System.out.println((num1 * num2) / (a * a));
+    }
+
+    public static int gcd(int a, int b) {
+
+        while (b != 0) {
+
+            int temp = a % b;
+            a = b;
+            b = temp;
+
+        }
+        return Math.abs(a);
+    }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/02 21:13</p>
+                                <p class="static-profile" style="margin:0;padding:0;">채규빈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14565"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def num_plant(x, y):
+    G = gcd(x, y)
+    return (x // G) * (y // G)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/08 00:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14792"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.Scanner;
+public class GCD {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+            System.out.print(&quot;첫번째 값 : &quot;);       
+            int fir = input.nextInt();
+            System.out.print(&quot;두번째 값 : &quot;);       
+            int sec = input.nextInt();
+        for (int i = Math.min(fir,sec);i&gt;0;i--){
+            if ((fir%i==0)&amp;&amp;(sec%i==0)){
+            System.out.println(i);
+            break;
+
+            }
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/10/01 16:03</p>
+                                <p class="static-profile" style="margin:0;padding:0;">잭Jack</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15780"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">number = list(map(int, input(&quot;두 자연수 입력 : &quot;).split()))
+big_box = []
+for i in number :
+    small_box = []
+    x = 2
+    while i &gt; 1 :
+        if i % x == 0 :
+            i = i // x
+            small_box.append(x)
+        else : x += 1
+    big_box.append(small_box)
+    print(small_box)
+print(big_box)
+big_box.append(set(big_box[0]+big_box[1]))
+print(big_box)
+
+tmp = 1
+for i in big_box[2] :
+    if i in big_box[0] or big_box[1] :
+        tmp *= (i**min(big_box[0].count(i), big_box[1].count(i)))
+print(tmp)
+print((eval('*'.join(map(str,big_box[0]))) / tmp) * (eval('*'.join(map(str,big_box[1]))) / tmp))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/01/03 22:41</p>
+                                <p class="static-profile" style="margin:0;padding:0;">lucky1to10</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15949"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import math
+
+
+area = input(&quot;'가로 세로'식으로 입력 &quot;).split()
+
+
+def divisor_make(n):
+    divisor_list = set()
+    for i in range(1, int(math.sqrt(n)) + 1):
+        if n % i == 0:
+            divisor_list.add(i)
+            divisor_list.add(n//i)
+    return divisor_list
+
+
+max_divisor = max(divisor_make(int(area[0])) &amp; divisor_make(int(area[1])))
+
+print(int(int(area[0])/max_divisor)*int(int(area[1])/max_divisor))
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/01/11 22:09</p>
+                                <p class="static-profile" style="margin:0;padding:0;">농창</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16007"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">num=input(&quot;가로 세로를 입력하시오:&quot;)
+num_arr=list(num.split())
+for x in range(0,len(num_arr)):
+    num_arr[x]=int(num_arr[x])
+if num_arr[0]%2==0 and num_arr[1]%2==0:
+    while num_arr[0]%2==0 and num_arr[1]%2==0:
+        num_arr[0]=num_arr[0]/2
+        num_arr[1]=num_arr[1]/2
+if num_arr[0]%3==0 and num_arr[1]%3==0:
+    while num_arr[0]%3==0 and num_arr[1]%3==0:
+        num_arr[0]/=3
+        num_arr[1]/=3
+if num_arr[0]%5==0 and num_arr[1]%5==0:
+    while num_arr[0]%5==0 and num_arr[1]%5==0:
+        num_arr[0]/=5
+        num_arr[1]/=5
+if num_arr[0]%7==0 and num_arr[1]%7==0:
+    while num_arr[0]%7==0 and num_arr[1]%7==0:
+        num_arr[0]/=7
+        num_arr[1]/=7   
+print(int(num_arr[0]*num_arr[1]))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/01/15 20:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">빅디펜스</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16153"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import math
+a, b = map(int,input().split())
+num = math.gcd(a, b)
+print(int((a/num) * (b/num)))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/01/22 15:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">D.H.</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16713"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">N1 = int(input(&quot;농장의 가로길이 : &quot;))
+N2 = int(input(&quot;농장의 세로길이 : &quot;))
+
+def gcd(a, b) :
+    if a &gt; b :
+        (a, b) = (b, a)
+    while b != 0 :
+        (a, b) = (b, a % b)
+    return a
+
+result = N1 * N2 / (gcd(N1, N2) * gcd(N1, N2))
+
+print(round(result))
+</code></pre>
+
+<p>파이썬입니다</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/02/15 20:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">임민주</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18136"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def gcd(a, b):
+    if a &lt; b:
+        return gcd(b,a)
+    if a%b== 0:
+        return b
+    return gcd(b, a%b)
+
+def square(a, b):
+    g = gcd(a, b)
+    n = (a*b)/(g*g)
+    print(n)
+
+w, h =map(int,input('가로와 세로를 입력하세요: ').split(' '))
+square(w, h)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/06/06 13:24</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hwaseong Nam</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19170"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">list_0 = list(map(int, input().split()))
+def Function(num):
+    share = []
+    while num &gt; 1:
+        for i in range(2, num+1):
+            if num%i == 0:
+                share.append(i)
+                num = num//i
+                break
+    return share
+set_1 = set()
+list_1 = []
+list_2 = []
+list_3 = []
+dict = {}
+for i in list_0:
+    a = Function(i)
+    set_1 = set_1 | set(a)
+    list_1.append(a)
+
+for i in set_1:
+    for j in range(len(list_1)):
+        list_2.append(list_1[j].count(i))
+    list_3.append(int(min(list_2)))
+    list_2 = []
+set_1 = list(set_1)
+for i in range(len(set_1)):
+    dict[set_1[i]] = list_3[i]
+result = 1
+for i in dict.keys():
+    result *= i**dict[i]
+print(int((list_0[0]*list_0[1])/(result**2)))
+</code></pre>
+
+<p>파이썬코드의 장점이 사라진 코드...</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/09/06 16:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이명운</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19636"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>def gcd(a,b):
+    value = min(a,b)
+    while True :
+        if a % value ==0 and b % value ==0:
+            return value
+        else :
+            value -= 1
+
+cd1 = int(input(&quot;농장 가로 입력 : &quot;))
+cd2 = int(input(&quot;농장 세로 입력 : &quot;))
+gcd_value = gcd(cd1,cd2)
+result = int(cd1/gcd_value * cd2/gcd_value)
+print(result)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/10/13 01:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">semipooh</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20320"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">#include &lt;math.h&gt;
+int the_greatest_common_denominator(int a,b)
+{
+int result = 1;
+int ArraySizeCount1 = 0, ArraySizeCount2 = 0;
+int *a_denominator_Array = new int;
+int *b_denominator_Array = new int;
+while(a!=1)
+{
+for(int i =2; i&lt;a;i++)
+{
+a%i == 0 ? a = a/i, a_denominator_Array[i]++ , i&gt;ArraySizeCount1? ArraySizeCount1=i:0; : 0;
+}
+}
+while(b!=1)
+{
+for(int i =2; i&lt;b;i++)
+{
+b%i == 0 ? b= b/i, b_denominator_Array[i]++ , i&gt;ArraySizeCount2? ArraySizeCount2=i:0; : 0;
+}
+}
+int count = 0;
+sizeof(a_denominator_Array) &gt; sizeof(b_denominator_Array) ? count = sizeof(a_denominator_Array)/ sizeof(int): count = sizeof(b_denominator_Array)/ sizeof(int) ; 
+
+for(int i =2;i&lt;count;i++)
+{
+a_denominator_Array[i] &gt; b_denominator_Array[i] &amp;&amp; b_denominator_Array[i] &gt;0 ? result*=(int)pow(i,b_denominator_Array[i]): 0;
+b_denominator_Array[i] &gt; a_denominator_Array[i] &amp;&amp; a_denominator_Array[i] &gt;0 ? result*=(int)pow(i,a_denominator_Array[i]): 0;
+}
+}
+delete a_denominator_Array,b_denominator_Array;
+return result;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/12/23 23:56</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Anderson</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20394"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">h=int(input(&quot;가로의 길이를 입력하십시오: &quot;))
+v=int(input(&quot;세로의 길이를 입력하십시오: &quot;))
+# 두 수의 최대 공약수를 찾아서 가로, 세로를 각 각 나눈 결과를 곱하면 됨.
+n=1
+lst=[]
+while n&lt;v:
+    if h%n==0 and v%n==0:
+        lst.append(n)  #max(lst)가 최대 공약수
+    n+=1
+print(int((h/max(lst))*(v/max(lst)))) #(가로/최대공약수) x (세로/최대공약수)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/12/30 02:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박시원</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20912"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">a = int(input(&quot;가로:&quot;))
+
+b = int(input(&quot;세로:&quot;))
+
+gongyaksu=[]
+
+for i in range(1, min(a,b)+1):
+
+    if a%i ==0 and b%i == 0:
+
+        gongyaksu.append(i)
+
+    else: continue
+
+
+print(int((a/max(gongyaksu))*(b/max(gongyaksu))))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/02/10 00:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">HyukHoon Kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_21046"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <blockquote>
+<p>from math import gcd</p>
+<p>a = int(input())
+b = int(input())</p>
+<p>A = gcd(a, b)
+B = (a<em>b)//(A</em>*2)
+print(B)</p>
+</blockquote>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/02/21 13:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이국성</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_21379"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def sep(a, b):
+    for i in range(1, min(a, b)+1):
+        if a%i==0 and b%i==0:
+            max=i
+    return a*b/max**2
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/03/12 16:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Caplexian _</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_21590"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def cal_plants_num(x, y):
+    area = x * y
+    gcd = max([i for i in range(1, max(x, y)) if x % i == 0 and y % i == 0])
+
+    result = area // gcd ** 2
+    return result
+
+
+# answer: 40
+case1 = 640, 400
+
+# answer: 3168
+case2 = (1980, 640)
+
+if __name__ == &quot;__main__&quot;:
+    print(cal_plants_num(640, 400))
+    print(cal_plants_num(1980, 640))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/03/30 15:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">inca1735</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22277"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Q168{
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        ArrayList&lt;Integer&gt; input = new ArrayList&lt;Integer&gt;();
+        System.out.print(&quot;a? : &quot;);
+        input.add(scan.nextInt());
+        System.out.print(&quot;b? : &quot;);
+        input.add(scan.nextInt());
+        int temp;
+        for(int i=2;; i++) {
+            temp = input.get(i-2)%input.get(i-1);
+            if(temp!=0) {
+                input.add(temp);
+            } else {
+                break;
+            }
+        }
+
+        System.out.println(input.get(0)*input.get(1)/(int)Math.pow(input.get(input.size()-1), 2));
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/11 18:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Daniel Park</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23586"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from math import gcd
+
+class GetNumPlant:
+    def __init__(self):
+        self.num = 0
+    def calNum(self,w,h):
+        self.num = w*h/gcd(w,h)**2
+        print (self.num)
+
+a = GetNumPlant()
+a.calNum(640,400)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/11/04 22:29</p>
+                                <p class="static-profile" style="margin:0;padding:0;">footsize</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23704"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def sosu(num):
+    result = []
+
+    for i in range(1,int(num)+1):
+        if int(num) % i == 0:
+            result.append(i)
+
+    if len(set(result)) == 2:
+        return True
+
+
+def insu(num):
+    temp = int(num)
+    result = []
+    result2 = []
+    while temp != 1:
+        for i in range(2,temp+1):
+            if temp % i == 0 and sosu(i):
+                result.append(i)
+                temp = temp // i
+
+    result.sort()
+    result1 = list(set(result))
+    result1.sort()
+
+    for aa in result1:
+        count = 0
+        for bb in result:
+            if bb == aa:
+                count += 1
+        result2.append(count)
+
+    return [result1, result2]
+
+def part(num):
+    ins = []
+    full = {}
+
+    for aa in insu(num)[0]:
+        if aa not in ins:
+            ins.append(aa)
+            full[aa] = insu(num)[1][insu(num)[0].index(aa)]
+
+        if insu(num)[1][insu(num)[0].index(aa)] &gt; full[aa]:
+            continue
+
+    return full
+
+def gcd(a,b):
+    _a = part(a)
+    _b = part(b)
+    result = {}
+
+    for i in _a.keys():
+        if i in _b:
+            result[i] = min(_a[i],_b[i])
+        else:
+            result[1] = 1
+
+    mult = 1
+    for j in result.keys():
+        mult = mult*(j**result[j])
+
+    return mult
+
+n1 = 1980
+n2 = 640
+print(n1/gcd(n1,n2)*n2/gcd(n1,n2))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/11/20 08:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">DSHIN</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23884"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>from math import *</p>
+<pre><code>farm=input("write your farm [a,b] :")
+
+for_farm=farm.split(",")
+
+ggccdd=gcd(int(for_farm[0]),int(for_farm[1]))
+
+first=int(for_farm[0])/ggccdd
+
+second=int(for_farm[1])/ggccdd
+
+print(first*second)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/12/06 20:34</p>
+                                <p class="static-profile" style="margin:0;padding:0;">전준혁</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23914"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def farm(a, b):
+    c = max(set([i for i in range(1, a + 1) if a % i == 0]) &amp; set([i for i in range(1, b + 1) if b % i == 0]))
+    return (a/c) * (b/c)
+
+
+print(farm(640, 400))
+print(farm(1980, 640))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/12/08 17:31</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김우석</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24749"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from math import gcd
+a = input().split(&quot; &quot;)
+a1,a2 = int(a[0]),int(a[1])
+new_gcd = gcd(a1,a2)
+
+print(a1//new_gcd * a2//new_gcd)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/02/14 18:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">개촙오</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24926"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">x=int(input('가로'))
+y=int(input('세로'))
+
+common=[]
+
+for i in range(1,x+1):
+    if x % i == 0 and y % i == 0:
+        common.append(i)
+
+big=common[-1]
+
+print(int((x/big) * (y/big)))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/03/04 10:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">최우진</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25263"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def dividing_to_max(a,b):
+    gcd_out = math.gcd(int(a),int(b))
+    return int(int(a)*int(b)/(gcd_out**2))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/04/27 14:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">최태호</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25380"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">
+from math import gcd
+def maxi(a,b):
+    length = gcd(a,b)
+    return print((a/length)*(b/length))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/05/16 11:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">ss2663</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26491"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#codingdojing_farm_partition
+
+#각 변의 최대공약수를 구한뒤 최종 넓이에서 나누어 준다.
+
+def gcd(a, b):  #a/b = q r , b/r이 0인 r의 값
+
+    if a%b == 0:
+        return b
+    else:
+        return gcd(b, a%b)
+
+a, b = map(eval,input('a, b: ').split(','))
+
+com = gcd(a,b)
+print(a/com * b/com)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/10/17 18:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jaeman Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_26604"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def split_the_farm(h,v):
+    n=1
+    lst=[]
+    while n &lt; v:
+        if h%n==0 and v%n==0:
+            lst.append(n)
+        n+=1
+    return int((h*v/max(lst)**2))
+
+if __name__ == '__main__':
+    h=int(input(&quot;가로의 길이를 입력하십시오: &quot;))
+    v=int(input(&quot;세로의 길이를 입력하십시오: &quot;))
+    print(split_the_farm(h,v))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/11/02 19:24</p>
+                                <p class="static-profile" style="margin:0;padding:0;">서현준</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

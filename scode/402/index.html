@@ -1,0 +1,4315 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="타워 디펜스 게임에서는 사용자가 장애물을 배치해 미로를 생성하여 적의 이동을 방해할 수 있다. 그런데 장애물을 배치할 때 길을 막아버리면 적이 목적지에 도달하는 것이 불가능하게 되어 정상적인 게임 진행이 되지 않는다. 따라서 많은 타워디펜스 게임...">
+    <title>미로 통과 검사 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">미로 통과 검사</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">8</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 4</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>타워 디펜스 게임에서는 사용자가 장애물을 배치해 미로를 생성하여 적의 이동을 방해할 수 있다. 그런데 장애물을 배치할 때 길을 막아버리면 적이 목적지에 도달하는 것이 불가능하게 되어 정상적인 게임 진행이 되지 않는다. 따라서 많은 타워디펜스 게임은 사용자가 미로를 만들 수 있게 하되, 목적지를 향한 길을 막는 것 자체는 허용하지 않고 있다. 이를 위해 사용자가 만든 미로가 통과 가능한지 아닌지를 알아내는 루틴을 만들고자 한다.</p>
+<p><strong>입력된 미로가 통과 가능한지 검사하는 프로그램을 아래 조건에 따라 작성하시오.</strong></p>
+<ul>
+<li>
+<p>미로는 1행 이상의 문자열로 입력된다.</p>
+</li>
+<li>
+<p>미로는 2차원 공간이며, 입력되는 문자열의 각 문자는 미로의 칸을 나타낸다.</p>
+</li>
+<li>
+<p>각 문자는 다음을 의미한다.</p>
+</li>
+<li>
+<ul>
+<li><code>#</code> 통과 불가능</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code></code>(공백) 통과 가능</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>&lt;</code> 시작 지점</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>&gt;</code> 목적 지점</li>
+</ul>
+</li>
+<li>
+<p>미로의 외벽은 막혀있다.</p>
+</li>
+<li>
+<p>한 위치에서 다른 위치로의 이동은 상하좌우로만 가능하며, 대각선 이동은 불가능하다.</p>
+</li>
+<li>
+<p>미로가 통과 가능하면 true를, 통과 불가능하면 false를 출력한다.</p>
+</li>
+</ul>
+<p><strong>통과 가능한 미로의 예</strong></p>
+<p>1)</p>
+<pre><code class="no-highlight">&lt;     &gt;
+</code></pre>
+
+<p>2)</p>
+<pre><code class="no-highlight">########
+#&lt;     #
+#  ##  #
+#  ##  #
+#     &gt;#
+########
+</code></pre>
+
+<p>3)</p>
+<pre><code class="no-highlight">#######
+#&lt;    #
+##### #
+#     #
+# #####
+# #   #
+# # # #
+#   #&gt;#
+#######
+</code></pre>
+
+<p><strong>통과 불가능한 미로의 예</strong></p>
+<p>4)</p>
+<pre><code class="no-highlight">&lt;   #   &gt;
+</code></pre>
+
+<p>5)</p>
+<pre><code class="no-highlight">########
+#&lt;     #
+#     ##
+#    #&gt;#
+########
+</code></pre>
+
+<p>6)</p>
+<pre><code class="no-highlight">#&lt; #  #
+#  #  #
+#  # &gt;#
+</code></pre>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">너비우선탐색(BFS)</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2014/02/20 01:03</p>
+                    <p class="static-profile" style="margin:0;padding:0;">박연오</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>38개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_305"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">3</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Ruby
+서로소 집합으로 구현</p>
+<pre><code>class DisjointSet
+    def initialize
+        @parent = Hash.new { |hash, key| hash[key] = key }
+    end
+
+    def root_of(node)
+        node_list = []
+        while @parent[node] != node
+            node_list &lt;&lt; node
+            node = @parent[node] 
+        end
+
+        #path compression       
+        node_list.each {|e|
+            @parent[e] = node;
+        }
+        node
+    end
+
+    def connect(node1, node2)
+        @parent[root_of(node1)] = root_of(node2)
+    end
+
+    def connected?(node1, node2)
+        root_of(node1) == root_of(node2)
+    end
+end
+
+class Map   
+    def map_data
+        @map_data
+    end
+
+    def map_data=(rhs)
+        @map_data = 
+            case rhs
+            when String
+                rhs.split("\n")
+            when Array
+                rhs
+            end         
+    end
+
+    def get_adjacents(y, x)
+        [[y+1, x], [y-1, x], [y, x-1], [y, x+1]].find_all { |y,x| 
+            y &gt;= 0 &amp;&amp; y &lt; @y_size &amp;&amp; x &gt;= 0 &amp;&amp; x &lt; @x_size
+        }
+    end
+
+    def passable?
+        @y_size = @map_data.size
+        @x_size = @map_data.first.length
+
+        ds = DisjointSet.new
+        st = []
+        ed = []
+
+        #[[0,0], [0, 1], ... , [0, @x_size-1], [1, 0] , ... , [@y_size-1, @x_size-1]
+        coords = [*0...@y_size].product [*0...@x_size]  
+        coords.each{|y, x| 
+            case @map_data[y][x]
+            when '&lt;'     #start point 
+                st = [y, x]
+            when '&gt;' #end point
+                ed = [y, x]
+            when '#' #wall - do nothing
+                nil
+            else
+                get_adjacents(y, x).find_all{|y, x| @map_data[y][x] != '#' }.each { |ny, nx| 
+                    ds.connect([y, x], [ny, nx] ) 
+                }
+            end
+        }
+        ds.connected?(st, ed)       
+    end
+end
+
+
+m = Map.new
+m.map_data="&lt;     &gt;"
+puts m.passable?
+
+m.map_data="########\n#&lt;     #\n#  ##  #\n#  ##  #\n#     &gt;#\n########"
+puts m.passable?
+
+m.map_data="#######\n#&lt;    #\n##### #\n#     #\n# #####\n# #   #\n# # # #\n#   #&gt;#\n#######"
+puts m.passable?
+
+m.map_data="&lt;   #   &gt;"
+puts m.passable?
+
+m.map_data="########\n#&lt;     #\n#     ##\n#    #&gt;#\n########"
+puts m.passable?
+
+m.map_data="#&lt; #  #\n#  #  #\n#  # &gt;#"
+puts m.passable?
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/02/21 15:27</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Kim Jaeju</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1257"></a>
+                            <div class="comment_line comment-content">
+                                
+                                    <span style="color:orangered;">+3</span>
+                                
+                                <span style="white-space:pre-wrap;">사실 DFS나 BFS를 돌려봐도 문제에서 출발지점과 도착지점이 하나뿐이기 때문에 시간복잡도는 별반 차이가 없는데, 이 방법의 장점은 O(N^2) 연산을 한 번만 실행하면, 지도 위의 임의의 두 위치 사이가 연결되었는지 아닌지를 빠른 시간에 알아낼 수 있다는 겁니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Kim Jaeju,
+                                    2014/02/21 15:46
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2540"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python3입니다. 간단한 Recursion을 이용했습니다. 미로가 커지면 스택이 감당이 안될것 같긴 하네요 ㅜㅠ</p>
+<pre><code class="python">def inspectMaze(mz, i, j):
+    if ((i &lt; 0) or (j &lt; 0) or (i == len(mz)) or (j == len(mz[0])) or (mz[i][j] == '#') or (mz[i][j] == '&lt;')): return False
+    if mz[i][j] == '&gt;': return True
+    mz[i][j] = '&lt;'
+    return (inspectMaze(mz, i, j - 1) or inspectMaze(mz, i - 1, j) or inspectMaze(mz, i, j + 1) or inspectMaze(mz, i + 1, j)) 
+
+def checkMaze(maze):
+    mz = [list(x) for x in list(maze.split(&quot;\n&quot;))]
+
+    #find &quot;&lt;&quot;
+    i, j = 0, 0
+    for mzl in mz:
+        if &quot;&lt;&quot; in mzl: 
+            j = mzl.index(&quot;&lt;&quot;)
+            break
+        i = i + 1
+
+    return (inspectMaze(mz, i, j - 1) or inspectMaze(mz, i - 1, j) or inspectMaze(mz, i, j + 1) or inspectMaze(mz, i + 1, j)) 
+
+for maze in [&quot;&lt;     &gt;&quot;, 
+&quot;&quot;&quot;########
+#&lt;     #
+#  ##  #
+#  ##  #
+#     &gt;#
+########&quot;&quot;&quot;, 
+&quot;&quot;&quot;#######
+#&lt;    #
+##### #
+#     #
+# #####
+# #   #
+# # # #
+#   #&gt;#
+#######&quot;&quot;&quot;,
+&quot;&lt;   #   &gt;&quot;, 
+&quot;&quot;&quot;########
+#&lt;     #
+#     ##
+#    #&gt;#
+########&quot;&quot;&quot;, 
+&quot;&quot;&quot;#&lt; #  #
+#  #  #
+#  # &gt;#&quot;&quot;&quot;]:
+    print(checkMaze(maze))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/11/26 13:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">jspark</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1859"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">여러면에서 간결하게 하시려고 노력을 많이 하셨네용~^^</span>
+                                -
+                                <span style="font-size:11px;">
+                                    윤태호,
+                                    2016/09/26 14:43
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3307"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>간단한 BFS입니다. </p>
+<pre><code class="python">from functools import reduce
+
+data1 = &quot;########\n#&lt;     #\n#  ##  #\n#  ##  #\n#     &gt;#\n########\n&quot;
+data2 = &quot;########\n#&lt;     #\n#     ##\n#    #&gt;#\n########\n&quot;
+
+def build(sdata):
+    tiles = dict(zip(' &lt;#&gt;', range(10)))
+    mdata = [x for x in sdata.split('\n') if x]
+    def convert(line):
+        return [tiles[c] for c in line if c in tiles]
+    return reduce(lambda x, y: x+y,
+                  [convert(x) for x in mdata], []), len(mdata[0]), len(mdata)
+
+def neighbors(i, w, h):
+    offsets = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+    return [i + x + y * w for x, y in offsets\
+              if 0 &lt;= (i // w + y) &lt; h and 0 &lt;= (i % w + x) &lt; w]
+
+def do(data):
+    smap, w, h = build(data)
+    i = smap.index(1)
+    queue = [i]
+    while queue:
+        i = queue.pop(0)
+        if smap[i] == 3:
+            return True
+        smap[i] = 1
+        queue += [x for x in neighbors(i, w, h) if smap[x] not in (1, 2)]
+    return False
+
+print(do(data1))
+print(do(data2))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/03/30 10:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">룰루랄라</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3808"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <!-- HTML generated using hilite.me -->
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">/*</span>
+<span style="color: #888888">C++ code </span>
+
+<span style="color: #888888">Sample input: </span>
+<span style="color: #888888">9 7</span>
+<span style="color: #888888">#######</span>
+<span style="color: #888888">#&lt;    #</span>
+<span style="color: #888888">##### #</span>
+<span style="color: #888888">#     #</span>
+<span style="color: #888888"># #####</span>
+<span style="color: #888888"># #   #</span>
+<span style="color: #888888"># # # #</span>
+<span style="color: #888888">#   #&gt;#</span>
+<span style="color: #888888">#######</span>
+
+<span style="color: #888888">Sample output: </span>
+<span style="color: #888888">true </span>
+<span style="color: #888888">*/</span> 
+<span style="color: #557799">#include &lt;iostream&gt; </span>
+<span style="color: #557799">#include &lt;cstdio&gt; </span>
+<span style="color: #557799">#include &lt;cstring&gt; </span>
+<span style="color: #557799">#include &lt;algorithm&gt; </span>
+<span style="color: #557799">#include &lt;queue&gt; </span>
+<span style="color: #557799">#include &lt;utility&gt; </span>
+<span style="color: #557799">#include &lt;string&gt; </span>
+<span style="color: #008800; font-weight: bold">using</span> <span style="color: #008800; font-weight: bold">namespace</span> std;  
+
+<span style="color: #008800; font-weight: bold">typedef</span> pair<span style="color: #333333">&lt;</span><span style="color: #333399; font-weight: bold">int</span>,<span style="color: #333399; font-weight: bold">int</span><span style="color: #333333">&gt;</span> P;  
+
+<span style="color: #333399; font-weight: bold">char</span> grid[<span style="color: #0000DD; font-weight: bold">101</span>][<span style="color: #0000DD; font-weight: bold">101</span>];  <span style="color: #888888">// 그리드의 dimension에 대한 범위가 주어지지 않았으므로 최대 101x101로 가정한다. </span>
+<span style="color: #333399; font-weight: bold">bool</span> visited[<span style="color: #0000DD; font-weight: bold">101</span>][<span style="color: #0000DD; font-weight: bold">101</span>];   
+<span style="color: #333399; font-weight: bold">int</span> n,m; <span style="color: #888888">// 미로의 가로,세로 (행,열) 길이 </span>
+<span style="color: #333399; font-weight: bold">int</span> sy,sx,ey,ex; <span style="color: #888888">// 미로의 시작좌표와 도착좌표 </span>
+<span style="color: #333399; font-weight: bold">int</span> dy[<span style="color: #0000DD; font-weight: bold">4</span>] <span style="color: #333333">=</span> {<span style="color: #0000DD; font-weight: bold">1</span>,<span style="color: #0000DD; font-weight: bold">0</span>,<span style="color: #333333">-</span><span style="color: #0000DD; font-weight: bold">1</span>,<span style="color: #0000DD; font-weight: bold">0</span>}; 
+<span style="color: #333399; font-weight: bold">int</span> dx[<span style="color: #0000DD; font-weight: bold">4</span>] <span style="color: #333333">=</span> {<span style="color: #0000DD; font-weight: bold">0</span>,<span style="color: #0000DD; font-weight: bold">1</span>,<span style="color: #0000DD; font-weight: bold">0</span>,<span style="color: #333333">-</span><span style="color: #0000DD; font-weight: bold">1</span>};
+
+<span style="color: #333399; font-weight: bold">bool</span> <span style="color: #0066BB; font-weight: bold">inRange</span>(<span style="color: #333399; font-weight: bold">int</span> y,<span style="color: #333399; font-weight: bold">int</span> x){
+    <span style="color: #008800; font-weight: bold">return</span> (y <span style="color: #333333">&gt;=</span> <span style="color: #0000DD; font-weight: bold">0</span> <span style="color: #333333">&amp;&amp;</span> y <span style="color: #333333">&lt;</span> n <span style="color: #333333">&amp;&amp;</span> x <span style="color: #333333">&gt;=</span> <span style="color: #0000DD; font-weight: bold">0</span> <span style="color: #333333">&amp;&amp;</span> x <span style="color: #333333">&lt;</span> m);
+}
+
+<span style="color: #333399; font-weight: bold">int</span> <span style="color: #0066BB; font-weight: bold">main</span>(){
+    cin <span style="color: #333333">&gt;&gt;</span> n <span style="color: #333333">&gt;&gt;</span> m; 
+    cin.ignore();  <span style="color: #888888">// C++에서 getline()이 입력을 건너뛰는 것을 방지하기 위해 사용.  </span>
+    <span style="color: #008800; font-weight: bold">for</span> (<span style="color: #333399; font-weight: bold">int</span> i <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>; i <span style="color: #333333">&lt;</span> n; i<span style="color: #333333">++</span>){
+        string s; 
+        getline(cin,s); 
+        <span style="color: #008800; font-weight: bold">for</span> (<span style="color: #333399; font-weight: bold">int</span> j <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>; j <span style="color: #333333">&lt;</span> m; j<span style="color: #333333">++</span>){
+            grid[i][j] <span style="color: #333333">=</span> s[j]; 
+            <span style="color: #008800; font-weight: bold">if</span> (grid[i][j] <span style="color: #333333">==</span> <span style="color: #0044DD">&#39;&lt;&#39;</span>) sy<span style="color: #333333">=</span>i,sx<span style="color: #333333">=</span>j; 
+            <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (grid[i][j] <span style="color: #333333">==</span> <span style="color: #0044DD">&#39;&gt;&#39;</span>) ey<span style="color: #333333">=</span>i,ex<span style="color: #333333">=</span>j; 
+        }
+    }
+    <span style="color: #888888">// bfs 시작 </span>
+    queue<span style="color: #333333">&lt;</span>P<span style="color: #333333">&gt;</span> que; 
+    que.push(P(sy,sx)); 
+    visited[sy][sx] <span style="color: #333333">=</span> <span style="color: #007020">true</span>; 
+    <span style="color: #333399; font-weight: bold">bool</span> reached <span style="color: #333333">=</span> <span style="color: #007020">false</span>; 
+    <span style="color: #008800; font-weight: bold">while</span> (<span style="color: #333333">!</span>que.empty() <span style="color: #333333">&amp;&amp;</span> <span style="color: #333333">!</span>reached){
+        <span style="color: #333399; font-weight: bold">int</span> t <span style="color: #333333">=</span> que.size();   
+        <span style="color: #008800; font-weight: bold">while</span> (t<span style="color: #333333">--</span>){
+            P p <span style="color: #333333">=</span> que.front(); que.pop();  
+            <span style="color: #333399; font-weight: bold">int</span> y <span style="color: #333333">=</span> p.first, x <span style="color: #333333">=</span> p.second;  
+            <span style="color: #008800; font-weight: bold">if</span> (y <span style="color: #333333">==</span> ey <span style="color: #333333">&amp;&amp;</span> x <span style="color: #333333">==</span> ex){
+                reached <span style="color: #333333">=</span> <span style="color: #007020">true</span>; 
+                <span style="color: #008800; font-weight: bold">break</span>; 
+            }
+            <span style="color: #008800; font-weight: bold">for</span> (<span style="color: #333399; font-weight: bold">int</span> i <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>; i <span style="color: #333333">&lt;</span> <span style="color: #0000DD; font-weight: bold">4</span>; i<span style="color: #333333">++</span>){
+                <span style="color: #333399; font-weight: bold">int</span> ny <span style="color: #333333">=</span> y<span style="color: #333333">+</span>dy[i], nx <span style="color: #333333">=</span> x<span style="color: #333333">+</span>dx[i]; 
+                <span style="color: #008800; font-weight: bold">if</span> (inRange(ny,nx) <span style="color: #333333">&amp;&amp;</span> <span style="color: #333333">!</span>visited[ny][nx] <span style="color: #333333">&amp;&amp;</span> grid[ny][nx] <span style="color: #333333">!=</span> <span style="color: #0044DD">&#39;#&#39;</span>){
+                    visited[ny][nx] <span style="color: #333333">=</span> <span style="color: #007020">true</span>; 
+                    que.push(P(ny,nx)); 
+                }
+            }
+        }
+    }
+    <span style="color: #008800; font-weight: bold">if</span> (reached) cout <span style="color: #333333">&lt;&lt;</span> <span style="background-color: #fff0f0">&quot;true&quot;</span> <span style="color: #333333">&lt;&lt;</span> endl; <span style="color: #888888">// 미로 통과가능 </span>
+    <span style="color: #008800; font-weight: bold">else</span> cout <span style="color: #333333">&lt;&lt;</span> <span style="background-color: #fff0f0">&quot;false&quot;</span> <span style="color: #333333">&lt;&lt;</span> endl; <span style="color: #888888">// 미로 통과 불가능 </span>
+    <span style="color: #008800; font-weight: bold">return</span> <span style="color: #0000DD; font-weight: bold">0</span>; 
+}
+</pre></div>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/05/31 02:32</p>
+                                <p class="static-profile" style="margin:0;padding:0;">iljimae</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2616"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">이 부분은 굳이 안 넣어도 될 것 같아요~  
+int t = que.size();   
+  while (t--){</span>
+                                -
+                                <span style="font-size:11px;">
+                                    maluchi,
+                                    2020/03/01 21:21
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_598"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>JAVA
+좀 무식한 방법으로 짰습니다</p>
+<pre><code class="java">package maze;
+import java.util.Scanner;
+public class Maze {
+
+    public static void main(String[] args) {
+        int L=100; //L : Limit of input lines
+
+        Maze m=new Maze();
+        Scanner in=new Scanner(System.in);
+        String[] inputS=new String[L];
+        int i,j,N,M=L; boolean d1,d2;
+        for(i=0;i&lt;L;i++){ // Inputting
+            inputS[i]=in.nextLine();
+            if(inputS[i].equals(&quot;&quot;)){ M=i; break;}
+        }
+        N=inputS[0].length();
+        int[][] maze=new int[M][N];
+        int[] goal=new int[2]; //goal: ending point
+        int[] count=new int[1];
+
+        m.input_to_maze(inputS, maze, goal);
+
+        do{ // Process
+            /*Print*/ // for(i=0;i&lt;M;i++) for(j=0;j&lt;N;j++) System.out.print(maze[i][j]+((j==N-1)?&quot;\n&quot;:&quot;&quot;)); System.out.println();
+            count[0]=0;
+            for(i=0;i&lt;M;i++){
+                for(j=0;j&lt;N;j++) m.pass(maze, i, j, count); for(j=N-1;j&gt;=0;j--) m.pass(maze, i, j, count);}
+            for(i=M-1;i&gt;=0;i--){
+                for(j=0;j&lt;N;j++) m.pass(maze, i, j, count); for(j=N-1;j&gt;=0;j--) m.pass(maze, i, j, count);}
+        }while(count[0]&gt;0);
+
+        System.out.println(((maze[goal[0]][goal[1]]==1)?&quot;true&quot;:&quot;false&quot;)); //Result
+    }
+
+    void input_to_maze(String[] inputS, int[][] maze, int[] goal){
+        int i,j, M=maze.length, N=maze[0].length;
+        for(i=0;i&lt;M;i++)
+            for(j=0;j&lt;N;j++){
+                switch(inputS[i].charAt(j)){
+                case '#': maze[i][j]=2; break;
+                case '&lt;': maze[i][j]=1; break;
+                case '&gt;': goal[0]=i; goal[1]=j;
+                default : maze[i][j]=0; break;
+                }
+            }
+    }
+
+    void pass(int[][] maze, int x, int y, int[] count){
+        int M=maze.length, N=maze[0].length;
+        if(maze[x][y]==0){
+            if( (x&gt;0&amp;&amp;maze[x-1][y]==1) || (x&lt;M-1&amp;&amp;maze[x+1][y]==1) || (y&gt;0&amp;&amp;maze[x][y-1]==1) || (y&lt;N-1&amp;&amp;maze[x][y+1]==1) ){
+                maze[x][y]=1; count[0]++;}
+        }
+    }
+
+}
+
+</code></pre>
+
+<pre><code class="java">좀 무식한 방법으로 짰습니다;;
+
+통과 가능한 미로의 예 3)에서,
+(/*print*/부분 슬러쉬 두 개 풀었을 때의 출력)
+
+#:2, 공백:0, 시작지점(&lt;):1으로 둔 Int 배열을 만든 후,
+오른쪽방향에서 왼쪽방향, 아랫방향에서 윗방향으로 한칸한칸씩
+0이 있는 칸(공백)일 경우 상하좌우에 1이 있을 경우 1을 집어넣습니다
+더 이상 1로 바꿀 수 있는 0칸이 없을 때까지 이를 반복합니다
+도착지점(&gt;)칸의 값이 1일 경우 true를, 0일 경우 false를 출력합니다
+
+2222222
+2100002
+2222202
+2000002
+2022222
+2020002
+2020202
+2000202
+2222222
+
+2222222
+2111112
+2222212
+2111112
+2122222
+2121112
+2121202
+2111202
+2222222
+
+2222222
+2111112
+2222212
+2111112
+2122222
+2121112
+2121212
+2111212
+2222222
+
+true
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/04/17 07:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Katherine</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_1003"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>python 2.7</p>
+<pre><code class="python">import unittest
+
+class V:
+    def __init__(self, row, y, x, value):
+        self.row = row
+        self.visit = False
+        self.y = y
+        self.x = x
+        self.value = value
+
+    def up(self):
+        if self.y-1 &lt; 0: return None
+        return self.row[self.y-1][self.x]
+
+    def down(self):
+        if self.y+1 &gt;= len(self.row): return None
+        return self.row[self.y+1][self.x]
+
+    def left(self):
+        if self.x-1 &lt; 0: return None
+        return self.row[self.y][self.x-1]
+
+    def right(self):
+        if self.x+1 &gt;= len(self.row[0]): return None
+        return self.row[self.y][self.x+1]
+
+    def __str__(self):
+        return &quot;(%s, %s):[%s]&quot; % (self.y, self.x, self.value)
+
+
+class Map:
+    def __init__(self, data):
+        self.row = []
+        y = 0
+        for line in data.split(&quot;\n&quot;):
+            line = line.strip()
+            if not line: continue
+            col = []
+            for x, c in enumerate(line):
+                v = V(self.row, y, x, c)
+                col.append(v)
+                if c == '&lt;':
+                    self.start = v
+                elif c == '&gt;':
+                    self.end = v
+            self.row.append(col)
+            y += 1
+
+
+class Search:
+    def __init__(self, data):
+        self.map = Map(data)
+        self.found = False
+        self.go(self.map.start)
+
+    def go(self, v):
+        if v == self.map.end:
+            self.found = True
+            return
+
+        v.visit = True
+
+        canGo = lambda v: v and v.value != &quot;#&quot; and not v.visit
+        if canGo(v.up()):self.go(v.up())
+        if canGo(v.right()):self.go(v.right())
+        if canGo(v.left()):self.go(v.left())
+        if canGo(v.down()):self.go(v.down())
+
+
+
+class SearchTest(unittest.TestCase):
+    def test1(self):
+        self.assertTrue(Search(&quot;&quot;&quot;
+            &lt;     &gt;
+        &quot;&quot;&quot;).found)
+
+        self.assertTrue(Search(&quot;&quot;&quot;
+            ########
+            #&lt;     #
+            #  ##  #
+            #  ##  #
+            #     &gt;#
+            ########
+        &quot;&quot;&quot;).found)
+
+        self.assertTrue(Search(&quot;&quot;&quot;
+            #######
+            #&lt;    #
+            ##### #
+            #     #
+            # #####
+            # #   #
+            # # # #
+            #   #&gt;#
+            #######
+        &quot;&quot;&quot;).found)
+
+        self.assertFalse(Search(&quot;&quot;&quot;
+            &lt;   #   &gt;
+        &quot;&quot;&quot;).found)
+
+        self.assertFalse(Search(&quot;&quot;&quot;
+            ########
+            #&lt;     #
+            #     ##
+            #    #&gt;#
+            ########
+        &quot;&quot;&quot;).found)
+
+        self.assertFalse(Search(&quot;&quot;&quot;
+            #&lt; #  #
+            #  #  #
+            #  # &gt;#
+        &quot;&quot;&quot;).found)
+
+
+
+if __name__ == &quot;__main__&quot;:
+    unittest.main()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/09/19 16:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">pahkey</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_1996"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="vbnet">    Sub Main()
+        Dim n As Integer = Val(Console.ReadLine)
+        Dim map(n - 1)() As String
+        Dim stPoint As Point
+
+        For i As Integer = 1 To n
+            Dim line As String = Console.ReadLine, idx As Integer = i - 1
+
+            map(idx) = Array.ConvertAll(line.ToArray,
+                                          Function(c As Char)
+                                              If c.ToString = &quot;&lt;&quot; Then
+                                                  stPoint = New Point(line.IndexOf(&quot;&lt;&quot;), idx)
+                                              End If
+                                              Return c.ToString
+                                          End Function)
+        Next
+
+        Dim find As Boolean = False
+
+        Dim q As New Queue
+        q.Enqueue(stPoint)
+
+        While q.Count &gt; 0
+            Dim pt As Point = q.Dequeue
+
+            '// 출구
+            If map(pt.X)(pt.Y) = &quot;&gt;&quot; Then
+                find = True
+                Exit While
+            End If
+
+            If map(pt.X)(pt.Y) &lt;&gt; &quot;#&quot; Then
+                map(pt.X)(pt.Y) = &quot;#&quot;
+
+                If pt.X &lt; map.Length - 1 Then q.Enqueue(New Point(pt.X + 1, pt.Y))
+                If pt.X &gt; 0 Then q.Enqueue(New Point(pt.X - 1, pt.Y))
+                If pt.Y &lt; map(0).Length - 1 Then q.Enqueue(New Point(pt.X, pt.Y + 1))
+                If pt.Y &gt; 0 Then q.Enqueue(New Point(pt.X, pt.Y - 1))
+            End If
+        End While
+
+        Console.WriteLine(&quot;Result: &quot; &amp; find.ToString)
+
+        Console.ReadLine()
+    End Sub
+</code></pre>
+
+<p>BFS 알고리즘을 이용하였습니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/06/12 21:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Steal</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2812"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">'''
+시작점을 먼저 찾고
+시작점 주위의 공백을 'c'로 색칠하고 그 주위의 공백을 또 색칠하는 것을 반복.
+도착점을 찾으면 True를 리턴
+재귀함수로 구현했음.
+'''
+
+
+maze=[]
+while True:
+    s = raw_input()
+    if s =='': break
+    maze.append(list(s))
+for y in range(len(maze)): # 시작점을 찾아서 x, y에 저장
+    if maze[y].count('&lt;') &gt; 0 :
+        x = maze[y].index('&lt;')
+        break
+
+def find(x,y): #재귀함수
+    if x&lt;0 or y&lt;0 or x&gt;len(maze[0]) or y&gt;=len(maze) : return False
+    m = maze[y][x]
+    if m == '&gt;' : return True
+    if m == ' ' or m =='&lt;':
+        maze[y][x] = 'c' # 한번 탐색을 했던 곳은 체크해서 다시 탐색하지 않도록 함
+        return find(x-1,y)|find(x+1,y)|find(x,y-1)|find(x,y+1)
+    else :
+        return False
+
+print find(x,y)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/01/17 17:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">상파</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3134"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">sample = '''#&lt; #  #
+#  #  #
+#  # &gt;#'''
+class cursor():
+    def __init__(self, co, endpoint):
+        self.y = co[0]; self.x = co[1]
+        self.ey = endpoint[0]; self.ex = endpoint[1]
+        self.dic = []; self.history = []
+    def chain(self, brd, co):
+        y = co[0]; x = co[1]
+        if (y,x) not in self.history:self.history.append((y,x))
+        else:return
+        for a, b in [(1,0),(-1,0),(0,1),(0,-1)]:
+            try:
+                if brd[y+a][x+b] == 0:
+                    self.dic.append((y+a, x+b))
+                    self.chain(brd, (y+a, x+b))
+            except:continue
+    def posibility(self):return (self.ey,self.ex) in self.dic
+
+if __name__ == '__main__':
+    m = sample.split('\n')
+    li = []; se = {};
+    i = 0
+    for a in m:
+        li.append([]); j = 0
+        for b in a:
+            if b == '#':li[i].append(1)
+            if b == ' ':li[i].append(0)
+            if b == '&lt;':li[i].append(0); se['start'] = (i,j)
+            if b == '&gt;':li[i].append(0); se['end'] = (i,j)
+            j += 1
+        i += 1
+    cu = cursor(se['start'],se['end'])
+    cu.chain(li,(cu.y,cu.x))
+    print(cu.posibility())
+</code></pre>
+
+<p>재귀함수입니다. 파이썬 3.5.1</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/03/13 16:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Flair Sizz</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3519"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C#으로 작성했습니다. Depth First Search로 구현하려고 최대한 노력했습니다.</p>
+<pre><code class="cs">        public class Point
+        {
+            public int X { get; set; }
+            public int Y { get; set; }
+            public Point(int x, int y)
+            {
+                X = x; Y = y;
+            }
+        }
+
+        public bool MazeThrough(string input)
+        {
+            var splits = input.Split(&quot;\n&quot;);
+            var starting = FindingPoint(splits, &quot;&lt;&quot;);
+            if (starting.X == -1 || starting.Y == -1) return false;
+            return PointOpen(splits, starting.X, starting.Y);
+        }
+
+        public Point FindingPoint(string[] splits, string sign)
+        {
+            for (int i = 0; i &lt; splits.Count(); i++)
+                if (splits[i].Contains(sign)) return new Point(i, splits[i].IndexOf(&quot;&lt;&quot;));
+            return new Point(-1, -1);
+        }
+
+        public bool PointOpen(string[] splits, int x, int y)
+        {
+            var line = splits[x];
+            var output = string.Empty;
+            if (line[y].ToString() == &quot;&gt;&quot;) return true;
+            if (line[y].ToString() == &quot;#&quot;) return false;
+            if (line[y].ToString() == &quot;X&quot;) return false;
+            for (int i = 0; i &lt; line.Length; i++) output += i == y ? &quot;X&quot; : line[i].ToString();
+            splits[x] = output;
+            var left = y - 1 &gt;= 0 &amp;&amp; PointOpen(splits, x, y - 1);
+            var right = y + 1 &lt; splits[0].Length &amp;&amp; PointOpen(splits, x, y + 1);
+            var up = x - 1 &gt;= 0 &amp;&amp; PointOpen(splits, x - 1, y);
+            var down = x + 1 &lt; splits.Count() &amp;&amp; PointOpen(splits, x + 1, y);
+            if (up || down || left || right) return true;
+            return false;
+        }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/04/26 13:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Straß Böhm Jäger</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4097"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<p>BFS</p>
+<pre><code class="ruby">require 'matrix'
+check = -&gt;maze=gets(&quot;\n\n&quot;) do
+  m = Matrix[*maze.split(&quot;\n&quot;).map(&amp;:chars)]
+  q = [m.index(&quot;&lt;&quot;)]
+  nexts = -&gt;x,y { m.send(:[]=, x, y, &quot;#&quot;)
+                 [[x+1,y], [x-1,y], [x,y-1], [x,y+1]].
+                   select {|x,y| x&gt;=0 &amp;&amp; y&gt;=0 &amp;&amp; &quot; &gt;&quot;[m[x,y] || 2]} }
+  ((x,y=q.shift; m[x,y]==&quot;&gt;&quot; ? (break true) : q+=nexts[x,y]) until !q[0]) || false
+end
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby">maze1 = &quot;&lt;     &gt;\n&quot;
+maze2 = &quot;########\n#&lt;     #\n#  ##  #\n#  ##  #\n#     &gt;#\n########\n&quot;
+maze3 = &quot;#######\n#&lt;    #\n##### #\n#     #\n# #####\n&quot; +
+        &quot;# #   #\n# # # #\n#   #&gt;#\n#######\n&quot;
+maze4 = &quot;&lt;   #   &gt;\n\n&quot;
+maze5 = &quot;########\n#&lt;     #\n#     ##\n#    #&gt;#\n########\n&quot;
+maze6 = &quot;#&lt; #  #\n#  #  #\n#  # &gt;#\n&quot;
+
+expect( [maze1, maze2, maze3].all? &amp;check ).to eq true
+expect( [maze4, maze5, maze6].all? &amp;check ).to eq false
+</code></pre>
+
+<p><strong>Output</strong></p>
+<pre><code class="ruby">puts check.call
+#######
+#&lt;    #
+##### #
+#     #
+# #####
+# #   #
+# # # #
+#   #&gt;#
+#######
+
+true
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/07/07 22:25</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4104"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Delphi 2010 BFS </p>
+<pre><code class="delphi">type
+  TArrayInt2d = array of array of Integer;
+
+function BFS(var Map: TArrayInt2d; pStart, pEnd: TPoint; sizeX, sizeY: Integer): string;
+var
+  i, pos, cnt, nSize, xPos, yPos: Integer; // 맵의 크기와 카운트 변수
+  x, Y, L: array of Integer; // 좌표와 길이를 담을 배열
+  s: string;
+  // 큐에 좌표 정보와 길이를 삽입하는 함수
+  procedure enqueue(_x, _y, _l: Integer);
+  begin
+    x[cnt] := _x;
+    Y[cnt] := _y;
+    L[cnt] := _l;
+    Inc(cnt);
+  end;
+
+begin
+  pos := 0;
+  cnt := 0;
+  nSize := sizeX * sizeY;
+  SetLength(x, nSize);
+  SetLength(Y, nSize);
+  SetLength(L, nSize);
+
+  // 시작점의 좌표 정보와 길이를 큐에 삽입한다
+  enqueue(pStart.x, pStart.Y, 1);
+  x[pos] := pStart.x;
+  Y[pos] := pStart.Y;
+  // 더 이상 방문할 지점이 없거나, 도착 지점에 도착하면 루프를 탈출한다
+  result := 'Result : Fail'; // 결과값 저장
+  while (pos &lt; nSize) do
+  begin
+    xPos := x[pos];
+    yPos := Y[pos];
+    if (xPos = pEnd.x) and (yPos = pEnd.Y) then // 결과위치
+    begin
+      result := format('Result = %d', [L[pos]]);
+      s := '';
+      for i := 0 to pos do
+        s := s + format('%3d,', [x[i]]);
+      result := result + #13#10 + 'X Value: ' + s;
+      s := '';
+      for i := 0 to pos do
+        s := s + format('%3d,', [Y[i]]);
+      result := result + #13#10 + 'Y Value: ' + s;
+      s := '';
+      for i := 0 to pos do
+        s := s + format('%3d,', [L[i]]);
+      result := result + #13#10 + 'L Value: ' + s;
+      break;
+    end;
+
+    if (xPos &gt;= sizeX - 1) and (yPos &gt;= sizeY - 1) then
+      break;
+    // 두 번 방문하게 하면 안되므로, 이미 지나갔다는 표시를 해둔다
+    Map[yPos, xPos] := 0;
+    // 위로 갈 수 있다면, 위 지점의 좌표 정보와 길이를 큐에 삽입한다
+    if (yPos &gt; 0) and (Map[yPos - 1, xPos] = 1) then
+      enqueue(xPos, yPos - 1, L[pos] + 1);
+    // 아래로 갈 수 있다면, 아래 지점의 좌표 정보와 길이를 큐에 삽입한다
+    if (yPos &lt; sizeY - 1) and (Map[yPos + 1, xPos] = 1) then
+      enqueue(xPos, yPos + 1, L[pos] + 1);
+    // 왼쪽으로 갈 수 있다면, 왼쪽 지점의 좌표 정보와 길이를 큐에 삽입한다
+    if (xPos &gt; 0) and (Map[yPos, xPos - 1] = 1) then
+      enqueue(xPos - 1, yPos, L[pos] + 1);
+    // 오른쪽로 갈 수 있다면, 오른쪽 지점의 좌표 정보와 길이를 큐에 삽입한다
+    if (xPos &lt; sizeX - 1) and (Map[yPos, xPos + 1] = 1) then
+      enqueue(xPos + 1, yPos, L[pos] + 1);
+
+    // 큐의 다음 순서의 지점을 방문한다
+    Inc(pos);
+  end;
+
+end;
+
+procedure TForm4.btnBFS미로찾기Click(Sender: TObject);
+var
+  sData: string;
+  C: Char;
+  i, j, nSizeX, nSizeY: Integer;
+  Map: TArrayInt2d;
+  pStart, pEnd: TPoint;
+begin
+    nSizeY := 9;
+    nSizeX := 7;
+    sData := //
+    '#######' + //
+    '#&lt;    #' + //
+    '##### #' + //
+    '#     #' + //
+    '# #####' + //
+    '# #   #' + //
+    '# # # #' + //
+    '#   #&gt;#' + //
+    '#######';
+
+  {nSizeY := 6;
+  nSizeX := 6;
+  sData := //
+    '111111' + //
+    '001001' + //
+    '111011' + //
+    '100010' + //
+    '111010' + //
+    '001111';
+    }
+
+  SetLength(Map, nSizeY, nSizeX);
+  pStart := Point(0, 0);
+  pEnd := Point(nSizeY-1, nSizeX-1);
+  for i := 0 to nSizeY - 1 do
+    for j := 0 to nSizeX - 1 do
+    begin
+      C := sData[nSizeX * i + j + 1];
+      if (C = '#') or (C = '0') then
+        Map[i, j] := 0
+      else
+      begin
+        Map[i, j] := 1;
+        if C = '&lt;' then
+        begin
+          pStart.x := j;
+          pStart.Y := i;
+        end;
+        if C = '&gt;' then
+        begin
+          pEnd.x := j;
+          pEnd.Y := i;
+        end;
+      end;
+    end;
+
+  Memo1.Lines.Text := BFS(Map, pStart, pEnd, nSizeX, nSizeY); // BFS 시작!
+end;
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/07/08 16:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">강 경수</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4853"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python3로 작성하였습니다. 출구를 찾아가는 과정을 눈으로 볼수 있도록 하였습니다.</p>
+<p>원치 않으시면 DEBUG 변수를 False로 바꿔주시면 됩니다.</p>
+<pre><code class="python">#-*-coding:utf-8-*-
+DEBUG = True
+checkPattern = [(0, -1), (-1, 0), (1, 0), (0, 1)]
+checkedFlag = &quot;o&quot;
+
+def checkNode(datas, x, y):
+    datas[y][x] = checkedFlag
+    for pattern in checkPattern:
+        coord = (x + pattern[0], y + pattern[1])
+        if (0 &lt;= coord[1] &lt; len(datas)) and (0 &lt;= coord[0] &lt; len(datas[coord[1]])):
+            data = datas[coord[1]][coord[0]]
+            #### DEBUG START
+            if DEBUG:
+                print(&quot;&quot;)
+                datas[y][x] = &quot;*&quot;
+                datas[coord[1]][coord[0]] = &quot;?&quot;
+                for line in datas:
+                    print(&quot;&quot;.join(line))
+                datas[y][x] = checkedFlag
+                datas[coord[1]][coord[0]] = checkedFlag
+            #### END OF DEBUG
+            if data != checkedFlag:                
+                if data == &quot;&gt;&quot;: 
+                    print(&quot;Found '&gt;' at&quot;, coord)
+                    return True
+                elif data == &quot; &quot;:
+                    # recursive search
+                    if checkNode(datas, coord[0], coord[1]):
+                        return True
+    return False
+
+def isPossible(data):
+    # 문자열 형태인 data를 리스트로 변환
+    datas = [list(line) for line in data.split(&quot;\n&quot;)]    
+    # 시작지점 &quot;&lt;&quot;의 위치를 찾는다.
+    sX, sY = 0, 0
+    for y in range(len(datas)):
+        if &quot;&lt;&quot; in datas[y]:
+            sX, sY = datas[y].index(&quot;&lt;&quot;), y
+    # 찾기시작          
+    if not checkNode(datas, sX, sY):
+        print(&quot;Not found.&quot;)
+</code></pre>
+
+<h3 id="_1">테스트</h3>
+<pre><code class="python">#-------------------#
+# Test
+#-------------------#
+data1=&quot;&quot;&quot;&lt;     &gt;&quot;&quot;&quot;
+
+data2=&quot;&quot;&quot;########
+#&lt;     #
+#  ##  #
+#  ##  #
+#     &gt;#
+########&quot;&quot;&quot;
+
+data3=&quot;&quot;&quot;#######
+#&lt;    #
+##### #
+#     #
+# #####
+# #   #
+# # # #
+#   #&gt;#
+#######&quot;&quot;&quot;
+
+data4=&quot;&quot;&quot;&lt;   #   &gt;&quot;&quot;&quot;
+
+data5 = &quot;&quot;&quot;########
+#&lt;     #
+#     ##
+#    #&gt;#
+########&quot;&quot;&quot;
+
+data6 = &quot;&quot;&quot;#&lt; #  #
+#  #  #
+#  # &gt;#&quot;&quot;&quot;
+
+isPossible(data1)
+isPossible(data2)
+isPossible(data3)
+isPossible(data4)
+isPossible(data5)
+isPossible(data6)
+</code></pre>
+
+<h3 id="_2">실행결과</h3>
+<pre><code class="python">Found '&gt;' at (6, 0)
+Found '&gt;' at (6, 4)
+Found '&gt;' at (5, 7)
+Not found.
+Not found.
+Not found.
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/09/26 14:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">윤태호</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4860"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>
+#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+#define SIZE 20
+
+char queue[20];
+int top = 0;
+int width = 7;
+int height = 3;
+
+void push(char value);
+int ALLpop();
+struct Coor {
+    int x;
+    int y;
+}start, end;
+void BFS(Coor c, char** arr, int val);
+void findStartEnd (char** arr);
+bool verdict(char** arr);
+int** temp;
+void main() 
+{
+    char** input = (char**) malloc (sizeof(char*)*height);
+    for(int i = 0; i&lt; height  ;i++)
+        input[i] = (char*) malloc (sizeof(char)*width);
+    temp = (int**) malloc (sizeof(int*)*height);
+    for(int i = 0; i&lt; height  ;i++)
+        temp[i] = (int*) malloc (sizeof(int)*width);
+
+    for(int i = 0; i&lt; height  ;i++) 
+        for(int j = 0; j&lt;width  ;j++) 
+            temp[i][j] = 0;
+
+    printf(&quot;가로 사이즈 : &quot;);
+    scanf(&quot;%d&quot;, &amp;width);
+    printf(&quot;세로 사이즈 : &quot;);
+    scanf(&quot;%d&quot;, &amp;height);
+
+    for(int i = 0; i&lt;height ;i++) {
+        scanf(&quot;%s&quot;, input[i]);
+    }
+
+    findStartEnd (input);
+    BFS(start, input, 0);
+    printf(&quot;\n\n%d\n&quot;, verdict(input));
+
+}
+void findStartEnd (char** arr) {
+    for(int i = 0; i&lt; height  ;i++) {
+        for(int j = 0; j&lt;width  ;j++)  {
+            if(arr[i][j] == '&lt;'){
+                start.x = j;
+                start.y = i;
+                temp[i][j] = -1;
+            }
+            else if(arr[i][j] == '&gt;'){
+                end.x = j;
+                end.y = i;
+            }
+        }
+    }
+}
+bool verdict(char** arr) {
+    for(int i = 0; i&lt; height  ;i++) {
+        for(int j = 0; j&lt;width  ;j++)  {
+            if(arr[i][j] == '&gt;'){
+                if(temp[i][j]!=0)
+                    return true;
+            }
+
+        }
+    }
+    return false;
+}
+void BFS(Coor c, char** arr, int val) {
+
+    if(c.y+1 &lt; height &amp;&amp; arr[c.y+1][c.x] !='#' &amp;&amp; temp[c.y+1][c.x] == 0) {
+        Coor cur;
+        cur.y = c.y+1;
+        cur.x = c.x;
+        temp[cur.y][cur.x] = val + 1;
+        BFS(cur, arr, temp[cur.y][cur.x]);
+    }
+    if(c.y &gt; 0 &amp;&amp; arr[c.y-1][c.x] !='#' &amp;&amp; temp[c.y-1][c.x] == 0) {
+        Coor cur;
+        cur.y = c.y-1;
+        cur.x = c.x;
+        temp[cur.y][cur.x] = val + 1;
+        BFS(cur, arr, temp[cur.y][cur.x]);
+    }
+    if(c.x+1 &lt; width &amp;&amp; arr[c.y][c.x+1] !='#' &amp;&amp; temp[c.y][c.x+1] == 0) {
+        Coor cur;
+        cur.y = c.y;
+        cur.x = c.x+1;
+        temp[cur.y][cur.x] = val + 1;
+        BFS(cur, arr,temp[cur.y][cur.x]);
+    }
+    if(c.x &gt; 0 &amp;&amp; arr[c.y][c.x-1] !='#' &amp;&amp; temp[c.y][c.x-1] == 0) {
+        Coor cur;
+        cur.y = c.y;
+        cur.x = c.x-1;
+        temp[cur.y][cur.x] = val + 1;
+        BFS(cur, arr,temp[cur.y][cur.x]);
+    }
+}
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/09/27 19:15</p>
+                                <p class="static-profile" style="margin:0;padding:0;">코딩초보</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5442"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Haskell로 작성 하였습니다.</p>
+<pre><code class="haskell">import Data.List
+import Control.Monad
+
+data1 = &quot;&lt;     &gt;&quot;
+
+data2 =
+    &quot;########\n\
+    \#&lt;     #\n\
+    \#  ##  #\n\
+    \#  ##  #\n\
+    \#     &gt;#\n\
+    \########&quot;
+
+data3 =
+    &quot;#######\n\
+    \#&lt;    #\n\
+    \##### #\n\
+    \#     #\n\
+    \# #####\n\
+    \# #   #\n\
+    \# # # #\n\
+    \#   #&gt;#\n\
+    \#######&quot;
+
+data4 = &quot;&lt;   #   &gt;&quot;
+
+data5 =
+    &quot;########\n\
+    \#&lt;     #\n\
+    \#     ##\n\
+    \#    #&gt;#\n\
+    \########&quot;
+
+data6 =
+    &quot;#&lt; #  #\n\
+    \#  #  #\n\
+    \#  # &gt;#&quot;
+
+checkPatterns = [(0, -1), (-1, 0), (1, 0), (0, 1)]
+
+findStartPoint datas num
+    | index /= Nothing = Just (n, num)
+    | length datas &lt;= num = Nothing
+    | otherwise = findStartPoint datas (num + 1)
+    where
+        index = elemIndex '&lt;' (datas !! num)
+        Just n = index
+
+mergeNode [] = Nothing
+mergeNode (x:xs) 
+    | x == Nothing = mergeNode xs
+    | otherwise = x
+
+findEndPoint datas (x,y) checkedList =
+    mergeNode (
+        fmap
+            (\(pX, pY) -&gt; 
+                let
+                    (nX, nY) = (x+pX, y+pY)
+                    character = (datas !! nY) !! nX
+                in
+                    if nY &gt;=0 &amp;&amp; nY &lt; length datas &amp;&amp; nX &gt;= 0 &amp;&amp; nX &lt; length (datas !! nY) &amp;&amp; not (elem (nX, nY) checkedList)
+                    then case character of
+                        '&gt;' -&gt; Just (nX, nY)
+                        ' ' -&gt; findEndPoint datas (nX, nY) ((x,y):checkedList)
+                        otherwise -&gt; Nothing
+                    else Nothing)
+            checkPatterns
+        )
+
+checkTheMaze =
+    fmap
+        (\mazeData -&gt; do
+            let maze = lines mazeData
+            startPoint &lt;- findStartPoint maze 0
+            findEndPoint maze startPoint [])
+        [data1, data2, data3, data4, data5, data6]
+</code></pre>
+
+<p>실행결과</p>
+<pre><code>Prelude&gt; checkTheMaze
+
+[Just (6,0),Just (6,4),Just (5,7),Nothing,Nothing,Nothing]
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/11/29 00:43</p>
+                                <p class="static-profile" style="margin:0;padding:0;">윤태호</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5536"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="javascript">const maze1 = `#######
+#&lt;    #
+##### #
+#     #
+# #####
+# #   #
+# # # #
+#   #&gt;#
+#######`
+
+const maze2 = `#&lt; #  #
+#  #  #
+#  # &gt;#`
+
+function parseMaze(s) {
+  return s.split(&quot;\n&quot;).map(line =&gt; line.split(&quot;&quot;))
+}
+
+function dfs(start, end, neighbors, equal) {
+  let visited = [];
+  let stack = [start];
+
+  while (stack.length) {
+    let current = stack.pop();
+    if (equal(current, end)) return true;
+    visited.push(current);
+    stack.push(...neighbors(current).filter(pos =&gt; !visited.find(v =&gt; equal(pos, v))))
+  }
+  return false;
+}
+
+function valid(m) {
+  return dfs(find(&quot;&lt;&quot;), find(&quot;&gt;&quot;), neighbors, equal);
+
+  function neighbors([i,j]) {
+    return [[i-1, j],[i+1, j],[i, j-1],[i,j+1]]
+      .filter(validIndex)
+      .filter(([i,j]) =&gt; m[i][j] !== '#');
+  }
+
+  function validIndex([i,j]) {
+    return i &gt;= 0 &amp;&amp; i &lt; m.length &amp;&amp; j &gt;= 0 &amp;&amp; j &lt; m[i].length;
+  }
+
+  function equal(a, b) {
+    return a[0] == b[0] &amp;&amp; a[1] == b[1];
+  }
+
+  function find(s) {
+    for (let i=0; i&lt;m.length; i++) {
+      let index = m[i].indexOf(s);
+      if (index !== -1) return [i, index];
+    }
+    throw &quot;no such element&quot;
+  }
+}
+
+console.log(valid(parseMaze(maze1)));
+console.log(valid(parseMaze(maze2)));
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/12/09 12:00</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Han Jooyung</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7438"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">test=&quot;&quot;&quot;
+#######
+#&lt;    #
+##### #
+#     #
+# #####
+# # # #
+# # # #
+#   #&gt;#
+#######&quot;&quot;&quot;
+cnt=0
+start=[]
+finish=[]
+point_x=[]
+point_y=[]
+def start_p(stt):
+    start.append(stt)
+def finish_p(stt):
+    finish.append(stt)
+#큐에 거리를 집어넣는다
+def enqueue(x,y):
+    global cnt
+    point_x.append(x)
+    point_y.append(y)
+    cnt+=1
+
+#2차원 배열로  맵을 변환
+def map2arr(test):
+    cnt_col=0
+    k=0
+    cnt_row=0
+    txt=[]
+    for i in range(len(test)):
+        if test[i] != &quot;\n&quot;:
+            cnt_row +=1
+            txt.append(test[i])
+        else :
+            cnt_col+=1
+            cnt_row=0
+    txt=&quot;&quot;.join(txt)
+    print(txt)
+    start_p(txt.find('&lt;'))
+    finish_p(txt.find('&gt;'))
+    list(txt)
+    test_road=[[0 for i in range(cnt_row)] for j in range(cnt_col)]
+    print(&quot;cnt_col : &quot;,cnt_col,&quot;cnt_row : &quot;,cnt_row)
+    for i in range(cnt_col):
+        for j in range(cnt_row):
+            test_road[i][j]=txt[k]
+            k+=1
+    #2차원 배열로 맵의 정보를 옮김==&gt; test_road    
+    return test_road
+def find_road(mapping):
+    pos=0
+    col=len(mapping)
+    row=len(mapping[0])
+    print(&quot;col : &quot;,col,&quot;row : &quot;,row)
+    #시작지점 저장
+    sx=(start[0]%row)
+    sy=int(start[0]/row)
+    print(&quot;start : &quot;,sx,sy)
+    enqueue(sx,sy)
+    #end point
+    fx=(finish[0]%row)
+    fy=int(finish[0]/row)
+    print(&quot;finish :&quot;,fx,fy)
+
+    while pos&lt;cnt and point_x[pos] != row-1 and point_y[pos] != col-1:
+        mapping[point_y[pos]][point_x[pos]]=0
+        #올라가는방
+        if mapping[point_y[pos]-1][point_x[pos]]==&quot; &quot; or mapping[point_y[pos]-1][point_x[pos]]==&quot;&gt;&quot;:
+            enqueue(point_x[pos], point_y[pos] - 1)
+
+        #down
+        if mapping[point_y[pos]+1][point_x[pos]]==&quot; &quot; or mapping[point_y[pos]+1][point_x[pos]]==&quot;&gt;&quot;:
+            enqueue(point_x[pos], point_y[pos] + 1)
+
+        #left
+        if mapping[point_y[pos]][point_x[pos]-1]==&quot; &quot; or mapping[point_y[pos]][point_x[pos]-1]==&quot;&gt;&quot;:
+            enqueue(point_x[pos]-1, point_y[pos])
+
+        #right
+        if mapping[point_y[pos]][point_x[pos]+1]==&quot; &quot; or mapping[point_y[pos]][point_x[pos]+1]==&quot;&gt;&quot;:
+            enqueue(point_x[pos] + 1, point_y[pos])
+        pos+=1
+    repeat=0
+    for i in range(len(point_x)):
+        if point_x[i]==fx and point_y[i]==fy:
+            print(&quot;True&quot;,point_x[i],point_y[i])
+            repeat=1
+    if repeat==0:
+        print(&quot;False&quot;)
+
+
+
+
+mapping=map2arr(test)
+find_road(mapping)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/12 13:29</p>
+                                <p class="static-profile" style="margin:0;padding:0;">나후승</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7641"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <h2 id="javascript">javascript</h2>
+<pre><code class="javascript">var check = function(maze) {
+    var map = maze.split(&quot;\n&quot;).map($ =&gt; $.split(&quot;&quot;));
+    var flatmap = map.reduce((a, b) =&gt; a.concat(b), []);
+
+    var [row, col] = [map.length, map[0].length];
+    var [startrow, startcol] = [parseInt(flatmap.indexOf(&quot;&lt;&quot;) / col), flatmap.indexOf(&quot;&lt;&quot;) % col];
+
+    var queue = [];
+    var visited = Array.from(Array(row), v =&gt; Array.from(Array(col), () =&gt; 0));
+
+    enqueue(queue, [startrow, startcol], map, visited);
+
+    while (queue.length &gt; 0) {
+        var [row, col] = queue.shift();
+        if (map[row][col] === &quot;&gt;&quot;) return true;
+
+        enqueue(queue, [row - 1, col], map, visited);
+        enqueue(queue, [row + 1, col], map, visited);
+        enqueue(queue, [row, col + 1], map, visited);
+        enqueue(queue, [row, col - 1], map, visited);
+    }
+    return false;
+};
+
+var enqueue = function(queue, [row, col], map, visited) {
+    if (map[row] &amp;&amp; map[row][col] &amp;&amp; map[row][col] !== &quot;#&quot; &amp;&amp; visited[row][col] !== 1) {
+        queue.push([row, col]);
+        visited[row][col] = 1;
+    }
+};
+</code></pre>
+
+<pre><code class="javascript">var maze1 =
+`&lt;     &gt;`;
+
+var maze2 =
+`########
+#&lt;     #
+#  ##  #
+#  ##  #
+#     &gt;#
+########`;
+
+var maze3 =
+`#######
+#&lt;    #
+##### #
+#     #
+# #####
+# #   #
+# # # #
+#   #&gt;#
+#######`;
+
+var maze4 =
+`&lt;   #   &gt;`;
+
+var maze5 =
+`########
+#&lt;     #
+#     ##
+#    #&gt;#
+########`;
+
+var maze6 =
+`#&lt; #  #
+#  #  #
+#  # &gt;#`;
+
+console.log(check(maze1));
+console.log(check(maze2));
+console.log(check(maze3));
+
+console.log(check(maze4));
+console.log(check(maze5));
+console.log(check(maze6));
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/26 17:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">funnystyle</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7958"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>[Python 3.6]</p>
+<pre><code class="python">import queue
+
+def isPass(mazeStr):
+    lineArr = mazeStr.strip().split(&quot;\n&quot;)
+    mazeArr = []
+    visitArr = []
+    strAxis = ()
+    for x, line in enumerate(lineArr):
+        varArr = []
+        for y, var in enumerate(line):
+            if var == '&lt;': strAxis = (x, y)
+            varArr.append(var)
+        mazeArr.append(varArr)
+        visitArr.append([0 for i in range(y)])
+
+    que = queue.Queue()
+    que.put(strAxis)
+
+    while not que.empty():
+        curAxis = que.get()
+        if mazeArr[curAxis[0]][curAxis[1]] == '&gt;': return True
+        if visitArr[curAxis[0]][curAxis[1]]: continue
+        visitArr[curAxis[0]][curAxis[1]] = 1
+        if curAxis[0] - 1 &gt; 0: que.put((curAxis[0] - 1, curAxis[1]))
+        if curAxis[0] + 1 &lt; len(visitArr): que.put((curAxis[0] + 1, curAxis[1]))
+        if curAxis[1] - 1 &gt; 0: que.put((curAxis[0], curAxis[1] - 1))
+        if curAxis[1] + 1 &lt; len(visitArr[0]): que.put((curAxis[0], curAxis[1] + 1))
+
+    return False
+
+mazeStr = &quot;&quot;&quot;
+#######
+#&lt;    #
+##### #
+#     #
+# #####
+# #   #
+# # # #
+#   #&gt;#
+#######
+&quot;&quot;&quot;
+print(isPass(mazeStr))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/07/21 16:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Eliya</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7971"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import numpy as np
+
+
+class Maze:
+    def __init__(self, inp_str):
+        self.arr = np.array([list(l) for l in inp_str.split('\n')])
+        self.X, self.Y = len(self.arr), len(self.arr[0])
+
+        for i in range(self.X):
+            for j in range(self.Y):
+                if self.arr[i, j] == '&lt;': self.startpos = (i, j)
+                elif self.arr[i, j] == '&gt;': self.endpos = (i, j)
+
+    # BFS
+    def escapable(self):
+        Q = [self.startpos]
+        while Q:
+            u = Q.pop(0)
+            for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+                v = (u[0] + dx, u[1] + dy)
+                if v == self.endpos:
+                    return True
+                elif 0 &lt;= v[0] &lt; self.X and 0 &lt;= v[1] &lt; self.Y and self.arr[v] == ' ':
+                    self.arr[v] = '.'
+                    Q.append(v)
+
+        return False
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/07/23 01:17</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7976"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C#: DFS</p>
+<pre><code class="cs">using System.Linq;
+using static System.Console;
+
+class Maze
+{
+    static bool DFS(char[][] maze, int x, int y)
+    {
+        if (x &lt; 0 || x &gt;= maze.Length || 
+            y &lt; 0 || y &gt;= maze[0].Length ||
+            maze[x][y] == '#')
+        {
+            return false;
+        }
+        if (maze[x][y] == '&gt;')
+            return true;
+
+        maze[x][y] = '#';
+        return DFS(maze, x - 1, y) ||
+            DFS(maze, x + 1, y) ||
+            DFS(maze, x, y - 1) ||
+            DFS(maze, x, y + 1);
+    }
+
+    static void Main(string[] args)
+    {        
+        string[] rawData = new string[] {
+            &quot;&lt;     &gt;&quot;,
+            &quot;########\n#&lt;     #\n#  ##  #\n#  ##  #\n#     &gt;#\n########&quot;,
+            &quot;#######\n#&lt;    #\n##### #\n#     #\n# #####\n# #   #\n# # # #\n#   #&gt;#\n#######&quot;,
+            &quot;&lt;   #   &gt;&quot;,
+            &quot;########\n#&lt;     #\n#     ##\n#    #&gt;#\n########&quot;,
+            &quot;#&lt; #  #\n#  #  #\n#  # &gt;#&quot;
+        };
+
+        foreach (string data in rawData)
+        {
+            string[] rows = data.Split('\n');
+            char[][] maze = new char[rows.Length][];
+            for (int i = 0; i &lt; rows.Length; i++)
+            {
+                maze[i] = rows[i].ToCharArray();
+            }
+
+            for (int i = 0; i &lt; rows.Length; i++)
+            { 
+                if (rows[i].Contains('&lt;'))
+                {
+                    WriteLine(DFS(maze, i, rows[i].IndexOf('&lt;')));
+                    break;
+                }
+            }
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/07/23 13:37</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10992"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3.6</p>
+<pre><code class="python">&quot;&quot;&quot;
+아이디어&gt;
+ 1) 미로 데이터의 시작점('&lt;')을 찾습니다.
+ 2) 시작점부터 현재 위치에서 이동 가능한 방향을 찾아 목적지('&gt;')에 당도할때까지 이동합니다.
+ 3) 목적지가 있는 라인(data[g])까지 가면 목적지 위치 접근 가능 여부를 확인하여, 접근이 가능하면 탐색을 계속하고, 접근이 불가능할 경우('false) 탐색을 종료합니다.
+ 4) 이동 중 목적지에 도착하면('true') 탐색을 종료합니다. 
+&quot;&quot;&quot;
+
+def inputdata():
+    n = int(input(''))
+    data = [input('') for i in range(n)]
+    return data
+
+def check(g,h,tmp): # 현재 위치에서 갈 수 있는 방향을 찾습니다.
+    if tmp != 'left' and data[g][h+1] != '#':
+        return 'right'
+    elif tmp != 'up' and data[g+1][h] != '#':
+        return 'down'
+    elif tmp != 'down' and data[g-1][h] != '#':
+        return 'up'
+    elif tmp != 'right' and data[g][h-1] != '#':
+        return 'left'
+    else:
+        return 0
+
+def maze(data):
+    t,h,tmp = 0,1,''
+    if len(data) == 1: # 미로가 한 줄짜리인 경우 중간에 장애물이 있는지만 체크합니다.
+        for i in data[0]:
+            if i == '&lt;':
+                t += 1
+            elif i == ' ':
+                pass
+            elif i == '#':
+                t -= 1
+            elif i == '&gt;' and t == 1:
+                print('true')
+                return
+            else:
+                print('false')
+                return                
+
+    elif len(data) &gt; 1:
+        for g,road in enumerate(data):
+            if '&lt;' in road:
+                while True:
+                    if data[g][h] == '&gt;':
+                        print('true')
+                        return
+                    elif tmp != 'left' and check(g,h,tmp) == 'right':
+                        tmp = check(g,h,tmp)
+                        h += 1
+                    elif tmp != 'up' and check(g,h,tmp) == 'down':
+                        tmp = check(g,h,tmp)
+                        g += 1
+                    elif tmp != 'down' and check(g,h,tmp) == 'up':
+                        tmp = check(g,h,tmp)
+                        g -= 1
+                    elif tmp != 'right' and check(g,h,tmp) == 'left':
+                        tmp = check(g,h,tmp)
+                        h -= 1
+                    else: # 모든 길에 대한 탐색을 마치기 전에 막다른 길을 만나면 이전 단계로 돌아가 다른 방법으로 탐색을 계속합니다.
+                        if tmp == 'down':
+                            g -= 1
+                            tmp = 'up'
+                        elif tmp == 'right':
+                            h -= 1
+                            tmp = 'left'
+                        elif tmp == 'left':
+                            h += 1
+                            tmp = 'right'
+                        elif tmp == 'up':
+                            g += 1
+                            tmp = 'down'
+                    if g == len(data)-1:
+                        break
+                    if '&gt;' in data[g]:
+                        tmp = ''
+                        if not check(g,data[g].index('&gt;'),tmp):
+                            break
+        print('false')
+
+if __name__ == &quot;__main__&quot;:
+    data = inputdata()
+    for i in data:
+        print(''.join(i))
+    miro(data)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/03/05 16:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">justbegin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11159"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+import java.util.Scanner;
+
+class Point{
+
+    int row = 0;
+    int vertical = 0;
+    char value = ' ';
+
+    public Point(int row, int vertical, char value){
+        this.row = row;
+        this.vertical = vertical;
+        this.value = value;
+    }
+
+}
+
+public class Maze {
+
+    static char[][] maze = null;
+
+    public static boolean bfs(int row, int vertical){
+
+        Queue&lt;Point&gt; queue = new LinkedList&lt;&gt;();
+
+        queue.offer(new Point(row, vertical, '&lt;'));
+
+        while(!queue.isEmpty()){
+
+            Point point = queue.poll();
+
+            if(point.value == '&gt;'){
+                return true;
+            }
+            if(point.row &gt; 0 &amp;&amp; maze[point.row-1][point.vertical] != '#' &amp;&amp; maze[point.row-1][point.vertical] != '0'){ //위 탐색
+                queue.offer(new Point(point.row-1, point.vertical, maze[point.row-1][point.vertical]));
+                maze[point.row-1][point.vertical] = '0';
+            }
+            if(point.row+1 &lt; maze.length &amp;&amp; maze[point.row+1][point.vertical] != '#' &amp;&amp; maze[point.row+1][point.vertical] != '0'){ //아래 탐색
+                queue.offer(new Point(point.row+1, point.vertical, maze[point.row+1][point.vertical]));
+                maze[point.row+1][point.vertical] = '0';
+            }
+            if(point.vertical &gt; 0 &amp;&amp; maze[point.row][point.vertical-1] != '#' &amp;&amp; maze[point.row][point.vertical-1] != '0'){ // 왼쪽 탐색
+                queue.offer(new Point(point.row, point.vertical-1, maze[point.row][point.vertical-1]));
+                maze[point.row][point.vertical-1] = '0';
+            }
+            if(point.vertical+1 &lt; maze[0].length &amp;&amp; maze[point.row][point.vertical+1] != '#' &amp;&amp; maze[point.row][point.vertical+1] != '0'){ // 오른쪽 탐색
+                queue.offer(new Point(point.row, point.vertical+1, maze[point.row][point.vertical+1]));
+                maze[point.row][point.vertical+1] = '0';
+            }
+        }
+
+        return false;
+    }
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        Scanner sc;
+        try {
+            sc = new Scanner(new File(&quot;C:\\Users\\present\\Desktop\\test\\maze.txt&quot;));
+            List&lt;String&gt; mazeRow = new ArrayList&lt;&gt;();
+
+            while(sc.hasNext()){
+                mazeRow.add(sc.nextLine());
+            }
+
+            maze = new char[mazeRow.size()][mazeRow.get(0).length()];
+
+            for(int i=0; i &lt; mazeRow.size(); i++){
+                for(int j=0; j &lt; mazeRow.get(i).length(); j++)
+                    maze[i][j] = mazeRow.get(i).charAt(j);
+            }
+
+            int startRow = 0;
+            int startVertical = 0;
+
+            start : for(int i=0; i&lt; maze.length; i++){
+                for(int j=0; j&lt; maze[i].length; j++){
+                    if(maze[i][j] == '&lt;'){
+                        startRow = i;
+                        startVertical = j;
+                        break start;
+                    }
+                }
+            }
+
+            System.out.println(bfs(startRow, startVertical));
+
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+    }
+
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/03/16 21:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김태훈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12331"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="scala">    import scala.collection.mutable.Queue
+
+    def mazePath(maze:Array[Array[Char]]):Boolean = {
+        var start = (0, 0)
+        var end = (0, 0)
+        println(maze.length, maze(0).length)
+
+        for(i &lt;- 0 until maze.length; j &lt;- 0 until maze(i).length){
+            if(maze(i)(j) == '&lt;'){
+                start = (i, j)
+            }
+            if(maze(i)(j) == '&gt;'){
+                end = (i, j)
+            }
+        }
+        println(s&quot;start: ${start} end: ${end}&quot;)
+
+        val q = Queue(start)
+        var bool = false
+        val direction = List((0, 1), (1, 0), (-1, 0), (0, -1))
+        while(!q.isEmpty &amp;&amp; !bool){
+            maze.map(_.toList).toList.foreach{v =&gt; println(v.mkString(&quot; &quot;))}
+            val (a, b) = q.dequeue
+            if(maze(a)(b) == '&gt;') bool = true
+            maze(a)(b) = '-'
+            for((x, y) &lt;- direction){
+                if(a + x &gt;=0 &amp;&amp; a + x &lt; maze.length &amp;&amp; b + y &gt;=0 &amp;&amp; b + y &lt; maze(0).length &amp;&amp; maze(a + x)(b + y) != '-' &amp;&amp; maze(a + x)(b + y) != '#' &amp;&amp; !q.contains((a + x, b + y))){
+                    q.enqueue((a + x, b + y))
+                }
+            }
+
+        }
+        bool
+
+    }
+    println(mazePath(
+        Array(
+        &quot;########&quot;.toCharArray,
+        &quot;#&lt;    &gt;#&quot;.toCharArray,
+        &quot;#  ##  #&quot;.toCharArray,
+        &quot;#  ##  #&quot;.toCharArray,
+        &quot;#      #&quot;.toCharArray,
+        &quot;########&quot;.toCharArray)
+        ))
+    println(mazePath(
+        Array(
+        &quot;#######&quot;.toCharArray,
+        &quot;#&lt;    #&quot;.toCharArray,
+        &quot;##### #&quot;.toCharArray,
+        &quot;#     #&quot;.toCharArray,
+        &quot;# #####&quot;.toCharArray,
+        &quot;# #   #&quot;.toCharArray,
+        &quot;# # # #&quot;.toCharArray,
+        &quot;#   #&gt;#&quot;.toCharArray,
+        &quot;#######&quot;.toCharArray)
+        ))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/15 14:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">한강희</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13540"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def tree_trim(tree):
+    for i,j in tree.items():
+        if isinstance(j,list):
+            for k in j:
+                if k in tree and isinstance(tree[k],int):
+                    tree[i] = tree[k]
+                    break
+    return tree
+
+def maze_roadtree(maze):
+    s = (' ','&lt;','&gt;')
+    tree = {}
+    tnum = lambda x,y: x*len(maze[0])+y
+    for i in range(len(maze)):
+        for j in range(len(maze[i])):
+            if maze[i][j] in s:
+                if maze[i][j] == '&lt;': start = tnum(i,j)
+                elif maze[i][j] == '&gt;': end = tnum(i,j)
+
+                if len(tree) == 0: tree[tnum(i,j)] = tnum(i,j)
+                else:
+                    tree.setdefault(tnum(i,j),[])
+                    if i-1 &gt;= 0 and maze[i-1][j] in s: tree[tnum(i,j)].append(tnum(i-1,j))
+                    if j-1 &gt;= 0 and maze[i][j-1] in s: tree[tnum(i,j)].append(tnum(i,j-1))
+                    if i+1 &lt; len(maze) and maze[i+1][j] in s: tree[tnum(i,j)].append(tnum(i+1,j))
+                    if j+1 &lt; len(maze[0]) and maze[i][j+1] in s: tree[tnum(i,j)].append(tnum(i,j+1))
+                    if tree[tnum(i,j)] == []: tree[tnum(i,j)] = tnum(i,j)
+            tree = tree_trim(tree)
+    return tree, start, end
+
+
+miro = '''\
+########
+#&lt;     #
+#  ##  #
+#  ##  #
+#     &gt;#
+########'''
+maze = miro.split('\n')
+
+tree,s,e = maze_roadtree(maze)
+print(tree[s]==tree[e])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/12 20:38</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16078"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import queue
+
+class Vertex:
+    def __init__(self, id, x, y):
+        self.adj = []
+        self.id = id
+        self.x = x
+        self.y = y
+        self.visit = False
+        self.distance = 0
+
+    def is_exist_adj(self, v):
+        for av in self.adj:
+            if v.x == av.x and v.y == av.y:
+                return True
+        return False
+
+    def add_adj(self, v):
+        self.adj.append(v)
+
+
+class MazeGraph:
+    def __init__(self, limitx, limity):
+        self.verts = []
+        self.limitx = limitx
+        self.limity = limity
+
+    def clear(self):
+        del self.verts
+        self.verts = []
+
+    def find(self, v):
+        for vert in self.verts:
+            if v.x == vert.x and v.y == vert.y:
+                return True
+        return False
+
+    def getVert(self, x, y):
+        for vert in self.verts:
+            if vert.x == x and vert.y == y:
+                return vert
+        return None
+
+    def add(self, v):
+        if True == self.find(v):
+            return False
+        self.verts.append(v)
+
+    def get_near_coord(self, x, y, limitx, limity, dir):
+        nx = ny = -1
+        if 'West' == dir:
+            if x &gt; 1:
+                nx = x - 1
+                ny = y
+        elif 'East' == dir:
+            if x &lt; limitx - 1:
+                nx = x + 1
+                ny = y
+        elif 'South' == dir:
+            if y &lt; limity - 1:
+                nx = x
+                ny = y + 1
+        elif 'North' == dir:
+            if y &gt; 1:
+                nx = x
+                ny = y - 1
+        return nx, ny
+
+    def link(self, x, y):
+        v = self.getVert(x, y)
+        if None == v:
+            print('No vertex %d, %d' %(x, y))
+            return False
+        for dir in ['North', 'East', 'South', 'West']:
+            nx, ny = self.get_near_coord(v.x, v.y, self.limitx, self.limity, dir)
+            #print('linking: {}:{},{} -&gt; DIR {:5s} : {},{}'.format(
+            #    v.id, v.x, v.y, dir, nx, ny))
+            if -1 == nx or -1 == ny:
+                continue    # no need to link (not exist)
+            nvert = self.getVert(nx, ny)
+            if None == nvert:
+                continue
+            if False == nvert.is_exist_adj(v):
+                nvert.add_adj(v)
+            if False == v.is_exist_adj(nvert):
+                v.add_adj(nvert)
+        return True
+
+    def dfs(self, start_x, start_y):
+        vert = self.getVert(start_x, start_y)
+        traqueue = queue.Queue()
+        vert.visit = True
+        traqueue.put(vert)
+
+        while not traqueue.empty():
+            v = traqueue.get()
+            print('{},{}'.format(v.x, v.y))
+            for adv in v.adj:
+                if False == adv.visit:
+                    adv.visit = True
+                    traqueue.put(adv)
+
+    def is_reachable(self, start_x, start_y, id):
+        vert = self.getVert(start_x, start_y)
+        if None == vert:
+            print('No start {}, {}'.format(start_x, start_y))
+        traqueue = queue.Queue()
+        vert.visit = True
+        traqueue.put(vert)
+        reachable = False
+        while not traqueue.empty():
+            v = traqueue.get()
+            if id == v.id:
+                print('FOUND: {}:{},{}'.format(v.id, v.x, v.y))
+                reachable = True
+            #print('{},{}'.format(v.x, v.y))
+            for adv in v.adj:
+                if False == adv.visit:
+                    adv.visit = True
+                    traqueue.put(adv)
+        return reachable
+
+    def print_info(self):
+        for v in self.verts:
+            print('{}:{},{}'.format(v.id, v.x, v.y))
+            for av in v.adj:
+                print('\t{}:{},{}'.format(av.id, av.x, av.y))
+            print()
+
+
+
+
+mazes = [
+&quot;&quot;&quot;#&lt; #  #
+#  #  #
+#  # &gt;#&quot;&quot;&quot;, 
+&quot;&quot;&quot;&lt;   #   &gt;&quot;&quot;&quot;, 
+&quot;&quot;&quot;&lt;     &gt;&quot;&quot;&quot;,
+&quot;&quot;&quot;########
+#&lt;     #
+#  ##  #
+#  ##  #
+#     &gt;#
+########&quot;&quot;&quot;,
+&quot;&quot;&quot;#######
+#&lt;    #
+##### #
+#     #
+# #####
+# #   #
+# # # #
+#   #&gt;#
+#######&quot;&quot;&quot;
+]
+
+def check_reachable(startx, starty, maze_lines):
+    limitx = len(maze_lines[0])
+    limity = len(maze_lines)
+    maze   = MazeGraph(limitx, limity)
+
+    for y in range(limity):
+        for x in range(limitx):
+            if '#' == maze_lines[y][x]:
+                continue
+            maze.add(Vertex(maze_lines[y][x], x, y))
+
+    for y in range(limity):
+        for x in range(limitx):
+            if '#' == maze_lines[y][x]:
+                continue
+            maze.link(x, y)
+
+    print(maze.is_reachable(startx, starty, '&gt;'))
+
+def get_start_coord(maze):
+    for y in range(len(maze)):
+        for x in range(len(maze[0])):
+            if '&lt;' == maze[y][x]:
+                return x, y
+    return -1, -1
+
+def print_maze(maze):
+    for y in range(len(maze)):
+        for x in range(len(maze[0])):
+            print(maze[y][x], end =' ')
+        print()
+
+for maze in mazes:
+    maze_lines = maze.split('\n')
+    print_maze(maze_lines)
+    x, y = get_start_coord(maze_lines)
+    if -1 == x or -1 == y:
+        continue
+    print('start coordinate', x, y, sep = ',')
+    check_reachable(x, y, maze_lines)
+    print()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/01/19 18:16</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Roy</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2465"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">generic 하게 동작 하도록 구현 하느라 코드가 늘어난 부분이 있으며, 
+주변 좌표 탐색 부분은 개선 가능합니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Roy,
+                                    2019/01/19 18:17
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16568"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># 미로의 입력값을 넣어 주는 곳
+maze = &quot;&quot;&quot;#######
+#&lt;    #
+##### #
+#     #
+# #####
+# #   #
+# # # #
+#   #&gt;#
+#######&quot;&quot;&quot;
+
+# 미로의 입력값을 배열 형태로 바꿔주는 함수
+mid_step = maze.split(&quot;\n&quot;)
+width = len(mid_step[0])
+hight = len(mid_step)
+box = []
+for row in mid_step:
+    for char in row:
+        if char =='&lt;':
+            char = True
+        box.append(char)
+cal_box = np.array(box).reshape(hight,width)
+
+# 마지막 출구의 위치 저장
+for h in range(hight):
+    for w in range(width):
+        if cal_box[h][w] == '&gt;':
+            ch_pnt=[h,w]
+
+# 미로의 한 점에서 한 점의 주변에 True 값이 있으면 값을 True 변환해주는 함수
+def check(box):
+    for h in range(hight):
+        for w in range(width):
+            if cal_box[h][w] != '#':
+                # 크기가 작더라도 작동하도록 만들어 주는 예외처리 문장
+                try:
+                    n1 = (cal_box[h-1][w] == 'True') 
+                    n2 = (cal_box[h+1][w] == 'True')
+                    n3 = (cal_box[h][w-1] == 'True')
+                    n4 = (cal_box[h][w+1] == 'True')
+                    if any([n1,n2,n3,n4]):
+                        cal_box[h][w] = 'True'
+                except:
+                    pass
+
+# 함수의 최대 실행 횟수 설정 및 출구가 &quot;True&quot;값을 가지면 자동으로 종료
+def main(box):
+    for cnt in range(width*hight):
+        if cal_box[ch_pnt[0]][ch_pnt[1]] == 'True':
+            break
+        check(box)
+
+    if cal_box[ch_pnt[0]][ch_pnt[1]] == 'True':
+        print(&quot;True&quot;)
+    elif cal_box[ch_pnt[0]][ch_pnt[1]] == '&gt;':
+        print(&quot;False&quot;)
+
+main(cal_box)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/02/10 16:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">현모구</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17397"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>알고리즘<br />
+1. '&lt;'에서 갈 수 있는 모든 방향으로 한걸음 전진해서 '&lt;'로 바꾼다.<br />
+    기존의 '&lt;'은 '#'으로 바꾼다.<br />
+    왔던 길로 되돌아가지 못하게 하기 위함.<br />
+    '&lt;'에서 사방이 '#'으로 막혀있다면 그 '&lt;'만 '#'으로 바뀌게 된다. <br />
+2. 이 작업을 계속 반복한다. <br />
+3. '&lt;'와 인접한 곳에 '&gt;'이 있다면 탐색을 종료하고 True를 반환한다.<br />
+4. '&lt;'가 하나도 없다면 False를 반환한다.<br />
+   어떤 경로로 가더라도 도착지점에 도달할 수 없다는 뜻이다.<br />
+<br />
+참고 : '&lt;'와 '&gt;'사이의 최단경로를 알고 싶다면 탐색한 경로를 역으로 추적하면 된다.<br />
+<br /></p>
+<pre><code class="python">def StrToArray(a):
+    a = list(a)
+    p = a.count('\n') + 1                #행수
+    q = (len(a) - a.count('\n')) // p    #열수
+    L = [[0]*q for i in range(p)]
+
+    k = 0
+    for i in range(len(a)):
+        if a[i] == '\n':
+            continue
+        else:
+            L[k//q][k%q] = a[i]
+            k += 1
+    return L
+
+def ArrayToStr(L):
+    T = []
+    p = len(L)
+    q = len(L[0])
+    Q = [[0]*q for i in range(p)]
+    for i in range(p):
+        for j in range(q):
+            Q[i][j] = L[i][j]
+
+    for i in range(len(Q)-1):
+        Q[i].append('\n')
+    for i in range(len(Q)):
+        T += Q[i]
+    return ''.join(T)
+
+
+
+def oneStep(L):
+    k = 0   #사방이 막혀있는지 확인하는 변수. 진행할때마다 값이 오름.
+    for i in range(len(L)):
+        for j in range(len(L[0])):
+            if L[i][j] == '&lt;':
+                for m in -1, 1:
+                    try:
+                        if i+m &lt; 0:
+                            raise NotImplementedError
+                        if L[i+m][j] == '&gt;':
+                            return 1
+                        else:
+                             try:
+                                if L[i+m][j] != '#':
+                                    if i+m &lt; 0:
+                                        raise NotImplementedError
+                                    else:
+                                        L[i+m][j] = 't'
+                                        k += 1
+                             except:
+                                 pass
+                    except:
+                        pass
+                for m in -1, 1:
+                    try:
+                        if j+m &lt; 0:
+                            raise NotImplementedError
+                        if L[i][j+m] == '&gt;':
+                            return 1
+                        else:
+                            try:
+                                if L[i][j+m] != '#':
+                                    if j+m &lt; 0:
+                                        raise NotImplementedError
+                                    else:
+                                        L[i][j+m] = 't'
+                                        k += 1
+                            except:                            
+                                pass
+                    except:
+                        pass
+
+                L[i][j] = '#'
+
+
+    for i in range(len(L)):
+        for j in range(len(L[0])):
+            try:                
+                if L[i][j] == 't':
+                    L[i][j] = '&lt;'
+            except:
+                pass
+    if k == 0:  #진행할 곳이 더이상 없다면
+        return -1
+    else:
+        return 0
+
+def displaySteps(s):
+    L=StrToArray(s)
+    test = 0
+    while test != 1:
+        test = oneStep(L)
+        print(ArrayToStr(L))
+        print('')
+        if test == -1:
+            return False
+    return True
+
+
+def isPassable(s):
+    L=StrToArray(s)
+    test = 0
+    while test != 1:
+        test = oneStep(L)
+        if test == -1:
+            return False
+    return True
+
+
+s=&quot;&quot;&quot;#######
+#&lt;    #
+##### #
+#     #
+# #####
+# #   #
+# # # #
+#   #&gt;#
+#######&quot;&quot;&quot;
+
+
+print(displaySteps(s))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/04/04 01:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">messi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19352"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;cstdlib&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+using namespace std;
+
+struct Pos {
+    int x;
+    int y;
+};
+
+bool findPath(vector&lt;string&gt; maze, int w, int h, Pos* pStart)
+{
+    vector&lt;vector&lt;vector&lt;Pos&gt;*&gt; &gt; posOwn;
+    vector&lt;Pos&gt; block;
+    Pos wrong = { -1,-1 };
+    block.push_back(wrong);
+    for (int i = 0; i &lt; h; i++) {
+        posOwn.push_back(* new vector&lt;vector&lt;Pos&gt;*&gt;);
+        for (int j = 0; j &lt; w; j++) {
+            if (maze[i][j] == ' ') {
+                posOwn[i].push_back(nullptr);
+            }
+            else
+            {
+                posOwn[i].push_back(&amp;block);
+            }
+        }
+    }
+
+    queue&lt;vector&lt;Pos&gt; &gt; routes;
+    vector&lt;Pos&gt; sp;
+    sp.push_back(*pStart);
+    routes.push(sp);
+    while (!routes.empty())
+    {
+        vector&lt;Pos&gt; *cPath = &amp;routes.front();
+        Pos ls = cPath-&gt;back();
+        if (ls.y &gt; 0 &amp;&amp; maze[ls.y - 1][ls.x] == '&gt;') {
+            return true;
+        }
+        if (ls.y &gt; 0 &amp;&amp; maze[ls.y-1][ls.x] == ' ' &amp;&amp; posOwn[ls.y-1][ls.x] == nullptr) {
+            vector&lt;Pos&gt;* up = new vector&lt;Pos&gt;;
+            up-&gt;assign(cPath-&gt;begin(), cPath-&gt;end());
+            up-&gt;push_back(* new Pos{ up-&gt;back().x , up-&gt;back().y - 1 });
+            posOwn[ls.y - 1][ls.x] = up;
+            routes.push(*up);
+        }
+        if (ls.x &gt; 0 &amp;&amp; maze[ls.y][ls.x - 1] == '&gt;') {
+            return true;
+        }
+        if (ls.x &gt; 0 &amp;&amp; maze[ls.y][ls.x - 1] == ' ' &amp;&amp; posOwn[ls.y][ls.x - 1] == nullptr) {
+            vector&lt;Pos&gt;* left = new vector&lt;Pos&gt;;
+            left-&gt;assign(cPath-&gt;begin(), cPath-&gt;end());
+            left-&gt;push_back(*new Pos{ left-&gt;back().x -1 , left-&gt;back().y});
+            posOwn[ls.y][ls.x -1] = left;
+            routes.push(*left);
+        }
+        if (ls.y &lt; h-1 &amp;&amp; maze[ls.y + 1][ls.x] == '&gt;') {
+            return true;
+        }
+        if (ls.y &lt; h - 1 &amp;&amp; maze[ls.y + 1][ls.x] == ' ' &amp;&amp; posOwn[ls.y + 1][ls.x] == nullptr) {
+            vector&lt;Pos&gt;* down = new vector&lt;Pos&gt;;
+            down-&gt;assign(cPath-&gt;begin(), cPath-&gt;end());
+            down-&gt;push_back(*new Pos{ down-&gt;back().x , down-&gt;back().y + 1 });
+            posOwn[ls.y + 1][ls.x] = down;
+            routes.push(*down);
+        }
+        if (ls.x &lt; w-1 &amp;&amp; maze[ls.y][ls.x + 1] == '&gt;') {
+            return true;
+        }
+        if (ls.x &lt; w-1 &amp;&amp; maze[ls.y][ls.x + 1] == ' ' &amp;&amp; posOwn[ls.y][ls.x + 1] == nullptr) {
+            vector&lt;Pos&gt;* right = new vector&lt;Pos&gt;;
+            right-&gt;assign(cPath-&gt;begin(), cPath-&gt;end());
+            right-&gt;push_back(*new Pos{ right-&gt;back().x + 1 , right-&gt;back().y });
+            posOwn[ls.y][ls.x + 1] = right;
+            routes.push(*right);
+        }
+        routes.pop();
+    }
+    return false;
+}
+
+bool testMaze(vector&lt;string&gt; maze, int x, int y)
+{
+    Pos start = { 0,0 };
+    Pos end = { 0,0 };
+    for (int i = 0; i &lt; y; i++) {
+        for (int j = 0; j &lt; maze[i].size(); j++) {
+            if (maze[i][j] == '&lt;') {
+                start.x = j;
+                start.y = i;
+            }
+        }
+    }
+    return findPath(maze,x,y,&amp;start);
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/09/19 02:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김한길</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19470"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#입력이 끝나는 부분이 표시되지 않았기 때문에, 다른 분 코드를 보고 ' '를 끝으로 만들었습니다.
+
+
+end=None
+y, x = 0, 0
+IN = [list(input())]
+while(IN[-1] != [' ']):
+    IN.append(list(input()))
+
+IN = IN[:-1]
+nowlist = [[i, IN[i].index('&lt;')] for i in range(len(IN)) if '&lt;' in IN[i]]
+
+i=0
+while end == None and len(nowlist) != 0:
+    for i in nowlist:
+        for j in [[i[0]+1, i[1]], [i[0], i[1]+1], [i[0]-1, i[1]], [i[0], i[1]-1]]:
+            try:
+                if j[0] &lt; 0 or j[1] &lt; 0:
+                    continue
+                if IN[j[0]][j[1]] == ' ':
+                    IN[j[0]][j[1]] = '0'
+                    nowlist.append([j[0], j[1]])
+                elif IN[j[0]][j[1]] == '&gt;':
+                    end = True
+                    break
+            except:
+                pass
+        nowlist.remove(i)
+
+if end == True:
+    print('true')
+else:
+    print('false')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/09/29 11:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">주휘상</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20441"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Javascript(ES6)...</p>
+<pre><code class="javascript">`텍스트 형태의 미로를 2차원 배열로 저장, &lt;(입구) 를 찾은다음, 입구 주변의 상하좌우 칸을 살펴서 공백이면 재귀호출하고 &gt;(출구)면 true 반환하고 막혀있으면 false 반환, 모든 반환 값을 ||(or) 연산자로 묶음. 출구(true 값)가 있다면 전체 결과는 true, 없다면 false 가 됨`;
+
+class Maze {
+    constructor(maze) {
+        this.str_maze = maze;
+        this.arr_maze = this._to_arr();
+        this.is_exitable
+    }
+
+    // 텍스트 형태의 미로를 2차원 배열로 전환
+    _to_arr() {
+        let result = [];
+        for(let v of this.str_maze.split('\n')) {
+            result.push([...v]);
+        }
+        return result;
+    }
+
+    // 입구를 찾는 함수, 입구의 위치를 [row, column] 형태로 반환
+    _find_entrance() {
+        for(let r = 0, c = 0; r &lt; this.arr_maze.length; r++) {
+            c = this.arr_maze[r].indexOf('&lt;');
+            if(c &gt; -1) { return [r, c]; }
+        }
+        return [0, 0];
+    }
+
+    // 미로가 탈출이 가능한지 판단 함수, 주어진 위치 [row, column]의 상하좌우를 살펴 재귀호출 혹은 결과반환
+    _can_exit([r, c]) {
+
+        // 주어진 [r, c] 의 상하좌우 셀 안 내용을 담음, 만일 범위가 벗어났다면 'X'
+        let cells = [];
+        cells[0] = (r - 1 == -1) ? 'X' : this.arr_maze[r - 1][c];
+        cells[1] = (c + 1 == this.arr_maze[r].length) ? 'X' : this.arr_maze[r][c + 1];
+        cells[2] = (r + 1 == this.arr_maze.length) ? 'X' : this.arr_maze[r + 1][c];
+        cells[3] = (c - 1 == -1) ? 'X' : this.arr_maze[r][c - 1];
+
+        // 현재 [r, c] 위치의 셀 내용이 공백일 경우 다른 문자로 채움(다시 재귀호출 당하지 않기 위함)
+        this.arr_maze[r][c] = '.';
+
+        // cells 배열 안에 출구(&gt;) 가 있다면 true, 다른 문자가 있다면 false, 공백이라면 재귀호출
+        if(cells.indexOf('&gt;') &gt; -1) { return true; }
+        return (cells[0] == ' ') ? this._can_exit([r - 1, c]) : false ||
+               (cells[1] == ' ') ? this._can_exit([r, c + 1]) : false ||
+               (cells[2] == ' ') ? this._can_exit([r + 1, c]) : false ||
+               (cells[3] == ' ') ? this._can_exit([r, c - 1]) : false;
+    }
+
+    // 미로와 탈출 가능한지 여부 출력
+    print_maze() {
+        console.log(this.str_maze);
+        console.log(this._can_exit(this._find_entrance()));
+        console.log();
+    }
+}
+
+let mazes = [
+`&lt;     &gt;`,
+`########
+#&lt;     #
+#  ##  #
+#  ##  #
+#     &gt;#
+########`,
+`#######
+#&lt;    #
+##### #
+#     #
+# #####
+# #   #
+# # # #
+#   #&gt;#
+#######`,
+`&lt;   #   &gt;`,
+`########
+#&lt;     #
+#     ##
+#    #&gt;#
+########`,
+`#&lt; #  #
+#  #  #
+#  # &gt;#`, 
+];
+
+new Maze(mazes[0]).print_maze();
+new Maze(mazes[1]).print_maze();
+new Maze(mazes[2]).print_maze();
+new Maze(mazes[3]).print_maze();
+new Maze(mazes[4]).print_maze();
+new Maze(mazes[5]).print_maze();
+</code></pre>
+
+<p>Python 3...</p>
+<p>조금 다른 방식...</p>
+<pre><code class="python">class Maze:
+    def __init__(self, maze):
+        self.maze = maze
+        self.arr_maze = self.__str_to_arr()
+
+    # 텍스트 형태의 미로를 리스트로 변환
+    def __str_to_arr(self):
+        arr = []
+        for s in self.maze.split('\n'):
+            arr.append([*s])
+
+        return arr
+
+    # 입구'&lt;' 를 찾음, 입구들의 위,오른쪽,아래,왼쪽 칸을 살핌, 출구'&gt;' 가 있으면 return True 리턴, 현재 위치를 '.' 으로 변경, 주위 빈 공간을 다시 입구로 변환, 재귀호출
+    def __can_exit(self, m):
+
+        # 모든 입구를 찾아 리스트에 위치를 담음
+        entrance = [(r, c) for r, row in enumerate(m) for c, col in enumerate(row) if col == '&lt;']
+
+        # 입구 주변 칸 위치와 내용 set 저장
+        neighbors = set()
+        for r, c in entrance:
+            if r - 1 != -1:
+                neighbors.add((r - 1, c, m[r - 1][c]))
+            if r + 1 != len(m):      
+                neighbors.add((r + 1, c, m[r + 1][c]))
+            if c - 1 != -1:
+                neighbors.add((r, c - 1, m[r][c - 1]))
+            if c + 1 != len(m[0]):
+                neighbors.add((r, c + 1, m[r][c + 1]))
+        neighbors = list(neighbors)
+
+        # 주변 칸에 출구'&gt;' 가 있으면 return True, 주변 칸에 빈공간' ' 이 없다면 return False
+        chars = [x[2] for x in neighbors]
+        if '&gt;' in chars:
+            return True
+        if ' ' not in chars:
+            return False
+
+        # 현재 위치를 '.' 으로 변경
+        for r, c in entrance:
+            m[r][c] = '.'
+
+        # 주변 빈 공간을 다시 입구로 변환
+        for r, c, v in [n for n in neighbors if n[2] == ' ']:
+            m[r][c] = '&lt;' 
+
+        # 재귀호출
+        return self.__can_exit(m)
+
+    # 테스트
+    def print_maze(self):
+        print(self.maze)
+        print(self.__can_exit(self.arr_maze))
+        print()
+
+mazes = [
+    '&lt;     &gt;',
+    '########\n#&lt;     #\n#  ##  #\n#  ##  #\n#     &gt;#\n########',
+    '#######\n#&lt;    #\n##### #\n#     #\n# #####\n# #   #\n# # # #\n#   #&gt;#\n#######',
+    '&lt;   #   &gt;',
+    '########\n#&lt;     #\n#     ##\n#    #&gt;#\n########',
+    '#&lt; #  #\n#  #  #\n#  # &gt;#',
+]
+Maze(mazes[0]).print_maze()
+Maze(mazes[1]).print_maze()
+Maze(mazes[2]).print_maze()
+Maze(mazes[3]).print_maze()
+Maze(mazes[4]).print_maze()
+Maze(mazes[5]).print_maze()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/02 21:17</p>
+                                <p class="static-profile" style="margin:0;padding:0;">tedware</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20792"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from copy import deepcopy
+
+map_ ='''########
+#&lt;     #
+#  ##  #
+#  ##  #
+#     &gt;#
+########
+'''
+
+map_list_1 = [list(i) for i in map_.split('\n')]
+
+def start_point(li) : # 시작점 검색
+    col = 0
+    for lines in li :
+        if '&lt;' in lines :
+            return [lines.index('&lt;'), col]
+        col += 1
+    return False
+
+def search_(li) :
+    queue = [li+[start_point(li)]]
+    while len(queue) != 0 :
+        head = queue.pop(0)
+        for cond in [(-1, 0, head[-1][0]), (1, 0, len(head[0])-1-head[-1][0]), (0, -1, head[-1][1]), (0, 1, len(head)-3-head[-1][1])] :  # 순서대로 dx, dy, 방향, 좌표가 데이터 범위 내 있을 조건
+            head_1 = deepcopy(head)
+            if cond[2] &gt; 0 and head_1[head_1[-1][1]+cond[1]][head_1[-1][0]+cond[0]] == ('&gt;') : # 목표지점까지 도착할 수 있으면 True를 반환
+                return True
+            if cond[2] &gt; 0 and head_1[head_1[-1][1]+cond[1]][head_1[-1][0]+cond[0]] == (' ') : # 좌표가 데이터 범위 내에 있으면서 탐색 가능한 경우
+                head_1[head_1[-1][1]][head_1[-1][0]] = '#' # 방문한 좌표 '#'로 대체
+                head_1[-1][0], head_1[-1][1] = head_1[-1][0]+cond[0], head_1[-1][1]+cond[1] #좌표 갱신
+                queue.append(head_1) # queue의 마지막에 추가
+    return False # 목표지점까지 도달한 경우가 없으면 False 반환
+print(search_(map_list_1))
+</code></pre>
+
+<p>bfs로 풀었습니다.</p>
+<p>결과</p>
+<pre><code>True
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/31 14:12</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GG</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23134"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">inp1=&quot;&lt;     &gt;&quot;
+inp2=&quot;&quot;&quot;########
+#&lt;     #
+#  ##  #
+#  ##  #
+#     &gt;#
+########&quot;&quot;&quot;
+inp3=&quot;&quot;&quot;#######
+#&lt;    #
+##### #
+#     #
+# #####
+# #   #
+# # # #
+#   #&gt;#
+#######&quot;&quot;&quot;
+inp4=&quot;&lt;   #   &gt;&quot;
+inp5=&quot;&quot;&quot;########
+#&lt;     #
+#     ##
+#    #&gt;#
+########&quot;&quot;&quot;
+inp6=&quot;&quot;&quot;#&lt; #  #
+#  #  #
+#  # &gt;#&quot;&quot;&quot;
+lst1=[list(ln) for ln in inp1.split(&quot;\n&quot;)]
+lst2=[list(ln) for ln in inp2.split(&quot;\n&quot;)]
+lst3=[list(ln) for ln in inp3.split(&quot;\n&quot;)]
+lst4=[list(ln) for ln in inp4.split(&quot;\n&quot;)]
+lst5=[list(ln) for ln in inp5.split(&quot;\n&quot;)]
+lst6=[list(ln) for ln in inp6.split(&quot;\n&quot;)]
+
+maxmc,nt=0,0 #maxmc-&gt;최대 움직일 수 있는 횟수(=공백의 개수), nt-&gt;움직임을 시도한 횟수(oneway일 경우 움직인 횟수)
+def mazepossible(lst):
+    global nt,maxmc
+    for i in range(len(lst)): #리스트에서 공백의 개수를 찾아 maxmc를 구한다
+        for j in range(len(lst[0])):
+            if lst[i][j]==&quot; &quot;:
+                maxmc+=1
+    while nt&lt;=maxmc: #움직임을 시도한 횟수(또는 움직인 횟수)가 최대 움직일 수 있는 횟수보다 작은 동안
+        for i in range(len(lst)):
+            for j in range(len(lst[0])):
+                if lst[i][j]==&quot;&lt;&quot;:
+                    y,x=i,j #&quot;&lt;&quot;문자의 위치 값 y,x를 일단 찾는다(while루프를 돌게 되면 여러 개일 수도 있음)
+        for dy,dx in [(-1,0),(1,0),(0,1),(0,-1)]: #상하좌우 이동
+            if 0&lt;=y+dy&lt;len(lst) and 0&lt;=x+dx&lt;len(lst[0]) and lst[y+dy][x+dx]==&quot; &quot;: #해당 좌표(현재 &quot;&lt;&quot;인 곳)에서 dy,dx를 더했을 때, 좌표가 미로의 범위 안에 있고, 그 값이 공백일 경우
+                lst[y+dy][x+dx]=&quot;&lt;&quot; #공백인 곳을 &quot;&lt;&quot;로 바꾸고
+                lst[y][x]=&quot;#&quot; #&quot;&lt;&quot;였던 곳은 &quot;#&quot;으로 바꾼다
+            if 0&lt;=y+dy&lt;len(lst) and 0&lt;=x+dx&lt;len(lst[0]) and lst[y+dy][x+dx]==&quot;&gt;&quot;: #해당 좌표(현재 &quot;&lt;&quot;인 곳)에서 dy,dx를 더했을 때, 좌표가 미로의 범위 안에 있고, 그 값이 &quot;&gt;&quot;일 경우
+                return True #탈출 가능하므로 True
+        nt+=1
+        if nt&gt;maxmc: #움직임을 시도한 횟수가 최대 움직인 횟수를 넘어버리면 그 미로는 탈출이 불가능하므로 False
+            return False
+</code></pre>
+
+<p>결과</p>
+<pre><code class="python">print(mazepossible(lst1)) #True
+print(mazepossible(lst2)) #True
+print(mazepossible(lst3)) #True
+print(mazepossible(lst4)) #False
+print(mazepossible(lst5)) #False
+print(mazepossible(lst6)) #False
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/09/10 10:29</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박시원</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23564"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Ruby 서로소 집합으로 구현</p>
+<p>class DisjointSet
+    def initialize
+        @parent = Hash.new { |hash, key| hash[key] = key }
+    end</p>
+<pre><code>def root_of(node)
+    node_list = []
+    while @parent[node] != node
+        node_list &lt;&lt; node
+        node = @parent[node] 
+    end
+
+    #path compression       
+    node_list.each {|e|
+        @parent[e] = node;
+    }
+    node
+end
+
+def connect(node1, node2)
+    @parent[root_of(node1)] = root_of(node2)
+end
+
+def connected?(node1, node2)
+    root_of(node1) == root_of(node2)
+end
+</code></pre>
+<p>end</p>
+<p>class Map <br />
+    def map_data
+        @map_data
+    end</p>
+<pre><code>def map_data=(rhs)
+    @map_data = 
+        case rhs
+        when String
+            rhs.split("\n")
+        when Array
+            rhs
+        end         
+end
+
+def get_adjacents(y, x)
+    [[y+1, x], [y-1, x], [y, x-1], [y, x+1]].find_all { |y,x| 
+        y &gt;= 0 &amp;&amp; y &lt; @y_size &amp;&amp; x &gt;= 0 &amp;&amp; x &lt; @x_size
+    }
+end
+
+def passable?
+    @y_size = @map_data.size
+    @x_size = @map_data.first.length
+
+    ds = DisjointSet.new
+    st = []
+    ed = []
+
+    #[[0,0], [0, 1], ... , [0, @x_size-1], [1, 0] , ... , [@y_size-1, @x_size-1]
+    coords = [*0...@y_size].product [*0...@x_size]  
+    coords.each{|y, x| 
+        case @map_data[y][x]
+        when '&lt;'     #start point 
+            st = [y, x]
+        when '&gt;' #end point
+            ed = [y, x]
+        when '#' #wall - do nothing
+            nil
+        else
+            get_adjacents(y, x).find_all{|y, x| @map_data[y][x] != '#' }.each { |ny, nx| 
+                ds.connect([y, x], [ny, nx] ) 
+            }
+        end
+    }
+    ds.connected?(st, ed)       
+end
+</code></pre>
+<p>end</p>
+<p>m = Map.new
+m.map_data="&lt;     &gt;"
+puts m.passable?</p>
+<p>m.map_data="########\n#&lt;     #\n#  ##  #\n#  ##  #\n#     &gt;#\n########"
+puts m.passable?</p>
+<p>m.map_data="#######\n#&lt;    #\n##### #\n#     #\n# #####\n# #   #\n# # # #\n#   #&gt;#\n#######"
+puts m.passable?</p>
+<p>m.map_data="&lt;   #   &gt;"
+puts m.passable?</p>
+<p>m.map_data="########\n#&lt;     #\n#     ##\n#    #&gt;#\n########"
+puts m.passable?</p>
+<p>m.map_data="#&lt; #  #\n#  #  #\n#  # &gt;#"
+puts m.passable?</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/11/03 20:27</p>
+                                <p class="static-profile" style="margin:0;padding:0;">고태욱</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28679"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># 016 미로 통과 검사
+
+strings = []
+
+while True:
+    string = input()
+    if string == '':
+        break
+    else:
+        strings.append([ x for x in string])
+
+max_x = len(strings[0])
+max_y = len(strings)
+
+# direction : 0=left, 1=up, 2=right, 3=down
+direction = [ [-1, 0], [0, -1], [1, 0], [0, 1] ]
+
+
+def print_result():
+    for y in range(max_y):
+        print(''.join(strings[y]))
+
+
+def find_path(x, y):
+    global strings, direction
+    temp_string = strings[y][x]
+
+    for dx, dy in direction:
+        next_x, next_y = x+dx, y+dy
+        if next_x in range(max_x) and next_y in range(max_y):
+            if strings[next_y][next_x] == '&gt;':
+                strings[y][x] = '.'
+                print_result()
+                exit('true')
+            elif strings[next_y][next_x] == ' ':
+                strings[y][x] = '.'
+                find_path(next_x, next_y)
+    strings[y][x] = temp_string             # Invalid path
+
+    return
+
+
+for y in range(max_y):
+    for x in range(max_x):
+        if strings[y][x] == '&lt;':        # 시작 위치 탐색
+            for dx, dy in direction:    # 시작 위치에서 공백있는 부분 탐색
+                next_x, next_y = x + dx, y + dy
+                if next_x in range(max_x) and next_y in range(max_y):
+                    if strings[next_y][next_x] == ' ':
+                        find_path(next_x, next_y)
+
+exit('false')
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/10/17 14:16</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jaeyoung Moon</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29880"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">direct = [(-1,0),(0,1),(1,0),(0,-1)]
+def find_path(r,c,d,maze):
+    for i in range(3):
+        tr, tc = r + direct[(d + i)%4][0], c + direct[(d + i)%4][1]
+        if 0&lt;=tr&lt;len(maze) and 0&lt;=tc&lt;len(maze[0]):
+            if maze[tr][tc]=='&gt;':
+                return True
+            elif maze[tr][tc]==' ':
+                return find_path(tr, tc, (d + i)%4 + 3, maze)
+    return False
+
+# inp = &quot;&quot;&quot;########
+# #&lt;     #
+# #  ##  #
+# #  ##  #
+# #     &gt;#
+# ########&quot;&quot;&quot;
+
+# inp = &quot;&quot;&quot;#######
+# #&lt;    #
+# ##### #
+# #     #
+# # #####
+# # #   #
+# # # # #
+# #   #&gt;#
+# #######&quot;&quot;&quot;
+
+inp = &quot;&quot;&quot;########
+#&lt;     #
+#     ##
+#    #&gt;#
+########&quot;&quot;&quot;
+
+#inp = &quot;&quot;&quot;&lt;   #   &gt;&quot;&quot;&quot;
+
+maze = inp.split('\n')
+start = []
+sr = -1
+for line in maze:
+    sr += 1
+    sc = -1
+    for l in line:
+        sc += 1
+        print('%-2s' %l, end='')
+        if l=='&lt;':
+            start.append(sr)
+            start.append(sc)
+    print()
+
+result = False
+for i in range(4):
+    tr, tc = start[0]+direct[i][0], start[1]+direct[i][1]
+    if 0&lt;=tr&lt;len(maze) and 0&lt;=tc&lt;len(maze[0]) and maze[tr][tc]==' ':
+        if find_path(tr, tc, i + 3, maze):
+            result=True
+            break
+
+print('&gt;&gt;', result)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2024/02/13 16:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_30031"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">list_list_map_lines=list()
+while True:
+    list_map_line=list(input())
+    if len(list_map_line)==0:
+        break
+    list_list_map_lines.append(list_map_line)
+
+for y in range(len(list_list_map_lines)):
+    for x in range(len(list_list_map_lines[y])):
+        print(list_list_map_lines[y][x],end='')
+    print()
+
+print()
+break_check='false'
+for y in range(len(list_list_map_lines)):
+    for x in range(len(list_list_map_lines[y])):
+        if list_list_map_lines[y][x]=='&lt;':
+            if (y-1)&lt;=(len(list_list_map_lines[y])-1)and list_list_map_lines[y-1][x]==' ':
+                list_list_map_lines[y-1][x]='?'
+                break_check='true'
+                break
+            elif (x+1)&lt;=(len(list_list_map_lines[y])-1)and list_list_map_lines[y][x+1]==' ':
+                list_list_map_lines[y][x+1]='?'
+                break_check='true'
+                break
+            elif (y+1)&lt;=(len(list_list_map_lines)-1):
+                list_list_map_lines[y+1][x]='?'
+                break_check='true'
+                break
+        if break_check=='true':
+            break
+print()
+
+lines=len(list_list_map_lines)
+break_check='false'
+for y in range(len(list_list_map_lines)):
+    for x in range(len(list_list_map_lines[y])):
+        yy=y
+        xx=x
+        if list_list_map_lines[yy][xx]=='&lt;' and list_list_map_lines[yy-1][xx]=='?':
+            count_1=0
+            yy-=2
+            while count_1&lt;100:
+                while True:
+                    if list_list_map_lines[yy][xx]==' ':
+                        list_list_map_lines[yy][xx]='?'
+                    else:
+                        break
+                    yy-=1
+                if list_list_map_lines[yy][xx]=='&gt;':
+                    print('true')
+                    break_check='true'
+                    break
+
+                yy+=1
+                xx+=1
+                while True:
+                    if list_list_map_lines[yy][xx]==' ':
+                        list_list_map_lines[yy][xx]='?'
+                    else:
+                        break
+                    xx+=1
+                if list_list_map_lines[yy][xx]=='&gt;':
+                    print('true')
+                    break_check='true'
+                    break
+
+                yy+=1
+                xx-=1
+                while True:
+                    if list_list_map_lines[yy][xx]==' ':
+                        list_list_map_lines[yy][xx]='?'
+                    else:
+                        break
+                    yy+=1
+                if list_list_map_lines[yy][xx]=='&gt;':
+                    print('true')
+                    break_check='true'
+                    break
+
+                yy-=1
+                xx-=1
+                while True:
+                    if list_list_map_lines[yy][xx]==' ':
+                        list_list_map_lines[yy][xx]='?'
+                    else:
+                        break
+                    xx-=1
+                if list_list_map_lines[yy][xx]=='&gt;':
+                    print('true')
+                    break_check='true'
+                    break
+
+                yy-=1
+                xx+=1
+
+                count_1+=1
+            else:
+                print('false')
+                break_check='true'
+
+        elif list_list_map_lines[yy][xx]=='&lt;' and list_list_map_lines[yy][xx+1]=='?':
+            count_2=0
+            xx+=2
+            while count_2&lt;100:
+                while True and (lines!=1 or lines==1):
+                    if list_list_map_lines[yy][xx]==' ':
+                        list_list_map_lines[yy][xx]='?'
+                    else:
+                        break
+                    xx+=1
+                if list_list_map_lines[yy][xx]=='&gt;':
+                    print('true')
+                    break_check='true'
+                    break
+
+                if lines!=1:
+                    yy+=1
+                    xx-=1
+                while True and lines!=1:
+                        if list_list_map_lines[yy][xx]==' ':
+                            list_list_map_lines[yy][xx]='?'
+                        else:
+                            break
+                        yy+=1
+                if list_list_map_lines[yy][xx]=='&gt;':
+                    print('true')
+                    break_check='true'
+                    break
+
+                if lines!=1:
+                    yy-=1
+                    xx-=1
+                while True and lines!=1:
+                    if list_list_map_lines[yy][xx]==' ':
+                        list_list_map_lines[yy][xx]='?'
+                    else:
+                        break
+                    xx-=1
+                if list_list_map_lines[yy][xx]=='&gt;':
+                    print('true')
+                    break_check='true'
+                    break
+
+                if lines!=1:
+                    yy-=1
+                    xx+=1
+                while True and lines!=1:
+                    if list_list_map_lines[yy][xx]==' ':
+                        list_list_map_lines[yy][xx]='?'
+                    else:
+                        break
+                    yy-=1
+                if list_list_map_lines[yy][xx]=='&gt;':
+                    print('true')
+                    break_check='true'
+                    break
+
+                if lines!=1:
+                    yy+=1
+                    xx+=1
+
+                count_2+=1
+            else:
+                print('false')
+                break_check='true'
+
+        elif list_list_map_lines[yy][xx]=='&lt;' and list_list_map_lines[yy+1][xx]=='?':
+            count_3=0
+            yy+=2
+            while count_3&lt;100:
+                while True:
+                        if list_list_map_lines[yy][xx]==' ':
+                            list_list_map_lines[yy][xx]='?'
+                        else:
+                            break
+                        yy+=1
+                if list_list_map_lines[yy][xx]=='&gt;':
+                    print('true')
+                    break_check='true'
+                    break
+
+                yy-=1
+                xx+=1
+                while True:
+                    if list_list_map_lines[yy][xx]==' ':
+                        list_list_map_lines[yy][xx]='?'
+                    else:
+                        break
+                    xx+=1
+                if list_list_map_lines[yy][xx]=='&gt;':
+                    print('true')
+                    break_check='true'
+                    break
+
+                yy-=1
+                xx-=1
+                while True:
+                    if list_list_map_lines[yy][xx]==' ':
+                        list_list_map_lines[yy][xx]='?'
+                    else:
+                        break
+                    yy-=1
+                if list_list_map_lines[yy][xx]=='&gt;':
+                    print('true')
+                    break_check='true'
+                    break
+
+                yy+=1
+                xx-=1
+                while True:
+                    if list_list_map_lines[yy][xx]==' ':
+                        list_list_map_lines[yy][xx]='?'
+                    else:
+                        break
+                    xx-=1
+                if list_list_map_lines[yy][xx]=='&gt;':
+                    print('true')
+                    break_check='true'
+                    break
+
+                yy+=1
+                xx-=1
+
+                count_3+=1
+            else:
+                print('false')
+                break_check='true'              
+
+        if break_check=='true':
+            break
+
+    if break_check=='true':
+        break
+
+for y in range(len(list_list_map_lines)):
+    for x in range(len(list_list_map_lines[y])):
+        print(list_list_map_lines[y][x],end='')
+    print()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2024/07/18 19:12</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박성우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_30160"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>JAVA입니다.</p>
+<pre><code class="java">package 미로_통과_검사;
+
+public class Cell {
+    char type;
+    boolean spreadable;
+
+    public Cell(char type) {
+        this.type = type;
+        spreadable = (this.type == '&lt;');
+    }
+
+    int spread() {
+        if(type == ' ') {
+            spreadable = true;
+            type = 'f';
+            return 0;
+        }
+        if(type == '&gt;') {
+            return 1; //끝 도달
+        }
+        return -1; //끝 도달 불가
+    }
+}
+</code></pre>
+
+<hr />
+<pre><code class="java">package 미로_통과_검사;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        // TODO Auto-generated method stub
+        String input
+                = &quot;#&lt; #  #\r\n&quot;
+                + &quot;#  #  #\r\n&quot;
+                + &quot;#  # &gt;#&quot;;
+
+        Maze maze = new Maze(input);
+        while(true) {
+            int result = maze.spreadCells();
+            if(result == 1) {
+                System.out.println(true);
+                break;
+            }
+            if(result == -1) {
+                System.out.println(false);
+                break;
+            }
+        }
+    }
+
+}
+</code></pre>
+
+<hr />
+<pre><code class="java">package 미로_통과_검사;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Maze {
+    Cell[][] maze;
+    //(세로, 가로)
+
+    public Maze(String mazeStr) {
+        String[] mazeStrs = mazeStr.split(&quot;\r\n&quot;);
+        char[][] mazeChars = new char[mazeStrs.length][mazeStrs[0].length()];
+        maze = new Cell[mazeStrs.length][mazeStrs[0].length()];
+
+        for (int i = 0; i &lt; maze.length; i++) {
+            mazeChars[i] = mazeStrs[i].toCharArray();
+            for (int j = 0; j &lt; maze[i].length; j++) {
+                maze[i][j] = new Cell(mazeChars[i][j]);
+            }
+        }
+    }
+
+    int spreadCells() {
+        boolean spread = false; //이번 실행에서 확장된 칸이 있는지
+        for (int i = 0; i &lt; maze.length; i++) {
+            for (int j = 0; j &lt; maze[i].length; j++) {
+                Cell cell = maze[i][j];
+                if(cell.spreadable) {
+                    List&lt;Cell&gt; neighbors = getNeighbors(i, j);
+                    for (Cell neighbor : neighbors) {
+                        int result = neighbor.spread();
+                        if(result == 0) { //옆으로 확장된 칸이 있음
+                            spread = true;
+                            cell.spreadable = false;
+                        }
+                        else if(result == 1) { //끝에 도달
+                            return 1;
+                        }
+                    }
+                }
+            }
+        }
+        if(spread) {
+            return 0;
+        }
+        else {
+            return -1; //옆으로 확장된 칸이 없음
+        }
+    }
+
+    List&lt;Cell&gt; getNeighbors(int i, int j) {
+        List&lt;Cell&gt; neighbors = new ArrayList&lt;Cell&gt;();
+        try {neighbors.add(maze[i][j+1]);}
+        catch (ArrayIndexOutOfBoundsException e) {}
+        try {neighbors.add(maze[i][j-1]);}
+        catch (ArrayIndexOutOfBoundsException e) {}
+        try {neighbors.add(maze[i+1][j]);}
+        catch (ArrayIndexOutOfBoundsException e) {}
+        try {neighbors.add(maze[i-1][j]);}
+        catch (ArrayIndexOutOfBoundsException e) {}
+
+        return neighbors;
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2025/01/21 22:17</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박준우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

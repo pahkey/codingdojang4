@@ -1,0 +1,1608 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lunar(Dismal) Arithmetic 라는 어떤 연산이 있습니다. 이 연산에서 [덧셈](https://oeis.org/A087061)「+」은 각 자릿수를 비교해서 큰 수를 취합니다.
+```{.no-highlight}
+5 + 3 = 5...">
+    <title>Lunar Arithmetic - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">Lunar Arithmetic</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">3</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 3</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>Lunar(Dismal) Arithmetic 라는 어떤 연산이 있습니다. 이 연산에서 <a href="https://oeis.org/A087061">덧셈</a>「+」은 각 자릿수를 비교해서 큰 수를 취합니다.</p>
+<pre><code class="no-highlight">5 + 3 = 5
+13 + 6 = 16
+
+   169
+ + 248
+ ------
+   269
+</code></pre>
+
+<p>그리고 <a href="https://oeis.org/A087062">곱셈</a>「×」은 각 자릿수를 비교해서 작은 수를 취합니다.</p>
+<pre><code class="no-highlight">5 × 3 = 3
+13 × 6 = 13
+
+     169
+   × 248
+   ------
+     168
+    144
+ + 122
+ --------
+   12468
+</code></pre>
+
+<p>Lunar Arithmetic를 수행하는 계산기를 만들어봅시다.</p>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2019/09/05 17:45</p>
+                    <p class="static-profile" style="margin:0;padding:0;">AY</p>
+                </div>
+            </div>
+
+            
+                <a name="comment_2581"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">곱셈 x의 연산에 대해서 좀더 설명해주실 수 있을까요? 169 × 248이 잘 이해가 안 되어서요^^;;;</span>
+                    -
+                    <span style="font-size:11px;">
+                        Katherine,
+                        2019/10/09 00:51
+                    </span>
+                </div>
+            
+                <a name="comment_2583"></a>
+                <div class="comment_line comment-content">
+                    
+                        <span style="color:orangered;">+1</span>
+                    
+                    <span style="white-space:pre-wrap;">Katherine님
+248의 8과 169의 각 자리수를 비교해서 작은 걸 취한 것이 결과(248의 밑 줄)의 첫 번째 줄이고, 4와 169의 각 자리수를 비교한 것이 두 번째 줄이고, 2랑 비교한게 세 번째 줄인 것 같네요~
+그걸 한 자리씩 비켜가면서 적은 다음 +연산을 시행한게 제일 밑 줄인 것 같습니다!</span>
+                    -
+                    <span style="font-size:11px;">
+                        GG,
+                        2019/10/11 13:43
+                    </span>
+                </div>
+            
+                <a name="comment_2584"></a>
+                <div class="comment_line comment-content">
+                    
+                        <span style="color:orangered;">+1</span>
+                    
+                    <span style="white-space:pre-wrap;">Katherine님
+일반적인 곱셈을 보면 각 자릿수를 곱하고 더하는 과정이 있죠.
+예시로 14*23을 한다면 (4*3)+(4*20)+(10*3)+(10*20) = 12+80+30+200 = 322가 되겠죠.
+세로셈으로 쓰면 (14*3)+(14*20) = 42+280 = 322가 되죠.
+14*23을 Lunar 연산으로 한다면 (4*3)+(4*20)+(10*3)+(10*20) = 3+20+10+100 = 123 이 됩니다.
+세로셈으로 쓰면 (14*3)+(14*20) = 13+120 = 123이 됩니다.</span>
+                    -
+                    <span style="font-size:11px;">
+                        AY,
+                        2019/10/11 14:42
+                    </span>
+                </div>
+            
+                <a name="comment_2585"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">@허혜진 님 @AY 님 좋은 댓글 감사합니다 ^^ 한번 풀어보겠습니다 :)</span>
+                    -
+                    <span style="font-size:11px;">
+                        Katherine,
+                        2019/10/12 12:22
+                    </span>
+                </div>
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>18개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_19167"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3.7</p>
+<pre><code class="python">def ladd(a, b):
+    c = ''
+    a, b = str(a)[::-1], str(b)[::-1]
+    for i in range(max(len(a), len(b))):
+        c += max(a[i:i+1], b[i:i+1])
+    return int(c[::-1])
+
+def lmul(a, b):
+    c = []
+    a, b = str(a)[::-1], str(b)[::-1]
+    for i in range(len(b)):
+        d = ''
+        for j in range(len(a)):
+            d += min(a[j], b[i])
+        c.append('0'*i+d)
+    e = 0
+    for i in c:
+        e = ladd(e, i[::-1])
+    return e
+</code></pre>
+
+<h5 id="input">Input</h5>
+<pre><code class="no-highlight">ladd(169, 248)
+lmul(169, 248)
+</code></pre>
+
+<h5 id="output">Output</h5>
+<pre><code class="no-highlight">269
+12468
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/09/06 10:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">AY</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2770"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">간결하고 이해하기 쉽게 잘 짜셨네요!!</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Chang-Hoon Lee,
+                                    2020/08/21 14:06
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19173"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="go">package main
+
+import (
+    &quot;fmt&quot;
+    &quot;strconv&quot;
+    &quot;strings&quot;
+)
+
+func main() {
+    a, _ := LunarAdd(169, 248)
+    m, _ := LunarMul(169, 248)
+    fmt.Println(a, m)
+}
+
+func LunarAdd(l, r uint) (uint64, error) {
+    if l &lt; r {
+        l, r = r, l
+    }
+    return strconv.ParseUint(rawLunaAdd(fmt.Sprint(l), fmt.Sprint(r)), 10, 64)
+}
+func rawLunaAdd(left, right string) string {
+    lenL, lenR := len(left), len(right)
+    var buf strings.Builder
+    buf.Grow(lenL)
+    buf.WriteString(left[:lenL-lenR])
+    tmp := left[lenL-lenR:]
+    for i := 0; i &lt; lenR; i++ {
+        if tmp[i] &gt; right[i] {
+            buf.WriteByte(tmp[i])
+        } else {
+            buf.WriteByte(right[i])
+        }
+    }
+    return buf.String()
+}
+func LunarMul(l, r uint) (uint64, error) {
+    if l &lt; r {
+        l, r = r, l
+    }
+    return strconv.ParseUint(rawLunaMul(fmt.Sprint(l), fmt.Sprint(r)), 10, 64)
+}
+func rawLunaMul(left, right string) string {
+    lenL, lenR := len(left), len(right)
+    box := make([]string, 0, lenR)
+    var buf strings.Builder
+    for i, rv := range right {
+        buf.Reset()
+        buf.Grow(lenL + lenR - i - 1)
+        for _, lv := range left {
+            if lv &lt; rv {
+                buf.WriteRune(lv)
+            } else {
+                buf.WriteRune(rv)
+            }
+        }
+        for j := 0; j &lt; lenR-i-1; j++ {
+            buf.WriteByte('0')
+        }
+        box = append(box, buf.String())
+    }
+    switch lenR {
+    case 1:
+        return box[0]
+    default:
+        res := rawLunaAdd(box[0], box[1])
+        for id := 2; id &lt; lenR; id++ {
+            res = rawLunaAdd(res, box[id])
+        }
+        return res
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/09/06 17:26</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19190"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def ladd(a, b):
+    a, b, c = list(str(a)), list(str(b)), ''
+    while a or b:
+        c = max('0' if not a else a.pop(),
+                '0' if not b else b.pop()) \
+            + c
+
+    return int(''.join(c))
+
+
+def lmul(a, b):
+    a, b = list(str(max(a, b))), list(str(min(a, b)))
+    c, base = 0, 1
+    for _b in reversed(b):
+        _c = int(''.join([min(x, _b) for x in a]))
+        c = ladd(c, _c * base)
+        base *= 10
+
+    return c
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/09/09 09:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19202"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<p>Digit hash에 넣은 뒤 누산</p>
+<pre><code class="ruby">class Integer
+  def add(another, hash = create_digit_hash)
+    pre_cal(self, another).each { |num| num.each { |n,dgt| hash[dgt] &lt;&lt; n } }
+    lunar_add(hash)
+  end
+
+  def mul(another, hash = create_digit_hash)
+    num1, num2 = pre_cal(self, another)
+    lunar_mul = -&gt;(two_dgt) { hash[two_dgt.sum(&amp;:last)] &lt;&lt; two_dgt.map(&amp;:first).min }
+    num2.each { |num2_digit| num1.product([num2_digit]).each &amp;lunar_mul }
+    lunar_add(hash)
+  end
+
+  private
+
+  def create_digit_hash
+    hash = Hash.new { |h,k| h[k] = [] }
+  end
+
+  def pre_cal(num1, num2)
+    [num1, num2].map { |num| num.digits.map.with_index.to_a }
+  end
+
+  def lunar_add(hash)
+    hash.values.map(&amp;:max).reverse.join.to_i
+  end
+end
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby">cases = [[5, 3], [13, 6], [0, 10], [9, 123], [169, 248]]
+expect(cases.map {|a,b| a.add(b) }).to eq [5, 16, 10, 129, 269]
+expect(cases.map {|a,b| a.mul(b) }).to eq [3, 13,  0, 123, 12468]
+</code></pre>
+
+<p><strong>Output</strong></p>
+<pre><code class="ruby">169.add 248 #=&gt; 269
+169.mul 248 #=&gt; 12468
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/09/09 17:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19326"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C#. 연산자 오버라이딩 방식으로 접근했습니다.</p>
+<pre><code class="cs">using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace CD241
+{
+    class Program
+    {
+        static void Main()
+        {
+            List&lt;int[]&gt; testCases = new List&lt;int[]&gt;()
+            {
+                new int[]{5, 3},
+                new int[]{13, 6},
+                new int[]{169, 248},
+            };
+
+            foreach (int[] test in testCases)
+            {
+                var value1 = new Lunar(test[0]);
+                var value2 = new Lunar(test[1]);
+                Console.WriteLine($&quot;{value1.NumValue} + {value2.NumValue} = {(value1 + value2).NumValue}&quot;);
+                Console.WriteLine($&quot;{value1.NumValue} * {value2.NumValue} = {(value1 * value2).NumValue}&quot;);
+            }
+        }
+    }
+
+    class Lunar
+    {
+        public int NumValue { get; } // Lunar 인스턴스의 숫자값
+
+        public string StrValue { get; } // Lunar 인스턴스 숫자값의 문자열 표현
+
+        public int Length =&gt; StrValue.Length; // Lunar 인스턴스 숫자값의 길이
+
+        public Lunar(int aNumber)
+        {
+            NumValue = aNumber;
+            StrValue = aNumber.ToString();
+        }
+
+        // + 연산자 오버라이딩
+        public static Lunar operator +(Lunar lunar1, Lunar lunar2)
+        {
+            // + 연산을 수행할 값의 길이를 맞춤
+            (int length, string string1, string string2) =
+                PadLeftLongest(lunar1.StrValue, lunar2.StrValue);
+
+            // 각 자리별 최대값을 선택하여 Lunar 인스턴스 반환
+            StringBuilder sb = new StringBuilder();
+            for (int idx = 0; idx &lt; length; idx++)
+            {
+                int addValue =
+                    (int)Math.Max(char.GetNumericValue(string1[idx]),
+                    char.GetNumericValue(string2[idx]));
+                sb.Append(addValue);
+            }
+            return new Lunar(int.Parse(sb.ToString()));
+        }
+
+        // * 연산자 오버라이딩
+        public static Lunar operator *(Lunar lunar1, Lunar lunar2)
+        {
+            Lunar result = new Lunar(0);
+            // 각 자리별로 최소값을 선택
+            for (int idx1 = 0; idx1 &lt; lunar1.Length; idx1++)
+            {
+                StringBuilder sb = new StringBuilder();
+                for (int idx2 = 0; idx2 &lt; lunar2.Length; idx2++)
+                {
+                    int addValue =
+                        (int)Math.Min(char.GetNumericValue(lunar1.StrValue[idx1]),
+                        char.GetNumericValue(lunar2.StrValue[idx2]));
+
+                    sb.Append(addValue);
+                }
+                // 각 자리별 * 연산자 결과에 대한 + 연산자 수행을 위해 자리수 맞춤
+                sb.Append(new string('0', lunar1.Length - idx1 - 1));
+                result += new Lunar(int.Parse(sb.ToString()));
+            }
+            return result;
+        }
+
+        // 두 문자열 중 긴 문자열을 기준으로 좌측에 '0'을 채워 반환
+        public static (int, string, string) PadLeftLongest(string string1, string string2)
+        {
+            int maxLength = Math.Max(string1.Length, string2.Length);
+            return (maxLength, string1.PadLeft(maxLength, '0'), string2.PadLeft(maxLength, '0'));
+        }
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/09/17 14:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19345"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>def lunar_arithmetic(choice, *num):
+    init_list = []
+    init_list_2 = []
+    len_list = []
+    digit = []
+    digit_2 = []
+    if choice == "add":
+        for i in num:
+            j = str(i)
+            init_list.append(j)
+        for k in init_list:
+            len_list.append(len(k))
+        max_len = max(len_list)
+        for l in range(0, max_len):
+            for k in init_list:
+                if len(k) &lt; max_len:
+                    k = "0" * (max_len - len(k)) + k
+                digit.append(k[l])
+            digit_2.append(max(digit))
+            digit = []
+        sol = ""
+        for number in digit_2:
+            sol = sol + str(number)
+    if choice == "multiple":
+        for i in num:
+            j = str(i)
+            init_list.append(j)
+        for k in init_list:
+            len_list.append(len(k))
+        max_len = max(len_list)
+        for l in range(0, max_len):
+            for k in init_list:
+                if len(k) &lt; max_len:
+                    k = "0" * (max_len - len(k)) + k
+                digit.append(k[l])
+                if "0" in digit:
+                    digit.remove("0")
+            digit_2.append(min(digit))
+            digit = []
+        sol = ""
+        for number in digit_2:
+            sol = sol + str(number)
+    return sol</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/09/18 17:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">남이승윤</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19461"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>문제에서 시킨대로 구현한 코드입니다.</p>
+<p>덧셈에 대한 항등원 0이라는 존재가 있기 때문에, 일반적으로 우리가 n^2 곱셈을 하는 방식과 동일하게 구현할 수 있었습니다.</p>
+<pre><code class="cpp">입력 예제 
+5 3
+16 3
+169 248
+2312314649516519516515919 51995498794561321987951687916
+0 0
+123 0
+123456789123456789 987654321987654321
+...
+</code></pre>
+
+<pre><code class="cpp">출력 예제
+#1 sum : 5 mul : 3
+#2 sum : 16 mul : 13
+#3 sum : 269 mul : 12468
+#4 sum : 51995498794669526989956687919 mul : 23233345466996698996698799999999997966698997968797916
+#5 sum : 0 mul : 0
+#6 sum : 123 mul : 0
+#7 sum : 987656789987656789 mul : 12345678987655678987655678987654321
+...
+</code></pre>
+
+<pre><code class="cpp">#include&lt;stdio.h&gt;
+int al, bl, cl, dl;
+char xx[1000009];
+int a[1000009];
+int b[1000009];
+int d[1000009];
+int c[2000009];
+__inline int max(int p, int q) { return p &gt; q ? p : q; }
+__inline int min(int p, int q) { return p &lt; q ? p : q; }
+int main()
+{
+    int tv = 0;
+    while (1) {
+        scanf(&quot;%s&quot;, xx);
+        for (al = 0; xx[al]; al++);
+        for (int i = 0; i &lt; al; i++)a[i] = xx[al - i - 1] - '0';
+        scanf(&quot;%s&quot;, xx);
+        for (bl = 0; xx[bl]; bl++);
+        for (int i = 0; i &lt; bl; i++)b[i] = xx[bl - i - 1] - '0';
+        cl = al + bl;
+        dl = max(al, bl);
+        for (int i = 0; i &lt; cl; i++)c[i] = 0;
+        for (int i = 0; i &lt; dl; i++)d[i] = 0;
+        for (int i = al; i &lt; dl; i++)a[i] = 0;
+        for (int i = bl; i &lt; dl; i++)b[i] = 0;
+        for (int i = 0; i &lt; dl; i++)d[i] = max(a[i], b[i]);
+        for(int i=0;i&lt;al;i++)
+            for (int j = 0; j &lt; bl; j++) {
+                c[i + j] = max(c[i + j], min(a[i], b[j]));
+            }
+        for (dl; dl &gt; 1; dl--) if (d[dl - 1])break;
+        for (cl; cl &gt; 1; cl--)if (c[cl - 1])break;
+        printf(&quot;#%d &quot;, ++tv);
+        printf(&quot;sum : &quot;);
+        for (int i = dl - 1; i &gt;= 0; i--)printf(&quot;%d&quot;, d[i]);
+        printf(&quot; mul : &quot;);
+        for (int i = cl - 1; i &gt;= 0; i--)printf(&quot;%d&quot;, c[i]);
+        printf(&quot;\n&quot;);
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/09/27 22:02</p>
+                                <p class="static-profile" style="margin:0;padding:0;">pichulia</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19640"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package d241_Lunar_Arithmetic;
+import java.util.Scanner;
+public class LunarArithmetic {
+    int cipher(int input) { //숫자의 자릿수 구하기
+        int i, j;
+        for(i=0, j=1; input/j&gt;0; j*=10, i++); //0이 될때까지 나누어보고, 그 횟수를 리턴.
+        return i;
+
+    }
+    int digit_n(int input, int cipher) { //특정 자릿수(cipher번째) 숫자만 구하기(일의 자리로)
+        int result, i, j=1;
+        for(i=0; i&lt;cipher-1; i++) j*=10;
+        result=input/j;
+        result%=10;
+        return result;
+    }
+    int digit(int input, int cipher) { //특정 자릿수(cipher번째) 숫자 구하기(그 자릿수 숫자로)
+        int result, i, j=1;
+        for(i=0; i&lt;cipher-1; i++) j*=10;
+        result=input/j;
+        result%=10;
+        for(i=0; i&lt;cipher-1; i++) result*=10; //digin_n과의 유일한 차이점.
+        return result;
+    }
+
+    int plus(int X, int Y) { //'+'연산
+        LunarArithmetic la=new LunarArithmetic();
+        int x_cipher=la.cipher(X), y_cipher=la.cipher(Y), result=0;
+        int max_cipher=(x_cipher&gt;y_cipher)?x_cipher:y_cipher;
+
+        for(int i=1; i&lt;=max_cipher; i++) {
+            result+= (la.digit(X, i)&gt;la.digit(Y, i))?la.digit(X, i):la.digit(Y, i);
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        LunarArithmetic la=new LunarArithmetic();
+        Scanner sc=new Scanner(System.in);
+
+        System.out.println(&quot;Input a number, an operator and another number:&quot;);
+        int X=sc.nextInt(); //입력 받기
+        String C=sc.next();
+        int Y=sc.nextInt();
+
+        switch(C) {
+        case &quot;+&quot;: //'+'연산 함수 실행
+            int result=la.plus(X, Y);
+            System.out.println(&quot; &quot;+X+&quot; &quot;+C+&quot; &quot;+Y+&quot; = &quot;+result);
+            break;
+
+        case &quot;×&quot;: //모두 '×' 연산
+        case &quot;x&quot;:
+        case &quot;X&quot;:
+        case &quot;*&quot;:
+            int X_cipher=la.cipher(X), Y_cipher=la.cipher(Y), resultx=0, y_each;
+            int[] array=new int[Y_cipher];
+            System.out.println(&quot;  &quot;+X+&quot;\n× &quot;+Y); //입력값 한번 더 출력
+            System.out.println(&quot;-------&quot;);
+            for(int i=0; i&lt;Y_cipher; i++) {
+                y_each=la.digit_n(Y, i+1); //각 줄에서 연산할 Y의 숫자 하나
+                array[i]=0;
+                for(int j=1; j&lt;=X_cipher; j++) { //각 줄 '×'연산
+                    array[i]+= (la.digit(X, j)&lt;y_each)? la.digit(X, j):y_each;
+                    y_each*=10;
+                }
+                for(int j=0; j&lt;i; j++) array[i]*=10; //각 줄 마다 뒤에 0을 붙임
+                System.out.print(&quot;  &quot;); 
+                for(int j=0; j&lt;Y_cipher-i-1; j++) System.out.print(&quot; &quot;); //출력의 편의를 위하여
+                System.out.println(array[i]); //각 줄 출력
+                resultx=la.plus(resultx, array[i]); //각 줄끼리 '+'연산
+            }
+            System.out.println(&quot;-------&quot;);
+            System.out.println(&quot;  &quot;+resultx);
+            break;
+
+        default:
+            System.out.println(&quot;Input '+' or '×'(or *, x, X).&quot;);
+            break;
+        }
+
+    }
+}
+
+</code></pre>
+
+<pre><code class="java">#예제1
+Input a number, an operator and another number:
+169 + 248
+ 169 + 248 = 269
+
+</code></pre>
+
+<pre><code class="java">#예제2
+Input a number, an operator and another number:
+2438 * 1475
+  2438
+× 1475
+-------
+     2435
+    24370
+   243400
+  1111000
+-------
+  1244475
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/10/13 10:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Katherine</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19713"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>솔직히 깔끔했다. </p>
+<pre><code class="cpp">#include &lt;iostream&gt;
+#include &lt;cmath&gt;
+using namespace std;
+
+int main(){
+    int n,m,sum=0,i=0;
+    char c;
+    cin&gt;&gt;n&gt;&gt;c&gt;&gt;m;
+
+    if(c=='+'){
+        while((n!=0) &amp;&amp; (m!=0)){
+            if((n%10)&gt;(m%10))
+                sum+=((n%10)*(pow(10,i)));
+            else
+                sum+=((m%10)*(pow(10,i)));
+
+            n/=10;
+            m/=10;
+            i++;
+        }
+    }
+
+    else if(c=='*'){
+        while(n!=0 &amp;&amp; m!=0){
+            if((n%10)&lt;(m%10))
+                sum+=((n%10)*(pow(10,i)));
+            else
+                sum+=((m%10)*(pow(10,i)));
+
+            n/=10;
+            m/=10;
+            i++;
+        }
+    }
+    cout&lt;&lt;sum;
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/10/19 12:34</p>
+                                <p class="static-profile" style="margin:0;padding:0;">저택벚꽃</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19729"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Sum(5, 3);
+            Sum(13, 6);
+            Sum(169, 248);
+            Mul(5, 3);
+            Mul(13, 6);
+            Mul(169, 248);
+        }
+
+        static void Sum (int a, int b) // 덧셈 연산
+        {
+            int longer_digit = Math.Max(a.ToString().Length, b.ToString().Length); // 큰 자릿수 찾기
+            string a_digit = a.ToString().PadLeft(longer_digit, '0'); // 두 수의 자릿수 맞추기
+            string b_digit = b.ToString().PadLeft(longer_digit, '0');
+            for(int i = 0; i &lt; longer_digit; i++)
+            {
+                Console.Write((a_digit[i] &gt;= b_digit[i]) ? a_digit[i] : b_digit[i]);
+            }
+            Console.WriteLine();
+        }
+
+        static void Mul (int a, int b) // 곱셈 연산
+        {
+            List&lt;string&gt; result = new List&lt;string&gt; { };
+            int max = 0;
+            int digit = 1; // 자릿수
+            string temp = &quot;&quot;; // 값 임시 저장
+            string a_str = a.ToString();
+            string b_str = b.ToString();
+            for(int i = b_str.Length - 1; i &gt;= 0; i--)
+            {
+                for(int x = a_str.Length - 1; x &gt;= 0; x--)
+                {
+                    temp = ((b_str[i] &lt;= a_str[x]) ? b_str[i] : a_str[x]) + temp;
+                }
+                result.Insert(0, (int.Parse(temp) * digit).ToString());
+                digit *= 10;
+                temp = &quot;&quot;;
+            }
+            int result_length = result[0].Length;
+            for(int i = 0; i &lt; result.Count; i++)
+            {
+                result[i] = result[i].PadLeft(result_length, '0');
+            }
+            for (int i = 0; i &lt; result_length; i++)
+            {
+                for(int x = 0; x &lt; result.Count; x++)
+                {
+                    max = Math.Max(int.Parse(result[x][i].ToString()), max);
+                }
+                Console.Write(max);
+                max = 0;
+            }
+            Console.WriteLine();
+        }
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/10/22 22:53</p>
+                                <p class="static-profile" style="margin:0;padding:0;">bat</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20084"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import re
+
+def add(a, b) :
+    a = a.rjust(len(b), '0')
+    result = ''
+    for IND in range(0, len(a)) :
+        result += max(a[IND], b[IND])
+    return result
+def mul(c, d) :
+    result = []
+    for m in range(1, len(d)+1) :
+        RIN = ''
+        for n in range(0, len(c)) :
+            RIN += str(min(int(c[n]), int(d[-m])))
+        RIN += '0'*(m-1)
+        result.append(RIN)
+    for w in range(1, len(result)) :
+        result[0] = add(result[0], result[w])
+    return result[0]
+
+inp = input(&quot;INPUT : &quot;)
+
+numbs = re.compile(&quot;\d+&quot;)
+oper = re.compile(&quot;[+x]{1}&quot;)
+numbs_LIST, oper_LIST = numbs.findall(inp), oper.findall(inp)
+
+if oper_LIST[0] == &quot;+&quot; :
+    print(add(sorted(numbs_LIST)[0], sorted(numbs_LIST)[1]))
+elif oper_LIST[0] == &quot;x&quot; :
+    print(mul(numbs_LIST[0], numbs_LIST[1]))
+</code></pre>
+
+<p>결과</p>
+<pre><code>INPUT : 169x248
+12468
+
+INPUT : 169+248
+269
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/11/28 16:24</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GG</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_21302"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def LAp(x,y):
+    elst=[]
+    xl,yl=list(x),list(y)
+    if len(xl)&gt;len(yl):
+        yl=[&quot;0&quot;]*(len(xl)-len(yl))+yl
+    elif len(yl)&gt;len(xl):
+        xl=[&quot;0&quot;]*(len(yl)-len(xl))+xl
+    for i in range(len(xl)):
+        if int(xl[i])&gt;=int(yl[i]):
+            elst.append(xl[i])
+        else:
+            elst.append(yl[i])
+    return &quot;&quot;.join(elst)
+print(LAp(&quot;169&quot;,&quot;248&quot;)) #269
+
+def LAm(x,y):
+    elst=[]
+    if int(x)&lt;int(y):
+        x,y=y,x
+    xl,yl=list(x),list(y)
+    for i in range(len(yl)):
+        e=&quot;&quot;
+        for k in range(len(xl)):
+            e+=str(min(int(xl[k]),int(yl[i])))
+        e=&quot;0&quot;*(i)+e+&quot;0&quot;*(len(yl)-i-1)
+        elst.append(e)
+    if len(xl)==1 and len(yl)==1:
+        return &quot;&quot;.join(min(xl,yl))
+    for i in range(len(elst)-1):
+        temp=LAp(elst[i],elst[i+1])
+        elst[i+1]=temp
+    return elst[i+1]
+
+print(LAm(&quot;169&quot;,&quot;248&quot;)) #12468
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/03/08 21:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박시원</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22051"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#파이썬
+#별것 아닌 문제인줄 알았는데 코드가 좀 길어져 버렸습니다
+#좀 더 간단히 할 수 있는 방법도 있을것 같은데 아직 초보라 잘안되네요 ㅠㅠ
+
+def num_list(a):                #숫자형을 리스트 형으로 변환해 주는 함수
+    a,b=str(a),[]
+    for i in range (len(a)):
+        b.append(int(a[i]))
+    return(b)
+
+def conv_num(x):                #리스트형을 숫자로 변환해주는 함수
+    z=0
+    for i in range (len(x)):
+        z+=x[i]*10**(len(x)-1-i)
+    return(z)
+
+def check_type(x):              # 변수를 체크하여 숫자형일 경우 리스트 형으로 변환해 주는 함수
+    if type(x)==int:
+        x=num_list(x)
+    return (x)
+
+
+def hap(x,y):                   #합을 구하는 함수
+    x=check_type(x)
+    y=check_type(y)
+
+    if len(x)&gt;len(y):
+        for i in range (len(x)-len(y)):
+            y.insert(0,0)
+    elif len(y)&gt;len(x):
+        for i in range (len(y)-len(x)):
+            x.insert(0,0)
+
+    z=[]
+    for i in range (len(x)):
+        if x[i]&gt;=y[i]:
+            z.append(x[i])
+        else:
+            z.append(y[i])              
+
+    z=conv_num(z)   
+    return (z)
+
+def gop(x,y):               #곱을 구하는 함수
+    z=[]
+
+    x=check_type(x)
+    y=check_type(y)
+
+    i=len(y)-1
+    while (i&gt;=0):
+        temp=[]
+        for j in range (len(x)):
+            if x[j]&lt;=y[i]:
+                temp.append(x[j])
+            else:
+                temp.append(y[i])
+
+        for k in range (len(y)-i-1):
+            temp.append(0)
+
+        i-=1
+        z=hap(temp,z)
+
+    return (z)
+
+print ('5+3=',hap(5,3))
+print ('13+6=',hap(13,6))
+print ('169+248=',hap(169,248))
+print ('1234+789=',hap(1234,789))
+print ('7145+913=',hap(7145,913))
+print()
+print ('5x3=',gop(5,3))
+print ('13x6=',gop(13,6))
+print ('169x248=',gop(169,248))
+print ('1234x789=',gop(1234,789))
+print ('7145x913=',gop(7145,913))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/03 08:24</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Buckshot</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2709"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">&lt;결과&gt;
+5+3= 5
+13+6= 16
+169+248= 269
+1234+789= 1789
+7145+913= 7945
+
+5x3= 3
+13x6= 13
+169x248= 12468
+1234x789= 123444
+7145x913= 714533</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Buckshot,
+                                    2020/05/03 08:24
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22502"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>푸는 과정이 재미있는 문제네요.</p>
+<pre><code class="python">def runa_add(a,b):
+    a_s=str(a)
+    b_s=str(b)
+    if len(b_s) &gt; len(a_s):
+        a,b = b,a
+        a_s,b_s = b_s, a_s
+    fore_a_s = a_s[:len(a_s)-len(b_s)]
+    back_a_s = a_s[len(a_s)-len(b_s) :]
+    for i in range(0,len(b_s)):
+        if back_a_s[i] &gt; b_s[i]:
+            fore_a_s = fore_a_s + back_a_s[i]
+        else:
+            fore_a_s = fore_a_s + b_s[i]
+    answer = int(fore_a_s)
+    return answer
+
+def runa_mul(a,b):
+    a_s=str(a)
+    b_s=str(b)
+    e = 1
+    if len(b_s) &gt; len(a_s):
+        a,b = b,a
+        a_s,b_s = b_s, a_s
+    for i in range(len(a_s)-1,-1,-1):
+        c=&quot;&quot;
+        for j in range(0,len(b_s)):
+            if int(a_s[i]) &lt; int(b_s[j]):
+                c = c + a_s[i]
+            else:
+                c = c + b_s[j]
+        if i == len(a_s)-1:
+            answer = int(c)
+        else:
+            e = e * 10
+            answer = runa_add(answer, int(c)*e)
+    return answer
+
+while True:
+    try:
+        a1 = int(input(&quot;input 1st integer : &quot;))
+        b1 = int(input(&quot;input 2nd integer : &quot;))
+        if &quot;-&quot; in str(a1) or &quot;-&quot; in str(b1):
+            print(&quot;input positive interger!!&quot;)
+            break
+        else:
+            c = runa_add(a1,b1)
+            d = runa_mul(a1,b1)
+            print(&quot;{} runa_add {} = {}&quot;.format(a1, b1, c))
+            print(&quot;{} runa_multiply {} = {}&quot;.format(a1, b1, d))
+            break
+    except ValueError:
+        print(&quot;That was no valid number.  Try again...&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/06/05 16:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Stony Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22992"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># Luna Add
+def add(a, b):
+    a = str(a)
+    b = str(b)
+    c = ''
+    num_digit = max(len(a), len(b))
+    a = (num_digit - len(a)) * '0' + a
+    b = (num_digit - len(b)) * '0' + b
+    for i in range(num_digit):
+        c += max(a[i], b[i])
+    return int(c)
+
+# Lunar Multiply
+def multiply(a, b):
+    c = ''
+    a = str(a)
+    b = str(b)
+    num_digit = max(len(a), len(b))
+    a = (num_digit - len(a)) * '0' + a
+    b = (num_digit - len(b)) * '0' + b
+    for ix_b in range(num_digit):
+        tmp = ''
+        for ix_a in range(num_digit):
+            # print(min(a[ix_a], b[ix_b]), end='')
+            tmp += min(a[ix_a], b[ix_b])
+        # print('0' * (num_digit - ix_b - 1))
+        tmp += '0' * (num_digit - ix_b -1)
+        c = add(tmp, c)
+    return c
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/08/21 14:02</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Chang-Hoon Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23372"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>def ladd(a, b):
+    c = ''
+    a, b = str(a)[::-1], str(b)[::-1]
+    for i in range(max(len(a), len(b))):
+        c += max(a[i:i+1], b[i:i+1])
+    return int(c[::-1])
+
+def lmul(a, b):
+    c = []
+    a, b = str(a)[::-1], str(b)[::-1]
+    for i in range(len(b)):
+        d = ''
+        for j in range(len(a)):
+            d += min(a[j], b[i])
+        c.append('0'*i+d)
+    e = 0
+    for i in c:
+        e = ladd(e, i[::-1])
+    return e
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/10/07 12:08</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김빈&#39;s life</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25204"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def plus():
+    a=[]
+    b=[]
+    A=input(&quot;숫자입력 : &quot;)
+    for i in range(len(A)):
+        a.append((int(A[i])))
+    B = input(&quot;숫자입력 : &quot;)
+    for i in range(len(B)):
+        b.append((int(B[i])))
+    if len(a) != len(b):
+        if len(a)&gt;len(b):
+            for i in range(1,len(b)+1):
+                if a[-i]&lt;b[-i]:
+                    a[-i]=b[-i]
+            for i in a:
+                print(i, end='')
+        else:
+            for i in range(1,len(a)+1):
+                if a[-i]&gt;b[-i]:
+                    b[-i]=a[-i]
+            for i in b:
+                print(i, end='')
+    else:
+        for i in range(1,len(a)+1):
+            if a[-i]&lt;b[-i]:
+                a[-i]=b[-i]
+        for i in a:
+            print(i, end='')
+
+
+
+def mul():
+    a=[]
+    b=[]
+    c=[]
+    total=[]
+    A=input(&quot;숫자입력 : &quot;)
+    for i in range(len(A)):       
+        a.append((int(A[i])))
+    B = input(&quot;숫자입력 : &quot;)
+    for i in range(len(B)):
+        b.append((int(B[i])))   # 숫자를 받은후 리스트 형식으로 변환
+
+    if len(a) != len(b):   # 수의 단위 다를경우
+        if len(a)&gt;len(b):
+            for i in range(1,len(b)+1):
+                if a[-i]&gt;b[-i]:
+                    a[-i]=b[-i]
+            for i in a:
+                print(i, end='')
+        else:
+            for i in range(1,len(a)+1):
+                if a[-i]&lt;b[-i]:
+                    b[-i]=a[-i]
+            for i in b:
+                print(i, end='')
+
+    else:                       # 수의 단위 같을경우
+        for i in range(1,len(a)+1):
+            for j in range(1,len(b)+1):
+                if b[-i]&lt;a[-j]:
+                    a[-j]=b[-i]          # 비교
+            c.append(list(a))
+        for i in range(len(c)):       # 자리수 맞추기
+            for j in range(i):
+                c[i].append(0)
+        for i in range(len(c)-1):
+            for j in range(1,len(c[i])+1):
+                if c[i][-j]&gt;c[i+1][-j]:
+                    c[i+1][-j]= c[i][-j] 
+        for j in c[-1]:
+            print(j, end='')
+
+
+
+def Lunar():
+    a = input(&quot;곱셈선택 : 0 덧셈선택 : 1 : &quot;)
+    if a=='0':
+        mul()
+    elif a=='1':
+        plus()
+    else:
+        print(&quot;다시 입력하세요! &quot;)
+Lunar()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/04/15 21:41</p>
+                                <p class="static-profile" style="margin:0;padding:0;">fox.j</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29499"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def lunarArithmetric(a, op, b):
+    print('  {0} {1} {2} ='.format(a,op,b), end=' ')
+    res = ''
+    if op == '+':
+        suA, suB = int(a), int(b)
+        while suA &gt; 0 or suB &gt; 0:
+            res = str(max(suA%10, suB%10)) + res
+            suA, suB = suA//10, suB//10
+    else:
+        nAB = len(a)+len(b)-1
+        arAB = [0 for _ in range(nAB)]
+        a = a[::-1]
+        b = b[::-1]
+        idx = 0
+        while idx &lt; len(b):
+            for i in range(len(a)):
+                arAB[idx+i] = max(arAB[idx+i], min(int(a[i]), int(b[idx])))
+            idx += 1
+        for i in range(nAB):
+            res = str(arAB[i]) + res
+    print(res)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/07/28 15:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

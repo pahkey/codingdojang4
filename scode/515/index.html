@@ -1,0 +1,1780 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="x축과 y축의 길이를 입력받아 시계방향으로 회전하며 값이 증가하는 매트릭스를 출력하라. 중앙의 출발지점은 x, y 입력에 따라 달라질 수 있지만 종료지점은 항상 (1,y)가 되어야 한다. (중앙 출발지점 값은 0)
+
+* 입출력 예
+```{....">
+    <title>Reverse Spiral Array - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">Reverse Spiral Array</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">3</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 3</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>x축과 y축의 길이를 입력받아 시계방향으로 회전하며 값이 증가하는 매트릭스를 출력하라. 중앙의 출발지점은 x, y 입력에 따라 달라질 수 있지만 종료지점은 항상 (1,y)가 되어야 한다. (중앙 출발지점 값은 0)</p>
+<ul>
+<li>입출력 예</li>
+</ul>
+<pre><code class="ruby"># 입력
+5 6
+# 출력
+ 16 17 18 19 20
+ 15  4  5  6 21
+ 14  3  0  7 22
+ 13  2  1  8 23
+ 12 11 10  9 24
+ 29 28 27 26 25
+
+# 입력
+9 6
+# 출력
+ 32 33 34 35 36 37 38 39 40
+ 31 12 13 14 15 16 17 18 41
+ 30 11  0  1  2  3  4 19 42
+ 29 10  9  8  7  6  5 20 43
+ 28 27 26 25 24 23 22 21 44
+ 53 52 51 50 49 48 47 46 45
+</code></pre>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">transpose</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2016/08/06 11:52</p>
+                    <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                </div>
+            </div>
+
+            
+                <a name="comment_2042"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">보통 m*n matrix 를 나타낼때 열(row)x행(column) 순서로 씁니다. 즉, 입력 두수가 5 6 이면 5x6 의 matrix을 만들지요. 그런데 입력예는 &#39;행 렬&#39; 으로 되어 있어 좀 헷갈리네요. 입력예를 &#39;열 행&#39; 로 바꿔주시면 안될까요?</span>
+                    -
+                    <span style="font-size:11px;">
+                        예강효빠,
+                        2017/06/17 20:05
+                    </span>
+                </div>
+            
+                <a name="comment_2055"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">예강효빠//
+row 가 &quot;행&quot; 이고 column 이 &quot;열&quot; 입니다 ^^;; 말그대로 &quot;m*n 행렬&quot;은 m행 n열이지요.
+입력은 열 행으로 되어 있어 헷갈리긴 하네요
+
+출제하신 분은 x축 y축이라 하셨는데 그러면 종료점이 원점 혹은 (1, 1) 이 되어야 하는것 같고(1사분면에 그린다고 할 때)... 
+어찌됐든 헷갈리네요 ^^</span>
+                    -
+                    <span style="font-size:11px;">
+                        funnystyle,
+                        2017/06/26 12:16
+                    </span>
+                </div>
+            
+                <a name="comment_2056"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">ㅎㅎ 영원한 논쟁거리지요. 과연 row 는 열인가 행인가? 열은 과연 가로인가 세로인가??? 구글링을 하면 더 헷갈립니다. 왜냐하면 막 섞여 있거든요...구글에서 define row 하면 &#39;열&#39; 이라고 나오고...쩝. 여기 미국애들은 행렬이라고 안부르지요. 그냥 matrix 또는 2d array 라고 부릅니다. 그래서 미국애들하고 애기할때는 헷갈리는 일이 없는데요....편의상 가로줄, 세로기둥 이렇게 부르는게 좋겠습니다. m x n = 2 x 3 이면 2개 가로줄 x 3개 세로기둥 이렇게 이해하는게 좋겠습니다. row(줄) 가로줄, column(기둥) 세로줄 이렇게요. 그리고 미국애들 수학책을 보면 grocery store 판매대 예를 많이 듭니다. 예를 들어 3x3 인 경우, 오렌지, 사과, 복숭아 row 에 대,중,소 column 이렇게요...좋은 우리말로 해서 가로줄*세로기둥 이렇게 쓰도록 하겠습니다.</span>
+                    -
+                    <span style="font-size:11px;">
+                        예강효빠,
+                        2017/06/26 23:13
+                    </span>
+                </div>
+            
+                <a name="comment_2057"></a>
+                <div class="comment_line comment-content">
+                    
+                        <span style="color:orangered;">+1</span>
+                    
+                    <span style="white-space:pre-wrap;">그렇군요, 구글링해보니 정말 그렇네요. 상식 벡터가 한 차원 늘었습니다. 감사해요</span>
+                    -
+                    <span style="font-size:11px;">
+                        funnystyle,
+                        2017/06/26 13:18
+                    </span>
+                </div>
+            
+                <a name="comment_2193"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">row(행) =&gt; &#39;가로 모양&#39; , column(열) =&gt; &#39;세로 모양&#39; 으로 이해하면 편한 것 같습니다.
+ex)배열 표현 arr[row][column]
+
+다만, row값이 변화하면 좌표의 위치가 상하로 이동(y축)하고, column값이 변화하면 좌표의 위치가 좌우로 이동(x축)하게 되어 모양과 변화 방향이 달라 혼돈을 겪는 경우가 종종 있는 것 같습니다.</span>
+                    -
+                    <span style="font-size:11px;">
+                        justbegin,
+                        2018/02/24 09:50
+                    </span>
+                </div>
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>22개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_4351"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<p>(1,y)에서 출발. 시계반대 방향으로 안으로 회전하는 spiral array를 만든 뒤 역으로 뒤집는다.</p>
+<pre><code class="ruby">cube = -&gt;x,y { (1..y).map {|e| [*1..x].product [e]} }
+peel = -&gt;cub { *h,t = cub; t ? t + peel[h.reverse.transpose] : [] }
+rvsp = -&gt; { c = cube[*gets.split.map(&amp;:to_i)]; s = peel[c].reverse
+            puts c.map {|r| r.map {|e| &quot;%3d&quot; % s.index(e)}*'' } }
+</code></pre>
+
+<p><strong>Output</strong></p>
+<pre><code class="ruby">#=&gt; rvsp.()
+5 6
+ 16 17 18 19 20
+ 15  4  5  6 21
+ 14  3  0  7 22
+ 13  2  1  8 23
+ 12 11 10  9 24
+ 29 28 27 26 25
+
+#=&gt; rvsp.()
+9 6
+ 32 33 34 35 36 37 38 39 40
+ 31 12 13 14 15 16 17 18 41
+ 30 11  0  1  2  3  4 19 42
+ 29 10  9  8  7  6  5 20 43
+ 28 27 26 25 24 23 22 21 44
+ 53 52 51 50 49 48 47 46 45
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/08/08 18:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4559"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>역으로 (1,y) 부터 시작해서 행렬을 90도 회전해가며 0,-1,-2... 순으로 값을 채운다. 마지막에 전체 값에 x*y-1을 더해 결과를 만든다.</p>
+<pre><code class="python">def printMatrix(matrix):
+    for i in matrix:
+        #print('[', end='')
+        for j in i:
+            print(&quot;%4d&quot; % j, end='')
+        print()
+
+def rotate(matrix):
+    newMatrix = []
+    for i in range(len(matrix[0])):
+        row = []
+        for j in matrix:
+            row.insert(0,j[i])
+        newMatrix.append(row)
+    return newMatrix
+
+
+nums=input('x,y:').split()
+
+x = int(nums[0])
+y = int(nums[1])
+
+# init matrix
+matrix = []
+
+for i in range(y):
+    row = []
+    for j in range(x):
+        row.append(1);
+    matrix.append(row)
+
+
+spiralValue = 0
+s_y = y
+startIndex = 0
+rotateCnt = 0
+center = 1
+
+while True:
+    for j in range(startIndex, x):
+        if matrix[y-center][j] == 1:
+            matrix[y-center][j] = spiralValue
+            spiralValue -= 1
+    #printMatrix(matrix)
+    matrix = rotate(matrix)
+
+    rotateCnt += 1
+
+    if rotateCnt%2 == 1:
+        startIndex += 1
+
+    for j in range(startIndex, s_y):
+        if matrix[x-center][j] == 1:
+            matrix[x-center][j] = spiralValue
+            spiralValue -= 1
+        else:
+            center += 1
+            s_y -= 1
+    #printMatrix(matrix)
+    matrix = rotate(matrix)
+
+    if spiralValue*(-1) &gt;= x*y:
+        #print(&quot;spiral:&quot;, spiralValue, &quot; end!&quot;)
+        break
+
+#print('Numbering finished. Rotating...')
+while matrix[-1][0] != 0:
+    matrix = rotate(matrix)
+
+for row in matrix:
+    for j in range(x):
+        row[j] = row[j] + x*y -1
+
+print('Result:')
+printMatrix(matrix)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/08/12 00:29</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jung Seung-yong</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4665"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+void main(void) {
+    int x, y;
+    int row, col;
+    int value;
+    int outx, outy;
+    printf(&quot;#입력 : &quot;);
+    scanf(&quot;%d&quot;, &amp;x);
+    scanf(&quot;%d&quot;, &amp;y);
+
+
+    outx = x;
+    outy = y;
+
+
+    //printf(&quot;%d,%d \n&quot;,x, y);
+
+    col = x -1;
+    row = y -1;
+    value = (x*y)-1;
+
+    int **arr;
+    arr = (int**)malloc(sizeof(int)*x);
+    for(int i = 0; i &lt; y; i++) {
+        arr[i] = (int*)malloc(sizeof(int)*y);
+    }
+    for(int i = 0 ; i &lt; x; i++) {
+        for(int j = 0 ;  j &lt;  y; j++) {
+            arr[i][j] = 0;
+        }
+    }
+
+
+    int sx = 0, sy = 0;
+    int ex = x, ey = y;
+    while(value &gt; 0) {
+
+        for(int i = sx ; i &lt; ex; i++){
+            arr[i][row] = value;
+            if(value &gt; 0)
+                value --;
+            col = i;
+        }
+        row--;
+        x--;
+        for(int j = row ; j&gt;=sy; j--){
+            arr[col][j] = value;
+            if(value &gt; 0)
+                value --;
+
+            row = j;
+        }
+        col--;
+        for(int i = col ; i&gt;=sx ; i--) {
+            arr[i][row] = value;
+            if(value &gt; 0)
+                value --;
+
+            col = i;
+        }
+        row++;
+        for(int j = row ; j &lt; ey-1 ; j++) { 
+            arr[col][j] = value;
+            if(value &gt; 0)
+                value --;
+
+            row = j;
+        }
+
+        sx++;
+        sy++;
+        ex--;
+        ey--;
+
+   }
+   printf(&quot;\n\n #출력 : \n\n&quot;);
+   for(int j = 0 ;  j &lt;  outy; j++) {
+        for(int i = 0 ; i &lt; outx; i++){
+            printf(&quot;%d\t&quot;, arr[i][j]);
+        }
+        printf(&quot;\n&quot;);
+    }
+}
+
+</code></pre>
+
+<p>```</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/08/28 16:15</p>
+                                <p class="static-profile" style="margin:0;padding:0;">코딩초보</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4774"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <h1 id="c">C언어</h1>
+<pre><code class="cpp">#include &lt;stdio.h&gt;
+enum { left, right, top, bottom };
+int main()
+{
+    int x_size = 9, y_size = 6, max = (x_size * y_size - 1);
+    int a[y_size][x_size];
+    for(int i = 0; i &lt; y_size; i++){
+        for(int j = 0; j &lt; x_size; j++){
+            a[i][j] = 0;
+        }
+    }
+    int d = right, x = 0, y = y_size - 1;
+    for(int v = max; v &gt;= 0; v--){
+        a[y][x] = v;
+        switch(d){
+            case left:
+                if(x == 0 || a[y][x-1] &gt; 0){ d = bottom; y++; } else { x--; }
+                break;
+            case right:
+                if(x == x_size - 1 || a[y][x+1] &gt; 0){ d = top; y--; } else { x++; }
+                break;
+            case top:
+                if(y == 0 || a[y-1][x] &gt; 0){ d = left; x--; } else { y--; }
+                break;
+            case bottom:
+                if(y == y_size -1 || a[y+1][x] &gt; 0) { d = right; x++; } else { y++; }
+                break;
+        }
+    }
+    for(int i = 0; i &lt; y_size; i++){
+        for(int j = 0; j &lt; x_size; j++){
+            printf(&quot;%d\t&quot;, a[i][j]);
+        }
+        printf(&quot;\n&quot;);
+    }
+    return 0;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/09/11 21:28</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이 종성</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4872"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">class cursor(list):
+    def __init__(self, y, x, board):
+        super().__init__(self)
+        self.y, self.x, self.board = y, x, board
+        self.l = len(board[0]), len(board)
+    def rot(self):
+        self[0:2] = (self[1], -self[0])
+    def auto_turn(self):
+        if all((0 &lt;= self.x + self[0] &lt; self.l[0],
+               0 &lt;= self.y + self[1] &lt; self.l[1])):
+               if self.board[self.y+self[1]][self.x+self[0]] == 0:
+                   return
+        self.rot()
+    def move(self, n):
+        self.board[self.y][self.x] = n
+        self.auto_turn()
+        self.x, self.y = self.x+self[0], self.y+self[1]
+    def getboard(self):
+        return self.board
+
+while __name__ == '__main__':
+    x, y = list(map(int, input().split()))
+    c = cursor(y-1, 0, list(list(0 for j in range(x)) for i in range(y)))
+    c.extend([1,0])
+    for x in range(x*y-1, 0-1, -1):
+        c.move(x)
+    for i in c.getboard():
+        print(' '.join('%-4d'%j for j in i))
+</code></pre>
+
+<p>리스트 상속하여 cursor 클래스 만듦.</p>
+<p>파이썬 3.5.1</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/02 00:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Flair Sizz</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4963"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <h1 id="java">JAVA</h1>
+<p>높이 : h, 너비 :  w 라 할 때,
+시작을 h*h - 1 ~ 0 까지 채우는 것. 시작 점은 array[0][h-1] 일 것.
+오른쪽 -&gt; 위쪽 -&gt; 왼쪽 -&gt; 아래쪽 -&gt; 오른쪽  순으로 방향을 순환, 방향을 변경하는 조건은 다음 채울 위치가 제시된 너비, 높이에 닿을 경우,
+혹은 이미 값이 채워져 있는 경우.</p>
+<pre><code class="java">
+public class ReverseSpiralArray {
+
+    public static final int SIZE = 100;
+    static int w;
+    static int h;
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        w = Integer.valueOf(args[0]);
+        h = Integer.valueOf(args[1]);
+        int[][] A = spiral(w, h);
+        for (int i=0; i&lt;h; i++) {
+            for (int j=0; j &lt;w ; j++) {
+                System.out.format(&quot;%3d &quot;, A[i][j]);
+            }
+            System.out.println();
+        }
+    }
+
+
+    public static int[][] spiral(final int w, final int h) {
+
+        int[][] array = new int[SIZE][SIZE];
+        int direction = 0;
+        int number = w*h -1;
+        Point current = new Point(h-1, 0);
+        Point next;
+        while(number &gt;= 0) {
+            array[current.getY()][current.getX()] = number--;
+            next = nextPoint(current, direction);
+            if (isCorrectPosition(array, next)) {
+                current = next;
+            } else {
+                direction++;
+                current = nextPoint(current, direction);
+            }   
+        }
+        return array;
+    }
+
+    private static Point nextPoint(Point current, int direction) {
+        final int DIRECTION_RIGHT = 0;
+        final int DIRECTION_UP = 1;
+        final int DIRECTION_LEFT = 2;
+        final int DIRECTION_DOWN = 3;
+        Point next = null;
+
+        switch(direction%4) {
+        case DIRECTION_RIGHT :
+            next = new Point(current.getY(), current.getX()+1);
+            break;
+        case DIRECTION_UP :
+            next = new Point(current.getY()-1, current.getX());
+            break;
+        case DIRECTION_LEFT :
+            next = new Point(current.getY(), current.getX()-1);
+            break;
+        case DIRECTION_DOWN :
+            next = new Point(current.getY()+1, current.getX());
+            break;
+        }
+        return next;
+    }
+
+    private static boolean isCorrectPosition(int[][] array, Point next) {
+        int x = next.getX();
+        int y = next.getY();
+        if (x &lt; 0 || y &lt; 0 || x &gt;= w || y &gt;= h) {
+            return false;
+        }
+        if (array[y][x] != 0) {
+            return false;
+        }
+        return true;
+    }
+
+    private static class Point {
+        private int x;
+        private int y;
+
+        public Point(int y, int x) {
+            this.x = x;
+            this.y = y;
+        }
+        public void setX(int x) {
+            this.x = x;
+        }
+        public void setY(int y) {
+            this.y = y;
+        }
+        public int getX() {
+            return x;
+        }
+        public int getY() {
+            return y;
+        }
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/14 21:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Moon TaeMin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5086"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>2차원리스트를 이용하며,
+변수명만 정직하게 넣어주면 헷갈리지 않습니다. </p>
+<pre><code class="python"># python3.5
+def do(w, h):
+    grid = [list([-1] * w) for _ in range(h)]
+    directions = ((1, 0), (0, -1), (-1, 0), (0, 1))
+    d = 0
+    curpos = (h-1, 0)
+
+    def getNext():
+        nonlocal curpos, d
+        row, col = curpos
+        ox, oy = directions[d]
+        if (0 &lt;= col + ox &lt; w) and (0 &lt;= row + oy &lt; h) and grid[row+oy][col+ox] &lt; 0:
+            pass
+        else:
+            d = (d + 1) % 4
+            ox, oy = directions[d]
+        curpos = (row+oy, col+ox)
+
+    for i in range(w*h)[::-1]:
+        row, col = curpos
+        grid[row][col] = i
+        getNext()
+
+    for row in grid:
+        print(&quot; &quot;.join(&quot;{:3d}&quot;.format(x) for x in row))
+
+if __name__ == '__main__':
+    do(9, 6)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/28 10:39</p>
+                                <p class="static-profile" style="margin:0;padding:0;">룰루랄라</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6258"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>종료지점부터 시작해서 출발지점까지 반대로 가도록 해 봤습니다.
+중간에 int j가 있는데 go_%%의 출발 지점과 끝 지점을 맞추기위해 넣었습니다.</p>
+<p>```{.java}</p>
+<p>import java.util.Scanner;</p>
+<p>public class reverse_spiral {</p>
+<pre><code>public static void main(String[] args) {
+    int x, y = 0;
+    Scanner scan = new Scanner(System.in);
+    x = scan.nextInt();
+    y = scan.nextInt();
+
+    int[][] arr = sql_arr(x, y);
+    for(int j = 0; j &lt; y; j++){
+        for(int i = 0; i &lt; x; i++)
+            System.out.print(arr[i][j] + " ");
+        System.out.println();
+    }
+}
+static int [][] sql_arr(int x, int y){
+    int[][] arr = new int [x][y];
+    int xy;
+    if(x &lt; y)
+        xy = 2 * x;
+    else
+        xy = 2 * y - 1;
+    for(int i = 0; i &lt; xy; i++){
+        switch(i % 4){
+        case 0 :
+            arr = go_right(arr, x, y--, i/4);
+            break;
+        case 1 :
+            arr = go_up(arr, x--, y, i/4);
+            break;
+        case 2 : 
+            arr = go_left(arr, x, y--, i/4);
+            break;
+        case 3 :
+            arr = go_down(arr, x--, y, i/4);
+            break;
+        }
+    }
+    return arr;
+
+}
+static int[][] go_right(int[][]arr, int x, int y, int j){
+    int num = x * y - 1;
+    for(int i = j; i &lt; x+j; i++)
+        arr[i][arr[0].length-j-1] = num--;
+    return arr;
+
+}
+static int[][] go_left(int[][]arr, int x, int y, int j){
+    int num = x * y;
+    for(int i = x+j; i &gt;= j; i--)
+        arr[i][j] = num--;
+    return arr;
+
+}
+static int[][] go_up(int[][]arr, int x, int y, int j){
+    int num = x * y;
+    for(int i = y+j; i &gt;= j; i--)
+        arr[arr.length-j-1][i] = num--;
+    return arr;
+
+}
+static int[][] go_down(int[][]arr, int x, int y, int j){
+    int num = x * y;
+    for(int i = j; i &lt;= y+j; i++)
+        arr[j][i] = num--;
+    return arr;
+
+}
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/02/19 11:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">KimSeonbin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7455"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3.5, spiral matrix 에 revered_array = (m*n)-1 부터 0 까지를 00 부터 넣고 np.flipup 으로 vertical flip 시키면 됩니다.</p>
+<pre><code class="python">import numpy as np
+
+
+def spiral(m,n):
+    pairs = []
+    cnt = 0
+    f, s = 0, -1 # fixed_num, start_num
+    while True:
+        right = [(f, i) for i in range(s+1, s+1+n-cnt)] # right, inc
+        pairs += right
+        cnt += 1
+        if cnt == m:
+            return pairs
+        s, f = right[-1]
+
+        down = [(i, f) for i in range(s+1, s+1+m-cnt)] # down, inc
+        pairs += down
+        if cnt == n:
+            return pairs
+        f, s = down[-1]
+
+        left = [(f, i) for i in range(s-1, s-1-n+cnt, -1)] # left, dec
+        pairs += left
+        cnt += 1
+        if cnt == m:
+            return pairs
+        s, f = left[-1]
+
+        up = [(i, f) for i in range(s-1, s-1-m+cnt,-1)] # up, dec
+        pairs += up
+        if cnt == n:
+            return pairs
+        f, s = up[-1]
+
+
+m, n = map(int, input(&quot;Matrix shape? &quot;).split()) # get m number of m * n matrix
+array = list(reversed([i for i in range(m*n)])) # make reversed array, len(array) is m*n
+matrix = np.zeros((m, n)).astype(int) # make m*n matrix based on zeros
+spiral = spiral(m, n) # spiral list of (tuple)
+
+for i in range(m * n):
+    x, y = spiral[i]
+    matrix[x][y] = array[i]
+
+print(np.flipud(matrix)) # vertical flip
+
+&gt;&gt;&gt; 
+Matrix shape?  6 5
+[[16 17 18 19 20]
+ [15  4  5  6 21]
+ [14  3  0  7 22]
+ [13  2  1  8 23]
+ [12 11 10  9 24]
+ [29 28 27 26 25]]
+
+&gt;&gt;&gt; 
+Matrix shape?  6 9
+[[32 33 34 35 36 37 38 39 40]
+ [31 12 13 14 15 16 17 18 41]
+ [30 11  0  1  2  3  4 19 42]
+ [29 10  9  8  7  6  5 20 43]
+ [28 27 26 25 24 23 22 21 44]
+ [53 52 51 50 49 48 47 46 45]]
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/13 14:41</p>
+                                <p class="static-profile" style="margin:0;padding:0;">예강효빠</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8386"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from exttuple import TupleAdder as T # T(1,1)+T(2,2) =&gt; T(3,3), T(1,1)&lt;T(2,2) =&gt; 1&lt;2 and 1&lt;2
+import numpy as np
+
+
+def spiral(cols, rows):
+    D = [(0,1),(-1,0),(0,-1),(1,0)]
+    valid = lambda x: (0,0) &lt;= x &lt; (rows,cols) and arr[x]==0
+
+    arr = np.zeros((rows, cols))
+    pos, d = T(rows-1, -1), 0
+    for n in range(rows*cols-1, -1, -1):
+        d = d if valid(pos+D[d]) else (d+1) % 4
+        pos = pos + D[d]
+        arr[pos] = n
+
+    return arr
+
+
+print(spiral(5, 6)); print()
+print(spiral(9, 6))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/18 00:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9254"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#dirseq = [[1, 0, -1, 0], [0, 1, 0, -1]]
+dirseq = [[1, 0, -1, 0], [0, -1, 0, 1]]
+
+def findnext(x, y, dir):
+    for i in range(4):
+        xnext = x + dirseq[0][(dir+i)%4]
+        ynext = y + dirseq[1][(dir+i)%4]
+        if xnext &lt; X and ynext &lt; Y and table[ynext][xnext] == '.':
+            return xnext, ynext, dir+i
+    return -1, -1, -1
+
+
+
+# make and init table
+X, Y = input('input size of array : ').split()
+X = int(X)
+Y = int(Y)
+
+table = [['.' for x in range(X)] for y in range(Y)]
+
+
+# make to spiral array table
+x, y, dir = 0, Y-1, 0
+
+for i in range(X*Y-1, -1, -1):
+    table[y][x] = i
+    x, y, dir = findnext(x, y, dir)
+
+
+# print table
+for y in range(Y):
+    for x in range(X):
+        print('%3d' %table[y][x], end=' ')
+    print()
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/11/13 17:37</p>
+                                <p class="static-profile" style="margin:0;padding:0;">songci</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10672"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3.6</p>
+<pre><code class="python">&quot;&quot;&quot;
+아이디어&gt;
+ 1) spiral은 (y//2+y%1)개의 사각형이 큰 사각형부터 (x -= 2, y-=2)의 크기로 구성되어 있습니다.
+ 2) 가장 큰 사각형부터 마지막 값(x*y-1)을 시작으로 하여 (0,y)부터 반시계 방향으로 (마지막 값 -= 1)을 대입합니다.
+&quot;&quot;&quot;
+
+def reverse_spiral(x,y):
+    arr = [['0' for i in range(x)] for i in range(y)]
+    start,col,row,t = (x*y)-1,x,y,0
+    while start &gt; 0:
+        for i in range(t,col):
+            arr[row-1][i] = &quot;{0:&lt;3}&quot;.format(str(start))
+            start -= 1
+        for i in [y for y in range(t,row-1)][::-1]:
+            arr[i][col-1] = &quot;{0:&lt;3}&quot;.format(str(start))
+            start -= 1
+        for i in [x for x in range(t,col-1)][::-1]:
+            arr[t][i] = &quot;{0:&lt;3}&quot;.format(str(start))
+            start -= 1
+        for i in range(1+t,row-1):
+            arr[i][t] = &quot;{0:&lt;3}&quot;.format(str(start))
+            start -= 1
+        t += 1
+        col -= 1
+        row -= 1 
+    for i in arr:
+        print(' '.join(i))
+
+if __name__ == &quot;__main__&quot;:
+    x,y = map(int,input('').split())
+    reverse_spiral(x,y)
+</code></pre>
+
+<ul>
+<li>결과값</li>
+</ul>
+<pre><code class="python">5 6
+16  17  18  19  20 
+15  4   5   6   21 
+14  3   0   7   22 
+13  2   1   8   23 
+12  11  10  9   24 
+29  28  27  26  25 
+
+9 6
+32  33  34  35  36  37  38  39  40 
+31  12  13  14  15  16  17  18  41 
+30  11  0   1   2   3   4   19  42 
+29  10  9   8   7   6   5   20  43 
+28  27  26  25  24  23  22  21  44 
+53  52  51  50  49  48  47  46  45 
+
+10 10
+72  73  74  75  76  77  78  79  80  81 
+71  42  43  44  45  46  47  48  49  82 
+70  41  20  21  22  23  24  25  50  83 
+69  40  19  6   7   8   9   26  51  84 
+68  39  18  5   0   1   10  27  52  85 
+67  38  17  4   3   2   11  28  53  86 
+66  37  16  15  14  13  12  29  54  87 
+65  36  35  34  33  32  31  30  55  88 
+64  63  62  61  60  59  58  57  56  89 
+99  98  97  96  95  94  93  92  91  90
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/13 13:03</p>
+                                <p class="static-profile" style="margin:0;padding:0;">justbegin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10853"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import math
+def reversespiral(m, n):
+    a = [[m*n-1  for i in range(m)] for j in range(n)]
+    for i in range(math.ceil(min(m/2, n/2))-1):
+        a[n-2-i][1+i] = a[n-1-i][i] - 2*(m+n-2-4*i)
+    for i in range(math.ceil(min(m/2, n/2))):
+        a[i][m-1-i] = a[n-1-i][i] - (m+n-2-4*i)
+        a[n-1-i][m-1-i] = a[n-1-i][i] - (m-1-2*i)
+        a[n-1-i][i:m-1-i] = list(range(a[n-1-i][i], a[n-1-i][m-1-i], -1))
+        for j in range(i, n-i-2):
+            a[n-2-j][m-1-i] = a[n-1-j][m-1-i] -1
+    for i in range(math.floor(min(m/2, n/2))):
+        a[i][i] = a[i][m-1-i] - (m-1-2*i)
+        a[i][i:m-1-i] = list(range(a[i][i], a[i][m-1-i]))
+        for j in range(i, n-i-2):
+            a[j+1][i] = a[j][i] - 1
+    return a
+n = list(map(int, input().split()))
+for i in reversespiral(n[0], n[1]):
+    for j in i:
+        print('{0:3d}'.format(j), end = ' ')
+    print('\n')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/22 13:31</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김동하</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10973"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package test;
+
+public class test11 {
+    static int RIGHT = 0;
+    static int UP = 1;
+    static int LEFT = 2;
+    static int DOWN = 3;
+
+    public static void main(String args[]) {
+        int x = 7;
+        int y = 7;
+
+        int[][] matrix = new int[y + 2][x + 2];
+
+        for (int a = 0; a &lt; y + 2; a++) {
+            matrix[a][0] = -1;
+            matrix[a][x+1] = -1;
+        }
+
+        for (int b = 0; b &lt; x + 2; b++) {
+            matrix[0][b] = -1;
+            matrix[y+1][b] = -1;
+        }
+
+
+        int i = y;
+        int j = 1;
+        int move = RIGHT;
+
+        for (int n = x * y - 1; n &gt; -1; n--) {
+            matrix[i][j] = n;
+
+            if (move == RIGHT) {
+                if ( matrix[i][j+1] != 0) {
+                    move = (move + 1) % 4;
+                    i--;
+                } else {
+                    j++;
+                }
+            } else if (move == UP) {
+                if ( matrix[i - 1][j] != 0) {
+                    move = (move + 1) % 4;
+                    j--;
+                } else {
+                    i--;
+                }
+            } else if (move == LEFT) {
+                if ( matrix[i][j - 1] != 0) {
+                    move = (move + 1) % 4;
+                    i++;
+                } else {
+                    j--;
+                }
+            } else if (move == DOWN) {
+                if ( matrix[i + 1][j] != 0) {
+                    move = (move + 1) % 4;
+                    j++;
+                } else {
+                    i++;
+                }
+            }
+        }
+
+        for (int a = 1; a &lt; y+1; a++) {
+            for (int b = 1; b &lt; x+1; b++) {
+
+                System.out.print((matrix[a][b] &lt; 10 ? &quot;0&quot; + matrix[a][b] : matrix[a][b]) + &quot; &quot;);
+            }
+            System.out.println();
+        }
+
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/03/02 16:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Wannagenie</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12681"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.Scanner;
+
+public class ReverseSpiralArray {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String size = sc.nextLine();
+        String temp[] = size.split(&quot; &quot;);
+        int x = Integer.valueOf(temp[1]), y = Integer.valueOf(temp[0]), k = 0;
+        int Array[][] = new int[x][y];
+        for (int j = x * y - 1; j &gt; 0; k++) {
+            for (int i = 0; i &lt; y - k * 2; i++)
+                Array[x - 1 - k][i + k] = j--;
+            for (int i = 0; i &lt; x - 1 - k * 2; i++)
+                Array[x - 2 - k - i][y - k - 1] = j--;
+            for (int i = 0; i &lt; y - 1 - k * 2; i++)
+                Array[k][y - k - 2 - i] = j--;
+            for (int i = 0; i &lt; x - 2 - k * 2; i++)
+                Array[i + k + 1][k] = j--;
+        }
+        for (int i = 0; i &lt; x; i++) {
+            for (int j = 0; j &lt; y; j++)
+                System.out.print(String.format(&quot;%3d&quot;, Array[i][j]));
+            System.out.println();
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/30 21:16</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김지훈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13308"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>```{.java}
+import java.io.BufferedReader;
+import java.io.InputStreamReader;</p>
+<p>class Main {</p>
+<pre><code>static int n, m, c=0,map[][];
+
+public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    String[] s = br.readLine().split(" ");
+    n = Integer.parseInt(s[0]);
+    m = Integer.parseInt(s[1]);
+    map = new int[m][n];    
+    int r = m - 1;
+    int a = n * m - 2;
+    map[m - 1][0] = n * m - 1;
+
+    while (a &gt;= 0) {
+        while (c + 1 &lt; n &amp;&amp; map[r][c + 1] == 0) // 열 ++
+            map[r][++c] = a--;
+        while (0 &lt;= r - 1 &amp;&amp; map[r - 1][c] == 0) // 행--
+            map[--r][c] = a--;
+        while (0 &lt;= c - 1 &amp;&amp; map[r][c - 1] == 0) // 열--
+            map[r][--c] = a--;
+        while (r + 1 &lt; m &amp;&amp; map[r + 1][c] == 0) // 행 ++
+            map[++r][c] = a--;
+    }
+    // 출력
+    for (int i = 0; i &lt; m; i++) {
+        for (int j = 0; j &lt; n; j++)
+            System.out.printf("%5d", map[i][j]);
+        System.out.println();
+    }
+}
+</code></pre>
+<p>} // 행렬이 반대로 돼있어서 헷갈렸네요</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/03 15:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">정몽준</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13798"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">clm,row = map(int,input().split())
+
+board = {}
+stp,n = (row-1,0),row*clm-1
+dr = [0,1]
+while n &gt;= 0:
+    board[stp] = n
+    if not(0&lt;=stp[0]+dr[0]&lt;row and 0&lt;=stp[1]+dr[1]&lt;clm) or (stp[0]+dr[0],stp[1]+dr[1]) in board:
+        if dr[0] == 0: dr.reverse(); dr[0] *= -1
+        else:          dr.reverse()
+    stp,n = (stp[0]+dr[0],stp[1]+dr[1]),n-1
+
+for i in range(row):
+    for j in range(clm):
+        print(f'{board[(i,j)]:{len(str(clm*row-1))}}',end=' ')
+    print()
+</code></pre>
+
+<pre><code>5 6
+16 17 18 19 20
+15  4  5  6 21
+14  3  0  7 22
+13  2  1  8 23
+12 11 10  9 24
+29 28 27 26 25
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/26 20:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14224"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">    class Program
+    {
+        static void Main(string[] args)
+        {
+            int nLow, nCol;
+
+            string[] strInput = Console.ReadLine().Split(' ');
+
+            bool result1 = int.TryParse(strInput[0], out nLow);
+            bool result2 = int.TryParse(strInput[1], out nCol);
+
+            if (result1 &amp;&amp; result2)
+                Sperial(nLow, nCol);
+            else
+                Console.WriteLine(&quot;숫자를 입력하세요&quot;);
+        }
+
+        static void Sperial(int low, int col)
+        {
+            int nLen = low;
+            int x = col - 1;
+            int y = -1;
+            int z = low * col - 1;
+            int nPosition = 1;
+            int nPlsMus = Math.Abs(low - col);
+            int[,] nArray = new int[col, low];
+
+            if (low &gt; col)
+                nPlsMus = -nPlsMus;
+
+            for (int i = 0; i &lt; col ; i++)
+            {
+                for (int k = 0; k &lt; nLen; k++)
+                {
+                    if (z == 0)
+                        break;
+
+                    y += nPosition;
+                    nArray[x, y] = z;
+                    z--;
+                }
+                nLen--;
+
+                for (int k = 0; k &lt; nLen + nPlsMus; k++)
+                {
+                    if (z == 0)
+                        break;
+
+                    x -= nPosition;
+                    nArray[x, y] = z;
+                    z--;
+                }
+                nPosition = -nPosition;
+            }
+
+            for (int i = 0; i &lt; nArray.GetLength(0); i++)
+            {
+                for (int j = 0; j &lt; nArray.GetLength(1); j++)
+                {
+                    Console.Write(String.Format(&quot;{0}\t&quot;, nArray[i, j]));
+                }
+                Console.WriteLine();
+            }
+        }
+    }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/21 23:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">정태식</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16243"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def spiral(a,b):
+
+    arr,x,n,ac,bc = list(map(lambda x : 0 , range(a*b))),a*b-1,a*b-a-1,a,b
+
+    for i in range(b):
+        for o in range(x, x-a-b+1,-1):
+            if 0 in arr:
+                n += ((-1,1)[i%2 == 0],(ac,-ac)[i%2 == 0])[o &lt;= x-a]
+                arr[n] = ' '*abs(len(str(o))-len(str(ac*bc)))+str(o)
+        x -= a+b-1
+        a,b = a-1,b-1
+
+    for x in range(bc): 
+        print(&quot; &quot;.join(arr[ac*x: ac*(x+1)]))spiral(3,3)
+</code></pre>
+
+<p>너무 날로 먹는 것 같지만....</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/01/25 13:55</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김영성</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20162"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def vec(dxdy1) :
+    dxdy_LIST = [(1, 0), (0, 1), (-1, 0), (0, -1)]
+    return dxdy_LIST[(int(dxdy_LIST.index(dxdy1))+1)%4]
+inp = list(map(int, input('INPUT : ').split(&quot; &quot;)))
+result, dxdy, x, y = [], (1, 0), 0, 0,
+
+for a in range(0, inp[1]) :
+    result.append(['#'.ljust(2) for x in range(0, int(inp[0]))])
+for n in range(0, inp[0]*inp[1]) :
+    result[y][x] = inp[0]*inp[1]-n # 숫자 대입
+    if (y, x) ==  (0, inp[0]-1) or (y, x) == (inp[1]-1, inp[0]-1) or (y, x) == (inp[1]-1, 0) :
+        dxdy = vec(dxdy)
+    elif result[y+dxdy[1]][x+dxdy[0]] != &quot;#&quot;.ljust(2) :
+        dxdy = vec(dxdy)
+    x, y = x + dxdy[0], y + dxdy[1]
+
+for o in range(0, inp[1]) :
+    for u in range(0, inp[0]) :
+        print(str(result[o][u]).ljust(4), end = &quot;&quot;)
+    print(&quot;&quot;)
+</code></pre>
+
+<p>Spiral array 문제에 썼던 코드의 일부분만 수정하였습니다. 
+결과</p>
+<pre><code>INPUT : 10 9
+90  89  88  87  86  85  84  83  82  81  
+57  56  55  54  53  52  51  50  49  80  
+58  31  30  29  28  27  26  25  48  79  
+59  32  13  12  11  10  9   24  47  78  
+60  33  14  3   2   1   8   23  46  77  
+61  34  15  4   5   6   7   22  45  76  
+62  35  16  17  18  19  20  21  44  75  
+63  36  37  38  39  40  41  42  43  74  
+64  65  66  67  68  69  70  71  72  73  
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/12/12 14:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GG</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20883"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#원래 나선형 배열 문제에서 숫자를 끝에서 부터 시작하게 하고 최종적으로 출력하는 배열을 역으로 뒤집으면 됨.
+nn=list(map(str,input(&quot;배열X배열을 입력하십시오: &quot;).split(&quot; &quot;)))
+r=int(nn[0])
+c=int(nn[1])
+t=eval(repr([[&quot; &quot;]*c]*r))
+x,y=0,0
+dx,dy=0,1
+for i in range(r*c-1,-1,-1): #r*c-1부터 0까지 -1씩 감소
+    t[x][y]=i
+    x,y=x+dx,y+dy
+    if x==r or y==c or t[x][y]!=&quot; &quot;:
+        x,y=x-dx,y-dy
+        dx,dy=dy,-dx
+        x,y=x+dx,y+dy
+
+for lst in t[::-1]:
+    for num in lst:
+        print(&quot;%3d&quot;%num, end=&quot;&quot;)
+    print()
+</code></pre>
+
+<p>결과</p>
+<pre><code>배열X배열을 입력하십시오: 6 5
+ 16 17 18 19 20
+ 15  4  5  6 21
+ 14  3  0  7 22
+ 13  2  1  8 23
+ 12 11 10  9 24
+ 29 28 27 26 25
+
+ 배열X배열을 입력하십시오: 6 9
+ 32 33 34 35 36 37 38 39 40
+ 31 12 13 14 15 16 17 18 41
+ 30 11  0  1  2  3  4 19 42
+ 29 10  9  8  7  6  5 20 43
+ 28 27 26 25 24 23 22 21 44
+ 53 52 51 50 49 48 47 46 45
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/02/07 11:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박시원</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29732"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def makeMatrix(row, col, matrix):
+    r, c = row-1, 0
+    su = row*col - 1
+    while True:
+        while 0 &lt;= c &lt; col and 0&lt;= r and r &lt; row and matrix[r][c] == 0:
+            matrix[r][c] = su
+            su -= 1
+            c += 1
+        r, c = r-1, c-1
+        while 0 &lt;= c &lt; col and 0&lt;= r &lt; row and matrix[r][c] == 0:
+            matrix[r][c] = su
+            su -= 1
+            r -= 1
+        r, c = r+1, c-1
+        while 0 &lt;= c &lt; col and 0&lt;= r &lt; row and matrix[r][c] == 0:
+            matrix[r][c] = su
+            su -= 1
+            c -= 1
+        r, c = r+1, c+1
+        while 0 &lt;= c &lt; col and 0&lt;= r &lt; row and matrix[r][c] == 0:
+            matrix[r][c] = su
+            su -= 1
+            r += 1
+        if su == -1:
+            break
+        r, c = r-1, c+1
+    return matrix
+
+
+x, y = map(int, input('x y : ').split())
+matrix = [[0 for _ in range(x)] for _ in range(y)]
+matrix = makeMatrix(y, x, matrix)
+printMatrix(y, x, matrix)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/11/01 18:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

@@ -1,0 +1,3936 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="여기서의 “부분”은 LCS문제에서의 “부분”과는 다른 의미임을 명심하라. nice라는 문자열이 있다면 이 문제에서의 부분문자열의 집합은 {‘’, n, i, c, e, ni, ic, ce, nic, nice}이다. 
+
+LCS문제에서의 “부분”에...">
+    <title>가장 긴 공통의 부분문자열 구하기 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">가장 긴 공통의 부분문자열 구하기</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">2</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 2</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>여기서의 “부분”은 LCS문제에서의 “부분”과는 다른 의미임을 명심하라. nice라는 문자열이 있다면 이 문제에서의 부분문자열의 집합은 {‘’, n, i, c, e, ni, ic, ce, nic, nice}이다. </p>
+<p>LCS문제에서의 “부분”에서는 nce도 하나의 부분문자열로 볼 수 있지만 이 문제에서는 부분문자열이 아니다. (즉, 이 문제에서의 “부분”은 원래 문자열에서 일정 부분을 잘라낸 것이다.) </p>
+<p>photography와 autograph 두 문자열이 있다고 할 때, ph, grap, to 등의 부분문자열이 있으며, 이 중 최대의 길이를 갖는 부분문자열은 tograph이다.</p>
+<p>입력 </p>
+<p>두 줄에 각각의 스트링이 주어진다. 각 스트링의 길이는 4000이하이다.</p>
+<pre><code>photography
+autograph
+</code></pre>
+<p>출력</p>
+<p>첫줄에 찾은 부분문자열의 길이, 둘째 줄에 가장 긴 공통의 부분문자열을 출력한다.</p>
+<pre><code>7
+tograph
+</code></pre>
+<ul>
+<li>파일 입출력 방식으로 하지 않습니다.</li>
+<li>문제출처 : 컴퓨터 알고리즘 (홍릉과학출판사) 314p</li>
+</ul>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">최적해 구하기</span>
+                
+                    <span class="label label-tag label-xs">알고리즘</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2016/09/07 01:46</p>
+                    <p class="static-profile" style="margin:0;padding:0;">happygrammer</p>
+                </div>
+            </div>
+
+            
+                <a name="comment_1856"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">이 문제는 병렬연산으로 해결하기 좋아보이는데요~ 혹시 병렬처리로 이문제 해결하신분 없나요?ㅎ</span>
+                    -
+                    <span style="font-size:11px;">
+                        윤태호,
+                        2016/09/21 09:47
+                    </span>
+                </div>
+            
+                <a name="comment_1861"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">병렬 연산으로 해결해야 할 만큼 연산량이 많지 않아서... 잘은 모르겠는데 파이썬의 경우에는 프로세스 생성하는데 시간이 더 걸립니다. 물론 몇백개라면 나누어서 할 수도 있겠지만요....</span>
+                    -
+                    <span style="font-size:11px;">
+                        Flair Sizz,
+                        2016/10/02 23:53
+                    </span>
+                </div>
+            
+                <a name="comment_2804"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">Ice는 왜 부분 문자열에 안들어가 있는지 여쭈어도 될까요??</span>
+                    -
+                    <span style="font-size:11px;">
+                        전준혁,
+                        2021/01/06 12:16
+                    </span>
+                </div>
+            
+                <a name="comment_2925"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">문제 예시의 조건과 출력조건이 다른거 같아요..</span>
+                    -
+                    <span style="font-size:11px;">
+                        김시영,
+                        2022/06/26 21:16
+                    </span>
+                </div>
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>71개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_7355"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">3</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>python 3.6, 앞에서부터 문자열을 구하여 집합으로 묶고, 두집합의 교집합의 max 를 구함. 없으면 0</p>
+<pre><code class="python">def set_str_array(s):
+    return {s[i:j] for i in range(len(s)) for j in range(i, len(s)+1)}
+
+
+in1 = input(&quot;string1: &quot;)
+in2 = input(&quot;string2: &quot;)
+
+result = max(set_str_array(in1) &amp; set_str_array(in2))
+
+print(&quot;\n%d\n'%s'&quot; % (len(result), result))
+</code></pre>
+
+<p>실행결과</p>
+<pre><code class="python">string1:  photography
+string2:  autograph
+
+7
+'tograph'
+
+string1:  qwer
+string2:  abcd
+
+0
+''
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/02 09:43</p>
+                                <p class="static-profile" style="margin:0;padding:0;">예강효빠</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2861"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">max만 쓰면 string의 길이를 기준으로 계산이 되지 않기 때문에 다음과 같이 수정해야 할 것 같습니다.
+max(set_str_array(in1) &amp; set_str_array(in2), key = len)</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Jaeman Lee,
+                                    2021/08/20 18:31
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4771"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def word_char(word):
+    charlst = [ x for x in word ]
+    word_list = []
+    length = len(word)
+    for i in range(0,length):
+        a = &quot;&quot;
+        for j in range(i,length):
+            a = a + charlst[j]
+            if a != &quot;&quot; : word_list.append(a)
+    return word_list
+
+def com_word(word1, word2):
+    word1_char = word_char(word1)
+    word2_char = word_char(word2)
+    longest = &quot;&quot;
+    for i in range(0,len(word1_char)):
+        for j in range(0,len(word2_char)):
+            if word1_char[len(word1_char)-i-1] == word2_char[len(word2_char)-j-1]:
+                if len(longest) &lt;= len(word1_char[len(word1_char)-i-1]):
+                    longest = word1_char[len(word1_char)-i-1]
+    print (len(longest))
+    print (longest)
+
+com_word('photography', 'autograph')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/09/11 10:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">superarchi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4807"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>PHP로 비교회수를 줄이는데 중점을 두고 짜봤습니다.</p>
+<pre><code class="php">$str1 = &quot;photography&quot;;
+$str2 = &quot;autograph&quot;;
+
+
+if(strlen($str1)&gt;strlen($str2)) {
+    $string_long = $str1;
+    $string_short = $str2;
+} else {
+    $string_long = $str2;
+    $string_short = $str1;
+}
+$length = strlen($string_short);
+
+$found = FALSE;
+for($i=$length; $i&gt;=1 &amp;&amp; !$found; $i--) {
+    $idx = 0;
+    while(strlen($tmp = substr($string_short,$idx, $i))==$i &amp;&amp; !$found) {
+        if(strpos($string_long, $tmp)!==FALSE) {
+            echo $i.&quot;&lt;br&gt;&quot;.$tmp;
+            $found = TRUE;
+        }
+        $idx++;
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/09/17 07:33</p>
+                                <p class="static-profile" style="margin:0;padding:0;">허큐리</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5084"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Haskell로 작성하였습니다.</p>
+<pre><code class="haskell">import Data.List
+
+getTokens xs n = [take n (drop i xs) | i &lt;- [0..(length xs - n)]]
+
+findCommonString s1 s2 = if length result &gt; 0 then head result else &quot;&quot;
+    where
+        (shortStr, longStr) = if length s1 &lt; length s2 then (s1, s2) else (s2, s1)
+        shortLength = length shortStr
+        result = [token | n &lt;- reverse [1..shortLength], token &lt;- getTokens shortStr n, isInfixOf token longStr]
+
+-- let's find common string.     
+main = return $ findCommonString &quot;photography&quot; &quot;autograph&quot;
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/28 02:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">윤태호</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4747"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<ol>
+<li>stdin을 2회 입력받아 길이가 작은 문자열을 a, 긴 문자열을 b로 합니다.   </li>
+<li>cmn - 문자열 a의 s란 인덱스에서 시작해서 만들어지는 부분 문자열중 b에 속하는 가장 긴 문자열을 돌려주는 함수입니다. 입력 s, 출력 s로 시작하는 가장 긴 공통문자열(b에 속하지 않는 문자열이 발견되는 경우 break로 중단한 뒤 직전의 공통 문자열 리턴)</li>
+<li>lcs - cmn[시작인덱스]를 호출, cmn으로 획득한 문자열과 임시변수 gcs(최장공통부분문자열)중 긴 문자열을 gcs에 저장합니다. a문자열 길이만큼 반복하면 lcs에 최장공통부분문자열이 남습니다.</li>
+<li>lcs의 길이와 문자열을 한줄씩 번갈아가며 출력합니다.</li>
+</ol>
+<pre><code class="ruby">def longest_common_str
+  a,b = (1..2).map {gets.chop}.sort_by(&amp;:size)
+  cmn = -&gt;s { (s...a.size).reduce(&quot;&quot;) {|_,e| b.include?(a[s..e])? a[s..e] : break } }
+  lcs = (0...a.size).reduce(&quot;&quot;) {|gcs,s| [gcs, cmn[s]||&quot;&quot;].max_by(&amp;:size) }
+  puts lcs.size, lcs
+end
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby">$stdin = StringIO.new(&quot;photography\nautograph\n&quot;) # for stdin
+expect{ longest_common_str }.to output(&quot;7\ntograph\n&quot;).to_stdout
+</code></pre>
+
+<p><strong>Output</strong></p>
+<pre><code class="ruby">longest_common_str
+photography
+autograph
+
+7
+tograph
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/09/07 16:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1840"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">독해 불가 @_@;;</span>
+                                -
+                                <span style="font-size:11px;">
+                                    이 종성,
+                                    2016/09/10 14:22
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1841"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">보고 또보고 또보니 조금 이해가 되네요, 휴우~ 루비는 심오한 언어군요,</span>
+                                -
+                                <span style="font-size:11px;">
+                                    이 종성,
+                                    2016/09/10 14:35
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1842"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">루비를 연습하느라 가독성이 떨어지게 작성되었네요. 리스트 조작(map, sort_by, reduce, max_by) 표현을 사용했습니다. 파이썬을 비롯해 여러 언어들이 이와같은 표현을 갖고 있습니다. 금방 익숙해지는 표현인데 처음엔 어렵더라구요. 마틴 파울러의 &#39;컬렉션 파이프라인&#39; 글( <a href="http://martinfowler.com/articles/collection-pipeline/" rel="nofollow">http://martinfowler.com/articles/collection-pipeline/</a> )에 개념설명, 장단점이 잘 설명되어 있습니다. 
+
+루비는 스트레스가 없는 프로그래밍을 지향합니다. 손에 달라붙는 즐거운 언어라 추천드리고 싶네요. python, clojure, haskell도 멋지다고 생각합니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    rk,
+                                    2016/09/10 18:49
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1844"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">보내주신 글을 읽고 제가 주로쓰는 c#언어에서도 lamda가 있는것을 알고,
+c#으로 최대한 비슷하게 만들어 보면서 의미를 해석해 봤습니다. reduce와 똑같은 함수를 c#에서는 못찾겠네요. 대신 급한데로 select를 사용하여 보았네요, 공부를 하니 소스가 잘보이네요, 설명글도 무슨 이야기 인지 잘보이고요. 재밌게 공부하보았슴다. 매력이 있네요. 아직 재밌고 흥미롭다 이외에 왜 좋은가 장점 같은 것은 잘모르겠네요, 좀 알려 주면 안될지, 보내주신 글에는 한번 알게되면 없으면 못살거라는 정도로 말하고 넘어가는듯 하고...</span>
+                                -
+                                <span style="font-size:11px;">
+                                    이 종성,
+                                    2016/09/10 21:53
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1845"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">1. (1..10).select(&amp;:짝수?).map(&amp;문자열로결합) 처럼 하나하나 분리된 명령을 조합할 수 있고, 왼쪽에서 오른쪽으로 평문 읽듯이 코드를 읽고 작성해나갈 수 있다는 장점이 있습니다. 압축된 표현도 가능하구요.
+2. lazy 적용에 유용. 보통은 구문 전부를 한번에 평가하게 됩니다. 가령, (1..무한대).select(짝수)처럼 구문을 사용하면 (1..무한대)에서 프로그램은 멈추고 말죠. (1..무한대).lazy.select(짝수).take(5)처럼 lazy를 적용하게 되면 가장앞부터 구문끝까지 1만 통과시키고 2를 통과시키고 이렇게 반복을 하게 됩니다. 만족하는 결과 5개를 얻을 때 까지요. 따라서 대용량 자료의 순차적인 처리나 계산중인 결과물을 바로바로 획득할 때 빠르고 편합니다.(요 아래 개미수열 문제가 lazy문제입니다)
+3. 병렬성. 처리할 내용 각각을 멀티코어나 쓰레드로 처리할 수도 있죠. 가령 jobs = 뉴스사이트10개.map {|i| future { 사이트읽어오기 }; Concurrent.zip(*jobs) 처럼 하면 비동기로 10개요청을 쏘고 10개가 다들어오면 결과를 출력하는 구문이 됩니다. 간단하고 쉽고 보기좋죠.
+4. 불변성 : 데이터를 여러번 이리저리 조작하게 되므로 쓰레드에 안전하고 side-effect에 강건하기 위해서는 불변 자료구조의 필요성을 느끼고 추구하게됩니다. 한번 수행하고 나서 두번째 수행하는데 기대한 결과물이 나오지 않는다? 이런경우를 접하게 되거든요. 불변자료구조를 추구하는건 좋은 방향이구요. 불변자료구조를 취하지 않더라도 구문을 쪼개고 조작하다보면 side-effect가 어디서 발생하는지 왜 문제가되는지, 어떻게 회피해야하는지를 조금씩 인식하게 됩니다.
+5. 디버깅 : 1개의 구문이 여러개의 절로 분리되는데.. 한개의 절은 한가지 목적으로 입출력을 기대하게 되는데 그것만 체크하면 되니 아무래도 디버깅이 쉬워지겠죠. 
+
+- 어디에 사용해야하나? : 특별하다기 보다 표현법의 하나니 for문 case, if~else처럼 써도 상관없습니다. 단점도 물론 있습니다. 가변성 객체를 다루거나 함수 바깥에서 변하는 값을 사용하는 경우 작성, 디버깅, 가독성 모두 좋지 않습니다. 제가 위에 작성한 코드도 그와같은 면에선 좋지 않은 코드구요(짧게 작성하면서 구문을 이리저리 트는걸 연습하는 중이라..). 
+- 더 깊게 알아보기 : 아는 한도내에서 쉽게 설명하려고 했는데 전문가가 아니라 설명이 취약합니다. 함수형 프로그래밍, list comprehension에 대해서 쉽게 쓰여진 글들을 살펴보시면 좋을 것 같습니다. 전엔 특별한 구문이나 기법처럼 여겨졌지만 지금은 일반화된 유용한 표현법으로 취급되니 알아두면 필요할 때 깔끔하고 응축된 좋은 코드를 작성하실 수 있지 않을까 싶습니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    rk,
+                                    2016/09/10 22:56
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1846"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">아, 아주 정성들여 답변을 작성해 주셨네요, 저도 열심히 정독했습니다. 일부러 ruby의 함수형 언어 기법을 연구하고 익숙해 지기 위해서 코딩도장에서 예제를 풀어보면서 연마 중이시군요, 재밌는 영역이네요. 마틴파울러글에 이미 말씀주신 장점들이 다 적혀 있었군요, 밑에 까지 읽었어야하는데 윗부분만 읽어서 글이 너무 길더라구요.. 민망합니다. 일반적으로 많이 사용하는 부분이니 눈으로 보고 익혀 둬야 겠네요. 고맙습니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    이 종성,
+                                    2016/09/11 00:51
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4768"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C언어로 작성, 맞을지 모르겠네요...틀린부분 댓글 플리즈
+모든 경우의 수를 다 구해서 비교하기 보다는 최대한 조금이라도 시간복잡도를 줄여보고자 했어요,
+O(n)에는 못하겠네요... 누가 찾아 주세요.</p>
+<pre><code class="cs">#include &lt;stdio.h&gt;
+int main(){
+    char* a = &quot;photography&quot;;
+    char* b = &quot;autograph&quot;;
+    char ms[4000] = &quot;&quot;;
+
+    char* pa = a;
+    char* pb = b;
+    char* bm = pa;
+
+    int s = 0;
+    int m = 0;
+
+    while(*pa != '\0') {
+        if(*pa == *pb){
+            pa++; pb++; s++;
+            if(s &gt; m){
+                m = s;
+                for(int i=0;i&lt;s;i++){
+                    ms[i] = *(bm + i);
+                }
+                ms[s] = '\0';
+            }
+        }else{
+            pa = bm;
+            if(s == 0){
+                pb++;
+            }
+            s = 0;
+        }       
+        if(*pb == '\0'){
+            pb = b;
+            pa = ++bm;
+        }
+    }
+    printf(&quot;%d\n%s&quot;, m, ms);
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/09/10 14:06</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이 종성</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4769"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>ruby 풀이를 보고 c# lamda로 구현해봄. 중간에 파이프라인이 끊어짐... 붙일수가 없음.. ㅠㅠ</p>
+<pre><code class="cs">using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace ConsoleApplication4
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string a = &quot;autograph&quot;;
+            string b = &quot;photography&quot;;
+            Func&lt;int, List&lt;string&gt;&gt; cmn = (s) =&gt; {
+                return Enumerable.Range(s, a.Length - s).Select(
+                    e =&gt; b.Contains(a.Substring(s, e - s + 1)) ? a.Substring(s, e - s + 1) : &quot;&quot;
+                ).ToList&lt;string&gt;();
+            };
+            List&lt;string&gt; cs_lst = new List&lt;string&gt;();
+            for (int i = 0; i &lt; a.Length; i++)
+            {
+                cs_lst.AddRange(cmn(i).ToArray());
+            }
+            string lcs = cs_lst.OrderByDescending(x =&gt; x.Length).First();
+            Console.WriteLine(lcs.Length);
+            Console.WriteLine(lcs);
+            Console.ReadKey();
+        }
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/09/10 21:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이 종성</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4815"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Java 풀이입니다</p>
+<p>public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        /*<em>
+         * photography
+         * autograph
+         </em>/</p>
+<pre><code>    String first = "photography";
+    String second = "autography";
+
+    int longestCommon = 0;
+    int compareValue = 0;
+    String commonstring = null;
+
+    for(int i = 0 ; i &lt; first.length() ; i++){
+
+        for(int j = 0 ; j &lt; second.length() ; j++){
+
+            if(first.charAt(i) == second.charAt(j)){
+
+                int minoftwo = Math.min(first.length(), second.length());
+                String common = "";
+
+                for(int k = 0 ; k &lt; minoftwo  ; k++){
+
+                    try{
+                        if(first.charAt(i+k)==second.charAt(j+k)){
+                            common=common.concat(String.valueOf(first.charAt(i+k)));
+                            longestCommon++;
+                        }
+                    }catch(StringIndexOutOfBoundsException e){
+
+                    }
+
+
+                }
+                if(longestCommon &gt; compareValue){
+                    compareValue = longestCommon;
+                    commonstring = common;
+                }
+                longestCommon=0;
+            }
+
+        }
+
+    }
+    System.out.println(commonstring+" 공통 문자열");
+    System.out.println(compareValue+" 공통 문자열 길이");
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/09/18 13:17</p>
+                                <p class="static-profile" style="margin:0;padding:0;">ㅅㅅㅇㅁㅎ</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4822"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>재밌어보여서 저도 한번 ㅎㅎ</p>
+<pre><code class="cpp">
+std::string codeingdojang(std::string w1, std::string w2, int *length)
+{
+    int longest_len = 0;
+    std::string result;
+
+    for (size_t n = 0; n &lt; w1.length(); n++)
+    {
+        int search_len = 0;
+        std::string search_word;
+
+        for (char c2 : w2)
+        {
+            char c1 = '\0';
+            if (n + search_len &lt; w1.length())
+                c1 = w1.at(n + search_len);
+
+            if (c1 == c2)
+            {
+                search_len++;
+                search_word.push_back(c1);
+            }
+            else
+            {
+                if (search_len &gt; longest_len)
+                {
+                    longest_len = search_len;
+                    result = search_word;
+                }
+                search_len = 0;
+                search_word.clear();
+            }
+        }
+
+        if (search_len &gt; longest_len)
+        {
+            longest_len = search_len;
+            result = search_word;
+        }
+    }
+
+    if (length != nullptr)
+        *length = longest_len;
+    return result;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/09/20 11:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이 광표</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4835"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3</p>
+<pre><code class="python">def findCommonString(s, lowerLengthString):
+    if len(lowerLengthString) &gt; len(s):
+        s, lowerLengthString = lowerLengthString, s
+
+    n = len(lowerLengthString)
+    for i in range(n):
+        for j in range(i+1):
+            token = lowerLengthString[j:n-i+j]
+            if token in s:
+                print(len(token))
+                print(token)
+                return
+    else:
+        print(&quot;Not found.&quot;)
+
+# let's find common string.
+findCommonString(&quot;photography&quot;, &quot;autograph&quot;)
+</code></pre>
+
+<p>Result</p>
+<pre><code class="python">7
+tograph
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/09/21 23:29</p>
+                                <p class="static-profile" style="margin:0;padding:0;">윤태호</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4867"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>전 부분집합으로 저장해서 찾아봤어요.</p>
+<pre><code class="java">import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
+public class Subset {
+
+
+    static Set textSet1 = new HashSet&lt;&gt;();
+    static Set textSet2 = new HashSet&lt;&gt;();
+    static Set sameSet = new HashSet&lt;&gt;();
+
+    public Set findSameSet(Set set1, Set set2){  // 똑같은 부분을 찾고 그중 긴 걸 찾는다.
+        Set result = new HashSet&lt;&gt;(); 
+
+        for(Object str : set1){
+            if(set2.contains((String)str)){    
+                result.add(str); 
+            }
+        }         
+        return result;
+    }
+
+    public String findMaxSameSet(Set gemeinsamSet){ // 가장 긴 원소찾기
+
+        Iterator it = gemeinsamSet.iterator();
+        String el = &quot;&quot;;
+
+        while(it.hasNext()){
+            el = (String) it.next(); 
+            if(el.length()==findMaxIndexOfSet(gemeinsamSet)){
+                return el;
+            }
+        }
+
+        return &quot;Not found.&quot;;
+    }
+
+    public int findMaxIndexOfSet(Set gemeinsamSet){
+        Iterator it = gemeinsamSet.iterator();
+        String el = &quot;&quot;;
+        int max = 0;
+        while(it.hasNext()){
+            el = (String) it.next(); 
+            if(el.length()&gt;max)
+                max = el.length();
+        }
+        return max;
+    }
+
+    public Set doSubset(String text){
+        Set stringSet = new HashSet&lt;&gt;();
+        int count = 0;
+        while(count&lt;text.length()){
+
+            for (int i = 0; i &lt; text.length(); i++) {
+                split(count, text, i, stringSet); 
+            }
+            count++;
+        }
+        return stringSet;
+    }
+
+    public void split(int count, String text, int index, Set stringSet){
+        String temp = &quot;&quot;;
+        for (int i = index; i &lt;= count; i++) {
+            temp+=text.charAt(i);
+        }
+        stringSet.add(temp);
+    }
+
+    public static void main(String[] args) {
+        Subset ss = new Subset();
+        String text1 = &quot;photograph&quot;;
+        String text2 = &quot;autograph&quot;;
+        textSet1 = ss.doSubset(text1);
+        textSet2 = ss.doSubset(text2);
+        sameSet =ss.findSameSet(textSet1, textSet2);
+        System.out.println(&quot;동일한 부분: &quot; + sameSet);
+        String result = ss.findMaxSameSet(sameSet);
+        System.out.println(&quot;동일하면서 가장 긴 부분: &quot; + result);
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/09/30 00:00</p>
+                                <p class="static-profile" style="margin:0;padding:0;">nikki</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4869"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>C++ Code</strong></p>
+<p>다이나믹 프로그래밍을 이용해서 최장공통부분열의 길이를 찾고 문자열을 dp테이블을 이용해서 reconstruct 하는 방법으로 코딩해봤습니다. 시간복잡도는 첫번째 문자열의 길이 n, 두번째 문자열의 길이 m이라고 가정했을때 O(mn) 입니다. </p>
+<pre><code class="cpp">#include &lt;iostream&gt; 
+#include &lt;string&gt; 
+#include &lt;algorithm&gt; 
+using namespace std; 
+
+int m,n;  
+int lcs[1001][1001];  
+
+int Len(string s1,string s2){
+    for (int i = m; i &gt;= 0; i--){
+        for (int j = n; j &gt;= 0; j--){
+            if (i == m || j == n){
+                lcs[i][j] = 0; 
+            }else if (s1[i] == s2[j]){
+                lcs[i][j] = 1+lcs[i+1][j+1];  
+            }else{
+                lcs[i][j] = max(lcs[i+1][j],lcs[i][j+1]);  
+            }
+        }
+    }
+    return lcs[0][0];  
+}
+
+string actual(string s1, string s2){
+    string t = &quot;&quot;;  
+    int i = 0, j = 0;  
+    while (i &lt; m &amp;&amp; j &lt; n){
+        if (s1[i] == s2[j]){
+            t += s1[i]; 
+            i++, j++;  
+        }else if (lcs[i+1][j] &gt;= lcs[i][j+1]){
+            i++; 
+        }else{
+            j++; 
+        }
+    }
+    return t; 
+}
+
+int main(){
+    string s1,s2; 
+    cin &gt;&gt; s1 &gt;&gt; s2; 
+    m = (int)s1.size();  
+    n = (int)s2.size();  
+    int ans = Len(s1,s2); 
+    string actualLCS = actual(s1,s2); 
+    cout &lt;&lt; ans &lt;&lt; endl; 
+    cout &lt;&lt; actualLCS &lt;&lt; endl; 
+    return 0; 
+}    
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/09/30 07:39</p>
+                                <p class="static-profile" style="margin:0;padding:0;">iljimae</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4876"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def d(s):
+    res = set('')
+    for i in range(len(s)):
+        for j in range(len(s)-i):
+            res.add(s[j:j+i+1])
+    return res
+
+def c(a, b):
+    M = 0; s = ''
+    for i in d(a)&amp;d(b):
+        if M &lt; len(i):
+            M = len(i)
+            s = i
+    return '%d\n%s'%(M, s)
+
+while __name__ == '__main__':
+    print(c(input(), input()))
+</code></pre>
+
+<p>루프문은 각 나누기마다 n(n+1)/2번으로 시간복잡도는 크긴 합니다만, 사전에서 가장 긴 영단어가 45자이고, 122자리로 테스트해봐도 답이 즉시 나와서 최적화할 필요는 없는 것 같습니다.</p>
+<p>파이썬 3.5.2 64</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/02 23:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Flair Sizz</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4901"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Javascript</strong></p>
+<p>Function</p>
+<pre><code class="javascript">function getLongerCommonStr(input1, input2){
+  var shorter = (input1.length &lt;= input2.length)? input1 : input2;
+  var longer = (input1.length &gt; input2.length)? input1 : input2;
+  var diff = longer.length - shorter.length + 1;
+
+  for(var i = 0; i &lt; shorter.length; i++){
+    for(var j = 0; j &lt; i + diff; j++){
+      var part = longer.substr(j, shorter.length - i);
+      if(shorter.indexOf(part) != -1){
+        return part;
+      }
+    }
+
+  }
+  return undefined;
+}
+</code></pre>
+
+<p>Test</p>
+<pre><code class="javascript">var str1 = &quot;photography&quot;;
+var str2 = &quot;autograph&quot;;
+
+var result = getLongerCommonStr(str1, str2);
+
+console.log(result.length);
+console.log(result);
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/07 11:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이 정현</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4970"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <h1 id="java">JAVA</h1>
+<p>두 문자열에서 짧은 쪽의 길이를 저장합니다. 이 길이로 각 문자열을 잘라서 Set에 넣습니다. Set에 넣을 때 충돌되면 공통 문자열이라 볼 수 있죠.
+DFS로 찾게 됩니다.</p>
+<pre><code class="java">import java.util.*;
+import java.util.concurrent.LinkedBlockingQueue;
+
+public class LongestCommonString {
+
+    static Set&lt;String&gt; stringParts = new HashSet&lt;&gt;();
+    static String LCS = &quot;&quot;;
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        String input1 = args[0];
+        String input2 = args[1];
+        int length = (args[0].length() &lt; args[1].length())?
+                args[0].length(): args[1].length();
+        while(length &gt; 0) {
+            if (!addSet(input1, length) || !addSet(input2, length)) {
+                break;
+            }
+            length--;
+        }
+        System.out.println(length);
+        System.out.println(LCS);
+    }
+
+
+    private static boolean addSet(String str, int size) {
+        Queue&lt;Vector&lt;Integer&gt;&gt; q = new LinkedBlockingQueue&lt;&gt;();
+        String cap;
+        int idx = 0;
+
+
+        while(idx + size &lt;= str.length()) {
+            cap = str.substring(idx, idx+size);
+            if (stringParts.contains(cap))  {
+                LCS = cap;
+                return false;
+            } else  {
+                stringParts.add(cap);
+            }
+            idx++;
+        }
+        return true;
+    }
+
+}
+
+
+//private static void printSet() {
+//  Iterator iterator = stringParts.iterator();
+//  while(iterator.hasNext()) {
+//      System.out.println(&quot;&quot; + iterator.next());
+//  }
+//  System.out.println();
+//}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/17 00:14</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Moon TaeMin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5015"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬입니다. 
+짧은 문자열의 부분문자열을 긴 것부터 생성하는 제너레이터를 이용해서
+찾도록했습니다. </p>
+<pre><code class="python">def g(s):
+    l = len(s)
+    i, m = 0, l
+    while m &gt; 0:
+        yield s[i:m+i]
+        i += 1
+        if m + i - 1 &gt; l:
+            i, m = 0, m -1
+
+
+def do(a, b):
+    a, b = (a, b) if len(a) &gt; len(b) else (b, a)
+    for m in g(b):
+        if m in a:
+            print(len(m))
+            print(m)
+            break
+
+a, b = input(), input()
+do(a, b)
+</code></pre>
+
+<p>4000자 짜리 랜덤 스트링을 두개 만들어서 해보니 1분 나오네요 ㅠㅠㅠㅠ</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/20 18:15</p>
+                                <p class="static-profile" style="margin:0;padding:0;">룰루랄라</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5044"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#파이썬 3.5.2
+#각 문자열의 부분문자열을 찾은 뒤 공통된 것중 긴것을 출력. 공통된 것을 찾는 것은 집합 형태를 이용했다.
+def part(s):
+    re = []
+    for i in range(1,len(s)+1):
+        for j in range(i):
+            re.append(s[j:j+len(s)-i+1])
+    return re
+
+a = input()
+b = input()
+alist = set(part(a))
+blist = set(part(b))
+answers = alist.intersection(blist)
+answer = max(answers,key=len)
+print(len(answer))
+print(answer)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/22 16:25</p>
+                                <p class="static-profile" style="margin:0;padding:0;">차우정</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5221"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>이중/삼중 루프를 피하는 방법은 잘 모르겠고..</p>
+<pre><code class="c">int main(int argc, const char * argv[]) {
+    lcs(&quot;photography&quot;, &quot;autograph&quot;);
+    return 0;
+}
+</code></pre>
+
+<p>우선 가장 쉬운 방법으로 풀어보자.
+두 문자열의 시작점을 하나씩 옮겨가면서 비교하여 가장 긴 공통문자열을 찾으면 된다.</p>
+<pre><code class="c">void lcs(const char* s1, const char* s2) {
+    size_t len = strlen(s1);
+    size_t maxIndex = 0;
+    size_t max = 0;
+
+    for (size_t i=0; i&lt;len;) {
+        size_t len2 = lcs1(s1 + i, s2); // s1에 대해 하나씩 검사
+        if (len2 &gt; max) {
+            maxIndex = i;
+            max = len2;
+        }
+        i += len2 ? len2 : 1; // 공통문자열만큼 건너뛴다.
+    }
+
+    printf(&quot;%.*s\n&quot;, (int)max, s1 + maxIndex);
+}
+</code></pre>
+
+<p><code>lcs1</code>은 두번째 인자에 대해 하나씩 검사한다.</p>
+<pre><code class="c">size_t lcs1(const char* s1, const char* s2) {
+    // s1을 s2에서 찾자
+    size_t len = strlen(s2);
+    size_t max = 0;
+    for (size_t i=0; i&lt;len; ) {
+        size_t len2 = lcs2(s1, s2 + i); // s2에 대해 하나씩 검사
+        if (len2 &gt; max) {
+            max = len2;
+        }
+        i += len2 ? len2 : 1; // 마찬가지로 찾은 길이만큼 건너뛴다.
+    }
+    return max;
+}
+</code></pre>
+
+<p>마지막으로 <code>lcs2</code>는 시작점을 기준으로 공통문자열의 길이만 찾으면 된다.</p>
+<pre><code class="c">size_t lcs2(const char* s1, const char* s2) {
+    size_t len = 0;
+    while (*s1 &amp;&amp; *s2 &amp;&amp; *s1 == *s2) {
+        len++;
+        s1++;
+        s2++;
+    }
+    return len;
+}
+</code></pre>
+
+<p>이상의 코드에서 <code>lcs2</code>의 호출을 살펴보면.. 아래와 같은 식으로 검사한다.</p>
+<pre><code>photography autograph -&gt; 0
+photography utograph -&gt; 0
+photography tograph -&gt; 0
+photography ograph -&gt; 0
+photography graph -&gt; 0
+photography raph -&gt; 0
+photography aph -&gt; 0
+photography ph -&gt; 2
+otography autograph -&gt; 0
+otography utograph -&gt; 0
+otography tograph -&gt; 0
+otography ograph -&gt; 1
+otography graph -&gt; 0
+otography raph -&gt; 0
+otography aph -&gt; 0
+otography ph -&gt; 0
+otography h -&gt; 0             &lt;- 벌써 2라는 최대값을 알기 때문에 검사할 필요 없다!
+tography autograph -&gt; 0
+tography utograph -&gt; 0
+tography tograph -&gt; 7
+y autograph -&gt; 0             &lt;- 벌써 7이라는 최대값을 알기 때문에 더이상 검사할 필요 없다!
+y utograph -&gt; 0
+y tograph -&gt; 0
+y ograph -&gt; 0
+y graph -&gt; 0
+y raph -&gt; 0
+y aph -&gt; 0
+y ph -&gt; 0
+y h -&gt; 0
+</code></pre>
+
+<p>이미 확인된 최대값을 알면 가지치기를 조금 더 할 수 있다.</p>
+<pre><code class="c">void lcs(const char* s1, const char* s2) {
+    size_t len = strlen(s1);
+    size_t maxIndex = 0;
+    size_t max = 0;
+
+    for (size_t i=0; i&lt;len - max;) {      // s1이 max보다 짧아지면 더 검사할 필요없다.
+        size_t len2 = lcs1(s1 + i, s2, max);
+        if (len2 &gt; max) {
+            maxIndex = i;
+            max = len2;
+        }
+        i += len2 ? len2 : 1;
+    }
+
+    printf(&quot;%.*s\n&quot;, (int)max, s1 + maxIndex);
+}
+</code></pre>
+
+<p><code>lcs1</code>에 대해서도..</p>
+<pre><code>size_t lcs1(const char* s1, const char* s2, size_t knownMax) {
+    // s1을 s2에서 찾자
+    size_t len = strlen(s2);
+    size_t max = 0;
+    for (size_t i=0; i&lt;len - knownMax; ) { // 이미 알고 있는 max만큼이 될 여지 가 없으면 중단한다.
+        size_t len2 = lcs2(s1, s2 + i);
+        if (len2 &gt; max) {
+            max = len2;
+            if (max &gt; knownMax) {
+                knownMax = max;
+            }
+        }
+        i += len2 ? len2 : 1;
+    }
+    return max;
+}
+</code></pre>
+
+<p>그러면 <code>lcs2</code>가 호출되는 횟수를 줄일 수 있다.</p>
+<pre><code>photography autograph -&gt; 0
+photography utograph -&gt; 0
+photography tograph -&gt; 0
+photography ograph -&gt; 0
+photography graph -&gt; 0
+photography raph -&gt; 0
+photography aph -&gt; 0
+photography ph -&gt; 2
+otography autograph -&gt; 0
+otography utograph -&gt; 0
+otography tograph -&gt; 0
+otography ograph -&gt; 1
+otography graph -&gt; 0
+otography raph -&gt; 0
+otography aph -&gt; 0
+tography autograph -&gt; 0
+tography utograph -&gt; 0
+tography tograph -&gt; 7
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/11/09 11:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Han Jooyung</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5457"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def do(a, b):
+    if a == '' or b == '':
+        return
+    def _subset(s):
+        return set([s[x:y] for x in range(len(s))
+                                    for y in range(x, len(s) + 1)])
+    r = list(_subset(a) &amp; _subset(b))
+    r.sort(key=lambda x:len(x), reverse=True)
+    print('{}\n{}'.format(len(r[0]), r[0]))         
+
+do('photography', 'autograph')
+
+</code></pre>
+
+<p>또는</p>
+<pre><code class="python">def subset(str_):
+    len_ = len(str_)
+    l = len_
+    while l &gt; 0:
+        for x in range(0, (len_ - l) + 1):
+            yield str_[0 + x:l + x]
+        l-=1
+
+def do(a, b):
+    src = a
+    cmp = b
+    if len(cmp) &gt; len(src):
+        src, cmp = cmp, src
+    for x in subset(cmp):
+        if src.find(x) != -1:
+            print('{}\n{}'.format(len(x), x))
+            break
+
+do('photography', 'autograph')
+
+</code></pre>
+
+<p>Python 3.5.2에서 작성하였습니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/11/30 10:02</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Yeo HyungGoo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5652"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <h1 id="include">include <stdio.h></h1>
+<h1 id="include_1">include <string.h></h1>
+<p>int main() {
+    char str1[4001], str2[4001];
+    fgets(str1, sizeof(str1), stdin);
+    fgets(str2, sizeof(str2), stdin);
+    str1[strlen(str1)-1] = '\0';
+    str2[strlen(str2)-1] = '\0';
+    if (strlen(str1) &lt; strlen(str2)) {
+        char tmp[4001];
+        strcpy(tmp, str1);
+        strcpy(str1, str2);
+        strcpy(str2, tmp);
+    }</p>
+<pre><code>int i, j, n = strlen(str2);
+while(n &gt; 0) {
+    for (i = 0; i &lt;= strlen(str2)-n; i++) {
+        for (j = 0; j &lt;= strlen(str1)-n; j++) {
+            if (strncmp(str1+j, str2+i, n) == 0) {
+                char tmp[4001];
+                strncpy(tmp, str1+j, n);
+                tmp[n] = '\0';
+                printf("%d\n", n);
+                printf("%s\n", tmp);
+                return 0;
+            }
+        }
+    }
+    n--;
+}
+printf("%d\n", 0);
+return 0;
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/12/22 00:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">리코둔</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6026"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">str1 = 'photography'
+str2 = 'autograph'
+step, length, string = 0, list(), list()
+for x in range(len(str1)):
+    if step &lt;= x:
+        for y in range(len(str2)):
+            if str1[x] == str2[y]:
+                for a in range(1, len(str1[x:])+1):
+                    if str1[x:x+a] != str2[y:y+a]:
+                        length.append(len(str1[x:x+a-1]))
+                        string.append(str1[x:x+a-1])
+                        step = x+a
+                        break
+print(max(length))
+print(string[length.index(max(length))])
+
+#### 2017.01.25 D-393 ####
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/01/25 22:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GunBang</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6090"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>def LCW_solver(s1, s2, s=&quot;&quot;):
+    def LCW(s1, s2):
+        if len(s1)*len(s2)==0 or s1[0]!=s2[0]: return &quot;&quot;
+        else: return s1[0] + LCW(s1[1:],s2[1:]) 
+    for i1 in range(len(s1)):
+        for i2 in range(len(s2)):
+            ns=LCW(s1[i1:],s2[i2:])
+            if len(s)&lt;len(ns): s=ns
+    return s
+
+print(LCW_solver(&quot;photography&quot;, &quot;autograph&quot;))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/02/03 03:15</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Song Seoha</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6199"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def subset_string(data):
+    result=[]
+    for i in range(len(data)-1):
+        for j in range(i,len(data)+1):
+            result+=[data[i:j]]
+    return set(result)
+
+def strings(data):
+    inter_set=subset_string(data[0]).intersection(subset_string(data[1]))
+    leng1=['',0]
+    for i in inter_set:
+        if leng1[1]&lt;len(i):
+            leng1=[i,len(i)]
+    print(&quot;%d\n%s&quot;%(leng1[1],leng1[0]))
+
+strings([&quot;photography&quot;,&quot;autograph&quot;])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/02/15 22:14</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김구경</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6562"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.Scanner;
+
+import static java.lang.System.in;
+
+public class PartialTextSearch {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(in);
+        String text = sc.next();
+        String pattern = sc.next();
+        int p = pattern.length();
+        int max = 0;
+        String result = &quot;&quot;;
+        for (int i = 0; i &lt; p; i++) {
+            for (int j = 0; j &lt; p; j++) {
+                if (i &lt; j) {
+                    String pp = pattern.substring(i, j + 1);
+                    if (text.indexOf(pp) != -1 &amp;&amp; max &lt; pp.length()) {
+                        max = pp.length();
+                        result = pp;
+                    }
+                }
+            }
+        }
+        System.out.println(max);
+        System.out.println(result);
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/03/14 17:25</p>
+                                <p class="static-profile" style="margin:0;padding:0;">genius.choi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6957"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def longest_mached_chars(words):
+    # 단어의 부분을 취할때 적게 루프를 돌기 위해 짧은 단어기준으로 돌도록
+    short_word = words[1] if len(words[0]) &gt; len(words[1]) else words[0]
+    long_word = words[0] if short_word == words[1] else words[1]
+    longest_match = ''
+    for idx in range(0, len(short_word)):
+        for l in range(1, len(short_word) - idx + 1):
+            chars = short_word[idx:idx+l]
+            if chars in long_word:
+                if len(longest_match) &lt; len(chars):
+                    longest_match = chars
+    print(len(longest_match))
+    print(longest_match)
+
+longest_mached_chars(['photography', 'autograph'])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/04/20 10:03</p>
+                                <p class="static-profile" style="margin:0;padding:0;">soleaf</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7245"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package hellojava;
+
+import java.util.ArrayList;
+
+public class practice {
+    static ArrayList vocSplit(String str) {
+        ArrayList&lt;String&gt; listStr = new ArrayList&lt;String&gt;();
+        for (int i = 0; i &lt; str.length(); i++) {
+            for (int k = 0; k &lt; str.length() - i; k++) {
+                listStr.add(str.substring(k, k + i + 1));
+            }
+        }
+        return listStr;
+    }
+
+    public static void main(String[] args) {
+        ArrayList&lt;String&gt; voc1 = new ArrayList&lt;String&gt;();
+        ArrayList&lt;String&gt; voc2 = new ArrayList&lt;String&gt;();
+        ArrayList&lt;String&gt; collectedVoc = new ArrayList&lt;String&gt;();
+
+        try {
+            voc1 = practice.vocSplit(&quot;photography&quot;);
+            voc2 = practice.vocSplit(&quot;autograph&quot;);
+
+            for (int i = 0; i &lt; voc1.size(); i++) {
+                if (voc2.contains(voc1.get(i)) == true) {
+                    collectedVoc.add(voc1.get(i));
+                }
+            }
+            System.out.println(collectedVoc.get(collectedVoc.size() - 1));
+
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println(&quot;no common subset&quot;);
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/05/24 17:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Kim Da Seul</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8037"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">코딩이 지저분하네요
+
+a=&quot;photography&quot;
+b=&quot;autograph&quot;
+a_list=[] # a 문자열 집합용
+b_list=[] # b 문자열 집합용
+c_list=[] # a,b 문자열 비교하여 같은거 집합용
+d_list=[] # 가장 큰 문자 갯수용
+temp_list=[]
+for i in range (0, len(a)):
+    for k in range (1,len(a)):
+        a_list.append(a[i:k])
+
+for i in range (0, len(a)):
+    for k in range (1,len(a)):
+        b_list.append(b[i:k])
+
+for i in range (0, len(a_list)):
+    for k in range (1,len(b_list)):
+        if(a_list[i]==b_list[k] and b_list[k]!=&quot;&quot;):
+            c_list.append(b_list[k])
+
+for i in range (0, len(c_list)):
+    d_list.append(int(len(c_list[i]))) #문자열 크기 구하기
+    temp_list.append(int(len(c_list[i]))) #소팅하기전 문자 구하기
+
+
+d_list.sort() #문자열크기  소팅
+
+print(d_list[-1]) # 가장큰 문자의 갯수 출력
+c_index=temp_list.index(d_list[-1]) #가장큰 문자의 index 확인
+print(c_list[c_index]) # 가장큰 문자 출력
+
+7
+tograph
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/07/27 18:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박준</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8213"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3으로 풀었습니다.</p>
+<pre><code class="python">def longest_common_substring(s1, s2):
+    if len(s1) &lt; len(s2):
+        tmp = s1
+        s1 = s2
+        s2 = tmp
+
+    for size in range(len(s2), 0, -1):
+        for s in range(len(s2) - size + 1):
+            if s2[s:s+size] in s1:
+                return s2[s:s+size]
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/04 22:32</p>
+                                <p class="static-profile" style="margin:0;padding:0;">SOUP</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8333"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">s1, s2 = 'photography'+'!', 'autograph'+'@'
+l1, l2 = len(s1), len(s2)
+lcs = ''
+for i in range(l1):
+    for j in range(l2):
+        for k in range(min(l1-i, l2-i)+1):
+            if s1[i+k] != s2[j+k]:
+                if k &gt; len(lcs):
+                    lcs = s1[i:i+k]
+                break
+
+print(lcs, len(lcs)) # tograph 7
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/13 12:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8742"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># python 3.6
+import itertools as it
+
+
+def subsets(inp):
+    &quot;&quot;&quot;return the list of inp subsets for a given inp&quot;&quot;&quot;
+    # 입력 문자열에 대해 길이 별 부분집합 문자(열) 생성(문자열 내 순서대로 포함 조건)
+    return [&quot;&quot;.join(tp) for i in range(len(inp) + 1)
+            for tp in list(it.combinations(inp, i)) if &quot;&quot;.join(tp) in inp]
+
+
+st1 = input(&quot;string 1: &quot;)
+st2 = input(&quot;string 2: &quot;)
+# 부분 문자열으 교집합 중 최대 길이
+cmn = max(set(subsets(st1)) &amp; set(subsets(st2)))
+print(&quot;%d\n%s&quot; % (len(cmn), cmn))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/09/07 15:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9250"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">inp = 'photography\nautograph'
+(str1, str2) = inp.split()
+if len(str2) &gt; len(str1):
+    str1, str2 = str2, str1
+
+maxl = 0
+maxsc = ''
+for l in range(1, len(str2)+1):
+    for i in range(len(str2)):
+        sc = str2[i:i+l]
+        if str1.count(sc) and len(sc) &gt; maxl:
+            maxl = len(sc)
+            maxsc = sc
+
+print(maxl, maxsc)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/11/13 15:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">songci</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10234"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3.6</p>
+<pre><code class="python">def part(string):
+    part,n = [],2
+    for i in string:
+        part.append(i)
+    while n &lt;= len(string)-1:
+        for h in range(len(string)-n):
+            part.append(string[h:h+n+1])
+        n += 1
+    return part
+
+def overlappart(data):
+    overlapset = set(part(data[0])) &amp; set(part(data[1]))
+    partlist.extend(list(overlapset))
+    for sub_part in partlist:
+        length.append(len(sub_part))
+
+if __name__ == &quot;__main__&quot;:
+    data = ['photography','autograph']
+    partlist,overlap,length = [],[],[]
+    overlappart(data)
+    print(max(length))
+    print(partlist[length.index(max(length))])
+</code></pre>
+
+<p>*결과값</p>
+<pre><code class="python">7
+tograph
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/01/19 16:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">justbegin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10437"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>in 을 써버리니까 너무 간단해지네요.</p>
+<p>긴 것 부터 찾으면 단어 갯수도 마지막 한번만 세면 됩니다.</p>
+<pre><code class="python"># 파이썬
+
+def common_string(long, short):
+    if len(long) &lt; len(short):
+        return common_string(short, long)
+
+    short_length = len(short)
+    for m in range(short_length, 0, -1):
+        for n in range(short_length - m): 
+            short_part = short[n:n+m]
+            if short_part in long: 
+                return short_part, len(short_part)
+
+
+print(common_string(&quot;photography&quot;, &quot;autography&quot;))
+
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/01 15:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">olclocr</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10696"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def substring(a):
+    l = list()
+    for i in range(1,len(a)+1):
+        for j in range(len(a)+1-i):
+            l.append(a[j:j+i])
+    return l
+def common(a, b):
+    c = max(set(substring(a)) &amp; set(substring(b)))
+    return len(c), c
+
+print(common('photography', 'autograph'))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/14 11:41</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김동하</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11434"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def samepiece(a, b):
+    apieces = []
+    for anum in range(len(a)):
+        args = [a[x:x+anum+1] for x in range(len(a)-anum)]
+        apieces.extend(args)
+    bpieces = []
+    for bnum in range(len(b)):
+        brgs = [b[x:x+bnum+1] for x in range(len(b)-bnum)]
+        bpieces.extend(brgs)
+    result = sorted(list(set(apieces) &amp; set(bpieces)), key=len, reverse=True)[0]
+    return str(len(result)) + '\n' + result
+print(samepiece('photography', 'autography'))
+</code></pre>
+
+<p>Python 3
+apieces, bpieces가 a, b의 부분문자열들이고 set로 변환하여 교집합을 구한 뒤 다시 리스트로 전환, 길이를 기준으로 리버스정렬</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/03/29 19:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">myyh2357</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12164"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def partition(string,string2):
+
+    start = 0
+    finish = 1
+    lst = []
+
+    while True:
+        cnt = string[start:finish+1]
+        if cnt in string2:
+            lst.append(cnt)
+        finish += 1
+
+        if finish == len(string):
+            start += 1
+            finish = start + 1
+
+        if start == len(string) - 2:
+            break
+
+    res = sorted(lst,key = lambda x: len(x))
+
+    print(len(res[-1]))
+    return res[-1]
+
+
+
+
+i1 = input()
+i2 = input()
+
+print(partition(i1,i2))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/09 10:53</p>
+                                <p class="static-profile" style="margin:0;padding:0;">최우성</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12622"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">
+public class Pratice {
+    public static void main(String[] args) {
+        String[] str = { &quot;photography&quot;, &quot;autograph&quot;, &quot;&quot; };
+        for (int i = 0; i &lt; str[0].length(); i++) {
+            for (int j = i; j &lt; str[0].length(); j++) {
+                if (str[1].contains(str[0].substring(i, j)) &amp;&amp; str[2].length() &lt; str[0].substring(i, j).length())
+                    str[2] = str[0].substring(i, j);
+            }
+        }
+        System.out.println(str[2].length() + &quot;\n&quot; + str[2]);
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/28 20:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김지훈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12623"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">#include &lt;stdio.h&gt;
+
+int main() {
+    char str1[] = &quot;photography&quot;, str2[] = &quot;autograph&quot;;
+    char tempString[2][4000] = { 0, };
+    int length[2] = { 0, 0};
+    int l1 = sizeof(str1) * sizeof(char), l2 = sizeof(str2) * sizeof(char), index = 0, k = -1;
+    for (int i = 0; i &lt; l1; i++) {
+        while (str1[i] != str2[++k]) {}
+        length[index = length[0] &lt;= length[1] ? 0 : 1] = 0;
+        for (int j = k; j &lt; l2; j++)
+            str1[i - k + j] == str2[j] ? tempString[index][length[index]++] = str1[i - k + j] : NULL;
+        k = -1;
+        tempString[index = length[0] &lt;= length[1] ? 1 : 0][length[index]] = '\0';
+    }
+    printf(&quot;%d\n%s\n&quot;, length[index], tempString[index]);
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/28 20:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">남해</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12746"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Swift입니다.</p>
+<p>주어진 두 문장에서 짧은 문장에서 부분 문자열을 추출해서 긴 문자열에 포함되어 있는지를 반복합니다.
+부분 문자열은 긴것부터 짧은 것으로 찾아나갑니다.</p>
+<pre><code class="no-highlight">import Foundation
+
+var a = &quot;photography&quot;
+var b = &quot;autograph&quot;
+
+func findSamePattern(_ a: String, _ b: String) -&gt; String {
+    let longer = a.count &gt; b.count ? a : b
+    let shorter = a.count &lt;= b.count ? a: b
+    let shorterCount = shorter.count 
+
+    for length in stride(from:shorterCount, to: 0, by: -1) {
+        var startIndex = 0
+        while length + startIndex &lt; shorterCount {
+            let start = shorter.index(shorter.startIndex, offsetBy: startIndex)
+            let end = shorter.index(start, offsetBy: length)
+            let patternFromShorter = shorter[start...end] // Partial pattern
+
+            let patternString = String(patternFromShorter)
+            if longer.range(of: patternString) != nil {
+                return patternString
+            }
+            startIndex += 1
+        }
+    }
+    return &quot;&quot; // No common pattern found
+}
+
+let foundPattern = findSamePattern(a, b)
+print(&quot;\(foundPattern.count) \(foundPattern)&quot;)
+</code></pre>
+
+<p>결과는...</p>
+<pre><code class="no-highlight">7 tograph
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/02 01:28</p>
+                                <p class="static-profile" style="margin:0;padding:0;">졸린하마</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12984"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python</p>
+<pre><code class="python">s = [&quot;photography&quot;, &quot;autograph&quot;]
+ans = [set() for i in range(len(s))]
+for s_i, a in enumerate(s):
+    for i in range(len(a)):
+        for j in range(i, len(a)):
+            ans[s_i].add(a[i:j+1])
+same_str = ans[0]
+for a in ans:
+    same_str.intersection_update(a)
+max_l = 0
+ans = &quot;&quot;
+for i in same_str:
+    if len(i) &gt; max_l:
+        max_l = len(i)
+        ans = i
+print(max_l, ans, sep=&quot;\n&quot;)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/14 16:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Taesoo Kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13009"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 입니다.</p>
+<pre><code class="python">def substring(s1,s2):
+    sub1=[]
+    sub2=[]
+    for n in range(len(s1),-1,-1):
+        for m in range(len(s1)-n+1):
+            sub1.append(s1[m:n+m])
+    for n in range(len(s2),-1,-1):
+        for m in range(len(s2)-n+1):
+            sub2.append(s2[m:n+m])
+    for sub in sub1:
+        for su in sub2:
+            if sub==su:
+                print(len(sub),sub)
+                return
+substring('photography','autograph')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/17 20:28</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박종범</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13729"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">a = 'photography'
+b = 'autograph'
+
+def func(a,b):
+    if len(a) &gt; len(b): a,b = b,a
+
+    for i in range(len(a)):
+        l = len(a)-i
+        for j in range(i+1):
+            if a[j:j+l] in b: return a[j:j+l]
+    return ''
+
+r = func(a,b)
+print(len(r))
+print(r)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/24 18:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14436"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">
+def func(a):
+    return [a[j:i] for i in range(len(a)+1) for j in range(len(a))]    
+
+a='photography'
+b='autograph'
+result=sorted(list((set(func(a))&amp;set(func(b)))),key=len)[-1]
+print(len(result),result,sep='\n')
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/30 16:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">S.H</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14862"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <h3>python3.6</h3>
+
+<p><p>def n_string(s):</p>
+   <p>return {s[x:y]for x in range(len(s))for y in range(len(s)+1)}</p></p>
+<p>a='aphotograp'</p>
+
+<p>b='bphotogdf'</p>
+
+<p>result=list(set(n_string(a)&n_string(b)))</p>
+
+<p>result.sort(key=lambda x:len(x),reverse=True)</p>
+
+<p>print('{} {}'.format(len(result[0]),result[0]))</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/10/10 15:53</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Shin gil sang</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16257"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>예강효빠님에게서 아이디어를 얻었습니다.</p>
+<pre><code class="python">def part(st):
+    lis = []
+    for i1 in range(1,len(st)+1):
+        for i2 in range(len(st)):
+            lis.append(st[i2:(i1+i2,i2)[i1+i2 &gt; len(st)]])
+    return [''] + list(x for x in lis if x != '')
+
+def comps(s1,s2):
+    l,s2 = [],part(s2)
+    for s in part(s1):
+        if s in s2:
+            l.append(s)
+    return list(sorted(l))[-1],len(list(sorted(l))[-1])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/01/26 11:28</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김영성</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16487"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">s1, s2 = input().split()
+
+def string_part(s):
+    return {s[i:j] for i in range(0, len(s)) for j in range(i, len(s) + 1)}
+
+answer = max(string_part(s1) &amp; string_part(s2))
+
+print(len(answer))
+print(answer)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/02/07 12:08</p>
+                                <p class="static-profile" style="margin:0;padding:0;">D.H.</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17161"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def two_strings(string1, string2):
+  list_string1 = {string1[i:j] for j in range(len(string1)) for i in range(j)}
+  list_string2 = {string2[i:j] for j in range(len(string2)) for i in range(j)}
+
+
+  same_word = &quot;&quot;
+  max_len = 0
+  for word1 in list_string1:
+    for word2 in list_string2:
+      if word1 == word2:
+        if len(word1) &gt; max_len:
+          max_len = len(word1)
+          same_word = word1
+
+  return same_word, max_len
+
+two_strings('photography', 'autography')
+('tograph', 7)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/03/17 16:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Gerrad kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17192"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">while True:
+    user1=input(&quot;Input string(1): &quot;)
+    user2=input(&quot;Input string(2): &quot;)
+    length=min(len(user1),len(user2))
+    common=[]
+    while True:
+        test=0
+        for i in range(len(user1)-length+1):
+            if user1[i:i+length] in user2:
+                common.append(user1[i:i+length])
+                test=1
+        if test:
+            print(length)
+            for term in common:
+                print(&quot;'{}'&quot;.format(term))
+            break
+        length-=1
+        if length==0:
+            break
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/03/19 22:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">ykleeac</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17794"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def SF(S,SET):
+    for i in range(len(S)):
+        for j in range(len(S)):
+            SET.add(S[i:j])
+    return SET
+
+s1=input();s2=input()
+set1=SF(s1,set());set2=SF(s2,set());set3=set1&amp;set2
+
+print(len(max(set3)),'\n',max(set3))
+</code></pre>
+
+<p>완전탐색법으로 하여보았는데요. 입력의 상한을 넘어가는 문자열을 입력하여 보니, 계산시간이 그렇게 길지는 않더군요. 그래서 그냥 이대로 제출하기로 하였읍니다.^^</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/08 19:56</p>
+                                <p class="static-profile" style="margin:0;padding:0;">암살자까마귀</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17836"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def max_com(s1, s2):
+    s = ''
+    m = 0
+
+    for i in range(len(s1)):
+        for j in range(len(s2)):
+            if s1[i] == s2[j]:
+                t = 1
+                while i+t &lt; len(s1) and j+t &lt; len(s2):
+                    if s1[i+t] == s2[j+t]: t += 1
+                    else: break
+                if t &gt; m:
+                    s = s1[i:i+t]
+                    m = t
+    print(m, s)
+
+max_com('photography', 'autograph')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/12 16:58</p>
+                                <p class="static-profile" style="margin:0;padding:0;">messi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19785"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>복잡한 것은 못해서.. 단순히 더 짧은 문자열의 부분집합을 모두 구한뒤에 긴 문자열에 해당 부분집합이 있는지 찾았습니다.</p>
+<p>public class SubStr {</p>
+<pre><code>public void UnionStr(String str1,String str2) {
+    ArrayList&lt;String&gt; subList;
+
+    if( str1.length()&gt;str2.length() )
+        subList=getSubStrs(str2);
+    else
+        subList=getSubStrs(str1);
+
+    String strTemp="";
+
+    for(String subStr:subList) {
+        if(str1.contains(subStr)) {
+            if(strTemp.length()&lt;subStr.length())
+                strTemp=subStr;
+        }
+    }
+
+    System.out.println(strTemp.length());
+    System.out.println(strTemp);
+}
+
+private ArrayList&lt;String&gt; getSubStrs(String str){
+
+    ArrayList&lt;String&gt; list=new ArrayList&lt;&gt;();
+
+    for(int i=0;i&lt;str.length()-1;i++) {
+        for(int j=i+1;j&lt;str.length();j++) {
+            list.add(str.substring(i, j+1));
+        }
+    }
+    return list;
+}
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/10/29 15:39</p>
+                                <p class="static-profile" style="margin:0;padding:0;">채희범</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20082"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">public static void main(String[] args) {
+
+        Scanner scan = new Scanner(System.in);
+        String a = scan.nextLine();
+        String b = scan.nextLine();
+
+        StringBuffer bf = new StringBuffer();
+        ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;();
+
+        for(int i=0; i&lt;a.length(); i++) {    //똑같은 부분들을 다 찾고 list에 넣습니다.
+            for(int j=i; j&lt;a.length(); j++) {
+                bf.append(a.charAt(j));
+                if(!b.contains(bf)) {
+                    bf.delete(j-i, j-i+1);
+                    break;
+                }
+            }
+            list.add(bf.toString());
+            bf.delete(0, a.length());
+        }
+
+        int count = 0;
+        for(int i=0; i&lt;list.size(); i++) {   //list에 담겨져있는 값들을 비교하고 가장 큰 길이 값을 count로 설정합니다.
+            if(list.get(i).length()&gt;=count) {
+                count=list.get(i).length();
+            }
+        }
+        System.out.println(count);       // count랑 같은 길이를 가진 값을 출력합니다.
+        for(int i=0; i&lt;list.size(); i++) {
+            if(list.get(i).length()==count) {
+                System.out.println(list.get(i));
+            }
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/11/27 19:37</p>
+                                <p class="static-profile" style="margin:0;padding:0;">big Ko</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20742"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">data1_list = []
+data2_list = []
+temp_list =['a']
+lenth = 2
+for i in range(len(data1)):
+    for j in range(i+2,len(data1)+1):
+        data1_list.append(data1[i:j])
+
+for i in range(len(data2)):
+    for j in range(i+2,len(data2)+1):
+        data2_list.append(data2[i:j])
+
+for i in data1_list:
+    for j in data2_list:
+        if i == j :
+            if lenth &lt; len(i) :
+                lenth = len(i)                
+                temp_list.pop()
+                temp_list.append(i)
+a= (&quot;,&quot;.join(temp_list))                
+print(len(a))                
+print(a)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/26 19:56</p>
+                                <p class="static-profile" style="margin:0;padding:0;">semipooh</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20784"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">string1=&quot;photography&quot;
+string2=&quot;autograph&quot;
+
+def MaxPartial(string): #부분문자열을 구하는 함수
+    n=2
+    lst=list(map(str,string))
+    while n&lt;=len(lst):
+        for i in range(len(lst)): #여기서 len(lst)로 쓰면 부분문자열 리스트 요소에 &quot;&quot;(공백)이 하나 추가로 들어감.
+            ns=string[i:i+n]
+            if ns not in lst:
+                lst.append(ns)
+        n+=1
+    return lst
+
+elst=[]
+for string in MaxPartial(string1):
+    if string in MaxPartial(string2):
+        elst.append(string)
+print(len(elst[-1]),elst[-1]) #위의 함수에 range()를 len(lst)로 잡았기 때문에 공통된 부분이 없을 경우(실제로는 &quot;&quot;(공백)이라는 공통된 요소가 있음), elst=[]이 아니라 elst=[&quot;&quot;]임. 그래서 elst[-1]을 쓸 수가 있음. 공통된 부분이 없을 경우 따라서 0을 출력함. (len(string)으로 했을 경우 &quot;&quot;(공백)없이 부분 문자열로만 리스트가 이루어지기 때문에 공통된 부분이 없으면 elst=[]이기 때문에 elst[-1]을 하면 오류 발생)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/30 15:41</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박시원</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20841"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def comm_str():
+    INP1 = input(&quot;INPUT1 : &quot;)
+    INP2 = input(&quot;INPUT2 : &quot;)
+    res = ''
+    for pos in range(0, len(INP1)) :
+        if INP1[pos] in INP2 : # 첫 번째 입력의 각 문자를 돌아가며, '그 문자로 시작하는 부분 문자열'이 두 번째 입력에 존재하는지 확인
+            for unt in range(len(res), len(INP1)-pos) :  # 현재까지의 최대공통부분문자열(res)보다 문자열이 더 길 경우의 가능성만 확인. 예를 들어, res의 길이가 6인 경우, 다음 반복에서도 길이가 6 이상인 부분문자열에 대하여만 비교한다.
+                if INP1[pos:pos+unt+1] in INP2 and len(INP1[pos:pos+unt+1]) &gt; len(res) :  # 현재까지의 최대공통부분문자열보다 긴 부분문자열이 발견된 경우 :
+                    res = INP1[pos:pos+unt+1] # res(결과)를 갱신한다
+    print(len(res))
+    print(res)
+
+comm_str()
+</code></pre>
+
+<p>첫 번째 입력의 각 문자를 돌아가며, 그 문자로 시작하는 문자열이 두 번째 입력에 존재하는지를 확인하는 식으로 만들었습니다. 코드에 설명되어 있듯이, 비교 횟수를 조금 줄이려고 노력했습니다.</p>
+<p>결과</p>
+<pre><code>INPUT1 : photography
+INPUT2 : autograph
+7
+tograph
+
+INPUT1 : abcd
+INPUT2 : efgh
+0
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/02/04 15:58</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GG</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_21795"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def part_str(x):    #입력 받은 문자열에 대하여 부분 문자열 리스트를 만들어 주는 함수
+    xx=[]
+    for i in range (len(x)):    
+        for j in range (i+1):
+            temp=[]
+            for k in range (j,i+1):
+                temp.append(x[k])
+            if (len(temp)!=1) and (temp not in xx):
+                xx.append(temp)
+    return(xx)
+
+a=part_str(str(input('a:')))    # 입력받은 문자열을 부분문자열 리스트로 변환시킴
+b=part_str(str(input('b:')))
+max,max_common=0,[]
+
+for i in range (len(a)):
+    if a[i] in b:               #부분문자열 리스트a를 차례로 체크하여 b에 같은 문자열이 있는지 체크
+        if len(a[i])==max:
+            max_common.append(a[i])
+
+        if len(a[i])&gt;max:
+            max=len(a[i])
+            max_common=[]
+            max_common.append(a[i])        
+
+print (max)
+for i in range (len(max_common[0])):
+    print (max_common[0][i],end='')
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/04/17 13:24</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Buckshot</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2686"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">&lt;결과&gt;
+
+a:abcdefghijklmn
+b:ghijklmnopqrstu
+8
+ghijklmn
+
+a:abcghjimnb
+b:dfghjienmsd
+4
+ghji
+
+a:photography
+b:autograph
+7
+tograph</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Buckshot,
+                                    2020/04/17 13:25
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22097"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def lcs(words):
+    word = [{w[i:j] for i in range(len(w)) for j in range(i, len(w)+1)} for w in words]
+    return max(word[0] &amp; word[1])
+
+if __name__ == '__main__':
+    words = 'photography', 'autograph'
+    print('{0}\n{1}'.format(len(lcs(words)), lcs(words)))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/05 14:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hwaseong Nam</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22348"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">a = input()
+alist = []
+for i in range(0,len(a)):
+    for j in range(i,len(a)+1):
+        alist.append(a[i:j])
+b = input()
+blist = []
+for i in range(0,len(b)):
+    for j in range(i,len(b)+1):
+        blist.append(b[i:j])
+result = [x for x in alist if x in blist]
+print(result)
+for i in result:
+    for j in range(len(result)):
+        if len(i) &gt; len(result[j]):
+            result[j] = '0'
+        else:
+            continue
+for i in result:
+    try:
+        int(i)
+
+    except ValueError:
+        print(i)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/15 09:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Money_Coding</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22632"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬3입니다.</p>
+<pre><code class="python">a = 'photography' 
+b = 'autograph' 
+
+partStringA = {a[x:y] for x in range(len(a)) for y in range(x,len(a)+1)}
+partStringB = {b[x:y] for x in range(len(b)) for y in range(x,len(b)+1)}
+commonString = max(partStringA &amp; partStringB)
+print(len(commonString))
+print(commonString)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/06/25 13:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">누마루</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23841"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def proportString(s):
+    setString = {''}
+    for i in range(len(s)):
+        for k in range(len(s) + 1):
+            setString.add(s[i:i + k])
+    return setString
+
+
+a = input()
+b = input()
+c = max(proportString(a) &amp; proportString(b))
+print(len(c), c)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/11/30 20:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김우석</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24230"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>def stringfind(strings):</p>
+<pre><code>  i=1
+
+  for_answer=[]
+
+  while i &lt;=len(strings):
+
+    for j in range(0,len(strings)-i+1,1):
+
+       for_answer.append(strings[j:j+i])
+
+    i+=1
+
+  return for_answer
+
+def find_string(a,b):
+
+  for_answer=[]
+
+  for i in a:
+
+    if i in b:
+
+      for_answer.append(i)
+
+  for_answer.sort()
+
+  print(len(for_answer[-1]))
+
+  print(for_answer[-1])
+
+def main():
+
+  word1=input("write your word")
+
+  word2=input("write your word")
+
+  find_string(stringfind(word1),stringfind(word2))
+
+main()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/01/06 12:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">전준혁</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24999"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def Same(a,d):
+    q=len(d)
+    b=len(a) 
+    c=[]
+    e=[]
+    for i in range(b):
+        c.append(a[i])    
+        c.append(a[i:]) 
+        c.append(a[i:b//2])    
+        c.append(a[i:-1])
+
+    for i in range(q):
+        e.append(d[i])
+        e.append(d[i:])
+        e.append(d[i:q//2])
+        e.append(d[i:-1])
+    print(len(max(list((set(e) &amp; set(c))))))
+    print(max(list((set(e) &amp; set(c)))))
+
+
+Same(&quot;photography&quot;,&quot;autograph&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/03/17 21:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">fox.j</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25072"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def partial(text):
+    result = []
+    for i in range(len(text)):
+        for j in range(len(text)):
+            _temp = text[i:len(text)-j]
+            if _temp not in result:
+                result.append(_temp)
+    result.sort(key=len)
+    return result
+
+def common(text1, text2):
+    result = []
+    list_1 = partial(text1)
+    list_2 = partial(text2)
+    for member in list_1:
+        if member in list_2:
+            result.append(member)
+    result.sort(key=len)
+    print(len(result[-1]), result[-1])
+
+common('photography', 'autograph')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/03/29 09:08</p>
+                                <p class="static-profile" style="margin:0;padding:0;">DSHIN</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25400"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">a = 'photography'
+b = 'autograph'
+
+def part(x:str):
+    result = set([''])
+    for i in range(len(x)):
+        for j in range(len(x)+1):
+            if i&lt;j:
+                result.add(x[i:j])
+    return result
+
+com = part(a) &amp; part(b)
+l = 0
+w = ''
+for word in com:
+    if len(word) &gt; l:
+        l = len(word)
+        w = word
+
+print(l, w)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/05/19 19:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Ha</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25503"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def w_product(a) :
+    s = set()
+    for x in range(len(a)+1):
+        for y in range(len(a)+1):
+            s.add(a[x:y])
+    return s
+a = 'photography'
+b = 'autograph'
+
+overlap = max(w_product(a) &amp; w_product(b))
+
+print(f'{len(overlap)}\n{overlap}')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/06/03 17:12</p>
+                                <p class="static-profile" style="margin:0;padding:0;">약사의혼자말</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26097"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#codingdojing_other_LCS_re
+#짧은 문자를 큰 순서대로 자른다. 
+#각 부분문자가 긴 문자에 포함되는지 확인한다.
+
+a = input()
+b = input()
+
+if len(a) &gt;= len(b): M, L = a, b
+else: M, L = b, a
+
+
+r_dic = {}
+flag = False
+
+for i in range(len(M), 0, -1): # 6 5 4 3 2 1 / 4인경우
+    for j in range(len(M)-i+1): # 6-4 / 0 1 2
+        if M[j:j+i] in L:
+            r_dic.setdefault(i, [])     #딕셔너리의 값을 리스트 형식으로
+            r_dic[i].append(M[j:j+i])
+
+print(max(r_dic))
+print(r_dic[max(r_dic)])
+
+</code></pre>
+
+<p>처음에는 큰 부분서열부터 비교해서 일치하는 경우가 있으면 break 하려고 했으나, 여러개인 경우도 있을 것 같아 전체를 다 비교하게 바꾸었습니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/08/19 15:08</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jaeman Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26958"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">a=input(&quot;첫번째 문자열을 입력해주세요&quot;)
+b=input(&quot;두번째 문자열을 입력해주세요&quot;)
+
+def solution (str1,str2):
+    arr=[]
+    if len(str1) &gt;= len(str2):
+        b = str1
+        a = str2
+    else:
+        b = str2
+        a = str1
+    for k in range(len(b)-1):
+        for i in range(k+1,len(b)):
+            if b[k:i] in a :
+                arr.append(b[k:i])
+    arr.sort(key=len,reverse=True)
+    return  print(len(arr[0]),&quot;\n&quot;,arr[0])
+
+solution(a,b)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/05 23:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">양캠부부</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27152"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>// Rust</p>
+<p>// 두 문자열 중 작은 길이를 substring의 최대 길이로 시작,</p>
+<p>// 첫 번째 문자열의 substring 길이를 하나씩 줄여가며, 두 번째 문자열에 포함되어 있는지 확인</p>
+<p>// string slice 두 개를 입력값으로 받으므로, reference(&amp;)의 generic lifetime('a)을 사용해야 합니다.</p>
+<p>fn common_str&lt;'a&gt;(s1: &amp;'a str, s2: &amp;'a str) -&gt; &amp;'a str {</p>
+<pre><code>let mut l = s1.len();
+l = l.min(s2.len());            //두 문자열 중 작은 길이
+
+for i in (1..=l).rev() {        //i 부분문자열 길이(l~1)
+    for j in 0..=(s1.len()-i) {     //j 시작 인덱스 0 ~ s1.len()-i
+        let substr = &amp;s1[j..j+i];   //최대 j+i-1 =&gt; s1.len()-1
+        if s2.contains(substr) { 
+            return substr;
+        }
+    }
+}
+""
+</code></pre>
+<p>}</p>
+<h1 id="test">[test]</h1>
+<p>fn test1() {</p>
+<pre><code>assert_eq!(common_str("photography", "autograph"), "tograph");
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/28 01:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">JW KIM</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27354"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def subset(a):
+    length = len(a)
+    sub = []
+
+    for i in range(length):
+        for j in range(length-i):
+            sub.append(a[i:i+j+1])
+
+    return(sub)
+
+a = subset('photography')
+b = subset('autograph')
+c = list(set(a) &amp; set(b))
+
+for i in range(len(c)-1):
+    if len(c[i]) &gt; len(c[i+1]):
+        c[i], c[i+1] = c[i+1], c[i]
+
+print(len(c[-1]))
+print(c[-1])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/02/16 17:15</p>
+                                <p class="static-profile" style="margin:0;padding:0;">로만가</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28130"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># 문제에서 nice는 n i c e ni ic ce nic nice 이렇게 되있음. &lt;- ice가 누락된것 처럼 보임. 그래서 그냥 둘다 진행
+s1 = 'photography'
+s2 = 'autograph'
+
+# 문제의 예시 'nice'에 맞춘 경우
+def ASDF(s):
+    Set = {i for i in s}|{''}
+    for x in range(1,len(s)):
+        for y in range(1,len(s)):
+            if x * y + 1 &lt;= len(s):
+                Set.add(s[x*(y-1):x*y+1])
+    return Set
+
+print(len(max(ASDF(s1) &amp; ASDF(s2))))
+print(max(ASDF(s1) &amp; ASDF(s2)))
+
+# 출력결과에 맞춘 경우
+def ASDFG(s):
+    Set = set([])
+    for x in range(0,len(s)+1):
+        for y in range(1,len(s)+1):
+            Set.add(s[x:y])
+    return Set
+
+print(len(max(ASDFG(s1) &amp; ASDFG(s2))))
+print(max(ASDFG(s1) &amp; ASDFG(s2)))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/06/26 22:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김시영</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29729"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def longestSubstring(str1, str2):
+    l1, l2 = len(str1), len(str2)
+
+    maxL, cnt = 0, 0
+    maxStr = &quot;&quot;
+    for i in range(l1):
+        for k in range(l2):
+            if str1[i] == str2[k]:
+                cnt = 1
+                while i+cnt&lt;l1 and k+cnt&lt;l2 and str1[i+cnt] == str2[k+cnt]:
+                    cnt += 1
+                if maxL &lt; cnt:
+                    maxL, maxStr = cnt, str1[i:cnt+i]
+    print(&quot;\n %d \n %s&quot; %(maxL, maxStr))
+
+str1 = input('string1: ')
+str2 = input('string2: ')
+longestSubstring(str1, str2)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/10/30 19:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

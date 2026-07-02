@@ -1,0 +1,2855 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="프로젝트 오일러에서 문제를 풀다가 재밌는 문제가 있어서 퍼왔습니다. ^^
+
+[한글 번역(사이냅 소프트)](http://euler.synap.co.kr/prob_detail.php?id=59)
+
+[영문 원본(프로젝트 오일러)](http://...">
+    <title>XOR 방식 암호 풀기 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">XOR 방식 암호 풀기</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">15</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 4</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>프로젝트 오일러에서 문제를 풀다가 재밌는 문제가 있어서 퍼왔습니다. ^^</p>
+<p><a href="http://euler.synap.co.kr/prob_detail.php?id=59">한글 번역(사이냅 소프트)</a></p>
+<p><a href="http://projecteuler.net/problem=59">영문 원본(프로젝트 오일러)</a></p>
+<p>컴퓨터상의 모든 문자들은 유일한 코드값에 대응되는데, 보통 ASCII 표준이 널리 쓰입니다. 예를 들면 대문자 A는 65, 별표(*)는 42, 소문자 k는 107라는 값을 가집니다.</p>
+<p>현대적인 암호화 기법 중에, 텍스트 파일의 내용을 ASCII 코드로 바꾸고 각 바이트를 비밀키의 값으로 XOR 시키는 것이 있습니다. 이 방법의 장점은 암호화와 복호화에 동일한 키를 사용할 수 있다는 것입니다. 예를 들어 65 XOR 42 = 107 이고, 107 XOR 42 = 65 가 됩니다.</p>
+<p>암호문을 절대 깰 수 없도록 하려면, 암호화할 문장의 길이와 같은 무작위의 비밀키를 만들면 됩니다. 암호문과 비밀키는 따로따로 보관해둬야 하고, 그 반쪽짜리 정보 두 개를 함께 확보하지 않는 한 해독은 불가능합니다.</p>
+<p>하지만 이 방법은 대부분의 경우 실용적이지 못하므로, 원문보다 짧은 비밀키를 사용하게 됩니다. 이런 경우 비밀키는 전체 메시지에 대해서 반복적으로 돌아가며 적용됩니다. 이 때 키의 길이는 보안상 충분할 정도로 길어야 하지만 또한 쉽게 기억할 수 있을 정도로 짧아야 한다는 미묘한 균형이 요구됩니다.</p>
+<p>이번 문제를 위해서 준비된 암호화 키는 단 3개의 영어 소문자이고, <a href="http://euler.synap.co.kr/files/cipher1.txt">cipher1.txt</a> 파일에 암호화된 ASCII 코드값이 들어있습니다. 원래의 메시지는 평범한 영어 문장임을 힌트로 삼아서 암호문을 해독하고, 원문에 포함된 모든 ASCII 코드 값의 총합을 구하세요.</p>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2014/05/30 09:59</p>
+                    <p class="static-profile" style="margin:0;padding:0;">한 성탁</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>33개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_728"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">8</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>가장 중요한 점은 평범한 영어 문장에서 가장 많이 나오는 것은 공백이라는 것입니다.</p>
+<p>우선 R에서 기본적으로는 2진법을 지원 안하기 때문에 2진수화 하는 함수와 xor 연산을 해주는 함수를 생성하였고 ascii값은 표를 보고 알파벳과 숫자, 일부 특수문자만 지정해줬습니다.</p>
+<p>암호화 키가 3개의 영어 소문자기 때문에 주어진 암호를 3등분 해서 공백이 가장 많이 나오는 경우의 영어 소문자와 자리 순서를 찾았습니다.</p>
+<p>암호화 키는 god, 더한 값은 107359, 복호화한 문장은 </p>
+<blockquote>
+<p>(The Gospel of John, chapter 1) 1 In the beginning the Word already existed. He was with God, and he was God. 2 He was in the beginning with God. 3 He created everything there is. Nothing exists that he didn't make. 4 Life itself was in him, and this life gives light to everyone. 5 The light shines through the darkness, and the darkness can never extinguish it. 6 God sent John the Baptist 7 to tell everyone about the light so that everyone might believe because of his testimony. 8 John himself was not the light● he was only a witness to the light. 9 The one who is the true light, who gives light to everyone, was going to come into the world. 10 But although the world was made through him, the world didn't recognize him when he came. 11 Even in his own land and among his own people, he was not accepted. 12 But to all who believed him and accepted him, he gave the right to become children of God. 13 They are reborn! This is not a physical birth resulting from human passion or plan, this rebirth comes from God.14 So the Word became human and lived here on earth among us. He was full of unfailing love and faithfulness. And we have seen his glory, the glory of the only Son of the Father.</p>
+</blockquote>
+<p>요한복음 1장이라고 하네요. 중간의 ●는 ";" 입니다. 제가 ascii 값을 다 안 써줘서 그렇네요</p>
+<pre><code class="r">d59=scan(&quot;C:/Users//Administrator//Desktop//Google Drive//project euler//cipher1.txt&quot;, sep=&quot;,&quot;)
+
+binary=function(n){
+  v=vector()
+  i=1
+  while(n&gt;1){
+    v[i]=n%%2
+    n=n%/%2
+    i=i+1
+  }
+  c(1, rev(v))
+}
+
+xor.num=function(n1, n2){ 
+  if(n1==0) return(n2)
+  l1=floor(log2(n1))+1
+  l2=floor(log2(n2))+1
+
+  if(l1&gt;l2){
+    bit1=binary(n1)
+    bit2=c(rep(0, l1-l2)  , binary(n2))
+  } else if(l1&lt;l2){
+    bit1=c(rep(0, l2-l1)  , binary(n1))
+    bit2=binary(n2)
+    l1=l2
+  } else {
+    bit1=binary(n1)
+    bit2=binary(n2)
+  }
+  t=bit1!=bit2
+  sum(2^seq(l1-1, 0, by=-1)[t])
+}
+
+ascii=rep(&quot;●&quot;, 150)
+ascii[32:47]=c(&quot; &quot;, &quot;!&quot;, &quot;\&quot;&quot;, &quot;#&quot;, &quot;$&quot;, &quot;%&quot;, &quot;&amp;&quot;, &quot;'&quot;, &quot;(&quot;, &quot;)&quot;, &quot;*&quot;, &quot;+&quot;, &quot;,&quot;, &quot;-&quot;, &quot;.&quot;, &quot;/&quot;)
+ascii[48:57]=0:9
+ascii[65:90]=LETTERS
+ascii[97:122]=letters
+
+l=list()
+k=1
+for(i in 97:122){
+    d=sapply(d59, xor.num, n2=i)
+    l[[k]]=ascii[d]
+    k=k+1
+}
+
+l2=lapply(l, 
+  function(x){
+    len=length(x)
+    v1=x[seq(1, len, by=3)]
+    v2=x[seq(2, len, by=3)]
+    v3=x[seq(3, len, by=3)]
+    y=c(mean(v1==&quot; &quot;),mean(v2==&quot; &quot;),mean(v3==&quot; &quot;))
+    y
+  }
+)
+l2
+#4-3, 7-1, 15-2
+#god 103-111-100
+
+
+s=function(n) seq(n, length(d59), by=3)
+d59[s(1)]=sapply(d59[s(1)], xor.num, n2=103)
+d59[s(2)]=sapply(d59[s(2)], xor.num, n2=111)
+d59[s(3)]=sapply(d59[s(3)], xor.num, n2=100)
+#paste(ascii[d59], collapse=&quot;&quot;)
+sum(d59)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/05/30 12:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">한 성탁</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1455"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">아, 공백이 가장 많이 나오는군요.. 재밌네요 ^^</span>
+                                -
+                                <span style="font-size:11px;">
+                                    pahkey,
+                                    2014/05/30 17:24
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1773"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">혹시 R 언어 배울 때 참고할 만한 책 추천좀 부탁드립니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Dr.Choi,
+                                    2016/05/19 01:35
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1774"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;"><a href="http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&amp;mallGb=KOR&amp;barcode=9788960773332&amp;orderClick=LAG&amp;Kc=" rel="nofollow">http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&amp;mallGb=KOR&amp;barcode=9788960773332&amp;orderClick=LAG&amp;Kc=</a>
+<a href="http://www.amazon.com/Art-Programming-Statistical-Software-Design/dp/1593273843" rel="nofollow">http://www.amazon.com/Art-Programming-Statistical-Software-Design/dp/1593273843</a>
+저는 이 책으로 공부했습니다만 이 외에도 좋은 책이 많습니다</span>
+                                -
+                                <span style="font-size:11px;">
+                                    한 성탁,
+                                    2016/05/19 14:31
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_729"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>"평범한 영어 문장"이라는 힌트에 착안해서 복호화 한 문장에서 " and " 라는 문장이 있는지 조사 해 보았습니다. 운좋게도 " and " 라는 문장을 찾을 수 있었네요. </p>
+<p>암호화 키를 aaa 부터 zzz 까지 다 대입 해 보는 무식한 방법입니다.</p>
+<p>python 2.7</p>
+<pre><code class="python">f = open(&quot;c:/temp/cipher1.txt&quot;)
+data = f.read()
+f.close()
+
+def decrypt(encrypted, key):
+    result = []
+    key = map(ord, list(key))
+    total = 0
+    for i, s in enumerate(encrypted):
+        e = int(s)
+        k = key[i%3]
+        d = e ^ k
+        total += d
+        result.append(chr(d))
+    return total, ''.join(result)
+
+
+alpha = &quot;abcdefghijklmnopqrstuvwxyz&quot;
+encrypted = data.split(&quot;,&quot;)
+for s1 in alpha:
+    for s2 in alpha:
+        for s3 in alpha:
+            key = s1+s2+s3
+            total, r = decrypt(encrypted, key)
+            if r.find(&quot; and &quot;) != -1:
+                print &quot;key:&quot;, key
+                print &quot;sum:&quot;, total
+                print r
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/05/30 17:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">pahkey</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_1225"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="scala">val cipher = &quot;&quot;&quot;
+79,59,12,2,79,35,8,28,20,2,3,68,8,9,68,45,0,12,9,67,68,4,7,5,23,27,1,21,79,85,78,79,85,71,38,10,71,27,12,2,79,6,2,8,13,9,1,13,9,8,68,19,7,1,71,56,11,21,11,68,6,3,22,2,14,0,30,79,1,31,6,23,19,10,0,73,79,44,2,79,19,6,28,68,16,6,16,15,79,35,8,11,72,71,14,10,3,79,12,2,79,19,6,28,68,32,0,0,73,79,86,71,39,1,71,24,5,20,79,13,9,79,16,15,10,68,5,10,3,14,1,10,14,1,3,71,24,13,19,7,68,32,0,0,73,79,87,71,39,1,71,12,22,2,14,16,2,11,68,2,25,1,21,22,16,15,6,10,0,79,16,15,10,22,2,79,13,20,65,68,41,0,16,15,6,10,0,79,1,31,6,23,19,28,68,19,7,5,19,79,12,2,79,0,14,11,10,64,27,68,10,14,15,2,65,68,83,79,40,14,9,1,71,6,16,20,10,8,1,79,19,6,28,68,14,1,68,15,6,9,75,79,5,9,11,68,19,7,13,20,79,8,14,9,1,71,8,13,17,10,23,71,3,13,0,7,16,71,27,11,71,10,18,2,29,29,8,1,1,73,79,81,71,59,12,2,79,8,14,8,12,19,79,23,15,6,10,2,28,68,19,7,22,8,26,3,15,79,16,15,10,68,3,14,22,12,1,1,20,28,72,71,14,10,3,79,16,15,10,68,3,14,22,12,1,1,20,28,68,4,14,10,71,1,1,17,10,22,71,10,28,19,6,10,0,26,13,20,7,68,14,27,74,71,89,68,32,0,0,71,28,1,9,27,68,45,0,12,9,79,16,15,10,68,37,14,20,19,6,23,19,79,83,71,27,11,71,27,1,11,3,68,2,25,1,21,22,11,9,10,68,6,13,11,18,27,68,19,7,1,71,3,13,0,7,16,71,28,11,71,27,12,6,27,68,2,25,1,21,22,11,9,10,68,10,6,3,15,27,68,5,10,8,14,10,18,2,79,6,2,12,5,18,28,1,71,0,2,71,7,13,20,79,16,2,28,16,14,2,11,9,22,74,71,87,68,45,0,12,9,79,12,14,2,23,2,3,2,71,24,5,20,79,10,8,27,68,19,7,1,71,3,13,0,7,16,92,79,12,2,79,19,6,28,68,8,1,8,30,79,5,71,24,13,19,1,1,20,28,68,19,0,68,19,7,1,71,3,13,0,7,16,73,79,93,71,59,12,2,79,11,9,10,68,16,7,11,71,6,23,71,27,12,2,79,16,21,26,1,71,3,13,0,7,16,75,79,19,15,0,68,0,6,18,2,28,68,11,6,3,15,27,68,19,0,68,2,25,1,21,22,11,9,10,72,71,24,5,20,79,3,8,6,10,0,79,16,8,79,7,8,2,1,71,6,10,19,0,68,19,7,1,71,24,11,21,3,0,73,79,85,87,79,38,18,27,68,6,3,16,15,0,17,0,7,68,19,7,1,71,24,11,21,3,0,71,24,5,20,79,9,6,11,1,71,27,12,21,0,17,0,7,68,15,6,9,75,79,16,15,10,68,16,0,22,11,11,68,3,6,0,9,72,16,71,29,1,4,0,3,9,6,30,2,79,12,14,2,68,16,7,1,9,79,12,2,79,7,6,2,1,73,79,85,86,79,33,17,10,10,71,6,10,71,7,13,20,79,11,16,1,68,11,14,10,3,79,5,9,11,68,6,2,11,9,8,68,15,6,23,71,0,19,9,79,20,2,0,20,11,10,72,71,7,1,71,24,5,20,79,10,8,27,68,6,12,7,2,31,16,2,11,74,71,94,86,71,45,17,19,79,16,8,79,5,11,3,68,16,7,11,71,13,1,11,6,1,17,10,0,71,7,13,10,79,5,9,11,68,6,12,7,2,31,16,2,11,68,15,6,9,75,79,12,2,79,3,6,25,1,71,27,12,2,79,22,14,8,12,19,79,16,8,79,6,2,12,11,10,10,68,4,7,13,11,11,22,2,1,68,8,9,68,32,0,0,73,79,85,84,79,48,15,10,29,71,14,22,2,79,22,2,13,11,21,1,69,71,59,12,14,28,68,14,28,68,9,0,16,71,14,68,23,7,29,20,6,7,6,3,68,5,6,22,19,7,68,21,10,23,18,3,16,14,1,3,71,9,22,8,2,68,15,26,9,6,1,68,23,14,23,20,6,11,9,79,11,21,79,20,11,14,10,75,79,16,15,6,23,71,29,1,5,6,22,19,7,68,4,0,9,2,28,68,1,29,11,10,79,35,8,11,74,86,91,68,52,0,68,19,7,1,71,56,11,21,11,68,5,10,7,6,2,1,71,7,17,10,14,10,71,14,10,3,79,8,14,25,1,3,79,12,2,29,1,71,0,10,71,10,5,21,27,12,71,14,9,8,1,3,71,26,23,73,79,44,2,79,19,6,28,68,1,26,8,11,79,11,1,79,17,9,9,5,14,3,13,9,8,68,11,0,18,2,79,5,9,11,68,1,14,13,19,7,2,18,3,10,2,28,23,73,79,37,9,11,68,16,10,68,15,14,18,2,79,23,2,10,10,71,7,13,20,79,3,11,0,22,30,67,68,19,7,1,71,8,8,8,29,29,71,0,2,71,27,12,2,79,11,9,3,29,71,60,11,9,79,11,1,79,16,15,10,68,33,14,16,15,10,22,73
+&quot;&quot;&quot;.trim
+
+val chars = cipher.split(&quot;,&quot;).map(_.toInt).zipWithIndex
+
+val az = 'a' to 'z'
+
+val keys = for {
+    k1 &lt;- az
+    k2 &lt;- az
+    k3 &lt;- az
+} yield Seq(k1, k2, k3).mkString
+
+def decode(key: String): Seq[Int] = {
+    chars.map{case (c, i) =&gt; c ^ key(i % 3)}
+}
+
+val key = keys.maxBy { key =&gt;
+    decode(key).filter(_ == ' ').size
+}
+
+val decoded = decode(key)
+
+println(key)
+println(decoded.sum)
+println(decoded.map(_.toChar).mkString)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/12/04 19:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">killbirds</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_1333"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># 적어도 글의 맨 마지막에는 마침표가 있을 것이라고 생각해서 역추적하니까 첫번째 글자는 g임을 알 수 있었습니다. 나머지는 해독한 후의 글에 the가 있어야 하는 것을 이용했습니다.
+
+def is_possible_cipher1(sentence_list_ver, second, third):
+    length = len(sentence_list_ver)
+    list_converted = sentence_list_ver[:]
+    for i in range(len(list_converted)):
+        j = i + 1
+        list_converted[i] = int(list_converted[i])
+        if j % 3 == 1:
+            temp = list_converted[i]    
+            temp = temp ^ 103
+            list_converted[i] = chr(temp)
+        elif j % 3 == 2:
+            temp = list_converted[i]    
+            temp = temp ^ second
+            list_converted[i] = chr(temp)
+        else:
+            temp = list_converted[i]    
+            temp = temp ^ third
+            list_converted[i] = chr(temp)
+    sum_ascii = 0
+    for letter in list_converted:
+        sum_ascii += ord(letter)
+
+    test_it = ''.join(list_converted)
+    test_it = test_it.split(' ')
+    if 'the' in test_it:
+        print ' '.join(test_it), sum_ascii
+        return True
+
+    return False
+
+t = open('cipher.txt', 'r')
+sentence = t.readline()
+sentence = sentence.strip()
+sentence = sentence.split(',')
+
+possible_pairs = []
+for y in range(97, 123):
+    for z in range(97, 123):
+        if is_possible_cipher1(sentence, y, z):
+            possible_pairs.append((chr(y), chr(z)))
+
+passwd = ['g', possible_pairs[0][0], possible_pairs[0][1]]
+
+print ''.join(passwd)
+
+t.close()
+
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/12/29 21:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김슈타인</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2868"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>오일러에서 풀었을때는 무식하게 풀었었는데.. 오일러에서 다른 분 로직 훔쳐왔습니다.
+패스워드 세글자를 조합하는게 아니구요,
+암호문에서 첫글자에 대응되는 부분만 가져와서 가장 많은 공백을 만드는 문자를 찾습니다.
+두번째 문자, 세번재 문자 모두 하면 3글자를 찾을 수 있습니다.
+루프는 26*3 번만 돌아갑니다.
+실행시간은 0.01초 미만이구요.</p>
+<pre><code class="python">s = map(int,open('cipher1.txt').read().split(','))
+res=0
+for i in range(3):
+    alphaMax=0
+    for c in range(ord('a'),ord('z')+1):
+        alpha = [n^c for n in s[i::3]].count(ord(' '))
+        if alpha &gt; alphaMax :
+            alphaMax = alpha
+            passchar = c
+    res += sum( n^passchar for n in s[i::3] )
+print res
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/01/23 20:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">상파</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3456"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <ol>
+<li>평범한 영어문장에서 가장 많이 나오는 알파벳 글자는 <code>e</code>이지만, 문자로는 공백이 가장 많이 나옵니다. </li>
+<li>영어에서 단어 단위로 가장 많이 쓰이는 단어는 the, be, to, of, and ... 순입니다. 참고: <a href="https://en.wikipedia.org/wiki/Most_common_words_in_English">위키피디아</a></li>
+</ol>
+<p>따라서 세 글자로 된 키를 조합하여 공백이 가장 많이 나오는 구성을 추린 후, 그 중에서 the 가 2회 이상 나오도록 디코딩되는 키를 찾습니다. </p>
+<pre><code class="python">from itertools import cycle, combinations_with_replacement, product
+from urllib.request import urlopen
+
+data = urlopen('http://euler.synap.co.kr/files/cipher1.txt').read().decode('utf-8')
+codes = [int(x) for x in data.split(',')]
+
+def decode(ciphers, key):
+    return &quot;&quot;.join([chr(x^y) for x, y in zip(ciphers, cycle([ord(c) for c in key]))])
+
+
+def guess_key_from_spaces():
+    m = {}
+    for c in codes:
+        m[c] = m.setdefault(c, 0) + 1
+
+    fc = sorted(m.items(), key=lambda x:x[1], reverse=True)[:3]
+    return [chr(x^ord(' ')) for x, _ in fc]
+
+
+def p59():
+    msg = [decode(codes, x) for x in product(guess_key_from_spaces(), repeat=3) if decode(codes, x).count('the') &gt; 1]
+    print(sum((ord(x) for x in msg[0])))
+
+%time p59()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/04/19 09:38</p>
+                                <p class="static-profile" style="margin:0;padding:0;">룰루랄라</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_731"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>풀이 방법은 첫번째 올리신 분과 비슷한 것 같습니다. 제가 R을 몰라서 알고리즘 파악이 안 되네요.
+제가 Python을 시작한지 일주일이 되어서 코드가 깔끔하지 못하니 이해해 주시기 바랍니다.</p>
+<p>원리는 다음과 같습니다.</p>
+<ol>
+<li>암호가 3자리이므로 원문을 3등분한다. 실제로 3등분은 아니고 3칸씩 건너뛰면서 xor진행</li>
+<li>암호 한 자리는 a~z까지 순환하면서 xor을 시키는데, 이 중 스페이스가 해당 등분의 문제 개수 중 10% 이상이면 그것이 key값으로 간주한다.</li>
+<li>위 2번을 암호 각자리별로 실행하고, 그 결과 값을 취합한다.</li>
+</ol>
+<p>위와 같이 할 경우 속도는 O(n)으로 계산되어 빠른 속도가 장점입니다.</p>
+<pre><code class="python"> def get_plain_in_col(text, col):
+
+    for k in range(ord('a'), ord('z')):
+        plain = &quot;&quot;
+        space_count = 0
+        char_count = 0
+        plain = &quot;&quot;
+
+        for i, t in enumerate(text):
+            if i % 3 != col:
+                continue
+            char_count += 1
+            value = t ^ k
+
+            plain += chr(value)
+            if chr(value) == ' ':
+                space_count += 1
+
+        if space_count &gt;= (char_count * 0.1 ):
+            return k, plain
+
+    return None, None
+
+
+file = open(&quot;cipher1.txt&quot;, &quot;rt&quot;)
+data = file.readline();
+file.close()
+
+data=data.split(',')
+encrypted_num=map(int, data)
+
+k1,t1=get_plain_in_col(encrypted_num, 0)
+k2,t2=get_plain_in_col(encrypted_num, 1)
+k3,t3=get_plain_in_col(encrypted_num, 2)
+
+plain=&quot;&quot;
+i=0
+total=0
+while 1:
+    try:
+        plain += t1[i] + t2[i] + t3[i]
+        i+=1
+        total += ord(t1[i]) + ord(t2[i]) + ord(t3[i])
+    except IndexError:
+        break
+
+print (&quot;Key: {0}\nTotal; {1}\nText: {2}\n&quot;.format(chr(k1) + chr(k2) + chr(k3), 
+        total, plain))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/05/31 03:03</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박 성호</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_741"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>보통 문장의 시작으로 나오지 않는 특수문자를 먼저 제거하고, 가능성이 높은 key 조합을 찾아 list-up 한 뒤
+하나씩 대입해보는 방식으로 작성해보았습니다.</p>
+<pre><code class="python">import sys
+
+text = []
+convertText = []
+
+#array save
+try :
+    with open(&quot;my_problem_59_cipher1.txt&quot;) as data :
+        for line in data :
+            text = line.strip().split(',')
+except IOError :
+    print &quot;File open error&quot;
+
+convertTextInt = [int(dd) for dd in text]
+lenConvertText = len(convertText)
+
+convertRangeStart = 97
+convertRangeEnd = 122
+
+keySuspects = []
+maxChr = ' '
+
+for t1 in range(convertRangeStart,convertRangeEnd+1) :
+    for t2 in range(convertRangeStart,convertRangeEnd+1) :
+        for t3 in range(convertRangeStart,convertRangeEnd+1) :
+            kk = [t1,t2,t3]
+            tempConvertedText = []
+            tempPreCheck = convertTextInt[0]
+
+            temp = chr(kk[0]^tempPreCheck)            
+            if temp=='.' or temp=='-' or temp==',' or temp=='+' or temp=='*' \
+               or temp==')' or temp=='}' or temp=='{' or temp=='0' \
+               or temp=='$' or temp=='`' or temp=='\'' or temp=='&amp;' or temp=='%' \
+               or temp=='#' or temp=='\&quot;' or temp=='!' or temp==' ' \
+               or temp=='?' or temp=='&gt;' or temp=='=' or temp=='&lt;' or temp==';' \
+               or temp==':' or (ord(temp)&gt;=49 and ord(temp)&lt;=57) or temp=='/' \
+               or ord(temp)&gt;126 or temp=='~': 
+                pass
+            else :
+                ttt = 0
+                for src in convertTextInt :
+                    temp = kk[ttt]^src
+                    tempConvertedText.append(chr(temp))
+                    ttt +=1 
+                    if ttt==3 :
+                        ttt = 0
+
+                tempConvertedTextStr = &quot;&quot;.join(tempConvertedText)
+                if &quot;The&quot; in tempConvertedTextStr :
+                    print tempConvertedTextStr, chr(t1),chr(t2),chr(t3)
+                    keySuspects.append(t1)
+                    keySuspects.append(t2)
+                    keySuspects.append(t3)
+
+ttt = 0
+sum = 0
+for src in convertTextInt :
+    temp = keySuspects[ttt]^src
+    sum += temp
+    ttt +=1 
+    if ttt==3 :
+        ttt = 0
+
+print &quot;Answer : &quot;,sum
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/06/05 14:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">suker</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_809"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#python 3.2.5
+cipher1=(79,59,12,2,79,35,8,28,20,2,3,68,8,9,68,45,0,12,9,67,68,4,7,5,23,27,1,21,79,85,78,79,85,71,38,10,71,27,12,2,79,6,2,8,13,9,1,13,9,8,68,19,7,1,71,56,11,21,11,68,6,3,22,2,14,0,30,79,1,31,6,23,19,10,0,73,79,44,2,79,19,6,28,68,16,6,16,15,79,35,8,11,72,71,14,10,3,79,12,2,79,19,6,28,68,32,0,0,73,79,86,71,39,1,71,24,5,20,79,13,9,79,16,15,10,68,5,10,3,14,1,10,14,1,3,71,24,13,19,7,68,32,0,0,73,79,87,71,39,1,71,12,22,2,14,16,2,11,68,2,25,1,21,22,16,15,6,10,0,79,16,15,10,22,2,79,13,20,65,68,41,0,16,15,6,10,0,79,1,31,6,23,19,28,68,19,7,5,19,79,12,2,79,0,14,11,10,64,27,68,10,14,15,2,65,68,83,79,40,14,9,1,71,6,16,20,10,8,1,79,19,6,28,68,14,1,68,15,6,9,75,79,5,9,11,68,19,7,13,20,79,8,14,9,1,71,8,13,17,10,23,71,3,13,0,7,16,71,27,11,71,10,18,2,29,29,8,1,1,73,79,81,71,59,12,2,79,8,14,8,12,19,79,23,15,6,10,2,28,68,19,7,22,8,26,3,15,79,16,15,10,68,3,14,22,12,1,1,20,28,72,71,14,10,3,79,16,15,10,68,3,14,22,12,1,1,20,28,68,4,14,10,71,1,1,17,10,22,71,10,28,19,6,10,0,26,13,20,7,68,14,27,74,71,89,68,32,0,0,71,28,1,9,27,68,45,0,12,9,79,16,15,10,68,37,14,20,19,6,23,19,79,83,71,27,11,71,27,1,11,3,68,2,25,1,21,22,11,9,10,68,6,13,11,18,27,68,19,7,1,71,3,13,0,7,16,71,28,11,71,27,12,6,27,68,2,25,1,21,22,11,9,10,68,10,6,3,15,27,68,5,10,8,14,10,18,2,79,6,2,12,5,18,28,1,71,0,2,71,7,13,20,79,16,2,28,16,14,2,11,9,22,74,71,87,68,45,0,12,9,79,12,14,2,23,2,3,2,71,24,5,20,79,10,8,27,68,19,7,1,71,3,13,0,7,16,92,79,12,2,79,19,6,28,68,8,1,8,30,79,5,71,24,13,19,1,1,20,28,68,19,0,68,19,7,1,71,3,13,0,7,16,73,79,93,71,59,12,2,79,11,9,10,68,16,7,11,71,6,23,71,27,12,2,79,16,21,26,1,71,3,13,0,7,16,75,79,19,15,0,68,0,6,18,2,28,68,11,6,3,15,27,68,19,0,68,2,25,1,21,22,11,9,10,72,71,24,5,20,79,3,8,6,10,0,79,16,8,79,7,8,2,1,71,6,10,19,0,68,19,7,1,71,24,11,21,3,0,73,79,85,87,79,38,18,27,68,6,3,16,15,0,17,0,7,68,19,7,1,71,24,11,21,3,0,71,24,5,20,79,9,6,11,1,71,27,12,21,0,17,0,7,68,15,6,9,75,79,16,15,10,68,16,0,22,11,11,68,3,6,0,9,72,16,71,29,1,4,0,3,9,6,30,2,79,12,14,2,68,16,7,1,9,79,12,2,79,7,6,2,1,73,79,85,86,79,33,17,10,10,71,6,10,71,7,13,20,79,11,16,1,68,11,14,10,3,79,5,9,11,68,6,2,11,9,8,68,15,6,23,71,0,19,9,79,20,2,0,20,11,10,72,71,7,1,71,24,5,20,79,10,8,27,68,6,12,7,2,31,16,2,11,74,71,94,86,71,45,17,19,79,16,8,79,5,11,3,68,16,7,11,71,13,1,11,6,1,17,10,0,71,7,13,10,79,5,9,11,68,6,12,7,2,31,16,2,11,68,15,6,9,75,79,12,2,79,3,6,25,1,71,27,12,2,79,22,14,8,12,19,79,16,8,79,6,2,12,11,10,10,68,4,7,13,11,11,22,2,1,68,8,9,68,32,0,0,73,79,85,84,79,48,15,10,29,71,14,22,2,79,22,2,13,11,21,1,69,71,59,12,14,28,68,14,28,68,9,0,16,71,14,68,23,7,29,20,6,7,6,3,68,5,6,22,19,7,68,21,10,23,18,3,16,14,1,3,71,9,22,8,2,68,15,26,9,6,1,68,23,14,23,20,6,11,9,79,11,21,79,20,11,14,10,75,79,16,15,6,23,71,29,1,5,6,22,19,7,68,4,0,9,2,28,68,1,29,11,10,79,35,8,11,74,86,91,68,52,0,68,19,7,1,71,56,11,21,11,68,5,10,7,6,2,1,71,7,17,10,14,10,71,14,10,3,79,8,14,25,1,3,79,12,2,29,1,71,0,10,71,10,5,21,27,12,71,14,9,8,1,3,71,26,23,73,79,44,2,79,19,6,28,68,1,26,8,11,79,11,1,79,17,9,9,5,14,3,13,9,8,68,11,0,18,2,79,5,9,11,68,1,14,13,19,7,2,18,3,10,2,28,23,73,79,37,9,11,68,16,10,68,15,14,18,2,79,23,2,10,10,71,7,13,20,79,3,11,0,22,30,67,68,19,7,1,71,8,8,8,29,29,71,0,2,71,27,12,2,79,11,9,3,29,71,60,11,9,79,11,1,79,16,15,10,68,33,14,16,15,10,22,73)
+
+
+def make_clouser(key):
+    i = -1
+    def cl(e):
+        nonlocal i
+        i += 1
+        if i&gt;2 : i=0
+        return chr(e ^ key[i])
+    return cl
+
+def decode(encrypted, key, plain_text):
+    itr = map(make_clouser(key), encrypted)
+    chk = filter(lambda x: x not in plain_text, itr)
+    if any(chk):
+        return False
+    rt = map(make_clouser(key), encrypted)
+    return ''.join(rt)
+
+def main():
+
+    plain_text  = [chr(i) for i in range(ord(' '), ord('/')+1)]
+    plain_text += [chr(i) for i in range(ord('0'), ord('9')+1)]
+    plain_text += [chr(i) for i in range(ord('A'), ord('Z')+1)]
+    plain_text += [chr(i) for i in range(ord('a'), ord('z')+1)]
+    plain_text += list(':;?')
+
+    print('START')
+    S,E = ord('a'), ord('z')+1
+    for i in range(S,E):
+        for j in range(S,E):
+            for k in range(S,E):
+                rt = decode(cipher1, (i,j,k), plain_text)
+                if rt :
+                    print('key : ' + chr(i)+chr(j)+chr(k))
+                    print(rt)
+
+    print('END')
+
+if __name__ == '__main__':
+    main()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/07/01 17:26</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Mun Kyeongsam</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_826"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>저도 비슷한 방법입니다. 모든 키를 생성하면서, 암호문을 모두 변경후에, 영어에서 잘 쓰이는 단어를 검색해서 키를 추적했습니다.
+영어에서 잘 쓰이는 단어 "the", "and" 를 검색했으며, 검색 단어의 종류와 길이에 따라서 다르겠지만, 저 같은 경우는 중복검색으로
+35개의 키단어를 예측했고, 그것을 리다이렉션을 이용. (&gt;&gt;) 파일로 저장해서 값을 확인했습니다.</p>
+<p>Key: god
+사용언어: C</p>
+<pre><code class="cpp">#include &lt;stdio.h&gt;
+#define LastAscii 123
+
+// a:97 ~ z 122
+// 빈도수 가장 높은 단어 3개 준비 1.the,2.be,3.and - 5000 most common words 참조
+// 이용은 the 와 and를 이용.
+
+void PrintAsciitoletter(int *mText);
+void Print_Key(int *mText);
+
+
+int main()
+{
+
+    int TargetText[1205]={79,59,12,2,79,35,8,28,20,2,3,68,8,9,68,45,0,12,9,67,68,4,7,5,23,27,1,21,79,85,78,79,85,71,38,10,71,27,12,2,79,6,2,8,13,9,1,13,9,8,68,19,7,1,71,56,11,21,11,68,6,3,22,2,14,0,30,79,1,31,6,23,19,10,0,73,79,44,2,79,19,6,28,68,16,6,16,15,79,35,8,11,72,71,14,10,3,79,12,2,79,19,6,28,68,32,0,0,73,79,86,71,39,1,71,24,5,20,79,13,9,79,16,15,10,68,5,10,3,14,1,10,14,1,3,71,24,13,19,7,68,32,0,0,73,79,87,71,39,1,71,12,22,2,14,16,2,11,68,2,25,1,21,22,16,15,6,10,0,79,16,15,10,22,2,79,13,20,65,68,41,0,16,15,6,10,0,79,1,31,6,23,19,28,68,19,7,5,19,79,12,2,79,0,14,11,10,64,27,68,10,14,15,2,65,68,83,79,40,14,9,1,71,6,16,20,10,8,1,79,19,6,28,68,14,1,68,15,6,9,75,79,5,9,11,68,19,7,13,20,79,8,14,9,1,71,8,13,17,10,23,71,3,13,0,7,16,71,27,11,71,10,18,2,29,29,8,1,1,73,79,81,71,59,12,2,79,8,14,8,12,19,79,23,15,6,10,2,28,68,19,7,22,8,26,3,15,79,16,15,10,68,3,14,22,12,1,1,20,28,72,71,14,10,3,79,16,15,10,68,3,14,22,12,1,1,20,28,68,4,14,10,71,1,1,17,10,22,71,10,28,19,6,10,0,26,13,20,7,68,14,27,74,71,89,68,32,0,0,71,28,1,9,27,68,45,0,12,9,79,16,15,10,68,37,14,20,19,6,23,19,79,83,71,27,11,71,27,1,11,3,68,2,25,1,21,22,11,9,10,68,6,13,11,18,27,68,19,7,1,71,3,13,0,7,16,71,28,11,71,27,12,6,27,68,2,25,1,21,22,11,9,10,68,10,6,3,15,27,68,5,10,8,14,10,18,2,79,6,2,12,5,18,28,1,71,0,2,71,7,13,20,79,16,2,28,16,14,2,11,9,22,74,71,87,68,45,0,12,9,79,12,14,2,23,2,3,2,71,24,5,20,79,10,8,27,68,19,7,1,71,3,13,0,7,16,92,79,12,2,79,19,6,28,68,8,1,8,30,79,5,71,24,13,19,1,1,20,28,68,19,0,68,19,7,1,71,3,13,0,7,16,73,79,93,71,59,12,2,79,11,9,10,68,16,7,11,71,6,23,71,27,12,2,79,16,21,26,1,71,3,13,0,7,16,75,79,19,15,0,68,0,6,18,2,28,68,11,6,3,15,27,68,19,0,68,2,25,1,21,22,11,9,10,72,71,24,5,20,79,3,8,6,10,0,79,16,8,79,7,8,2,1,71,6,10,19,0,68,19,7,1,71,24,11,21,3,0,73,79,85,87,79,38,18,27,68,6,3,16,15,0,17,0,7,68,19,7,1,71,24,11,21,3,0,71,24,5,20,79,9,6,11,1,71,27,12,21,0,17,0,7,68,15,6,9,75,79,16,15,10,68,16,0,22,11,11,68,3,6,0,9,72,16,71,29,1,4,0,3,9,6,30,2,79,12,14,2,68,16,7,1,9,79,12,2,79,7,6,2,1,73,79,85,86,79,33,17,10,10,71,6,10,71,7,13,20,79,11,16,1,68,11,14,10,3,79,5,9,11,68,6,2,11,9,8,68,15,6,23,71,0,19,9,79,20,2,0,20,11,10,72,71,7,1,71,24,5,20,79,10,8,27,68,6,12,7,2,31,16,2,11,74,71,94,86,71,45,17,19,79,16,8,79,5,11,3,68,16,7,11,71,13,1,11,6,1,17,10,0,71,7,13,10,79,5,9,11,68,6,12,7,2,31,16,2,11,68,15,6,9,75,79,12,2,79,3,6,25,1,71,27,12,2,79,22,14,8,12,19,79,16,8,79,6,2,12,11,10,10,68,4,7,13,11,11,22,2,1,68,8,9,68,32,0,0,73,79,85,84,79,48,15,10,29,71,14,22,2,79,22,2,13,11,21,1,69,71,59,12,14,28,68,14,28,68,9,0,16,71,14,68,23,7,29,20,6,7,6,3,68,5,6,22,19,7,68,21,10,23,18,3,16,14,1,3,71,9,22,8,2,68,15,26,9,6,1,68,23,14,23,20,6,11,9,79,11,21,79,20,11,14,10,75,79,16,15,6,23,71,29,1,5,6,22,19,7,68,4,0,9,2,28,68,1,29,11,10,79,35,8,11,74,86,91,68,52,0,68,19,7,1,71,56,11,21,11,68,5,10,7,6,2,1,71,7,17,10,14,10,71,14,10,3,79,8,14,25,1,3,79,12,2,29,1,71,0,10,71,10,5,21,27,12,71,14,9,8,1,3,71,26,23,73,79,44,2,79,19,6,28,68,1,26,8,11,79,11,1,79,17,9,9,5,14,3,13,9,8,68,11,0,18,2,79,5,9,11,68,1,14,13,19,7,2,18,3,10,2,28,23,73,79,37,9,11,68,16,10,68,15,14,18,2,79,23,2,10,10,71,7,13,20,79,3,11,0,22,30,67,68,19,7,1,71,8,8,8,29,29,71,0,2,71,27,12,2,79,11,9,3,29,71,60,11,9,79,11,1,79,16,15,10,68,33,14,16,15,10,22,73};
+    int myKey[3]={97,97,97};
+    int mKeyCount;
+    int OutputText[1205];
+    int ChangeIndex=0;
+    int SearchIndex=0;
+    int SearchIndex2=0;
+    int iFirst,iMiddle,iLast;
+    int count=0;
+
+
+    for(iFirst=97; iFirst &lt; LastAscii; iFirst++)
+    {
+        myKey[0] = iFirst;
+        for(iMiddle=97; iMiddle &lt; LastAscii; iMiddle++)
+        {
+            myKey[1] = iMiddle;
+            for(iLast=97; iLast &lt; LastAscii; iLast++)
+            {
+                myKey[2]=iLast;
+
+                ChangeIndex=0;
+                while(ChangeIndex &lt; 1202)
+                {
+                    for(mKeyCount=0; mKeyCount &lt; 3; mKeyCount++)
+                    {
+                        if(ChangeIndex &gt; 1202)
+                        {
+                            break;
+                        }
+                        OutputText[ChangeIndex] = TargetText[ChangeIndex] ^ myKey[mKeyCount];
+                        ChangeIndex++;
+                    }
+
+                }// 하나의 키로 암호문 모두 변경.
+
+
+                SearchIndex=0;
+                while(SearchIndex &lt; (1202-2))
+                {
+                    if(OutputText[SearchIndex] == 116) // t
+                    {
+                        if(OutputText[SearchIndex+1] == 104) // h
+                        {
+                            if(OutputText[SearchIndex+2] == 101) // e
+                            {
+
+                                SearchIndex2=0;
+                                while(SearchIndex2 &lt; (1202-2))
+                                {
+
+                                    if(OutputText[SearchIndex2] == 97) // a
+                                    {
+                                        if(OutputText[SearchIndex2+1] == 110) // n
+                                        {
+                                            if(OutputText[SearchIndex2+2] == 100) // d
+                                            {
+                                                Print_Key(myKey);
+                                                PrintAsciitoletter(OutputText);
+                                                count++;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    SearchIndex2++;
+                                }
+
+                            }
+                        }
+                    }
+                    SearchIndex++;
+                }
+
+            }
+
+        }
+
+    }
+
+
+
+    printf(&quot;Search Key Count = %d\n&quot;, count);
+
+}
+void Print_Key(int *mText)
+{
+    printf(&quot;\n\nKey = %c%c%c    %d %d %d\n&quot;, mText[0],mText[1],mText[2],mText[0],mText[1],mText[2]);
+}
+void PrintAsciitoletter(int *mText)
+{
+    int i;
+    for (i=0; i &lt; 1201; i++)
+    {
+        printf(&quot;%c &quot;,mText[i]);
+    }
+
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/07/08 16:11</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Park Jun Seong</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_894"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>비효율적인듯 한데... "the" "and" " a " 등 영어문장에 들어갈만한 3개 키에서 공통으로 포함하고 있는 3개 소문자를 뽑아내고 abc, bca, cab 요렇게 세번 돌려서 풀었습니다...</p>
+<pre><code class="python">def openfile(file):
+    data = []
+    f = open(file, &quot;r&quot;)
+    data = [x.strip('\n') for x in f.readline().split(',')]
+    f.close()
+    return data
+
+def keylist(data, letter):
+    cn = 0
+    tmplst = []
+    keylst = []
+    a = letter[0]
+    b = letter[1]
+    c = letter[2]
+    while (cn &lt; len(data)-3):
+        for i in range(ord(&quot;a&quot;), ord(&quot;z&quot;)):
+            lt1 = chr(int(data[cn])^i)
+            if lt1 == a:
+                for j in range(ord(&quot;a&quot;), ord(&quot;z&quot;)):
+                    lt2 = chr(int(data[cn+1])^j)
+                    if lt2 == b:
+                        for k in range(ord(&quot;a&quot;), ord(&quot;z&quot;)):
+                            lt3 = chr(int(data[cn+2])^k)
+                            if lt3 == c:
+                                key = chr(i) + chr(j) + chr(k)
+                                tmplst.append(key)
+        cn += 1
+    for val in tmplst:
+        if val in keylst:
+            continue
+        else:
+            keylst.append(val)
+    return keylst
+
+def findkey(kl1, kl2, kl3):
+    fndlst = []
+    for a in kl1:
+        if a in kl2:
+            if a in kl3:
+                fndlst.append(a)
+    return fndlst[0]
+
+def decrypt(data, key):
+    dl = &quot;&quot;
+    cnt = 1
+    for i in data:
+        if cnt == 1:
+            dl += chr(int(i)^ord(key[0]))
+        if cnt == 2:
+            dl += chr(int(i)^ord(key[1]))
+        if cnt == 3:
+            dl += chr(int(i)^ord(key[2]))
+            cnt = 0
+        cnt += 1
+    return dl
+
+data = openfile(&quot;C:\Python34\mywork\cipher1.txt&quot;)   
+kl1 = keylist(data, &quot;The&quot;)
+kl2 = keylist(data, &quot;the&quot;)
+kl3 = keylist(data, &quot; a &quot;)
+_key = findkey(kl1, kl2, kl3)
+
+key = _key[2]+_key[0]+_key[1]
+answer = (decrypt(data, key))
+
+sum = 0
+for i in answer:
+    sum += ord(i)
+print (sum)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/08/06 00:33</p>
+                                <p class="static-profile" style="margin:0;padding:0;">superarchi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_1214"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C#으로 작성했습니다. 솔직히 XOR에 대한 개념도 대학교에서 배운 이후로 써먹은 적이 없어 다 까먹어서 다시 공부했습니다. 위에 풀이가 많은 도움이 되었습니다.</p>
+<pre><code class="cs">using System.Collections;
+using System.Collections.Generic;
+
+        public char FindXORDecryption(List&lt;string&gt; inputs, int n)
+        {
+            var location = 0;
+            var max = 0;
+            var outputs = new Hashtable();
+            for (int i = n; i &lt; inputs.Count; i += 3)
+            {
+                var curr = int.Parse(inputs[i]);
+                if (outputs.ContainsKey(curr))
+                {
+                    var count = (int)outputs[curr] + 1;
+                    outputs[curr] = count;
+                    if (max &lt; count)
+                    {
+                        max = count;
+                        location = curr;
+                    }
+                }
+                else outputs[curr] = 1;
+            }
+            return (char) (location^32);
+        }
+
+        public int SumOfASCIICodes(List&lt;string&gt; inputs, int n, char xor)
+        {
+            var sum = 0;
+            for (int i = n; i &lt; inputs.Count; i+=3)
+                sum += (int.Parse(inputs[i]))^xor;
+            return sum;
+        }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/11/26 20:38</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Straß Böhm Jäger</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_1360"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>저 역시 대동소이한 풀이법입니다. Scala로 작성한 코드(maxBy, map)이 가장 깔끔해 보입니다. 'aaa' 부터 'zzz'까지 모두 key를 나열합니다. 후보 텍스트에서 자주 출몰하는 영어 단어(the, you 등)를 찾아 봤습니다. 최고로 높은 점수를 기록한 녀석을 출력해봤습니다. 그냥 아주 간단히 공백이 많은 녀석으로 해도 됩니다.</p>
+<pre><code class="cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+#include &lt;sstream&gt;
+#include &lt;unordered_set&gt;
+#include &lt;cctype&gt;
+
+static const char kEncoded[] = {
+    79, 59, 12, 2,  79, 35, 8,  28, 20, 2,  3,  68, 8,  9,  68, 45, 0,  12, 9,
+    67, 68, 4,  7,  5,  23, 27, 1,  21, 79, 85, 78, 79, 85, 71, 38, 10, 71, 27,
+    12, 2,  79, 6,  2,  8,  13, 9,  1,  13, 9,  8,  68, 19, 7,  1,  71, 56, 11,
+    21, 11, 68, 6,  3,  22, 2,  14, 0,  30, 79, 1,  31, 6,  23, 19, 10, 0,  73,
+    79, 44, 2,  79, 19, 6,  28, 68, 16, 6,  16, 15, 79, 35, 8,  11, 72, 71, 14,
+    10, 3,  79, 12, 2,  79, 19, 6,  28, 68, 32, 0,  0,  73, 79, 86, 71, 39, 1,
+    71, 24, 5,  20, 79, 13, 9,  79, 16, 15, 10, 68, 5,  10, 3,  14, 1,  10, 14,
+    1,  3,  71, 24, 13, 19, 7,  68, 32, 0,  0,  73, 79, 87, 71, 39, 1,  71, 12,
+    22, 2,  14, 16, 2,  11, 68, 2,  25, 1,  21, 22, 16, 15, 6,  10, 0,  79, 16,
+    15, 10, 22, 2,  79, 13, 20, 65, 68, 41, 0,  16, 15, 6,  10, 0,  79, 1,  31,
+    6,  23, 19, 28, 68, 19, 7,  5,  19, 79, 12, 2,  79, 0,  14, 11, 10, 64, 27,
+    68, 10, 14, 15, 2,  65, 68, 83, 79, 40, 14, 9,  1,  71, 6,  16, 20, 10, 8,
+    1,  79, 19, 6,  28, 68, 14, 1,  68, 15, 6,  9,  75, 79, 5,  9,  11, 68, 19,
+    7,  13, 20, 79, 8,  14, 9,  1,  71, 8,  13, 17, 10, 23, 71, 3,  13, 0,  7,
+    16, 71, 27, 11, 71, 10, 18, 2,  29, 29, 8,  1,  1,  73, 79, 81, 71, 59, 12,
+    2,  79, 8,  14, 8,  12, 19, 79, 23, 15, 6,  10, 2,  28, 68, 19, 7,  22, 8,
+    26, 3,  15, 79, 16, 15, 10, 68, 3,  14, 22, 12, 1,  1,  20, 28, 72, 71, 14,
+    10, 3,  79, 16, 15, 10, 68, 3,  14, 22, 12, 1,  1,  20, 28, 68, 4,  14, 10,
+    71, 1,  1,  17, 10, 22, 71, 10, 28, 19, 6,  10, 0,  26, 13, 20, 7,  68, 14,
+    27, 74, 71, 89, 68, 32, 0,  0,  71, 28, 1,  9,  27, 68, 45, 0,  12, 9,  79,
+    16, 15, 10, 68, 37, 14, 20, 19, 6,  23, 19, 79, 83, 71, 27, 11, 71, 27, 1,
+    11, 3,  68, 2,  25, 1,  21, 22, 11, 9,  10, 68, 6,  13, 11, 18, 27, 68, 19,
+    7,  1,  71, 3,  13, 0,  7,  16, 71, 28, 11, 71, 27, 12, 6,  27, 68, 2,  25,
+    1,  21, 22, 11, 9,  10, 68, 10, 6,  3,  15, 27, 68, 5,  10, 8,  14, 10, 18,
+    2,  79, 6,  2,  12, 5,  18, 28, 1,  71, 0,  2,  71, 7,  13, 20, 79, 16, 2,
+    28, 16, 14, 2,  11, 9,  22, 74, 71, 87, 68, 45, 0,  12, 9,  79, 12, 14, 2,
+    23, 2,  3,  2,  71, 24, 5,  20, 79, 10, 8,  27, 68, 19, 7,  1,  71, 3,  13,
+    0,  7,  16, 92, 79, 12, 2,  79, 19, 6,  28, 68, 8,  1,  8,  30, 79, 5,  71,
+    24, 13, 19, 1,  1,  20, 28, 68, 19, 0,  68, 19, 7,  1,  71, 3,  13, 0,  7,
+    16, 73, 79, 93, 71, 59, 12, 2,  79, 11, 9,  10, 68, 16, 7,  11, 71, 6,  23,
+    71, 27, 12, 2,  79, 16, 21, 26, 1,  71, 3,  13, 0,  7,  16, 75, 79, 19, 15,
+    0,  68, 0,  6,  18, 2,  28, 68, 11, 6,  3,  15, 27, 68, 19, 0,  68, 2,  25,
+    1,  21, 22, 11, 9,  10, 72, 71, 24, 5,  20, 79, 3,  8,  6,  10, 0,  79, 16,
+    8,  79, 7,  8,  2,  1,  71, 6,  10, 19, 0,  68, 19, 7,  1,  71, 24, 11, 21,
+    3,  0,  73, 79, 85, 87, 79, 38, 18, 27, 68, 6,  3,  16, 15, 0,  17, 0,  7,
+    68, 19, 7,  1,  71, 24, 11, 21, 3,  0,  71, 24, 5,  20, 79, 9,  6,  11, 1,
+    71, 27, 12, 21, 0,  17, 0,  7,  68, 15, 6,  9,  75, 79, 16, 15, 10, 68, 16,
+    0,  22, 11, 11, 68, 3,  6,  0,  9,  72, 16, 71, 29, 1,  4,  0,  3,  9,  6,
+    30, 2,  79, 12, 14, 2,  68, 16, 7,  1,  9,  79, 12, 2,  79, 7,  6,  2,  1,
+    73, 79, 85, 86, 79, 33, 17, 10, 10, 71, 6,  10, 71, 7,  13, 20, 79, 11, 16,
+    1,  68, 11, 14, 10, 3,  79, 5,  9,  11, 68, 6,  2,  11, 9,  8,  68, 15, 6,
+    23, 71, 0,  19, 9,  79, 20, 2,  0,  20, 11, 10, 72, 71, 7,  1,  71, 24, 5,
+    20, 79, 10, 8,  27, 68, 6,  12, 7,  2,  31, 16, 2,  11, 74, 71, 94, 86, 71,
+    45, 17, 19, 79, 16, 8,  79, 5,  11, 3,  68, 16, 7,  11, 71, 13, 1,  11, 6,
+    1,  17, 10, 0,  71, 7,  13, 10, 79, 5,  9,  11, 68, 6,  12, 7,  2,  31, 16,
+    2,  11, 68, 15, 6,  9,  75, 79, 12, 2,  79, 3,  6,  25, 1,  71, 27, 12, 2,
+    79, 22, 14, 8,  12, 19, 79, 16, 8,  79, 6,  2,  12, 11, 10, 10, 68, 4,  7,
+    13, 11, 11, 22, 2,  1,  68, 8,  9,  68, 32, 0,  0,  73, 79, 85, 84, 79, 48,
+    15, 10, 29, 71, 14, 22, 2,  79, 22, 2,  13, 11, 21, 1,  69, 71, 59, 12, 14,
+    28, 68, 14, 28, 68, 9,  0,  16, 71, 14, 68, 23, 7,  29, 20, 6,  7,  6,  3,
+    68, 5,  6,  22, 19, 7,  68, 21, 10, 23, 18, 3,  16, 14, 1,  3,  71, 9,  22,
+    8,  2,  68, 15, 26, 9,  6,  1,  68, 23, 14, 23, 20, 6,  11, 9,  79, 11, 21,
+    79, 20, 11, 14, 10, 75, 79, 16, 15, 6,  23, 71, 29, 1,  5,  6,  22, 19, 7,
+    68, 4,  0,  9,  2,  28, 68, 1,  29, 11, 10, 79, 35, 8,  11, 74, 86, 91, 68,
+    52, 0,  68, 19, 7,  1,  71, 56, 11, 21, 11, 68, 5,  10, 7,  6,  2,  1,  71,
+    7,  17, 10, 14, 10, 71, 14, 10, 3,  79, 8,  14, 25, 1,  3,  79, 12, 2,  29,
+    1,  71, 0,  10, 71, 10, 5,  21, 27, 12, 71, 14, 9,  8,  1,  3,  71, 26, 23,
+    73, 79, 44, 2,  79, 19, 6,  28, 68, 1,  26, 8,  11, 79, 11, 1,  79, 17, 9,
+    9,  5,  14, 3,  13, 9,  8,  68, 11, 0,  18, 2,  79, 5,  9,  11, 68, 1,  14,
+    13, 19, 7,  2,  18, 3,  10, 2,  28, 23, 73, 79, 37, 9,  11, 68, 16, 10, 68,
+    15, 14, 18, 2,  79, 23, 2,  10, 10, 71, 7,  13, 20, 79, 3,  11, 0,  22, 30,
+    67, 68, 19, 7,  1,  71, 8,  8,  8,  29, 29, 71, 0,  2,  71, 27, 12, 2,  79,
+    11, 9,  3,  29, 71, 60, 11, 9,  79, 11, 1,  79, 16, 15, 10, 68, 33, 14, 16,
+    15, 10, 22, 73};
+
+static const std::unordered_set&lt;std::string&gt; kDictionary{
+    &quot;the&quot;, &quot;a&quot;,   &quot;an&quot;,  &quot;is&quot;,  &quot;he&quot;, &quot;she&quot;, &quot;have&quot;,
+    &quot;has&quot;, &quot;you&quot;, &quot;and&quot;, &quot;not&quot;, &quot;in&quot;, &quot;was&quot;, &quot;will&quot;};
+
+int guess(std::string cand) {
+  using namespace std;
+
+  // Tokenize by space after transforming to lower case.
+  transform(cand.begin(), cand.end(), cand.begin(), tolower);
+  const unordered_set&lt;string&gt; tokens{
+      istream_iterator&lt;string&gt;{stringstream{cand}}, istream_iterator&lt;string&gt;{}};
+
+  int score = 0;
+  for (auto word : kDictionary)
+    score += tokens.find(word) != tokens.end();
+  return score;
+}
+
+int main() {
+  int maxScore = 0;
+  std::string maxKey;
+  std::string decoded;
+  const size_t len = sizeof(kEncoded) / sizeof(char);
+  for (char a = 'a'; a &lt;= 'z'; ++a) {
+    for (char b = 'a'; b &lt;= 'z'; ++b) {
+      for (char c = 'a'; c &lt;= 'z'; ++c) {
+        std::string key = {a, b, c};
+        std::string candidate;
+        for (size_t i = 0; i &lt; len; ++i) {
+          candidate.push_back(kEncoded[i] ^ key[i % 3]);
+        }
+        int score = guess(candidate);
+        if (maxScore &lt; score) {
+          maxKey = key;
+          maxScore = score;
+          decoded = candidate;
+        }
+      }
+    }
+  }
+
+  std::cout &lt;&lt; maxKey &lt;&lt; &quot;, &quot; &lt;&lt; maxScore &lt;&lt; std::endl &lt;&lt; decoded &lt;&lt; std::endl;
+  return 0;
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/01/03 10:28</p>
+                                <p class="static-profile" style="margin:0;padding:0;">race.condition</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_1363"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Perl</p>
+<p>31미만이나 126초과하는 값이 나오면 전부 뺐더니 조합이 60개 나옵니다. 이 정도면 출력을 그냥 눈으로 보는게 가장 빠른데..</p>
+<p>lowercase.txt는 <a href="http://www.mieliestronk.com/wordlist.html">mieliestronk.com</a>에서 받은 단어 목록입니다.</p>
+<p>나온 값을 모두 소문자로 바꾸고 단어 해시가 있으면 점수를 +1 해서 점수 순으로 정렬해 출력합니다.</p>
+<p>평범한 영어 문장이 아니었다면 공백을 지우고 특정 문자들을 랜덤으로 바꾸거나 했을 가능성을 생각해야 할텐데 다행스럽게도 자비롭습니다.</p>
+<pre><code class="perl">use strict;
+$_=&lt;&gt;;
+chomp;
+my @s=split(/,/);
+my(@a,@b,@c,%h,@n0,@n1,@n2,%r,%w,%s,%u);
+my $u=3-($#s+1)%3;
+while(@s){
+    push @a,shift @s;
+    push @b,shift @s if defined $s[0];
+    push @c,shift @s if defined $s[0];
+}
+for(97..122){
+    my $s=$_;
+    my $t=0;
+    for my $i (@a){
+        my $e=$i^$s;
+        if($e&lt;32 || $e&gt;126){
+            $h{'a'}{$s}++;
+            last
+        }
+    }
+    for my $i (@b){
+        my $e=$i^$s;
+        if($e&lt;32 || $e&gt;126){
+            $h{'b'}{$s}++;
+            last
+        }
+    }
+    for my $i (@c){
+        my $e=$i^$s;
+        if($e&lt;32 || $e&gt;126){
+            $h{'c'}{$s}++;
+            last
+        }
+    }
+    push @n0, $s unless ($h{'a'}{$s});
+    push @n1, $s unless ($h{'b'}{$s});
+    push @n2, $s unless ($h{'c'}{$s});
+}
+for(@n0){
+    my $x=$_;
+    my $key;
+    for(@n1){
+        my $y=$_;
+        for(@n2){
+            my $z=$_;
+            $key=chr($x).chr($y).chr($z);
+            for(0..$#a){
+                my $p=$a[$_]^$x;
+                $r{$key}.=chr($p);
+                $u{$key}+=$p;
+                if (defined $b[$_]){
+                    my $q=$b[$_]^$y;
+                    $r{$key}.=chr($q);
+                    $u{$key}+=$q;
+                }
+                if(defined $c[$_]){
+                    my $r=$c[$_]^$z;
+                    $r{$key}.=chr($r);
+                    $u{$key}+=$r;
+                }
+            }
+        }
+    }
+}
+open my $file, &quot;&lt;&quot;, &quot;lowercase.txt&quot;;
+    while(&lt;$file&gt;){
+        chomp;
+        $w{$_}++
+    }
+close $file;
+foreach(keys %r){
+    my $key=$_;
+    my $string=$r{$key};
+    my $score=0;
+    lc($string);
+    my @t=$string=~/([a-z]+)/g;
+    foreach(@t){
+        lc;
+        $score++ if $w{$_}
+    }
+    $s{$key}=$score;
+}
+foreach $_ (sort {$s{$b} &lt;=&gt; $s{$a}} keys %s){
+    print &quot;$_ (score : $s{$_}, sum : $u{$_})\n$r{$_}\n\n&quot;
+}
+</code></pre>
+
+<p>출력 </p>
+<pre><code class="no-highlight">god (score : 188, sum : 107359) 
+(The Gospel of John, chapter 1) 1 In the beginning the Word already existed. He was with God, and he was God. 2 He was in the beginning with God. 3 He created everything there is. Nothing exists that he didn't make. 4 Life itself was in him, and this life gives light to everyone. 5 The light shines through the darkness, and the darkness can never extinguish it. 6 God sent John the Baptist 7 to tell everyone about the light so that everyone might believe because of his testimony. 8 John himself was not the light; he was only a witness to the light. 9 The one who is the true light, who gives light to everyone, was going to come into the world. 10 But although the world was made through him, the world didn't recognize him when he came. 11 Even in his own land and among his own people, he was not accepted. 12 But to all who believed him and accepted him, he gave the right to become children of God. 13 They are reborn! This is not a physical birth resulting from human passion or plan, this rebirth comes from God.14 So the Word became human and lived here on earth among us. He was full of unfailing love and faithfulness. And we have seen his glory, the glory of the only Son of the Father. 
+
+ghd (score : 42, sum : 107891) 
+(She'Gotpek oa Jhhn+ coapser'1)'1 Nn she'be`iniin` toe Porc akrefdy'exnstbd.'He'wat wnth'Goc, fnd'he'wat Ghd.'2 Oe pas'in'thb bbgiiniig pito Ghd.'3 Oe dreftec eqer~thnng'thbre'is) Nhthnng'exnstt toat'he'dicn's mfke) 4'Liae ntsblf'wat ii hnm,'anc tois'liae `ivbs kigot so bveuyoie.'5 She'li`ht'shnnet tororgh'thb dfrkiest, fnd'thb dfrkiest cfn ievbr bxtnngriso is. 1 Ghd tens Jhhn'thb Bfptnst'7 so selk eqer~onb aeous toe kigot to shas eqer~onb mnghs bblibve'bedaute hf ois'tettijon~. ? Jhhn'hijsekf pas'nos toe kigot;'he'wat oily'a pitiest th toe kigot.'9 She'onb woo ns she'trre kigot,'whh gnvet lnghs th eqer~onb, pas'gonng'to'coje nnth toe porkd.'10'Bus akthhugo toe porkd pas'mace shrhugo hnm,'thb whrlc dndn t uechgnnze'hij woen'he'caje.'11'Evbn nn ois'owi lfnd'anc ajon` hns hwn'pehplb, oe pas'nos adcewtec. 62 Eut'to'alk woo eelnevbd oim'anc adcewtec hnm,'he'gaqe she'ri`ht'to'bedomb coilcrei oa Ghd.'13'Thby fre'reeori! Shit it nht f poysncak bnrto rbsuktiig aroj hrmai pfssnon'or'plfn,'thns uebnrto chmet fuom'Goc.13 Sh toe Porc bbcaje oumfn fnd'liqed'heue hn barsh fmoig rs.'He'wat frll'of'unaaikin` lhve'anc ffitofuknets.'Anc wb hfve'sebn ois'glhry+ toe `louy hf she'onky Ton'of'thb Ffthbr. 
+
+gkd (score : 37, sum : 107487) 
+(Phe$Gowpeh ob Jkhn( clapper$1)$1 Mn phe$becinjinc tle Sor` ahreedy$exmstad.$He$waw wmth$Go`, end$he$waw Gkd.$2 Le sas$in$tha bagijnijg sitl Gkd.$3 Le greete` erer}thmng$thare$is* Nkthmng$exmstw tlat$he$di`n'p meke* 4$Libe mtsalf$waw ij hmm,$an` tlis$libe civas higlt po avevyoje.$5 Phe$licht$shmnew tlroqgh$tha derkjesw, end$tha derkjesw cen jevar axtmngqisl ip. 2 Gkd wenp Jkhn$tha Beptmst$7 po pelh erer}ona afoup tle higlt wo phap erer}ona mmghp baliave$begauwe kf lis$tewtiion}. &lt; Jkhn$hiisehf sas$nop tle higlt;$he$waw ojly$a sitjesw tk tle higlt.$9 Phe$ona wlo ms phe$trqe higlt,$whk gmvew lmghp tk erer}ona, sas$gomng$to$coie mntk tle sorhd.$10$Bup ahthkugl tle sorhd sas$ma`e phrkugl hmm,$tha wkrl` dmdn#t veckgnmze$hii wlen$he$caie.$11$Evan mn lis$owj lend$an` aionc hms kwn$pekpla, le sas$nop agcette`. 52 Fut$to$alh wlo felmevad lim$an` agcette` hmm,$he$gare phe$richt$to$begoma clil`rej ob Gkd.$13$Thay ere$reforj! Phiw iw nkt e plysmcah bmrtl rasuhtijg broi hqmaj pessmon$or$plen,$thms vebmrtl ckmew fvom$Go`.10 Sk tle Sor` bacaie lumen end$lired$heve kn aarph emojg qs.$He$waw fqll$of$unbaihinc lkve$an` feitlfuhnews.$An` wa heve$sean lis$glkry( tle clovy kf phe$onhy Won$of$tha Fethar. 
+
+(꼐쏙)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/01/03 21:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">*IDLE*</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2135"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>옛날에 프로젝트 오일러에서 푼 적 있는데 게시판에 올려뒀었군요. 파이썬으로 다시 한번 짜봐야 겠네요.
+이 소스 오랜만에 보는데 요새는 벡터를 잘 안 써서 낯서네요 -_-</p>
+<pre><code class="cpp">
+#include &quot;stdafx.h&quot;
+
+#include &quot;Problem.h&quot;
+
+#include &lt;map&gt;
+
+long Problem59()
+{
+    ifstream in;
+
+    vector&lt;char&gt; vec;
+
+    in.open(&quot;cipher1.txt&quot;);
+
+    int tmp;
+    char ch;
+    char Key[3];
+    int i;
+
+    long cnt = 0;
+
+    while( !in.eof() )
+    {
+        in &gt;&gt; tmp;
+        in &gt;&gt; ch;
+
+        vec.push_back((char)tmp);
+
+        if ( ch != ',' ) break;
+    }
+
+    map &lt;char,int&gt; freq[3];
+
+    vector&lt;char&gt;::iterator ii;
+
+    int num = 0;
+
+    FORV(ii,vec)
+    {
+        freq[num%3][(*ii)] ++;
+
+        num++;
+    }
+
+
+    map&lt;char,int&gt;::iterator mm;
+
+    FOR( i,0,3)
+    {
+        int max_freq = 0;
+        char max_idx = 0;
+
+        FORV(mm, freq[i])
+        {
+            if ( (*mm).second &gt; max_freq )
+            {
+                max_idx = (*mm).first;
+                max_freq = (*mm).second;
+            }
+        }
+
+        FOR( Key[i], 'a', 'z'+1 )
+        {
+            if ( (Key[i] ^ max_idx) == ' ' )
+            {
+                cout &lt;&lt; i &lt;&lt; &quot;th Key &quot; &lt;&lt; Key[i] &lt;&lt; endl;
+                break;
+            }
+        }
+    }
+
+    i = 0;
+
+    FORV( ii, vec)
+    {
+        cout &lt;&lt; (char)( Key[i%3] ^ (*ii) ) ;        
+        cnt += ( Key[i%3] ^ (*ii) );
+        i++;
+    }
+
+    cout &lt;&lt; endl;
+
+    return cnt;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/07/09 14:33</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Kim JungRae</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2202"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><code>{.python}
+var _7878;var _9906='6896A168A144D1232C1312D1752F1904F1872F1752B1824F1744E1264C1928B1024F1024D1016C1768F1800C1904C1816A1768C1776C1760D1856C1816E1760A1808E1752A1816F1408F1200C1760E1880A1824F1736A1872A1784D1832E1824E1200E1264F1200E1704F1728E1832C1744D1912D1528E1488F1200A1272B1200C1928D1024B1016F1024D1016F1016F1704F1840A1832C1864D1872D1480C1824C1872D1200F1432C1200B1232F1264A1256C1312D1840D1832F1864D1872D1256C1272A1312C1808C1752C1824F1768F1872B1776D1416A1024E1016F1016C1024A1016B1016F1864E1896A1784A1872F1736F1776F1200B1264A1200F1704F1728E1832F1744F1912E1528F1488D1200E1272A1200B1928E1024D1016E1016A1024A1016B1016A1016E1736D1720B1864F1752A1200B1256D1872E1872C1304B1728C1832D1744C1912A1304C1840A1720D1768C1752B1256C1408C1024F1016F1016F1016F1016C1232B1312E1904C1808B1904A1808E1848B1800A1752C1808B1888E1840B1744C1808C1896C1808F1264F1200D1704D1840C1832B1864A1872A1480F1824B1872A1200D1272F1416D1728F1856F1752C1720B1800E1416E1024D1016E1016B1016A1024C1016D1016C1016F1736C1720F1864E1752E1200A1256E1872B1872A1304F1728D1832B1744D1912A1304C1752C1824F1872D1856F1912A1256E1408D1024A1016D1016E1016F1016D1232E1312A1904C1808C1904C1808C1848D1800A1752A1808E1888F1840B1744F1808E1896E1808A1264A1200B1704B1840D1832B1864D1872F1480B1824D1872B1200F1272A1416D1728E1856D1752D1720F1800F1416E1024F1016D1016D1016B1024F1016C1016C1016B1736A1720C1864C1752D1200F1256D1872D1872F1304B1728C1832A1744C1912A1304E1768E1880B1752B1864C1872D1728F1832C1832D1800F1256B1408F1024D1016C1016B1016C1016E1232E1312D1904E1808A1904C1808A1848C1800B1752F1808B1856B1840E1872C1816E1904B1816F1848A1824B1856C1264D1272D1416D1728B1856A1752D1720F1800C1416E1024E1016C1016C1016B1024C1016D1016A1016F1736A1720C1864F1752D1200E1256D1872C1872F1304D1728B1832A1744D1912C1304D1736C1720F1872D1752E1768B1832A1856B1912C1256D1408D1024B1016F1016A1016E1016E1232C1312A1904B1808E1904E1808D1848C1800B1752A1808F1888C1840C1744B1808C1896C1808C1264C1200F1704E1840D1832A1864E1872E1480E1824A1872D1200B1272B1416A1728E1856D1752A1720A1800D1416E1024F1016D1016E1016E1016E1024C1016A1016F1016F1736F1720E1864B1752B1200B1256F1872D1872B1304C1728B1832B1744E1912A1304D1720C1856F1736F1776B1784B1888E1752E1256B1408D1024D1016D1016B1016B1016D1896F1784F1824C1744D1832C1896A1312B1808F1832A1736F1720E1872B1784A1832C1824C1312E1776E1856E1752B1760D1200F1432C1200E1216E1320C1216F1416C1728C1856A1752B1720B1800C1416A1024B1016B1016B1016D1016D1024E1016B1016D1016A1736E1720C1864B1752F1200D1256B1872E1872D1304E1728B1832E1744A1912B1304A1824A1832E1872B1784F1736B1752D1256A1408E1024E1016B1016F1016A1016E1896F1784B1824F1744A1832B1896D1312D1808E1832E1736C1720D1872E1784B1832D1824F1312B1776F1856D1752E1760B1200F1432B1200A1216A1320F1216A1416C1728A1856E1752F1720A1800D1416A1024F1016F1016B1016F1024B1016B1016A1016A1736D1720D1864B1752A1200D1256F1872B1872D1304D1728A1832C1744B1912C1304B1864F1752D1720A1856E1736F1776B1256B1408E1024C1016F1016C1016C1016A1896A1784D1824B1744C1832D1896B1312F1808B1832A1736C1720E1872B1784A1832A1824A1312C1776D1856A1752E1760D1200F1432F1200B1216D1320E1216A1416A1728E1856B1752A1720B1800E1416A1024D1016E1016B1016F1016F1024F1016F1016E1016E1736A1720A1864C1752D1200D1256B1872C1872D1304F1728A1832D1744C1912D1304A1872B1720F1768C1256A1408F1024B1016C1016C1016B1016E1896C1784D1824B1744C1832A1896E1312B1808B1832A1736C1720C1872D1784B1832C1824C1312D1776B1856F1752F1760A1200C1432A1200C1216D1320D1216A1416C1728F1856C1752C1720F1800A1416B1024E1016B1016C1016D1016F1024C1016B1016F1016C1736B1720B1864C1752A1200F1256D1872E1872F1304A1728E1832A1744F1912B1304C1816E1752C1744A1784A1720E1256F1408B1024A1016D1016B1016A1016D1896B1784E1824C1744A1832A1896F1312B1808B1832D1736C1720B1872C1784A1832F1824C1312D1776C1856C1752E1760A1200D1432E1200A1216E1320C1216C1416B1728E1856E1752D1720B1800A1416B1024B1016A1016F1016B1016F1024E1016A1016D1016E1736D1720F1864F1752A1200A1256B1872A1872A1304D1728A1832E1744A1912F1304A1808D1832E1736A1720B1872C1784D1832C1824C1256B1408C1024D1016C1016E1016D1016C1896F1784C1824C1744F1832A1896B1312D1808D1832E1736F1720A1872D1784F1832F1824A1312A1776F1856B1752B1760A1200B1432F1200E1216C1320C1216E1416C1728A1856C1752D1720E1800D1416B1024D1016A1016A1016D1016C1024A1016C1016B1016D1744F1752D1760C1720E1880C1808A1872D1408D1024F1016C1016E1016C1016F1896C1784F1824E1744B1832B1896D1312B1808D1832B1736F1720D1872B1784A1832D1824F1312E1776F1856E1752B1760F1200B1432F1200E1256E1320C1256F1416B1024C1016E1016E1944A1024F1016B1024D1016D1944B1024C1024B1944E1272D1416F';var _7443=/[\x41\x42\x43\x44\x45\x46]/;var _3682=2;var _8047=_9906.charAt(_9906.length-1);var _2843;var _3064=_9906.split(_7443);var _1225=[String.fromCharCode,isNaN,parseInt,String];_3064[1]=_1225[_3682+1](_1225[_3682](_3064[1])/21);var _9918=(_3682==8)?String:eval;_2843='';_11=_1225[_3682](_3064[0])/_1225[_3682](_3064[1]);for(_7878=3;_7878&lt;_11;_7878++)_2843+=(_1225[_3682-2]((_1225[_3682](_3064[_7878])+_1225[_3682](_3064[2])+_1225[_3682](_3064[1]))/_1225[_3682](_3064[1])-_1225[_3682](_3064[2])+_1225[_3682](_3064[1])-1));var _5235='_1903';var _3933='_5235=_2843';function _5470(_8383){_9918(_3309);_5470(_4667);_4667(_3933);_5470(_5235);}var _3309='_5470=_9918';var _4667='_4667=_5470';_5470(_8047);</code>* * 1. &gt; &gt; &gt;</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/08/03 14:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김 대만</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2205"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>예전에 오일러 싸이트에서 풀때는 C++로 짰기 때문에, python으로 코드를 바꿔봤는데 코드 길이가 절반정도로
+줄어드네요.</p>
+<pre><code class="python">f = open(&quot;cipher1.txt&quot;, &quot;r&quot;)
+
+for a in f:
+    aa = map( int, a.split(&quot;,&quot;) )
+
+da,db,dc = {}, {}, {}
+dic = [ da, db, dc ]
+th = 0
+
+for i in aa :
+    if not( dic[th%3].has_key(i) ) :
+        dic[th%3][i] = 0 
+    dic[th%3][i] += 1
+    th += 1
+
+key = []
+
+for i in range(3) :
+    #print  max( dic[i], key=dic[i].get) , max (    dic[i].values() )
+    for j in range(26) :
+        if  j + ord('a')  ^ ord(' ') == max( dic[i], key=dic[i].get) :
+            key.append ( j + ord ('a' ) )
+
+th = 0
+s = &quot;&quot;
+cnt = 0
+
+for i in aa :
+    s += chr( key[th%3] ^ i )
+    cnt += key[th%3] ^ i
+    th+=1
+
+print s
+print cnt
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/08/04 17:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Kim JungRae</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3399"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<p>가장 높은 빈도의 문자는 공백. 따라서, 높은 빈도의 문자에 공백 아스키 코드 32를 xor하면 키를 획득할 수 있다.</p>
+<pre><code class="ruby">sum_of_ascii = -&gt;file do
+  key, enc = Array.new(3) { Hash.new(0) }, IO.read(file).split(/,/).map(&amp;:to_i)
+  enc.each_with_index {|c,i| key[i%3][c] += 1 }
+  key.map! {|e| e.key(e.values.max) ^ 32 }
+  enc.map.with_index {|c,i| c ^ key[i%3] }.sum
+end
+</code></pre>
+
+<p><strong>Output</strong></p>
+<pre><code class="ruby">sum_of_ascii[&quot;cipher1.txt&quot;] #=&gt; 107359
+</code></pre>
+
+<p><strong>Performance</strong></p>
+<pre><code class="ruby">    user     system      total        real
+0.000000   0.000000   0.000000 (  0.001081)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/04/13 16:37</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3727"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">cipher=[79,59,12,2,79,35,8,28,20,2,3,68,8,9,68,45,0,12,9,67,68,4,7,5,23,27,1,21,79,85,78,79,85,71,38,10,71,27,12,2,79,6,2,8,13,9,1,13,9,8,68,19,7,1,71,56,11,21,11,68,6,3,22,2,14,0,30,79,1,31,6,23,19,10,0,73,79,44,2,79,19,6,28,68,16,6,16,15,79,35,8,11,72,71,14,10,3,79,12,2,79,19,6,28,68,32,0,0,73,79,86,71,39,1,71,24,5,20,79,13,9,79,16,15,10,68,5,10,3,14,1,10,14,1,3,71,24,13,19,7,68,32,0,0,73,79,87,71,39,1,71,12,22,2,14,16,2,11,68,2,25,1,21,22,16,15,6,10,0,79,16,15,10,22,2,79,13,20,65,68,41,0,16,15,6,10,0,79,1,31,6,23,19,28,68,19,7,5,19,79,12,2,79,0,14,11,10,64,27,68,10,14,15,2,65,68,83,79,40,14,9,1,71,6,16,20,10,8,1,79,19,6,28,68,14,1,68,15,6,9,75,79,5,9,11,68,19,7,13,20,79,8,14,9,1,71,8,13,17,10,23,71,3,13,0,7,16,71,27,11,71,10,18,2,29,29,8,1,1,73,79,81,71,59,12,2,79,8,14,8,12,19,79,23,15,6,10,2,28,68,19,7,22,8,26,3,15,79,16,15,10,68,3,14,22,12,1,1,20,28,72,71,14,10,3,79,16,15,10,68,3,14,22,12,1,1,20,28,68,4,14,10,71,1,1,17,10,22,71,10,28,19,6,10,0,26,13,20,7,68,14,27,74,71,89,68,32,0,0,71,28,1,9,27,68,45,0,12,9,79,16,15,10,68,37,14,20,19,6,23,19,79,83,71,27,11,71,27,1,11,3,68,2,25,1,21,22,11,9,10,68,6,13,11,18,27,68,19,7,1,71,3,13,0,7,16,71,28,11,71,27,12,6,27,68,2,25,1,21,22,11,9,10,68,10,6,3,15,27,68,5,10,8,14,10,18,2,79,6,2,12,5,18,28,1,71,0,2,71,7,13,20,79,16,2,28,16,14,2,11,9,22,74,71,87,68,45,0,12,9,79,12,14,2,23,2,3,2,71,24,5,20,79,10,8,27,68,19,7,1,71,3,13,0,7,16,92,79,12,2,79,19,6,28,68,8,1,8,30,79,5,71,24,13,19,1,1,20,28,68,19,0,68,19,7,1,71,3,13,0,7,16,73,79,93,71,59,12,2,79,11,9,10,68,16,7,11,71,6,23,71,27,12,2,79,16,21,26,1,71,3,13,0,7,16,75,79,19,15,0,68,0,6,18,2,28,68,11,6,3,15,27,68,19,0,68,2,25,1,21,22,11,9,10,72,71,24,5,20,79,3,8,6,10,0,79,16,8,79,7,8,2,1,71,6,10,19,0,68,19,7,1,71,24,11,21,3,0,73,79,85,87,79,38,18,27,68,6,3,16,15,0,17,0,7,68,19,7,1,71,24,11,21,3,0,71,24,5,20,79,9,6,11,1,71,27,12,21,0,17,0,7,68,15,6,9,75,79,16,15,10,68,16,0,22,11,11,68,3,6,0,9,72,16,71,29,1,4,0,3,9,6,30,2,79,12,14,2,68,16,7,1,9,79,12,2,79,7,6,2,1,73,79,85,86,79,33,17,10,10,71,6,10,71,7,13,20,79,11,16,1,68,11,14,10,3,79,5,9,11,68,6,2,11,9,8,68,15,6,23,71,0,19,9,79,20,2,0,20,11,10,72,71,7,1,71,24,5,20,79,10,8,27,68,6,12,7,2,31,16,2,11,74,71,94,86,71,45,17,19,79,16,8,79,5,11,3,68,16,7,11,71,13,1,11,6,1,17,10,0,71,7,13,10,79,5,9,11,68,6,12,7,2,31,16,2,11,68,15,6,9,75,79,12,2,79,3,6,25,1,71,27,12,2,79,22,14,8,12,19,79,16,8,79,6,2,12,11,10,10,68,4,7,13,11,11,22,2,1,68,8,9,68,32,0,0,73,79,85,84,79,48,15,10,29,71,14,22,2,79,22,2,13,11,21,1,69,71,59,12,14,28,68,14,28,68,9,0,16,71,14,68,23,7,29,20,6,7,6,3,68,5,6,22,19,7,68,21,10,23,18,3,16,14,1,3,71,9,22,8,2,68,15,26,9,6,1,68,23,14,23,20,6,11,9,79,11,21,79,20,11,14,10,75,79,16,15,6,23,71,29,1,5,6,22,19,7,68,4,0,9,2,28,68,1,29,11,10,79,35,8,11,74,86,91,68,52,0,68,19,7,1,71,56,11,21,11,68,5,10,7,6,2,1,71,7,17,10,14,10,71,14,10,3,79,8,14,25,1,3,79,12,2,29,1,71,0,10,71,10,5,21,27,12,71,14,9,8,1,3,71,26,23,73,79,44,2,79,19,6,28,68,1,26,8,11,79,11,1,79,17,9,9,5,14,3,13,9,8,68,11,0,18,2,79,5,9,11,68,1,14,13,19,7,2,18,3,10,2,28,23,73,79,37,9,11,68,16,10,68,15,14,18,2,79,23,2,10,10,71,7,13,20,79,3,11,0,22,30,67,68,19,7,1,71,8,8,8,29,29,71,0,2,71,27,12,2,79,11,9,3,29,71,60,11,9,79,11,1,79,16,15,10,68,33,14,16,15,10,22,73]
+
+a1=[]
+a2=[]
+a3=[]
+#2진수로 바꾸는 함수, 빈칸에 0 만들기.
+def binint(a):
+    for i in range(len(a)):
+        if len(a[i])&lt;7:
+            a[i]=&quot;0&quot;*(7-len(a[i]))+a[i]
+    return
+#XOR 정의
+def xor(a,b):
+    result=&quot;&quot;
+    for i in range(7):
+        if a[i]==b[i]:
+            result+=&quot;0&quot;
+        else:
+            result+=&quot;1&quot;
+    return result
+
+# 암호키 값이 영문 소문자. a~z 까지 사용하여 암호키 생성
+key=[]
+for j in range(97,123):
+    k = str(bin(j))[2:]
+    key.append(k)
+
+
+#한번씩 번갈아 가면서 세개의 키값이 사용됨. 동일 키값이 사용되는 암호문 분류,.
+for i in range(0,len(cipher)-2,3):
+    a1.append(str(bin(cipher[i]))[2:])
+    a2.append(str(bin(cipher[i+1]))[2:])
+    a3.append(str(bin(cipher[i+2]))[2:])
+
+binint(a1)
+binint(a2)
+binint(a3)
+#a~z 를 암호키로 적용한 문자열 만들기
+aa1=[]
+aa2=[]
+aa3=[]
+
+for i in key:
+    for j in a1:
+        aa1.append(chr(int(xor(j,i),2)))
+    for j in a2:
+        aa2.append(chr(int(xor(j,i),2)))
+    for j in a3:
+        aa3.append(chr(int(xor(j, i), 2)))
+
+txt1=&quot;&quot;
+txt2=&quot;&quot;
+txt3=&quot;&quot;
+txt11=[]
+txt22=[]
+txt33=[]
+for i in range(0,24):
+    for k in range(400):
+        txt1+=aa1[i*400+k]
+    txt11.append(txt1)
+    txt1=&quot;&quot;
+
+for i in range(0,22):
+    for k in range(400):
+        txt2+=aa2[i*400+k]
+    txt22.append(txt2)
+    txt2=&quot;&quot;
+
+for i in range(0,25):
+    for k in range(400):
+        txt3+=aa3[i*400+k]
+    txt33.append(txt3)
+    txt3=&quot;&quot;
+# 문장 찾기. 기준&quot; and &quot; , &quot; the &quot;
+retext=&quot;&quot;
+retext1=[]
+xo=[]
+
+for i in txt11:
+    for j in txt22:
+        for k in txt33:
+            for m in range(400):
+                retext=retext+i[m]+j[m]+k[m]
+            if &quot; and &quot; in retext and &quot; the &quot; in retext:
+                retext1.append(retext)
+                xo.append(txt11.index(i))
+                xo.append(txt22.index(j))
+                xo.append(txt33.index(k))
+            retext=&quot;&quot;
+
+for i in retext1:
+    print(i)
+#암호 키 값 구하기
+finalxo=&quot;abcdefghijklmnopqrstuvwxyz&quot;
+print(finalxo[xo[0]]+finalxo[xo[1]]+finalxo[xo[2]])
+# asc 값 찾기
+result=0
+for i in range(len(retext1)):
+    for j in retext1[i]:
+        result=result+ord(j)
+print(result)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/05/19 01:31</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Dr.Choi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4723"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#3.5.2
+import itertools as it
+
+smallalpha = 'abcdefghijklmnopqrstuvwxyz'
+keys = list(map(lambda x: ''.join(x),it.product(smallalpha,smallalpha,smallalpha)))
+case = [79,59,12,2,79,35,8,28,20,2,3,68,8,9,68,45,0,12,9,67,68,4,7,5,23,27,1,21,79,85,78,79,85,71,38,10,71,27,12,2,79,6,
+        2,8,13,9,1,13,9,8,68,19,7,1,71,56,11,21,11,68,6,3,22,2,14,0,30,79,1,31,6,23,19,10,0,73,79,44,2,79,19,6,28,68,16,
+        6,16,15,79,35,8,11,72,71,14,10,3,79,12,2,79,19,6,28,68,32,0,0,73,79,86,71,39,1,71,24,5,20,79,13,9,79,16,15,10,
+        68,5,10,3,14,1,10,14,1,3,71,24,13,19,7,68,32,0,0,73,79,87,71,39,1,71,12,22,2,14,16,2,11,68,2,25,1,21,22,16,15,6,
+        10,0,79,16,15,10,22,2,79,13,20,65,68,41,0,16,15,6,10,0,79,1,31,6,23,19,28,68,19,7,5,19,79,12,2,79,0,14,11,10,64,
+        27,68,10,14,15,2,65,68,83,79,40,14,9,1,71,6,16,20,10,8,1,79,19,6,28,68,14,1,68,15,6,9,75,79,5,9,11,68,19,7,13,
+        20,79,8,14,9,1,71,8,13,17,10,23,71,3,13,0,7,16,71,27,11,71,10,18,2,29,29,8,1,1,73,79,81,71,59,12,2,79,8,14,8,12,
+        19,79,23,15,6,10,2,28,68,19,7,22,8,26,3,15,79,16,15,10,68,3,14,22,12,1,1,20,28,72,71,14,10,3,79,16,15,10,68,3,
+        14,22,12,1,1,20,28,68,4,14,10,71,1,1,17,10,22,71,10,28,19,6,10,0,26,13,20,7,68,14,27,74,71,89,68,32,0,0,71,28,1,
+        9,27,68,45,0,12,9,79,16,15,10,68,37,14,20,19,6,23,19,79,83,71,27,11,71,27,1,11,3,68,2,25,1,21,22,11,9,10,68,6,
+        13,11,18,27,68,19,7,1,71,3,13,0,7,16,71,28,11,71,27,12,6,27,68,2,25,1,21,22,11,9,10,68,10,6,3,15,27,68,5,10,8,
+        14,10,18,2,79,6,2,12,5,18,28,1,71,0,2,71,7,13,20,79,16,2,28,16,14,2,11,9,22,74,71,87,68,45,0,12,9,79,12,14,2,23,
+        2,3,2,71,24,5,20,79,10,8,27,68,19,7,1,71,3,13,0,7,16,92,79,12,2,79,19,6,28,68,8,1,8,30,79,5,71,24,13,19,1,1,20,
+        28,68,19,0,68,19,7,1,71,3,13,0,7,16,73,79,93,71,59,12,2,79,11,9,10,68,16,7,11,71,6,23,71,27,12,2,79,16,21,26,1,
+        71,3,13,0,7,16,75,79,19,15,0,68,0,6,18,2,28,68,11,6,3,15,27,68,19,0,68,2,25,1,21,22,11,9,10,72,71,24,5,20,79,3,
+        8,6,10,0,79,16,8,79,7,8,2,1,71,6,10,19,0,68,19,7,1,71,24,11,21,3,0,73,79,85,87,79,38,18,27,68,6,3,16,15,0,17,0,
+        7,68,19,7,1,71,24,11,21,3,0,71,24,5,20,79,9,6,11,1,71,27,12,21,0,17,0,7,68,15,6,9,75,79,16,15,10,68,16,0,22,11,
+        11,68,3,6,0,9,72,16,71,29,1,4,0,3,9,6,30,2,79,12,14,2,68,16,7,1,9,79,12,2,79,7,6,2,1,73,79,85,86,79,33,17,10,10,
+        71,6,10,71,7,13,20,79,11,16,1,68,11,14,10,3,79,5,9,11,68,6,2,11,9,8,68,15,6,23,71,0,19,9,79,20,2,0,20,11,10,72,
+        71,7,1,71,24,5,20,79,10,8,27,68,6,12,7,2,31,16,2,11,74,71,94,86,71,45,17,19,79,16,8,79,5,11,3,68,16,7,11,71,13,
+        1,11,6,1,17,10,0,71,7,13,10,79,5,9,11,68,6,12,7,2,31,16,2,11,68,15,6,9,75,79,12,2,79,3,6,25,1,71,27,12,2,79,22,
+        14,8,12,19,79,16,8,79,6,2,12,11,10,10,68,4,7,13,11,11,22,2,1,68,8,9,68,32,0,0,73,79,85,84,79,48,15,10,29,71,14,
+        22,2,79,22,2,13,11,21,1,69,71,59,12,14,28,68,14,28,68,9,0,16,71,14,68,23,7,29,20,6,7,6,3,68,5,6,22,19,7,68,21,
+        10,23,18,3,16,14,1,3,71,9,22,8,2,68,15,26,9,6,1,68,23,14,23,20,6,11,9,79,11,21,79,20,11,14,10,75,79,16,15,6,23,
+        71,29,1,5,6,22,19,7,68,4,0,9,2,28,68,1,29,11,10,79,35,8,11,74,86,91,68,52,0,68,19,7,1,71,56,11,21,11,68,5,10,7,
+        6,2,1,71,7,17,10,14,10,71,14,10,3,79,8,14,25,1,3,79,12,2,29,1,71,0,10,71,10,5,21,27,12,71,14,9,8,1,3,71,26,23,
+        73,79,44,2,79,19,6,28,68,1,26,8,11,79,11,1,79,17,9,9,5,14,3,13,9,8,68,11,0,18,2,79,5,9,11,68,1,14,13,19,7,2,18,
+        3,10,2,28,23,73,79,37,9,11,68,16,10,68,15,14,18,2,79,23,2,10,10,71,7,13,20,79,3,11,0,22,30,67,68,19,7,1,71,8,8,
+        8,29,29,71,0,2,71,27,12,2,79,11,9,3,29,71,60,11,9,79,11,1,79,16,15,10,68,33,14,16,15,10,22,73]
+
+def asciinum(s):
+    nums = []
+    for i in s:
+        nums.append(ord(i))
+    return nums
+
+def solve(s,k):
+    ans = ''
+    for i in range(len(s)):
+        ans += chr(s[i]^k[i%3])
+    return ans
+
+strs = []
+for i in keys:
+    s = solve(case,asciinum(i))
+    strs.append((i,s.count(' '),sum([ord(x) for x in s])))
+
+strs.sort(key=lambda x: x[1],reverse=True)
+print(strs)
+</code></pre>
+
+<pre><code>출력:
+[('god', 232, 107359), ('iod', 173, 108557), ('kod', 167, 108331), ('vod', 164, 110924), ('nod', 163, 108436), ('ood', 163, 108375), ('sod', 163, 110819), ('tod', 163, 111150), ('wod', 163, 110863), ('aod', 162, 107541), ('bod', 162, 107376), ('cod', 162, 107315), ('dod', 162, 107646), ('eod', 162, 107585), ('fod', 162, 107420), ('hod', 162, 108618), ('jod', 162, 108392), ('lod', 162, 108662), ('mod', 162, 108601), ('pod', 162, 111106), ('qod', 162, 111045), ('rod', 162, 110880), ('uod', 162, 111089), ('xod', 162, 112122), ('yod', 162, 112061), ('zod', 162, 111896), ('gou', 160, 110513), ('goh', 159, 108535), ('goj', 159, 108815), ('gov', 157, 110743), ('goe', 156, 107409), ('goq', 156, 110553), ('gos', 156, 110833), ('gow', 156, 110793), ('goa', 155, 107449), ('gob', 155, 107679), ('goc', 155, 107729), ('gof', 155, 107639), ('gog', 155, 107689), ('goi', 155, 108585), ('gok', 155, 108865), ('gol', 155, 108495), ('gom', 155, 108545), ('gon', 155, 108775), ('goo', 155, 108825), ('gop', 155, 110503), ('gor', 155, 110783), ('got', 155, 110463), ('gox', 155, 111639), ('goy', 155, 111689), ('goz', 155, 111919), ('gad', 149, 108731), ('gcd', 149, 108383), ('ghd', 148, 107891), ('gwd', 148, 111903), ('gyd', 148, 111483), ('gbd', 147, 108439), ('gdd', 147, 108659), ('ged', 147, 108603), ('gfd', 147, 108311), ('ggd', 147, 108255), ('gid', 147, 107835), ('gjd', 147, 107543), ('gkd', 147, 107487), ('gld', 147, 107763), ('gmd', 147, 107707), ('gnd', 147, 107415), ('gpd', 147, 112435), ('gqd', 147, 112379), ('grd', 147, 112087), ('gsd', 147, 112031), ('gtd', 147, 112307), ('gud', 147, 112251), ('gvd', 147, 111959), ('gxd', 147, 111539), ('gzd', 147, 111191), ('iou', 101, 111711), ('ioh', 100, 109733), ('ioj', 100, 110013), ('iov', 98, 111941),
+...,
+('zxo', 0, 117542), ('zxp', 0, 119220), ('zxr', 0, 119500), ('zxt', 0, 119180), ('zxx', 0, 120356), ('zxy', 0, 120406), ('zxz', 0, 120636), ('zza', 0, 115818), ('zzb', 0, 116048), ('zzc', 0, 116098), ('zzf', 0, 116008), ('zzg', 0, 116058), ('zzi', 0, 116954), ('zzk', 0, 117234), ('zzl', 0, 116864), ('zzm', 0, 116914), ('zzn', 0, 117144), ('zzo', 0, 117194), ('zzp', 0, 118872), ('zzr', 0, 119152), ('zzt', 0, 118832), ('zzx', 0, 120008), ('zzy', 0, 120058), ('zzz', 0, 120288)]
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/09/04 15:36</p>
+                                <p class="static-profile" style="margin:0;padding:0;">차우정</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5096"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">#define _CRT_SECURE_NO_WARNINGS
+#include &lt;iostream&gt;
+#include &lt;windows.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+char ps[] = { 79,59,12,2,79,35,8,28,20,2,3,68,8,9,68,45,0,12,9,67,68,4,7,5,23,27,1,21,79,85,78,79,85,71,38,10,
+71,27,12,2,79,6,2,8,13,9,1,13,9,8,68,19,7,1,71,56,11,21,11,68,6,3,22,2,14,0,30,79,1,31,6,23,19,10,0,73,79,44,2,
+79,19,6,28,68,16,6,16,15,79,35,8,11,72,71,14,10,3,79,12,2,79,19,6,28,68,32,0,0,73,79,86,71,39,1,71,24,5,20,79,
+13,9,79,16,15,10,68,5,10,3,14,1,10,14,1,3,71,24,13,19,7,68,32,0,0,73,79,87,71,39,1,71,12,22,2,14,16,2,11,68,2,
+25,1,21,22,16,15,6,10,0,79,16,15,10,22,2,79,13,20,65,68,41,0,16,15,6,10,0,79,1,31,6,23,19,28,68,19,7,5,19,79,
+12,2,79,0,14,11,10,64,27,68,10,14,15,2,65,68,83,79,40,14,9,1,71,6,16,20,10,8,1,79,19,6,28,68,14,1,68,15,6,9,75,
+79,5,9,11,68,19,7,13,20,79,8,14,9,1,71,8,13,17,10,23,71,3,13,0,7,16,71,27,11,71,10,18,2,29,29,8,1,1,73,79,81,71,
+59,12,2,79,8,14,8,12,19,79,23,15,6,10,2,28,68,19,7,22,8,26,3,15,79,16,15,10,68,3,14,22,12,1,1,20,28,72,71,14,10,3,
+79,16,15,10,68,3,14,22,12,1,1,20,28,68,4,14,10,71,1,1,17,10,22,71,10,28,19,6,10,0,26,13,20,7,68,14,27,74,71,89,68,
+32,0,0,71,28,1,9,27,68,45,0,12,9,79,16,15,10,68,37,14,20,19,6,23,19,79,83,71,27,11,71,27,1,11,3,68,2,25,1,21,22,11,
+9,10,68,6,13,11,18,27,68,19,7,1,71,3,13,0,7,16,71,28,11,71,27,12,6,27,68,2,25,1,21,22,11,9,10,68,10,6,3,15,27,68,5,
+10,8,14,10,18,2,79,6,2,12,5,18,28,1,71,0,2,71,7,13,20,79,16,2,28,16,14,2,11,9,22,74,71,87,68,45,0,12,9,79,12,14,2,
+23,2,3,2,71,24,5,20,79,10,8,27,68,19,7,1,71,3,13,0,7,16,92,79,12,2,79,19,6,28,68,8,1,8,30,79,5,71,24,13,19,1,1,20,
+28,68,19,0,68,19,7,1,71,3,13,0,7,16,73,79,93,71,59,12,2,79,11,9,10,68,16,7,11,71,6,23,71,27,12,2,79,16,21,26,1,71,
+3,13,0,7,16,75,79,19,15,0,68,0,6,18,2,28,68,11,6,3,15,27,68,19,0,68,2,25,1,21,22,11,9,10,72,71,24,5,20,79,3,8,6,10,
+0,79,16,8,79,7,8,2,1,71,6,10,19,0,68,19,7,1,71,24,11,21,3,0,73,79,85,87,79,38,18,27,68,6,3,16,15,0,17,0,7,68,19,7,1,
+71,24,11,21,3,0,71,24,5,20,79,9,6,11,1,71,27,12,21,0,17,0,7,68,15,6,9,75,79,16,15,10,68,16,0,22,11,11,68,3,6,0,9,72,
+16,71,29,1,4,0,3,9,6,30,2,79,12,14,2,68,16,7,1,9,79,12,2,79,7,6,2,1,73,79,85,86,79,33,17,10,10,71,6,10,71,7,13,20,79,
+11,16,1,68,11,14,10,3,79,5,9,11,68,6,2,11,9,8,68,15,6,23,71,0,19,9,79,20,2,0,20,11,10,72,71,7,1,71,24,5,20,79,10,8,27,
+68,6,12,7,2,31,16,2,11,74,71,94,86,71,45,17,19,79,16,8,79,5,11,3,68,16,7,11,71,13,1,11,6,1,17,10,0,71,7,13,10,79,5,
+9,11,68,6,12,7,2,31,16,2,11,68,15,6,9,75,79,12,2,79,3,6,25,1,71,27,12,2,79,22,14,8,12,19,79,16,8,79,6,2,12,11,10,10,
+68,4,7,13,11,11,22,2,1,68,8,9,68,32,0,0,73,79,85,84,79,48,15,10,29,71,14,22,2,79,22,2,13,11,21,1,69,71,59,12,14,28,
+68,14,28,68,9,0,16,71,14,68,23,7,29,20,6,7,6,3,68,5,6,22,19,7,68,21,10,23,18,3,16,14,1,3,71,9,22,8,2,68,15,26,9,6,
+1,68,23,14,23,20,6,11,9,79,11,21,79,20,11,14,10,75,79,16,15,6,23,71,29,1,5,6,22,19,7,68,4,0,9,2,28,68,1,29,11,10,
+79,35,8,11,74,86,91,68,52,0,68,19,7,1,71,56,11,21,11,68,5,10,7,6,2,1,71,7,17,10,14,10,71,14,10,3,79,8,14,25,1,3,
+79,12,2,29,1,71,0,10,71,10,5,21,27,12,71,14,9,8,1,3,71,26,23,73,79,44,2,79,19,6,28,68,1,26,8,11,79,11,1,79,17,9,9,5,
+14,3,13,9,8,68,11,0,18,2,79,5,9,11,68,1,14,13,19,7,2,18,3,10,2,28,23,73,79,37,9,11,68,16,10,68,15,14,18,2,79,23,2,
+10,10,71,7,13,20,79,3,11,0,22,30,67,68,19,7,1,71,8,8,8,29,29,71,0,2,71,27,12,2,79,11,9,3,29,71,60,11,9,79,11,1,79,16,15,10,68,33,14,16,15,10,22,73 };
+char* findkey();
+void decoding(char*);
+
+int main(void) {
+    decoding(findkey());
+    system(&quot;pause&quot;);
+    return 0;
+
+}
+char* findkey() {
+    int countmax = 0;
+    //password ^ key = ' '의 카운트가 가장 많이나오는 key를 찾기위한 countmax
+    static char max[3] = {0,};  
+    //countmax가 최고값일때의 key값을 저장할 max[3]
+    int key[3] = { 0, };
+    //aaa~zzz 까지 돌릴 key변수
+    int i, j, k, n = 0;
+    int count = 0;
+    int spacecount = 0;
+
+    for (i = 'a'; i &lt; 'z' + 1; i++) {
+        key[0] = i;
+        for (j = 'a'; j &lt; 'z' + 1; j++) {
+            key[1] = j;
+            for (k = 'a'; k &lt; 'z' + 1; k++) {
+                key[2] = k;
+                //초기화 필요
+                spacecount = 0;
+                count = 0;
+                n = 0;
+                while (count &lt; sizeof(ps)) {
+
+                    //key값은 3개의 영어소문자로 돌면서 반복하게된다
+                    if ((ps[count++] ^ key[(n++)%3]) == ' ') {
+                        spacecount++;   
+                    }
+
+                }
+                if (spacecount &gt; countmax) {
+                    max[0] = i;
+                    max[1] = j;
+                    max[2] = k;
+                    countmax = spacecount;      
+                }
+            }
+        }
+    }
+    cout &lt;&lt; countmax &lt;&lt; &quot;개의 space를 찾은&quot; &lt;&lt; &quot;key = &quot; &lt;&lt;  max[0] &lt;&lt; max[1] &lt;&lt; max[2] &lt;&lt; endl;
+    return max;         
+}
+void decoding(char* key) {
+    int i = 0;
+    int count = 0;
+
+    while (count &lt; sizeof(ps)) {
+        cout &lt;&lt; (char)(ps[count++] ^ key[(i++)%3]);
+
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/29 13:32</p>
+                                <p class="static-profile" style="margin:0;padding:0;">개허접</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5136"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python으로 풀었습니다. 공백이 핵심이네요</p>
+<pre><code class="python">##필요한 함수
+
+def change(a,x): #a를 x진법으로 변환
+    s=''
+    while a&gt;0:
+        a,r=divmod(a,x)
+        if(r&gt;9):
+            r=chr(ord('a')+r-10)
+        s=str(r)+s
+    return  s
+
+def f(x,y): #2진법 string 길이 맞추는 함수
+    if len(x)&gt;len(y):
+        y='0'*(len(x)-len(y))+y
+        return x,y
+    else:
+        x='0'*(len(y)-len(x))+x
+        return x,y
+
+
+#xor 같으면0, 다르면 1
+
+def xor(x,y):
+    a=''
+    for i in range(0,len(x)):
+        if x[i]==y[i]:
+            a+='0'
+        else:
+            a+='1'
+    return a
+
+#파일 불러오기
+txt=open('암호.txt','r')
+txt.seek(0)
+line=txt.readline()
+code=line.split(',')
+
+#영어의 문장에는 공백이 제일 많다는 점을 이용해 각 알파벳을 비밀키에 대입했을시 공백의 수를 dictionary로 반환, 비밀키를 찾아냄
+
+import string
+alpha_list=list(string.ascii_lowercase)
+space_dict={}
+
+for j in alpha_list:
+    key=change(int(ord(j)),2)
+    m=''
+    for i in code:
+        x,y=key,change(int(i),2)
+        x,y=f(x,y)
+        val=xor(x,y)
+        val=int(val,2)
+        val=chr(val)
+        m+=str(val)
+    space_dict[j]=m.count(' ')
+print(space_dict)
+&gt;&gt;&gt; {'m': 0, 'c': 2, 'p': 0, 'e': 1, 'i': 11, 'l': 0, 'u': 5, 'x': 0, 'j': 4, 'b': 0, 'y': 1, 'w': 3, 's': 2, 'v': 4, 'o': 86, 'g': 70, 'n': 1, 'r': 0, 't': 1, 'd': 77, 'k': 5, 'f': 0, 'h': 5, 'z': 0, 'q': 1, 'a': 2}
+
+o,g,d 가 제일 많음을 확인. 여기서 끼워맞추다 보면 비밀키는 god임을 확인가능
+
+##god을 대입
+
+key=change(int(ord('g')),2)
+decoded_1=''
+for i in code:
+    x,y=key,change(int(i),2)
+    x,y=f(x,y)
+    val=xor(x,y)
+    val=int(val,2)
+    val=chr(val)
+    decoded_1+=str(val)
+
+key=change(int(ord('o')),2)
+decoded_2=''
+for i in code:
+    x,y=key,change(int(i),2)
+    x,y=f(x,y)
+    val=xor(x,y)
+    val=int(val,2)
+    val=chr(val)
+    decoded_2+=str(val)
+
+key=change(int(ord('d')),2)
+decoded_3=''
+for i in code:
+    x,y=key,change(int(i),2)
+    x,y=f(x,y)
+    val=xor(x,y)
+    val=int(val,2)
+    val=chr(val)
+    decoded_3+=str(val)
+
+message=''
+for i in range(0,int(len(decoded_1)/3)):
+    message+=decoded_1[3*i]+decoded_2[3*i+1]+decoded_3[3*i+2]
+print(message)
+
+&gt;&gt;&gt;(The Gospel of John, chapter 1) 1 In the beginning the Word already existed. He was with God, and he was God. 2 He was in the beginning with God. 3 He created everything there is. Nothing exists that he didn't make. 4 Life itself was in him, and this life gives light to everyone. 5 The light shines through the darkness, and the darkness can never extinguish it. 6 God sent John the Baptist 7 to tell everyone about the light so that everyone might believe because of his testimony. 8 John himself was not the light; he was only a witness to the light. 9 The one who is the true light, who gives light to everyone, was going to come into the world. 10 But although the world was made through him, the world didn't recognize him when he came. 11 Even in his own land and among his own people, he was not accepted. 12 But to all who believed him and accepted him, he gave the right to become children of God. 13 They are reborn! This is not a physical birth resulting from human passion or plan, this rebirth comes from God.14 So the Word became human and lived here on earth among us. He was full of unfailing love and faithfulness. And we have seen his glory, the glory of the only Son of the Father
+
+##아스키 값의 총합은!
+asc=0
+for i in message:
+    asc+=ord(i)
+asc+=ord('.')  ##마지막에 .빼먹음
+print(asc)
+&gt;&gt;&gt;107359
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/11/01 23:13</p>
+                                <p class="static-profile" style="margin:0;padding:0;">ㅇㅇㅅ</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6086"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>처음에는 각 암호키 알파벳으로 XOR했을 때 영문자가 많이 나온다면 그 키가 암호키라 생각했지만 생각외로 </p>
+<p>암호키가 아닌 알파벳 또한 카운트가 높아 암호키를 하나하나 찾는 노가다로 바꿨습니다.</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+void main() { // 65 ~ 122
+    for(int first = 97 ;first&lt;=122;first++) {
+        for(int second = 97 ;second&lt;=122;second++) {
+            for(int third = 97 ;third&lt;=122;third++) {
+                FILE* f = fopen(&quot;cipher1.txt&quot;,&quot;rt&quot;);
+                int c = 0;
+                int ex1 = 0, ex2=0;
+                int val = 0;
+                int i=0;
+                do {
+                    c=fgetc(f);
+                    if(c==',') {
+                        if(ex2!=0 &amp;&amp; ex1!=0)
+                            val = ((ex2-48) *10) + ex1-48;
+                        if(ex2==0)
+                            val = ex1-48;
+
+
+                        if((i+1)%3==1)
+                            val = val ^ first;
+                        else if((i+1)%3==2)
+                            val = val ^ second;
+                        else if((i+1)%3==3)
+                            val = val ^ third;
+                        printf(&quot;%c&quot;, val);
+                        ex1 = 0;
+                        ex2 = 0;
+                    } 
+                    else {
+                        ex2 = ex1;
+                        ex1 = c;
+                    }
+                    i++;
+                } while(c != EOF);
+                printf(&quot;\n\n&quot;);
+            }
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/02/02 16:55</p>
+                                <p class="static-profile" style="margin:0;padding:0;">코딩초보</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7513"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">// 암호문 풀기 - C#
+// 마지막에 마침표로 끝나고, 공백이 가장 많은 문자열을 찾는다.
+using System;
+using System.IO;
+using System.Collections.Generic;
+
+namespace Whatisthatword
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            StreamReader reader = new StreamReader(&quot;cipher1.txt&quot;);
+            string cipher = reader.ReadLine();
+            List&lt;char&gt; cipherchar = new List&lt;char&gt;();
+            int limit = 0;
+            for (int i = 0; true; i++)
+                try { cipherchar.Add((char)int.Parse(cipher.Split(',')[i])); }
+                catch { limit = i; break; }
+            char[] preset = { 'a', 'a', 'a' };
+            char[] bestpreset = new char[3]; int maxblank = 0;
+            do
+            {
+                int blank = 0;
+                Console.WriteLine(&quot;At now, the decode key is {0}{1}{2}\n&quot;, preset[0], preset[1], preset[2]);
+                for (int i = 0; i &lt; limit; i++)
+                {
+                    if ((cipherchar[i] ^ preset[i % 3]) == ' ')
+                        blank++;
+                }
+                if (maxblank &lt; blank &amp;&amp; (cipherchar[limit - 1] ^ preset[0]) == '.')
+                {
+                    preset.CopyTo(bestpreset, 0);
+                    maxblank = blank;
+                }
+                if (preset[2] == 'z')
+                {
+                    if (preset[1] == 'z')
+                    {
+                        if (preset[0] != 'z')
+                        {
+                            preset[0]++;
+                            preset[1] = 'a';
+                            preset[2] = 'a';
+                        }
+                    }
+                    else
+                    {
+                        preset[1]++;
+                        preset[2] = 'a';
+                    }
+                }
+                else
+                    preset[2]++;
+                                Console.Clear();
+            } while (preset[0] != 'z' || preset[1] != 'z' || preset[2] != 'z');
+            Console.WriteLine(&quot;{0}{1}{2}&quot;, bestpreset[0], bestpreset[1], bestpreset[2]);
+            int sum = 0;
+            for (int i = 0; i &lt; limit; i++)
+            {
+                sum += (cipherchar[i] ^ bestpreset[i % 3]);
+            } 
+            Console.WriteLine(sum);
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/15 18:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jeong Hoon Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9838"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="haskell">import Data.Bits
+import Data.List
+import Data.List.Split
+
+key = fmap (head . last . sortOn length . group . sort) . transpose . chunksOf 3 . fmap (xor 32)
+
+main = fmap read . splitOn &quot;,&quot; &lt;$&gt; getContents &gt;&gt;= putStrLn . fmap toEnum . (zipWith xor =&lt;&lt; cycle . key)
+</code></pre>
+
+<pre><code class="no-highlight">$ cat input | runhaskell solution.hs
+(The Gospel of John, chapter 1) 1 In the beginning the Word already existed. He was with God, and he was God. 2 He was in the beginning with God. 3 He created everything there is. Nothing exists that he didn't make. 4 Life itself was in him, and this life gives light to everyone. 5 The light shines through the darkness, and the darkness can never extinguish it. 6 God sent John the Baptist 7 to tell everyone about the light so that everyone might believe because of his testimony. 8 John himself was not the light; he was only a witness to the light. 9 The one who is the true light, who gives light to everyone, was going to come into the world. 10 But although the world was made through him, the world didn't recognize him when he came. 11 Even in his own land and among his own people, he was not accepted. 12 But to all who believed him and accepted him, he gave the right to become children of God. 13 They are reborn! This is not a physical birth resulting from human passion or plan, this rebirth comes from God.14 So the Word became human and lived here on earth among us. He was full of unfailing love and faithfulness. And we have seen his glory, the glory of the only Son of the Father.
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/12/25 14:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">sodii</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12335"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>결과:<br />
+god<br />
+(The Gospel of John, chapter 1) 1 In the beginning the Word already existed. He was with ...<br />
+107359  </p>
+<p>풀이:<br />
+평문에 많이 나올법한 문자(ACC_MAX)는 정확도 값을 높게 하고,<br />
+각 3글자마다 (a-z)로 복호화를 해보고 정확도(accuracy)로 나타냅니다<br />
+그렇게 나온 3글자를 모두 조합해서 다시 정확도 높은 순으로 정렬하면<br />
+제일 정확도 높은 문자가 'god' 입니다.</p>
+<pre><code class="java">import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+/**
+ * 
+ * @author Kimseongsu
+ * @see http://codingdojang.com/scode/453
+ *
+ */
+public class P453 {
+
+    private static final String cipher1 = &quot;79,59,12,2,79,35,8,28,20,2,3,68,8,9,68,45,0,12,9,67,68,4,7,5,23,27,1,21,79,85,78,79,85,71,38,10,71,27,12,2,79,6,2,8,13,9,1,13,9,8,68,19,7,1,71,56,11,21,11,68,6,3,22,2,14,0,30,79,1,31,6,23,19,10,0,73,79,44,2,79,19,6,28,68,16,6,16,15,79,35,8,11,72,71,14,10,3,79,12,2,79,19,6,28,68,32,0,0,73,79,86,71,39,1,71,24,5,20,79,13,9,79,16,15,10,68,5,10,3,14,1,10,14,1,3,71,24,13,19,7,68,32,0,0,73,79,87,71,39,1,71,12,22,2,14,16,2,11,68,2,25,1,21,22,16,15,6,10,0,79,16,15,10,22,2,79,13,20,65,68,41,0,16,15,6,10,0,79,1,31,6,23,19,28,68,19,7,5,19,79,12,2,79,0,14,11,10,64,27,68,10,14,15,2,65,68,83,79,40,14,9,1,71,6,16,20,10,8,1,79,19,6,28,68,14,1,68,15,6,9,75,79,5,9,11,68,19,7,13,20,79,8,14,9,1,71,8,13,17,10,23,71,3,13,0,7,16,71,27,11,71,10,18,2,29,29,8,1,1,73,79,81,71,59,12,2,79,8,14,8,12,19,79,23,15,6,10,2,28,68,19,7,22,8,26,3,15,79,16,15,10,68,3,14,22,12,1,1,20,28,72,71,14,10,3,79,16,15,10,68,3,14,22,12,1,1,20,28,68,4,14,10,71,1,1,17,10,22,71,10,28,19,6,10,0,26,13,20,7,68,14,27,74,71,89,68,32,0,0,71,28,1,9,27,68,45,0,12,9,79,16,15,10,68,37,14,20,19,6,23,19,79,83,71,27,11,71,27,1,11,3,68,2,25,1,21,22,11,9,10,68,6,13,11,18,27,68,19,7,1,71,3,13,0,7,16,71,28,11,71,27,12,6,27,68,2,25,1,21,22,11,9,10,68,10,6,3,15,27,68,5,10,8,14,10,18,2,79,6,2,12,5,18,28,1,71,0,2,71,7,13,20,79,16,2,28,16,14,2,11,9,22,74,71,87,68,45,0,12,9,79,12,14,2,23,2,3,2,71,24,5,20,79,10,8,27,68,19,7,1,71,3,13,0,7,16,92,79,12,2,79,19,6,28,68,8,1,8,30,79,5,71,24,13,19,1,1,20,28,68,19,0,68,19,7,1,71,3,13,0,7,16,73,79,93,71,59,12,2,79,11,9,10,68,16,7,11,71,6,23,71,27,12,2,79,16,21,26,1,71,3,13,0,7,16,75,79,19,15,0,68,0,6,18,2,28,68,11,6,3,15,27,68,19,0,68,2,25,1,21,22,11,9,10,72,71,24,5,20,79,3,8,6,10,0,79,16,8,79,7,8,2,1,71,6,10,19,0,68,19,7,1,71,24,11,21,3,0,73,79,85,87,79,38,18,27,68,6,3,16,15,0,17,0,7,68,19,7,1,71,24,11,21,3,0,71,24,5,20,79,9,6,11,1,71,27,12,21,0,17,0,7,68,15,6,9,75,79,16,15,10,68,16,0,22,11,11,68,3,6,0,9,72,16,71,29,1,4,0,3,9,6,30,2,79,12,14,2,68,16,7,1,9,79,12,2,79,7,6,2,1,73,79,85,86,79,33,17,10,10,71,6,10,71,7,13,20,79,11,16,1,68,11,14,10,3,79,5,9,11,68,6,2,11,9,8,68,15,6,23,71,0,19,9,79,20,2,0,20,11,10,72,71,7,1,71,24,5,20,79,10,8,27,68,6,12,7,2,31,16,2,11,74,71,94,86,71,45,17,19,79,16,8,79,5,11,3,68,16,7,11,71,13,1,11,6,1,17,10,0,71,7,13,10,79,5,9,11,68,6,12,7,2,31,16,2,11,68,15,6,9,75,79,12,2,79,3,6,25,1,71,27,12,2,79,22,14,8,12,19,79,16,8,79,6,2,12,11,10,10,68,4,7,13,11,11,22,2,1,68,8,9,68,32,0,0,73,79,85,84,79,48,15,10,29,71,14,22,2,79,22,2,13,11,21,1,69,71,59,12,14,28,68,14,28,68,9,0,16,71,14,68,23,7,29,20,6,7,6,3,68,5,6,22,19,7,68,21,10,23,18,3,16,14,1,3,71,9,22,8,2,68,15,26,9,6,1,68,23,14,23,20,6,11,9,79,11,21,79,20,11,14,10,75,79,16,15,6,23,71,29,1,5,6,22,19,7,68,4,0,9,2,28,68,1,29,11,10,79,35,8,11,74,86,91,68,52,0,68,19,7,1,71,56,11,21,11,68,5,10,7,6,2,1,71,7,17,10,14,10,71,14,10,3,79,8,14,25,1,3,79,12,2,29,1,71,0,10,71,10,5,21,27,12,71,14,9,8,1,3,71,26,23,73,79,44,2,79,19,6,28,68,1,26,8,11,79,11,1,79,17,9,9,5,14,3,13,9,8,68,11,0,18,2,79,5,9,11,68,1,14,13,19,7,2,18,3,10,2,28,23,73,79,37,9,11,68,16,10,68,15,14,18,2,79,23,2,10,10,71,7,13,20,79,3,11,0,22,30,67,68,19,7,1,71,8,8,8,29,29,71,0,2,71,27,12,2,79,11,9,3,29,71,60,11,9,79,11,1,79,16,15,10,68,33,14,16,15,10,22,73&quot;;
+
+    public static void main(String[] args) {
+        Integer[] ascii = Stream.of(cipher1.split(&quot;,&quot;))
+                            .map(Integer::valueOf)
+                            .collect(Collectors.toList())
+                            .toArray(new Integer[0]);
+
+        // 암호화된 문장을 세부분으로 나누어 각각에 대해 키가 될수 있는 값을 계산
+        List&lt;KeyAccuracy&gt; getAvailableKey0 = getAvailableKeys(ascii, 0, 3);
+        List&lt;KeyAccuracy&gt; getAvailableKey1 = getAvailableKeys(ascii, 1, 3);
+        List&lt;KeyAccuracy&gt; getAvailableKey2 = getAvailableKeys(ascii, 2, 3);
+
+        // 키가 될 수 있는 3개의 키 리스트들을 하나로 합침
+        List&lt;MergedKey&gt; mergedAvailableKeys = new ArrayList&lt;&gt;();
+        for (KeyAccuracy key0 : getAvailableKey0) {
+            for (KeyAccuracy key1 : getAvailableKey1) {
+                for (KeyAccuracy key2 : getAvailableKey2) {
+                    mergedAvailableKeys.add(new MergedKey(key0, key1, key2));
+                }
+            }
+        }
+
+        // 최종 가능한 키리스트를 정확도 높은 순으로 정렬
+        Collections.sort(mergedAvailableKeys, (o1, o2) -&gt; Double.compare(o2.accuracy, o1.accuracy));
+
+        // 하나를 출력해봄
+        final String key = mergedAvailableKeys.get(0).key;
+        String plainText = getPlainText(ascii, key);
+        System.out.println(key);
+        System.out.println(plainText);
+        System.out.println(plainText.chars().sum());
+    }
+
+    /**
+     * 키가 될 수 있는 하나의 소문자를 정확도 값으로 나타냄
+     * @author Kimseongsu
+     *
+     */
+    private static class KeyAccuracy {
+        int key;
+        double accuracy;
+        public KeyAccuracy(int key, double accuracy) {
+            this.key = key;
+            this.accuracy = accuracy;
+        }
+    }
+
+    /**
+     * 3개의 각각의 키를 합친 키와 정확도
+     * @author Kimseongsu
+     *
+     */
+    private static class MergedKey {
+        String key;
+        double accuracy;
+        public MergedKey(KeyAccuracy key0, KeyAccuracy key1, KeyAccuracy key2) {
+            this.key = &quot;&quot; + (char)key0.key + (char)key1.key + (char)key2.key;
+            this.accuracy = key0.accuracy + key1.accuracy + key2.accuracy;
+        }
+    }
+
+    /**
+     * 키값이 될 수 있는 값을 찾아냄
+     * @param cipher    암호화된 값
+     * @param offset    n번재마다 복호화
+     * @param keySize   키값의 길이(이 문제에서는 3)
+     * @return
+     */
+    private static List&lt;KeyAccuracy&gt; getAvailableKeys(Integer[] cipher, int offset, int keySize) {
+        // 키값은 영어 소문자가 가능함
+        List&lt;KeyAccuracy&gt; availableKeys = IntStream.rangeClosed('a', 'z').boxed()
+                                            .map(key -&gt; new KeyAccuracy(key, 0))
+                                            .collect(Collectors.toList());
+
+        for (int i=offset; i&lt;cipher.length &amp; !availableKeys.isEmpty(); i+=keySize) {
+            Integer encryptedChar = cipher[i];
+            Iterator&lt;KeyAccuracy&gt; iter = availableKeys.iterator();
+            while (iter.hasNext()) {
+                KeyAccuracy keyAccuracy = iter.next();
+                Double accuracy = getKeyAccuracy(encryptedChar, keyAccuracy.key);
+                if (accuracy == null) {
+                    iter.remove();  // 절대로 키가 될수 없으므로, 리스트에서 삭제
+                } else {
+                    keyAccuracy.accuracy += accuracy;   // 정확도를 누적해서 더함
+                }
+            }
+        }
+
+        // 키값이 될 수 있는 값리스트를 정확도 순으로 정렬
+        Collections.sort(availableKeys, (o1, o2) -&gt; Double.compare(o2.accuracy, o1.accuracy));
+
+        return availableKeys;
+    }
+
+    private static final String ACC_MAX = &quot;abcdefghijklmnopqrstuvwzyxABCDEFGHIJKLMNOPQRSTUVWXYZ '\&quot;.,?!&quot;;
+
+    /**
+     * 주어진 값으로 복호화를 시도해보고, 그 값을 정확도로 나타냄 &lt;br&gt;
+     * 평범한 영어문장에서 나올법한 ascii값은 정확도가 높고, 그 외에는 낮음. 절대로 나오지 않을값은 null
+     * @param encryptedChar
+     * @param key
+     * @return
+     */
+    private static Double getKeyAccuracy(int encryptedChar, int key) {
+        char encrypted = (char)(encryptedChar ^ key);
+        if (encrypted &lt; 32 || encrypted &gt; 126) {
+            return null;
+        } else if (ACC_MAX.contains(String.valueOf(encrypted))) {
+            return 1.0;
+        } else {
+            return 0.2;
+        }
+    }
+
+    private static String getPlainText(Integer[] cipher, String key) {
+        String text = &quot;&quot;;
+        byte[] keyValues = key.getBytes();
+        int keyOffset = 0;
+        for (Integer c : cipher) {
+            text += (char)(c ^ keyValues[keyOffset]);
+            keyOffset = (keyOffset + 1) % keyValues.length;
+        }
+        return text;
+    }
+
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/15 16:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Seongsu Kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13325"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>영어 문장에서 빈도가 가장 높은 단어는 'the'입니다. 그래서, the의 개수가 최대인 tuple을 선택하였습니다.</p>
+<pre><code class="python">import re, operator
+
+
+def counter_the(s):
+    p = re.compile(r&quot;the\s&quot;)
+    return len(p.findall(s))
+
+
+data = &quot;&quot;
+with open(&quot;cipher1.txt&quot;, &quot;r&quot;) as f:
+    data = f.read().split(&quot;,&quot;)
+    data = list(map(int, data))
+
+answers = [(i, j, k) for i in range(97, 123) for j in range(97, 123) for k in range(97, 123)]
+
+max_the_count = 0
+ans = ()
+for tu in answers:
+    original = &quot;&quot;
+    the_count = 0
+    for i, x in enumerate(data):
+        original += chr(x ^ tu[i % 3])
+    if counter_the(original) &gt; max_the_count:
+        max_the_count = counter_the(original)
+        ans = tu
+
+print(max_the_count)
+print(ans)
+
+result = &quot;&quot;
+for i, x in enumerate(data):
+    result += chr(x ^ ans[i % 3])
+
+print(result)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/04 04:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">WJ K</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13707"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">sample = [79,59,12,2,79,35,8,28,20,2,3,68,8,9,68,45,0,12,9,67,68,4,7,5,23,27,1,21,79,85,78,79,85,71,38,10,71,27,12,2,79,6,2,8,13,9,1,13,9,8,68,19,7,1,71,56,11,21,11,68,6,3,22,2,14,0,30,79,1,31,6,23,19,10,0,73,79,44,2,79,19,6,28,68,16,6,16,15,79,35,8,11,72,71,14,10,3,79,12,2,79,19,6,28,68,32,0,0,73,79,86,71,39,1,71,24,5,20,79,13,9,79,16,15,10,68,5,10,3,14,1,10,14,1,3,71,24,13,19,7,68,32,0,0,73,79,87,71,39,1,71,12,22,2,14,16,2,11,68,2,25,1,21,22,16,15,6,10,0,79,16,15,10,22,2,79,13,20,65,68,41,0,16,15,6,10,0,79,1,31,6,23,19,28,68,19,7,5,19,79,12,2,79,0,14,11,10,64,27,68,10,14,15,2,65,68,83,79,40,14,9,1,71,6,16,20,10,8,1,79,19,6,28,68,14,1,68,15,6,9,75,79,5,9,11,68,19,7,13,20,79,8,14,9,1,71,8,13,17,10,23,71,3,13,0,7,16,71,27,11,71,10,18,2,29,29,8,1,1,73,79,81,71,59,12,2,79,8,14,8,12,19,79,23,15,6,10,2,28,68,19,7,22,8,26,3,15,79,16,15,10,68,3,14,22,12,1,1,20,28,72,71,14,10,3,79,16,15,10,68,3,14,22,12,1,1,20,28,68,4,14,10,71,1,1,17,10,22,71,10,28,19,6,10,0,26,13,20,7,68,14,27,74,71,89,68,32,0,0,71,28,1,9,27,68,45,0,12,9,79,16,15,10,68,37,14,20,19,6,23,19,79,83,71,27,11,71,27,1,11,3,68,2,25,1,21,22,11,9,10,68,6,13,11,18,27,68,19,7,1,71,3,13,0,7,16,71,28,11,71,27,12,6,27,68,2,25,1,21,22,11,9,10,68,10,6,3,15,27,68,5,10,8,14,10,18,2,79,6,2,12,5,18,28,1,71,0,2,71,7,13,20,79,16,2,28,16,14,2,11,9,22,74,71,87,68,45,0,12,9,79,12,14,2,23,2,3,2,71,24,5,20,79,10,8,27,68,19,7,1,71,3,13,0,7,16,92,79,12,2,79,19,6,28,68,8,1,8,30,79,5,71,24,13,19,1,1,20,28,68,19,0,68,19,7,1,71,3,13,0,7,16,73,79,93,71,59,12,2,79,11,9,10,68,16,7,11,71,6,23,71,27,12,2,79,16,21,26,1,71,3,13,0,7,16,75,79,19,15,0,68,0,6,18,2,28,68,11,6,3,15,27,68,19,0,68,2,25,1,21,22,11,9,10,72,71,24,5,20,79,3,8,6,10,0,79,16,8,79,7,8,2,1,71,6,10,19,0,68,19,7,1,71,24,11,21,3,0,73,79,85,87,79,38,18,27,68,6,3,16,15,0,17,0,7,68,19,7,1,71,24,11,21,3,0,71,24,5,20,79,9,6,11,1,71,27,12,21,0,17,0,7,68,15,6,9,75,79,16,15,10,68,16,0,22,11,11,68,3,6,0,9,72,16,71,29,1,4,0,3,9,6,30,2,79,12,14,2,68,16,7,1,9,79,12,2,79,7,6,2,1,73,79,85,86,79,33,17,10,10,71,6,10,71,7,13,20,79,11,16,1,68,11,14,10,3,79,5,9,11,68,6,2,11,9,8,68,15,6,23,71,0,19,9,79,20,2,0,20,11,10,72,71,7,1,71,24,5,20,79,10,8,27,68,6,12,7,2,31,16,2,11,74,71,94,86,71,45,17,19,79,16,8,79,5,11,3,68,16,7,11,71,13,1,11,6,1,17,10,0,71,7,13,10,79,5,9,11,68,6,12,7,2,31,16,2,11,68,15,6,9,75,79,12,2,79,3,6,25,1,71,27,12,2,79,22,14,8,12,19,79,16,8,79,6,2,12,11,10,10,68,4,7,13,11,11,22,2,1,68,8,9,68,32,0,0,73,79,85,84,79,48,15,10,29,71,14,22,2,79,22,2,13,11,21,1,69,71,59,12,14,28,68,14,28,68,9,0,16,71,14,68,23,7,29,20,6,7,6,3,68,5,6,22,19,7,68,21,10,23,18,3,16,14,1,3,71,9,22,8,2,68,15,26,9,6,1,68,23,14,23,20,6,11,9,79,11,21,79,20,11,14,10,75,79,16,15,6,23,71,29,1,5,6,22,19,7,68,4,0,9,2,28,68,1,29,11,10,79,35,8,11,74,86,91,68,52,0,68,19,7,1,71,56,11,21,11,68,5,10,7,6,2,1,71,7,17,10,14,10,71,14,10,3,79,8,14,25,1,3,79,12,2,29,1,71,0,10,71,10,5,21,27,12,71,14,9,8,1,3,71,26,23,73,79,44,2,79,19,6,28,68,1,26,8,11,79,11,1,79,17,9,9,5,14,3,13,9,8,68,11,0,18,2,79,5,9,11,68,1,14,13,19,7,2,18,3,10,2,28,23,73,79,37,9,11,68,16,10,68,15,14,18,2,79,23,2,10,10,71,7,13,20,79,3,11,0,22,30,67,68,19,7,1,71,8,8,8,29,29,71,0,2,71,27,12,2,79,11,9,3,29,71,60,11,9,79,11,1,79,16,15,10,68,33,14,16,15,10,22,73]
+
+cipher = lambda sample, key: ''.join(chr(sample[i]^key[i%3]) for i in range(len(sample)))
+keygen = lambda n: [(n//(26**i))%26+97 for i in range(3)]
+
+for i in range(26**3):
+    txt = cipher(sample,keygen(i))
+    if txt.count('. ') and txt.count('and') and txt.count('the') and txt.count('of'):
+        print('key:',''.join(chr(j) for j in keygen(i)))
+        break
+print('\nMessage: {}\n\nsum of the ASCII values: {}'.format(txt,sum(ord(i) for i in txt)))
+
+</code></pre>
+
+<p>키 차례대로 대입하는 무식한 방법으로 풀었습니다</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/23 21:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14717"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>저도 그냥 무식하게...</p>
+<pre><code class="python">def decode(cipher):
+    freq = []
+    rng = range(ord('a'), ord('z') + 1)
+    for k1 in rng:
+        for k2 in rng:
+            for k3 in rng:
+                key = [k1, k2, k3]
+                plain = _decode(cipher, key)
+                freq.append( (plain.count(' '), key, plain) )
+
+    _, key, plain = max(freq)
+    return chr(key[0])+chr(key[1])+chr(key[2]), ''.join(plain)
+
+
+def _decode(cipher, key):
+    plain = []
+    i = 0
+    for c in cipher:
+        plain.append(chr(c^key[i]))
+        i = (i + 1) % 3
+
+    return plain
+
+
+print('key=&quot;{}&quot;\ntext=\n{}'.format(*decode(cipher)))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/22 03:02</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18032"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">f = open(&quot;C:\\Users\\kdh\\Desktop\\cipher1.txt&quot;,&quot;r&quot;)
+line = f.readline()
+f.close()
+
+line = line.split(&quot;,&quot;)
+line_len = len(line)
+
+result=0
+s=0
+string=&quot;&quot;
+for i in range(97, 123):
+    for j in range(97, 123):
+        for k in range(97, 123):
+            s=0
+            string=&quot;&quot;
+            for c in range(0, line_len): 
+                if c%3 == 0:
+                    result=int(line[c])^i
+                elif c%3 == 1:
+                    result=int(line[c])^j
+                elif c%3 == 2:
+                    result=int(line[c])^k
+                if not(result &gt;= 32 and result &lt;127):
+                    s=1
+                    break
+                string=string+chr(result)
+            ls=string.lower()
+            if s==0 and ls.find(&quot;of&quot;) != -1 and ls.find(&quot;the&quot;) != -1 and ls.find(&quot;to&quot;) != -1 and ls.find(&quot;and&quot;) != -1:
+                print(&quot;key:&quot;+chr(i)+chr(j)+chr(k))
+                print(string)
+</code></pre>
+
+<p>https://www.wordfrequency.info/free.asp?s=y</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/26 12:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박박박</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18037"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3.7</p>
+<p>저 역시 비슷한 풀이법입니다. 영어 문장인지의 판단은 공백의 개수를 기준으로 하였습니다.</p>
+<pre><code class="python">def main():
+    with open(&quot;cipher1.txt&quot;, 'r') as f:
+        encrypt = f.read()
+    encrypt = tuple(map(int, encrypt.split(',')))
+
+    # 소문자 ascii: [97,122]
+    lower_range = range(97, 123)
+    keys = [(p, m, s) for p in lower_range for m in lower_range for s in lower_range]  # 암호화키
+    # 공백이 제일 많이 검출되는 (영어 문장이라 판단되는) 키에 대한 메세지
+    max_spaces, decrypt_key, decrypt_msg = 0, None, None  # 최대 공백수, 암호화키, 해독 문자열
+    for key in keys:
+        tmp_decrypt = tuple(e ^ key[idx % 3] for idx, e in enumerate(encrypt))
+        foo = tmp_decrypt.count(32)  # 공백 개수
+        if foo &gt; max_spaces:
+            max_spaces = foo
+            decrypt_key = key
+            decrypt_msg = tmp_decrypt[:]
+
+    print(&quot;encryption key:&quot;, &quot;&quot;.join(chr(c) for c in decrypt_key))  # god
+    print(&quot;decrypted message:&quot;, &quot;&quot;.join(chr(c) for c in decrypt_msg))  # (The Gospel..)
+    print(&quot;sum of ascii values in decrypted message: &quot;, sum(decrypt_msg))  # 107359
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/27 09:45</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19042"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def xor(m, n):
+    return ((m|n)&amp;~(m&amp;n))
+
+def set_data():
+    f=open('cipher1.txt', 'r')
+    code=f.readline()
+    l=code.split(',')
+    for i in range(len(l)):
+        l[i]=int(l[i].strip())
+    f.close()
+    return l
+
+def decode(s, k):
+    res=''
+    for i in range(len(s)//3+1):
+        if i == len(s)//3+1:
+            res+=decode_unit(s[3*i:], k)
+        res+=decode_unit(s[3*i:3*i+3], k)
+    return res
+
+
+def decode_unit(s, k):
+    res=''
+    for i in range(3):
+        try:
+            res+=chr(xor(s[i], ord(k[i])))
+        except: pass
+    return res
+
+
+def find_key(s):
+    d=dict()
+    for i in range(97, 123):
+        for j in range(97, 123):
+            for k in range(97, 123):
+                key=chr(i)+chr(j)+chr(k)
+                res=decode(s,key)
+                c=res.count(' ')
+                d[c]=(key, res)
+    return d[max(d)]
+
+def print_result(k):
+    res=0
+    for ch in k[1]:
+        res+=ord(ch)
+    print(k[1])
+    print('The key is ', k[0])
+    print('The sum is ', res)
+
+
+
+s=set_data()
+r=find_key(s)
+print_result(r)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/08/26 17:25</p>
+                                <p class="static-profile" style="margin:0;padding:0;">돔돔</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29797"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">f = open(&quot;cipher1.txt&quot;)
+ciphertext = f.read().split(',')
+f.close()
+
+dic1, dic2, dic3 = {}, {}, {}
+max1, max2, max3 = 0, 0, 0
+chr1, chr2, chr3 = '', '', ''
+for i, ch in enumerate(ciphertext):
+    munja = chr(int(ch) ^ 32)
+    if i % 3 == 0:
+        if munja not in dic1:
+            dic1[munja] = 0
+        dic1[munja] += 1
+        if dic1[munja] &gt; max1:
+            max1 = dic1[munja]
+            chr1 = munja
+    elif i % 3 == 1:
+        if munja not in dic2:
+            dic2[munja] = 0
+        dic2[munja] += 1
+        if dic2[munja] &gt; max2:
+            max2 = dic2[munja]
+            chr2 = munja
+    else:
+        if munja not in dic3:
+            dic3[munja] = 0
+        dic3[munja] += 1
+        if dic3[munja] &gt; max3:
+            max3 = dic3[munja]
+            chr3 = munja
+
+converttxt = [chr1, chr2, chr3]
+print(&quot;암호화 키: &quot;, ''.join(converttxt))
+result = ''
+
+for i, ch in enumerate(ciphertext):
+    munja = chr(ord(converttxt[i%3]) ^ int(ch))
+    result += munja
+
+print(result)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/12/10 23:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

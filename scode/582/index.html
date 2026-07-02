@@ -1,0 +1,641 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="취미로 주식하는 사람인 L씨는 어느날 자신이 투자한 한 종목에 조작이 있음을 직감하였다.
+약간의 계산 후 그는 주가가 어떤 고차 다항함수를 따라서 움직인다고 추정하였다.
+만약 그 다항함수를 구할 수 있다면 L은 부자가 될 게 명백했다.
+
+...">
+    <title>다항함수를 구하라 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">다항함수를 구하라</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">5</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 3</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>취미로 주식하는 사람인 L씨는 어느날 자신이 투자한 한 종목에 조작이 있음을 직감하였다.
+약간의 계산 후 그는 주가가 어떤 고차 다항함수를 따라서 움직인다고 추정하였다.
+만약 그 다항함수를 구할 수 있다면 L은 부자가 될 게 명백했다.</p>
+<p>L씨를 도와서 2개 이상의 좌표가 주어지면, 그 좌표를 모두 지나는 최소 차수의 다항함수를 출력하는 프로그램을 만들어라.</p>
+<p>*다항함수:x^2+x+1 따위를 의미한다. 이 때 x^2에서 2를 차수라고 하며 차수는 0이상의 정수여야 한다.</p>
+<p>ex.(1,1), (2,2)가 주어지면 y=x</p>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">라그랑주의 보간법</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2018/02/10 14:44</p>
+                    <p class="static-profile" style="margin:0;padding:0;">추천은 다 읽음</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>7개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_10670"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 입니다</p>
+<pre><code class="python">from itertools import combinations
+
+
+
+n=input(&quot;좌표 개수를 입력하세요\n&quot;)
+if int(n)&lt;=1:
+    exit()
+location_list_x=[]
+location_list_y=[]
+for k in range(int(n)):
+    temp_location_x=float(input(&quot;x좌표를 입력하세요\n&quot;))   #입력하고자하는 좌표가 (1,2)라면 여기서 1 다음줄에서 2 이렇게 했습니다
+    temp_location_y=float(input('y좌표를 입력하세요\n'))
+    location_list_x.append(temp_location_x)
+    location_list_y.append(temp_location_y)
+
+degree_list=[]            #리스트에 n-1차계수,n-2차계수,.....1차,0차 이런 순서로 저장할려고 이렇게 했습니다
+for l in range(int(n)):      #라그랑주 보간법 이용해서 다항식 구하는 과정
+    degree_list.append(0)
+
+
+for i in range(int(n)):
+    temp_denominator=1
+    for_combination=[]
+    for j in range(int(n)):
+        if i==j:
+            continue
+        temp_denominator*=((location_list_x[i])-(location_list_x[j]))
+        for_combination.append((location_list_x[j]))
+    for g in range(int(n)):
+        if temp_denominator==0:
+            degree_list[g]=0
+            continue
+        if g==0:
+            degree_list[g]+=((location_list_y[i])/temp_denominator)
+            continue
+        comb=combinations(for_combination,g)
+        temp_sum=0
+
+        if g==1:                # ex) (x-a)(x-b)(x-c)  계수 1 다음  a+b+c 다음 ab+bc+ca일때 만약 a,b,c중에 0포함고려
+            for a in comb:
+                temp_sum+=sum(a)
+
+        if g&gt;=2:
+            for f in comb:
+                num=1
+                for b in f:
+                    num*=b
+                temp_sum+=num
+
+
+        degree_list[g]+=((-1)**(g))*(location_list_y[i])/temp_denominator*temp_sum   #여기서 다항식 구하는 과정 끝
+
+ans_str =&quot;y=&quot;                         #출력하는 과정(출력시 계수가 실수로 나오는데 입력값이 실수일때를 고려했습니다.. )
+
+for c in range(int(n)):
+    if c==(int(n)-1) and degree_list[c]&gt;0:
+        ans_str+=&quot;+%s&quot;%(degree_list[-1])
+        break
+    elif c==(int(n)-1) and degree_list[c]&lt;0:
+        ans_str+=&quot;%s&quot;%(degree_list[-1])
+        break
+    elif c==(int(n)-1) and degree_list[c]==0:
+        break
+    elif degree_list[c]&gt;0:
+        ans_str+= &quot;+%sx^%s&quot; % ((degree_list[c]), (int(n)-1 - c))
+    elif degree_list[c]==0:
+        continue
+    else:
+        ans_str += &quot;%sx^%s&quot; % ((degree_list[c]), (int(n)-1 - c))
+
+print(ans_str)
+exit()
+
+
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/13 00:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">D B</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10794"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3.6</p>
+<ul>
+<li>라그랑주 보간법을 sympy를 이용하여 구현하였습니다.</li>
+</ul>
+<pre><code class="python">import sympy
+
+def inputdata():
+    p = int(input('▶ 좌표의 개수를 입력하세요: '))
+    data,x,y = [],0,0
+    for i in range(p):
+        x,y = map(float,input('').split())
+        data.append([x,y])
+    return data
+
+def polynomialfunc(data):
+    n = len(data)
+    x = sympy.Symbol('x')
+    l,L = 1,0
+    for i in range(n):
+        for h in range(n):
+            if i == h:
+                pass
+            else:
+                l *= (x-data[h][0])/(data[i][0]-data[h][0])
+        L += data[i][1]*l
+        l = 1
+    print(sympy.expand(L))
+
+if __name__ == &quot;__main__&quot;:
+    data = inputdata()
+    print(data)
+    polynomialfunc(data)
+</code></pre>
+
+<ul>
+<li>결과값</li>
+</ul>
+<pre><code class="python"># y = tan(x) 그래프상의 점들에 대한 다항식
+▶ 좌표의 개수를 입력하세요: 5
+-1.5 -14.1014
+-0.75 -0.931596
+0 0
+0.75 0.931596
+1.5 14.1014
+[[-1.5, -14.1014], [-0.75, -0.931596], [0.0, 0.0], [0.75, 0.931596], [1.5, 14.1014]]
+
+ L(x) = 4.83484760493827*x**3 - 1.47747377777778*x
+
+▶ 좌표의 개수를 입력하세요: 2
+1 1
+2 2
+[[1.0, 1.0], [2.0, 2.0]]
+
+ L(x) = 1.0*x
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/18 22:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">justbegin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10882"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>이 문제를 통해 sympy 모듈을 처음 다뤄보았습니다. 좋은 문제 공유 감사합니다. 실행속도가 빠르지 않은데 어떻게 개선할 수 있을까요?</p>
+<pre><code class="python">from sympy import *
+def lagrange(a):
+    result = 0
+    x = Symbol('x')
+    for i in range(len(a)):
+        l = a[i][1]
+        for j in range(len(a)):
+            if i == j:
+                pass
+            else:
+                l *=  (x - a[j][0]) / (a[i][0] - a[j][0])
+        result += expand(l)
+    return result
+a = list()
+while 1:
+    n = input()
+    if n == '':
+        break
+    else:
+        a.append(list(map(float, n.split())))
+print(lagrange(a))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/23 13:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김동하</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13218"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from functools import reduce
+
+def calc_polynomial(a,b):
+    return ((i[0]+j[0],i[1]*j[1]) for i in a for j in b)
+
+def Lagrange(coordinate):
+    LagrangeEq = []
+    result = []
+    solution = {}
+    for i in range(len(coordinate)): solution[i] = 0
+    x = [i[0] for i in coordinate]
+    y = [i[1] for i in coordinate]
+
+    for i in range(len(coordinate)):
+        LagrangeEq += [[((0, y[i]/reduce(lambda t1, t2: t1*t2, (x[i]-x[j] for j in range(len(coordinate)) if i != j))),)]]
+        LagrangeEq[-1] += tuple(((1,1),(0,-x[j])) for j in range(len(coordinate)) if i != j)
+    for i in LagrangeEq:
+        result += reduce(lambda t1,t2:calc_polynomial(t1,t2),i)
+
+    for i in result:
+        solution[i[0]] += i[1]
+    return solution
+
+# 좌표 입력
+coord = set()
+while 1:
+    temp = input('(x,y) 형태로 좌표 입력(입력종료는 엔터): ')
+    if temp == '': break
+    coord.add(eval(temp))
+
+# 라그랑주 계산
+Lcalc = Lagrange(coord)
+
+# 출력
+print('\n다항식: ',end='')
+for i in range(len(coord)-1,0,-1):
+    if Lcalc[i] == 0: continue
+    if i == 1: print('{}x + '.format(Lcalc[i]),end='')
+    else: print('{}x^{} + '.format(Lcalc[i],i),end='')
+print(Lcalc[0])
+
+</code></pre>
+
+<pre><code>(x,y) 형태로 좌표 입력(입력종료는 엔터): 1,1
+(x,y) 형태로 좌표 입력(입력종료는 엔터): 2,7
+(x,y) 형태로 좌표 입력(입력종료는 엔터): 0,1
+(x,y) 형태로 좌표 입력(입력종료는 엔터):
+
+다항식: 3.0x^2 + -3.0x + 1.0
+
+(x,y) 형태로 좌표 입력(입력종료는 엔터): 23,58
+(x,y) 형태로 좌표 입력(입력종료는 엔터): 12,84
+(x,y) 형태로 좌표 입력(입력종료는 엔터): -23.3242,-23.234
+(x,y) 형태로 좌표 입력(입력종료는 엔터): 0,0
+(x,y) 형태로 좌표 입력(입력종료는 엔터): -12,1
+(x,y) 형태로 좌표 입력(입력종료는 엔터):
+
+다항식: -0.0006717455457842552x^4 + -0.004614238543956924x^3 + 0.39187024748182164x^2 + 4.12278368366313x + 0.0
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/29 06:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16093"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#다항함수 구하기
+import numpy.linalg as lin
+n=int(input('좌표의 수 입력:'))
+x=[]
+y=[]
+for i in range(1,n+1):
+    print('번호: ',i)
+    xn=int(input('x좌표 입력: '))
+    x.append(xn)
+    yn=int(input('y좌표 입력: '))
+    y.append(yn)
+print('x좌표',x)
+print('y좌표',y)
+
+#2차원 배열(Vandermonde Matrix)
+def matrix2(x):
+    xx=[]#전체
+    for i in range(0,n):
+        xx2=[]#각 행
+        for j in range(0,n):
+            xx1=x[i]**j
+            xx2.append(xx1)
+        xx.append(xx2)
+    return xx
+
+xx=matrix2(x)        
+#xx는 Vandermonde Matrix
+#역행렬 구하기
+inxx=lin.inv(xx)
+k=[]#다항식의 계수
+for i in range(0,n):
+    kk=0
+    for j in range(0,n):
+        kk+=inxx[[i],[j]]*y[j]
+    k.append(kk)
+print('다항식의 계수(상수항,x,x^2,...x^(n-1) 순으로): ',k)
+#구하는 다항식은 k[0]+k[1]*x+k[2]*x^2+k[3]*x^3+....+k[n-1]*x^(n-1)이다.
+
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/01/20 21:15</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GammaKnight</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20230"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import sympy
+import re
+
+inp_com, inp_LIST = re.compile(&quot;([-]?\d*\.?\d+)&quot;), []
+x, inter, kou = Symbol('x'), [], []
+while True : 
+    inp_LIST.append(inp_com.findall(input(&quot;INPUT(\'-.1\' to quit) : &quot;)))
+    if inp_LIST[-1] == ['-.1'] :
+        del inp_LIST[-1]
+        break
+print(inp_LIST)
+for i in range(0, len(inp_LIST)) :
+    for m in range(1, len(inp_LIST)) :
+        inter.append('((x-%s)/(%s-%s))'% (inp_LIST[(i+m)%len(inp_LIST)][0], inp_LIST[i][0], inp_LIST[(i+m)%len(inp_LIST)][0] ))
+    kou.append(&quot;*&quot;.join(inter)+'*'+str(inp_LIST[i][1]))
+    inter = []
+print('y=', sympy.expand(('+'.join(kou))))
+</code></pre>
+
+<p>먼저 풀이를 적어주신 분들의 답을 참고삼아 라그랑주 보간법으로 풀었습니다. sympy는 처음 써보는데
+매트랩의 심볼릭 툴박스가 생각나네요</p>
+<p>** 조금 난잡해 보이기도 하고 결과예시가 너무 단순해 보여서 조금 수정했습니다.</p>
+<p>결과</p>
+<pre><code>INPUT('-.1' to quit) : 2 0
+INPUT('-.1' to quit) : 1 0
+INPUT('-.1' to quit) : 3 2
+INPUT('-.1' to quit) : -1 6
+INPUT('-.1' to quit) : -.1
+[['2', '0'], ['1', '0'], ['3', '2'], ['-1', '6']]
+y= x**2 - 3*x + 2
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/12/19 16:08</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GG</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29661"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from future.moves import itertools
+
+
+def getCoordinates():
+    N = int(input('좌표 갯수는? '))
+    cp = []
+    for n in range(N):
+        x, y = map(int, input('{}번째 x y 좌표는: '.format(n+1)).split())
+        cp.append([x,y])
+    return cp
+
+def nthCoefficient(cp, coef):
+    nth = len(cp)
+    co = []
+    for i in range(nth):
+        a = cp[i][1]
+        ad = 1
+        for j in range(nth):
+            if not i == j:
+                ad *= (cp[i][0] - cp[j][0])
+        co.append(a / ad)
+    coef.append(co)
+
+def lowthCoefficient(nth, cp, coef):
+    idx = [i for i in range(nth)]
+
+    for i in range(1, nth):
+        Cb = itertools.combinations(idx, i)
+        lst = list(Cb)
+        tmp = []
+        for j in range(nth):
+            for l in range(len(lst)):
+                if not j in lst[l]:
+                    b = 1
+                    for k in lst[l]:
+                        b *= (-cp[k][0])
+                    tmp.append(b * coef[0][j])
+        coef.append(tmp)
+
+def printFunction(nth, res):
+    y = ''
+    index = nth
+    for n in res:
+        if n == 0:
+            continue
+        elif n == 1 or n == -1:
+            if n == 1:
+                y += ' + x**' + str(nth)
+            else:
+                y += ' - x**' + str(nth)
+        else:
+            if n &gt; 0:
+                y += ' + ' + str(n) + ' x**' + str(nth)
+            else:
+                y += ' - ' + str(abs(n)) + ' x**' + str(nth)
+        nth -= 1
+    print('\n  y = ', y)
+
+
+cp = getCoordinates()
+coef = []
+nthCoefficient(cp, coef)
+lowthCoefficient(len(cp), cp, coef)
+
+allCoef = []
+for co in coef:
+    allCoef.append(sum(co))
+print(allCoef)
+printFunction(len(cp) - 1, allCoef)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/10/02 16:13</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

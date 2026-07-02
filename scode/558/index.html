@@ -1,0 +1,2823 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="(프로젝트 오일러 문제 16번)
+2^15 = 32768 의 각 자리수를 더하면 3 + 2 + 7 + 6 + 8 = 26 입니다.
+2^1000의 각 자리수를 모두 더하면 얼마입니까?">
+    <title>2^1000의 각 자릿수의 합은? - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">2^1000의 각 자릿수의 합은?</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">2</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 2</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>(프로젝트 오일러 문제 16번)
+2^15 = 32768 의 각 자리수를 더하면 3 + 2 + 7 + 6 + 8 = 26 입니다.
+2^1000의 각 자리수를 모두 더하면 얼마입니까?</p>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2017/08/02 13:07</p>
+                    <p class="static-profile" style="margin:0;padding:0;">P.Y.Thon</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>72개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_8169"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">2</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">print(eval('+'.join(str(2**1000)))) # 1366
+</code></pre>
+
+<p>1 &lt;&lt; 1000 이렇게 비트연산을 안 해도 내부적으로 구현이 잘 되어있는지 거의 시간차 없이 바로 나옵니다.</p>
+<p>하지만 문제 의도는 아마</p>
+<pre><code class="python">def twosqr(n):
+    arr = [0] * (int(n/10*3)+2) + [1]
+    for i in range(n):
+        carrys  = [x*2 // 10 for x in arr][1:] + [0]
+        remains = [x*2 %  10 for x in arr]
+        arr = [sum(x) for x in zip(carrys, remains)]
+
+    return arr
+
+
+#print(''.join(map(str, twosqr(1000))))  # 2^n
+print(sum(twosqr(1000)))
+</code></pre>
+
+<p>이렇게 직접 계산하라는 거겠지요. 2^10을 10진수 3자리로 얼추 계산해서 배열을 준비하고 2를 1000번 곱했습니다.</p>
+<p>.</p>
+<p>아니면 한자리씩 계산하지 말고... 32bit unsigned int라고 가정하고 대충 9자리씩 끊어서 요렇게.</p>
+<p>이번에는 배열을 처음부터 안 만들고 10억 넘을 때마다 앞에 하나씩 붙여줬습니다.</p>
+<pre><code class="python">def twosqr(n):  
+    LIMIT = 1000000000
+    arr = [1]
+    for i in range(n):
+        if arr[0]*2 &gt;= LIMIT:
+            arr = [0] + arr
+
+        for j in range(len(arr)):
+            carry, arr[j] = divmod(arr[j]*2, LIMIT)            
+            arr[j-1] += carry
+
+    return ''.join(map(str, arr))
+
+
+print(eval('+'.join(twosqr(1000))))
+</code></pre>
+
+<p>return ''.join(map(str, arr))  &lt;-- 여기서 정확히 2^1000 은 안 나옵니다. </p>
+<p>숫자로 끊어서 저장했기 때문에... 예를 들어서 "[1, 1]" 이런 숫자가 저장되어 있으면 "1" + "000000001" 이 아니라 "1" + "1"을 리턴합니다.</p>
+<p>다만 0은 마지막 덧셈에 영향이 없기 때문에 결과는 틀리지 않습니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/03 05:15</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8305"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">2</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<pre><code class="ruby">(2**1000).digits.sum #=&gt; 1366
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/10 19:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20091"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">public class 이의천제곱의각자릿수의합은 {
+
+    public static void main(String[] args) {
+
+        BigInteger b1 = new BigInteger(&quot;2&quot;);
+        BigInteger b2 = b1.pow(1000);
+        BigInteger b3 = BigInteger.TEN;
+        BigInteger a= BigInteger.ZERO;
+
+        for(int i=0;;i++) {
+            if(b2.compareTo(b3)==-1) {  //b2의 값이 10보다 작을경우
+                a=a.add(b2);
+                break;
+            }
+            else {
+                 a=a.add(b2.mod(b3));
+                 b2=b2.divide(b3);
+            }
+        }
+        System.out.println(a);
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/11/30 15:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">big Ko</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8193"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">int GetWeekDay(int y, int m, int d);
+
+int main()
+{
+int count = 0;
+
+for( int y = 1901 ; y &lt;= 2000 ; y++ )
+{
+for( int m = 1 ; m &lt;= 12 ; m++ )
+{
+if( GetWeekDay(y, m, 1) == 0 ) count++;
+}
+}
+printf(&quot;Ans = %d\n&quot;, count);
+}
+
+int GetWeekDay(int y, int m, int d)
+{
+if( m &lt;= 2 ) { m += 9; y += 4799; } else { m -= 3; y += 4800; }
+int days = 365*y + y/4 - y/100 + y/400 + (153*m+2)/5 + d - 32045;
+return (days+1)%7;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/04 08:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">P.Y.Thon</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8294"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">a=str(2**1000)
+b=[]
+ans=0
+for i in range(0,len(a)):
+    b.append(int(a[i]))
+for i in b:
+    ans+=i
+
+print(ans)
+#1366
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/10 10:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박봉경</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8299"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package practiceBasic.binaryOut;
+
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class projectOiler16 {
+    public static void main(String[] args) {
+        System.out.println(&quot;BigInteger Calculation: &quot; + bigIntegerCalculation(1000));
+        System.out.println(&quot;ArrayList Calculation: &quot; + arrayListCalculation(1000));
+    }
+
+    private static int bigIntegerCalculation(int power) {
+        // 단순무식
+        BigInteger times = new BigInteger(&quot;2&quot;);
+        int temp = 0;
+
+        times = times.pow(power);
+
+        while (times.compareTo(BigInteger.TEN) &gt;= 0) {
+            temp += times.mod(BigInteger.TEN).intValue();
+            times = times.divide(BigInteger.TEN);
+        }
+        temp += times.mod(BigInteger.TEN).intValue();
+
+        return temp;
+    }
+
+    private static int arrayListCalculation(int power) {
+        // ArrayList, doublyLinked가 더 좋을듯...
+        List&lt;Integer&gt; numList = new ArrayList&lt;Integer&gt;();
+        int temp = 0;
+
+        numList.add(1);
+
+        for (int i = 1; i &lt;= power; i++) {
+            int ten = 0;
+
+            for (int n = 0; n &lt; numList.size(); n++) {
+                int tmpNum = numList.get(n) * 2 + ten;
+                ten = tmpNum / 10;
+                numList.set(n, tmpNum % 10);
+            }
+
+            if (ten &gt; 0)
+                numList.add(ten);
+        }
+
+        Iterator&lt;Integer&gt; itr = numList.iterator();
+        while (itr.hasNext())
+            temp += itr.next();
+
+        return temp;
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/10 14:27</p>
+                                <p class="static-profile" style="margin:0;padding:0;">어머언니</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8315"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>python3로 작성했습니다.</p>
+<pre><code class="python">print( sum( [ int(i) for i in str(2**1000) ] ) )
+</code></pre>
+
+<pre><code class="no-highlight">#실행결과
+1366
+</code></pre>
+
+<p>사족으로, 2^1000은 다음과 같습니다.</p>
+<pre><code class="no-highlight">10715086071862673209484250490600018105614048117055336074437503883703510511249361224931983788156958581275946729175531468251871452856923140435984577574698574803934567774824230985421074605062371141877954182153046474983581941267398767559165543946077062914571196477686542167660429831652624386837205668069376
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/11 10:02</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Envil_Saintan</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8471"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">list = list(str(2**1000))
+sum = 0
+for i in list:
+    sum += int(i)
+print(sum)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/22 21:58</p>
+                                <p class="static-profile" style="margin:0;padding:0;">윤건석 (can9165)</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8503"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬으로 하면 2^1000 이나 100! 같은 엄청 큰 수에 대해서도 큰 어려움 없이 계산이 가능합니다. </p>
+<pre><code class="python">print(sum(int(x) for x in str(2**1000)))
+</code></pre>
+
+<p>Swift와 같이 정수타입 크기에 제한이 있고, 큰 정수를 지원하지 않는 경우에는 좀 다른 접근이 필요합니다. 10진수 1234는 10이라는 상수를 항으로하는 4차 다항식으로 볼 수 있습니다. (1 * 10^3 + 2 * 10^2 + 3*10^1 + 4 * 10^0) 이 때 두 10진수를 더했을 때 각 항의 계수가 9를 넘어서면 그 차이만큼 상위 항이 하나 더 추가되어 합산됩니다. 곱셈의 경우에도 두 다항식을 곱하는 식으로 정리하고, 계수가 10이상인 항을 상위항으로 올려주는 처리를 해서 정리하게 됩니다. </p>
+<p>이 룰을 따라서 큰 수의 덧셈이나 곱셈을 처리할 수 있는 타입을 만들 수 있습니다. 여기서는 10,000을 단위로 하는 다항식으로 큰 수를 다루는 타입을 작성해보도록 하겠습니다. 덧셈이랑 곱셈만 지원하고 부호는 딱히 생각하지 않습니다. 먼저 각 항의 단위가 되는 노드를 다음과 같이 정의합니다. </p>
+<pre><code class="swift">struct Node {
+  static let limit = 10_000
+  let value: Int
+  let unit: Int
+
+  init(value:Int, unit: Int=0) {
+    self.value = value
+    self.unit = unit
+  }
+
+  func mutiplying(_ other: Node) -&gt; [Node] {
+    let unit = self.unit + other.unit
+    var value = self.value * other.value
+    if value &lt; Node.limit { return [Node(value:value, unit:unit)] }
+    let upFlag = value / Node.limit
+    value = value % Node.limit
+    return [Node(value: upFlag, unit: unit+1), Node(value:value, unit: unit)]
+  }
+}
+</code></pre>
+
+<p>이번에는 이 항들을 모아서 큰 정수를 표현하는 타입을 정의해봅니다. </p>
+<pre><code class="swift">struct BigNumber {
+  var data: [Node]
+
+  // 정수로부터 초기화
+  init(integer n: Int) {
+    var n = n
+    var temp: [Node] = []
+    var unit = 0
+    while n &gt; 0 {
+        temp.append(Node(value: n % Node.limit, unit: unit))
+        n = n / Node.limit
+        unit += 1
+    }
+    self.data = temp
+  }
+
+  // 노드리스트로부터 초기화
+  init(nodes:[Node]) {
+    var temp: [Node] = []
+    let maxUnit = nodes.map{ $0.unit }.max() ?? 0
+    var upFlag = 0
+    for unit in (0...maxUnit) {
+        var value = nodes.filter{ $0.unit == unit }.map{ $0.value }.reduce(0, +) + upFlag
+        if value &gt;= Node.limit {
+           upFlag = value / Node.limit
+           value = value % Node.limit
+         } else {
+           upFlag = 0
+         }
+         temp.append(Node(value: value, unint: unit))
+    }
+    if upFlag &gt; 0 {
+      temp.append(Node(value: upFlag, unit: maxUnit + 1))
+    }
+}
+</code></pre>
+
+<p>문자열로부터 초기화하는 이니셜라이저도 필요하겠지만, 일단 이 문제에서는 필요없으니 제외하겠습니다. 다음은 덧셈과 곱셈을 적용할 수 있게 합니다. 덧셈은 두 다항식의 모든 항을 정리하면 됩니다. 곱셈은 두 다항식의 각 항을 곱하고 그 결과를 정리합니다. </p>
+<pre><code class="swift">extension BigNumer {
+  static func + (left: BigNumber, right: BigNumber) -&gt; BigNumer {
+    return BigNumer(nodes: left.data + right.data)
+  }
+
+  static func * (left: BigNumer, right: BigNumber) -&gt; BigNumer {
+    let nodes = left.data.flatMap{ n in right.data.flatMap{ $0.multiplying(n) }}
+    return BigNumer(nodes: nodes)
+  }
+}
+</code></pre>
+
+<p>이제 계산은 할 수 있으니, 결과를 출력해야겠네요. 각 노드를 unit 역순으로 정렬하고, 노드 값을 4자리 문자열에 포맷팅합니다. <code>String(format:_,_)</code> 을 써도 되는데, 기왕에 <code>Foundation</code>을 반입 안했으니, 그냥 무식하게 "0"으로 패딩 주고 자르는 방식을 선택합니다. 끝으로 첫 항이 4자리 미만인 경우에 앞에 00이 붙는 경우가 있을 수 있으니 이건 떼도록 하겠습니다. </p>
+<pre><code class="swift">extension BigNumer: CustomStringConvertible {
+  var description: String {
+    let numbers = nodes.sorted{ $0.unit &gt; $1.unit }.map{ n in 
+                     let s = &quot;0000&quot; + &quot;\($0.value)&quot;
+                     let pos = s.index(s.endIndex, offsetBy: -4)
+                     return s[pos...]
+                   }.joined(separator:&quot;&quot;)
+    if let nz = numbers.index(where: { $0 != &quot;0&quot; }) {
+      return numbers[nz...]
+    }
+    return numbers
+  }
+}
+</code></pre>
+
+<p>이제 2^1000을 계산하면 되겠네요.</p>
+<pre><code class="swift">func pow(_ base: BigNumber, _ e: Int) -&gt; BigNumber {
+  guard e &gt; 0 else { return BigNumber(integer: 0) }
+  let r = pow(base, e/2)
+  if e % 2 == 0 { return r * r }
+  return r * r * base
+}
+</code></pre>
+
+<p>마무리입니다.</p>
+<pre><code class="swift">let a = BigNumer(integer: 2)
+print(pow(a, 1000).description.characters.flatMap{ Int(String($0)) }.reduce(0, +))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/24 11:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">룰루랄라</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8527"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">a=str(pow(2,1000))
+result=0
+for i in a :
+    result+=int(i)
+print(result)
+
+</code></pre>
+
+<p>답 1366</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/24 21:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박준</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8562"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def f(n1, n2):
+    print(sum(list(map(int, str(n1**n2)))))
+
+f(2, 15)
+f(2, 1000)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/28 10:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">piko</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8578"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>clojure</p>
+<pre><code class="clojure">(print(apply +(map #(-(int%)48)(str(apply *'(repeat 1024 2))))))
+</code></pre>
+
+<p>좀 더 줄일 수 있을 텐데 말이죠...
+<code>#(-(int%)48)</code>는 각 글자 코드 값에서 '0' 코드 값 48을 빼는 코드에요</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/28 17:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김창동</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8628"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="go">// golang 1.9
+package main
+
+import (
+    &quot;fmt&quot;
+    &quot;math&quot;
+    &quot;strconv&quot;
+)
+
+func main() {
+    // sum digits function
+    sum := func(s string) int {
+        lsum := 0
+        for i := 0; i &lt; len(s); i++ {
+            nsn, _ := strconv.Atoi(string(s[i]))
+            lsum += nsn
+        }
+        return lsum
+    }
+    //
+    fmt.Println(sum(fmt.Sprintf(&quot;%.f&quot;, math.Exp2(1000))))
+}
+
+// ans: 1366
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/30 14:11</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8702"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># python 3.6
+print(sum([int(c) for c in str(2**1000)]))
+# ans: 1366
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/09/04 14:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8842"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <h1 id="python">python</h1>
+<p>a=2**1000
+sum=0
+for i in str(a) :
+    sum += int(i)
+print(sum)</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/09/19 15:34</p>
+                                <p class="static-profile" style="margin:0;padding:0;">노명환</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9037"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>이번에는 C#으로 풀어 봤습니다. 난이도가 낮아서 그런지 C++과 크게 차이는 없네요</p>
+<pre><code class="cs">using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleforTest
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int num;
+            int num2 = 1; //2의 n승을 저장할 변수
+            int DivideNum = 1; //1부터 10 씩곱해서 나눠줄 변수
+            int answer = 0; //답을 입력
+
+            num = int.Parse(Console.ReadLine());
+
+            Console.WriteLine(num);
+            num2 = (int)Math.Pow(2, num); //라이브러리
+
+            //그냥 계산했을때..
+            /*for(int i = 0; i &lt; num; i++)
+            {
+                num2 *= 2;
+            }*/
+
+            Console.WriteLine(&quot;2의 n승은 : &quot; + num2);
+
+            while(true) //1의 자리부터 ~ 맨윗자리 까지
+            {
+                if (num2 / DivideNum &gt; 1) //10단위로 나누어서 1보다 크면 그수로 나눠주면 된다는 얘기
+                {
+                    int temp = (num2 % (DivideNum * 10)); //구하는 단위의 윗자리를 제거
+                    answer += (temp / DivideNum); //해당 자리를 1단위로
+                    DivideNum *= 10; //나누는 자릿수 증가
+                }
+                else
+                    break; //모두 계산했을때
+            }
+            Console.WriteLine(answer);
+        }
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/17 13:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">와디더</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9224"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="javascript">function power(pow){
+    var befNum = [1];
+    var aftNum = new Array();
+    var temNum;
+    var odFlag = false;
+    for(var i=1;i&lt;=pow;i++){
+        aftNum = [];
+        for(var j=befNum.length-1;j&gt;=0;j--){
+            temNum = befNum[j];
+            temNum = temNum * 2;
+            if(odFlag == true){
+                temNum += 1;
+                odFlag = false;
+            }
+            if(temNum &lt; 10){
+                aftNum.unshift(temNum);
+                odFlag = false;
+            }else{
+                aftNum.unshift(temNum - 10);
+                if(j == 0) aftNum.unshift(1);
+                else odFlag = true;
+            }
+        }
+        befNum = aftNum;
+    }
+    temNum = 0;
+    for(var k=0;k&lt;befNum.length;k++){
+        temNum += Number(befNum[k]);
+    }
+    console.log(i-1 + &quot; : &quot; + temNum);
+}
+power(1000);
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/11/09 15:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">최현석</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9365"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>결과가 나오긴 하는데 성능은 똥이네요.. ㅋㅋ 손좀 봐야겠어요</p>
+<pre><code class="javascript">const calc = (arr, index, value) =&gt; {
+  arr[index] = value % 10;
+  value = Math.floor(value / 10);
+  if (value) {
+    if (!arr[++index]) {
+      arr.push(0);
+    }
+    calc(arr, index, arr[index] + value);
+  }
+};
+
+const exponentiation = (base, exp) =&gt; {
+  const result = [1];
+  for (let i = 1; i &lt;= exp; i++) {
+    let length = result.length;
+    for (let j = length - 1; j &gt;= 0; j--) {
+      calc(result, j, result[j] * base);
+    }
+  }
+  return result.reduce((s, v) =&gt; s += v, 0);
+};
+
+console.log(exponentiation(2, 1000));
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/11/24 15:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">huna</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9610"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>저는 계산된 수를 string으로 만들어 리스트에 쪼개어 인자로 집어넣었습니다.</p>
+<p>그 후 해당 인자들을 모두 integer로 변환시킨 다음,</p>
+<p>for문을 사용하여 합을 구했습니다.</p>
+<pre><code class="python">a = 2**1000
+
+position_numberlist = list(str(a))
+
+converted_numberlist = [int(i) for i in position_numberlist]
+
+result = 0
+for i in converted_numberlist:
+    if i == 0:
+        continue
+    else: 
+        result += i
+
+print(result)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/12/13 12:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">정재훈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9729"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">class i:
+    def __init__(self):
+        self.li = [1]
+    def double(self):
+        li = self.li
+        for i in range(len(li)):
+            li[i] *= 2
+        for i in range(len(li)):
+            if li[i]//10 == 1:
+                li[i] %= 10
+                try:
+                    li[i+1] += 1
+                except IndexError:
+                    li.append(1)
+    def __str__(self):
+        return ''.join(str(x) for x in self.li)[::-1]
+
+if __name__ == '__main__':
+    n = i()
+    for x in range(1000):
+        n.double()
+    print(sum(int(x) for x in str(n)))
+</code></pre>
+
+<p>파이썬 3.6.2 64</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/12/20 02:36</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Flair Sizz</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10196"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Java 입니다.</p>
+<p>import java.util.Scanner;</p>
+<p>public class level_2_to_1000_squared {</p>
+<pre><code>public static void main(String[] args) {
+
+    System.out.println("2의 n제곱일때 n의 값을 입력하세요.");
+    Scanner sc = new Scanner(System.in);
+    int number = sc.nextInt();
+    sc.close();
+
+    int two = 2;        
+    for(int i = 1; i &lt; number; i++) // 제곱 계산.
+    {
+        two = two * 2;
+    }
+
+    int length = (int)(Math.log10(two)+1); // 제곱한 수 자릿수 계산.
+
+    int[] array = new int[length];
+    int temp = two;
+    int sum = 0; // 각 자릿수를 모두 더해 저장할 변수.
+
+    for(int i = 0; i &lt; length; i++) // 각 자리수를 배열에 집어 넣는거기 때문에 앞, 뒤 순서 상관 없음.
+    {
+        array[i] = temp % 10;
+        temp = temp / 10;
+    }
+
+    for(int i = 0; i &lt; length; i++)
+    {
+        sum = sum + array[i];
+    }
+    System.out.println("2의 " + number + "제곱의 각 자릿수 합 : " + sum);
+}
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/01/17 11:26</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Byam_Gyu</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10251"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3.6</p>
+<pre><code class="python">print(sum([int(i) for i in list(str(2**1000))]))
+
+* 결과값
+1366
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/01/21 15:25</p>
+                                <p class="static-profile" style="margin:0;padding:0;">justbegin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10454"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># 파이썬
+# 나중에 다시 풀 것
+
+r = 0
+for m in str(2**1000): r += int(m)
+print(r)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/02 15:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">olclocr</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10540"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">each_num = list(str(2**1000)) # string 값을 list로 변환하면 각 자리의 숫자를 요소로 갖는 list가 형성됩니다.
+total_sum = 0
+
+for i in each_num:
+    each_int = int(i) # 각 자릿값이 string이기 때문에 int로 형변환을 해줍니다.
+    total_sum += each_int # 각 자릿값의 누적합을 구합니다.
+
+print(total_sum)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/06 14:58</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이호재</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10707"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def sumdigit(n):
+    if len(str(n)) == 1:
+        return n
+    else:
+        return sumdigit(int(str(n)[1:])) + int(str(n)[0])
+
+
+print(sumdigit(2**1000))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/14 16:17</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김동하</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10947"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">sum([int(i) for i in str(2**1000)])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/28 22:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">코끼리식당</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10982"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="haskell">n=2^1000
+digit :: Integer -&gt; [Integer]
+digit 0 = []
+digit x = digit(x `div` 10) ++ [x `mod` 10]
+showdigit = show$sum$digit n
+main = do
+ putStr$showdigit
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/03/04 02:03</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Janico</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11168"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <h3 id="python3">python3</h3>
+<pre><code class="python">sum(int(x) for x in str(2**1000))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/03/17 14:02</p>
+                                <p class="static-profile" style="margin:0;padding:0;">디디</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11389"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def curculate(n , m):
+    return eval('+'.join(str(eval('*'.join(['2' for x in range(m)])))))
+print(curculate(2, 1000))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/03/27 18:24</p>
+                                <p class="static-profile" style="margin:0;padding:0;">myyh2357</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12093"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">
+    static long f(long num) {
+        long sum = 0;
+        while (num &gt; 0) {
+            sum += num %10;
+            num /= 10;
+        }
+        return sum;
+    }
+
+    public static void main(String[] args) throws Exception {
+        System.out.println(f((long)Math.pow(2, 1000)));
+    }
+// 자바입니다
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/07 10:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">정몽준</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2344"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">Long으로 선언되어서 재대로된 답이 출력되지 않습니다.
+BigInteger 를 이용하셔야 합니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    김지훈,
+                                    2018/08/26 19:32
+                                </span>
+                            </div>
+                        
+                            <a name="comment_2345"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">그렇군여 감사합니다</span>
+                                -
+                                <span style="font-size:11px;">
+                                    정몽준,
+                                    2018/08/27 01:10
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13018"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python</p>
+<pre><code class="python">print(sum([int(i) for i in str(2**1000)]))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/18 14:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Taesoo Kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13026"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">num=str(2**1000)
+
+print(int(eval(&quot;+&quot;.join(num))))
+
+</code></pre>
+
+<p>리얼.. 파이썬은 너무 완벽한 꼼수언어같아요ㅠㅠ</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/18 19:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">leak</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13356"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">a=str(2**1000)
+b=len(a)
+res=0
+for i in range(0,b):
+    res= res+int(a[i])
+print(res)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/05 17:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김정연</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13749"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">print(sum(int(i) for i in str(2**1000)))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/25 02:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13949"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#2^1000의 각 자릿수의 합은?
+
+a=str(2**1000)
+b=list(a)
+result=0
+for i in b:
+    result +=int(i)
+print(result)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/07 16:26</p>
+                                <p class="static-profile" style="margin:0;padding:0;">S.H</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14345"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package test;
+
+import java.math.BigInteger;
+
+public class test {
+    public static void main(String[] args) {
+        BigInteger num = new BigInteger(&quot;2&quot;).pow(1000);
+        int sum = 0;
+        while (num.compareTo(BigInteger.ZERO) != 0) {
+            sum += num.mod(BigInteger.valueOf(10)).intValue();
+            num = num.divide(BigInteger.valueOf(10));
+        }
+        System.out.println(sum);
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/26 19:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김지훈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14752"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">a = 2**1000
+b = '+'.join(str(a))
+print(eval(b))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/28 14:12</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hyuk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15402"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package studypac;
+//import java.util.Scanner;
+import java.math.*;
+
+public class timestudy {
+
+    public static void main(String args[])
+    {
+        BigInteger verybignumber = new BigInteger(&quot;2&quot;).pow(1000);
+        String cheese = verybignumber.toString();
+        int converter=0,result = 0;
+
+        for(int i = 0; i &lt;=cheese.length()-1;i++)
+        {
+            char c = cheese.charAt(i);
+            converter = (int)c;
+            result += converter - '0';
+        }
+
+        System.out.println(&quot;Answer is : &quot; + result);
+
+    }
+}
+
+</code></pre>
+
+<p>자바입니다.ㅠㅠ
+출력-&gt; Answer is : 1366</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/12/03 17:26</p>
+                                <p class="static-profile" style="margin:0;padding:0;">dbnfqe</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15445"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from _functools import reduce
+print(reduce(lambda x,y:int(x)+int(y),str(2**1000)))
+
+'''
+1366
+''''
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/12/05 14:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Dae Su Jeong</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15806"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">print(eval('+'.join(list(str(2**1000)))))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/01/05 11:25</p>
+                                <p class="static-profile" style="margin:0;padding:0;">lucky1to10</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16215"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#2^n의 각 자릿수의 합
+n=int(input(&quot;지수 입력: &quot;))
+num=2**n
+sn=str(num)#문자열로 변환
+sn.split()#문자열 분리
+
+s=0
+for i in range(len(sn)):
+    s0=int(sn[i])
+    s+=s0
+print('각 자릿수의 합: ',s)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/01/24 17:37</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GammaKnight</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16435"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">print(sum(list(map(int,list(str(2**1000))))))
+print(eval('+'.join(str(2**1000))))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/02/02 17:38</p>
+                                <p class="static-profile" style="margin:0;padding:0;">얀차</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16449"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">sum(list(map(int,str(2**1000))))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/02/03 12:58</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김영성</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16533"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">num = list(map(int,(str(2**1000))))
+print(sum(num))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/02/08 14:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">D.H.</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16948"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">print(sum([int(i) for i in str(2**1000)]))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/02/28 19:36</p>
+                                <p class="static-profile" style="margin:0;padding:0;">ykleeac</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17098"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">print(sum(int(i) for i in str(2**1000)))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/03/12 21:14</p>
+                                <p class="static-profile" style="margin:0;padding:0;">쨔이</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17839"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">print(sum(map(int, list(str(2**1000)))))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/12 17:24</p>
+                                <p class="static-profile" style="margin:0;padding:0;">messi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17949"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def sum(a):
+    x = 0
+    for i in str(a):
+        x += int(i)
+    return x
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/20 17:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">조관우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18543"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">print(sum([int(x) for x in str(2**1000)]))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/07/11 20:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">조현우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19288"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">num=list(str(2**1000))
+result=[]
+for i in num:
+    result.append(int(i))
+print(sum(result))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/09/13 12:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박재욱</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19579"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">sum(map(lambda a : int(a), list(str(2**1000))))
+</code></pre>
+
+<p>2*1000의 각 자리수를 요소로 하는 리스트를 정의하고, 그 요소들의 합으로 구했습니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/10/08 13:16</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GG</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20562"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">print(eval(&quot;+&quot;.join(str(2**1000)))) #1366
+#또는
+print(sum(list(map(int,str(2**1000))))) #1366
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/15 17:11</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박시원</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20789"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">num = int(input(&quot;제곱 승 : &quot;))
+value = str(2**num)
+sum = 0
+for i in range(len(value)):
+    sum += int(value[i])
+print(sum)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/30 23:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">semipooh</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_21404"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>num_str=str(2**1000)<br />
+sum=0<br />
+for i in range (0,len(num_str)):<br />
+    sum=sum+int(num_str[i])<br />
+print(sum)</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/03/15 08:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Buckshot</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_21489"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 입니다.</p>
+<pre><code class="python">digit = list(str(2 ** 1000))
+print(sum(int(i) for i in digit))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/03/21 20:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">뤼크</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_21498"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>python 3.8
+
+print(sum(int(i) for i in str(2**1000)))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/03/22 23:28</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mr. gimp</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22011"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">num=2**1000
+Str=str(num)
+sum=0
+for i in range(len(Str)):
+    sum+=int(Str[i])
+
+print(sum)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/04/29 21:36</p>
+                                <p class="static-profile" style="margin:0;padding:0;">kim center</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22154"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">print(sum([int(i) for i in str(2**1000)]))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/07 15:53</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hwaseong Nam</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22383"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">number = int(input())
+calculate = list(str(number**1000))
+summ = []
+print(summ)
+for i in range(0,len(calculate)):
+    summ.append(int(calculate[i]))
+print(sum(summ))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/20 16:55</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Money_Coding</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23838"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">print(eval(&quot;+&quot;.join(str(2**1000))))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/11/30 17:43</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김우석</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24260"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>print(sum([int(c) for c in str(2**1000)]))</p>
+<p>-----------------------try------------------------------------------------
+혹시 문제점을 알려주실 수 있을까요 시도해봤는데 답이 다르게 나오네요.
+      import math as m</p>
+<pre><code>  def sumof_one_number(number,pows):
+
+  a=pows*(m.log(number,10))
+
+  numbers=m.modf(a)
+
+  for_answer=str(round(pow(10,numbers[0])*pow(10,numbers[1])))
+
+ answer=0
+
+  for i in for_answer:
+
+    answer+=int(i)
+
+  return answer
+
+print(sumof_one_number(2,1000))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/01/08 18:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">전준혁</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24589"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>아마 이런식의 풀이를 원하시는게 아닐까 생각해봅니다..</p>
+<pre><code class="python">a=[1]
+for i in range(0, 1000):
+  if a[0]&gt;4: a=[0]+a
+  for j in range(len(a)-1, -1, -1):
+    tmp=a[j]*2
+    a[j] = tmp%10
+    a[j-1]+=tmp//10/2
+print(int(sum(a)))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/02/02 19:17</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박영빈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24995"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">a=str(2**1000)
+total=0
+for i in range(len(a)):
+    total+=int(a[i])
+print(total)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/03/17 21:34</p>
+                                <p class="static-profile" style="margin:0;padding:0;">fox.j</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25508"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">print(sum([int(i) for i in str(2**1000)]))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/06/04 13:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">약사의혼자말</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25570"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def func(num1, num2):
+    temp_0 = 1
+    for i in range(num2):
+        temp_0 = num1 * temp_0
+
+    temp_1 = str(temp_0)
+
+    result = 0
+    for member in temp_1:
+        result += int(member)
+
+    return result
+
+if __name__ == '__main__':
+    print(str(func(2,1000)))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/06/21 09:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">DSHIN</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26239"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#codingdojing_2^1000
+
+print (sum([int(i) for i in str(2**1000)]))
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/09/05 17:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jaeman Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26594"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def squared():
+    b = 0
+    for i in str(2**1000):
+        b += int(i)
+    return b   
+
+if __name__ == '__main__':
+    print(squared())
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/10/28 17:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">서현준</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26666"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>result = 0
+for i in str(2**1000):
+    result += int(i)
+
+print(result)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/11/22 11:39</p>
+                                <p class="static-profile" style="margin:0;padding:0;">황성민</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26985"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">a = 2**1000
+b = list(map(int,list(str(a))))
+print(sum(b))
+</code></pre>
+
+<p>연산결과 -&gt; 문자열 변환 -&gt;  배열화하여 각 문자 원소화 -&gt; Map 이용 각 원소 정수화
+-&gt; 정수화된 배열의  sum 값 출력</p>
+<p>의도한바가 맞는지는 몰겠네요..</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/08 16:12</p>
+                                <p class="static-profile" style="margin:0;padding:0;">양캠부부</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27166"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>// Rust</p>
+<p>// 큰 수를 다루기 위해 vector에 각 자리수를 넣고 그냥 단순 계산^^</p>
+<p>fn power_n(n: u32) -&gt; u32 {</p>
+<pre><code>let mut vec = vec![6, 1];  // 2^4
+for i in 5..=n {
+    for v in &amp;mut vec {
+        *v *= 2;
+    }
+    //tidy vector : 각 원소가 0~9를 갖도록 (10 이상이면 다음 칸으로 더해줌)
+    let l = vec.len();
+    for j in 0..l-1 {
+        if vec[j] &gt;= 10 {   vec[j+1] += vec[j] / 10;
+                            vec[j] %= 10;}
+    }
+    if vec[l-1] &gt;= 10 { vec.push(vec[l-1] / 10);
+                        vec[l-1] %= 10;}
+}
+vec.iter().sum::&lt;u32&gt;()
+</code></pre>
+<p>}</p>
+<h1 id="test">[test]</h1>
+<p>fn t() {</p>
+<pre><code>assert_eq!(power_n(15), 26);
+assert_eq!(power_n(1000), 1366);
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/28 16:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">JW KIM</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27360"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">a=2**1000
+sum([int(x) for x in str(a)])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/02/17 13:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">로만가</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29697"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def powerOfTwo(n):
+    arr = [1] + [0] * (n//10 * 3 + 2)
+    carry = 0
+    for _ in range(n):
+        for i in range(len(arr)-1):
+            v = arr[i] * 2
+            arr[i] = (v % 10 + carry)
+            carry = v // 10
+    return arr
+
+
+print(sum(powerOfTwo(1000)))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/10/12 21:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

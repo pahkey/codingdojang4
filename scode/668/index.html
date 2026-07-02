@@ -1,0 +1,1080 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="[Bulls and Cows 게임](http://codingdojang.com/scode/663)
+
+위 게임의 인공지능 플레이어를 구현하시오.
+
+**입력**
+
+없음
+
+**출력**
+
+시행횟수, 인공지능이 입력한 값, bulls&amp;c...">
+    <title>Bulls and Cows 게임(2) - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">Bulls and Cows 게임(2)</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">3</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 5</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p><a href="http://codingdojang.com/scode/663">Bulls and Cows 게임</a></p>
+<p>위 게임의 인공지능 플레이어를 구현하시오.</p>
+<p><strong>입력</strong></p>
+<p>없음</p>
+<p><strong>출력</strong></p>
+<p>시행횟수, 인공지능이 입력한 값, bulls&amp;cows 를 출력한다.</p>
+<p>마지막 줄에는 정답과 성공/실패 여부를 출력하거나(최대 10회 시도), 또는 횟수제한 없이 몇 회만에 성공했는지 출력한다.</p>
+<p>예시)</p>
+<pre><code>1th guess = 0123, result = 1B1C
+2th guess = 1023, result = 0B2C
+3th guess = 0432, result = 2B0C
+4th guess = 0536, result = 1B0C
+5th guess = 0783, result = 2B0C
+6th guess = 0983, result = 3B0C
+7th guess = 0183, result = 2B0C
+8th guess = 0982, result = 4B0C
+success: answer = 0982, 8 tries
+</code></pre>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2019/07/24 17:40</p>
+                    <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>7개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_19459"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">2</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>어차피 가능한 숫자의 가지수가 5040밖에 안되므로
+query를 날린 결과랑 똑같은 숫자만 남겨두고 나머지는 다 제거해나가는 방식으로 풀었습니다.
+여기서 약간의 최적화를 사용하면 try 횟수를 줄일 수 있긴 합니다만...계산량이 많아져서 속도를 희생하게 됩니다.
+아래 코드에서 3번째줄에 있는 GEAR라는 변수를 통해 최적화의 정도를 조절할 수 있습니다.</p>
+<ul>
+<li>GEAR 0 : 뭐 없음</li>
+<li>GEAR 1 : 약간의 최적화가 들어감</li>
+<li>GEAR 2 : 이론상 최적의 알고리즘을 사용</li>
+</ul>
+<p>그리고 숫자야구로 가능한 모든 정답에 대해서 try 횟수의 평균 및 최대값을 구해보면 아래처럼 나옵니다.</p>
+<ul>
+<li>GEAR 0 --&gt; total try count : 25226 / 5040, max : 8(at 5283), average : 5.005159</li>
+<li>GEAR 1 --&gt; total try count : 24596 / 5040, max : 7(at 1430), average : 4.880159</li>
+<li>GEAR 2 --&gt; total try count : 24264 / 5040, max : 7(at 1567), average : 4.814286</li>
+</ul>
+<p>해당 방식과는 본질적으로 다른 또다른 풀이도 있긴 한데.. 구현도 까다롭기 때문에 우선 간단한 버젼부터 올려봅니다.</p>
+<pre><code class="cpp">#include&lt;stdio.h&gt;
+#include&lt;random&gt;
+#define GEAR 0
+int prev_origin[10009];
+int next_origin[10009];
+int origin_count;
+void inil() {
+    origin_count = 0;
+    int i, j, k;
+    for (i = 1; i &lt; 10000; i++) {
+        prev_origin[i] = i - 1;
+        next_origin[i] = i + 1;
+        origin_count++;
+    }
+    next_origin[0] = 1;
+    prev_origin[10000] = 9999;
+    auto valid_number = [](int x)-&gt; bool {
+        int z[4];
+        for (int i = 0; i &lt; 4; i++) {
+            z[i] = x % 10; x /= 10;
+            for (int j = 0; j &lt; i; j++)
+                if (z[i] == z[j])return false;
+        }
+        return true;
+    };
+    for (i = 1; i &lt; 10000; i++) {
+        if (!valid_number(i))
+        {
+            next_origin[prev_origin[i]] = next_origin[i];
+            prev_origin[next_origin[i]] = prev_origin[i];
+            origin_count--;
+        }
+    }
+}
+int prev[10009];
+int next[10009];
+int prev_del[10009];
+int next_del[10009];
+int count;
+int answer;
+int nextint(int s, int t) {
+    static std::mt19937 rnd;
+    return (int)(rnd() % (t - s + 1)) + s;
+}
+void setup_answer() {
+    int i;
+    int cn = nextint(0, origin_count - 1);
+    for (i = next_origin[0]; i &lt; 10000 &amp;&amp; cn--; i = next_origin[i]);
+    answer = i;
+}
+void setup() {
+    int i;
+
+    for (i = 0; i &lt;= 10000; i++) {
+        prev[i] = prev_origin[i];
+        next[i] = next_origin[i];
+        prev_del[i] = 0;
+        next_del[i] = 10000;
+    }
+    next_del[0] = 10000;
+    prev_del[10000] = 0;
+
+    count = origin_count;
+}
+int countstrike(int p, int q) {
+    int res = 0;
+    int i, j, k;
+    for (i = 0; i &lt; 4; i++) {
+        j = p % 10;
+        k = q % 10;
+        if (j == k)res++;
+        p /= 10;
+        q /= 10;
+    }
+    return res;
+}
+int countball(int p, int q) {
+    int res = 0;
+    int i, j;
+    for (i = 0; i &lt; 3; i++) {
+        j = q % 10;
+        q /= 10;
+        q += j * 1000;
+        res += countstrike(p, q);
+    }
+    return res;
+}
+int try_count;
+int pickup() {
+    int minn = -1;
+    int mini = next[0];
+    int i, j, k;
+    int cnt[16];
+
+    if (GEAR &gt; 0) {
+        // precheck valid answer
+        for (i = next[0]; i &lt; 10000; i = next[i]) {
+            for (k = 0; k &lt; 16; k++)cnt[k] = 0;
+            for (j = next[0]; j &lt; 10000; j = next[j])
+            {
+                int st = countstrike(i, j);
+                int bl = countball(i, j);
+                cnt[st * 4 + bl]++;
+                if (minn&gt;=0 &amp;&amp; cnt[st * 4 + bl] &gt;= minn)break;
+            }
+            int localmax = cnt[0];
+            for (k = 0; k &lt; 16; k++)if (localmax &lt; cnt[k]) localmax = cnt[k];
+            if (minn&lt;0 || minn &gt; localmax) {
+                minn = localmax;
+                mini = i;
+            }
+        }
+        if (GEAR &gt; 1) {
+            // check valid answer totally
+            for (i = next_del[0]; i &lt; 10000; i = next_del[i]) {
+                for (k = 0; k &lt; 16; k++)cnt[k] = 0;
+                for (j = next[0]; j &lt; 10000; j = next[j])
+                {
+                    int st = countstrike(i, j);
+                    int bl = countball(i, j);
+                    cnt[st * 4 + bl]++;
+                    if (minn &gt;= 0 &amp;&amp; cnt[st * 4 + bl] &gt;= minn)break;
+                }
+                int localmax = cnt[0];
+                for (k = 0; k &lt; 16; k++)if (localmax &lt; cnt[k]) localmax = cnt[k];
+                if (minn&lt;0 || minn &gt; localmax) {
+                    minn = localmax;
+                    mini = i;
+                }
+            }
+        }
+    }
+    return mini;
+}
+int process() {
+    int i, j;
+    try_count = 0;
+    while (count &gt; 1) {
+        try_count++;
+
+        if (try_count == 1)
+            i = next[0];
+        else
+            i = pickup();
+        int st = countstrike(i, answer);
+        int bl = countball(i, answer);
+        printf(&quot;Guess %04d : %d Bull %d Cow\n&quot;, i, st, bl);
+        for (j = next[0]; j &lt; 10000;j = next[j]) {
+            int cst = countstrike(j, i);
+            int cbl = countball(j, i);
+            if (cst != st || cbl != bl) {
+                next[prev[j]] = next[j];
+                prev[next[j]] = prev[j];
+                count--;
+
+                prev_del[j] = 0;
+                next_del[j] = next_del[0];
+                prev_del[next_del[0]] = j;
+                next_del[0] = j;
+            }
+        }
+    }
+    return next[0];
+}
+int main()
+{
+    inil();
+    int i, j, k;
+    int tcsum = 0;
+    int tcn = 0;
+    int tcmax = 0;
+    int maxi = 0;
+    //while (1) 
+    for(i=next_origin[0]; i&lt;10000; i=next_origin[i])
+    {
+        answer = i;
+        //setup_answer();
+        setup();
+        int res = process();
+        if (res == answer) {
+            printf(&quot;Yes! answer was %04d ! %d tried\n&quot;, answer, try_count);
+            tcsum += try_count;
+            if (tcmax &lt; try_count) {
+                tcmax = try_count; maxi = answer;
+            }
+            tcn++;
+        }
+        else {
+            printf(&quot;No. answer was %04d. not %04d\n&quot;, answer, res);
+        }
+    }
+    printf(&quot;total try count : %d / %d, max : %d(at %04d), average : %.6lf\n&quot;, tcsum, tcn, tcmax, maxi, (double)tcsum / tcn);
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/09/27 21:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">pichulia</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18695"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import random
+
+def getAnswer():
+    number = [str(a) for a in range(0,10)]
+    random.shuffle(number)
+    return &quot;&quot;.join(number[0:4])
+
+def getCowBull(answer, guess):#input (list, list) format
+    bull, cow = 0, 0
+
+    for index,num in enumerate(guess):
+        if answer[index]==guess[index]: cow+=1
+        elif num in answer: bull+=1
+
+    return cow, bull
+
+while True:
+    count = 1
+    maxCount = (10)
+    answer = getAnswer()
+    print(answer) #Show Answer to code check
+
+    while count &lt;= maxCount:
+
+        digits4 = input('Enter 4 digits :')
+
+        if len(set(list(digits4))) != 4:
+            print('Wrong input please enter again')
+        else:
+            cow, bull = getCowBull(list(answer), list(digits4))
+            print('{}th guess={}, result={}B{}C'.format(count, digits4, bull,cow))
+            if cow==4:
+                print('success: answer={}, {} tries'.format(digits4, count))
+                break
+            else:
+                count+=1
+                if count&gt;maxCount: print('Game over! the answer is {}'.format(answer))
+
+
+    if input('Try Again? 1 or 0:')=='1': pass
+    else: break
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/07/27 09:36</p>
+                                <p class="static-profile" style="margin:0;padding:0;">전병수</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18948"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>import random</p>
+<p>def getAnswer():
+    number = [str(a) for a in range(0,10)]
+    random.shuffle(number)
+    return "".join(number[0:4])</p>
+<p>def getCowBull(answer, guess):#input (list, list) format
+    bull, cow = 0, 0</p>
+<pre><code>for index,num in enumerate(guess):
+    if answer[index]==guess[index]: cow+=1
+    elif num in answer: bull+=1
+
+return cow, bull
+</code></pre>
+<p>while True:
+    count = 1
+    maxCount = (10)
+    answer = getAnswer()
+    print(answer) #Show Answer to code check</p>
+<pre><code>while count &lt;= maxCount:
+
+    digits4 = input('Enter 4 digits :')
+
+    if len(set(list(digits4))) != 4:
+        print('Wrong input please enter again')
+    else:
+        cow, bull = getCowBull(list(answer), list(digits4))
+        print('{}th guess={}, result={}B{}C'.format(count, digits4, bull,cow))
+        if cow==4:
+            print('success: answer={}, {} tries'.format(digits4, count))
+            break
+        else:
+            count+=1
+            if count&gt;maxCount: print('Game over! the answer is {}'.format(answer))
+
+
+if input('Try Again? 1 or 0:')=='1': pass
+else: break
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/08/14 17:17</p>
+                                <p class="static-profile" style="margin:0;padding:0;">cond_b</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20243"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>※아직 최적화가 완료되지 않음..※</p>
+<p>랜덤하게 추출하되</p>
+<p>1) 0B0C(하나도 일치하지 않음)의 경우가 나오면 그 숫자들을 앞으로 뽑지 않도록</p>
+<p>2) 4B(숫자는 다 일치하지만, 자리가 하나도 맞지 않음)의 경우가 나오면 같은자리에 같은숫자를 뽑지 않도록</p>
+<p>3) B+C = 1 or 3(숫자 한개만 맞거나 한개만 틀림)의 경우가 나오면 이전 시도했던 숫자에서 하나씩 바꾸면서 B+C = 0 or 4를 유도함</p>
+<p>위 세가지 원칙으로 만든 알고리즘입니다.</p>
+<p>아직 인공지능이 약해서 10회 안에 정답을 좀처럼 찾지 못하여, 횟수를 100회까지 시도하도록 해두었습니다.</p>
+<p>더 강력한 알고리즘을 찾으면 수정하러 돌아옵니다...</p>
+<pre><code class="python"># Bulls and Cows Game AI
+
+
+# 컴퓨터가 0~9까지의 숫자중 중복없이 배열한 문자열을 랜덤하게 생성하여 정답을 A에 저장
+
+random_answer = [int(x) for x in range(0,10)]
+A = []
+import random
+for i in range(0,4):
+    K = random.choice(random_answer)
+    A.append(K)
+    random_answer.remove(K)
+del K, random_answer
+
+
+
+# 최대 10회 게임
+
+N = 0 # 시행 횟수
+factor = 1 # 성공 실패여부 측정 value (1 : 성공, 0 : 실패)
+
+# AI가 숫자를 가져올 list 생성
+pickup = [0,1,2,3,4,5,6,7,8,9]
+
+# 시행 차수별 입력값과 결과값을 각각 list로 저장
+tryed = []
+result = []
+bbb_index = []
+bbbb_index = []
+
+
+
+## AI 입력 알고리즘 II ##
+
+################################# AI 입력 알고리즘(입력값 : 시행회차, 결과값 : D) #################################
+
+############################## 아무 정보도 없을 경우 중복되지 않게 랜덤 추출 ##############################
+def gamepick_before(i):
+    ## pickup에서 D를 랜덤하게 추출함
+    while True:
+        checkpoint = True
+        checkpointgroup = []
+        D = []
+        for i in range(0,4):
+            ran = random.choice(pickup)
+            while ran in D:
+                ran = random.choice(pickup)
+            D.append(ran)
+
+    ## 만약 D를 이미 시도했던 기록이 있는지 확인 (Non-repeat Case.1)
+
+        if D in tryed:
+            checkpoint = True
+
+        else:
+            checkpoint = False
+
+    ## Non-repeat Case.1에 해당한다면 다시 뽑음
+
+        if checkpoint == True:
+            continue
+
+    ## 그렇지 않다면 while문을 종료
+        else:
+            break
+
+    ## 결과값을 리턴함
+    return D
+
+############################## 1b 혹은 3b가 등장한 경우 추출 ##############################
+## 가급적 0b 혹은 4b를 유도하기 위해 최대한 기존 그룹을 활용하여 다시 뽑음
+
+def gamepick_afterb(i):
+    ## 마지막으로 1b 혹은 3b가 등장했던 함수는 past_pickup 에 저장되어 있음.(새로 등장하기 전까지)
+
+    while True:
+        checkpoint = True
+        checkpointgroup = []
+        D = []
+        for i in range(0,3):
+            ran = random.choice(past_pickup)
+            while ran in D:
+                ran = random.choice(past_pickup)
+            D.append(ran)
+
+        ran2 = random.choice(pickup)
+        while ran2 in D:
+            ran2 = random.choice(pickup)
+        D.append(ran2)
+
+    ## 만약 D를 이미 시도했던 기록이 있는지 확인 (Non-repeat Case.1)
+
+        if D in tryed:
+            checkpoint = True
+
+        else:
+
+    ## 기존에 뽑았던 것과 같은 구성을 뽑았던 적이 있는지 확인 (Non-repeat Case.2)
+
+            for i in tryed:
+                if sorted(i) == sorted(D):
+                    checkpointgroup.append(True)
+                else:
+                    checkpoint = False
+
+            else:
+                checkpoint = False
+
+    ## Non-repeat Case에 하나라도 해당한다면 다시 뽑음
+
+        if checkpoint == True or True in checkpointgroup:
+            continue
+
+    ## 그렇지 않다면 while문을 종료
+        else:
+            break
+
+    ## 결과값을 리턴함
+    return D
+
+
+############################## 4b 등장한 경우 추출 ##############################
+def gamepick_after4b(i):
+
+    ## pickup에서 D를 랜덤하게 추출함
+    while True:
+        checkpoint = True
+        checkpointgroup = []
+        D = []
+        for i in range(0,4):
+            ran = random.choice(pickup)
+            while ran in D:
+                ran = random.choice(pickup)
+            D.append(ran)
+
+    ## 만약 D를 이미 시도했던 기록이 있는지 확인 (Non-repeat Case.1)
+
+        if D in tryed:
+            checkpoint = True
+
+        else:
+
+    ## 만약 4b0c가 나온 적이 있다면, 그때 추측했던 숫자와 자릿수가 같은 것이 있는지 확인 (Non-repeat Case.2)
+
+            if len(bbbb_index) != 0:
+                for i in bbbb_index:
+                    for j in range(0,4):
+                        if tryed[i][j] == D[j]:
+                            checkpointgroup.append(True)
+                        else:
+                            checkpoint = False
+
+    ## 4b0c가 나온 적이 없는 경우
+
+            else:
+                checkpoint = False
+
+    ## Non-repeat Case에 하나라도 해당한다면 다시 뽑음
+
+        if checkpoint == True or True in checkpointgroup:
+            continue
+
+    ## 그렇지 않다면 while문을 종료
+        else:
+            break
+
+    ## 결과값을 리턴함
+    return D
+
+
+factor = 0
+for i in range(0,100):
+
+    time = i
+
+    ## 별다른 조건이 없을 때(2b, 2c, 1b1c 등) 기본 함수로 진행
+    if factor == 0:
+        D = gamepick_before(i)
+
+    elif factor == 1:        
+        D = gamepick_afterb(i)
+
+    else:
+        D = gamepick_after4b(i)
+
+
+
+    #### D를 골랐으면 tryed에 추가해준다 ####
+
+    tryed.append(D)
+
+    ########################################################
+
+    # 시행 횟수를 1 증가, 다시 점검하기 위해 bulls와 cows를 초기화
+    N += 1 # 시행 횟수
+    b = 0 # bulls
+    c = 0 # cows
+
+
+
+    # 정답인 경우
+    if A == D:
+        result.append([0,4])
+
+        if N &lt; 10:
+            print()
+            print(&quot;**************************Win!!!**************************&quot;)
+            print(&quot;%d번째 추측, %d%d%d%d ========&gt; 정답입니다.&quot; %(N,A[0],A[1],A[2],A[3]))
+            print()
+        else:
+            print(&quot;%d번째 추측, %d%d%d%d ========&gt; 정답입니다.&quot; %(N,A[0],A[1],A[2],A[3]))
+            print()
+        break
+
+    # 오답인 경우
+    else:
+
+        # 같은 숫자가 몇 개인지 확인하여 b에 저장한다.
+        for i in range(0,4):
+            for j in range(0,4):
+                if A[i] == D[j]:
+                    b += 1
+
+        # 메인 비교 알고리즘. index를 비교하여 같은 자리에 같은 숫자가 있다면 b에서 1을 빼고 c에서 1을 더해준다.
+        for i in range(0,4):
+            if A[i] == D[i]:
+                b -= 1
+                c += 1
+
+        # 해당 회차의 시행 결과를 result 에 저장     
+        result.append([b,c])
+
+
+        ## 만약 0b0c가 나왔다면, 앞으로 뽑을 숫자에서 그 숫자들은 제외해야 함.
+        if [b,c] == [0, 0]:
+            for k in range(0,4):
+                pickup.remove(D[k])
+
+        ## 만약 b + c의 합이 4라면, 앞으로는 그 숫자에서만 뽑아야 함.
+        if sum([b,c]) == 4:
+            pickup = sorted(D)
+
+        ### 마지막 시행 결과에 따른 index 저장
+        ## 4b0c가 등장했다면, 해당 회차의 시행횟수(index)를 저장하여 색인할 수 있도록 함.
+        if b == 4:
+            bbbb_index.append(N-1)
+            factor = 4
+        ## b + c의 합이 3혹은 1인 경우, index에 추가하고 past_pickup에 해당 list를 저장.
+        elif b+c == 3 or b+c == 1:
+            bbb_index.append(N-1)
+            past_pickup = D
+            factor = 1
+        else:
+            factor = 0
+
+
+
+        # 결과값 출력
+        if c == 0:
+            print(&quot;%d번째 추측, %d%d%d%d ========&gt; 판정 : %dB&quot; %(N,D[0],D[1],D[2],D[3],b))
+            print()
+        else:
+            print(&quot;%d번째 추측, %d%d%d%d ========&gt; 판정 : %dB%dC&quot; %(N,D[0],D[1],D[2],D[3],b,c))
+            print()
+
+        # 10턴을 초과했다면 게임 오버 선언.
+        if N == 10:
+            factor = 0
+            print()
+            print(&quot;**************************Game Over!!!**************************&quot;)
+            print(&quot;                      정답은 %d%d%d%d 입니다.&quot; %(A[0],A[1],A[2],A[3]))
+            print()
+
+
+print()
+print(&quot;**************************최종 결과**************************&quot;)
+print()
+if factor == 0:
+    print(&quot;    Failure!!! 정답은 %d%d%d%d 였습니다. 시행 횟수 : %d&quot; %(A[0],A[1],A[2],A[3],N))
+else:
+    print(&quot;    Success!!! 정답은 %d%d%d%d 가 맞습니다. 시행 횟수 : %d&quot; %(A[0],A[1],A[2],A[3],N))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/12/20 08:17</p>
+                                <p class="static-profile" style="margin:0;padding:0;">D.W. Choi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23945"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>연필굴려 맞추는 AI지만 .. 사람보다 나음 ㅋㅋ</p>
+<p>실행 예:
+6143
+     -&gt;  0B1C
+1029
+     -&gt;  0B1C
+9378
+     -&gt;  1B0C
+5608
+     -&gt;  1B1C
+5470
+     -&gt;  0B2C
+4258
+정답입니다. 총 입력한 횟수:  6</p>
+<pre><code class="python">import random
+
+# global var
+Nums = []   # store what AI guessed
+Bulls = []  # store corresponding Bull numbers
+Cows = []   # store corresponding Cow numbers
+Count = 0   # number of cycles finished
+
+# judge function
+def Judge(sNumbers, sGuess):
+    b = 0
+    c = 0
+    for j in range(4):
+        d = sGuess[j]
+        if d==sNumbers[j]:
+            b = b+1
+        elif sNumbers.count(d)&gt;0:
+            c = c+1
+    return b,c
+
+# decide what AI to say
+def AI_say():
+    global Count, Nums, Bulls, Cows
+    isAcceptable = False
+    while (not isAcceptable):
+        num_say = random.randrange(10000)  # pick random number ^^
+        if num_say&lt;100: # do not accept two 0's
+            continue
+        s = str(num_say)
+        if num_say&lt;1000:    # if first should be 0, let it be
+            s = '0'+s
+        # if numbers collide, pick number again
+        if s[0]==s[1] or s[0]==s[2] or s[0]==s[3] or s[1]==s[2] or s[1]==s[3] or s[2]==s[3]:
+            continue
+        # check with guess history
+        mismatched = False
+        for c in range(Count):
+            bull, cow = Judge(Nums[c], s)
+            if (bull!=Bulls[c] or cow!=Cows[c]):
+                mismatched = True
+                break
+        if mismatched:
+            continue
+        isAcceptable = True
+    Nums.append(s)
+    print(s)
+    return s
+
+# How AI listen
+def AI_listen(answer):
+    Bulls.append(int(answer[0]))
+    Cows.append(int(answer[2]))
+    print(&quot;     -&gt; &quot;, answer)
+
+# main begins here
+
+# the number to guess
+random.seed()
+numbers = &quot;&quot;
+for i in range(4):
+    x = -1
+    while x&lt;0 or numbers.count(str(x))&gt;0:
+        x = random.randrange(10)
+    numbers = numbers + str(x)
+
+# AI tries 10 times
+solved = False
+for Count in range(10):
+    guess = AI_say()
+    b, c = Judge(numbers, guess)
+    if b==4:
+        print(&quot;정답입니다. 총 입력한 횟수: &quot;, Count+1)
+        solved = True
+        break
+    AI_listen(str(b)+'B'+str(c)+'C')
+
+# message on failure
+if not solved:
+    print(&quot;정답은: &quot;, str(numbers[0])+str(numbers[1])+str(numbers[2])+str(numbers[3]))
+    print(&quot;Gave Over&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/12/10 17:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김준우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29504"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import random
+
+
+def makeTargetNum():
+    target = []
+    while len(target) &lt; 4:
+        n = random.randint(0, 9)
+        if n not in target:
+            target.append(n)
+    return target
+
+def checkGuesstNum(t, g):
+    if len(g) != 4 or len(set(g)) &lt; 4:
+        return -1, -1
+    b, c = 0, 0
+    for num in g:
+        if int(num) &lt; 0 or int(num) &gt; 9:
+            return -1, -1
+        if num in t:
+            if t.index(num) == g.index(num):
+                b += 1
+            else:
+                c += 1
+    return b, c
+
+
+print(&quot;  Bulls and Cows 게임을 시작 합니다.&quot;)
+trials = 0
+while True:
+    target = makeTargetNum()
+    targetNum = ''.join(str(i) for i in target)
+    print('예측 번호를 입력하세요(4자리수): ')
+    while True:
+        guess = input('{0}th guess: '.format(trials + 1))
+        (bulls, cows) = checkGuesstNum(targetNum, guess)
+        if bulls == -1:
+            print(&quot;잘못된 수 입니다.&quot;)
+        else:
+            trials += 1
+            if bulls == 4:
+                print(' *' * 10)
+                print(&quot;정답입니다. 총 시행 횟수: {}&quot;.format(trials))
+                break
+            elif trials &gt;= 10:
+                print('시행횟수 초과 입니다.')
+                print('\t 정답은 : {0} 입니다..'.format(targetNum))
+            else:
+                print('\t guess = {0},  result = {1}B{2}C'.format(guess, bulls, cows))
+    again = int(input(&quot;\n다시 하시고 싶으면 1을, 아니면 0을 입력하세요: &quot;))
+    if again == 1:
+        trials = 0
+        continue
+    else:
+        break
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/07/30 16:32</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_30011"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>사람이 문제를 내고, 컴퓨터가 맞춥니다.</p>
+<p>띄어쓰기로 구분해서 4개의 서로 다른 숫자를 사용자가 입력하고,
+컴퓨터는(코딩은) 순열, 조합 등을 다루는 itertools를 사용하여, 통상 4~8번 사이에 답을 알아냅니다.
+사람과 동일한 수준입니다.</p>
+<pre><code class="python">import random
+from itertools import permutations
+
+def get_bulls_and_cows(guess, answer):
+    bulls = sum(g == a for g, a in zip(guess, answer))
+    cows = sum(g in answer for g in guess) - bulls
+    return bulls, cows
+
+def get_valid_input():
+    while True:
+        user_input = input(&quot;1부터 10 사이의 서로 다른 4개의 숫자를 입력하세요 (공백으로 구분): &quot;).split()
+        if len(user_input) != 4:
+            print(&quot;4개의 숫자를 입력해야 합니다.&quot;)
+            continue
+        try:
+            user_numbers = list(map(int, user_input))
+        except ValueError:
+            print(&quot;숫자로 입력하세요.&quot;)
+            continue
+        if len(set(user_numbers)) != 4 or any(n &lt; 1 or n &gt; 10 for n in user_numbers):
+            print(&quot;1부터 10 사이의 서로 다른 숫자를 입력해야 합니다.&quot;)
+            continue
+        return user_numbers
+
+def main():
+    print(&quot;컴퓨터와 Bull &amp; Cow 게임을 시작합니다!&quot;)
+    answer = get_valid_input()
+    all_possible = list(permutations(range(1, 11), 4))
+    attempts = 0
+
+    while attempts &lt; 10:
+        guess = random.choice(all_possible)
+        bulls, cows = get_bulls_and_cows(guess, answer)
+        print(f&quot;컴퓨터의 추측: {guess} -&gt; {bulls} Bulls, {cows} Cows&quot;)
+        if bulls == 4:
+            print(f&quot;컴퓨터가 {attempts + 1}번 만에 정답을 맞췄습니다!&quot;)
+            break
+        all_possible = [perm for perm in all_possible if get_bulls_and_cows(perm, guess) == (bulls, cows)]
+        attempts += 1
+
+    if attempts == 10:
+        print(&quot;컴퓨터가 10번의 시도 안에 정답을 맞추지 못했습니다.&quot;)
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2024/06/10 10:36</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Stony Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

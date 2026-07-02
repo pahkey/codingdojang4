@@ -1,0 +1,1579 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="파이썬을 이용해서 낱말퍼즐 만들기 입니다.
+
+어떤 두 단어를 비교하여 낱말퍼즐이 형성될 수 있는지 확인하는 프로그램을 만들고자 한다. 두 단어가 A와 B의 순서로 공백문자를 포함하여 있다. 이 둘 중에서 겹치는 문자를 찾아서 서로 겹치게 하여...">
+    <title>낱말퍼즐 만들기 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">낱말퍼즐 만들기</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">4</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 2</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>파이썬을 이용해서 낱말퍼즐 만들기 입니다.</p>
+<p>어떤 두 단어를 비교하여 낱말퍼즐이 형성될 수 있는지 확인하는 프로그램을 만들고자 한다. 두 단어가 A와 B의 순서로 공백문자를 포함하여 있다. 이 둘 중에서 겹치는 문자를 찾아서 서로 겹치게 하여 낱말 퍼즐이 형성되는지 확인한다. 만약 겹치게 할 수 있는 문자가 두 개 이상이라면 A 문자에서 가장 먼저 오는 위치를 선정하여 서로 겹치게 한다. </p>
+<p>예를들어
+lazy crossword 두단어를 넣으면 &gt;&gt; None</p>
+<p>crossword boolean 두단어를 넣으면 </p>
+<p>..b......</p>
+<p>crossword</p>
+<p>..o......</p>
+<p>..l......</p>
+<p>..e......</p>
+<p>..a......</p>
+<p>..n......</p>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2019/05/23 00:18</p>
+                    <p class="static-profile" style="margin:0;padding:0;">파란하늘</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>27개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_18009"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">2</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3.7.2</p>
+<pre><code class="python">A = input(&quot;원하는 두 단어를 입력하세요.\n&gt; &quot;)
+nlist = A.split(&quot; &quot;)
+
+def isSame(nlist):
+    for i in range(len(nlist[0])):
+        for j in range(len(nlist[1])):
+            if nlist[0][i] == nlist[1][j]:
+                return(True, i, j)
+    return(False, 0, 0)
+
+same, i, j = isSame(nlist)
+if same == False:
+    print(&quot;\nNone\n&quot;)
+elif same == True:
+    print(&quot;\n&quot;)
+    for x in range(len(nlist[0])):
+        if x == j:
+            print(nlist[1])
+        else:
+            print(&quot; &quot;*i+nlist[0][x]+&quot; &quot;*(len(nlist[0])-i))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/23 17:27</p>
+                                <p class="static-profile" style="margin:0;padding:0;">CT_EK</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2871"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">답이 출력되지 않습니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    ­박철희,
+                                    2021/09/21 23:20
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23860"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">2</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def wordPuzzle(a, b):
+    i = set(a) &amp; set(b)
+    dot = a.index(list(i)[0])
+    cross = b.index(list(i)[0])
+    for i in range(len(b)):
+        if i == cross:
+            print(a)
+        else:
+            print(&quot;.&quot; * dot + b[i] + &quot;.&quot; * (len(a) - dot - 1))
+
+
+wordPuzzle(&quot;crossword&quot;, &quot;boolean&quot;)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/12/03 15:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김우석</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18092"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">wordInput = input('input two words: ')
+words = wordInput.split(' ')
+
+result = []
+
+for i in words[0]:
+    for j in words[1]:
+        if i == j:
+            result.append(i)
+
+if result is False:
+    print('None')
+else:
+    pointNum = words[0].find(result[0])
+    lineNum = words[1].find(result[0])
+
+    for cnt, k in enumerate(words[1]):
+        if lineNum == cnt:
+            print(words[0])
+        else:
+            print('.'*pointNum, k)
+
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/06/01 21:38</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hyebin Oh</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18129"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C로도 풀어보았습니다..</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+void main() {
+
+    char CrossWord[50][50];
+    char widthStr[50];
+    char lengthStr[50];
+    int crossIdx[2];
+    int widthIndex = 0;
+    int lengthIndex = 0;
+    int widthPrinter = 0;
+    int lengthPrinter = 0;
+
+    scanf(&quot;%s %s&quot;, widthStr, lengthStr);
+
+    for (; widthIndex &lt; strlen(widthStr); widthIndex++) {
+        for (lengthIndex = 0; lengthIndex &lt; strlen(lengthStr); lengthIndex++) {
+            if (widthStr[widthIndex] == lengthStr[lengthIndex]) {
+                crossIdx[0] = widthIndex;
+                crossIdx[1] = lengthIndex;
+                break;
+            }
+        }
+        if (widthStr[widthIndex] == lengthStr[lengthIndex]) {
+            break;
+        }
+    }
+
+    if (widthIndex == strlen(widthStr) &amp;&amp; lengthIndex == strlen(lengthStr)) {
+        printf(&quot;None\n&quot;);
+        return;
+    }
+
+
+    for (widthIndex=0; widthIndex &lt; strlen(lengthStr); widthIndex++) {
+        for (lengthIndex=0; lengthIndex &lt; strlen(widthStr); lengthIndex++) {
+            if(widthIndex == crossIdx[1] &amp;&amp; lengthIndex == crossIdx[0]){
+                CrossWord[widthIndex][lengthIndex] = widthStr[widthPrinter];
+                widthPrinter++;
+                lengthPrinter++;
+            }else if (widthIndex == crossIdx[1]) {
+                CrossWord[widthIndex][lengthIndex] = widthStr[widthPrinter];
+                widthPrinter++;
+            }else if (lengthIndex == crossIdx[0]) {
+                CrossWord[widthIndex][lengthIndex] = lengthStr[lengthPrinter];
+                lengthPrinter++;
+            }else {
+                CrossWord[widthIndex][lengthIndex] = '.';
+            }
+        }
+    }
+    for (widthIndex = 0; widthIndex &lt; strlen(lengthStr); widthIndex++) {
+        for (lengthIndex = 0; lengthIndex &lt; strlen(widthStr); lengthIndex++) {
+            printf(&quot;%c\t&quot;, CrossWord[widthIndex][lengthIndex]);
+        }
+        putchar('\n');
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/06/05 17:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Wonsang Kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18002"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">while True:
+    word1=input(&quot;Input word 1: &quot;)
+    word2=input(&quot;Input word 2: &quot;)
+    print()
+    same=0
+    for i in range(len(word1)):
+        if word1[i] in word2:
+            same=1
+            samepos1=i
+            samepos2=word2.index(word1[i])
+            break
+
+    if not same:
+        print(&quot;None&quot;)
+    else:
+        for i in range(len(word2)):
+            if i==samepos2:
+                print(word1)
+            else:
+                print('.'*samepos1+word2[i]+'.'*(len(word1)-samepos1-1))
+    print()
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/23 09:27</p>
+                                <p class="static-profile" style="margin:0;padding:0;">ykleeac</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18003"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def gen_crosswords(word_a: str, word_b: str):
+    # 교점 존재 여부 찾기
+    foo = tuple(word_a.find(c) for c in word_b if word_a.find(c) != -1)
+    if not len(foo):
+        return
+    # 교점 위치에 대한 각 문자열 내 인덱스
+    idx_a, idx_b = foo[0], word_b.find(word_a[foo[0]])
+    # 반환 문자 배열 생성
+    result = ['.' * idx_a + v + '.' * (len(word_a) - idx_a - 1) for _, v in enumerate(word_b)]
+    result[idx_b] = word_a
+    return '\n'.join(result)
+
+
+def main():
+    words = input().split()
+    result = gen_crosswords(words[0], words[1])
+    print(result)
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/23 10:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18022"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">word_in = input(&quot;두 단어를 입력하시라: &quot;).split(&quot; &quot;)
+
+word_a = word_in[0]
+word_b = word_in[1]
+a_len = len(word_a)
+b_len = len(word_b)
+a_pos = -1
+b_pos = -1
+for i in range(0, a_len):
+    for j in range(0,b_len):
+        if word_a[i] == word_b[j]:
+            a_pos = i
+            b_pos = j
+            break
+    if a_pos != -1:
+        break
+
+#print(str(a_pos) + &quot;/&quot; + str(b_pos))
+
+if a_pos == -1:
+    print(&quot;None&quot;)
+else:
+    for i in range(0, b_len):
+        line = &quot;.&quot;*a_pos + word_b[i] + &quot;.&quot;*(a_len-a_pos-1)
+        if i == b_pos:
+            line=word_a
+        print(line)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/25 00:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박박박</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18084"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>input = input()
+list = input.split(' ')
+
+list2 = []
+list_no = []
+
+for i in range(len(list[0])):
+    for j in range(len(list[1])):
+        if list[0][i] == list[1][j]:
+            list2.append([list[0][i],i,j])
+
+            list3 = []
+            for x in range(len(list[1])):
+                list3.append([])
+                for y in range(len(list[0])):
+                    list3[x].append(([0]))      
+
+            for a in range(len(list[0])):
+                list3[list2[0][2]][a] = list[0][a]
+            for b in range(len(list[1])):
+                list3[b][list2[0][1]] = list[1][b]
+
+            for x in range(len(list[1])):
+                print(list3[x])
+
+        else:
+            print(&quot;None&quot;)
+            break
+        break
+    break
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/31 14:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">_styl2s</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18117"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        Scanner sc = new Scanner(System.in);
+        System.out.println(&quot;첫번째 문자를 입력하세요&quot;);
+        String first = sc.next(); 
+        System.out.println(&quot;두번째 문자를 입력하세요&quot;);
+        String second = sc.next(); 
+
+        boolean result = false;
+        int i = 0;
+        int j = 0;  
+
+        //검사
+        for(j=0;j&lt;first.length();j++) {         
+            for(i=0;i&lt;second.length();i++) {        
+                if(second.charAt(i) == first.charAt(j)) {
+                    result = true;  
+                    break;
+                }               
+            }       
+            if(result) {
+                break;
+            }
+        }
+
+        //출력
+        if(result) {            
+            for(int c = 0 ; c &lt; second.length() ; c++) {
+                for(int k = 0 ; k &lt; first.length() ; k++) { 
+                    if(c == i) {
+                        System.out.print(first);
+                        break;
+                    }
+                    else if(k==j) {
+                        System.out.print(second.charAt(c));                     
+                    }
+                    else {
+                        System.out.print(&quot;.&quot;);
+                    }
+
+                }               
+                System.out.println(&quot;&quot;);
+            }
+
+        }
+        else {
+            System.out.println(&quot;None&quot;);
+        }
+    }   
+}
+</code></pre>
+
+<p>자바입니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/06/04 17:06</p>
+                                <p class="static-profile" style="margin:0;padding:0;">신현준</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18152"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3.7 사용.</p>
+<pre><code class="python">def input_str():
+    while(True):
+        tmp=input(&quot;입력하세요: &quot;)
+        result=tmp.split(' ')
+        if len(result)==2:
+            return result
+        else:
+            print('입력 에러. 다시 입력하세요')
+
+def Make_crossword():
+    words=input_str()
+    word_found=False
+    for i, char1 in enumerate(words[0]):
+        j=words[1].find(char1)
+        if j!=-1:
+            word_found=True
+            Output_crossword(words, i, j)
+            break
+    if word_found==False:
+        print('None')
+
+def Output_crossword(words, i, j):
+    for a, a_char in enumerate(words[1]):
+        if a!=j:
+            tmp='.'*i + a_char + '.'*(len(words[0])-i-1)
+            print(tmp)
+        else:
+            print(words[0])
+
+if __name__==&quot;__main__&quot;:
+    Make_crossword()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/06/06 19:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">왕초보</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18156"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">namespace codingdojang__
+{
+    class Program
+    {
+        static string a = &quot;crossword&quot;;
+        static string b = &quot;boolean&quot;;
+
+        static void Main(string[] args)
+        {
+            string word = Overlap(a, b);
+            word_puzzle(word);
+        }
+        static string Overlap(string input_a, string input_b)
+        {
+            string word = &quot;&quot;;
+            for (int temp_b = 0; temp_b &lt; input_b.Length; temp_b++)
+            {
+                if (input_a.Contains(input_b[temp_b]) == true)
+                {
+                    word = input_b[temp_b].ToString();
+                }
+            }
+            return word;
+        }
+        static void word_puzzle(string input)
+        {
+            int position_a = a.IndexOf(input);
+            int position_b = b.IndexOf(input);
+            for (int count = 0; count &lt; b.Length; count++)
+            {
+                if (count == position_b)
+                {
+                    Console.WriteLine(a);
+                }
+                else
+                {
+                    for (int i = 0; i &lt; a.Length; i++)
+                    {
+                        if (i == position_a)
+                        {
+                            Console.Write(b[count]);
+                        }
+                        else
+                        {
+                            Console.Write(&quot;.&quot;);
+                        }
+                    }
+                    Console.WriteLine();
+                }
+            }
+        }
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/06/06 21:08</p>
+                                <p class="static-profile" style="margin:0;padding:0;">bat</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18179"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def puzzle(w):
+    a, b = w.split(' ')
+    b = list(b)
+    for s1 in a:
+        for s2 in b:
+            if s1 == s2: b[b.index(s2)] = a; return ''.join(b)
+</code></pre>
+
+<pre><code class="no-highlight">&gt;&gt;&gt;crossword boolean
+bcrosswordolean
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/06/08 13:17</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이진형</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18453"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># dst에서 src와 교차하는 인덱스
+def cross_idx(dst, src):
+    for i, c in enumerate(dst):
+        if c in src:
+            return i
+
+    return -1
+
+
+word1, word2 = input('word1, word2 = ').split()
+p1, p2 = cross_idx(word1, word2), cross_idx(word2, word1)
+
+if p1 &lt; 0:
+    print(None)
+    exit()
+
+row = list('.' * len(word1))
+for i, c in enumerate(word2):
+    if i == p2:
+        print(word1)
+    else:
+        row[p1] = c
+        print(''.join(row))
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/07/05 16:29</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18511"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">word1,word2=input('두개의 단어 입력: ').split(' ')
+
+for i in range(len(word1)):
+   if word1[i] in word2:
+       for j in range(len(word1)):
+            if i==j:
+
+               print(word2)
+            else:
+                for n in range(i-1):
+                    print(end=&quot; &quot;)
+                print(word1[j])
+       break
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/07/10 16:56</p>
+                                <p class="static-profile" style="margin:0;padding:0;">정환용</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18690"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>python 3.7</p>
+<pre><code class="python">wa, wb = input(&quot;두 단어 입력 : &quot;).split(' ')
+
+def word(A,B):
+    for i in A:
+        for j in B:
+            if i == j:
+                return i
+    return None
+
+a = word(wa, wb)
+if a == None:
+    print(a)
+else:
+    b = wa.find(a)
+    for i in wb:
+        if i == a:
+            print(wa)
+            a = None
+        else:
+            print(&quot; &quot;*b+i+&quot; &quot;*(len(wa)-b-1))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/07/26 10:56</p>
+                                <p class="static-profile" style="margin:0;padding:0;">AY</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18950"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">A = input(&quot;원하는 두 단어를 입력.\n&gt; &quot;)
+nlist = A.split(&quot; &quot;)
+
+def isSame(nlist):
+    for i in range(len(nlist[0])):
+        for j in range(len(nlist[1])):
+            if nlist[0][i] == nlist[1][j]:
+                return(True, i, j)
+    return(False, 0, 0)
+
+same, i, j = isSame(nlist)
+if same == False:
+    print(&quot;\nNone\n&quot;)
+elif same == True:
+    print(&quot;\n&quot;)
+    for x in range(len(nlist[0])):
+        if x == j:
+            print(nlist[1])
+        else:
+            print(&quot; &quot;*i+nlist[0][x]+&quot; &quot;*(len(nlist[0])-i))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/08/14 17:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">cond_b</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20303"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>```{.java}
+public class 낱말퍼즐만들기 {</p>
+<pre><code>public static void main(String[] args) {
+
+    Scanner scan = new Scanner(System.in);
+    String[] str = scan.nextLine().split(" ");
+
+    String[] str1 = str[0].split("");
+    String[] str2 = str[1].split("");
+
+    int count = 0;
+    loop:
+    for(int i=0; i&lt;str1.length; i++) {
+        for(int j=0; j&lt;str2.length; j++) {
+            if(str1[i].equals(str2[j])) {
+                str2[j] = str[0];
+                break loop;
+            }
+        }
+        count++;
+    }
+    if(count==str1.length) {
+        System.out.println("None");
+        System.exit(0);
+    }
+    for(int i=0; i&lt;str2.length; i++) {
+        System.out.println(str2[i]);
+    }
+}
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/12/22 18:56</p>
+                                <p class="static-profile" style="margin:0;padding:0;">big Ko</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_21087"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">word=input(&quot;Enter the two word: &quot;).split(' ')
+w1=list(word[0])
+w2=list(word[1])
+co_word=[]
+for i in range(len(w1)):
+    if w2.count(w1[i])==0:
+        co_word.append('n')
+    else: co_word.append(w2.index(w1[i]))
+if co_word.count('n')==len(w1):
+    print(&quot;이 두 개의 단어는 공통되는 알파벳이 존재하지 않습니다. 다시 시도하세요.&quot;)
+else:
+    for i in range(len(co_word)):
+        if co_word[i]!='n':
+            CW=i
+            break
+#co_word의 i번째에서 처음 index가 나타났다는 것
+#i,즉 CW는 w1에서 몇번째인지, 그리고 index는 w2에서 몇 번째인지를 나타낸다.
+Crossword=[]
+for j in range(len(w1)):
+    if j!=CW:
+        crossword='_'*(co_word[CW])+w1[j]+'_'*(len(w2)-co_word[CW]-1)
+    else:
+        crossword=''.join(w2)
+    Crossword.append(crossword)
+for i in range(len(w1)): print(Crossword[i])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/02/26 19:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">eun030611</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_21845"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>#파이썬
+
+a=str(input('Input two words.....')).split(' ')
+min_char=200
+
+#각 단어의 각각의 문자들을 하나씩 비교하여 겹치는 문자 중 
+#a에 가장 가까운 문자를 찾아내며
+#첫단어에서의 위치를 x에 두번째 단어에서의 위치를 y에 저정한다
+for i in range(len(a[0])): 
+    for j in range(len(a[1])):
+        if a[0][i]==a[1][j]:
+            if min_char&gt;ord(a[0][i]):
+                min_char=ord(a[0][i])
+                x,y=i,j
+
+if min_char==200:   #이 변수가 그대로 200이라는 것은 아무런 공통된 문자가 없다는 의미
+    print ('None')
+else:       
+    for j in range (len(a[1])):
+        if j==y:
+            print (a[0])
+        else:
+            for i in range (len(a[0])):
+                if i==x:
+                    print (a[1][j],end='')
+                else:
+                    print ('.',end='')
+            print ()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/04/21 01:36</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Buckshot</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2693"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">Input two words.....lazy crossword
+None
+
+Input two words.....crossword boolean
+..b......
+crossword
+..o......
+..l......
+..e......
+..a......
+..n......
+
+Input two words.....python delphi
+...d..
+...e..
+...l..
+...p..
+python
+...i..</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Buckshot,
+                                    2020/04/21 01:37
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22376"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def wp(words):
+    col_idx = min([words[0].index(s) for s in set(words[0]).intersection(words[1])])
+    row_idx = words[1].index(words[0][2])
+
+    for r in range(len(words[1])):
+        if r != row_idx:
+            for c in range(len(words[0])):
+                print((words[1][r], '.',)[col_idx != c], end='')
+            print()
+        else:
+            print(words[0])
+
+if __name__ == '__main__':
+    words = ['crossword', 'boolean']
+    wp(words)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/19 13:41</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hwaseong Nam</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2744"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">set 함수의 교집합을 이용한 후 중복 알파벳 인덱스값중 가장작은 값을 선택하여 최초 중복 인덱스 값 추출</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Hwaseong Nam,
+                                    2020/05/19 13:42
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24151"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">Str = input('두 단어를 빈칸으로 띄워서 입력하시오: ')
+Words = Str.split(' ')
+
+# 겹치는 위치를 찾아 Row와 Col에 저장하기
+found = False
+row = 0
+while (not found and row&lt;len(Words[0])):
+    col = 0
+    while (not found and col&lt;len(Words[1])):
+        if Words[0][row]==Words[1][col]:
+            Row = row
+            Col = col
+            found = True
+        col += 1
+    row += 1
+if (not found):
+    print('None')
+else:
+    # 두 단어를 row와 col으로 출력하기
+    for row in range(0,len(Words[0])):
+        str = &quot;&quot;
+        for col in range(0,len(Words[1])):
+            if Row==row:
+                c = Words[1][col]
+            elif Col==col:
+                c = Words[0][row]
+            else:
+                c = '.'
+            str += c
+        print(str)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/12/28 17:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김준우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25571"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">a = [x for x in 'crossword']
+b = [x for x in 'boolean']
+c = [a.index(j) for i in a for j in b if i==j][0]   #첫번째로 동일한 문자
+count = 0
+total = 0
+for i in a:
+    for j in b:
+        if count==0 and i==j :
+            count+=1
+            total+=1
+    if count==1 and total==1:
+        count=0
+        print(''.join(b))
+    else :
+        word= '.'*len(a)
+        print(word[:c],i,word[c-1:])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/06/21 10:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">약사의혼자말</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26501"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def word(a,b):
+    co1 = 0
+    co2 = 0
+    for i in a:
+        for j in b:
+            if i == j and co2 == 0:
+                c = a.find(j)
+                co1 = 1
+                co2 = 1
+
+    if co1 == 0:
+        print('None')
+        return
+    print(c)
+    count = 0
+    total = 0
+    for i in a:
+        for j in b:
+            if count==0 and i==j:
+                count += 1
+                total += 1
+        if count == 1 and total == 1:
+            count = 0
+            print(b)
+        else:
+            word = '.'*len(a)
+            print(word[:c],i,word[c:])
+word('boolen','crossword')
+word('crossword','lazy')
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/10/19 14:56</p>
+                                <p class="static-profile" style="margin:0;padding:0;">한고선</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26928"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def puzzle(data) :
+    words = data.split()
+    print(words)
+    cnt = 1
+    for i in words[1]:
+        if i in words[0] :
+            value = i
+            break
+
+    a = words[0].index(value)
+    b = words[1].index(value)
+
+    for i in range(len(words[1])):
+        if i == b :
+            print(words[0])
+        else :
+            print(&quot;.&quot;*a + words[1][i]+&quot;.&quot;*(len(words[1])-b-1))
+
+
+
+data = &quot;crossword boolean&quot;
+puzzle(data)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/01 22:33</p>
+                                <p class="static-profile" style="margin:0;padding:0;">semipooh</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27060"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">A = str(input(&quot;A 단어를 입력하시오&quot;))
+B = str(input(&quot;B 단어를 입력하시오&quot;))
+
+def order (A,B):
+    for i in range(len(A)):
+        if A[i] in set(A)&amp;set(B) :
+            return i        #처음 겹치는 단어의 순서구하는 함수
+            break
+print()
+
+if len(set(A)&amp;set(B)) == 0 :
+    print(&quot;None&quot;)
+else :
+    an = order(A,B)
+    bn = order(B,A)  
+    for k in range(len(B)):
+        if k == bn:
+            print(A)
+        else: 
+            print('.'*an,B[k],'.'*(len(B)-an))
+
+</code></pre>
+
+<p>집합을 이용해서 교집합 단어를 구하고,
+각 A,B 단어에서 처음 겹치는 단어 순서를 구하는 함수를 짰습니다
+그 순서를 이용해서 for문을 짰구요</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/22 00:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">양캠부부</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27190"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>// Rust</p>
+<p>// 첫뻔째 일치하는 character를 찾으면 인쇄, 못찾으면 인쇄하지 않습니다.(Option type)</p>
+<p>fn crossword() {</p>
+<pre><code>let a = "crossword";
+let b = "boolean";
+
+let mut position = None;
+for (i, c) in a.chars().enumerate() { 
+    if let Some(j) = b.find(c) { 
+        position = Some((i, j));
+        break;} }
+
+if let Some((i, j)) = position {
+    for (y, c) in b.chars().enumerate() {            
+        let mut line = String::new();
+        if y == j { line = a.to_string();
+                    println!("{}", line);
+                    continue;}
+        for _ in 0..i { line.push('.');}
+        line.push(c);
+        for _ in i+1..a.len() { line.push('.');}
+        println!("{}", line);
+    }
+}
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/30 15:02</p>
+                                <p class="static-profile" style="margin:0;padding:0;">JW KIM</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29516"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def findOverlappChar(words):
+    for c in range(len(words[0])):
+        for r in range(len(words[1])):
+            if words[0][c] == words[1][r]:
+                return (r, c)
+    return (-1, -1)
+
+
+words = input('두단어를 넣으세요: ').split(' ')
+r, c = findOverlappChar(words)
+if r == -1:
+    print('\n  None')
+else:
+    w = [c for c in words[0]]
+    for y in range(len(words[1])):
+        if y == r:
+            print(' '.join(w))
+        else:
+            print('. ' * c + words[1][y] + ' .' * (len(w) - c-1))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/08/03 15:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

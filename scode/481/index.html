@@ -1,0 +1,2994 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="높이와 폭의 길이를 입력받아 임의의 미로를 출력하는 프로그램 입니다.
+미로는 프로그램을 실행할 때마다 다르게 출력되어야 하며 코너는 **+** 로, 수직벽은 **|** 를 사용하여야 합니다.
+출구는 벽면이 없는 형태로 출력하고, 현재위치는 *...">
+    <title>Print a random maze - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">Print a random maze</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">6</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 4</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>높이와 폭의 길이를 입력받아 임의의 미로를 출력하는 프로그램 입니다.<br/>
+미로는 프로그램을 실행할 때마다 다르게 출력되어야 하며 코너는 <strong>+</strong> 로, 수직벽은 <strong>|</strong> 를 사용하여야 합니다.<br/>
+출구는 벽면이 없는 형태로 출력하고, 현재위치는 <strong>#</strong> 로 표기합니다. 단 현재위치와 출구는 반드시 연결되어야 합니다.<br/></p>
+<p>Sample Input</p>
+<pre><code class="no-highlight">4 5
+</code></pre>
+
+<p>Sample Output</p>
+<pre><code class="no-highlight">+-+-+
+  |#|
+|   |
++---+
+</code></pre>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">maze</span>
+                
+                    <span class="label label-tag label-xs">ascii-art</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2015/05/15 18:32</p>
+                    <p class="static-profile" style="margin:0;padding:0;">vegan</p>
+                </div>
+            </div>
+
+            
+                <a name="comment_1917"></a>
+                <div class="comment_line comment-content">
+                    
+                        <span style="color:orangered;">+1</span>
+                    
+                    <span style="white-space:pre-wrap;">&quot;가로벽을 `-`로 표시 한다&quot;는 내용이 들어가면 더 낫겠네요.</span>
+                    -
+                    <span style="font-size:11px;">
+                        Han Jooyung,
+                        2016/11/24 22:25
+                    </span>
+                </div>
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>16개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_4795"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">3</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;time.h&gt;
+
+#define xsize 10
+#define ysize 10
+
+//001000 =&gt; LEFT  //000100 =&gt; RIGHT //000010 =&gt; TOP //000001 =&gt; BOTTOM
+//010000 =&gt; BLOCK //100000 =&gt; NOW
+enum direction {
+    NONE = 0, 
+    LEFT = 8, RIGHT = 4, TOP = 2, BOTTOM = 1, 
+    BLOCK = 16, NOW = 32
+};
+
+int getRandDirection() {
+    int d = rand() % 4;
+    switch(d){
+        case 0:
+            return LEFT;
+        case 1:
+            return RIGHT;
+        case 2:
+            return BOTTOM;
+        case 3:
+            return TOP;
+    }
+}
+
+void getDirectionChar(int left, int me, int top, int row, char* c) {
+    if(row == 0){
+        c[0] = '+'; 
+        if((me &gt;&gt; 1) &amp; 1 || top &amp; 1){
+            c[1] = ' '; 
+            c[2] = ' '; 
+        }
+        else{
+            c[1] = '-'; 
+            c[2] = '-'; 
+        }
+    }
+    if(row == 1){
+        if((me &gt;&gt; 3) &amp; 1 || (left &gt;&gt; 2) &amp; 1) {
+            c[0] = ' ';
+        }else{
+            c[0] = '|';
+        }       
+        switch(me){
+            case NOW:
+                c[1] = '#';
+                c[2] = ' ';
+                break;
+            case NONE:
+                c[1] = '.';
+                c[2] = '.';
+                break;          
+            default:
+                c[1] = ' ';
+                c[2] = ' ';
+                    break;
+        }
+    }
+}
+
+void printMaze(int a[xsize][ysize], int x, int y) {
+    system(&quot;cls&quot;);
+    for(int j = 0; j &lt; ysize; j++) {
+        for(int k = 0; k &lt; 2; k++) {
+            for(int i = 0; i &lt; xsize; i++) {                
+                int left, me, top;      
+
+                left = i &gt; 0 ? a[i - 1][j] : (j == 0 ? RIGHT : BLOCK);
+                me = i ==x &amp;&amp; j == y ? NOW : a[i][j];               
+                top = j &gt; 0 ? a[i][j - 1] : BLOCK;              
+
+                char c[3] = { ' ', ' ', ' ' }; 
+                getDirectionChar(left, me, top, k , c);
+                printf(&quot;%c%c%c&quot;, c[0], c[1], c[2]);
+            }
+            printf(k == 0 ? &quot;+\n&quot; : &quot;|\n&quot;);
+        };
+    }
+    for(int i = 0; i &lt; xsize; i++) {
+        printf(&quot;+--&quot;);
+    }
+    printf(&quot;+\n&quot;);
+}
+
+int goForward(int a[xsize][ysize], int x, int y){
+    printMaze(a, x, y);
+    int d = 0;
+    while(1) {
+        if((x == 0 || a[x - 1][y] != NONE) &amp;&amp; //LEFT is disable
+            (x == xsize - 1 || a[x + 1][y] != NONE) &amp;&amp; //RIGHT is disable
+            (y == 0 || a[x][y - 1] != NONE) &amp;&amp; //TOP is diable
+            (y == ysize - 1 || a[x][y + 1] != NONE)) { //BOTTOM is diable
+                return 0;
+        }
+        d = getRandDirection();
+        switch(d){
+            case LEFT:
+                if(x &gt; 0 &amp;&amp; a[x - 1][y] == NONE) {
+                    a[x][y] += LEFT;
+                    x--;
+                    goForward(a, x, y);
+                    a[x][y] += RIGHT;
+                }
+                break;
+            case RIGHT:
+                if(x &lt; xsize - 1 &amp;&amp; a[x + 1][y] == NONE) {
+                    a[x][y] += RIGHT;
+                    x++;
+                    goForward(a, x, y);
+                    a[x][y] += LEFT;
+                }
+                break;
+            case TOP:
+                if(y &gt; 0 &amp;&amp; a[x][y - 1] == NONE) {
+                    a[x][y] += TOP;
+                    y--;
+                    goForward(a, x, y);
+                    a[x][y] += BOTTOM;
+                }
+                break;
+            case BOTTOM:
+                if(y &lt; ysize - 1 &amp;&amp; a[x][y + 1] == NONE) {
+                    a[x][y] += BOTTOM;
+                    y++;
+                    goForward(a, x, y);
+                    a[x][y] += TOP;
+                }
+                break;
+        }
+    }
+}
+
+int main(){
+    srand(time(NULL));
+    int a[xsize][ysize];
+    for(int i = 0; i &lt; xsize; i++) {
+        for(int j = 0; j &lt; ysize; j++) {
+            a[i][j] = NONE;
+        }
+    }
+    a[0][0] = LEFT;
+    goForward(a, 0, 0);
+    printMaze(a, xsize - 1, ysize - 1);
+}
+</code></pre>
+
+<pre><code class="cpp">- =&gt; -- 로 결과를 변형함. 보기더 나음.
++--+--+--+--+--+--+--+--+--+--+
+   |              |        |  |
++  +--+--+--+  +  +  +--+  +  +
+|              |     |     |  |
++--+--+--+--+--+--+--+  +--+  +
+|  |           |        |     |
++  +  +--+--+  +  +--+--+  +  +
+|     |        |  |        |  |
++--+--+  +--+--+  +--+--+  +  +
+|     |  |        |     |  |  |
++  +  +  +  +--+--+  +  +--+  +
+|  |     |  |        |  |     |
++  +--+--+  +  +--+--+  +  +--+
+|           |        |  |     |
++  +--+--+--+--+--+  +  +--+  +
+|  |              |  |        |
++  +--+--+  +--+  +  +--+--+  +
+|        |     |  |     |     |
++--+--+  +--+  +  +--+  +  +--+
+|              |        |   # |
++--+--+--+--+--+--+--+--+--+--+
+
+D:\16.minGW&gt;
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/09/15 01:16</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이 종성</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2617"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">형님으로 모십니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    maluchi,
+                                    2020/03/01 21:31
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5399"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">2</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="c">int main(int argc, const char * argv[]) {
+    srand((unsigned int)time(NULL));
+    int width = 30, height = 15;
+    maze* m = make_maze(width, height);
+    print_maze(m);
+    free_maze(m);
+    return 0;
+}
+</code></pre>
+
+<p><code>maze</code>는 2차원 배열에 벽과 복도를 1과 0으로 표시하고, 시작점/출구를 기억.</p>
+<pre><code class="c">typedef struct maze maze;
+struct maze {
+    int width;
+    int height;
+    char** cells;
+    int startx;
+    int starty;
+    int goalx;
+    int goaly;
+};
+</code></pre>
+
+<p>이제 미로를 만들어보자.</p>
+<pre><code class="c">maze* make_maze(int width, int height) {
+    maze* m = (maze*)malloc(sizeof(maze));
+    m-&gt;width = width;
+    m-&gt;height = height;
+
+    // allocate 2D array
+    m-&gt;cells = (char**)calloc(width, sizeof(char*));
+    for (int x=0; x&lt;width; x++)
+        m-&gt;cells[x] = (char*)calloc(height, sizeof(char));
+</code></pre>
+
+<p>시작점은 내부에 있어야 한다.</p>
+<pre><code class="c">    // starting point is not on the boundary
+    m-&gt;startx = uniform(1, width-1);
+    m-&gt;starty = uniform(1, height-1);
+</code></pre>
+
+<p>출구는 외부, 하지만 네 귀퉁이는 될 수 없다.</p>
+<pre><code class="c">    // goal is on the boundary, but not on the corner
+    int side = uniform(0,4);
+    switch (side) {
+        case 0:
+            m-&gt;goalx = uniform(1, width-1);
+            m-&gt;goaly = 0;
+            break;
+        case 1:
+            m-&gt;goalx = 0;
+            m-&gt;goaly = uniform(1, height-1);
+            break;
+        case 2:
+            m-&gt;goalx = uniform(1, width-1);
+            m-&gt;goaly = height-1;
+            break;
+        default: //3
+            m-&gt;goalx = width-1;
+            m-&gt;goaly = uniform(1, height-1);
+            break;
+    }
+</code></pre>
+
+<p>기본 아이디어는 외부벽을 만든다음 랜덤하게 벽을 키워나가되 길을 끊지 않는 것이다.</p>
+<p>먼저 외부벽을 만든다.</p>
+<pre><code class="c">    // draw boundary
+    for (int i=0; i&lt;width; i++) {
+        m-&gt;cells[i][0] = 1;
+        m-&gt;cells[i][height-1] = 1;
+    }
+    for (int i=0; i&lt;height; i++) {
+        m-&gt;cells[0][i] = 1;
+        m-&gt;cells[width-1][i] = 1;
+    }
+    m-&gt;cells[m-&gt;goalx][m-&gt;goaly] = 0;
+</code></pre>
+
+<p>외부벽을 키워나가려면.. (좀 무식하게.. ㅠ.ㅠ)
+빈칸 중에서 벽에 연결되면서 연결방향의 전방에 다른 벽이 있으면 안된다. (길을 막지 않아야..)
+이런 조건에 해당하는 빈칸 중에서 랜덤하게 하나를 골라서 벽을 만든다!</p>
+<pre><code>    // for each empty cell, find a cell to be connected to the wall with only one side
+    // and not close the road
+    int* candidate = (int*)calloc(width * height, sizeof(int));
+    int  size = 0;
+    while (1) {
+        for (int y=1; y&lt;m-&gt;height-1; y++) {
+            for (int x=1; x&lt;m-&gt;width-1; x++) {
+                if (m-&gt;cells[x][y] || (x == m-&gt;startx &amp;&amp; y == m-&gt;starty))
+                    continue;
+                if (is_candidate(m-&gt;cells, x, y))
+                    candidate[size++] = y * width + x;
+            }
+        }
+        if (size == 0)
+            break;
+        int pos = candidate[rand() % size];
+        m-&gt;cells[pos % width][pos / width] = 1;
+        size = 0;
+    }
+    free(candidate);
+
+    return m;
+}
+</code></pre>
+
+<p>연결 조건을 확인하는 코드는 아래..</p>
+<pre><code class="c">int is_candidate(char** cells, int x, int y) {
+    if (cells[x-1][y]) {
+        return cells[x+1][y-1] == 0
+        &amp;&amp; cells[x+1][y] == 0
+        &amp;&amp; cells[x+1][y+1] == 0
+        &amp;&amp; cells[x][y-1] == 0
+        &amp;&amp; cells[x][y+1] == 0;
+    }
+    if (cells[x+1][y]) {
+        return cells[x-1][y-1] == 0
+        &amp;&amp; cells[x-1][y] == 0
+        &amp;&amp; cells[x-1][y+1] == 0
+        &amp;&amp; cells[x][y-1] == 0
+        &amp;&amp; cells[x][y+1] == 0;
+    }
+    if (cells[x][y-1]) {
+        return cells[x-1][y] == 0
+        &amp;&amp; cells[x+1][y] == 0
+        &amp;&amp; cells[x-1][y+1] == 0
+        &amp;&amp; cells[x][y+1] == 0
+        &amp;&amp; cells[x+1][y+1] == 0;
+    }
+    if (cells[x][y+1]) {
+        return cells[x-1][y] == 0
+        &amp;&amp; cells[x+1][y] == 0
+        &amp;&amp; cells[x-1][y-1] == 0
+        &amp;&amp; cells[x][y-1] == 0
+        &amp;&amp; cells[x+1][y-1] == 0;
+    }
+    return 0;
+}
+</code></pre>
+
+<p>출력하는 건 간단하다.</p>
+<pre><code class="c">void print_maze(maze* m) {
+    for (int y=0; y&lt;m-&gt;height; y++) {
+        for (int x=0; x&lt;m-&gt;width; x++)
+            printf(&quot;%c&quot;, cell(m, x, y));
+        printf(&quot;\n&quot;);
+    }
+}
+
+char cell(maze* m, int x, int y) {
+    if (x==m-&gt;startx &amp;&amp; y==m-&gt;starty)
+        return '#';
+    if (m-&gt;cells[x][y] == 0)
+        return ' ';
+
+    int h = (x &gt; 0 &amp;&amp; m-&gt;cells[x-1][y]) || (x &lt; m-&gt;width-1 &amp;&amp; m-&gt;cells[x+1][y]);
+    int v = (y &gt; 0 &amp;&amp; m-&gt;cells[x][y-1]) || (y &lt; m-&gt;height-1 &amp;&amp; m-&gt;cells[x][y+1]);
+    int corner = (x == 0 || x == m-&gt;width -1) &amp;&amp; (y == 0 || y == m-&gt;height - 1);
+
+    if (corner || (h &amp;&amp; v))
+        return '+';
+    if (h)
+        return '-';
+    return '|';
+}
+</code></pre>
+
+<p>남은 함수는 메모리 해제와 랜덤 선택</p>
+<pre><code class="c">int uniform(int a, int b) {
+    return a + rand() % (b - a);
+}
+
+void free_maze(maze* m) {
+    for (int x=0; x&lt;m-&gt;width; x++)
+        free(m-&gt;cells[x]);
+    free(m-&gt;cells);
+    free(m);
+}
+</code></pre>
+
+<p>아래는 결과 예제</p>
+<pre><code class="txt">+-+-+-+-+-+-+-+-+-+--+--+-+--+
+| | | | | | | | | |  |  | |  |
+|     | | | | | | ++ |    +- |
++--- ++ | | | | |  | ++ +-+  |
+|    |  |     | | -+  | | | -+
++--- |  +-+-+   |  |         |
+|    | -+ | | --+- | -+  -+--+
++---        |         +-  |  |
+     +--+--   --+- ---+     -+
+| |  |  |   |   |     ++  |  |
++-+-   ++ | +- ++ -+   | ++ -+
+|  # | |  +-+  |   | --+-+   |
+| +- | ++ |   -+ | |   | | --+
+| |  |  | | |  | | | | |     |
++-+--+--+-+-+--+-+-+-+-+-----+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/11/25 00:11</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Han Jooyung</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2346"></a>
+                            <div class="comment_line comment-content">
+                                
+                                    <span style="color:orangered;">+1</span>
+                                
+                                <span style="white-space:pre-wrap;">아이디어가 좋네요</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Noname,
+                                    2018/08/28 04:41
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2335"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>결과물(160x160) : <a href="https://www.dropbox.com/s/ub9km51j7utbbau/maze.txt?dl=0">https://www.dropbox.com/s/ub9km51j7utbbau/maze.txt?dl=0</a></p>
+<pre><code class="python">import random
+import time
+
+class maze:
+    maze_makingTime=0
+    maze_size=0
+    maze_map=None
+    maze_mapList=None
+    maze_exitWay=None
+    startPoint_x=1
+    startPoint_y=0
+    endPoint_x=0
+    endPoint_y=0
+
+    def __init__(self,input_size):
+        list_maze=list()
+        for i in range(input_size):
+            list_maze.append(list())
+            for j in range(input_size):
+                list_maze[i].append(1)
+        self.maze_map=list_maze
+        self.maze_size=int(input_size)
+
+        t_start=time.time()
+        self.design_mazeOut()
+        t_end=time.time()
+        self.maze_makingTime=t_end-t_start
+        self.duplicate_MazeToList()
+
+    #사용하지 말것,__init__에서 자동으로 호출한다
+    def design_mazeOut(self):
+        #나가는 법을 기록
+        temp_way=list()
+        self.maze_map[self.startPoint_y][self.startPoint_x]=0
+        temp_x,temp_y=self.startPoint_x,self.startPoint_y+1
+        temp_prevDir=4
+        temp_way.append(temp_prevDir)
+        self.maze_map[temp_y][temp_x]=0
+
+        while True:
+            int_exit_select=random.randint(1,4)
+            if temp_x==0 or temp_y==0 or temp_x==self.maze_size-1 or temp_y==self.maze_size-1:
+                break
+            elif temp_prevDir==3:
+                if int_exit_select&lt;3:
+                    temp_x+=1
+                    temp_prevDir=3
+                    temp_way.append(temp_prevDir)
+                    self.maze_map[temp_y][temp_x]=0
+                else:
+                    temp_y+=1
+                    temp_prevDir=4
+                    temp_way.append(temp_prevDir)
+                    self.maze_map[temp_y][temp_x]=0
+
+            elif temp_prevDir==4:
+                if int_exit_select&lt;3:
+                    temp_y+=1
+                    temp_prevDir=4
+                    temp_way.append(temp_prevDir)
+                    self.maze_map[temp_y][temp_x]=0
+                else:
+                    temp_x+=1
+                    temp_prevDir=3
+                    temp_way.append(temp_prevDir)
+                    self.maze_map[temp_y][temp_x]=0
+        #나가는 경로 지정 완료
+
+        #나가는 법 저장 객체에 저장
+        self.maze_exitWay=temp_way
+        self.endPoint_x,self.endPoint_y=temp_x,temp_y
+        temp_x,temp_y=self.startPoint_x,self.startPoint_y
+
+        #이 부분은 나가는 길을 만든 후 가짜 길을 만들기 위한 부분이다.
+        for temp_prev in temp_way:
+            if temp_prev==4:
+                self.randomspace(temp_x-1,temp_y,1)
+                self.randomspace(temp_x+1,temp_y,3)
+                temp_y+=1
+            else:
+                self.randomspace(temp_x,temp_y-1,2)
+                self.randomspace(temp_x,temp_y+1,4)
+                temp_x+=1
+
+    def duplicate_MazeToList(self):
+        self.maze_mapList=list()
+        for i,line in enumerate(self.maze_map):
+            self.maze_mapList.append(list())
+            for line_ele in line:
+                self.maze_mapList[i].append(line_ele)
+
+
+    #이 메소드를 호출하면 길을 랜덤하게 만들어준다 design_mazeOut에서 자동 호출한다.
+    def randomspace(self,point_x,point_y,prev):
+        if  point_x==0 or point_y==0 or point_x==self.maze_size-1 or point_y==self.maze_size-1:
+            return
+
+        int_select=random.randint(1,10)
+
+        if prev==1:
+            if self.maze_map[point_y-1][point_x]==1 and self.maze_map[point_y+1][point_x]==1 and self.maze_map[point_y][point_x-1]==1:
+                if int_select&lt;8:
+                    self.maze_map[point_y][point_x]=0
+                    self.randomspace(point_x-1,point_y,1)
+                    self.randomspace(point_x,point_y-1,2)
+                    self.randomspace(point_x,point_y+1,4)
+        elif prev==2:
+            if self.maze_map[point_y-1][point_x]==1 and self.maze_map[point_y][point_x-1]==1 and self.maze_map[point_y][point_x+1]==1:
+                if int_select&lt;8:
+                    self.maze_map[point_y][point_x]=0
+                    self.randomspace(point_x-1,point_y,1)
+                    self.randomspace(point_x,point_y-1,2)
+                    self.randomspace(point_x+1,point_y,3)
+        elif prev==3:
+            if self.maze_map[point_y-1][point_x]==1 and self.maze_map[point_y+1][point_x]==1 and self.maze_map[point_y][point_x+1]==1:
+                if int_select&lt;8:
+                    self.maze_map[point_y][point_x]=0
+                    self.randomspace(point_x+1,point_y,3)
+                    self.randomspace(point_x,point_y-1,2)
+                    self.randomspace(point_x,point_y+1,4)
+        else:
+            if self.maze_map[point_y+1][point_x]==1 and self.maze_map[point_y][point_x-1]==1 and self.maze_map[point_y][point_x+1]==1:
+                if int_select&lt;8:
+                    self.maze_map[point_y][point_x]=0
+                    self.randomspace(point_x-1,point_y,1)
+                    self.randomspace(point_x+1,point_y,3)
+                    self.randomspace(point_x,point_y+1,4)
+
+    #미궁을 어떤 식으로 출력할지 결정
+    def set_mazeLine(self):
+        #x좌표가 0일때 공백으로 전환
+        for temp_x in range(self.maze_size):
+            for temp_y in range(self.maze_size):
+                if self.maze_mapList[temp_y][temp_x]==0:
+                    self.maze_map[temp_y][temp_x]=&quot; &quot;
+
+        for temp_x in range(self.maze_size):
+            for temp_y in range(self.maze_size):
+                if temp_x==0:
+                    if self.maze_mapList[temp_y][temp_x+1]==0:
+                        self.maze_map[temp_y][temp_x]=&quot;|&quot;
+                    else:
+                        self.maze_map[temp_y][temp_x]=&quot;+&quot;
+
+                elif temp_x==self.maze_size-1:
+                    if self.maze_mapList[temp_y][temp_x-1]==0:
+                        self.maze_map[temp_y][temp_x]=&quot;|&quot;
+                    else:
+                        self.maze_map[temp_y][temp_x]=&quot;+&quot;
+                elif temp_y==0:
+                    if self.maze_mapList[temp_y+1][temp_x]==0:
+                        self.maze_map[temp_y][temp_x]=&quot;-&quot;
+                    else:
+                        self.maze_map[temp_y][temp_x]=&quot;+&quot;
+                elif temp_y==self.maze_size-1:
+                    if self.maze_mapList[temp_y-1][temp_x]==0:
+                        self.maze_map[temp_y][temp_x]=&quot;-&quot;
+                    else:
+                        self.maze_map[temp_y][temp_x]=&quot;+&quot;
+                else:
+                    if self.maze_mapList[temp_y][temp_x]==0:
+                        pass
+                    elif self.maze_mapList[temp_y][temp_x-1]==0 and self.maze_mapList[temp_y][temp_x+1]==0 and self.maze_mapList[temp_y-1][temp_x]==0 and self.maze_mapList[temp_y+1][temp_x]==0:
+                        self.maze_map[temp_y][temp_x]=&quot;+&quot;
+                    elif self.maze_mapList[temp_y][temp_x-1]==0 and self.maze_mapList[temp_y][temp_x+1]==0:
+                        self.maze_map[temp_y][temp_x]=&quot;|&quot;
+                    elif self.maze_mapList[temp_y-1][temp_x]==0 and self.maze_mapList[temp_y+1][temp_x]==0:
+                        self.maze_map[temp_y][temp_x]=&quot;-&quot;
+                    else:
+                        self.maze_map[temp_y][temp_x]=&quot;+&quot;
+            self.maze_map[self.startPoint_y][self.startPoint_x]=&quot;#&quot;
+            self.maze_map[self.endPoint_y][self.endPoint_x]=&quot; &quot;
+
+    def set_mazeSquare(self):
+        for temp_x in range(self.maze_size):
+            for temp_y in range(self.maze_size):
+                if self.maze_mapList[temp_y][temp_x]==0:
+                    self.maze_map[temp_y][temp_x]=&quot; &quot;
+                else:
+                    self.maze_map[temp_y][temp_x]=&quot;◼︎&quot;
+        self.maze_map[self.startPoint_y][self.startPoint_x]=&quot;#︎&quot;
+
+    def print_maze(self,mode=0):
+        t_start=time.time()
+        if mode==0:
+            self.set_mazeLine()
+        else:
+            self.set_mazeSquare()
+        t_end=time.time()
+        for line in self.maze_map:
+            for temp_char in line:
+                print(temp_char,end=&quot;&quot;)
+            print(&quot;&quot;)
+        return t_end-t_start
+
+    def save_txtMaze(self,mode=0):
+        if mode==0:
+            self.set_mazeLine()
+        else:
+            self.set_mazeSquare()
+        f_maze=open(&quot;maze.txt&quot;,&quot;w&quot;)
+        for line in self.maze_map:
+            for temp_char in line:
+                f_maze.write(temp_char)
+            f_maze.write(&quot;\n&quot;)
+</code></pre>
+
+<p>...네 더럽게 깁니다. 물론 출력용이나 그런 쓸데없는 코드도 있지만 코드자체가 좀 길더군요;;</p>
+<p>코드에 대해 설명하자면</p>
+<p>maze 객체의 변수는 총9개가 있지만 가장 중요한 것은
+<em>  maze_map.
+</em>  maze_mapList.
+<em>  maze_exitWay.
+</em>  startPoint_x.
+*  startPoint_y.
+이렇게 5가지입니다. map과 mapList는 사실 같은 내용이지만 두개가 있는 이유는 객체의 print_maze 또는 save_maze메소드를 호출할 때 Set_MazeLine 혹은 set_mazeSquare를 통해 1과0으로 구성된 MapList 가 사각벽 미로나, 선 미로로 변환되고 이것이 map에 저장됩니다.
+한마디로 같은 내용을 생긴것만 다르게 만들었다는 뜻인데 이게 사실 하나만 있어도 되는데 따로 있는 이유는 사실 제가 print를 할때하고 save를 할때 따른 방식으로(square방식과 line 방식) 미궁을  저장해서 그렇습니다.
+startPoint와 exitWay는 시작점과 나가는 법을 나타내는 것입니다.</p>
+<p>maze_size : <strong>len</strong>함수로 크기를 얻어도 되지만 계산시간을 고려해서 그냥 변수로 선언했습니다.
+maze_makingTime : 미궁 리스트(1,0)을 만드는 시간이 궁금해서 넣었습니다.
+endPoint : exitWay와 startPoint를 사용하면 얻을 수 있지만 따로 함수를 하나 더 만들기 그래서 넣었습니다.</p>
+<p>이 객체에서 가장 중요한 메소드는 design_maze하고 randomspaze 입니다.</p>
+<p>객체를 생성할 때 <strong>init</strong>에서 design_maze를 호출하고 이 메소드에서 randomspace를 호출하는 형식인데.</p>
+<p>design 메소드는 2가지의 작업으로 나뉩니다. 첫째는 나가는 길을 만드는 것이고 둘째는 가짜 통로를 만드는 것입니다.
+이 메소드는 1,0(좌표)에서 시작해 아래, 혹은 우측으로 움직이며 길을 만들고 이를 exitWay변수에 저장하는 것이 첫째 단계입니다.
+여기서 왜 시작점은 고정되고 이동방향은 우,하밖에 없느냐는 질문에는 여러번 이 함수를 반복할 때 출구까지의 거리를 일정하게 유지시키기 위해서라고 말하겠습니다.
+처음에는 design_out이란 함수가 나가는 길을 만들어 주는 방식이였는데 가끔식 바로 옆으로(0,1)나가는 길을 뚫어버리는 통에 아얘 가장 쉬운 방법으로 나가는 길을 만들게 되었습니다.</p>
+<p>design 메소드의 두번째 작업은 exitWay와 startPoint로 나가는 길을 그대로 따라가면서 가짜 통로를 만드는 것입니다. 
+나가는 길을 따라가면서 좌우 좌표를 randomspace함수의 변수로 넘기는게 바로 그것인데, randomspace는 재귀식으로 자신을 호출한 방향 메소드가 있었던 방향을 제외한 나머지 방향으로 나아가면서 길을 만듭니다. 이때 자신 전의 함수가 나아간 방향으로 다시 나아갈 확률을 랜덤으로 만들기 위해 random.randint()함수를 사용했습니다.
+사실 이전에 나아갔던 방향으로 나아갈 확률이 압도적으로 높은데 이는 미로가 너무 구불구불해지면 randomspace함수 특성상 쉽게 길을 가로막힐 가능성이 있기에 이런 방법을 사용했습니다.</p>
+<p>design메소드가 호출되면 이렇게 미로만들기가 모두 종료됩니다.</p>
+<p>이후print나 save 메소드들이 호출되면 set 메소드가 호출되면서 mapList변수를 이용해서 map변수의 각 요소를 문자형으로 변환합니다.</p>
+<pre><code class="python">maze_size=160
+
+m_test=maze(maze_size)
+time_changing=m_test.print_maze()
+
+print(&quot;\n&quot;+str(m_test.maze_makingTime)+&quot;초 걸림(제작)&quot;)
+print(&quot;\n&quot;+str(time_changing)+&quot;초 걸림(변환)&quot;)
+m_test.save_txtMaze(2)
+</code></pre>
+
+<p>이게 실제로 160X160칸 미로를 만드는 과정인데 실제 진행하면 .</p>
+<p>0.19153094291687012초 걸림(제작).
+0.028708934783935547초 걸림(변환).</p>
+<p>총 0.21초 정도 걸립니다.(저장과정 제외,시간이 적게 걸리는 부분 제외 걸린시간).
+160칸이 넘어가면 maximum recursion depth exceeded 오류가 일어나서 이 이상은 몇초정도 걸리는지 잘 모르겠습니다. 재귀부분을 수정하기는 어려운데;;.
+ps. macPro 2015년형 pypy3.2에서 동작함
+pss.이 문제 이런식으로 푸는게 맞나??</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/09/17 15:56</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Graed</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2483"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from random import randint
+K=lambda x: (x-1)/2
+top=[]; walls=[]; bot=[]; start='#'
+X,Y=0,0
+
+def show():
+    topLine=botLine=''; wall=''  #top,bot as one string
+    for i in top:
+        topLine+=i
+    for i in bot:
+        botLine+=i
+    for i in walls:
+        for j in i:
+            wall+=j
+        wall+='\n'
+    print topLine+'\n'+wall[:-1]+'\n'+botLine   
+
+def breakingPrison():
+    left,right=[],[]
+    for i in range(Y-2):
+        left.append(walls[i][0])
+        right.append(walls[i][X])
+    if ' ' not in top or bot or left or right:
+        return True
+
+def prison(x,y):         #가로를 x, 세로를 y로 했고 모양세를 위해 x는 홀수만 입력가능
+    if x%2==0:
+        print 'x should be an odd number';return 0
+    X,Y=x,y
+    row = randint(0,Y-3)
+    col = randint(1,K(X)) *2-1
+
+    for i in range(y-2):
+        walls.append([])
+        for j in range(x):
+            walls[i].append('|' if j%2==0 else ' ')
+            if j==col and i==row:
+                walls[i][j]= start
+    for i in range(x):                     #top,bot list
+        top.append('-'); bot.append('-') 
+
+    while breakingPrison():
+        count=0
+        direction=randint(1,10) #up, down, left,  right
+        up,down, left,right = [1,2],[3,4],[5,6,7],[8,9,10]
+        if direction in up:
+            if row!=0:
+                row-=1; count+=1
+            else:
+                if count&lt;3:          #넘 빨리 끝나지 않게 대충 카운트 걸어줬어요.
+                    continue
+                top[col]=' '; break
+        elif direction in down:
+            if row != Y-3:
+                row+=1; count+=1
+            else:
+                if count&lt;3:
+                    continue
+                bot[col]=' '; break
+        elif direction in left:
+            if col!=1:
+                walls[row][col-1]=' '; col-=2; count+=1
+            else:
+                walls[row][0]=' '; break
+        elif direction in right:
+            if col!= X-2:
+                walls[row][col+1]=' '; col+=2; count+=1
+            else:
+                walls[row][X-1]=' '; break
+    for i in range(x):                             
+        if walls[0][i]=='|':           #최외곽 벽이 깨졌을때 맨 위벽 바로아래 수직벽이 없으면 코너로 변경
+            top[i]='+'
+        if walls[-1][i]=='|':          #최외곽 벽이 깨졌을떄 맨 아래벽 바로위 수직벽이 없으면 코너로 변경
+            bot[i]=('+')
+    show()
+prison(23,10)
+</code></pre>
+
+<p>음 문제 출력 예시 보고 코너만 +로 나오고 세로벽 위아래로는 세로벽만 나온다고 이해하고 풀었습니다. 일단 전부 세로벽으로 채운 뒤, 출발위치에서 상,하,좌,우 랜덤으로 탈옥을 시도하며 가장 바깥쪽 벽을 깨면 그 결과를 출력하게 짰습니다. 일명 PrisonBreak ㅋㅋ</p>
+<pre><code class="actionscript">+---+-+-+-+-+-+-+-+-+-+ 23 x 10 예시
+|   | | | | | | | | | |
+|   | | | | | | | | | |
+|#    | | | | | | | | |
+| | | |   | | |       |
+| | |   |           | |
+| | | | | |       | | |
+| | | | | | | | |      
+| | | | | | | | | | | |
++-+-+-+-+-+-+-+-+-+-+-+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/11/11 00:56</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noh Hun</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3275"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 2.7
+모든 칸이 뚫릴 때까지 길을 만드는 방법을 사용했습니다. 다만 염두에 두고 만든 미로의 형태는 가로, 세로가 모두 홀수일 때만 가능합니다. 예시 출력같은 형태는 좀 더 생각해 봐야 겠네요...</p>
+<pre><code class="python">import random
+
+x = input()
+y = input()
+assert x%2==1 and y%2==1
+
+uncovered = {(a,b) for a in xrange(1,x,2) for b in xrange(1,y,2)}
+unfinished = set()
+maze = [[' ']*x for i in xrange(y)]
+
+#Initialization
+for a in xrange(x):
+    for b in xrange(y):
+        if a%2==0:
+            if b%2==0:
+                maze[b][a] = '+'
+            else:
+                maze[b][a] = '|'
+        elif b%2==0:
+            maze[b][a] = '-'
+start = random.choice([(1,b) for b in xrange(1,y,2)])
+maze[start[1]][start[0]] = '#'
+uncovered-= {start}
+unfinished.add(start)
+
+#Digging
+def nextspot(c):
+    return {(c[0]+x[0], c[1]+x[1]) for x in zip([-2,0,0,2],[0,-2,2,0])}.intersection(uncovered)
+
+while uncovered:
+    c = random.sample(unfinished,1)[0]
+    d = nextspot(c)
+    if len(d) == 0:
+        unfinished-= {c}
+        continue
+    dig = random.sample(d,1)[0]
+    maze[(c[1]+dig[1])/2][(c[0]+dig[0])/2] = ' '
+    uncovered.remove(dig)
+    if len(nextspot(dig)) &gt; 0:
+        unfinished.add(dig)
+
+#Exit setting
+exit = random.choice([(x-1,b) for b in xrange(1,y,2)])
+maze[exit[1]][exit[0]] = ' '
+
+#'+' Removal
+def get(L, x, y):
+    if not 0&lt;=x&lt;len(L[0]) or not 0&lt;=y&lt;len(L):
+        return
+    return L[y][x]
+
+for a in xrange(0,x,2):
+    for b in xrange(0,y,2):
+        vertical = False
+        horizontal = False
+        if get(maze,a-1,b) == '-' or get(maze,a+1,b) == '-':
+            horizontal = True
+        if get(maze,a,b+1) == '|' or get(maze,a,b-1) == '|':
+            vertical = True
+        if vertical and not horizontal:
+            maze[b][a] = '|'
+        elif horizontal and not vertical:
+            maze[b][a] = '-'
+
+#Print
+for a in maze:
+    print ''.join(a)
+
+''' Example
+25
+11
++---+-------------+-----+
+|#  |             |     |
+| --+ --+ +---+ --+ | | |
+|       | |   |     | | |
+| --+ --+-+ | | ----+-+-+
+|   |   |   | |     |    
+| | | | | --+-+---+-+ --+
+| | | |           |     |
+| +-+-+-- --------+-- --+
+|     |                 |
++-----+-----------------+
+'''
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/03/24 16:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">최 재민</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4126"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>일단 미로의 구조를 짠 다음에 - (벽, 코너가 있는 좌표를 변수 a에 저장)
+&lt;무한루프 시작&gt;
+현재 위치를 읽어들이는 함수를 사용해서 #을 출력하고
+키보드 입력이 들어올 때까지 대기하고 있다가 
+누르면 
+(if 문을 사용해서 a와 비교 후 일치하면 continue)
+이동시키고 나서 전에건 지우는 방식으로 코딩하는건 어떨까요? 
+o v o</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/07/10 22:45</p>
+                                <p class="static-profile" style="margin:0;padding:0;">ro hwiseok</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4992"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>프림알고리즘을 이용한 미로 만들기</p>
+<p><img alt="결과 1" src="http://postfiles7.naver.net/20161018_54/wooyeonb_14767875640540SrLH_PNG/%B0%E1%B0%FA1.PNG?type=w580" />
+<img alt="결과 2" src="http://postfiles14.naver.net/20161018_13/wooyeonb_1476787567752wJWcJ_PNG/%B0%E1%B0%FA2.PNG?type=w580" />
+<img alt="결과 3" src="http://postfiles13.naver.net/20161018_156/wooyeonb_14767875719521Du2O_PNG/%B0%E1%B0%FA3.PNG?type=w580" /></p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;time.h&gt;
+
+void init();
+void display();
+int up(int x, int y);
+int down(int x, int y);
+int left(int x, int y);
+int right(int x, int y);
+void randomMaze(int x, int y);
+bool verdict(int x, int y);
+
+int w = 51;
+int h = 21;
+char** board;
+
+void main() {
+    int x =1, y =1;
+    init();
+    board[y][x] = 'x';
+    board[y][x+2] = 'o';
+    board[y+2][x] = 'o';
+    randomMaze(x, y);
+    display();
+}
+void randomMaze(int x, int y) {
+    int dir = rand()%4;
+    while(verdict(x, y)) {
+        switch(dir) {
+            case 0:
+                y = up(x, y);
+                randomMaze(x, y);
+                break;
+            case 1:
+                y = down(x, y);
+                randomMaze(x, y);
+                break;
+            case 2:
+                x = left(x, y);
+                randomMaze(x, y);
+                break;
+            case 3:
+                x = right(x, y);
+                randomMaze(x, y);
+                break;
+        }
+    }
+}
+
+void init() {
+    srand(time(NULL));
+    board = (char**) malloc (sizeof(char*) * h);
+    for(int i = 0 ; i&lt;h ; i++)
+        board[i] = (char*) malloc (sizeof(char) * w);
+
+    for(int i = 0 ; i&lt;h ; i++) {
+        for(int j = 0 ; j&lt;w ; j++) {
+            board[i][j] = ' ';
+            if(i==0) 
+                board[i][j] = '-';
+            if(i== h-1) 
+                board[i][j] = '-';
+            if(j==0) 
+                board[i][j] = '|';
+            if(j==w-1) 
+                board[i][j] = '|';
+
+            if( (i==0 &amp;&amp; j==0)  ||  (i==0 &amp;&amp; j==w-1)  ||  (i==h-1 &amp;&amp; j==0)  ||  (i==h-1 &amp;&amp; j==w-1)) 
+                board[i][j] = '+';
+        }
+    }
+
+    for(int i = 1 ; i&lt;h-1 ; i++) {
+        for(int j = 1 ; j&lt;w-1 ; j++) {
+            if(i%2 == 0 &amp;&amp; j%2 != 0)
+                board[i][j] = '-';
+            if(i%2 != 0 &amp;&amp; j%2 == 0)
+                board[i][j] = '|';
+            if(i%2 == 0 &amp;&amp; j%2 == 0)
+                board[i][j] = '+';
+        }
+    }
+}
+
+
+void display() {
+    for(int i = 1 ; i&lt;h-1 ; i++) {
+        for(int j = 1 ; j&lt;w-1 ; j++) {
+            if(board[i][j] == '+') {
+                if(board[i+1][j] == ' '  &amp;&amp; board[i-1][j] == ' '  &amp;&amp; board[i][j+1] == ' '  &amp;&amp; board[i][j-1] == ' ')
+                    board[i][j] = ' ';
+            }
+            if(board[i][j] == 'x') {
+                board[i][j] = ' ';
+            }
+            if(board[i][j] == 'o') {
+                board[i][j] = ' ';
+            }
+        }
+    }
+    for(int i = 0 ; i&lt;h ; i++) {
+        for(int j = 0 ; j&lt;w ; j++) {
+            if(i==1 &amp;&amp; j==1) {
+                printf(&quot;#&quot;);
+                continue;
+            }
+            if(i==h-2 &amp;&amp; j==w-1) {
+                printf(&quot; &quot;);
+                continue;
+            }
+            printf(&quot;%c&quot;, board[i][j]);
+        }
+        printf(&quot;\n&quot;);
+    }
+
+}
+int up(int x, int y) {
+    if((y-2) &lt; 0)
+        return y;
+    if(board[y-2][x] == 'x')
+        return y;
+    board[y-1][x] = ' ';
+    y-=2;
+    board[y][x] = 'x';
+
+    if(y-2 &gt; 0 &amp;&amp; board[y-2][x]== ' ')
+        board[y-2][x] = 'o';
+    if(x-2 &gt; 0 &amp;&amp; board[y][x-2]== ' ')
+        board[y][x-2] = 'o';
+    if(y+2 &lt; h &amp;&amp; board[y+2][x]== ' ')
+        board[y+2][x] = 'o';
+    if(x+2 &lt; w &amp;&amp; board[y][x+2]== ' ')
+        board[y][x+2] = 'o';
+
+    return y;
+}
+int down(int x, int y) {
+    if(h&lt;=(y+2))
+        return y;
+    if(board[y+2][x] == 'x')
+        return y;
+
+    board[y+1][x] = ' ';
+    y+=2;
+    board[y][x] = 'x';
+
+    if(y-2 &gt; 0 &amp;&amp; board[y-2][x]== ' ')
+        board[y-2][x] = 'o';
+    if(x-2 &gt; 0 &amp;&amp; board[y][x-2]== ' ')
+        board[y][x-2] = 'o';
+    if(y+2 &lt; h &amp;&amp; board[y+2][x]== ' ')
+        board[y+2][x] = 'o';
+    if(x+2 &lt; w &amp;&amp; board[y][x+2]== ' ')
+        board[y][x+2] = 'o';
+
+    return y;
+}
+int left(int x, int y) {
+    if((x-2) &lt; 0)
+        return x;
+    if(board[y][x-2] == 'x')
+        return x;
+
+    board[y][x-1] = ' ';
+    x-=2;
+    board[y][x] = 'x';
+
+    if(y-2 &gt; 0 &amp;&amp; board[y-2][x]== ' ')
+        board[y-2][x] = 'o';
+    if(x-2 &gt; 0 &amp;&amp; board[y][x-2]== ' ')
+        board[y][x-2] = 'o';
+    if(y+2 &lt; h &amp;&amp; board[y+2][x]== ' ')
+        board[y+2][x] = 'o';
+    if(x+2 &lt; w &amp;&amp; board[y][x+2]== ' ')
+        board[y][x+2] = 'o';
+
+    return x;
+}
+int right(int x, int y) {
+    if(w&lt;=(x+2))
+        return x;
+    if(board[y][x+2] == 'x')
+        return x;
+
+    board[y][x+1] = ' ';
+    x+=2;
+    board[y][x] = 'x';
+
+    if(y-2 &gt; 0 &amp;&amp; board[y-2][x]== ' ')
+        board[y-2][x] = 'o';
+    if(x-2 &gt; 0 &amp;&amp; board[y][x-2]== ' ')
+        board[y][x-2] = 'o';
+    if(y+2 &lt; h &amp;&amp; board[y+2][x]== ' ')
+        board[y+2][x] = 'o';
+    if(x+2 &lt; w &amp;&amp; board[y][x+2]== ' ')
+        board[y][x+2] = 'o';
+
+    return x;
+}
+
+bool verdict(int x, int y) { // false 면 끝~
+    if(y-2 &gt; 0 &amp;&amp; board[y-2][x]== 'o')
+        return true;
+    if(x-2 &gt; 0 &amp;&amp; board[y][x-2]== 'o')
+        return true;
+    if(y+2 &lt; h &amp;&amp; board[y+2][x]== 'o')
+        return true;
+    if(x+2 &lt; w &amp;&amp; board[y][x+2]== 'o')
+        return true;
+    return false;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/18 19:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">코딩초보</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6911"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from random import randint
+from time import time
+
+MOVEMAP = {&quot;UP&quot;:0, &quot;DOWN&quot;:1, &quot;LEFT&quot;:2, &quot;RIGHT&quot;:3, &quot;CURRENT&quot;:4}
+
+class maze:
+    BLOCK = '+'
+    ENTRANCE = '#'
+    def __init__(self, height = 5, width = 5):
+        self.__height, self.__width = height, width
+        self.init_array(height, width)
+        self.make_maze()
+
+    def init_array(self, height, width):
+        self.__array = self.make_array(height, width)
+        self.make_wall()
+
+    def make_wall(self):
+        for y in range(self.__height):
+            if y%2 == 0:
+                for x in range(self.__width):
+                    self.set_item(y, x, maze.BLOCK)
+            for x in range(self.__width):
+                if x%2 == 0:
+                    self.set_item(y, x, maze.BLOCK)
+
+    def make_array(self, height, width):
+        return [*([*(0 for x in range(width))] for y in range(height))]
+
+    def make_maze(self):
+        y_list, x_list = [*(y for y in range(1, self.__height, 2))], [*(x for x in range(1, self.__width, 2))]
+        ry, rx = randint(0, len(y_list)-1), randint(0, len(x_list)-1)
+        y, x = y_list[ry], x_list[rx]
+        self.set_item(y, x, maze.ENTRANCE)
+        P = maze_pointer(self, y, x)
+        P.make_maze()
+
+    def get_maze(self):
+        return self.__array
+
+    def get_item(self, y, x):
+        return self.get_maze()[y][x]
+
+    def set_item(self, y, x, new_value):
+        self.get_maze()[y][x] = new_value
+
+    def calc_char(self, y, x):
+        p = maze_pointer(self, y, x)
+        BLOCK = maze.BLOCK
+        up = down = left = right = current = 0
+        try:
+            up = self.get_item(*p.get_location_by_direction(0)) == BLOCK
+        except TypeError:
+            pass
+        try:
+            down = self.get_item(*p.get_location_by_direction(1)) == BLOCK
+        except TypeError:
+            pass
+        try:
+            left = self.get_item(*p.get_location_by_direction(2)) == BLOCK
+        except TypeError:
+            pass
+        try:
+            right = self.get_item(*p.get_location_by_direction(3)) == BLOCK
+        except TypeError:
+            pass
+        try:
+            current = self.get_item(*p.get_location_by_direction(4))
+        except TypeError:
+            pass
+        v = up or down
+        h = left or right
+        if current == maze.ENTRANCE:
+            return maze.ENTRANCE
+        elif current != BLOCK:
+            return ' '
+        elif v and h:
+            return '+'
+        elif v:
+            return '|'
+        elif h:
+            return '-'
+        else:
+            return ' '
+
+    def __repr__(self):
+        result = ''
+        for j in range(self.__height-1, -1, -1):
+            for i in range(self.__width):
+                result += self.calc_char(j, i) + ' '
+            result += '\n'
+        return result
+
+class maze_pointer:
+    def __init__(self, _maze:maze, y = 1, x = 1):
+        self.__height, self.__width = len(_maze.get_maze()), len(_maze.get_maze()[0])
+        self.__maze = _maze
+        self.__y, self.__x = y, x
+        self.__history = [(y, x)]
+        self.__all = self.make_all()
+        self.__escape = None
+
+    def make_all(self):
+        return [*(((j, i) for i in range(0, self.__width, 2)) for j in range(0, self.__height, 2))]
+
+    def get_location(self):
+        return self.__y, self.__x
+
+    def get_location_by_direction(self, direction:MOVEMAP, times = 1):
+        y, x = self.get_location()
+        if direction == MOVEMAP['UP']:
+            y += times
+        elif direction == MOVEMAP['DOWN']:
+            y -= times
+        elif direction == MOVEMAP['LEFT']:
+            x -= times
+        elif direction == MOVEMAP['RIGHT']:
+            x += times
+
+        if self.is_out_of_bound(y, x):
+            return 'ERROR'
+        else:
+            return y, x
+
+    def set_location(self, y, x):
+        if y%2 == 1 and x%2 == 1 and not self.is_out_of_bound(y, x):
+            self.__y = y
+            self.__x = x
+            self.__history.append((y, x))
+            return True
+        else:
+            return False
+
+    def move(self, direction:MOVEMAP):
+        y, x = self.get_location()
+        if direction == MOVEMAP['UP']:
+            y += 2
+        elif direction == MOVEMAP['DOWN']:
+            y -= 2
+        elif direction == MOVEMAP['LEFT']:
+            x -= 2
+        elif direction == MOVEMAP['RIGHT']:
+            x += 2
+        if self.set_location(y, x):
+            wall_location = ((self.get_history()[-2][0] + y)//2, (self.get_history()[-2][1] + x)//2)
+            self.__maze.set_item(*wall_location, 0)
+            return True
+        else:
+            return False
+
+    #constraint variable's value
+    def clamp(self, _min, _max, target):
+        return max(_min, min(_max, target))
+
+    #constraint location by height and width
+    def get_clamped_location(self, y, x):
+        return self.clamp(0, self.__height-1, y), self.clamp(0, self.__width-1, x)
+
+    #check location is out of array size
+    def is_out_of_bound(self, y, x):
+        if self.get_clamped_location(y, x) != (y, x):
+            return True
+        else:
+            return False
+
+    def __repr__(self):
+        return str(self.get_location())
+
+    def get_movable_directions(self):
+        result = []
+        for x in range(4):
+            temp = self.get_location_by_direction(x, 2)
+            if temp != 'ERROR' and temp not in self.__history:
+                result.append(x)
+        return result
+
+    def random_move(self):
+        while True:
+            directions = self.get_movable_directions()
+            if len(directions) == 0:
+                if self.__escape:
+                    return
+                y, x = self.get_location()
+                if y == 1:
+                    y -= 1
+                elif y == self.__height-2:
+                    y += 1
+                elif x == 1:
+                    x -= 1
+                elif x == self.__width-2:
+                    x += 1
+                if (y, x) != self.get_location():
+                    self.__maze.set_item(y, x, 0)
+                    self.__escape = (y, x)
+            else:
+                random_int = randint(0, len(directions)-1)
+                self.move(directions[random_int])
+#recursion can be dangerous, because of recursion limit
+#        directions = self.get_movable_directions()
+#        if len(directions) == 0:
+#            return
+#        else:
+#            random_int = randint(0, len(directions)-1)
+#            self.move(directions[random_int])
+#            self.random_move()
+
+    def get_left_blocks(self)-&gt;set:
+        return set(self.__all) - set(self.__history)
+
+    def is_movable_block(self, location:&quot;2DVector&quot;):
+        y, x = location
+        temp_pointer = maze_pointer(self.__maze, y, x)
+        temp_pointer.set_history(self.get_history())
+        if temp_pointer.get_movable_directions() != []:
+            return True
+        else:
+            return False
+
+    def make_maze(self):
+        while True:
+            self.random_move()
+            new_locations = [*filter(self.is_movable_block, self.get_history())]
+            if not len(new_locations) &gt; 0:
+                break
+            else:
+                random_int = randint(0, len(new_locations)-1)
+                self.set_location(*new_locations[random_int])
+
+    def get_history(self):
+        return self.__history
+
+    def set_history(self, history_to_copy, do_copy = True):
+        if do_copy:
+            self.__history = history_to_copy[:]
+        else:
+            self.__history = history_to_copy
+while __name__ == '__main__':
+    print('Both height and width must be odd numbers')
+    h = int(input('Height : '))
+    w = int(input('Width : '))
+    t = time()
+    M = maze(h, w)
+    print(M)
+    print(&quot;Elapsed time : &quot; + str(time() - t))
+</code></pre>
+
+<p>파이썬 3.6.0 64bit</p>
+<p>설명:</p>
+<p>maze 객체 -&gt; 넓이, 높이를 받아 배열을 생성한다. 또 배열의 값으로부터 출력할 문자열을 계산한다.</p>
+<p>maze_pointer 객체 -&gt; 미로 위를 움직이면서 길을 만든다. (Hunt-and-Kill 알고리즘 사용)</p>
+<p>21 정도에서는 금방 나오지만 100 넘어가면 한참 걸립니다. 최적화는 생략합니다. 객체지향 연습도 할 겸 캡슐화도 적극적으로 사용했습니다.</p>
+<p>출력(h 51, w 53)</p>
+<pre><code class="python">Both height and width must be odd numbers
+Height : 51
+Width : 53
++ - - - + - - - + - - - + - - - -   + - - - - - - - - - - - + - - - + - - - - - - - - - + - - - - - - - + 
+|       |     # |       |           |                       |       |                   |               | 
++ - -   |   - - +   |   |   - - - - +   + - - - - - -   |   + - +   |   + - +   |   |   |   - - + - - - + 
+|       |           |   |               |               |       |       |   |   |   |   |       |       | 
+|   + - + - + - - - +   + - - - - - + - +   - - + - - - + - +   + - - - +   |   |   |   + - +   |   |   | 
+|   |       |                       |           |           |               |   |   |       |   |   |   | 
+|   + - -   |   + - + - - - +   - - +   + - - - +   |   |   + - +   |   + - +   |   + - +   |   |   |   | 
+|           |   |   |       |           |       |   |   |       |   |   |       |       |   |   |   |   | 
++ - - - +   |   |   |   - - + - - - - - +   |   |   + - + - +   |   + - +   + - + - +   + - +   |   |   | 
+|       |   |       |                       |       |       |   |           |       |               |   | 
+|   |   |   |   + - + - + - - - - - -   + - + - - - +   |   |   + - + - -   |   + - +   + - + - - - +   | 
+|   |       |   |       |               |           |   |           |           |       |   |           | 
++ - +   + - + - +   |   |   + - - - -   + - - - +   + - + - -   |   |   - - + - +   - - +   |   |   + - + 
+|       |           |       |           |       |       |       |   |       |           |       |   |   | 
+|   - - +   + - +   + - + - + - + - - - +   |   + - -   |   - - +   + - +   |   - - +   + - - - +   |   | 
+|           |   |       |       |       |   |           |       |       |   |       |           |       | 
+|   - - + - +   + - +   + - +   |   |   |   + - - - + - + - +   + - +   |   |   |   + - - - +   + - -   | 
+|       |           |       |       |   |           |       |       |       |   |   |       |   |       | 
++ - -   + - - - +   + - +   |   + - +   + - + - -   |   - - + - +   + - - - + - +   |   |   |   |   + - + 
+|       |       |       |   |   |   |       |       |           |   |       |       |   |       |   |   | 
+|   + - +   |   |   - - +   |   |   + - +   |   |   + - - - +   |   + - -   |   - - + - + - -   |   |   | 
+|   |       |           |   |   |       |       |   |       |       |       |       |           |   |   | 
++ - +   - - + - - - +   |   |   + - +   |   - - + - +   - - + - - - +   + - + - - - +   + - - - +   |   | 
+|           |       |       |       |   |                   |       |   |               |       |   |   | 
+|   + - - - +   + - + - - - + - +   |   + - - - - - - - +   |   |   |   |   |   + - - - + - +   |   |   | 
+|   |           |               |   |                   |       |   |   |   |   |           |   |       | 
+|   |   + - - - +   + - + - -   |   |   + - - - + - - - + - +   |   |   |   + - +   + - -   |   |   |   | 
+|   |   |           |   |       |       |       |           |   |   |   |   |       |           |   |   | 
+|   |   |   + - -   |   |   - - + - - - +   - - +   |   |   |   |   |   + - +   + - +   |   - - +   |   | 
+|   |   |   |       |   |       |                   |   |       |   |           |       |           |   | 
+|   |   |   |   - - +   + - +   |   - - + - - - - - + - + - -   |   + - + - - - +   + - + - -   + - +   | 
+|       |   |           |   |           |           |           |   |   |       |   |           |       | 
+|   |   |   + - - - - - +   + - - - - - +   - - + - +   - - + - +   |   |   |   + - +   + - - - +   + - + 
+|   |   |                   |           |       |           |   |       |   |   |       |           |   | 
+|   |   + - - - - - - - -   + - -   |   |   |   |   - - +   |   + - + - +   + - +   |   + - - - +   |   | 
+|   |                       |       |   |   |   |       |   |       |       |       |           |       | 
++ - + - - - - - - - - - - - +   - - + - +   + - + - -   |   |   |   |   - - +   + - +   + - +   + - - - + 
+|                           |           |               |   |   |   |           |       |   |           | 
+|   - - + - +   + - - - -   |   - - +   + - - - - - +   |   + - +   + - - - - - + - + - +   + - -   |   | 
+|       |   |   |           |       |   |           |   |                           |       |       |   | 
++ - -   |   |   + - - - - - + - +   + - +   |   |   + - + - - - - - - - - - + - +   |   |   |   - - + - + 
+|       |                       |   |       |   |       |                   |   |       |   |           | 
+|   + - + - - - - - - - - - +   |   |   + - +   + - -   |   |   - - - - +   |   + - - - + - + - - - +   | 
+|   |                       |       |   |       |       |   |           |   |                       |   | 
+|   |   - - +   + - - - +   |   - - +   |   |   |   |   |   + - - - - - +   + - - - -   |   - - +   |   | 
+|   |       |   |       |   |       |   |   |   |   |   |               |   |           |       |       | 
+|   + - +   + - +   |   |   + - -   |   + - +   |   + - + - - - - - -   |   |   - - + - +   - - + - -   | 
+|       |       |   |       |       |       |   |   |                   |   |       |   |       |       | 
++ - -   + - -   |   + - - - + - - - + - -   |   |   |   - - - - +   - - +   + - -   |   + - -   |   - - + 
+|               |                           |   |               |       |           |           |       | 
++ - - - - - - - + - - - - - - - - - - - - - + - + - - - - - - - + - - - + - - - - - + - - - - - + - - - + 
+
+Elapsed time : 3.2903761863708496
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/04/17 12:29</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Flair Sizz</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1981"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">높이 101, 넓이 103에서 102초 걸립니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Flair Sizz,
+                                    2017/04/17 12:32
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9064"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <ol>
+<li>길을 만드는 함수 - make_way(s,e,maze)</li>
+<li>한개의 정답 길을 만든다 - make_way(0,0,X,Y,maze)</li>
+<li>여러개의 오답 길을 추가한다 - make_way(길위, 빈곳, maze)</li>
+</ol>
+<pre><code class="no-highlight">결과.
+------------------------------
+ 22  0  0  2  4  6  2  2  2  2
+ 21  0  0  8  6  1  4  0  1  8
+ 21  0  8  2  1  4  1  8  8  0
+ 17 17 20  8  2  2  1  4  8  8
+ 20 18 18  0  0  1 12  4  8 10
+ 17 17 17 28  1  8  0  1  1  8
+ 20 18 18 19  8 17 17 17 17 20
+ 20 17 17 17 20 24 20 18 20 18
+ 20 24 18  0 22 24 20 24 19  0
+ 17 17 24  0 17 24 17 17 17  1
+------------------------------
++--+--+--+--+--+--+--+--+--+--+
+ * |  |     |                 |
++  +--+--+  +  +  +--+--+--+  +
+|*    |  |     |     |  |     |
++  +--+  +--+  +--+  +  +  +--+
+|*    |     |     |     |  |  |
++  +--+--+  +--+  +--+--+  +  +
+|*  *  * |        |     |  |  |
++--+--+  +--+--+--+  +  +  +  +
+|*  *  * |  |  |     |  |     |
++  +--+--+  +--+  +  +  +--+  +
+|*  *  *  * |     |  |        |
++--+--+--+  +  +--+--+--+--+--+
+|*  *  *  *    |*  *  *  *  * |
++  +--+--+--+--+  +--+--+--+  +
+|* |*  *  *  * |* |*  * |*  * |
++  +  +--+--+  +  +  +  +  +--+
+|* |*  * |   * |* |* |*  *    |
++  +--+  +--+  +  +  +--+--+--+
+|*  *  * |  |*  * |*  *  *     
++--+--+--+--+--+--+--+--+--+--+
+
+</code></pre>
+
+<pre><code class="python">from random import randint
+
+R, L, D, U, SOLVE = 1, 2, 4, 8, 16
+RLDU = [R, L, D, U]
+MOVE_X = [0, 0, 1, -1]
+MOVE_Y = [1, -1, 0, 0]
+
+
+# 랜덤한 길을 만드는 함수
+# 길에는 방향이 저장됨
+def make_way(x1, y1, x2, y2, org_maze, solve=0):
+    x_size = len(org_maze)
+    y_size = len(org_maze[0])
+    cnt = 0
+
+    # 적당히 반복
+    while cnt &lt; x_size * y_size:
+        cnt += 1
+        x, y = x1, y1
+        maze = [list(row) for row in org_maze]
+        # 시도한 방향
+        visited = []
+        while True:
+            direction = randint(0, 3)
+            if direction in visited:
+                continue
+            else:
+                visited += [direction]
+
+            next_x = x + MOVE_X[direction]
+            next_y = y + MOVE_Y[direction]
+
+
+
+
+            # 새로운 길이면,
+            if -1 &lt; next_x &lt; x_size and -1 &lt; next_y &lt; y_size and not is_way_xy(next_x, next_y, maze):
+                # 좌표에 위치 저장
+                maze[x][y] |= RLDU[direction]
+                if solve == SOLVE:
+                    maze[x][y] |= SOLVE
+                x = next_x
+                y = next_y
+                visited = []
+                if next_x == x2 and next_y == y2:
+                    return maze
+
+            # 네방향 모두 길이 없다면, 처음부터 다시
+            if len(visited) == 4:
+                break
+
+# 랜덤한 좌표
+# is_way = True - 길 위
+# is_way = False - 빈 곳
+def random_xy(maze, is_way):
+    x_size = len(maze)
+    y_size = len(maze[0])
+    while True:
+        x = randint(0, x_size - 1)
+        y = randint(0, y_size - 1)
+        if (x == 0 and y == 0) or (x == x_size - 1 and y == y_size - 1):
+            continue
+        if is_way and maze[x][y] != 0:
+            return x, y
+        if not is_way and not is_way_xy(x, y, maze):
+            return x, y
+
+# 길인가? - 상하좌우 뚫린곳이 있나?
+def is_way_xy(x, y, maze):
+    if maze[x][y] != 0:
+        return True
+    else:
+        # 왼쪽이 뚫렸으면
+        if y &gt; 0 and maze[x][y - 1] &amp; R:
+            return True
+        # 오른쪽이
+        if y &lt; y_size - 1 and maze[x][y + 1] &amp; L:
+            return True
+        # 위쪽이
+        if x &gt; 0 and maze[x - 1][y] &amp; D:
+            return True
+        # 아래쪽이
+        if x &lt; x_size - 1 and maze[x + 1][y] &amp; U:
+            return True
+    return False
+
+
+# 미로 설정
+x_size = 10
+y_size = 10
+wrong_way = 10
+maze = [[0] * y_size for i in range(x_size)]
+
+# 정답 1개
+maze = make_way(0, 0, x_size - 1, y_size - 1, maze, SOLVE)
+
+# 오답 여러개
+for i in range(wrong_way):
+    while True:
+        # 길 위
+        x1, y1 = random_xy(maze, True)
+        # 빈 곳
+        x2, y2 = random_xy(maze, False)
+        next_maze = make_way(x1, y1, x2, y2, maze)
+        if next_maze:
+            break
+    maze = next_maze
+
+# print_maze(maze)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/19 10:31</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박범수</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9073"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>위의 이종성님 코드를 파이썬으로 컨버전했습니다.</p>
+<pre><code class="python">from random import randint
+
+NONE, RIGHT, LEFT, DOWN, UP = 0, 1, 2, 4, 8
+DIRECTION = [1, 2, 4, 8]
+DIRECTION_BACK = [2, 1, 8, 4]  # 역방향
+NEXT_X = [0, 0, 1, -1]
+NEXT_Y = [1, -1, 0, 0]
+
+
+# 한 칸 전진
+def go_one_step(maze, x, y, x_size, y_size):
+    while True:
+        # 모두 막혔으면 중지
+        if x == 0 or maze[x - 1][y] != NONE:
+            if x == x_size - 1 or maze[x + 1][y] != NONE:
+                if y == 0 or maze[x][y - 1] != NONE:
+                    if y == y_size - 1 or maze[x][y + 1] != NONE:
+                        return
+
+        d = randint(0, 3)
+        next_x = x + NEXT_X[d]
+        next_y = y + NEXT_Y[d]
+        # 다음이 비었으면,
+        if -1 &lt; next_x &lt; x_size and -1 &lt; next_y &lt; y_size and maze[next_x][next_y] == NONE:
+            # 방향 저장
+            maze[x][y] |= DIRECTION[d]
+            # 한 칸 전진
+            go_one_step(maze, next_x, next_y, x_size, y_size)
+            # 역방향 저장
+            maze[next_x][next_y] |= DIRECTION_BACK[d]
+
+if __name__ == &quot;__main__&quot;:
+    x_size = 10
+    y_size = 10
+    maze = [[NONE for j in range(y_size)] for i in range(x_size)]
+    go_one_step(maze, 0, 0, x_size, y_size)
+    # 미로 출력 - 간단버전
+    print('\n'.join([''.join(['{:3}'.format(j) for j in i]) for i in maze]))
+
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/20 16:24</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박범수</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9525"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using System.Diagnostics;
+
+namespace WindowsFormsApplication2
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+        private string[,] mStringArray;
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int height = int.Parse(mtbHeight.Text);
+            int width = int.Parse(mtbWidth.Text);
+            mStringArray = makeArray(height, width);
+            Point pointGate = new Point(0, 0);
+            Point pointStart = new Point(0, 0);
+            decideOutGate(height, width, ref pointGate, ref pointStart);
+            mStringArray[pointGate.Y, pointGate.X] = &quot; &quot;;
+            //mStringArray[pointStart.Y, pointStart.X] = &quot;*&quot;;
+            makeHaze(height, width, pointStart);
+            tbOut.Text = drawGrid(mStringArray);
+        }
+        private void makeHaze(int height, int width, Point pointStart)
+        {
+            List&lt;Point&gt; passedPoints = new List&lt;Point&gt;();
+            Point point = pointStart;
+            passedPoints.Add(point);
+
+            moveToWall(height, width, point, passedPoints);
+
+            Point lastPoint = passedPoints[passedPoints.Count - 1];
+            mStringArray[lastPoint.Y, lastPoint.X] = &quot;*&quot;;
+
+            for (int i = passedPoints.Count - 1; i &gt; 0; i--)
+            {
+                point = passedPoints[i];
+                moveToWall(height, width, point, passedPoints);
+            }
+            for (int i = passedPoints.Count - 1; i &gt; 0; i--)
+            {
+                point = passedPoints[i];
+                moveToWall(height, width, point, passedPoints);
+            }
+        }
+        private void moveToWall(int height, int width, Point point, List&lt;Point&gt; passedPoints)
+        {
+            Random rnd = new Random();
+
+            List&lt;Point&gt; possiblePoints = getPossiblePoints(height, width, point, passedPoints);
+            while (possiblePoints.Count &gt; 0)
+            {
+                int direction = rnd.Next(0, possiblePoints.Count);
+
+                Point newPoint = possiblePoints[direction];
+                passedPoints.Add(newPoint);
+
+                eraseBetween(point, newPoint, &quot; &quot;);
+                point = newPoint;
+                possiblePoints = getPossiblePoints(height, width, point, passedPoints);
+            }
+        }
+        private void eraseBetween(Point point, Point newPoint, string blank)
+        {
+            if (point.X == newPoint.X)
+            {
+                mStringArray[(point.Y + newPoint.Y) / 2, point.X] = blank;
+            }
+            else if (point.Y == newPoint.Y)
+            {
+                mStringArray[point.Y, (point.X + newPoint.X) / 2] = blank;
+            }
+        }
+        private List&lt;Point&gt; getPossiblePoints(int height, int width, Point currentPoint, List&lt;Point&gt; passedPoints)
+        {
+            List&lt;Point&gt; possiblePoints = new List&lt;Point&gt;();
+
+            // n
+            Point newPoint = new Point();
+            newPoint.X = currentPoint.X;
+            newPoint.Y = currentPoint.Y - 2;
+            if (newPoint.Y &gt; 0 &amp;&amp; !passedPoints.Contains(newPoint))
+            {
+                possiblePoints.Add(newPoint);
+            }
+            // e
+            newPoint.X = currentPoint.X + 2;
+            newPoint.Y = currentPoint.Y;
+            if (newPoint.X &lt; width * 2 &amp;&amp; !passedPoints.Contains(newPoint))
+            {
+                possiblePoints.Add(newPoint);
+            }
+            // s
+            newPoint.X = currentPoint.X;
+            newPoint.Y = currentPoint.Y + 2;
+            if (newPoint.Y &lt; height * 2 &amp;&amp; !passedPoints.Contains(newPoint))
+            {
+                possiblePoints.Add(newPoint);
+            }
+            // e
+            newPoint.X = currentPoint.X - 2;
+            newPoint.Y = currentPoint.Y;
+            if (newPoint.X &gt; 0 &amp;&amp; !passedPoints.Contains(newPoint))
+            {
+                possiblePoints.Add(newPoint);
+            }
+
+            return possiblePoints;
+        }
+        private void decideOutGate(int height, int width, ref Point pointGate, ref Point pointStart)
+        {
+            Random rnd = new Random();
+            int holeDirection = rnd.Next(0, 4); // 0 n 1 e 2 s 3 w
+            int target = holeDirection == 0 || holeDirection == 2 ? width : height;
+            int outGate = rnd.Next(1, target + 1);
+
+            switch (holeDirection)
+            {
+                case 0:
+                    pointGate.X = outGate * 2 - 1;
+                    pointGate.Y = 0;
+                    pointStart.X = pointGate.X;
+                    pointStart.Y = pointGate.Y + 1;
+                    break;
+                case 1:
+                    pointGate.X = width * 2;
+                    pointGate.Y = outGate * 2 - 1;
+                    pointStart.X = pointGate.X - 1;
+                    pointStart.Y = pointGate.Y;
+                    break;
+                case 2:
+                    pointGate.X = outGate * 2 - 1;
+                    pointGate.Y = height * 2;
+                    pointStart.X = pointGate.X;
+                    pointStart.Y = pointGate.Y - 1;
+                    break;
+                case 3:
+                    pointGate.X = 0;
+                    pointGate.Y = outGate * 2 - 1;
+                    pointStart.X = pointGate.X + 1;
+                    pointStart.Y = pointGate.Y;
+                    break;
+            }
+        }
+        private string[,] makeArray(int height, int width)
+        {
+            string[,] array = new string[height * 2 + 1, width * 2 + 1];
+
+            for (int i = 0; i &lt; array.GetLength(0); i++)
+            {
+                for (int j = 0; j &lt; array.GetLength(1); j++)
+                {
+                    string chr = &quot;&quot;;
+                    if (i % 2 == 0)
+                    {
+                        chr = j % 2 == 0 ? &quot;+&quot; : &quot;-&quot;;
+                    }
+                    else
+                    {
+                        chr = j % 2 == 0 ? &quot;|&quot; : &quot; &quot;;
+                    }
+                    array[i, j] = chr;
+                }
+            }
+
+            return array;
+        }
+        private string drawGrid(string[,] array)
+        {
+            string grid = &quot;&quot;;
+            for (int i = 0; i &lt; array.GetLength(0); i++)
+            {
+                if (i &gt; 0)
+                {
+                    grid += Environment.NewLine;
+                }
+                for (int j = 0; j &lt; array.GetLength(1); j++)
+                {
+                    grid += array[i, j];
+                }
+            }
+
+            return grid;
+        }
+    }
+}
+
+</code></pre>
+
+<pre><code class="html">결과물
++-+-+-+-+-+-+-+-+-+-+
+|   |   |           |
++ + + +-+ +-+-+ +-+-+
+| |   |       |     |
++ +-+-+ +-+-+-+-+-+ +
+| |   |   |   |   | |
++ + +-+-+ + + + + + +
+| |     | | |   | | |
++ + +-+ + + +-+-+-+ +
+| |   | | |   |     |
++ + +-+ + +-+ + +-+-+
+|   |   |   | |     |
++ +-+ +-+-+ + +-+-+ +
+| | |     |     | |  
++ + +-+-+ +-+-+ + +-+
+|   |   |     |   | |
++-+ +-+ +-+-+ +-+ + +
+|   |   |   |   |   |
++ +-+ + + + +-+ +-+ +
+|     |   |  *|     |
++-+-+-+-+-+-+-+-+-+-+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/12/05 15:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">임정구</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11890"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Swift입니다.</p>
+<p>임의의 한점 A에서 또 다른 임의의 한점 B까지 항상 연결이 되어 있는 Maze를 만들어 냅니다.</p>
+<pre><code class="no-highlight">import Foundation
+
+func printMaze(_ maze: [[Int]]) {
+    let height = maze.count
+    let width = maze[0].count
+
+    for i in 0..&lt;height {
+        print( maze[i].reduce(&quot;&quot;, {$0 + ($1 &amp; 1 == 0 ? &quot;+-&quot; : &quot;+ &quot;)}) + &quot;+&quot; )
+        if i == 0 {
+            var firstLine = maze[i].reduce(&quot;&quot;, {$0 + ($1 &amp; 8 == 0 ? &quot;| &quot; : &quot;  &quot;)}) + &quot;|&quot; 
+            firstLine.removeFirst()
+            firstLine.removeFirst()
+            print(&quot;  \(firstLine)&quot;)
+        } else if i == height - 1 {
+            var lastLine = maze[i].reduce(&quot;&quot;, {$0 + ($1 &amp; 8 == 0 ? &quot;| &quot; : &quot;  &quot;)}) + &quot;|&quot; 
+            lastLine.removeLast()
+            lastLine.removeLast()
+            print(&quot;\(lastLine)#|&quot;)
+        } else {
+            print( maze[i].reduce(&quot;&quot;, {$0 + ($1 &amp; 8 == 0 ? &quot;| &quot; : &quot;  &quot;)}) + &quot;|&quot; )
+        }
+    }
+
+    for _ in 0..&lt;width {
+        print(&quot;+-&quot;, terminator: &quot;&quot;)
+    }
+    print(&quot;+&quot;)
+}
+
+func navigate(_ prevMap:[[Int]], _ x: Int, _ y: Int) -&gt; [[Int]] {
+    var maze = prevMap
+    let height = maze.count
+    let width = maze[0].count
+    var route = [(Int, Int, Int, Int)]()
+
+    if x &gt; 0 &amp;&amp; maze[y][x - 1] == 0 {
+        route.append((x - 1, y, 8, 2))
+    }
+    if x &lt; width - 1 &amp;&amp; maze[y][x + 1] == 0 {
+        route.append((x + 1, y, 2, 8))
+    }
+    if y &gt; 0 &amp;&amp; maze[y - 1][x] == 0 {
+        route.append((x, y - 1, 1, 4))
+    }
+    if y &lt; height - 1 &amp;&amp; maze[y + 1][x] == 0 {
+        route.append((x, y + 1, 4, 1))
+    }
+
+    while route.count &gt; 0 {
+        let number = Int(arc4random_uniform(UInt32(route.count)))
+        let (nx, ny, d1, d2) = route[number]
+
+        if maze[ny][nx] == 0 {
+            maze[y][x] |= d1
+            maze[ny][nx] |= d2
+            maze = navigate(maze, nx, ny)
+        }
+
+        route.remove(at: number)
+    }
+    return maze
+}
+
+func createMaze(width: Int, height: Int) -&gt; [[Int]] {
+    let maze = Array(repeating: Array(repeating: 0, count: width), count: height)
+    return navigate(maze, 0, 0)
+}
+
+printMaze( createMaze(width:10, height: 10) )
+
+</code></pre>
+
+<p>결과는...</p>
+<pre><code class="no-highlight">+-+-+-+-+-+-+-+-+-+-+
+        |       |   |
++-+-+-+ + +-+-+ + +-+
+|     |   |   | |   |
++ +-+ +-+-+ + + +-+ +
+| |       | | |     |
++ + +-+-+-+ + +-+-+ +
+| |   |     |       |
++ +-+ + +-+-+-+-+-+-+
+|   | |   |   |     |
++-+ + +-+ + + + +-+ +
+|   |     | |   |   |
++ +-+-+-+-+-+-+-+ + +
+| |               | |
++ + +-+-+ +-+-+-+-+ +
+| |     | |   |     |
++ +-+-+-+ + + + +-+-+
+| |   |   | | |   | |
++ + + + +-+ + +-+ + +
+|   |   |   |      #|
++-+-+-+-+-+-+-+-+-+-+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/04/27 04:38</p>
+                                <p class="static-profile" style="margin:0;padding:0;">졸린하마</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13350"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>0 짜리 매트릭스 생성<br />
+임의의 출발점으로 부터 외벽을 향해 경로 뚫기<br />
+가지치기<br />
+외벽 장식  </p>
+<p>위 순서대로 생각없이 짰다가 코드가 무식하게 길어졌다.</p>
+<p>코드는 임의의 내부에서부터 랜덤하게 탈출 경로를 만들었는데,<br />
+임의의 탈출점으로부터 내부로 경로를 생성하면 탈출 경로의 길이를 아주 세밀하게 조절할 수 있을 거 같다.  </p>
+<pre><code class="python">from random import *
+
+# 임의의 점 만들기
+def cur_loc(i,j):
+    return (randint(1,i-2),randint(1,j-2))
+
+def maze_make(h,w):
+    count = 1
+    s = cur_loc(h,w)
+    tmp = list(s)
+    maze = [[0 for i in range(w)] for j in range(h)]
+    maze[s[0]][s[1]] = 1
+
+    # 탈출 경로 그리기
+    while not(tmp[0] == 0 or tmp[0] == h-1 or tmp[1] == 0 or tmp[1] == w-1):
+        while 1:
+            dr = randint(0,3)
+            if maze[tmp[0]-2*(dr//2)-(dr%2)+2*(dr//2)*(dr%2)+1][tmp[1]+(dr%2)-2*(dr//2)*(dr%2)] == 0: break
+        if rod_D(1,maze,tmp[0]-2*(dr//2)-(dr%2)+2*(dr//2)*(dr%2)+1,tmp[1]+(dr%2)-2*(dr//2)*(dr%2)):
+            tmp[0] += -2*(dr//2)-(dr%2)+2*(dr//2)*(dr%2)+1
+            tmp[1] += (dr%2)-2*(dr//2)*(dr%2)
+            maze[tmp[0]][tmp[1]] = 1
+        # 탈출 경로를 못 찾고 갇혔을 때 시작점 재설정
+        if count%(h*w) == 0:
+            s = cur_loc(h,w)
+            tmp = list(s)
+            maze = [[0 for i in range(w)] for j in range(h)]
+            maze[s[0]][s[1]] = 1
+            count = 1
+        # 탈출 경로가 너무 짧은 경우 다시 만듦
+        if tmp[0] == 0 or tmp[0] == h-1 or tmp[1] == 0 or tmp[1] == w-1:
+            if sum(sum(i) for i in maze) &lt; 2*h*w/(h+w):
+                s = cur_loc(h,w)
+                tmp = list(s)
+                maze = [[0 for i in range(w)] for j in range(h)]
+                maze[s[0]][s[1]] = 1
+                count = 1
+            else: break
+        count += 1
+
+    # 가짜 경로 만들기
+    for k in range(100):
+        if sum(len([j for j in i if j != 0]) for i in maze) &gt; (h-1)*(w-1)*0.4: break
+        # 가짜 경로 시작점 설정
+        while 1:
+            tmp = list(cur_loc(h,w))
+            if set(maze[tmp[0]-1][tmp[1]-1:tmp[1]+2:2]) != {0} or set(maze[tmp[0]+1][tmp[1]-1:tmp[1]+2:2]) != {0}: continue
+            if maze[tmp[0]][tmp[1]] == 0: break
+        count = 1
+        esc = True
+        maze[tmp[0]][tmp[1]] = 2
+        while esc:
+            while 1:
+                dr = randint(0,3)
+                if tmp[0]-2*(dr//2)-(dr%2)+2*(dr//2)*(dr%2)+1 in [0,h-1] or tmp[1]+(dr%2)-2*(dr//2)*(dr%2) in [0,w-1]: continue
+                elif maze[tmp[0]-2*(dr//2)-(dr%2)+2*(dr//2)*(dr%2)+1][tmp[1]+(dr%2)-2*(dr//2)*(dr%2)] == 0: break
+            if rod_D(2,maze,tmp[0]-2*(dr//2)-(dr%2)+2*(dr//2)*(dr%2)+1,tmp[1]+(dr%2)-2*(dr//2)*(dr%2)):
+                tmp[0] += -2*(dr//2)-(dr%2)+2*(dr//2)*(dr%2)+1
+                tmp[1] += (dr%2)-2*(dr//2)*(dr%2)
+                maze[tmp[0]][tmp[1]] = 2
+            for i in range(4):
+                if maze[tmp[0]-2*(i//2)-(i%2)+2*(i//2)*(i%2)+1][tmp[1]+(i%2)-2*(i//2)*(i%2)] == 1:
+                    esc = False
+            if count &gt;= h*w*4: break
+            count += 1
+        if k%5 == 0: maze = [[1 if j == 2 else j for j in i] for i in maze]
+
+    maze = [[1 if j == 2 else j for j in i] for i in maze]
+    maze = wall_decoration(maze)
+
+    maze[s[0]][s[1]] = '#'
+    return maze
+
+# 길을 외길로 만듦
+def rod_D(flag,mat,x,y):
+    if x == 0 or x == len(mat)-1 or y == 0 or y == len(mat[0])-1: return True
+
+    tmp = [mat[x-1][y-1:y+2],mat[x][y-1:y+2],mat[x+1][y-1:y+2]]
+    tmp[1][1] = 0
+
+    if (tmp[0][0] in [1,2] and tmp[0][1] == 0 and tmp[1][0] == 0) or \
+(tmp[0][2] in [1,2] and tmp[0][1] == 0 and tmp[1][2] == 0) or \
+(tmp[2][0] in [1,2] and tmp[2][1] == 0 and tmp[1][0] == 0) or \
+(tmp[2][2] in [1,2] and tmp[2][1] == 0 and tmp[1][2] == 0):
+        return False
+
+    if sum([len([j for j in i if j == flag]) for i in tmp]) &lt;= 2: return True
+    else: return False
+
+
+def wall_decoration(maze):
+    board = maze
+    w,h = len(board),len(board[0])
+    for i in range(1,w-1):
+        for j in range(1,h-1):
+            if board[i][j] == 0:
+                if board[i][j-1:j+2:2] == [1,1] and board[i-1][j] == 1 and board[i+1][j] == 1: board[i][j] = '+'
+                elif board[i][j-1:j+2:2] == [1,1] and (board[i-1][j] == 1 or board[i+1][j] == 1): board[i][j] = '|'
+                elif (board[i-1][j] == 1 and board[i+1][j] == 1) and (board[i][j-1] == 1 or board[i][j+1] == 1): board[i][j] = '-'
+                elif board[i][j-1] == 1 or board[i][j+1] == 1: board[i][j] = '|'
+                elif board[i-1][j] == 1 or board[i+1][j] == 1: board[i][j] = '-'
+                elif not(1 in board[i-1][j-1:j+2]+board[i][j-1:j+2:2]+board[i+1][j-1:j+2]): board[i][j] = 1
+
+    for i in range(w):
+        if board[i][0] != 1:
+            board[i][0] = '|'
+            if board[i][1] != 1: board[i][0] = '+'
+        if board[i][h-1] != 1:
+            board[i][h-1] = '|'
+            if board[i][h-2] != 1: board[i][h-1] = '+'
+    for j in range(h):
+        if board[0][j] != 1:
+            board[0][j] = '-'
+            if board[1][j] != 1: board[0][j] = '+'
+        if board[w-1][j] != 1:
+            board[w-1][j] = '-'
+            if board[w-2][j] != 1: board[w-1][j] = '+'
+
+    for i in range(1,w-1):
+        for j in range(1,h-1):
+            if board[i][j] != 1:
+                if not 1 in [board[i][j-1],board[i-1][j]] or \
+                not 1 in [board[i-1][j],board[i][j+1]] or \
+                not 1 in [board[i][j+1],board[i+1][j]] or \
+                not 1 in [board[i+1][j],board[i][j-1]]: board[i][j] = '+'
+
+    return board
+
+h,w = [int(i) for i in input('4 4 이상을 입력: ').split()]
+a = maze_make(h,w)
+
+# 미로 출력
+for i in range(h):
+    for j in range(w):
+        print(str(a[i][j]).replace('1','  ').replace('+','+ ').replace('-','- ').replace('|','| ').replace('#','# '),end='')
+    print()
+
+print('\n'*3)
+
+for i in range(h):
+    for j in range(w):
+        print(str(a[i][j]).replace('1','  ').replace('+','X ').replace('-','X ').replace('|','X ').replace('#','. '),end='')
+    print()
+
+</code></pre>
+
+<pre><code>4 4 이상을 입력: 40 50
++ - - + + - - - - - + + + + + - - - - + - - - - - - - + - - - - - + - + - - - - + + - - - + + + + +
+|     + +           + + + + +         |               |           |   |         + +       + + + + +
++ +         + + +       + +     + +   + + +   + - +   |   + - -   + + + - - -   + +   |           |
++ + + + + - + + +   + - +     + + +   + + +   |   |       |       + +           + +   + - + + + + +
++ + + + +       |   |       + + + +       |       + - + + +   + - +     + - - + +         + + + + +
++ +         + + +       + + +   |     |   + - + - +   + +     |   |   + +     + +   + +         + +
++ +   - - - + + + + + + + + + - +   + +   |   |   |         + + - +   + + -   |     + + + + +     |
++ +             + + + + +       + + + + + + + +   + - +   + + +       + +         + +   + + + -   |
++ + - - - + +   |           |     + + + +   + +   |   |   + + +   |   |     + - - + + + +         |
+|         + +   |   + +   - + +     + +     + +       |     + +   |       + +         + +   - +   |
++ +   - + + +       + +     + + +     + + + + +   + + + -   |     + - - - + + - + +   + +     |   |
++ +     + + + + - - + + -       + +     + + + +   + + +         + +         |   + +   + + +       |
++ + +   |     |             |     + +             + +     |   - + + +   |       |         + + +   |
+|   |   + +       + +   + + + + - + + - - + + +         + +         |   + - + + +   + - - + + +   |
++ - +   + + + -   + +   + + + +           + + + - + + + + + + + - + +       + + +   |         |   |
+|   + - + + +     + + + +         + - +       |   + + + + + + +   + +   |     + +       + +       |
++ + +       + +   |   + + + + -   |   + + +   + - +         + +   |     + +     + + + - + + + - + +
++ +     |   + +   + + + + + +     + - + + +   | # |   + +         + - - + + -   + + +   |   |   + +
++ +   + +   + +   + +       |   - +     + +       |   + + - - -   |       |     |   + + + + +   + +
+|     |     + + + +     + + +         + + + - - + +   + +             + - +   + +     |   + +     |
++ - - +   - + + +     + + + + -   + + + +       + + + +     + +   - - +       + + -       + +   - +
+|               |   + +   + +     + +   |   |     + +     + + +       + + -           + + + +     |
+|   + + + - +       + +   + +   - + +   |   + +         + +   + + -   + +     + - + + + +   + +   |
+|   + + +   + + +   |               |       + + + + - - + +   + +     |     + +   + +   |   + +   |
+|   + +     + + +   |   + +   + +       + - + + + +           + +   - +   - + +     |       |     |
+|   + +   + +       + - + +   + + + -   |       + +   - - + + + +     |     + + +   + - - + +   - +
+|   + +   + +   + - +   + + + + + +     |                 + +   + +   + +       |         + +     |
+|     |   + +   |   + + + + +   |     + + - - + + + + +     + + + +   + +   + + + -   + + + + -   |
++ +   |   + +   + + + +     + + +   + +       + + + + + -   + + + +   |     + +       + + +       |
++ +       + +     |       + + + + + + +   - - + +   |       + +       + - + +     + + + +     + - +
++ + - - - + + -   |   |   |     + + +         + +   |   - - + + + +       + +   + + +       - +   |
+|         |           |   |   + +       + +         |           + + + -         |   |   |     + - +
+|   + +   + - + + - - + + +   |     + - + +   + +   + - + +   - + + +     + +   + - + + + -   |   |
+|   + +       + +       + +   |   + +   |     + + - +   + +             + + +       + +       + + +
++ + +     |         |   |         + + - +   + + +   + + + + - + +   - + +   + + +   + +   - - + + +
++ +     + + +   - + +       - + - +         + + +   + +   |   + +     + +   + + + - + +           |
++ +   + +   |     + + + +     |       + - - +         + + + - + + -   + +     |       + - +   + - +
++ +   + + - + +       + + -   |   |   |         + +     + +           + + +       |       |   |   |
++ +           + + +           + + + + +   + + + + + +         + + +   |   + + + + + + +           |
++ + - - - - - + + + - - - - - + + + + + - + + + + + + - - - - + + +   + - + + + + + + + - - - - - +
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/05 01:41</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14384"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>랜덤하게 찍어보고 탈출경로가 존재할 때까지 다시합니다.  </p>
+<p>완전 랜덤으로 생성하면 미로의 기본 퀄리티(?)가 별로 안 좋네요.</p>
+<p>퀄리티를 올려보려고 조건을 걸어서 조절하게 해 봤는데, 그럴수록 시간을 더 잡아먹으니 고육지책밖에 안 되는 거 같습니다.</p>
+<pre><code class="python">
+from random import choice, random, shuffle
+
+
+class RandomMaze:
+    X, Y = 0, 0 # 크기
+    map = [] # 지도(2차원배열)
+    (start, exit) = ((0, 0), (0, 0)) # 출발점, 출구
+
+    # ratio = (벽 개수)/(울타리를 뺀 전체 타일 개수), min_path = 탈출 경로의 최소 길이
+    def __init__(self, X, Y, ratio = 0.4, min_path = 0):
+        self.X, self.Y = X, Y
+        self.map = [[' ' for y in range(Y)] for x in range(X)]
+        if min_path == 0:
+            min_path = self.X + self.Y
+
+        fence = self.set_fence()
+        while True:
+            self.start = self.rand_loc()
+            self.set(self.start, '#')
+            self.exit = choice(fence)
+            self.set(self.exit, ' ')
+
+            self.build_wall(ratio)
+            if self.path_len() &gt;= min_path:
+                break
+            self.clear()
+
+    # 길찾기
+    def path_len(self):
+        Q = [(self.start[0], self.start[1], 0)]
+        V = [self.start]
+        while Q:
+            (x, y, plen) = Q.pop(0)
+            for x2, y2 in [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)]:
+                if (x2, y2) not in V and \
+                        0 &lt;= x2 &lt; self.X and 0 &lt;= y2 &lt; self.Y and \
+                        self.get((x2, y2)) == ' ':
+                    if (x2, y2) == self.exit:
+                        return plen + 1
+
+                    Q.append((x2, y2, plen + 1))
+                    V.append((x2, y2))
+
+        return 0 # 경로 없음
+
+    # 랜덤하게 벽 세우기
+    def build_wall(self, ratio):
+        n_wall = int((self.X - 2) * (self.Y - 2) * ratio)
+        empty = self.get_empty_loc()
+        shuffle(empty)
+        for loc in empty[:n_wall + 1]:
+            self.set(loc, '+')
+
+    # 울타리를 치고, 출구를 만들기 위해 모서리를 뺸 울타리 좌표들 리턴
+    def set_fence(self):
+        wall = set()
+        for i in range(self.X):
+            self.map[i][0] = self.map[i][self.Y - 1] = '+'
+            wall.add((i, 0))
+
+        for j in range(self.Y):
+            self.map[0][j] = self.map[self.X-1][j] = '+'
+            wall.add((0, j))
+
+        vertex =  {(0, 0), (0, self.Y-1), (self.X-1, 0), (self.X-1, self.Y-1)} # 모서리
+        return list(wall - vertex)
+
+    # 울타리만 남기고 지움
+    def clear(self):
+        for i in range(1, self.X - 1):
+            for j in range(1, self.Y - 1):
+                self.set((i, j), ' ')
+
+        self.set(self.exit, '+')
+
+    def set(self, loc, val):
+        self.map[loc[0]][loc[1]] = val
+
+    def get(self, loc):
+        return self.map[loc[0]][loc[1]]
+
+    # 출력 준비
+    def decorate(self):
+        for i in range(self.X):
+            for j in range(self.Y):
+                if self.get((i, j)) != '+':
+                    continue
+
+                if (i == 0 and self.get((i + 1, j)) == ' ') or \
+                        (i == self.X -1 and self.get((i - 1, j)) == ' ') or \
+                        (0 &lt; i &lt; self.X - 1 and self.get((i + 1, j)) == ' ' and self.get((i - 1, j)) == ' '):
+                    self.set((i, j), '-')
+                elif (j == 0 and self.get((i, j + 1)) == ' ') or \
+                        (j == self.Y - 1 and self.get((i, j - 1)) == ' ') or\
+                        (0 &lt; j &lt; self.Y - 1 and self.get((i, j + 1)) == ' ' and self.get((i, j - 1)) == ' '):
+                    self.set((i, j), '|')
+
+    # 출력
+    def __str__(self):
+        self.decorate()
+        string = ''
+        for row in self.map:
+            string += ''.join(row) + '\n'
+
+        return string[:-1]
+
+    # 빈칸들 찾아서 좌표 리턴
+    def get_empty_loc(self):
+        empty = []
+        for i in range(1, self.X - 1):
+            for j in range(1, self.Y - 1):
+                if self.get((i, j)) == ' ':
+                    empty.append((i, j))
+
+        return empty
+
+    def rand_loc(self):
+        empty = self.get_empty_loc()
+        if not empty:
+            exit()
+        else:
+            return choice(empty)
+
+
+
+print(RandomMaze(4, 5, ratio = 0.2, min_path = 2))
+print(RandomMaze(40, 80))
+
+</code></pre>
+
+<pre><code>++----+----+--++--------+--+-+--+--++-+----+--+------+---+---+---+-------++--+++
+++    |    |  ++        |  | |  |  ++ |    |  |      |   |   |   |       ++  +++
+++  - | | - | | | - --  |      - - ++ | -    -  | | - -- |   |   |  - | -     ++
+| ++  | |   ++ -+-    ++  --  -    |      +-   ++ |      +- ++-+-+    |  |  - ++
+| ++     -- ++    -  +++     -  -  | +--+ |  +-+ |    -     |  | +-      |    ++
++- +----   -+    - - +++-- |  +- -  ++  |  --+   ++       -  - | |  |  +- - -  |
+        -      --         ++- |    ++ - | -   -  ++ - -  -    -+  - | ++     --+
+++-      +- -    - -+-  - ++ -++   |    |  --- +- |     |       -  - ++   ++   |
+++  - - -+    -   - |         ++  -  --  --   -+   +-   +- | |   -  -+ - -++-- |
+|  -   |    -  --    +++               --      |   |  |   ++ ++      |         |
+| - |  ++         +- +++    | ++--   -   |   - | - | ++ | |  ++--    ++   -    |
++- ++ +++ -  |   -+  |   -  | ++    - -+ +-    +- |  ++-+-+  |     | ++ -+  -- |
+|  |  | +- | | -- | - -   -- |     - | | |  - ++  ++ |    |  | ----+ ++  |    ++
+++++-   |  +- |  | | | -+-  -+  -   -+     - -+ -  | ++   |  ++    | | | | -+ ++
+++++   - -++  |  | +-+  |    ++  | | | - -    |  -  -++   |   |      | +-   |  |
+|    ++ - ++-+++- -+ +- |  | ++ ++++      - +-     -   ++-   -           |  |  |
+|  -+++  -   | |        |  ++ +-+ +++-  -- ++ ++-++  - ++ --   - -      ++  |  |
++-  | |   | -   -   +-      | |  ++++     +++-++ ++ -       --  -   -  -+ -  -++
+|  - -+-  +- | -  - |  - -  |  | | ++-    |    +-  -  |  -+       -         | ++
+|         | -+- |     |   ++ - |       - |   +++ |   ++   | -    -       -+ #+ |
++- -- | | |     ++    +-  ++   | ++      |   +++ +-- +++ ++    +-  | -    |  | |
+| |  ++ +-   ---++        | ++++ ++-  -+- | -+ +-+  - ++ | +-  |   |    --  -+ |
+| +-+++   -       |  -  --  ++++- |    | -+  |        | - ++  |  -++      -    |
++-  | +-+   - --  ++   -    | ++  |    |    - |           +++ | - ++ -  --    ++
+|  ++ | | -     | ++-    |      ++ -  - |  -  |  --- - |  +++ |  +++        - ++
+++ |  +-+  - -  |  | - +-+ - |  ++-  | -++- -++ |      |     -++ ++  | - -   | |
+++ | -+        |       | ++ ++       ++  |   |  ++-+-+ +++ -  ++  |  |      ++-+
+|  |   --      |   +--+   | |   -     | ++  | - ++ | +- ++-       | -+ -  -++  |
+|   |     |  -  | -+  +--++-  -    |  +-+   |   | -    -   | +++  |      | | | |
+| | +--  -++    ++ +--   ++        |    | - +-   -  -   -  | ++++++-  -  |  -+ |
+| |    -- ++-   ++ |  |  |   --  ++  - -   -    -         +++ | ++  |  | |   | |
+|  |         -  ++-+- |  |  |   +++     |   - +- --- +-   +++ |  +- |  |    -  |
++- +--+               |     | --+ |     |     |      |   - ++-+  |  +--+---  - |
+| |   +++  --+ --+--+-  - -            -  -    --   +++    |  |  |  |      --  |
+| ++  +++ -  +-  |  | +- -        -+--   -       |  +++--    |    | | - | -    |
+++ | - ++   -  -  -   | |   | -+-  |    -  -     +-       | ++--  +++   |   |  |
+++    -++  |    -+      ++  +- | - +- |   |   -  |   -  - | |    - |   |   ++  |
+++-  - |   |  ++ +--+ --+++++  |      ++- | -+ | +-      ++-    | |  - | +-+  ++
+|   |  ++ | | ++ |  ++   ++++ | | | | ++ | | +++++ |  | +++  |  ++++  ++++    ++
++---+--++-+-+-++-+--++---++++-+-+-+-+-++-+-+-+++++-+--+-+++--+--++++--++++----++
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/28 05:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18311"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬입니다.
+제주도 오니 할게 없어서 그만...</p>
+<pre><code class="python">import numpy as np
+
+
+class MakeMaze:
+    def __init__(self, h, w, random_start_on=False):
+        self.h, self.w = 2 * h + 1, 2 * w + 1
+        self.maze = np.zeros((self.h, self.w))
+        self.random_start_on = random_start_on
+        self.set_maze_array()
+        self.make_maze()
+        self.maze_list = self.convert_maze_to_list()
+        self.print_maze()
+
+    def set_maze_array(self):
+
+        for i in range(self.h):
+            if i % 2 == 0:
+                for j in range(self.w):
+                    if j % 2 == 1:
+                        self.maze[i, j] = 1
+            else:
+                for j in range(self.w):
+                    if j % 2 == 0:
+                        self.maze[i, j] = 2
+                    else:
+                        self.maze[i, j] = 4
+        self.maze[1, 0] = 4
+        if self.random_start_on:
+            starting_point = (2*np.random.randint(self.h//2)+1, 2*np.random.randint(self.w//2)+1)
+        else:
+            starting_point = (-2, -2)
+        self.maze[starting_point] = 3
+
+    def move(self, maze_01, current_point):
+        h, w = maze_01.shape
+        x, y = current_point
+        maze_101 = np.ones((h + 2, w + 2))
+        maze_101[1:-1, 1:-1] = maze_01
+        movable_points = []
+        for i, j in [(-1, 0), (0, -1), (1, 0), (0, 1)]:
+            if maze_101[x + 1 + i, y + 1 + j] == 0:
+                movable_points.append((x + i, y + j))
+        if len(movable_points) == 0:
+            return maze_01, None
+        next_point = movable_points[np.random.choice(range(len(movable_points)))]
+        next_maze = maze_101[1:-1, 1:-1]
+        next_maze[next_point] = 1
+        return next_maze, next_point
+
+    def make_maze(self):
+        h, w = self.h // 2, self.w // 2
+        maze_01 = np.zeros((h, w))
+        maze_01[0, 0] = 1
+        path_list = [(0, 0)]
+        while len(path_list):
+            current_point = path_list[-1]
+            maze_01, next_point = self.move(maze_01, current_point)
+            if next_point is None:
+                path_list.pop()
+                continue
+            break_wall = np.array(current_point) + np.array(next_point) + 1
+            self.maze[break_wall[0], break_wall[1]] = 4
+            path_list.append(next_point)
+
+    def convert_maze_to_list(self):
+        maze_list = []
+        convert_dic = {0: ' + ', 1: '---', 2: ' | ', 3: ' o ', 4: '   '}
+        for i in range(self.h):
+            maze_list_t = []
+            for j in range(self.w):
+                maze_list_t.append(convert_dic[self.maze[i, j]])
+            maze_list.append(maze_list_t)
+        return maze_list
+
+    def print_maze(self):
+        for maze_row in self.maze_list:
+            for x in maze_row:
+                print(x, end='')
+            print('')
+
+
+if __name__ == &quot;__main__&quot;:
+    wr, hr = map(int, input(&quot;가로, 세로의 크기를 입력해주세요. (띄어쓰기로 구분)&quot;).split())
+    maze = MakeMaze(hr, wr)
+
+</code></pre>
+
+<h2 id="result">Result</h2>
+<pre><code class="python">가로, 세로의 크기를 입력해주세요. (띄어쓰기로 구분)15 15
+ + --- + --- + --- + --- + --- + --- + --- + --- + --- + --- + --- + --- + --- + --- + --- + 
+       |           |           |                 |                                         | 
+ +     +     +     +     +     +     +     +     +     + --- + --- + --- +     + --- +     + 
+ |           |     |     |     |     |     |     |     |                       |           | 
+ + --- + --- +     +     +     +     +     + --- +     +     + --- + --- + --- +     + --- + 
+ |                 |     |     |     |     |           |     |                 |           | 
+ +     + --- + --- +     +     +     +     +     + --- +     + --- +     + --- + --- +     + 
+ |     |                 |     |     |                 |           |                       | 
+ +     + --- +     + --- +     +     + --- + --- + --- + --- +     +     + --- + --- + --- + 
+ |                 |     |     |           |                       |     |                 | 
+ + --- + --- + --- +     +     + --- +     +     + --- + --- + --- +     +     + --- +     + 
+ |     |                       |           |           |                 |           |     | 
+ +     +     + --- + --- + --- + --- + --- + --- +     + --- +     + --- + --- + --- +     + 
+ |     |                                         |           |           |                 | 
+ +     + --- + --- + --- + --- + --- + --- +     + --- +     + --- +     +     + --- +     + 
+ |                 |                 |           |           |     |           |     |     | 
+ +     + --- + --- +     +     + --- +     + --- +     + --- +     + --- + --- +     +     + 
+ |     |                 |           |                 |     |                             | 
+ +     +     + --- + --- + --- +     + --- + --- + --- +     +     + --- + --- + --- + --- + 
+ |     |     |                       |                       |     |           |           | 
+ +     +     +     + --- + --- +     +     + --- + --- +     +     +     + --- +     +     + 
+ |           |     |           |           |                 |     |     |           |     | 
+ +     + --- +     +     +     + --- +     + --- + --- + --- +     +     +     + --- +     + 
+ |           |     |     |     |           |                       |           |           | 
+ + --- +     +     +     +     + --- +     +     + --- + --- + --- + --- + --- +     +     + 
+ |           |           |           |     |     |                 |                 |     | 
+ +     + --- + --- + --- + --- +     + --- +     +     + --- +     +     + --- + --- +     + 
+ |     |                       |           |           |     |           |                 | 
+ +     + --- + --- + --- +     + --- +     + --- + --- +     + --- + --- +     + --- + --- + 
+ |                                   |                                                  o  | 
+ + --- + --- + --- + --- + --- + --- + --- + --- + --- + --- + --- + --- + --- + --- + --- + 
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/06/25 01:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hyuk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_21031"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import random
+from copy import deepcopy
+
+def Gen_maze(lis) :
+    if lis[0]%2 == 0 or lis[1]%2 == 0 : return False
+    od = list(&quot;-&quot;.join('+'*(lis[1]+1)))
+    ev = list(&quot;&amp;&quot;.join('|'*(lis[1]+1))) # 맵의 모든 벽을 만들고, 미방문 좌표를 '&amp;'로 표시한다.
+    map_ = []
+    for r in range(lis[0]) :
+        map_.append(deepcopy(od))
+        map_.append(deepcopy(ev))
+    map_.append(deepcopy(od))
+    map_[1][1], x, y, map_[-2][-1] = '#', 1, 1, ' ' # 시작점과 x,y좌표 초기화
+
+    while '&amp;' in (&quot;&quot;.join([&quot;&quot;.join(jo) for jo in map_])) : # 전체 루프
+        while True : #막힐 때까지 랜덤으로 벽을 없애서 진행하면서 길을 만든다.
+            potential, nextWay = [], &quot;&quot;
+            for cond in [((lis[0]*2+1)-2-y, 0, 2, &quot;D&quot;), (x-2, -2, 0, &quot;L&quot;), (y-2, 0, -2, &quot;U&quot;), ((lis[1]*2+1)-2-x, 2, 0, &quot;R&quot;)] : #진행가능한 방향을 찾아, potential에 추가한다.
+                if (cond[0]&gt;0) and (map_[y+cond[2]][x+cond[1]] == '&amp;' ) :
+                    potential.append(cond[3])
+
+            if potential == [] : ## 진행방향 없다면 :
+                break ## Go hunt.(또다른 탐색 시작점 찾는다)
+            nextWay = potential[random.randint(0, len(potential)-1)]## 진행할 수 있는 방향이 있다면 : 방향 결정(위의 potential에 추가된 방향들 중 랜덤하게 선택)
+
+            for cond_2nd in [(0, 1, 'D'), (-1, 0, 'L'), (0, -1, 'U'), (1, 0, 'R')] : #선택된 방향(nextWay)으로 진행한다
+                if nextWay == cond_2nd[2] :
+                    map_[y+cond_2nd[1]][x+cond_2nd[0]] = ' ' #진행방향에 있는 벽을 없앤다
+                    x, y = x+2*cond_2nd[0], y+2*cond_2nd[1] # 좌표를 갱신한다
+                    map_[y][x] = ' ' #갱신된 좌표의 '&amp;'(미방문 좌표 표시)를 지운다.
+
+        if not '&amp;' in (&quot;&quot;.join([&quot;&quot;.join(jo) for jo in map_])) : return printOut(map_)
+        (map_, x, y) = hunt(map_, x, y)
+
+    return printOut(map_)
+
+def hunt(hunt_map_, hunt_x, hunt_y) :  # hunt. 상단의 왼쪽부터 차례로 탐색하지 않은 점('&amp;')을 찾아서, 그 점과 미로를 연결시킨다
+    for hunt_c in range(0, len(hunt_map_)) :
+        for hunt_r in range(0, len(hunt_map_[0])) :
+            if (hunt_map_[hunt_c][hunt_r] == '&amp;') :
+                for hunt_cond in [((lis[0]*2+1)-2-hunt_c, 0, 1), (hunt_r-2, -1, 0), (hunt_c-2, 0, -1), ((lis[1]*2+1)-2-hunt_r, 1, 0)] :
+                    if (hunt_cond[0]&gt;0) and (hunt_map_[hunt_c+(hunt_cond[2]*2)][hunt_r+(hunt_cond[1]*2)] == ' ' ) :
+                        hunt_map_[hunt_c][hunt_r], hunt_map_[hunt_c+hunt_cond[2]][hunt_r+hunt_cond[1]] = ' ', ' '
+                        hunt_x, hunt_y = hunt_r, hunt_c #찾아낸 '&amp;'의 좌표를 x,y로 갱신한다.
+                        return (hunt_map_, hunt_x, hunt_y) # 갱신된 x,y 좌표와 맵으로 다시 탐색한다.
+
+
+def printOut(m) : # 맵 출력
+    for r in m :
+        print(&quot;&quot;.join(r))
+if __name__ == '__main__' :
+    Gen_maze(list(map(int, input(&quot;Size : &quot;).split()))[:2])
+</code></pre>
+
+<p>hunt and kill 알고리즘으로 풀었습니다. 처음에 모든 벽들을 생성한 뒤, 한 칸씩 전진해가며 벽을 공백으로 바꿔 넣는 방식입니다.</p>
+<p>코너만 +처리 되도록 하는건 어렵네요. 좋은 해결책이 생각나면 수정하겠습니다.</p>
+<p>결과</p>
+<pre><code>Size : 15 15
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|#|   |       |   |   |       |
++ + + + +-+-+ + + + + + +-+-+-+
+| | | | |   |   |   |         |
++ +-+ + + + +-+-+-+ +-+-+-+-+ +
+|   |   | |   |     |       | |
++ + +-+-+ +-+ + +-+-+ +-+-+ +-+
+| | |     |   |           |   |
++ + + +-+-+ +-+-+-+-+-+ + +-+ +
+| | | |   |   |       | | |   |
++ + + +-+ +-+ + +-+-+ + + + +-+
+| |   |   |   | |     | | |   |
++ +-+-+ +-+ +-+ + +-+-+ +-+ + +
+| |       |   | |     | |   | |
++ + +-+-+-+-+ + +-+-+ + + +-+ +
+| |   |     | |   |   | |   | |
++ +-+ + +-+ + + +-+ +-+-+-+ + +
+|   | |   |   | |     |   | | |
++ +-+ +-+ +-+-+ + +-+-+ + + + +
+|       | |     |   |   |   | |
++ +-+-+ + + +-+-+-+ + +-+-+-+ +
+|   |   |     |   | |       | |
++-+ + +-+-+-+ + +-+ + +-+-+ + +
+|   |   |     |   | | |     | |
++ +-+-+ + +-+-+-+ + + + +-+-+ +
+|   |   |   |     |   |   |   |
++-+ + +-+-+ + +-+-+-+-+-+-+ +-+
+|   |     | | |         |     |
++ +-+-+-+ +-+ + +-+ +-+-+ +-+ +
+|       |     |   |       |    
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/02/20 13:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GG</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

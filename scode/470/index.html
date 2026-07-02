@@ -1,0 +1,2377 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="출처: [http://www.codechef.com/problems/LIFE](http://www.codechef.com/problems/LIFE)
+
+콘웨이의 라이프 게임(Conway&#39;s Game of Life)은 세포 시뮬레이션 알고리즘입니...">
+    <title>1차원 라이프 게임 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">1차원 라이프 게임</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">7</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 4</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>출처: <a href="http://www.codechef.com/problems/LIFE">http://www.codechef.com/problems/LIFE</a></p>
+<p>콘웨이의 라이프 게임(Conway's Game of Life)은 세포 시뮬레이션 알고리즘입니다. 각 세포는 살아있거나 죽어있는 두 상태가 있으며, 시뮬레이션 각 단계마다 주변 세포의 상태에 따라 자신의 상태를 갱신합니다. 이번 문제는 1차원 라이프 게임에 관한 것입니다.</p>
+<p>0번부터 N-1까지의 N개의 세포가 있다고 합시다. i번째 세포의 이웃은 i-1번째와 i+1번째의 세포가 될 것입니다. 양 끝의 세포들은 모듈로(modulo) 값으로 이웃을 구합니다. 예를 들어, 0번 세포는 1번과 N-1번째가 이웃이 됩니다.</p>
+<p>이제 라이프 게임의 규칙을 설명합니다.</p>
+<p>매 단계마다 각 세포들은 자신의 두 이웃을 봅니다. 만약 두 이웃의 상태가 모두 같다면, 자신의 상태는 그대로 유지합니다. 만약 두 이웃의 상태가 다르다면, 자신의 상태를 바꿉니다. 이 규칙으로 다음 상태로 전이합니다. (다르게 말하면 오직 한 이웃만이 살아있을 때 자신의 상태를 바꾼다라고 표현할 수 있습니다.)</p>
+<p>예를 들어, 8개의 세포, 01100101 을 생각해봅시다. 0은 죽어있는 상태, 1은 살아있는 상태라고 하죠.</p>
+<ul>
+<li>0과 6번 세포는 모두 살아있는 이웃이 있습니다. 상태를 유지합니다.</li>
+<li>5, 7번 세포는 살아있는 이웃이 없습니다. 상태를 유지합니다.</li>
+<li>1, 2, 3, 4번 세포는 하나만 살아있는 이웃이 있습니다. 상태를 바꿉니다.</li>
+</ul>
+<p>따라서 다음 단계는 00011101이 됩니다.</p>
+<p>이번 코딩 문제는 주어진 세포 상태가 있을 때, "<em>직전의 단계</em>"를 구하는 것입니다. 어떨 때는 여러 이전 단계가 있을 수도 있고 불가능할 수도 있습니다.</p>
+<p>주어진 세포 상태의 직전 단계가 유일하다면 그것을 출력하고, 없다면 "No", 여러 개라면 "Multiple"을 출력하는 코드를 만들어 보세요.</p>
+<p>예: (꼭 인터페이스를 이렇게 할 필요는 없습니다)</p>
+<pre><code class="no-highlight">computePrevState(&quot;00011101&quot;) == &quot;01100101&quot;
+computePrevState(&quot;000&quot;) == &quot;Multiple&quot;
+computePrevState(&quot;000001&quot;) == &quot;No&quot;
+computePrevState(&quot;11110&quot;) == &quot;10010&quot;
+</code></pre>
+
+<p>입력 문자열의 길이는 3에서 50까지로 가정합니다.</p>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2015/01/08 08:14</p>
+                    <p class="static-profile" style="margin:0;padding:0;">race.condition</p>
+                </div>
+            </div>
+
+            
+                <a name="comment_1545"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">제가 규칙을 잘 못 이해한 것 같은데, 000이 왜 multiple인가요? 000의 이전 세대는 000 뿐 아닌가요?
+제가 이해하기로는 이럴 것 같은데요.
+000 =&gt; 000
+001 =&gt; 011
+010 =&gt; 010
+011 =&gt; 001
+100 =&gt; 110
+101 =&gt; 101
+110 =&gt; 100
+111 =&gt; 111</span>
+                    -
+                    <span style="font-size:11px;">
+                        박성철,
+                        2015/01/21 23:09
+                    </span>
+                </div>
+            
+                <a name="comment_1546"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">011 =&gt; 000 입니다.</span>
+                    -
+                    <span style="font-size:11px;">
+                        race.condition,
+                        2015/01/22 08:17
+                    </span>
+                </div>
+            
+                <a name="comment_1548"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">011의 경우
+0번째는 모두 살아 있는 이웃이 있으므로 유지
+1번째는 한쪽은 죽었고 한 쪽은 살았으므로 토글
+2번째는 모두 살아 있으므로 유지
+아닐까요?
+문제의 예시에 따르면 그럴 것 같은데...</span>
+                    -
+                    <span style="font-size:11px;">
+                        박성철,
+                        2015/01/23 14:56
+                    </span>
+                </div>
+            
+                <a name="comment_1549"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">2번째도 하나는 0 하나는 1이라서 상태를 바꿉니다.</span>
+                    -
+                    <span style="font-size:11px;">
+                        *IDLE*,
+                        2015/01/23 17:46
+                    </span>
+                </div>
+            
+                <a name="comment_1550"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">이해했습니다. 고맙습니다.</span>
+                    -
+                    <span style="font-size:11px;">
+                        박성철,
+                        2015/01/23 17:54
+                    </span>
+                </div>
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>26개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_1425"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">5</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def computePrevState(bn):
+    an = case(0,0, bn)+case(0,1, bn)+case(1,0, bn)+case(1,1, bn)
+
+    if len(an)==0: print &quot;No&quot;
+    elif len(an)==len(bn): print an
+    else: print &quot;Multiple&quot;
+
+def case(i, j, bn): 
+    a = str(i)+str(j)
+    b = &quot;_&quot;+bn
+    for k in range(1, len(b)):
+        a = a + str((int(a[k-1])+int(a[k])+int(b[k]))%2)
+
+    if a[0]==a[-2] and a[1]==a[-1]: return a[1:-1]
+    else: return &quot;&quot;
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/01/09 22:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Soori</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1529"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">햐 정말 멋지네요!!</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Lee SeungChan,
+                                    2015/01/10 09:54
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1530"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">감사합니다. 코딩 전에 미리 수열의 점화식을 구해보니 %2(mod 2) 계산법으로 쉽게 풀리더라구요. Lee님의 코딩을 보니 4가지 케이스 나눈 것과 양 끝 자르는 것이 비슷하네요. 서로 다른 머릿 속이지만 풀이법은 하나로 수렴하는 군요.(파이썬의 정신&gt;_&lt;)</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Soori,
+                                    2015/01/10 12:52
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4435"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<p>이전상태 p의 다음상태를 (0...p.size).map {|n| p[n-1]^p[n-2]^p[n] }.rotate*'' } 과 같이 구할 수 있음. 분배법칙으로 p[n] = p[n-2] ^ p[n-1] ^ c[n]. seed(임의의 n-2, n-1번째 값)로 이전상태 n번째 값 획득.seed와 이전상태 값이 같으면 유효한 이전상태.</p>
+<pre><code class="ruby">prev_state = -&gt;s,current=s.chars.map(&amp;:to_i) do
+  seeds = [[0,0],[0,1],[1,0],[1,1]]
+  gen = -&gt;seed { current.reduce(seed) {|a,c| a &lt;&lt; (a[-2] ^ a[-1 ] ^ c) }*'' }
+  prevs = seeds.map(&amp;gen).select {|e| e[0,2] == e[-2,2] }.map {|e| e[1..-2] }
+  prevs[1] ? &quot;Multiple&quot; : prevs[0] || &quot;No&quot;
+end
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby">expect( prev_state[&quot;00011101&quot;] ).to eq &quot;01100101&quot;
+expect( prev_state[&quot;000&quot;] ).to eq &quot;Multiple&quot;
+expect( prev_state[&quot;000001&quot;] ).to eq &quot;No&quot;
+expect( prev_state[&quot;11110&quot;] ).to  eq &quot;10010&quot;
+</code></pre>
+
+<p><strong>Output</strong></p>
+<pre><code class="ruby">puts prev_state[&quot;00011101&quot;] #=&gt; &quot;01100101&quot;
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/08/10 06:16</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7616"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>아이디어</p>
+<pre><code>x 양쪽에 a 와 b 가 있을 때 x -&gt; y 상태 변화를 표로 나타내면 다음과 같습니다.
+
+a x b -&gt; y
+0 0 0    0
+0 0 1    1
+0 1 0    1
+0 1 1    0
+1 0 0    1
+1 0 1    0
+1 1 0    0
+1 1 1    1
+
+위 표에서
+y = a XOR x XOR b 임을 알 수 있습니다. (이후 간단히 y=a^x^b 라 하겠습니다.)
+XOR 관계의 특성상 좌변의 문자와 우변의 문자를 바꿔도 식이 성립합니다.
+교환법칙은 말할 것도 없구요.
+
+즉
+y=a^x^b 라면 a=y^x^b, x=a^y^b, b=a^x^y 가 다 성립합니다.
+이를 토대로 첫 상태가 1001 인 경우를 예를 들어보면
+1001 -&gt; 0110 이 됨을 알 수 있는데 0110 을 가지고 1001 을 재구성하면 되지요.
+
+00, 01, 10, 11 의 네 가지 케이스를 가지고 0110 의 숫자 하나씩 XOR을 계산을 해서 붙여봅니다.
+
+   0 1 1 0
+00 0        : 0^0^0 = 0 (처음 0 두 개는 왼쪽의 00, 세번째 0 은 위쪽의 첫 0)
+00 0 1      : 0^1^1 = 0
+00 0 1 0    : 1^0^1 = 0
+00 0 1 0 1  : 1^0^0 = 1
+
+이제 계산이 다 끝났으면 처음 구성한 00 과 마지막 두 숫자가 일치하는지를 봅니다.
+00 != 01 이지요 이렇다면 이것은 불가능한 케이스입니다. 
+숫자가 rotation 이 일어날 수 없기 때문이지요.
+00 뿐 아니라 01, 10 도 마찬가지로 불가능한 케이스입니다.
+
+11 의 경우를 보겠습니다.
+
+   0 1 1 0
+11 0        : 1^1^0 = 0
+11 0 0      : 1^0^1 = 0
+11 0 0 1    : 0^0^1 = 1
+11 0 0 1 1  : 0^1^0 = 1
+
+이 경우는 앞의 11 과 뒤의 11 이 일치합니다. 따라서 수열은 완성됩니다.
+이제 이 6 개의 수열(110011)가지고 을 원래의 1001 을 구성해내면 되는데요
+처음 보았던 XOR 연산을 생각해 보면 아주 쉽습니다.
+
+          0(y) 1 1 0
+1(a) 1(x) 0(b) 0 1 1
+
+윗줄의 첫 0 과 아랫줄의 첫 1 1 을 XOR 한 것이 아랫줄의 세번째 0 이지요
+제일 처음 식 y=a^x^b 를 기억하실 겁니다. 
+우리는 이 중 a, x, y 를 가지고 b 를 만들었던 겁니다. (a^x^y=b)
+이 식을 가지고 y=a^x^b 를 구성할 수 있죠.
+따라서 우리가 원래 찾아야 하는 x 는 아랫줄 두번째 1 이 되는 거지요
+
+그렇게 생각하면 110011 중 
+두번째부터 다섯번째까지의 1001 이 이전 상태의 수열이 되는 겁니다    
+끝.
+</code></pre>
+<p><strong>javascript</strong></p>
+<pre><code class="javascript">var computePrevState = function (cell) {
+    var start = [&quot;00&quot;, &quot;01&quot;, &quot;10&quot;, &quot;11&quot;];
+    var result = [];
+    for (s of start) {
+        var prev = s;
+        for (c of cell.split(&quot;&quot;)) {
+            prev += prev[prev.length - 2] ^ prev[prev.length - 1] ^ c;
+        }
+        if (prev.slice(0, 2) === prev.slice(-2)) {
+            result.push(prev.slice(1, -1));
+        }
+    }
+
+    return result.length === 1 ? result[0] :
+           result.length === 0 ? &quot;No&quot; :
+                                 &quot;Multiple&quot;;
+}
+
+computePrevState(&quot;00011101&quot;) == &quot;01100101&quot;
+computePrevState(&quot;000&quot;) == &quot;Multiple&quot;
+computePrevState(&quot;000001&quot;) == &quot;No&quot;
+computePrevState(&quot;11110&quot;) == &quot;10010&quot;
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/22 10:38</p>
+                                <p class="static-profile" style="margin:0;padding:0;">funnystyle</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_1419"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>모든 경우의 케이스를 다 살펴보는 무식한 방법으로 풀어 보았습니다.
+다만, 순차적으로 이동(우측방향)하면서 체크하기 때문에 재귀의 늪에서 금방 빠져나오긴 합니다..</p>
+<p>풀고서도 찝찝한 마음이 드는게, 제대로 풀었는지 확신이 안서네요.
+보다 다양한 테스트케이스가 있었으면 좋겠습니다.</p>
+<p>파이썬 2.7입니다.</p>
+<pre><code class="python">class computePrevState:
+    def __init__(self, org):
+        self.org = org
+        self.result = []
+
+    def run(self):
+        self.get_prev_state(self.org)
+        if len(self.result) &gt; 1:
+            return &quot;Multiple&quot;, self.result
+        elif not self.result:
+            return &quot;No&quot;
+        else:
+            return self.result[0]
+
+    def toggle(self, n):
+        if n=='1': return '0'
+        else: return '1'
+
+    def get_next_state(self, state):
+        src = list(state)
+        for i in range(len(state)):
+            left = state[i-1]
+            if i+1 &gt; len(state)-1:
+                right = state[0]
+            else:
+                right = state[i+1]
+            if left != right:
+                src[i] = self.toggle(state[i])
+        return &quot;&quot;.join(src)
+
+    def get_prev_state(self, src, cur_index=0):
+        next_state = self.get_next_state(src)
+
+        #
+        # recursion finish.
+        #
+        if self.org[:cur_index] != next_state[:cur_index]: return
+        if cur_index+1 == len(src):
+            if self.org == next_state:
+                if src not in self.result:
+                    self.result.append(src)
+            return
+
+        srcList = list(src)
+        for left, right in [('1', '1'), ('0', '0'), ('1', '0'), ('0', '1')]:
+            srcList[cur_index-1]=left
+            srcList[cur_index+1]=right
+            self.get_prev_state(&quot;&quot;.join(srcList), cur_index+1)
+
+
+print computePrevState(&quot;00011101&quot;).run()
+print computePrevState(&quot;11110&quot;).run()
+print computePrevState(&quot;000&quot;).run()
+print computePrevState(&quot;000001&quot;).run()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/01/09 10:58</p>
+                                <p class="static-profile" style="margin:0;padding:0;">pahkey</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_1422"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>python 3.4 </p>
+<pre><code class="python">def ReturnPrev(bbb):
+    result=[]
+    TestDic={'0':['000','101','110','011'],'1':['111','010','001','100']}    
+    for i in bbb:    
+        if result:
+            temp=[]
+            for j in TestDic[i]:
+                for k in result:
+                    if j[:2]==k[-2:]:
+                        temp.append(k+j[-1])
+            result=temp.copy()
+        if not result:
+            temp=[]
+            for j in TestDic[i]:
+                temp.append(j)
+            result=temp.copy()
+    result2=[]
+    for l in result:
+        if (len(l)-2)==len(bbb):
+            if l[:2]==l[-2:]:
+                result2.append(l[1:-1])
+    return result2
+
+def computePrevState(bbb):
+    ccc=ReturnPrev(bbb)
+    if len(ccc)&gt;1:
+        print('Multiple')
+    if len(ccc)==1:
+        print(ccc[0])
+    if len(ccc)==0:
+        print('No')
+
+
+computePrevState(&quot;00011101&quot;) 
+computePrevState(&quot;000&quot;)
+computePrevState(&quot;000001&quot;)
+computePrevState(&quot;11110&quot;)
+</code></pre>
+
+<p>먼저 숫자 0 또는 1 이 나올 경우 4가지씩을 (testdic) 알아내었습니다. </p>
+<p>그리고 숫자 0 또는 1이 나올때마다 나오는 경우의 숫자 4가지 중 앞글자 두개와 기존의 결과물들의(result=list()) 뒷글자 2개를 살펴보고 일치하면 add 아니면 버리는 형식으로 결과치를 줄여나갔습니다. </p>
+<p>다만 좀 무성의한 알고리즘인 덕에 약간의 버그가 예상되어 if (len(l)-2)==len(bbb) 를 추가하였습니다. </p>
+<p>그리고 마지막으로 첫 2글자와 마지막 두글자가 일치하면 결과로 인정하고 첫글자와 마지막 글자를 삭제하는 방식으로 처리하였습니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/01/09 17:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Lee SeungChan</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_1427"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>저도 처음에는 재귀로 할까, 분할-병합으로 할까 고민하다가 해보니 굉장히 간단하게 한번의 순회로 끝낼 수 있었습니다. Lee SeungChan님과 Soori님의 답변과 거의 같습니다.</p>
+<pre><code class="cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;cassert&gt;
+
+std::string computePrevState(const std::string &amp;input) {
+  const size_t len = input.length();
+  if (len &lt; 3)
+    return &quot;No&quot;;
+
+  // 입력 값의 첫번째 숫자가 생성되도록 총 4개의 후보 답안을 만듭니다. 후보 답안 중
+  // 3개 비트를 채우게 됩니다.
+  std::string candidates[4];
+  for (size_t i = 0; i &lt; 4; ++i) {
+    // 후보 템플릿: x = input[0], y = !input[0]
+    static const char tmpls[4][2] = {
+        {'0', '0'}, // x0....0
+        {'0', '1'}, // y0....1
+        {'1', '1'}, // x1....1
+        {'1', '0'}, // y1....0
+    };
+    std::string &amp;cand = candidates[i];
+    cand = std::string(len, '?');
+    cand[0] = ((i % 2 == 0) ? input[0] : '0' + !(input[0] - '0'));
+    cand[1] = tmpls[i][0];
+    cand[len - 1] = tmpls[i][1];
+  }
+
+  int valid = 0, resultIdx = 0;
+  for (size_t i = 0; i &lt; 4; ++i) {
+    auto &amp;cand = candidates[i];
+    // 남은 후보 비트들을 input[1..(len - 2)] 값이 나오도록 생성합니다.
+    for (size_t k = 1; k &lt; len - 2; ++k) {
+      // XOR 성질을 이용하면 쉽게 계산할 수 있습니다.
+      // input[k] = cand[k - 1] ^ cand[k] ^ cand[k + 1]. 따라서, 다음처럼 하면..
+      cand[k + 1] = cand[k - 1] ^ cand[k] ^ input[k];
+      // 주의: 0과 1에 대해 XOR 연산을 해야 하는데 실제로는 '0'(=48)과 '1'(=49)
+      // 입니다. 그냥 '0', '1'에 대해 XOR을 하면 역시 '0' 또는 '1'를 얻습니다.
+    }
+
+    // 지금까지 input[0..(len-2)]가 생성되도록 후보들을 만들었습니다. 이제 남은
+    // 두 입력 값이 각 후보로부터 생성이 되는지 검사합니다.
+    if ((input[len - 2] == cand[len - 3] ^ cand[len - 2] ^ cand[len - 1]) &amp;&amp;
+        (input[len - 1] == cand[len - 2] ^ cand[len - 1] ^ cand[0])) {
+      ++valid;
+      resultIdx = i;
+    }
+  }
+
+  if (valid == 0)
+    return &quot;No&quot;;
+  else if (valid == 1)
+    return candidates[resultIdx];
+  else
+    return &quot;Multiple&quot;;
+}
+
+int main() {
+  assert(computePrevState(&quot;00011101&quot;) == &quot;01100101&quot;);
+  assert(computePrevState(&quot;000&quot;) == &quot;Multiple&quot;);
+  assert(computePrevState(&quot;000001&quot;) == &quot;No&quot;);
+  assert(computePrevState(&quot;11110&quot;) == &quot;10010&quot;);
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/01/10 03:55</p>
+                                <p class="static-profile" style="margin:0;padding:0;">race.condition</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_1432"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Perl<br />
+이런거 금방 금방 생각하시는 분 보면 부럽습니다.</p>
+<pre><code class="perl">use strict;
+while(&lt;&gt;){
+    chomp $_;
+    my @a=(0,1,0,1);
+    my @n=split(&quot;&quot;,$_);
+    my (@r,$p);
+    for my $se ('00','01','10','11'){
+        my $re=$se;
+        $re=~s/(.)(.)$/$1$2$a[$1+$2+$n[$_]]/ for(0..$#n);
+        push @r, $re if $re=~s/^(.)(.)(.+)\1\2$/$2$3$1/;
+    }
+    if($r[1]){
+        $p='Multiple';
+    }elsif($r[0]){
+        $p=$r[0];
+    }else{
+        $p='No';
+    }
+    print &quot;$p\n&quot;;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/01/11 15:08</p>
+                                <p class="static-profile" style="margin:0;padding:0;">*IDLE*</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_1575"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 2.7입니다.
+역시 이런문제는 알고리즘을 누가 더 잘 생각하느냐에 따라
+코드가 간결해지네요.
+저는.... 아직 그 단계에 못다다라서 단순합니다.</p>
+<pre><code class="python">def computePrevState(cell):
+    cell_len = len(cell)
+    cell_array = [int(x) for x in cell]
+
+    #Initiallize
+    n_1_1, Precon1 = 0, [0]
+    n_1_2, Precon2 = 1, [0]
+    n_1_3, Precon3 = 0, [1]
+    n_1_4, Precon4 = 1, [1]
+
+    #Precondition value searching
+    for x in range(1,cell_len+1):
+        if x == 1:
+            Precon1.append((n_1_1+(Precon1[x-1]^cell_array[x-1]))%2)
+            Precon2.append((n_1_2+(Precon2[x-1]^cell_array[x-1]))%2)
+            Precon3.append((n_1_3+(Precon3[x-1]^cell_array[x-1]))%2)
+            Precon4.append((n_1_4+(Precon4[x-1]^cell_array[x-1]))%2)
+        else:
+            Precon1.append((Precon1[x-2]+(Precon1[x-1]^cell_array[x-1]))%2)
+            Precon2.append((Precon2[x-2]+(Precon2[x-1]^cell_array[x-1]))%2)
+            Precon3.append((Precon3[x-2]+(Precon3[x-1]^cell_array[x-1]))%2)
+            Precon4.append((Precon4[x-2]+(Precon4[x-1]^cell_array[x-1]))%2)
+
+    #Decision
+    dec = [0]*4
+    dec[0] = (not (Precon1[0]^Precon1[-1])) and (not (n_1_1^Precon1[-2]))
+    dec[1] = (not (Precon2[0]^Precon2[-1])) and (not (n_1_2^Precon2[-2]))
+    dec[2] = (not (Precon3[0]^Precon3[-1])) and (not (n_1_3^Precon3[-2]))
+    dec[3] = (not (Precon4[0]^Precon4[-1])) and (not (n_1_4^Precon4[-2]))
+
+    if sum(dec) &gt; 1:
+        print &quot;Multiple&quot;
+    elif sum(dec) == 1:
+        print reduce(lambda a,b: str(a)+str(b),Precon1*dec[0]+Precon2*dec[1]+Precon3*dec[2]+Precon4*dec[3])
+    else:
+        print &quot;No&quot;
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/01/25 22:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">SPJung</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_1582"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>coding by python beginner</p>
+<pre><code class="python">def gof(s):
+    rs = ''
+    for i in range(len(s)):
+        if i &lt; len(s)-1: rs += ( ( '1' if s[i] == '0' else '0' ) if s[i-1] != s[i+1] else s[i]  )
+        else: rs += ( ( '1' if s[i] == '0' else '0' ) if s[i-1] != s[0] else s[i]  )            
+    return rs;
+
+def checkNo(s):
+    chk = s[0]
+    for i in range( len(s[1:] ) ):
+        if chk == s[1:][i]: return False
+        chk = s[1:][i]
+    return True
+
+def computePrevState(s):
+    origin = ''
+    prev = ''
+    while True:
+        if s == origin: print(prev); break;
+        elif len( set( list(s) ) ) == 1: print('Multiple');break
+        elif checkNo(s): print('No'); break     
+        if origin == '': origin = s
+
+        prev = s
+        s = gof(s)  
+
+computePrevState('00011101')
+computePrevState('000')
+computePrevState('000001')
+computePrevState('11110')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/01/26 19:13</p>
+                                <p class="static-profile" style="margin:0;padding:0;">vegan</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_1708"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Java
+무식하게 일차원적으로 짰습니다...
+Input과 같은 자릿수의 이진법으로 표현한 수들을 for루프로 일일이 다음단계를 계산해서 확인하는 방법입니다.</p>
+<pre><code class="java">package life;
+import java.util.Scanner;
+
+public class lifegame {
+
+    public static void main(String[] args) {
+        lifegame L=new lifegame();
+        Scanner in=new Scanner(System.in);
+        String input=in.nextLine();
+        String output=new String();
+        int i, cipher=input.length(), max=1;
+        for(i=0; i&lt;cipher; i++, max*=2); 
+        max--; //max: input과 자릿값이 같은 수 중 이진법으로 최대값 계산
+        boolean check=false;
+        Find:
+        {
+            for(i=0; i&lt;=max; i++){
+                if(input.equals(L.Next(L.Binary(i, cipher)))){
+                    if(check==false){
+                        check=true;
+                        output=L.Binary(i, cipher);
+                    }
+                    else{
+                        System.out.println(&quot;Multiple&quot;);
+                        break Find;
+                    }
+                }
+            }
+            System.out.println((check?output:&quot;No&quot;));
+        }
+    }
+
+    String Next(String input){ //다음단계 계산
+        String result=&quot;&quot;;
+        int i, il, ir, cipher=input.length();
+        for(i=0; i&lt;cipher; i++){
+            if(i&gt;0) il=i-1;
+            else il=cipher-1;
+            if(i&lt;cipher-1) ir=i+1;
+            else ir=0;
+            if(input.charAt(il)==input.charAt(ir)) result=result+input.charAt(i);
+            else{
+                if(input.charAt(i)=='1') result=result+'0';
+                else result=result+'1';
+            }
+        }
+        return result;
+    }
+
+    String Binary(int num, int cipher){ //num을 이진법으로 String에 표현
+        String result=&quot;&quot;;
+        int i;
+        for(i=0; num&gt;0; i++){
+            result=(num%2)+result;
+            num/=2;
+        }
+        for(; i&lt;cipher; i++) result='0'+result;
+        return result;
+    }
+
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/02/24 21:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Katherine</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_1838"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>c 언어로 작성했습니다.</p>
+<pre><code class="no-highlight">#include &lt;stdio.h&gt;
+
+int main (void)
+{
+    int arr[10000], arr1[10000], arr2[10000], arr3[10000], arr4[10000], arr5[10000], a = 0, b = 0, c = 0, u = 0, d = 0, e = 0, f = 0, g = 0, o = 0, k = 0, i = 0, j = 0, l = 0, m = 0, t = 0, r = 0, s = 0;
+    char str[500];
+
+    printf(&quot;라이프 게임을 시작합니다. 몇 가지를 테스트 할지 먼저 써 주시고 엔터 하신 다음, 테스트 할 만큼 0 이나 1 을 문자열 처럼 입력하세요. (0 이나 1 이 총 50 개 숫자까지 가능합니다... 2 개 숫자까지는 결과값이 해당이 안됩니다.)\n양 옆의 수가 다르면 그 수는 바뀝니다. 바뀌기 전의 단계를 구합니다. 전 단계가 여럿이면 Multiple, 유일하면 바로 그 단계를 구하고 전 단계가 없으면 No Solution 을 표시합니다.&quot;);
+    scanf(&quot;%d&quot;, &amp;g);
+
+    s = g;
+    while(f &lt; g)
+    {
+        scanf(&quot;%s&quot;, &amp;str);
+        a = -1;
+        b = -1;
+        while(1)
+        {
+            a++;
+            b++;        
+            if(str[a]=='\0')
+                break;      
+        }
+
+        i = 0;
+        a = k;
+        while(i &lt; b)
+        {
+            arr[a] = str[i]%2;
+            str[i] = (int) str[i]/2;
+            a++;
+            i++;
+        }
+        a++;
+        k = a;
+        a = t;
+        for(a = a; a &lt; k; a++)
+        {
+            arr1[a] = arr[a];
+        }
+        a = t;
+        for(a = a; a &lt; k; a++)
+        {
+            arr2[a] = arr[a];
+        }
+        f++;
+        t = a;
+    }
+    a = 0;
+    arr4[j] = a;
+    j++;
+    a = 1;
+    f = g;
+
+    for(c = 0; c &lt; 1000000; c++)
+    {       
+        while(1)
+        {
+            for(a = a; 1; a++)
+            {
+                if(arr[a + 1] &lt; 0 || arr[a + 1] &gt; 1)
+                    break;
+                if(arr[a - 1] + arr[a]==arr[a] + arr[a + 1])
+                {
+                    arr1[a] = arr[a];
+                }
+                else if(arr[a - 1] + arr[a]!=arr[a] + arr[a + 1])
+                {
+                    if(arr[a]==1)
+                    {
+                        arr1[a] = 0;
+                    }
+                    else if(arr[a]==0)
+                    {
+                        arr1[a] = 1;
+                    }
+                }
+            }
+
+            a++;
+            a++;
+            arr4[j] = a;
+            j++;
+            arr[a - 1] = 'b';
+            arr1[a - 1] = 'b';
+            a++;
+            if(j==f + 1)
+                break;
+
+        }
+        arr[a - 1] = 'b';
+        arr1[a - 1] = 'b';
+        a = 0;
+        b = 1;
+        j = 0;
+        arr5[0] = 0;
+        while(1)
+        {
+            if(arr[b - 1] + arr[a]==arr[a] + arr[a + 1])
+            {
+                if(arr[b]=='b')
+                {
+                    arr1[a] = arr[a];
+                }
+            }
+            else if(arr[b - 1] + arr[a]!=arr[a] + arr[a + 1])
+            {
+                if(arr[b]=='b')
+                {
+                    if(arr[a]==1)
+                    {
+                        arr1[a] = 0;
+                    }
+                    else if(arr[a]==0)
+                    {
+                        arr1[a] = 1;
+                    }
+                }
+            }
+
+            if(arr[b - 2] + arr[b - 1]==arr[b - 1] + arr[a])
+            {
+                if(arr[b]=='b')
+                {
+                    arr1[b - 1] = arr[b - 1];
+                }
+            }
+            else if(arr[b - 2] + arr[b - 1]!=arr[b - 1] + arr[a])
+            {
+                if(arr[b]=='b')
+                {
+                    if(arr[b - 1]==1)
+                    {
+                        arr1[b - 1] = 0;
+                    }
+                    else if(arr[b - 1]==0)
+                    {
+                        arr1[b - 1] = 1;
+                    }
+                }
+            }
+            b++;
+            if(arr[b]=='b')
+            {
+                a = arr4[j];
+                j++;
+
+            }   
+            if(j==f + 1)
+                break;
+        }       
+
+        a = 0;
+        b = 0;
+        d = 0;
+        e = 0;
+        u = 0;
+        if(c==0)
+        {
+            for(a = arr5[o]; arr[a]!='b'; a++)
+            {
+                if(arr2[a]==arr1[a])
+                {
+                    e++;
+                }
+                u++;    
+            }
+        }   
+        for(a = arr5[o]; arr[a]!='b'; a++)
+        {
+            if(arr2[a]==arr1[a])
+            {
+                d++;
+            }
+            b++;
+        }
+        if(c==0)
+        {
+            if(u==e)
+            {   
+                if(g==s)
+                {
+                    printf(&quot;\n&quot;);
+                }
+                printf(&quot;Multiple\n&quot;);
+                o++;
+                arr5[o] = arr4[o];
+                g--;
+                c = -1;
+                for(a = arr5[o]; ; a++)
+                {
+                    if(arr[a]=='b')
+                    {
+                        r++;
+                        a++;
+                    }
+                    if(g==0)
+                        break;
+                    if(r==g)
+                        break;
+                    arr[a] = arr2[a];
+                    arr1[a] = arr2[a];
+                }
+            }
+        }
+        r = 0;
+        if(c &gt; 0)
+        {
+            if(d==b)
+            {
+                if(g==s)
+                {
+                    printf(&quot;\n&quot;);
+                }
+                for(a = arr5[o]; arr[a]!='b'; a++)
+                {
+                    printf(&quot;%d&quot;, arr[a]);
+                }
+                printf(&quot;\n&quot;);
+                o++;
+                arr5[o] = arr4[o];
+                g--;
+                c = -1;
+                for(a = arr5[o]; ; a++)
+                {
+                    if(arr[a]=='b')
+                    {
+                        r++;
+                        a++;
+                    }
+                    if(g==0)
+                        break;
+                    if(r==g)
+                        break;
+                    arr[a] = arr2[a];
+                    arr1[a] = arr2[a];
+                }
+                r = 0;
+            }
+            else if(c &gt; 10000)
+            {
+                if(g==s)
+                {
+                    printf(&quot;\n&quot;);
+                }
+                printf(&quot;No Solution\n&quot;);
+                o++;                
+                arr5[o] = arr4[o];
+                g--;
+                c = -1;
+                for(a = arr5[o]; ; a++)
+                {
+                    if(arr[a]=='b')
+                    {
+                        r++;
+                        a++;
+                    }
+                    if(g==0)
+                        break;
+                    if(r==g)
+                        break;
+                    arr[a] = arr2[a];
+                    arr1[a] = arr2[a];
+                }
+            }
+        }
+        if(g==0)
+            break;
+
+        for(a = arr5[o]; ; a++)
+        {
+            arr3[a] = arr1[a];
+            if(arr[a]=='b')
+            {
+                l++;
+            }
+            if(l==g)
+            {
+                l = 0;
+                break;
+            }
+        }           
+        for(a = arr5[o]; ; a++)
+        {
+            arr[a] = arr1[a];
+            if(arr[a]=='b')
+            {
+                m++;
+            }
+            if(m==g)
+            {
+                m = 0;
+                break;
+            }
+        }       
+        a = 1;
+        j = 1;
+        r = 0;
+    }   
+    return 0;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/04/15 14:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">전승빈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2255"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">static String oneD(char[] input)
+    {
+        int len = input.length;
+        String output = &quot;&quot;;
+
+        for (int i = 0; i &lt; len; i++)
+        {
+            if (input[(i + len - 1) % len] == input[(i + len + 1) % len])
+            {
+                output += input[i];
+            } else
+            {
+                output += (char) (((input[i] - '0' + 1) % 2) + '0');
+            }
+        }
+
+        return output;
+    }
+
+    static char[] nextBy(char[] input)
+    {
+        input[input.length - 1] += 1;
+
+        for (int i = input.length - 1; i &gt; 0; i--)
+        {
+            if (input[i] == '2')
+            {
+                input[i] = '0';
+                input[i - 1] += 1;
+            }
+        }
+
+        return input;
+    }
+static void exce77()
+    {
+        Scanner scan = new Scanner(System.in);
+        String input = scan.nextLine();
+        char[] sample = new char[input.length()];
+        char[] arr = new char[input.length()];
+        char[] next = new char[input.length()];
+        int cnt = 0;
+
+        for (int i = 0; i &lt; input.length(); i++)
+        {
+            arr[i] = input.charAt(i);
+            next[i] = '0';
+        }
+
+        while (next[0] &lt; '2')
+        {
+            if (input.equals(oneD(next)))
+            {
+                for (int i = 0; i &lt; next.length; i++)
+                    sample[i] = next[i];
+                cnt++;
+            }
+            nextBy(next);
+        }
+        if (cnt == 0)
+            System.out.println(&quot;No&quot;);
+        else if (cnt == 1)
+            System.out.println(sample);
+        else
+            System.out.println(&quot;Multiple&quot;);
+
+    }
+</code></pre>
+
+<p>무식하게 하나하나 다 찾았습니다..</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/08/20 16:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">조서현</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2344"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def cell_change(str_bori):
+    temp_mem=&quot;&quot;
+    str_b=list(str_bori)
+    for s_index,s_char in enumerate(str_b):
+        if s_index+1==len(str_bori):
+            s_index=-1
+        if str_b[s_index-1]==str_b[s_index+1]:
+            temp_mem+=s_char
+        elif s_char=='1':
+            temp_mem+='0'
+        else:
+            temp_mem+='1'
+    return temp_mem
+
+str_ori=input(&quot;0과 1만 이용한 문자열을 쓰시오&gt;&quot;)
+str_binarys = [bin(i)[2:].zfill(len(str_ori)) for i in range(pow(2,len(str_ori)))]
+str_binarys2 = list(map(cell_change,str_binarys))
+m=len(list(filter(lambda temp_str:str_ori==temp_str,str_binarys2)))
+#여기부터는 출력부
+if m&gt;1:
+    print(&quot;multiple&quot;)
+elif m==1:
+    print(str_binarys[str_binarys2.index(str_ori)])
+else:
+    print(&quot;None&quot;)
+</code></pre>
+
+<p>모든 경우의 수를 구한 후 경우의 수에서 있는 것들을 반환했습니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/09/18 00:13</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Graed</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2346"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Multiple은 안 나오고 맞는거 다 출력하는 방식으로 했습니다.</p>
+<p>array에서 끝에서 2번째까지를 나타내는걸 몰라서 b[-2]+b[-1] 이렇게 썼는데 깔끔한 방법 없나요?</p>
+<p>핵심 로직은       b[j] = b[j][0:i+1] + str( (int(s[i%len(s)]) + int(b[j][i-1])+int(b[j][i] ) ) % 2 )
+이 부분인데, 처음에 00, 01 등으로 시작하는 케이스를 넣은 후, 
+예를 들어 s의 2번째 세포, s[1]을 만들려면 그전 b[0,1,2] 의 내용을 참조해야 하므로, 이 네개의 합이
+2의 배수가 되게 했습니다. 즉 010 이면 그대로니까 1이되고, 011이면 다르니까 0이 되는 식으로, 직전 세개와
+다음 한개는 총합이 짝수가 되는것을 이용했습니다. i%len(s)로 인덱스를 쓴 이유는, 한바퀴 돌아서 마지막
+내용은 s[ len(s)-2, len(s)-1, 0] 이렇게 참조해야 하기 때문입니다. 이런 방식으로 네가지 케이스를
+다 발전시켜 본 후, 마지막으로 생성된 두개가 0,1번째와 같으면 생성가능, 아니면 모순이라고 판단해서
+뺐습니다.</p>
+<pre><code class="python">
+def ComputePrevState(s):
+  b= [&quot;00&quot;, &quot;01&quot;,&quot;10&quot;,&quot;11&quot;]
+
+  for i in range(1,len(s)+1):
+    for j in range(4):
+      b[j] = b[j][0:i+1] + str( (int(s[i%len(s)]) + int(b[j][i-1])+int(b[j][i] ) ) % 2 )
+
+  print s + &quot;:&quot;,
+  for j in range(4):
+    if b[j][0:2] == b[j][-2]+b[j][-1] :
+      print b[j][0:-2],
+  print &quot;&quot;
+
+ComputePrevState(&quot;00011101&quot;)
+ComputePrevState(&quot;000&quot;)
+ComputePrevState(&quot;000001&quot;)
+ComputePrevState(&quot;11110&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/09/18 16:28</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Kim JungRae</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1616"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">앞부분에 오타가 있으신 것 같은데 ㅎㅎ 똑같은 부분이 2개네요</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Graed,
+                                    2015/09/18 21:06
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1620"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">아 오타가 있었군요 감사합니다</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Kim JungRae,
+                                    2015/10/07 14:22
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2898"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>진리표를 작성해서 본 결과 xor을 이용하면 되더군요.
+순방향 연산도 역산도 모두 xor 이용하면 됩니다.</p>
+<pre><code class="python">def computePrevState(s):
+    res=[]
+    for cn in ['00','01','10','11']:
+        for c in s:
+            cn += str( int(cn[-2])^int(cn[-1])^int(c) )
+        if cn[:2]==cn[-2:] : res.append(cn[1:-1])
+    if len(res)==0 : return 'No'
+    if len(res)&gt;1 : return 'Multiple'
+    return res[0]
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/01/26 02:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">상파</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1743"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">배워갑니다 ^^</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Flair Sizz,
+                                    2016/04/14 23:35
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3412"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def nxt(previous, now, linow):
+    return (int(not(previous)) if now^linow else previous)
+
+def life(li, result, depth = 0, history = []):
+    if depth == 0 or depth == 1:
+        for x in range(2):
+            life(li, result, depth+1, history + [x])
+    else:
+        pp = history[depth-2]
+        p = history[depth-1]
+        lp = li[depth-1]
+        c = nxt(pp, p, lp)
+        if depth != len(li)-1:
+            life(li, result, depth+1, history + [c])
+        elif history[0] == nxt(history[-1], c, li[-1]) and history[1] == nxt(c, history[0], li[0]):
+            result.append(history+[c])
+
+while __name__ == '__main__':
+    inpt = list(int(x) for x in input('&gt;&gt;&gt;')); result = []; s = ''
+    life(inpt, result)
+    if len(result)&gt;1: s = 'Multiple'
+    elif len(result)==1: s = ''.join(str(x) for x in result[0])
+    else: s = 'No'
+    print(s)
+</code></pre>
+
+<p>처음 2개만 결정하면 나머지는 자동으로 결정됩니다. 나머지를 결정하고 처음 2개의 타당성을 검증하여 모순되지 않은 결과만을 등록합니다.</p>
+<p>파이썬 3.5.1</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/04/14 23:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Flair Sizz</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3583"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>재귀를 통해서 가능한 케이스를 전부 다 구하는 식으로 풀었습니다. </p>
+<pre><code class="python">def do(sample):
+    s = sample + sample[0]
+    pred = {'1': ['100', '001', '111', '010'], '0': ['000', '101', '011', '110']}
+    def helper(xs):
+        result = []
+        x, *tail = xs
+        if len(tail) == 0:
+            return pred[x]
+
+        for p in pred[x]:
+            ys = [t for t in helper(tail) if t[:2] == p[1:]]
+            result += [p + y[2:] for y in ys]
+
+        return set(result)
+
+    g = [x[1:-2] for x in helper(s) if x[:2] == x[-3:-1]]
+    if len(g) == 1:
+        print(g[0])
+    elif len(g) == 0:
+        print(&quot;No&quot;)
+    else:
+        print(&quot;Mutiple&quot;)
+
+do(&quot;00011101&quot;)
+do(&quot;000&quot;)
+do(&quot;000001&quot;)
+do(&quot;11110&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/05/04 10:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">룰루랄라</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4277"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C#으로 작성했습니다. 저도 하나하나 대입해보는 방법을 택했는데, 더 좋은 algorithm이 나오면 변경하겠습니다.</p>
+<pre><code class="cs">using System;
+using System.Linq;
+
+        public int CountCellSimulations(string input)
+        {
+            var count = 0;
+            var temp = Math.Pow(2, input.Length);
+            for (int i = 0; i &lt; temp; i++)
+            {
+                var curr = Convert.ToString(i, 2);
+                curr = string.Empty.PadLeft(input.Length - curr.Length).Replace(&quot; &quot;, &quot;0&quot;) + curr;
+                var output = PrintCellSimulations(curr);
+                if (input == output) 
+                    count++;
+            }
+            return count;
+        }
+
+        public string PrintCellSimulations(string input)
+        {
+            input = input.Last() + input + input.First();
+            var output = string.Empty;
+            for (int i = 1; i &lt; input.Length - 1; i++)
+            {
+                var prev = input[i - 1];
+                var next = input[i + 1];
+                output += prev == next ? input[i] : (input[i] == '0' ? '1' : '0');
+            }
+            return output;
+        }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/07/29 13:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Straß Böhm Jäger</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4432"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from collections import Counter
+
+###일단 문자열에서 0과 1이 자유롭게 바뀌기 위해서 함수를 하나 만들어 줍니다.
+
+def switch(a):
+    if a == '1':
+        a='0'
+    else:
+        a='1'
+    return a
+
+###결과를 통해서 추론해 낸 이전 단계가 정말 맞는지 결과로 도출해내는 함수를 만들어 봅니다.
+
+def takeTurn(string):
+    new_life=list(string)
+    i=0
+    for x in string:
+        try:
+            if string[i-1]==string[i+1]:
+                pass
+            else:
+                new_life[i]=switch(new_life[i])
+        except :
+            if string[i-1]==string[0]:
+                pass
+            else:
+                new_life[i]=switch(new_life[i])
+        i+=1
+    return ''.join(new_life)
+
+###코딩을 하기 전에 점화식을 해보니 첫 숫자를 0 또는 1로 가정하면 4개의 케이스가 나와서 금새 풀리더군요. 알고리즘을 짜봅니다.
+###Life의 마지막 항이랑 가정이랑 양립하는 지를 알 수 있는 방법을 고민해보았는데 잘 모르겠더군요. 이렇게 된 거 위에서 만든 takeTurn을 활용해 보도록 합시다.
+
+def referCell(preLifeCell,Life):
+    i=1
+    while i&lt;len(Life)-2:
+        if preLifeCell[i] == Life[i]:
+            tmpCell=list(preLifeCell)
+            tmpCell.insert(-1,preLifeCell[i-1])
+            preLifeCell=''.join(tmpCell)
+        else:
+            tmpCell=list(preLifeCell)
+            tmpCell.insert(-1,switch(preLifeCell[i-1]))
+            preLifeCell=''.join(tmpCell)
+        i+=1
+    return preLifeCell
+
+###referCell함수를 이용하기 위해서 초기값들을 설정해주고 그 결과를 Counter 모듈을 이용해서 저장한 후 원하는 출력결과를 도출합니다.
+
+def seeLastTurn(string):
+    Life=list(string)[:]
+    keepCase00=referCell(''.join([Life[0],'0','0']),Life)
+    keepCase11=referCell(''.join([Life[0],'1','1']),Life)
+    changeCase01=referCell(''.join([switch(Life[0]),'0','1']),Life)
+    changeCase10=referCell(''.join([switch(Life[0]),'1','0']),Life)
+    cases=[keepCase00,keepCase11,changeCase01,changeCase10]
+    cnt=Counter()
+    for x in cases:
+        if takeTurn(x) == string:
+            cnt[x]+=1
+    answer=list(cnt.keys())
+    if len(answer)==1:
+        return answer[0]
+    elif len(answer)==0:
+        return 'No'
+    else:
+        return 'Multiple'
+
+
+if __name__=='__main__':
+    print(seeLastTurn(&quot;00011101&quot;) == &quot;01100101&quot;)
+    print(seeLastTurn(&quot;000&quot;) == &quot;Multiple&quot;)
+    print(seeLastTurn(&quot;000001&quot;) == &quot;No&quot;)
+    print(seeLastTurn(&quot;11110&quot;) == &quot;10010&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/08/09 16:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김 지회</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5031"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <h3 id="35">파이썬3.5<br></h3>
+<p>재귀, 클로저를 이용</p>
+<pre><code class="python">toggle = lambda x: '1' if x == '0' else '0'
+
+
+def nextlife(s):
+    's 다음의 세포 상태 리턴'
+
+    s_ = s
+    for i in range(len(s)):
+        if s[i-1] != s[i-len(s)+1]:
+            s_ = s_[:i] + toggle(s[i]) + s_[i+1:]
+
+    return s_
+
+
+def f(s):
+    's 직전의 세포 상태'
+
+    result = set()
+    def g(s, cur=''):
+
+        if not s:
+            return cur
+
+        r = g(s[1:], cur+s[0])    # 그대로
+        if r: result.add(r)
+        r2 = g(s[1:], cur+toggle(s[0]))    # 토글해서
+        if r2: result.add(r2)
+    g(s)
+
+    # 마무리
+    a = [n for n in result if nextlife(n) == s]
+    if len(a) &gt; 1: return 'Multiple'
+    elif len(a) == 1: return a[0]
+    else: return 'No'
+
+
+if __name__ == '__main__':
+    print(f('00011101'), f('000'), f('000001'), f('11110'), sep='\n')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/21 15:25</p>
+                                <p class="static-profile" style="margin:0;padding:0;">디디</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5046"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>해매다가 겨우 만들었네요ㅠㅠ
+무식한 방법이지만 공유합니다.</p>
+<pre><code class="java">import java.util.*;
+
+public class onechawon {
+
+    /*문자열을 받아다 정수배열로 바꾸고, 그 숫자가 변할 지에 대한 boolean 배열도
+      만들어 최종적으로 문자열을 반환하는 메소드입니다
+     */
+    static String work(String a){
+        int[] nums = new int[a.length()];
+        boolean[] change= new boolean[a.length()];
+        for(int i=0; i&lt;a.length(); i++){
+            int x = a.charAt(i)-48;
+            nums[i]=x;
+            change[i]=false;
+        }
+        for(int i=0; i&lt;a.length(); i++){
+            if(i==0){
+                if(nums[1]!=nums[a.length()-1]) change[i]=true;
+            }
+            else if(i==a.length()-1){
+                if(nums[i-1]!=nums[0]) change[i]=true;
+            }else{
+                if(nums[i-1]!=nums[i+1]) change[i]=true;
+            }
+        }
+        String result =&quot;&quot;;
+        for(int i=0; i&lt;a.length(); i++){
+            if(change[i]){
+                if(nums[i]==0){ nums[i]=1;
+                }else nums[i]=0;
+            }
+            result +=nums[i];
+        }
+        return result;
+    }
+
+    /*무식하게 2^input.length()의 경우를 하나씩 다 따져보는 메소드입니다.
+    */
+    static void show(String input){
+        int count = 0;
+        int s = input.length();
+        int cases = 1;
+        for (int i=0; i&lt;s; i++){
+            cases*=2;
+        }
+        Random ran = new Random();
+        String answer=&quot;&quot;;
+        String x =&quot;&quot;;
+        int obsize=0;
+        while(obsize&lt;cases){
+            ArrayList ob = new ArrayList();
+            for (int i=0; i&lt;s; i++){
+                x+=ran.nextInt(2);
+            }
+            if(ob.contains(x)){continue;
+            }else{
+                ob.add(x);
+                if(work(x).equals(input)){
+                    count++;
+                    answer+=x;
+                }
+                x=&quot;&quot;;
+            }
+            obsize++;
+        }
+        if(count==0) System.out.println(&quot;computePrevState(\&quot;&quot;+input+&quot;\&quot;) == none&quot;);
+        if(count==1) System.out.println(&quot;computePrevState(\&quot;&quot;+input+&quot;\&quot;) == &quot;+answer);
+        if(count&gt;1) System.out.println(&quot;computePrevState(\&quot;&quot;+input+&quot;\&quot;) == multiple&quot;);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while(true){
+            System.out.println(&quot;input line: &quot;);
+            if(sc.hasNext()){
+                String input = sc.nextLine();
+                show(input);
+            }else break;
+        }
+        System.out.println(&quot;Exit&quot;);
+        System.exit(0);
+    }
+
+}
+</code></pre>
+
+<p>실행결과</p>
+<pre><code class="actionscript">input line: 
+000
+computePrevState(&quot;000&quot;) == multiple
+input line: 
+11110
+computePrevState(&quot;11110&quot;) == 10010
+input line: 
+000001
+computePrevState(&quot;000001&quot;) == none
+input line: 
+00011101
+computePrevState(&quot;00011101&quot;) == 01100101
+input line: 
+Exit
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/23 17:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">장핌</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6222"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>모든 경우의 수를 여러 for문을 통해 비교해봅니다~~</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;math.h&gt;
+
+int size;
+
+int computePrevState(char* state);
+void print_state(char* state);
+char* getNextState(char* state);
+
+void main() {
+    char state[] = &quot;11110&quot;;
+    size = strlen(state);
+
+    int result = computePrevState(state);
+    if(result==0)
+        printf(&quot;No&quot;);
+    if(result &gt; 1)
+        printf(&quot;Multiple&quot;);
+}
+
+int computePrevState(char* state) {
+    int count = 0;
+    char* prev = (char*) malloc (sizeof(char) * size);
+    char* next = (char*) malloc (sizeof(char) * size);
+    char* copy = (char*) malloc (sizeof(char) * size);
+
+    int bound = 0;
+    for(int i=0;i&lt;size;i++)
+        bound = pow(2.0, i) + bound;
+    for(int i=0;i&lt;=bound;i++) {
+        for(int i=0;i&lt;size;i++)
+            prev[i] = '0';
+        int temp = i;
+        for(int j=0;j&lt;size;j++) {
+            int m = (int)pow(2.0, size-j-1);
+            if(temp/m!= 0)
+                prev[j] = '1';
+            temp = temp % m;
+        }
+
+        next = getNextState(prev);
+        if(!strncmp(next, state, size)) {
+            strcpy(copy, prev);
+            count++;
+        }
+    }
+    if(count==1)
+        print_state(copy);
+    return count;
+}
+
+
+void print_state(char* state) {
+    for(int i=0;i&lt;size;i++)
+        printf(&quot;%c&quot;, state[i]);
+    printf(&quot;\n&quot;);
+}
+
+char* getNextState(char* state) {
+    char* next = (char*) malloc (sizeof(char) * size);
+    for(int i=0;i&lt;size;i++) {
+        if(i==0) {
+            if(state[size-1] != state[1])
+                if(state[i] == '0')
+                    next[i] = '1';
+                else
+                    next[i] = '0';
+            else 
+                next[i] = state[i];
+        }
+        else if(i == (size-1)) {
+            if(state[0] != state[size-2])
+                if(state[i] == '0')
+                    next[i] = '1';
+                else
+                    next[i] = '0';
+            else 
+                next[i] = state[i];
+        }
+        else {
+            if(state[i-1] != state[i+1]) {
+                if(state[i] == '0')
+                    next[i] = '1';
+                else
+                    next[i] = '0';
+            }
+            else 
+                next[i] = state[i];
+        }
+    }
+    return next;
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/02/17 14:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">코딩초보</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14058"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def compute_prev_state(v):    
+    for i in ('00','10','11','01'):
+        ret = i
+        for j in range(1, len(v)+1):
+            ret += (str(int(ret[-2])^1), ret[-2])[ret[-1] == v[j%len(v)]]
+        if ret[:2] == ret[-2:]: yield ret[:-2]
+
+def main(v):
+    tmp = tuple(compute_prev_state(v))
+    print(tmp[0] if len(tmp)==1 else 'Multiple' if len(tmp)&gt;1 else 'No')
+
+
+inp = [&quot;00011101&quot;, &quot;000&quot;, &quot;000001&quot;, &quot;11110&quot;]
+for i in inp: main(i)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/11 19:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14744"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>전단계: P = P0P1P2...Pn-1</p>
+<p>현단계: C = C0C1C2...Cn-1</p>
+<p>진리표를 그려 보면 Pi = Ci xor (Pi-1 xor Pi+1) 인데, </p>
+<p>Pi 를 알기 위해 앞뒤 두 개를 구하는 건 번거로우므로, 다시 Pi+1에 대해 정리:</p>
+<table>
+<thead>
+<tr>
+<th>Ci</th>
+<th>Pi</th>
+<th>Pi-1</th>
+<th>Pi+1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>--------</td>
+<td>--------</td>
+<td>--------</td>
+<td>--------</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<pre><code>=&gt; Pi+1 = (Ci+Pi+Pi-1) in [1, 3]
+        = (Ci+Pi+Pi-1) % 2 == 1
+        = (Ci+Pi+Pi-1) % 2
+
+=&gt; Pi = (Ci-1+Pi-1+Pi-2) % 2
+</code></pre>
+
+<p>즉 P에서 이웃한 두 세포의 상태가 결정되면, 나머지 세포들의 상태도 결정할 수 있다.</p>
+<p>순환 구조이므로 마지막에는 처음 결정된 두 세포의 상태가 유효한지 확인해야 한다.</p>
+<pre><code class="python"># P[-1], P[-2] 에 가짜 세포 두 개를 만들고 시작해서 P 인덱스가 두 개씩 밀림
+def prev_stat(C):
+    res = []    
+    for P in ['00', '01', '10', '11']:
+        for i in range(len(C)):
+            P += str((int(C[i-1]) + int(P[i+1]) + int(P[i])) % 2)
+
+        if P[0]+P[1] == P[-2]+P[-1]:
+            res.append(P[2:])
+
+    return res
+
+
+for cells in ['00011101', '000', '000001', '11110']:
+    prev = prev_stat(cells)
+    if not prev:
+        print('No')
+    elif len(prev) &gt; 1:
+        print('Multiple')
+    else:
+        print(prev[0])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/27 01:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17421"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <h1 id="c">C</h1>
+<h3 id="_1">비트연산으로 해봤습니다.</h3>
+<p>일단은...모든경우 다 따져보는데도 속도는 빠른것 같아요. </p>
+<pre><code class="cpp">#define _CRT_SECURE_NO_WARNINGS
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    char life[51];
+    scanf(&quot;%s&quot;, life);
+    int n = strlen(life), count = 0;
+    unsigned long long p = 0, q = 0, r = strtoull(life, NULL, 2);
+    for (p; p &lt; (1ULL&lt;&lt;n); p++)
+    {                                  
+        q = p &lt;&lt; 2;                    
+        q += p &gt;&gt; (n - 2);          
+        q = p ^ q;                    
+        q &amp;= (1 &lt;&lt; n) - 1;
+        q += (q &amp; 1) &lt;&lt; n;       
+        q = p ^ (q &gt;&gt; 1);     
+        if (q == r)
+        {
+            for (int i = n - 1; i &gt;= 0; i--)
+                printf(&quot;%lld&quot;, (p &gt;&gt; i) &amp; 1);
+            printf(&quot;\n&quot;);
+            count++;
+        }
+    }
+    printf(&quot;count : %d\n&quot;, count);
+    return 0;
+}
+</code></pre>
+
+<h2 id="result">result</h2>
+<p>input : 1000100100010011110010010
+result : 1101110101100001001100001
+count (개수) : 1</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/04/05 19:03</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hyuk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29778"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def predic(P,strR,res):
+    for c in strR:
+        if P[-1]==c:
+            P += P[-2]
+        else:
+            P += str(1-int(P[-2]))
+    if P[0]==P[-2] and P[1]==P[-1]:
+        res.append(P[1:-1])
+
+def computePrevState(strR):
+    N = len(strR)
+    res = []
+    predic('00',strR,res)
+    predic('10',strR,res)
+    predic('01',strR,res)
+    predic('11',strR,res)
+    print('computePrevState(&quot;',strR,'&quot;) == ', end='')
+    if len(res)==1:
+        print('&quot;%s&quot;' %res[0])
+    elif len(res)==0:
+        print('&quot;No&quot;')
+    else:
+        print('&quot;Multiple&quot;')
+
+computePrevState(&quot;00011101&quot;)
+computePrevState(&quot;000&quot;)
+computePrevState(&quot;000001&quot;)
+computePrevState(&quot;11110&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/12/02 13:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

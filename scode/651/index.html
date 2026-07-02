@@ -1,0 +1,1541 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="## Input
+n(짝수) 가 입력 됩니다. (홀수일 경우 예외처리는 자율적으로)
+
+## Output
+0~n-1의 원소를 절반씩 나눠 가지는 두 리스트의 쌍 (a, b)를 반환하거나 출력합니다.
+
+### (중요) 단, 외부 라이브러리를...">
+    <title>절반씩 나누기 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">절반씩 나누기</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">6</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 4</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <h2 id="input">Input</h2>
+<p>n(짝수) 가 입력 됩니다. (홀수일 경우 예외처리는 자율적으로)</p>
+<h2 id="output">Output</h2>
+<p>0~n-1의 원소를 절반씩 나눠 가지는 두 리스트의 쌍 (a, b)를 반환하거나 출력합니다.</p>
+<h3 id="_1">(중요) 단, 외부 라이브러리를 임포트 하지 않습니다.</h3>
+<h3 id="input_1">Input 예시</h3>
+<pre><code class="cpp">6
+
+</code></pre>
+
+<h3 id="output_1">Output 예시</h3>
+<pre><code class="cpp">([2, 3, 4], [0, 1, 5])
+([0, 1, 5], [2, 3, 4])
+([1, 3, 4], [0, 2, 5])
+([0, 2, 5], [1, 3, 4])
+([1, 2, 4], [0, 3, 5])
+([0, 3, 5], [1, 2, 4])
+([1, 2, 3], [0, 4, 5])
+([0, 4, 5], [1, 2, 3])
+([0, 3, 4], [1, 2, 5])
+([1, 2, 5], [0, 3, 4])
+([0, 2, 4], [1, 3, 5])
+([1, 3, 5], [0, 2, 4])
+([0, 2, 3], [1, 4, 5])
+([1, 4, 5], [0, 2, 3])
+([0, 1, 4], [2, 3, 5])
+([2, 3, 5], [0, 1, 4])
+([0, 1, 3], [2, 4, 5])
+([2, 4, 5], [0, 1, 3])
+([0, 1, 2], [3, 4, 5])
+([3, 4, 5], [0, 1, 2])
+
+</code></pre>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">조합</span>
+                
+                    <span class="label label-tag label-xs">재귀</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2019/04/09 11:31</p>
+                    <p class="static-profile" style="margin:0;padding:0;">Hyuk</p>
+                </div>
+            </div>
+
+            
+                <a name="comment_2801"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">문제에서 의도한 리스트와 쌍이 각각 순열을 가리키는지 조합을 가리키는지 명확한 설명이 없습니다.
+다만 예시를 통해서 추론해보건데, 리스트는 조합이고 쌍은 순열로 의도하신 것 같습니다.</span>
+                    -
+                    <span style="font-size:11px;">
+                        김준우,
+                        2021/01/03 14:14
+                    </span>
+                </div>
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>16개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_17461"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">3</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>우선...파이썬으로 해봤습니다.</p>
+<p>8개를 4개씩 나누는 상황을 생각해보면 0~ 255까지의 수를 (이진법으로 00000000 ~ 11111111)</p>
+<p>이진법으로 표현한뒤 1의 개수가 4개일때만 골라 a는 1의 위치를, b는 0의 위치를 반환했습니다.</p>
+<pre><code class="python">result = []
+n = int(input())
+for i in range(2**n):
+    a = []
+    b = []
+    c = bin(i)[2:]
+    if c.count('1') == n/2:
+        for j in range(n):
+            if c.zfill(n)[j] == '1': a.append(j)
+            else: b.append(j)
+        result.append((a, b))
+print(result)
+</code></pre>
+
+<p>이렇게 계산할 경우 for문을 n * (2^n) 번 돌아야 하네요..</p>
+<p>근데 ([1,2,3,4] , [5,6,7,8]) 과 ([5,6,7,8], [1,2,3,4])는 대칭임을 고려한다면 </p>
+<p>횟수를 절반으로 줄일 수 있을 것 같습니다.</p>
+<pre><code class="python">result = []
+n = int(input())
+for i in range(2**(n-1)):
+    c = bin(i)[2:]
+    if c.count('1') == n/2:
+        a, b = [], []
+        for j in range(n-1):
+            if c.zfill(n-1)[j] == '1': a.append(j)
+            else: b.append(j)
+        b.append(n-1)
+        result.append((a, b))
+        result.append((b, a))
+for x in result: print(x)
+</code></pre>
+
+<p>이렇게 구하면 for문을  도는 횟수가 (n-1)(2^(n-1)) 이니까 위 경우의 절반보다 조금 더 줄어드네요</p>
+<p>이해를 돕자면...</p>
+<p>우선 다음과 같은 상황을 생각해 봅시다.</p>
+<p>0~2n-1의 2n개의 원소중 n개를 뽑을 때, 
+0을 포함해서 뽑는경우의 가지수와                   (남은 2n-1개 중 n-1개를 더 뽑아야 함 :  2n-1 C n-1)
+0을 포함하지 않고 2n개를 뽑는 가지 수가 같고   (남은 2n-1개 중 n 개를 뽑아야 함       :  2n-1 C n)
+두 경우는 당연히도 서로 겹치지 않습니다. ( 하나는 0을 포함, 하나는 0을 포함하지 않는 조합이므로)</p>
+<p>이를 이용해서,</p>
+<p>n개 원소 : 0 ~n-1 중에서 n-1을 제외하고 
+(0~7중에 7을 제외하고)</p>
+<p>남은 n-1개 원소 : 0~n-2 중에서 n/2개를 뽑습니다.
+(0~6 중에 4개 뽑음 예: 0,1,2,3)</p>
+<p>그럼 뽑힌 수가 n/2개  (0, 1, 2, 3), 
+남은 수가 n/2 -1 개    (4, 5, 6)         이니까 </p>
+<p>안 뽑힌 수 목록에 n-1을 추가하면 개수가 같아집니다! ([0, 1, 2, 3] 과 [4, 5, 6, 7])</p>
+<p>그리고는 순서를 고려해서 위 예시의 ([0,1,2,3], [4,5,6,7]) 과 ([4,5,6,7],[0,1,2,3])두개를 모두 반환하면 됩니다.</p>
+<p>재귀함수를 이용해서도 작성해봤는데요,</p>
+<p>확인하는 수는 적어도 스택떄문인지 n이 커지면 오래걸리는건 똑같은거 같습니다. ㅜㅜ</p>
+<pre><code class="python">def move(a, n, max_n):
+    yield a
+    while not a &amp; 2**n and n &lt; max_n:
+        a ^= 3 &lt;&lt; (n-1)
+        n += 1
+        yield a
+
+
+def main(base, n, max_n, r=[]):
+    for i in move(base, n, max_n):
+        if n == 1:
+            r.append(bin(i)[2:].zfill(max_n))
+        else:
+            main(i, n-1, max_n, r)
+    result = []
+    for x in r:
+        a, b = [], []
+        for i in range(max_n):
+            if x[i] == '1':
+                a.append(i)
+            else:
+                b.append(i)
+        result.append((a, b))
+    return result
+
+
+if __name__ == '__main__':
+    n1 = int(input(&quot;Please enter even number n : &quot;))
+    base1 = 2**(n1//2) - 1
+    a = main(base1, n1 // 2, n1)
+    for k in a:
+        print(k)
+</code></pre>
+
+<p>이 방법은
+0000011111</p>
+<p>0000101111</p>
+<p>0000110111</p>
+<p>0000111011</p>
+<p>0000111101</p>
+<p>0000111110
+.
+.
+.
+와 같이 왼쪽으로 1을 한개 씩 옮기는 전략을 세웠습니다.</p>
+<p>0010011 을 
+0110000 과 xor 연산 시키면
+0100011 로 바뀌는 점(맨 왼쪽의 1이 왼쪽으로 한 칸 이동) 을 이용했습니다.</p>
+<p>.
+.</p>
+<p>최근 c도 같이 공부중이라 c로도 한번 짜 봤습니다.</p>
+<h3 id="c">c</h3>
+<pre><code class="cpp">#define _CRT_SECURE_NO_WARNINGS
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main()
+{
+    int n, a_index, b_index, i_index=0;
+    scanf(&quot;%d&quot;, &amp;n);
+    int ***result = malloc(sizeof(int**)*2);
+    for (int i=0; i &lt; 2; i++)
+    {
+        result[i] = malloc(sizeof(int*)*(1 &lt;&lt; (n - 1)));
+        for (int j = 0; j &lt; (1 &lt;&lt; (n - 1)); j++)
+            result[i][j] = malloc(sizeof(int)*n/2);
+    }
+    for (int i = 0; i &lt; (1 &lt;&lt; (n-1)); i++)
+    {
+        a_index = 0, b_index = 0;
+        for (int j = 0; j &lt; n-1; j++)
+        {
+            if ((i &gt;&gt; j) &amp; 1) a_index++;
+            else b_index++;
+            if (a_index &gt; n / 2 || b_index &gt;= n / 2) break;
+        }
+        if (a_index == n / 2)
+        {
+            a_index = 0, b_index = 0;
+            for (int j = 0; j &lt; n - 1; j++)
+            {
+                if ((i &gt;&gt; j) &amp; 1)
+                {
+                    result[0][i_index][a_index] = j;
+                    result[1][i_index+1][a_index] = j;
+                    a_index++;
+                }
+                else
+                {
+                    result[1][i_index][b_index] = j;
+                    result[0][i_index+1][b_index] = j;
+                    b_index++;
+                }
+            }
+            result[1][i_index][b_index] = n - 1;
+            result[0][i_index + 1][b_index] = n - 1;
+            i_index += 2;
+        }
+    }
+    for (int i = 0; i &lt; i_index; i++)
+    {
+        for (int k = 0; k &lt; 2; k++)
+        {
+            printf(&quot;(&quot;);
+            for (int j = 0; j &lt; n/2; j++)
+                printf(&quot;%d, &quot;, result[k][i][j]);
+            printf(&quot;)  &quot;);
+        }
+        printf(&quot;\n&quot;);
+    }
+    for (int i = 0; i &lt; 2; i++)
+    {
+        for (int j = 0; j &lt; (1 &lt;&lt; (n - 1)); j++)
+            free(result[i][j]);
+        free(result[i]);
+    }
+    free(result);
+    return 0;
+}
+</code></pre>
+
+<p>세 경우 다 결과는
+n=6일경우 </p>
+<pre><code class="cpp">([2, 3, 4], [0, 1, 5])
+([0, 1, 5], [2, 3, 4])
+([1, 3, 4], [0, 2, 5])
+([0, 2, 5], [1, 3, 4])
+([1, 2, 4], [0, 3, 5])
+([0, 3, 5], [1, 2, 4])
+([1, 2, 3], [0, 4, 5])
+([0, 4, 5], [1, 2, 3])
+([0, 3, 4], [1, 2, 5])
+([1, 2, 5], [0, 3, 4])
+([0, 2, 4], [1, 3, 5])
+([1, 3, 5], [0, 2, 4])
+([0, 2, 3], [1, 4, 5])
+([1, 4, 5], [0, 2, 3])
+([0, 1, 4], [2, 3, 5])
+([2, 3, 5], [0, 1, 4])
+([0, 1, 3], [2, 4, 5])
+([2, 4, 5], [0, 1, 3])
+([0, 1, 2], [3, 4, 5])
+([3, 4, 5], [0, 1, 2])
+</code></pre>
+
+<p>이렇게 나오네요</p>
+<p>근데 n이 14~16까지는 계산할 만 한데,
+n이 더더더 커지면 어떻게 해야 할까요? ...ㅎㅎㅎㅎㅎ</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/04/09 11:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hyuk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18527"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># S(남은숫자)에서 하나를 뽑아서 P에 넣거나 Q에 넣는다.
+# S가 공집합이 되면 출력, P 또는 Q가 과반이 되면 중단.
+
+def part(n):
+    def _part(S, P, Q):
+        if len(P) &gt; n//2 or len(Q) &gt; n//2:
+            return
+        elif not S:
+            print(P, Q)
+        else:
+            _part(S[1:], P | {S[0]}, Q         )
+            _part(S[1:], P,          Q | {S[0]})
+
+    return _part(list(range(n)), set(), set())
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/07/11 14:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17466"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><em>julia</em></p>
+<pre><code class="none">[0, 1, 2], [3, 4, 5]
+[0, 1, 3], [2, 4, 5]
+[0, 1, 4], [2, 3, 5]
+[0, 1, 5], [2, 3, 4]
+[0, 2, 3], [1, 4, 5]
+[0, 2, 4], [1, 3, 5]
+[0, 2, 5], [1, 3, 4]
+[0, 3, 4], [1, 2, 5]
+[0, 3, 5], [1, 2, 4]
+[0, 4, 5], [1, 2, 3]
+
+첫번째 원소만 처음으로 고정한체 순서대로 카운팅하여 모든 조합을 탐색
+일종의 DFS
+</code></pre>
+
+<pre><code class="julia">function printPair(vector, pos)
+    tmp = setdiff(vector, pos)
+    println(pos, &quot;, &quot;, tmp, &quot;\n&quot;, tmp, &quot;, &quot;, pos)
+end
+
+print(&quot;짝수 입력: &quot;)
+const n = parse(Int, readline())
+const vector = collect(0:n-1)
+
+
+
+let
+    pos = collect(0:(n&gt;&gt;1 - 1))
+
+    while pos[1] &lt; 1
+        printPair(vector, pos)
+
+        pos[end] &lt; n-1 ? pos[end] += 1 :
+        for i in 1:n
+            if pos[end-i] &lt; n-1
+                pos[end-i] += 1
+                pos[end-i] + i &lt; n &amp;&amp;
+                    ( pos[end-i+1:end] = (1:i) .+ pos[end-i]; break )
+            end
+        end
+    end
+end
+</code></pre>
+
+<pre><code>짝수 입력: 6
+[0, 1, 2], [3, 4, 5]
+[3, 4, 5], [0, 1, 2]
+[0, 1, 3], [2, 4, 5]
+[2, 4, 5], [0, 1, 3]
+[0, 1, 4], [2, 3, 5]
+[2, 3, 5], [0, 1, 4]
+[0, 1, 5], [2, 3, 4]
+[2, 3, 4], [0, 1, 5]
+[0, 2, 3], [1, 4, 5]
+[1, 4, 5], [0, 2, 3]
+[0, 2, 4], [1, 3, 5]
+[1, 3, 5], [0, 2, 4]
+[0, 2, 5], [1, 3, 4]
+[1, 3, 4], [0, 2, 5]
+[0, 3, 4], [1, 2, 5]
+[1, 2, 5], [0, 3, 4]
+[0, 3, 5], [1, 2, 4]
+[1, 2, 4], [0, 3, 5]
+[0, 4, 5], [1, 2, 3]
+[1, 2, 3], [0, 4, 5]
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/04/09 20:14</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17478"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>아래에 있는 함수 getSubsets은 리스트 L에서 주어진 크기의 모든 부분집합을 구하는 재귀함수입니다. <br>
+이 문제에서 구하고자 하는 건 짝수 크기의 리스트에서 절반 크기의 모든 부분집합을 구하는 문제이므로 <br>
+아래와 같이 함수 halfCombs를 정의해주면 됩니다. <br>
+<br>
+아래의 재귀함수 getSubsets를 이해하자면 우선 주어진 리스트 L의 모든 부분집합을 구하는 문제를 생각해봅시다. <br>
+간단하게 L = [0, 1, 2]라고 합시다. <br>
+L의 모든 부분집합은 0을 포함하는 집합과 0을 포함하지 않는 집합으로 나뉩니다. <br>
+그리고 그 두 그룹은 다시 1을 포함하는 집합과 1을 포함하지 않는 집합으로 나뉩니다. <br>
+그러면 두 그룹을 각각 둘로 나눴으니 총 네 그룹을 얻게 됩니다. <br>
+그 네 그룹은 다시 2를 포함하는 집합과 2를 포함하지 않는 집합으로 나뉘게 됩니다. <br>
+이런 식으로 모든 부분집합을 구할 수 있습니다. <br>
+getSubsets 함수는 이런 식으로 경우의 수를 나눠가는 과정에서 얻는 리스트가 <br>
+주어진 사이즈와 일치할때 그 리스트를 출력하는 재귀함수입니다. <br>
+즉 L의 모든 부분집합 중 주어진 크기의 집합만 추려서 출력하는 함수입니다. <br>
+만약 사이즈와 관계없이 모든 과정에서 얻는 리스트를 출력한다면 결과적으로 모든 부분집합을 출력하게 됩니다. <br></p>
+<pre><code class="python">def halfCombs(n):
+    if n % 2 == 1:
+        print(&quot;n이 홀수입니다.&quot;)
+        return
+    L = [i for i in range(n)]
+    getSubsets(L, n//2, 0)
+
+def getSubsets(L, size, index):
+    if size == len(L):
+        print(L)
+        return
+    if index &gt;= len(L):
+        return
+    Q = L[:]
+    Q.pop(index)
+    getSubsets(Q, size, index)
+    getSubsets(L, size, index+1)
+</code></pre>
+
+<pre><code>&gt;&gt;&gt; halfCombs(6)
+[3, 4, 5]
+[2, 4, 5]
+[2, 3, 5]
+[2, 3, 4]
+[1, 4, 5]
+[1, 3, 5]
+[1, 3, 4]
+[1, 2, 5]
+[1, 2, 4]
+[1, 2, 3]
+[0, 4, 5]
+[0, 3, 5]
+[0, 3, 4]
+[0, 2, 5]
+[0, 2, 4]
+[0, 2, 3]
+[0, 1, 5]
+[0, 1, 4]
+[0, 1, 3]
+[0, 1, 2]
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/04/10 23:31</p>
+                                <p class="static-profile" style="margin:0;padding:0;">messi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17479"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>재귀함수뿐만 아니라 이진수를 활용할 수도 있습니다. <br>
+<br>
+이진수의 편이 좀더 직관적으로 보입니다.<br>
+<br>
+예를 들어 L = [0, 1, 2]와 같이 길이 3의 집합인 경우<br>
+모든 부분집합은 이진수 000 ~ 111에 일대일 대응시킬 수 있습니다.<br>
+예컨대 이진수 001은 0번째 원소만 가지는 부분집합 [0]에 대응합니다.<br>
+이진수 101은 0번째, 2번째 원소를 가지는 부분집합 [0,2]에 대응합니다.<br></p>
+<pre><code class="python">def halfCombs(n):
+    if n % 2 == 1:
+        print(&quot;n이 홀수입니다.&quot;)
+        return
+    L = [i for i in range(n)]
+    getSubsets(L, n//2)
+
+def getSubsets(L, size):
+    for i in range(2**len(L)):
+        T = list(bin(i))  #이진수로 바꾸기
+        del T[0:2]  #'0b' 문자열 제거
+        T.reverse()
+
+        if T.count('1') == size:
+            Q = []
+            for j in range(len(T)):
+                if T[j] == '1':
+                    Q.append(L[j])
+            print(Q)
+
+halfCombs(6)
+</code></pre>
+
+<p><br>
+<br>
+재귀함수 때와 마찬가지로 집합 크기의 조건을 빼면 모든 부분집합을 출력하는 함수가 됩니다.<br></p>
+<pre><code>def getAllSubsets(L):
+    for i in range(2**len(L)):
+        T = list(bin(i))  #이진수로 바꾸기
+        del T[0:2]  #'0b' 문자열 제거
+        T.reverse()
+
+        Q = []
+        for j in range(len(T)):
+            if T[j] == '1':
+                Q.append(L[j])
+        print(Q)
+
+getAllSubsets([0,1,2,3])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/04/11 00:39</p>
+                                <p class="static-profile" style="margin:0;padding:0;">messi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17494"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.Scanner;
+
+public class HalfDivide {
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+        int n = 1;                              
+        while(n % 2 != 0) {
+            System.out.println(&quot;짝수 입력 : &quot;);
+            n = scanner.nextInt();
+        }
+        int n2 = n/2;               
+        int num1[] = new int[n];
+        int num2[] = new int[n];
+
+        String str;
+        for(int i = (int) (Math.pow(2, n2) - 1); i &lt; Math.pow(2, n); i++) {
+            int k = 0;
+            int count1 = 0;
+            int count2 = 0;
+
+            str = Integer.toBinaryString(i);    // 변환시킨 2진수 자릿수를 n으로 맞춰준다.
+            while(str.length() != n) {
+                str = &quot;0&quot; + str;
+            }
+
+            while(true) {                       // 1이면 num1배열에 자릿수를 저장 0이면 num2배열에 자릿수를 저장
+                k++;
+                if(str.substring(str.length() - k, str.length() - k + 1).equals(&quot;1&quot;)) {
+                    num1[count1] = k - 1;
+                    count1++;
+                } else if(str.substring(str.length() - k, str.length() - k + 1).equals(&quot;0&quot;)){
+                    num2[count2] = k - 1;
+                    count2++;
+                } 
+
+                if(k == n &amp;&amp; count1 == n/2) {   // 1의 갯수가 n/2 일 경우만 결과 출력
+                    System.out.print(&quot;([&quot;);
+                    for(int j = 0; j &lt; count1; j++) {
+                        System.out.print(num1[j]);
+                        if(j != count1 - 1) {
+                            System.out.print(&quot;, &quot;);
+                        }
+                    }
+                    System.out.print(&quot;], [&quot;);
+                    for(int j = 0; j &lt; count1; j++) {
+                        System.out.print(num2[j]);
+                        if(j != count1 - 1) {
+                            System.out.print(&quot;, &quot;);
+                        }
+                    }
+                    System.out.println(&quot;])&quot;);
+                    break;
+                } else if(k == n) break;
+
+            }
+        }
+
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/04/12 16:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김동혁</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17509"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def more_depth(li,max_num):
+    res = []
+    for l in li:
+        for i in range(max(l)+1,max_num):
+            res.append(l+[i])
+    return res
+
+n = int(input(&quot;Input a even natural number: &quot;))
+if n&lt;=0 or n%2 ==1:
+    raise ValueError(&quot;Input a 'EVEN' 'NATURAL' number&quot;)
+
+result = [[k] for k in range(0,int(n/2)+1)]
+for i in range(int(n/2)+2,n+1):
+    result = more_depth(result,i)
+
+for item1 in result:
+    item2 = list({i for i in range(0,n)}-set(item1))
+    print((item1, item2))
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/04/14 18:27</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Wonjin Park</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17568"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<pre><code class="ruby">pair = -&gt;bin { bin.each_index.reduce([[],[]]) { |a,i| a[bin[i].to_i] &lt;&lt; i+1; a } }
+comb = -&gt;n = gets.to_i do 
+  (2**(n-1)).times.map { |num| (&quot;%0#{n}b&quot; % num).chars }.
+    select { |e| e.count('1') == n/2 }.map(&amp;pair).each { |e| p e; p e.reverse }
+end
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby">case_4 = &lt;&lt;-eos
+[[1, 2], [3, 4]]
+[[3, 4], [1, 2]]
+[[1, 3], [2, 4]]
+[[2, 4], [1, 3]]
+[[1, 4], [2, 3]]
+[[2, 3], [1, 4]]
+eos
+
+$stdin = StringIO.new(&quot;4\n&quot;)
+expect { comb.call }.to output(case_4).to_stdout
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/04/20 22:58</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17621"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>우선 두개의 리스트를 만들어 숫자를 입력한 뒤
+두 개의 원소를 돌아가며 위치를 바꾸어가며 출력하였습니다.</p>
+<pre><code class="python">def swap(a, b):
+    return b, a
+
+n = int(raw_input(&quot;input&gt;&gt;&quot;))
+
+if not n % 2 == 0:
+    print &quot;Input should be even number!&quot;
+    n = int(raw_input(&quot;input&gt;&gt;&quot;))
+
+a = list()
+b = list()
+
+for i in range(n):
+    if i &lt; n/2:
+        a.append(i)
+    else:
+        b.append(i)
+
+print a, b
+for i in range(n):
+    for j in range(i+1,n):
+        if i &lt; n/2 and j &lt; n/2:
+            a[i], a[j] = swap(a[i], a[j])
+            print a, b
+            a[i], a[j] = swap(a[i], a[j])
+
+        elif i &lt; n/2 and j &gt;= n/2:
+            a[i], b[j-n/2] = swap(a[i], b[j-n/2])
+            print a, b
+            a[i], b[j-n/2] = swap(a[i], b[j-n/2])
+
+        elif i &gt;= n/2 and j &lt; n/2:
+            b[i-n/2], a[j] = swap(b[i-n/2], a[j])
+            print a, b
+            b[i-n/2], a[j] = swap(b[i-n/2], a[j])
+
+        elif i &gt;= n/2 and j &gt;= n/2:
+            b[i-n/2], b[j-n/2] = swap(b[i-n/2], b[j-n/2])
+            print a, b
+            b[i-n/2], b[j-n/2] = swap(b[i-n/2], b[j-n/2])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/04/29 16:31</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jonghyeok Kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17846"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="javascript">    &lt;input type=&quot;text&quot; placeholder=&quot;짝수를 입력하세요.&quot; id=&quot;odd&quot;&gt;
+    &lt;button onclick=&quot;getNum()&quot;&gt;Submit&lt;/button&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+        function getNum() {         
+            var num=$(&quot;#odd&quot;).val();
+            var a1=new Array();
+            var a2=new Array();
+            var a3=new Array();
+            var str=&quot;&quot;;
+            if(num == null || num%2!=0){
+                alert(&quot;짝수! 짝수만!! 입력하라고!!!&quot;);
+            }
+            for(var i=0;i&lt;num ;i++){
+                var val = Math.round(Math.random()*(num-1));
+                if($.inArray(val, a3) != -1){
+                    i=i-1;
+                    val = Math.round(Math.random()*(num-1));
+                    continue;
+                }
+                a3[i]=val;
+            }
+            alert(a3);
+            for(var i=0;i&lt;(num/2) ;i++){
+                a1[i]=a3[i];
+                a2[i]=a3[(i+(num/2))];
+            }
+            $(&quot;#odd&quot;).val(&quot;([&quot;+a1+&quot;])([&quot;+a2+&quot;])&quot;);
+        }
+    &lt;/script&gt;
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/13 15:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">오택주</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18740"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;</p>
+<p>public class sol221 {</p>
+<pre><code>static int numbers[];
+static boolean used[];
+
+static List&lt;List&lt;List&lt;Integer&gt;&gt;&gt; patterns = new ArrayList&lt;&gt;();
+
+public static void solution(int n) throws Exception {
+
+    List&lt;Integer&gt; left = new ArrayList&lt;Integer&gt;();
+    List&lt;Integer&gt; right = new ArrayList&lt;Integer&gt;();
+
+    patterns(n,left,right);
+    deleteSamePatterns();
+}
+
+// 재귀함수
+public static void patterns(int n, List&lt;Integer&gt; left, List&lt;Integer&gt; right) {
+
+    //종료 조건
+    if(left.size() + right.size() == n) {
+
+        List temp = new ArrayList&lt;&gt;();
+
+        temp.add(left);
+        temp.add(right);
+
+        patterns.add(temp);
+        return;
+    }
+
+
+    //재귀 조건, numbers 셋팅
+    for(int i=0; i&lt;n; i++) {
+
+        //이미 추가된 num이라면 제낌
+        if(used[i]) continue;
+
+
+        if(left.size() &lt; n/2) {
+            // 왼쪽에서 사용 후 재귀
+            used[i] = true;
+            left.add(i);
+            patterns(n, new ArrayList&lt;&gt;(left), new ArrayList&lt;&gt;(right));
+
+            // 왼쪽에서 사용 않고 재귀 턴을 다음 놈에게 넘겨줌
+            used[i] = false;
+            left.remove(left.size()-1);
+        }
+        else if(right.size() &lt; n/2) {
+            // 오른쪽에서 사용 후 재귀
+            used[i] = true;
+            right.add(i);
+            patterns(n, new ArrayList&lt;&gt;(left), new ArrayList&lt;&gt;(right));
+
+            // 오른쪽에서 사용 않고 재귀 턴을 다음 놈에게 넘겨줌
+            used[i] = false;
+            right.remove(right.size()-1);
+        }
+
+    }
+
+}
+
+//static patterns List에 순번만 다르고 동일한 데이터가 들어가있으면 제거
+// left 또는 right의 앞 특성이 뒷 특성보다 숫자가 크면 제거하면 됨
+public static void deleteSamePatterns() {
+
+    //  i++ 은 조건적으로 해야함으로 for문 내에서 카운트해줌
+    for(int i=0; i&lt;patterns.size();) {
+        List target = patterns.get(i);
+
+        List left = (List) target.get(0);
+        List right = (List) target.get(1);
+
+        // left , right 둘중 하나에서 patterns remove 한다면 loopTail을 빠져나올 것
+        loopTail : {
+
+                for(int j=0; j&lt;left.size()-1; j++) {
+                    if( (Integer)left.get(j) &gt;= (Integer)left.get(j+1) ) {
+                        patterns.remove(i);
+
+                        break loopTail;
+                    }
+                }
+
+                for(int j=0; j&lt;right.size()-1; j++) {
+                    if( (Integer)right.get(j) &gt;= (Integer)right.get(j+1) ) {
+                        patterns.remove(i);
+
+                        break loopTail;
+                    }
+                }
+
+                 i++; // remove 조건에 맞지 않으면 ++
+        }
+
+        // loopTail에서 빠져나와 remove 조건에 맞으면 i가 땡겨지므로 i를 그대로 놓아야 검사를 함
+
+    }
+}
+
+
+
+public static void main(String[] args) throws Exception {
+
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+
+    numbers = new int[n];
+    used = new boolean[n];
+
+    for(int i=0; i&lt;n; i++) {
+        numbers[i] = i;
+    }
+
+    solution(n);
+
+    System.out.println("#############");
+    for(int i=0; i&lt;patterns.size(); i++) {
+
+        List target = patterns.get(i);
+
+        List left = (List) target.get(0);
+        List right = (List) target.get(1);
+
+        for(int j=0; j&lt;left.size(); j++) {
+            System.out.print(left.get(j) + " ");
+        }
+        System.out.print("| ");
+        for(int j=0; j&lt;right.size(); j++) {
+            System.out.print(right.get(j) + " ");
+        }
+        System.out.println();
+
+    }
+
+    System.out.println(patterns.size());
+
+}
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/07/31 09:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이병호</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20220"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3.7</p>
+<pre><code class="python"># 시퀀스 seq로부터 길이 length에 해당하는 조합(리스트의 리스트) 생성
+def combination(seq, length):
+    if length == 0:
+        return [[]]
+    return [[val] + lst for idx, val in enumerate(seq)
+            for lst in combination(seq[idx + 1:], length - 1)]
+
+
+# 절반씩 조합된 리스트의 쌍을 얻음
+def get_halves(n_input: int):
+    seq = range(n_input)
+    length = len(seq) // 2
+    result = []  # 전, 후 리스트 쌍
+
+    firsts: list = combination(seq, length)  # 앞쪽 절반에 해당하는 리스트
+    for first in firsts:
+        result.append((first, [s for s in seq if s not in first]))
+
+    return result
+
+
+def main():
+    n: int = int(input())
+    rst = get_halves(n)
+
+    for halves in rst:
+        print(halves)
+
+
+if __name__ == '__main__':
+    main()
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/12/18 16:37</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20247"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">inp, res = int(input(&quot;INPUT : &quot;)), []
+
+for n in range(0, 2**(inp)) :
+    yo = []
+    c = bin(n)[2:].zfill(inp)
+    if c.count('1') == inp/2 :
+        for k in range(0, len(c)) :
+            if c[k] == '1' :
+                yo.append(k)
+        res.append(yo)
+zen = set(range(0, inp))
+for m in res :
+    print((m, list(zen-set(m))))
+</code></pre>
+
+<p>저도 2진수를 이용해봤는데 for문이 너무 많이 쓰여서  n이 커지면 커질수록 계산량이 많아집니다. 조금 더 효율적인 계산법이 있는지는 한번 생각해보겠습니다.</p>
+<p>결과</p>
+<pre><code>INPUT : 6
+([3, 4, 5], [0, 1, 2])
+([2, 4, 5], [0, 1, 3])
+([2, 3, 5], [0, 1, 4])
+([2, 3, 4], [0, 1, 5])
+([1, 4, 5], [0, 2, 3])
+([1, 3, 5], [0, 2, 4])
+([1, 3, 4], [0, 2, 5])
+([1, 2, 5], [0, 3, 4])
+([1, 2, 4], [0, 3, 5])
+([1, 2, 3], [0, 4, 5])
+([0, 4, 5], [1, 2, 3])
+([0, 3, 5], [1, 2, 4])
+([0, 3, 4], [1, 2, 5])
+([0, 2, 5], [1, 3, 4])
+([0, 2, 4], [1, 3, 5])
+([0, 2, 3], [1, 4, 5])
+([0, 1, 5], [2, 3, 4])
+([0, 1, 4], [2, 3, 5])
+([0, 1, 3], [2, 4, 5])
+([0, 1, 2], [3, 4, 5])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/12/20 15:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GG</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2593"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">n자리 이진수에서 &#39;1&#39;의 개수가 n/2인 경우, 그 1들의 인덱스를 출력하는 식으로 만들었습니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    GG,
+                                    2019/12/20 15:52
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22314"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n,result=int(input('n=?')),[]
+
+for i in range (n**(int(n/2))):
+    temp1,j=[],i    
+    while(j&gt;=n):
+        if (j%n) not in temp1:
+            temp1.append(j%n)
+        j=int(j/n)   
+    if j not in temp1: 
+        temp1.append (j)
+    if len(temp1)==int(n/2):
+        temp1.sort()
+        if temp1 not in result:
+            result.append(temp1)
+
+for i in range(len(result)):
+    temp2=[]
+    for k in range (n):
+        temp2.append(k)
+    for j in range (len(result[i])):
+        temp2.remove (result[i][j])
+
+    print ('(',result[i],',',temp2,')')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/13 12:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Buckshot</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2729"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">n=?4
+( [0, 1] , [2, 3] )
+( [1, 2] , [0, 3] )
+( [1, 3] , [0, 2] )
+( [0, 2] , [1, 3] )
+( [2, 3] , [0, 1] )
+( [0, 3] , [1, 2] )
+
+ 
+n=?6
+( [0, 1, 2] , [3, 4, 5] )
+( [0, 1, 3] , [2, 4, 5] )
+( [0, 1, 4] , [2, 3, 5] )
+( [0, 1, 5] , [2, 3, 4] )
+( [1, 2, 3] , [0, 4, 5] )
+( [1, 2, 4] , [0, 3, 5] )
+( [1, 2, 5] , [0, 3, 4] )
+( [1, 3, 4] , [0, 2, 5] )
+( [1, 3, 5] , [0, 2, 4] )
+( [1, 4, 5] , [0, 2, 3] )
+( [0, 2, 4] , [1, 3, 5] )
+( [0, 2, 5] , [1, 3, 4] )
+( [2, 3, 4] , [0, 1, 5] )
+( [2, 3, 5] , [0, 1, 4] )
+( [2, 4, 5] , [0, 1, 3] )
+( [0, 3, 4] , [1, 2, 5] )
+( [0, 3, 5] , [1, 2, 4] )
+( [3, 4, 5] , [0, 1, 2] )
+( [0, 4, 5] , [1, 2, 3] )
+
+
+n=?8
+( [0, 1, 2, 3] , [4, 5, 6, 7] )
+( [0, 1, 2, 4] , [3, 5, 6, 7] )
+( [0, 1, 2, 5] , [3, 4, 6, 7] )
+( [0, 1, 2, 6] , [3, 4, 5, 7] )
+( [0, 1, 2, 7] , [3, 4, 5, 6] )
+( [0, 1, 3, 4] , [2, 5, 6, 7] )
+( [0, 1, 3, 5] , [2, 4, 6, 7] )
+( [0, 1, 3, 6] , [2, 4, 5, 7] )
+( [0, 1, 3, 7] , [2, 4, 5, 6] )
+( [0, 1, 4, 5] , [2, 3, 6, 7] )
+( [0, 1, 4, 6] , [2, 3, 5, 7] )
+( [0, 1, 4, 7] , [2, 3, 5, 6] )
+( [0, 1, 5, 6] , [2, 3, 4, 7] )
+( [0, 1, 5, 7] , [2, 3, 4, 6] )
+( [0, 1, 6, 7] , [2, 3, 4, 5] )
+( [1, 2, 3, 4] , [0, 5, 6, 7] )
+( [1, 2, 3, 5] , [0, 4, 6, 7] )
+( [1, 2, 3, 6] , [0, 4, 5, 7] )
+( [1, 2, 3, 7] , [0, 4, 5, 6] )
+( [1, 2, 4, 5] , [0, 3, 6, 7] )
+( [1, 2, 4, 6] , [0, 3, 5, 7] )
+( [1, 2, 4, 7] , [0, 3, 5, 6] )
+( [1, 2, 5, 6] , [0, 3, 4, 7] )
+( [1, 2, 5, 7] , [0, 3, 4, 6] )
+( [1, 2, 6, 7] , [0, 3, 4, 5] )
+( [1, 3, 4, 5] , [0, 2, 6, 7] )
+( [1, 3, 4, 6] , [0, 2, 5, 7] )
+( [1, 3, 4, 7] , [0, 2, 5, 6] )
+( [1, 3, 5, 6] , [0, 2, 4, 7] )
+( [1, 3, 5, 7] , [0, 2, 4, 6] )
+( [1, 3, 6, 7] , [0, 2, 4, 5] )
+( [1, 4, 5, 6] , [0, 2, 3, 7] )
+( [1, 4, 5, 7] , [0, 2, 3, 6] )
+( [1, 4, 6, 7] , [0, 2, 3, 5] )
+( [1, 5, 6, 7] , [0, 2, 3, 4] )
+( [0, 2, 3, 4] , [1, 5, 6, 7] )
+( [0, 2, 3, 5] , [1, 4, 6, 7] )
+( [0, 2, 3, 6] , [1, 4, 5, 7] )
+( [0, 2, 3, 7] , [1, 4, 5, 6] )
+( [0, 2, 4, 5] , [1, 3, 6, 7] )
+( [0, 2, 4, 6] , [1, 3, 5, 7] )
+( [0, 2, 4, 7] , [1, 3, 5, 6] )
+( [0, 2, 5, 6] , [1, 3, 4, 7] )
+( [0, 2, 5, 7] , [1, 3, 4, 6] )
+( [0, 2, 6, 7] , [1, 3, 4, 5] )
+( [2, 3, 4, 5] , [0, 1, 6, 7] )
+( [2, 3, 4, 6] , [0, 1, 5, 7] )
+( [2, 3, 4, 7] , [0, 1, 5, 6] )
+( [2, 3, 5, 6] , [0, 1, 4, 7] )
+( [2, 3, 5, 7] , [0, 1, 4, 6] )
+( [2, 3, 6, 7] , [0, 1, 4, 5] )
+( [2, 4, 5, 6] , [0, 1, 3, 7] )
+( [2, 4, 5, 7] , [0, 1, 3, 6] )
+( [2, 4, 6, 7] , [0, 1, 3, 5] )
+( [2, 5, 6, 7] , [0, 1, 3, 4] )
+( [0, 3, 4, 5] , [1, 2, 6, 7] )
+( [0, 3, 4, 6] , [1, 2, 5, 7] )
+( [0, 3, 4, 7] , [1, 2, 5, 6] )
+( [0, 3, 5, 6] , [1, 2, 4, 7] )
+( [0, 3, 5, 7] , [1, 2, 4, 6] )
+( [0, 3, 6, 7] , [1, 2, 4, 5] )
+( [3, 4, 5, 6] , [0, 1, 2, 7] )
+( [3, 4, 5, 7] , [0, 1, 2, 6] )
+( [3, 4, 6, 7] , [0, 1, 2, 5] )
+( [3, 5, 6, 7] , [0, 1, 2, 4] )
+( [0, 4, 5, 6] , [1, 2, 3, 7] )
+( [0, 4, 5, 7] , [1, 2, 3, 6] )
+( [0, 4, 6, 7] , [1, 2, 3, 5] )
+( [4, 5, 6, 7] , [0, 1, 2, 3] )
+( [0, 5, 6, 7] , [1, 2, 3, 4] )</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Buckshot,
+                                    2020/05/13 12:19
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24198"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>문제의도를 예시를 바탕으로 해석할 때, '리스트'는 조합이고 '쌍'은 순열로 추정됩니다.</p>
+<p>이러한 가정으로 코드를 작성했습니다.</p>
+<pre><code class="python">def PairSets(set1:set, set2:set, nLeft):
+    global Answers
+    if nLeft==0:
+        if min(set1)&lt;min(set2) and (set1 not in Answers):
+            Answers.append(set1)
+            print(set1,set2)
+            print(set2,set1)    # 문제의도에서 '쌍'이 순열인 경우, 이 라인을 지운다
+        return
+    for e2 in set2:
+        s1 = set1.copy()
+        s1.add(e2)
+        s2 = set2.copy()
+        s2.remove(e2)
+        PairSets(s1,s2,nLeft-1)
+    return
+
+N = 6
+Answers = []
+PairSets(set(),set(range(N)),N&gt;&gt;1)
+</code></pre>
+
+<p>만일 모두 순열일 경우, 아래와 같이 더 간단해집니다.</p>
+<pre><code class="python">def PairLists(listVisited:list, nRange):
+    if len(listVisited)==nRange:
+        print(listVisited[0::2],listVisited[1::2])
+        return
+    for n in range(nRange):
+        if n not in listVisited:
+            PairLists(listVisited+[n],nRange)
+
+PairLists([],6)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/01/03 14:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김준우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29560"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def divideHalf(idx, n, a, b):
+    if len(a) == n/2:
+        result.append((a,b))
+        return
+    if idx &gt;= n:
+        return
+    for i in range(idx, n):
+        if i in a:
+            a.remove(i)
+            b.append(i)
+            c = a.copy()
+            d = b.copy()
+            divideHalf(i+1, n, c, d)
+            a.append(i)
+            b.remove(i)
+
+
+result = []
+while True:
+    n = int(input('n을 입력하세요: '))
+    if n % 2 == 0:
+        num = [i for i in range(n)]
+        divideHalf(0, n, num, [])
+        for i in result:
+            print(i)
+        break
+    else:
+        print('짝수를 입력하세요!!')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/08/13 20:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

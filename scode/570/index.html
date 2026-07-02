@@ -1,0 +1,5233 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="출처 : [http://tech.kakao.com/2017/09/27/kakao-blind-recruitment-round-1/](http://tech.kakao.com/2017/09/27/kakao-blind-recruitment-round-1...">
+    <title>비밀 지도 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">비밀 지도</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">7</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 2</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>출처 : <a href="http://tech.kakao.com/2017/09/27/kakao-blind-recruitment-round-1/">http://tech.kakao.com/2017/09/27/kakao-blind-recruitment-round-1/</a></p>
+<p>2018년 카카오 신입 공채 1차 코딩 테스트 문제입니다.</p>
+<hr />
+<p>네오는 평소 프로도가 비상금을 숨겨놓는 장소를 알려줄 비밀지도를 손에 넣었다. 그런데 이 비밀지도는 숫자로 암호화되어 있어 위치를 확인하기 위해서는 암호를 해독해야 한다. 다행히 지도 암호를 해독할 방법을 적어놓은 메모도 함께 발견했다.</p>
+<ol>
+<li>지도는 한 변의 길이가 n인 정사각형 배열 형태로, 각 칸은 “공백”(“ “) 또는 “벽”(“#”) 두 종류로 이루어져 있다.</li>
+<li>전체 지도는 두 장의 지도를 겹쳐서 얻을 수 있다. 각각 “지도 1”과 “지도 2”라고 하자. 지도 1 또는 지도 2 중 어느 하나라도 벽인 부분은 전체 지도에서도 벽이다. 지도 1과 지도 2에서 모두 공백인 부분은 전체 지도에서도 공백이다.</li>
+<li>“지도 1”과 “지도 2”는 각각 정수 배열로 암호화되어 있다.</li>
+<li>암호화된 배열은 지도의 각 가로줄에서 벽 부분을 1, 공백 부분을 0으로 부호화했을 때 얻어지는 이진수에 해당하는 값의 배열이다.</li>
+</ol>
+<p><img alt="" src="http://t1.kakaocdn.net/welcome2018/secret8.png" /></p>
+<p>네오가 프로도의 비상금을 손에 넣을 수 있도록, 비밀지도의 암호를 해독하는 작업을 도와줄 프로그램을 작성하라.</p>
+<p><strong>입력 형식</strong></p>
+<p>입력으로 지도의 한 변 크기 n 과 2개의 정수 배열 arr1, arr2가 들어온다.</p>
+<ul>
+<li>1 ≦ n ≦ 16</li>
+<li>arr1, arr2는 길이 n인 정수 배열로 주어진다.</li>
+<li>정수 배열의 각 원소 x를 이진수로 변환했을 때의 길이는 n 이하이다. 즉, 0 ≦ x ≦ 2^n - 1을 만족한다.</li>
+</ul>
+<p><strong>출력 형식</strong></p>
+<p>원래의 비밀지도를 해독하여 "#", 공백으로 구성된 문자열 배열로 출력하라.</p>
+<p><strong>입출력 예제</strong></p>
+<table>
+<thead>
+<tr>
+<th>매개변수</th>
+<th>값</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>n</td>
+<td>5</td>
+</tr>
+<tr>
+<td>arr1</td>
+<td>[9, 20, 28, 18, 11]</td>
+</tr>
+<tr>
+<td>arr2</td>
+<td>[30, 1, 21, 17, 28]</td>
+</tr>
+<tr>
+<td>출력</td>
+<td>["#####","# # #", "### #", "#&nbsp;&nbsp;##", "#####"]</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>매개변수</th>
+<th>값</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>n</td>
+<td>6</td>
+</tr>
+<tr>
+<td>arr1</td>
+<td>[46, 33, 33 ,22, 31, 50]</td>
+</tr>
+<tr>
+<td>arr2</td>
+<td>[27 ,56, 19, 14, 14, 10]</td>
+</tr>
+<tr>
+<td>출력</td>
+<td>["######", "###&nbsp;&nbsp;#", "##&nbsp;&nbsp;##", " #### ", " #####", "### # "]</td>
+</tr>
+</tbody>
+</table>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">입사문제</span>
+                
+                    <span class="label label-tag label-xs">카카오</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2017/10/07 16:03</p>
+                    <p class="static-profile" style="margin:0;padding:0;">pahkey</p>
+                </div>
+            </div>
+
+            
+                <a name="comment_2120"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">입출력 예제에 공백2개로 출력될 부분이 공백1개로 되어있는데 공백이 연속되면 공백 1개로 출력하는건가요? 문제엔 그러한 룰이 없어서요.</span>
+                    -
+                    <span style="font-size:11px;">
+                        rk,
+                        2017/10/08 14:12
+                    </span>
+                </div>
+            
+                <a name="comment_2122"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">네, 문제에 오류가 있네요. 원문도 마찬가지인걸로 보아 html 표기오류로 보입니다. 이곳에는 nbsp태그로 수정해 놓았습니다.</span>
+                    -
+                    <span style="font-size:11px;">
+                        pahkey,
+                        2017/10/08 16:50
+                    </span>
+                </div>
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>80개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_9000"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">9</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def secret(n, arr1, arr2):
+    print(['{0:b}'.format((i | j)).zfill(n).replace('0', ' ').replace('1', '#') for i, j in zip(arr1, arr2)])
+
+
+secret(5, [9, 20, 28, 18, 11], [30, 1, 21, 17, 28])
+secret(6, [46, 33, 33 ,22, 31, 50], [27 ,56, 19, 14, 14, 10])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/12 10:02</p>
+                                <p class="static-profile" style="margin:0;padding:0;">songci</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2133"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">format((i | j))이부분에 대해서 설명좀 부탁드려도될까요 ?</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Seohyun Choi,
+                                    2017/11/23 23:08
+                                </span>
+                            </div>
+                        
+                            <a name="comment_2868"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">0 == False, 1 == True
+0|0, 0|1, 1|0, 1|1 == 0, 1, 1, 1
+세로로 긴 작대기(^^) 연산자는 or 연산자입니다. 둘 중 하나라도 참이면 참.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    ­박철희,
+                                    2021/09/19 12:40
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9024"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">2</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">int main(void)
+{
+    int i=0,temp,temp2,for_bin,input_n;
+    int *arr1, *arr2;
+    scanf(&quot;%d&quot;, &amp;input_n);  
+    arr1 = new int[input_n];
+    arr2 = new int[input_n];
+    temp = pow(2, input_n);
+    printf(&quot;arr1 입력\n&quot;);
+    while(i!=input_n){          
+        scanf(&quot;%d&quot;, &amp;arr1[i]);  
+        if (arr1[i] &gt;= temp)
+            printf(&quot;숫자가 조건보다 큽니다\n재입력하시오\n&quot;);
+        else
+            i++;
+    }   i = 0;
+    printf(&quot;arr2 입력\n&quot;);
+    while (i != input_n) {
+        scanf(&quot;%d&quot;, &amp;arr2[i]);
+        if (arr2[i] &gt;= temp)
+            printf(&quot;숫자가 조건보다 큽니다\n재입력하시오\n&quot;);
+        else
+            i++;
+    }
+    for (i = 0; i &lt; input_n; i++) {
+        temp = arr1[i] | arr2[i];
+        for (for_bin = input_n; for_bin &gt; 0; for_bin--) {
+            temp2 = pow(2, for_bin - 1);
+            if (temp / temp2)
+                printf(&quot;#&quot;);
+            else
+                printf(&quot; &quot;);    
+            temp= temp % temp2;
+        }
+        printf(&quot;\n&quot;);
+    }
+    delete arr1,arr2;
+    return 0;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/16 00:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">hsson</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9031"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">2</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def secret_map(n, arr1, arr2):
+    for i in range(n):
+        row = bin(arr1[i] | arr2[i])
+        row = row[2:]
+        row = row.zfill(n)
+        row = row.replace('0', ' ')
+        row = row.replace('1', '#')
+        print(row)
+
+secret_map(5, [9, 20, 28, 18, 11], [30, 1, 21, 17, 28])
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/16 14:15</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박범수</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9552"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>haskell</p>
+<pre><code class="haskell">import Data.Bits ((.|.))
+
+solution :: Int -&gt; [Int] -&gt; [Int] -&gt; [String]
+solution n arr1 arr2 = fmap display . toBits &lt;$&gt; zipWith (.|.) arr1 arr2
+    where
+        display True = '#'
+        display False = ' '
+        toBits = reverse . take n . fmap odd . iterate (`div` 2)
+
+main = mapM_ putStrLn $ solution 5 [9,20,28,18,11] [30,1,21,17,28]
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/12/10 06:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">sodii</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17171"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3.7  </p>
+<pre><code class="python"># 두 지도의 정수 값에 대해 OR 연산 =&gt; 연산된 (길이=size의) 이진문자열에 대해 문자 치환
+def unveil_map(size, map1, map2):
+    rst = [binary.zfill(n).replace(&quot;1&quot;, &quot;#&quot;).replace(&quot;0&quot;, &quot; &quot;) for binary in
+           (bin(map1[i] | map2[i])[2:] for i in range(size))]
+    return rst
+
+
+# 예제1
+n = 5
+arr1 = [9, 20, 28, 18, 11]
+arr2 = [30, 1, 21, 17, 28]
+print(unveil_map(n, arr1, arr2))
+
+# 예제2
+n = 6
+arr1 = [46, 33, 33, 22, 31, 50]
+arr2 = [27, 56, 19, 14, 14, 10]
+print(unveil_map(n, arr1, arr2))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/03/18 21:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8967"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<pre><code class="ruby">def decode_map(width, map1, map2)
+  map1.zip(map2).map {|a,b| (&quot;%0#{width}b&quot; % (a|b)).gsub(/./,'0'=&gt;' ','1'=&gt;'#')}
+end
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby">cases = [[5, [9, 20, 28, 18, 11], [30, 1, 21, 17, 28]],
+         [6, [46, 33, 33 ,22, 31, 50], [27 ,56, 19, 14, 14, 10]]]
+decoded_maps = [[&quot;#####&quot;,&quot;# # #&quot;, &quot;### #&quot;, &quot;#  ##&quot;, &quot;#####&quot;],
+                [&quot;######&quot;, &quot;###  #&quot;, &quot;##  ##&quot;, &quot; #### &quot;, &quot; #####&quot;, &quot;### # &quot;]]
+expect( cases.map {|e| decode_map(*e)} ).to eq decoded_maps
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/08 13:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8981"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># input #######################
+n = 6
+arr1 = [46, 33, 33 ,22, 31, 50]
+arr2 = [27, 56, 19, 14, 14, 10]
+###############################
+
+
+def to_hash(num):
+    hashs = ''
+    for i in range(n):
+        num, r = divmod(num, 2)
+        hashs = ('#' if r else ' ') + hashs
+    return hashs
+
+
+print([to_hash(i | j) for i, j in zip(arr1, arr2)])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/10 15:33</p>
+                                <p class="static-profile" style="margin:0;padding:0;">songci</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8993"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>자바입니다.
+많이 난잡하네여...원래 신입이면 이정도는 쉽게 풀어야 하는건가여
+수정,보완 조언 부탁드려여</p>
+<pre><code class="java">public class secret_map {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print(&quot;한변의 길이  입력(1~16정수):&quot;);
+        //한 변의 크기
+        int n = sc.nextInt();
+        int[] arr1 = new int[n];
+        int[] arr2 = new int[n];
+        Character[][] secret_map = new Character[n][n];
+        Character[][] secret_map2 = new Character[n][n];
+        System.out.println(&quot;배열1에 담을 값 :&quot;);
+        for(int i=0;i&lt;n;i++){
+            arr1[i]=sc.nextInt();
+        }
+        System.out.println(&quot;배열2에 담을 값:&quot;);
+        for(int i=0;i&lt;n;i++){
+            arr2[i]=sc.nextInt();
+        }
+
+        Character[][] list1=create_map(n,arr1);
+        Character[][] list2=create_map(n,arr2);
+
+        for(int i=0;i&lt;n;i++){
+            for(int j=0;j&lt;n;j++){
+                if(list1[i][j].equals('1') || list2[i][j].equals('1')){
+                    secret_map[i][j]='1';
+                }else{
+                    secret_map[i][j]='0';
+                }
+            }
+        }
+
+
+        for(int i=0;i&lt;n;i++){
+            for(int j=0;j&lt;n;j++){
+                System.out.print(secret_map[i][j]);
+            }
+            System.out.println();
+        }
+
+        secret_map2=replace_map(secret_map);
+        for(int i=0;i&lt;n;i++){
+            for(int j=0;j&lt;n;j++){
+                System.out.print(secret_map2[i][j]);
+            }
+            System.out.println();
+        }
+
+
+    }
+
+    static Character[][] create_map(int n,int[] arr1){
+
+        Character[] tmplist1 = new Character[n];
+        Character[][] list = new Character[n][n];
+        String tmpstr=&quot;&quot;;
+
+        for(int i=0;i&lt;n;i++){
+            if(Integer.toBinaryString(arr1[i]).length() != n){
+                int cnt=1;
+                while(true){
+                    tmpstr=add_zero(cnt)+Integer.toBinaryString(arr1[i]);
+                    cnt++;
+                    if(tmpstr.length()==n) break;
+                }
+            }else{
+                tmpstr=Integer.toBinaryString(arr1[i]);
+            }
+            for(int j=n-1;j&gt;=0;j--){
+                tmplist1[j] = tmpstr.charAt(j);
+            }
+
+            for(int k=0;k&lt;n;k++){
+                list[i][k]=tmplist1[k];
+            }
+        }
+
+        return list;
+    }
+    static StringBuffer add_zero(int a){
+        StringBuffer sb = new StringBuffer();
+        for(int i=0;i&lt;a;i++){
+            sb.append(&quot;0&quot;);
+        }
+        return sb;
+    }
+    static Character[][] replace_map(Character[][] list){
+        for(int i=0;i&lt;list.length;i++){
+            for(int j=0;j&lt;list.length;j++){
+                if(list[i][j].equals('1')){
+                    list[i][j]='#';
+                }else{
+                    list[i][j]=' ';
+                }
+            }
+        }
+        return list;
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/11 16:26</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김문수</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8997"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <h1 id="c">C++</h1>
+<pre><code class="cpp">
+vector&lt;string&gt; solution(int n, vector&lt;int&gt; arr1, vector&lt;int&gt; arr2)
+{
+    vector&lt;string&gt; ans(n);
+    for (int i = 0; i &lt; n; ++i)
+    {
+        int lineKey = arr1[i] | arr2[i];
+        for (int j = 0; j &lt; n; ++j)
+        {
+            if (lineKey &amp; (0x1 &lt;&lt; j))ans[i] += &quot;#&quot;;
+            else ans[i] += &quot; &quot;;
+        }
+        reverse(&amp;ans[i][0], &amp;ans[i][n]);
+    }
+    return ans;
+}
+
+</code></pre>
+
+<h1 id="testcase">TESTCASE</h1>
+<pre><code class="cpp">typedef struct testcase
+{
+    int n;
+    vector&lt;int&gt; arr1, arr2;
+    vector&lt;string&gt; expectANS;
+};
+
+void TESTCASE()
+{
+    testcase TC[] = {
+        {5,{ 9, 20, 28, 18, 11 },{ 30, 1, 21, 17, 28 },{ &quot;#####&quot;,&quot;# # #&quot;, &quot;### #&quot;, &quot;#  ##&quot;, &quot;#####&quot;}},
+        {6,{ 46, 33, 33 ,22, 31, 50 },{ 27 ,56, 19, 14, 14, 10 },{ &quot;######&quot;, &quot;###  #&quot;, &quot;##  ##&quot;, &quot; #### &quot;, &quot; #####&quot;, &quot;### # &quot;}}
+    };
+    for (const auto&amp; eachTC : TC)
+        if (eachTC.expectANS == solution(eachTC.n, eachTC.arr1, eachTC.arr2)) std::cout &lt;&lt; &quot;OK!\n&quot;;
+        else std::cout &lt;&lt; &quot;WRONG!!!!!\n&quot;;
+}
+int main()
+{
+    TESTCASE();
+    return 0;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/11 17:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">신길수</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8999"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def BINARY(a):                                     # 2진수로 바꾸는 함수
+    X = []
+    for x in a:
+        X.append(bin(x)[2:])                       # 앞의 0b 제거 
+
+    return X
+
+
+n = int(input(&quot;How long is the map? : &quot;))
+print(&quot;\n&quot;)
+arr1 = []   # 제 1지도
+arr2 = []   # 제 2지도
+arr3 = []   # 앞의 두개를 겹친 것
+
+arr5 = []   # 우물 정자로 바꾼 것 (최종)
+
+while len(arr1) != n:           # 제 1지도 입력
+    z = int(input(&quot;Give me a number for arr1 :&quot;))
+    if z &gt; 2**n - 1:
+        print(&quot;Too Big! \n&quot;)  #특정 범위 넘을 시
+        continue
+    arr1.append(z)
+    print(&quot;\n&quot;)
+
+while len(arr2) != n:         # 제 2지도 입력
+    Z = int(input('Give me a number for arr2 :'))
+    if Z &gt; 2**n - 1:
+        print(&quot;Too Big! \n&quot;)
+        continue
+    arr2.append(Z)
+    print(&quot;\n&quot;)
+
+for x in range(n):
+    arr3.append(int(arr1[x])|int(arr2[x]))    #겹치기
+
+arr3 = BINARY(arr3)  #2진수화
+
+for x in arr3:
+    arr4 = []   # 우물정자 암호로 만든 후 하나씩 보관하기
+    for y in x:
+        if y == &quot;1&quot;:
+            arr4.append(&quot;#&quot;)
+        else:
+            arr4.append(&quot; &quot;)
+    arr5.append(&quot;&quot;.join(arr4))  # 보관해 놓은 걸 문자열로 풀어서 최종 리스트에 저장
+
+print(arr5)
+</code></pre>
+
+<p>python3로 풀었습니다. 작동은 하는데 너무 길고... 매끈하지 못한거 같습니다. 조언 해주시면 감사합니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/11 22:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">李愼言(이신언)</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9020"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C++입니다. 2차원 배열 설정이 상당이 더럽군요;
+배열만 써서 풀었습니다.</p>
+<pre><code class="cpp">#include&lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    int n;
+    cout &lt;&lt; &quot;배열의 크기 : &quot;;
+    cin &gt;&gt; n;
+
+    //미로가 들어갈 배열
+    int** binary = new int*[n];
+    int** binary2 = new int*[n];
+
+    for (int i = 0; i &lt; n; i++)
+    {
+        binary[i] = new int[n];
+        binary2[i] = new int[n];
+    }
+
+    int *num1, *num2;
+
+    num1 = new int[n];
+    num2 = new int[n];
+
+    cout &lt;&lt; &quot;첫번째 요소 : &quot;;
+    for (int i = 0; i &lt; n; i++)
+        cin &gt;&gt; num1[i];
+
+    cout &lt;&lt; &quot;두번째 요소 : &quot;;
+    for (int i = 0; i &lt; n; i++)
+        cin &gt;&gt; num2[i];
+
+    //2진수로 바꿔서 OR
+    for (int i = 0; i &lt; n; i++)
+    {
+        int* temp = new int[n];
+
+        for (int k = 0; k &lt; n; k++)
+            temp[k] = 0;
+        int j = 0;
+        while (num1[i] &gt; 0)
+        {
+            temp[j] = num1[i] % 2;
+            num1[i] /= 2;
+            j++;
+        }
+
+        for (int k = 0; k &lt; n; k++)
+        {
+            //cout &lt;&lt; temp[k] &lt;&lt; &quot; &quot;;
+            binary[i][n - k - 1] = temp[k];
+        }
+    }
+
+    for (int i = 0; i &lt; n; i++)
+    {
+        int* temp = new int[n];
+
+        for (int k = 0; k &lt; n; k++)
+            temp[k] = 0;
+        int j = 0;
+        while (num2[i] &gt; 0)
+        {
+            temp[j] = num2[i] % 2;
+            num2[i] /= 2;
+            j++;
+        }
+
+        for (int k = 0; k &lt; n; k++)
+        {
+            //cout &lt;&lt; temp[k] &lt;&lt; &quot; &quot;;
+            binary2[i][n - k - 1] = temp[k];
+        }
+    }
+
+    cout &lt;&lt; &quot;출력&quot; &lt;&lt; endl;
+    for (int i = 0; i &lt; n; i++)
+    {
+        for (int j = 0; j &lt; n; j++)
+        {
+            if (binary[i][j] || binary2[i][j])
+            {
+                cout &lt;&lt; &quot;#&quot;;
+            }
+            else
+            {
+                cout &lt;&lt; &quot; &quot;;
+            }
+        }
+        cout &lt;&lt; endl;
+    }
+    for (int i = 0; i &lt; n; i++)
+    {
+        delete[] binary[i];
+        delete[] binary2[i];
+    }
+    delete[] binary;
+    delete[] binary2;
+
+    return 0;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/15 20:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">와디더</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9034"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬3 풀이입니다. </p>
+<pre><code class="python">def solution(n:int, arr1:[int], arr2:[int]) -&gt; [str]:
+    template = &quot;{: %d}&quot; % n
+    return [template.format(bin(a|b)[2:].replace('0', ' ').replace('1','#'))
+            for a, b in zip(arr1, arr2)]
+
+</code></pre>
+
+<p>Swift에서는 <code>bin</code> 함수가 기본라이브러리에 없어서 아래와 같이 구현해보았습니다. </p>
+<pre><code class="swift">import Foundation
+
+func solution(n: Int, arr1: [Int], arr2: [Int]) -&gt; [String] {
+
+    func bin(_ a: Int, _ b: Int) -&gt; String {
+        var temp: [String] = []
+        var i = 1 &lt;&lt; (n-1)
+        while i &gt; 0 {
+            temp.append((a|b) &amp; i == 0 ? &quot; &quot; : &quot;#&quot;)
+            i = i &gt;&gt; 1
+        }
+        return temp.joined(separator:&quot;&quot;)
+    }
+    return zip(arr1, arr2).map(bin)
+}
+</code></pre>
+
+<p>하스켈로도 한 번 해봤습니다. </p>
+<pre><code class="haskell">import Data.Bits
+
+doubles :: Int -&gt; [Int]
+doubles n = n:(doubles (n*2))
+
+convert :: Int -&gt; Int -&gt; String
+convert width n = let ds = take width . doubles $ 1 in reverse . fmap f $ ds
+  where f x = if n .&amp;. x &gt; 0 then '#' else ' '
+
+solution :: Int -&gt; [Int] -&gt; [Int] -&gt; [String]
+solution n arr1 arr2 = fmap (convert n) . fmap (uncurry (.|.)) $ zip arr1 arr2
+
+main = putStr . unlines $ solution 5 [9,20,28,18,11] [30,1,21,17,28]
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/16 20:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">룰루랄라</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9044"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>package codingdojang;</p>
+<p>import java.util.Scanner;</p>
+<p>public class ex151 {
+/<em> 입력예시
+ *  6
+    46 33 33 22 31 50
+    27 56 19 14 14 10 
+ </em>/
+/<em> 출력예시
+</em>   ######
+    ###  #
+    ##  ##
+    #### 
+    #####
+    ### # 
+     */
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        Scanner sc = new Scanner(System.in);</p>
+<pre><code>    int n = sc.nextInt(); sc.nextLine();
+    char map[][] = new char[n][n];
+    int arr1[] = new int[n];
+    int arr2[] = new int[n];
+
+    for(int i=0; i&lt;n; i++) {
+        arr1[i] = sc.nextInt();
+    }
+
+    for(int i=0; i&lt;n; i++) {
+        arr2[i] = sc.nextInt();
+    }
+
+    for(int i=0; i&lt;n; i++) {
+        for(int j=0; j&lt;n; j++) {
+            map[i][j] = ' ';
+        }
+    }
+
+    for(int i=0; i&lt;arr1.length; i++) {
+        String temp = Integer.toBinaryString(arr1[i]);
+        for(int j = 0; j&lt;temp.length() ; j++){
+         if(temp.charAt(j) == '1'){
+          map[i][temp.length()-1-j] = '#';
+         }
+        } 
+    }
+
+    for(int i=0; i&lt;arr2.length; i++) {
+        String temp = Integer.toBinaryString(arr2[i]);
+        for(int j = 0; j&lt;temp.length() ; j++){
+         if(temp.charAt(j) == '1'){
+          map[i][temp.length()-1-j] = '#';
+         }
+        } 
+    }
+
+    for(int i=0; i&lt;n; i++) {
+        for(int j=n-1; j&gt;=0; j--) {
+            System.out.print(map[i][j]);
+        }
+        System.out.println();
+    }
+}
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/17 18:15</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이병호</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9045"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package codingdojang;
+
+import java.util.Scanner;
+
+public class ex151 {
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt(); sc.nextLine();
+        char map[][] = new char[n][n];
+        int arr1[] = new int[n];
+        int arr2[] = new int[n];
+
+        for(int i=0; i&lt;n; i++) {
+            arr1[i] = sc.nextInt();
+        }
+
+        for(int i=0; i&lt;n; i++) {
+            arr2[i] = sc.nextInt();
+        }
+
+        for(int i=0; i&lt;n; i++) {
+            for(int j=0; j&lt;n; j++) {
+                map[i][j] = ' ';
+            }
+        }
+
+        for(int i=0; i&lt;arr1.length; i++) {
+            String temp = Integer.toBinaryString(arr1[i]);
+            for(int j = 0; j&lt;temp.length() ; j++){
+             if(temp.charAt(j) == '1'){
+              map[i][temp.length()-1-j] = '#';
+             }
+            } 
+        }
+
+        for(int i=0; i&lt;arr2.length; i++) {
+            String temp = Integer.toBinaryString(arr2[i]);
+            for(int j = 0; j&lt;temp.length() ; j++){
+             if(temp.charAt(j) == '1'){
+              map[i][temp.length()-1-j] = '#';
+             }
+            } 
+        }
+
+        for(int i=0; i&lt;n; i++) {
+            for(int j=n-1; j&gt;=0; j--) {
+                System.out.print(map[i][j]);
+            }
+            System.out.println();
+        }
+    }
+
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/17 18:17</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이병호</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9061"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">
+/*
+네오는 평소 프로도가 비상금을 숨겨놓는 장소를 알려줄 비밀지도를 손에 넣었다. 
+그런데 이 비밀지도는 숫자로 암호화되어 있어 위치를 확인하기 위해서는 암호를 해독해야 한다. 
+다행히 지도 암호를 해독할 방법을 적어놓은 메모도 함께 발견했다.
+지도는 한 변의 길이가 n인 정사각형 배열 형태로, 각 칸은 “공백”(“ “) 또는 “벽”(“#”) 두 종류로 이루어져 있다.
+전체 지도는 두 장의 지도를 겹쳐서 얻을 수 있다. 
+각각 “지도 1”과 “지도 2”라고 하자. 
+지도 1 또는 지도 2 중 어느 하나라도 벽인 부분은 전체 지도에서도 벽이다. 
+지도 1과 지도 2에서 모두 공백인 부분은 전체 지도에서도 공백이다.
+“지도 1”과 “지도 2”는 각각 정수 배열로 암호화되어 있다.
+암호화된 배열은 지도의 각 가로줄에서 벽 부분을 1, 공백 부분을 0으로 부호화했을 때 얻어지는 이진수에 해당하는 값의 배열이다.
+네오가 프로도의 비상금을 손에 넣을 수 있도록, 비밀지도의 암호를 해독하는 작업을 도와줄 프로그램을 작성하라.
+
+//입력 형식
+
+입력으로 지도의 한 변 크기 n 과 2개의 정수 배열 arr1, arr2가 들어온다.
+1 ≦ n ≦ 16
+arr1, arr2는 길이 n인 정수 배열로 주어진다.
+정수 배열의 각 원소 x를 이진수로 변환했을 때의 길이는 n 이하이다. 즉, 0 ≦ x ≦ 2^n - 1을 만족한다.
+출력 형식
+원래의 비밀지도를 해독하여 &quot;#&quot;, 공백으로 구성된 문자열 배열로 출력하라.
+
+입출력 예제
+ */
+import java.util.Scanner;
+
+import javax.swing.plaf.synth.SynthSpinnerUI;
+
+class Solution {
+
+    public static void main(String args[]) throws Exception {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt(); // 배열 수 입력 
+
+        int [] arr1 = new int[n];
+        int [] arr2 = new int[n]; // 배열 두 개 생성 
+        int [][] binaryNumofArr1 = new int[n][n];
+        int [][] binaryNumofArr2 = new int[n][n];
+        char [][] finalMap = new char[n][n]; 
+
+        for ( int i = 0; i &lt; n; i++) { // arr1 원소 입력 
+            arr1[i] = sc.nextInt();
+        }
+
+        for ( int i = 0; i &lt; n; i++) { // arr2 원소 입력 
+            arr2[i] = sc.nextInt();
+        }
+
+        for ( int i = 0; i &lt; n; i++) { 
+            for (int j = n -1; j &gt;= 0; j--) {
+                binaryNumofArr1[i][j] = arr1[i] % 2;
+                arr1[i] = arr1[i] / 2;
+                System.out.print(binaryNumofArr1[i][j]);
+
+            }System.out.println(&quot; &quot;);
+        }
+
+        System.out.println(&quot; ========================================== &quot;);
+
+        for ( int i = 0; i &lt; n; i++) {          
+            for (int j = n-1; j &gt;= 0; j--) {
+                binaryNumofArr2[i][j] = arr2[i] % 2;
+                arr2[i] = arr2[i] / 2;
+                System.out.print(binaryNumofArr2[i][j]);
+
+            }System.out.println(&quot; &quot;);
+        }
+
+        for ( int i = 0; i &lt; n; i++) {
+            for ( int j = 0; j &lt; n; j++) {
+                if (binaryNumofArr1[i][j] == 1 || binaryNumofArr2[i][j] == 1) {
+                    finalMap[i][j] = '#';
+                }
+                else {
+                    finalMap[i][j] = ' ';
+                }   
+            }
+        }
+
+        for ( int i = 0; i &lt; n; i++) {
+            for (int j = 0; j &lt; n; j++) {
+                System.out.print(finalMap[i][j]);
+            }
+            System.out.print(',' + &quot; &quot;);
+        }
+    }
+}
+
+/*
+n   5
+arr1    [9, 20, 28, 18, 11]
+arr2    [30, 1, 21, 17, 28]
+출력  [&quot;#####&quot;,&quot;# # #&quot;, &quot;### #&quot;, &quot;#  ##&quot;, &quot;#####&quot;] 
+*/
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/18 17:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">송현우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9067"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <hr />
+<p>파이썬</p>
+<pre><code class="python">n = 5
+arr1 = [9, 20, 28, 18, 11]
+arr2 = [30, 1, 21, 17, 28]
+
+answer = [&quot;#####&quot;, &quot;# # #&quot;, &quot;### #&quot;, &quot;#  ##&quot;, &quot;#####&quot;]
+
+
+def decoder(n, arr1, arr2):
+
+    tempArr = []
+    for i in range(n):
+        tempArr.append(bin(arr1[i] | arr2[i])[2:])
+        tempArr[i] = tempArr[i].replace('0', ' ').replace('1', '#')
+
+
+
+    print(tempArr)
+
+
+decoder(n, arr1, arr2)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/19 15:55</p>
+                                <p class="static-profile" style="margin:0;padding:0;">호에에</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9083"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="ruby"># KAKAO 3번째 문제
+N = 5
+ARR1 = [9, 20, 28, 18, 11]
+ARR2 = [30, 1, 21, 17, 28]
+COMBINED = ARR1.zip(ARR2)
+
+def decode_set(set)
+  codes, first, second = [], set[0], set[1]
+  N.times do
+    code = first % 2 + second % 2
+    first /= 2
+    second /= 2
+    if code.zero?
+      codes.prepend &quot; &quot;
+    else
+      codes.prepend &quot;#&quot;
+    end
+  end
+  codes
+end
+
+@result = []
+COMBINED.each do |set|
+  @result &lt;&lt; decode_set(set)
+end
+
+puts @result.to_s
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/23 11:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이한결</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9084"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>C</strong></p>
+<pre><code>char b;
+for (int i = 0; i &lt; n; i++) {
+    for (int j = 0; j &lt; n; j++) {
+         b = ((arr1[i] | arr2[i]) &amp; (1&lt;&lt;(n-1-j))) ? '*' : ' ';
+         printf(&quot;%c&quot;,b);
+    }
+    printf(&quot;\n&quot;);
+}
+</code></pre>
+
+<p>문법도 간단하고 속도도 빠른 비트연산 만세! ('ㅅ')/</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/23 14:31</p>
+                                <p class="static-profile" style="margin:0;padding:0;">아몬드</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9094"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">public static void main(String[] args) {
+// TODO Auto-generated method stub
+    int[] arr1 = {9, 20, 28, 18, 11};
+    int[] arr2 = {30, 1, 21, 17, 28};
+    getSecret(5, arr1, arr2);
+
+    int[] arr3 = {46, 33, 33 ,22, 31, 50};
+    int[] arr4 = {27 ,56, 19, 14, 14, 10};
+    getSecret(6, arr3, arr4);
+}
+
+public static void getSecret(int n, int[] arr1, int[] arr2){
+    String[] result = new String[n];
+    String tmp = &quot;&quot;;
+    for(int i=0;i&lt;n; i++){
+        String n1 = checkLength(Integer.toBinaryString(arr1[i]),n);
+        String n2 = checkLength(Integer.toBinaryString(arr2[i]),n);
+        for(int j=0; j&lt;n; j++){
+            int c1 = Integer.parseInt(String.valueOf(n1.charAt(j)));
+            int c2 = Integer.parseInt(String.valueOf(n2.charAt(j)));
+            if(c1 == 0 &amp;&amp; c2 == 0)
+                tmp += &quot; &quot;;
+            else
+                tmp += &quot;#&quot;;
+        }
+        result[i] = tmp;
+        tmp = &quot;&quot;;
+    }
+
+    for(int k=0; k&lt;result.length; k++){
+        System.out.print(result[k]+&quot;, &quot;);
+    }
+}
+
+public static String checkLength(String value, int n){
+    String str = &quot;&quot;;
+    if(value.length() &gt;= n)
+        return value;
+    else{
+        for(int l=0; l&lt;(n-value.length()); l++){
+            str+=&quot;0&quot;;
+        }
+        str+=value;
+    }
+    return str;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/24 14:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">jake</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9096"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">-- 이런 문제 내는것도 대단하다~~
+
+public class SecureMap {
+    private String divide(int val, int size) {
+        StringBuilder sb = new StringBuilder();
+
+        for (int j = size - 1; j &gt;= 0; j--) {
+            if (val == 0) {
+                sb.append(&quot;-&quot;);
+            } else if (val == 1) {
+                sb.append(&quot;#&quot;);
+            } else {
+                int rest = val % 2;
+                sb.append(rest == 1 ? &quot;#&quot; : &quot;-&quot;);
+            }
+            val /= 2;
+        }
+
+        return sb.toString();
+    }
+
+    public String[] findMap(int[] a, int[] b) {
+        int size = a.length;
+        String[] result = new String[size];
+
+        for (int i = 0; i &lt; size; i++) {
+            String tempA = divide(a[i], size);
+            String tempB = divide(b[i], size);
+
+            result[i] = &quot;&quot;;
+            for (int j = tempA.length() - 1; j &gt;= 0; j--) {
+                if (tempA.charAt(j) == '#' || tempB.charAt(j) == '#') {
+                    result[i] += &quot;#&quot;;
+                } else {
+                    result[i] += &quot;-&quot;;
+                }
+            }
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int[] a = new int[]{46, 33, 33, 22, 31, 50};
+        int[] b = new int[]{27, 56, 19, 14, 14, 10};
+
+        SecureMap secureMap = new SecureMap();
+        String[] result = secureMap.findMap(a, b);
+
+        for (int i = 0; i &lt; result.length; i++) {
+            System.out.println(result[i]);
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/24 18:28</p>
+                                <p class="static-profile" style="margin:0;padding:0;">ohna</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9120"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">a = int(input())
+
+b = list(input().split())
+b = list(map(int, b))
+
+c = list(input().split())
+c = list(map(int, c))
+
+d = []
+
+for i in range(a):
+    d.append(bin(b[i] | c[i]))
+
+    d[i] = d[i].replace(&quot;0b&quot;, &quot;&quot;)
+    d[i] = d[i].replace(&quot;1&quot;, &quot;#&quot;)
+    d[i] = d[i].replace(&quot;0&quot;, &quot; &quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/27 23:13</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Changho Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9477"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Javascript (ECMA3), Internet Explorer 6 에서 사용 가능한 Code 입니다...</p>
+<pre><code class="javascript">// polyfill
+Array.prototype.fill = Array.prototype.fill ? Array.prototype.fill : function (value) {
+    for (var i = 0, m = this.length; i &lt; this; i++) {
+        this[i] = value;
+    }
+    return this;
+};
+
+function getMap(count, array1, array2) {
+    // validation of parameters
+    if (typeof count !== 'number' || isNaN(count)) {
+        throw new TypeError('1st parameter is required as number type');
+    }
+    if (1 &gt; count || count &gt; 16) {
+        throw new Error('count is not proper');
+    }
+    var isArray = function (value) {
+        return Object.prototype.toString.call(value) === '[object Array]';
+    };
+    if (!isArray(array1) || !isArray(array2)) {
+        throw new TypeError('2nd and 3rd parameters are required as array type');
+    }
+    if (array1.length !== count || array2.length !== count) {
+        throw new Error('2nd and 3rd parameters are invalid caused by 1st parameter validation');
+    }
+    // end of validation
+
+    var returnArray = [];
+    var padding = new Array(count).fill(0).join('');
+    for (var i = 0; i &lt; count; i++) {
+        var value = (Number(array1[i].toString(2)) + Number(array2[i].toString(2))).toString();
+        value = padding.substr(value.length) + value;
+        returnArray.push(value.replace(/[0]/gm, ' ').replace(/[1,2]/gm, '#'));
+    }
+    return returnArray;
+}
+
+alert(getMap(5, [9, 20, 28, 18, 11], [30, 1, 21, 17, 28]));
+alert(getMap(6, [46, 33, 33, 22, 31, 50], [27, 56, 19, 14, 14, 10]));
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/12/03 20:11</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Seunghwan Oh</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9554"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="clojure">(ns secret.core)
+
+
+(defn to-digits
+  [n b]
+  (loop [n n
+         digits ()]
+    (if (pos? n)
+      (recur (quot n b)
+             (conj digits (mod n b)))
+      digits)))
+
+(defn padding [seq size]
+  (let [cnt (count seq)
+        fill-size (- size cnt)]
+    (concat (repeat fill-size 0) seq)))
+
+(defn secret [n arr1 arr2]
+  (-&gt;&gt; [arr1 arr2]
+       (apply map (fn [x y]
+                    (-&gt; (bit-or x y)
+                        (to-digits 2)
+                        (padding n)
+                        (-&gt;&gt; (map #(if (zero? %) \space \#))
+                             (apply str)))))))
+
+(let [n 5
+      arr1  [9, 20, 28, 18, 11]
+      arr2  [30, 1, 21, 17, 28]]
+  (secret n arr1 arr2))
+;=&gt; (&quot;#####&quot; &quot;# # #&quot; &quot;### #&quot; &quot;#  ##&quot; &quot;#####&quot;)
+
+(let [n 6
+      arr1  [46, 33, 33 ,22, 31, 50]
+      arr2  [27 ,56, 19, 14, 14, 10]]
+  (secret n arr1 arr2))
+;=&gt; (&quot;######&quot; &quot;###  #&quot; &quot;##  ##&quot; &quot; #### &quot; &quot; #####&quot; &quot;### # &quot;)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/12/10 09:36</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김 은평</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9626"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def miro(n, arr1, arr2):
+    temp1, temp2 = [], []
+    answer = ['' for i in range(n)]
+    for i in arr1:
+        temp = len(bin(i)[2:]) &lt; n and ('0' * (n-len(bin(i)[2:]))) + bin(i)[2:] or bin(i)[2:]
+        temp1.append(temp)
+    for i in arr2:
+        temp = len(bin(i)[2:]) &lt; n and ('0' * (n-len(bin(i)[2:]))) + bin(i)[2:] or bin(i)[2:]
+        temp2.append(temp)
+
+    for i in range(n):
+        for j in range(n):
+            if temp1[i][j] == '0' and temp2[i][j]  == '0':
+                answer[i] += ' '
+            else:
+                answer[i] += '#'
+
+    return answer
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/12/13 17:34</p>
+                                <p class="static-profile" style="margin:0;padding:0;">bbubbush</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9802"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">while True:
+    try:
+        n = int(input('input N: '))
+        if isinstance(n, int) and n &lt; 17:
+            break
+        else:
+            print('16이하의 자연수를 입력하세요')
+    except ValueError:
+        print('16이하의 자연수를 입력하세요')
+
+def input_arr(n, arr):
+    temp = 0
+    for i in range(n):
+        while True:
+            try :
+                temp = int(input(str(i + 1) + '번 째 원소: '))
+            except ValueError:
+                print('0이상 ' + str(2 ** n - 1) + ' 이하의 정수를 입력하세요')
+            if isinstance(temp, int) and (temp &lt; (2 ** n )):
+                break
+            else:
+                print('0이상 ' + str(2 ** n - 1) + ' 이하의 정수를 입력하세요')
+        arr.append(temp)
+
+def bin_match(num1, num2):
+    result = str()
+    num1_bin = bin(num1)[2:].zfill(5)
+    num2_bin = bin(num2)[2:].zfill(5)
+
+    for i in range(5):
+        if num1_bin[i] == str(1) or num2_bin[i] == str(1):
+            result += '#'
+        else:
+            result += ' '
+    print(result)
+
+print('Input arr1: ')
+arr1 = []
+input_arr(n, arr1)
+
+print('Input arr2: ')
+arr2 = []
+input_arr(n, arr2)
+
+for i in range(n):
+    bin_match(arr1[i], arr2[i])
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/12/22 23:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이영훈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9873"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">#include&lt;stdio.h&gt;
+void bin (int num, int *p);
+int n;
+int main(void)
+{
+    int arr1[16], arr2[16], i, j;
+    int compare1[16], compare2[16];
+    char _char[16][16];
+    scanf(&quot;%d&quot;, &amp;n);
+
+    for(i = 0; i &lt; n; i++)
+        scanf(&quot;%d&quot;, arr1 +i);
+    for(i = 0; i &lt; n; i++)
+        scanf(&quot;%d&quot;, arr2 +i);
+
+    for( i = 0; i &lt; n; i++)
+    {
+        bin(arr1[i], compare1);
+        bin(arr2[i], compare2);
+        for(j =0; j &lt; n; j++)
+            if(compare1[j]||compare2[j])
+                _char[i][j] = '#';
+            else
+                _char[i][j] = ' ';
+    }
+    for(i = 0; i &lt; n; i++)
+    {
+        for( j = 0; j &lt; n; j++)
+            printf(&quot;%c &quot;, _char[i][j]);
+        printf(&quot;\n&quot;);
+    }
+
+    return 0;
+}
+
+void bin (int num, int *p)
+{
+    int i, j;
+    for(i = n-1; i &gt;= 0 ; i--)
+    {
+        p[i] = num %2;
+        num /= 2;
+    }
+
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/12/27 22:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">CodingMan</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9959"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package CodingDojang;
+
+import java.util.Scanner;
+import java.util.Random;
+
+public class test1 {
+    public static void printResult(int n, int [] A, int [] B, String [] R ){
+        // print 함수
+        System.out.println(&quot;입력된 한 변의 크기 : &quot; + n);
+        System.out.print(&quot;arr1의 값들 : &quot;);
+        for(int i = 0; i &lt; A.length; i++){
+            System.out.print(A[i] + &quot; &quot;);
+        }
+        System.out.println();
+        System.out.print(&quot;arr2의 값들 : &quot;);
+        for(int i = 0; i &lt; B.length; i++){
+            System.out.print(B[i] + &quot; &quot;);
+        }
+        System.out.println();
+        System.out.print(&quot;암호 결과 : [&quot;);
+        for(int j = 0; j &lt; R.length; j++){
+            System.out.print(&quot;\&quot;&quot;);
+            for(int i = 0; i &lt; R.length; i++){
+                System.out.print(R[j].charAt(i));
+            }
+            System.out.print(&quot;\&quot;&quot;);
+        }
+        System.out.print(&quot;]&quot;);
+    }
+
+    public static void main(String args[]){
+
+        int x = 1, n; // 정수배열의 각 원소들의 상한(x), 한 변의 크기(n)
+        int [] arr1, arr2;  // 지도 1, 2
+        String [] map1, map2, result; // 
+        Scanner input = new Scanner(System.in);
+        Random rand = new Random();
+        while(true){
+            System.out.print(&quot;지도 한 변의 크기 : &quot;);
+            n = input.nextInt();
+            if(n &lt; 1 || n &gt; 16){
+                System.out.println(&quot;지도 한 변의 크기는 1보다 크거나 같고 16보다는 작거나 같아야합니다.&quot;);
+            } // 지도 한 변의 크기를 만족 못하는 경우 다시 입력
+            else{
+                arr1 = new int[n];
+                arr2 = new int[n];
+                map1 = new String[n];
+                map2 = new String[n];
+                result = new String[n];
+                break; // 지도 한 변의 크기를 만족하는 경우 지도들의 크기 정의
+            }
+        }
+
+        for(int i = n; i &gt; 0; i--){
+            x = x*2;
+        } // x의 최대상한 계산
+
+        for(int i = 0; i &lt; n; i++){
+            arr1[i] = rand.nextInt(x);
+            arr2[i] = rand.nextInt(x);
+        } // 각 지도에 범위에 맞는 값(암호)삽입 
+
+        for(int i = 0; i &lt; n; i++){
+            map1[i] = &quot;&quot;;
+            map2[i] = &quot;&quot;;
+            int temp1 = arr1[i], temp2 = arr2[i];
+            for(int j = x; j &gt; 0; j = j/2){
+                // 큰 범위의 진수부터 계산
+                if(temp1 &lt; j &amp;&amp; temp1 &gt;= j/2){ // 만약 해당하는 범위라면
+                    map1[i] += &quot;#&quot;; 
+                    if(j !=1)
+                        temp1 = temp1 % (j/2); // #표시와 함께 나머지값을 temp1에 반환
+                }
+                else map1[i] += &quot; &quot;;
+
+                if(temp2 &lt; j &amp;&amp; temp2 &gt;= j/2){
+                    map2[i] += &quot;#&quot;;
+                    if(j != 1)
+                    temp2 = temp2 % (j/2); // map1과 마찬가지
+                }
+                else map2[i] += &quot; &quot;;
+            }
+        } // 각각의 지도의 암호를 푸는 과정
+
+        for(int i = 0 ; i &lt; n; i++){
+            result[i] = &quot;&quot;;
+            for(int j = 0; j &lt; n; j++){
+                if( map1[i].charAt(j) == '#' || map2[i].charAt(j) == '#'){
+                    result[i] += &quot;#&quot;;
+                    // 만약 각 지도의 자리에 #이 있다면 결과에도 #을 표시 
+                }
+                else result[i] += &quot; &quot;; // 그렇지 않다면 공백
+            }
+        }
+        printResult(n, arr1, arr2, result); // print
+        input.close();
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/01/02 15:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박경철</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2161"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">실력이 많이 부족하여 난잡한 코드가 나온것 같습니다 ㅠㅠ 수정했으면 좋을 부분이나 조언부탁드립니다 ^^</span>
+                                -
+                                <span style="font-size:11px;">
+                                    박경철,
+                                    2018/01/02 15:25
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10206"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>출력값을 기대값과 동일한지 check하는 루틴을 추가하였습니다.
+구현내용은 def showmap(n, arr1, arr2)함수를 참고하세요</p>
+<pre><code class="python">inputs = [{&quot;n&quot;:5, &quot;arr1&quot;:[9,20,28,18,11], &quot;arr2&quot;:[30,1,21,17,28], &quot;result&quot;:[&quot;#####&quot;,&quot;# # #&quot;, &quot;### #&quot;, &quot;#  ##&quot;, &quot;#####&quot;]},
+          {&quot;n&quot;:6, &quot;arr1&quot;:[46,33,33,22,31,50], &quot;arr2&quot;:[27,56,19,14,14,10], &quot;result&quot;:[&quot;######&quot;, &quot;###  #&quot;, &quot;##  ##&quot;, &quot; #### &quot;, &quot; #####&quot;, &quot;### # &quot;]}]
+
+def showmap(n, arr1, arr2):
+    result = []
+    for i in range(len(arr1)):
+        result.append(&quot;{0:b}&quot;.format(arr1[i] | arr2[i]).zfill(n).replace(&quot;0&quot;, &quot; &quot;).replace(&quot;1&quot;, &quot;#&quot;))
+    return result
+
+for input in inputs:
+    assert(input[&quot;result&quot;] == showmap(input[&quot;n&quot;], input[&quot;arr1&quot;], input[&quot;arr2&quot;]))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/01/17 18:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Kim yeon hui</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10262"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def miro(n, arr1, arr2):
+    return [bin(arr1[i] | arr2[i])[2:].replace(&quot;1&quot;, &quot;#&quot;).replace('0', ' ') for i in range(5)]
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/01/22 19:06</p>
+                                <p class="static-profile" style="margin:0;padding:0;">bbubbush</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10274"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">##비밀지도
+def decimal2binary(n, decimal_num):
+    &quot;&quot;&quot;Convert decimal number to binary number&quot;&quot;&quot;
+    binary = &quot;&quot;
+    while decimal_num != 1:
+        binary = str(decimal_num % 2) + binary
+        decimal_num = int(decimal_num / 2)
+    binary = &quot;1&quot; + binary
+
+    while len(binary) != n:
+       binary = &quot;0&quot; + binary
+
+    return binary
+
+def map_reader(n, arr1, arr2):
+    &quot;&quot;&quot;n = # of rows, arr1 &amp; arr2 refers to decimal lists&quot;&quot;&quot;
+    arr1_binary = [decimal2binary(n, elem) for elem in arr1]
+    arr2_binary = [decimal2binary(n, elem) for elem in arr2]
+
+    result_list = []
+    for i in range(n):
+        result_text = &quot;&quot;
+        for j in range(n):
+            if arr1_binary[i][j] == &quot;1&quot; or arr2_binary[i][j] == &quot;1&quot;:
+                result_text += &quot;#&quot;
+            else:
+                result_text += &quot; &quot;
+        result_list.append(result_text)
+    return result_list
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/01/24 07:45</p>
+                                <p class="static-profile" style="margin:0;padding:0;">ShinKoo Kang</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10280"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3.6</p>
+<pre><code class="python">def numtobin(arr):
+    arr_bin,arr_map,maplist,x = [],[],[],0
+    for num in arr:# 배열안의 수들을 2진수로 변환
+        x = num
+        if num == 1:
+            arr_bin.append(num)
+        while x//2 != 0 :
+            arr_bin.append(x%2)
+            x = x // 2
+            if x // 2 == 1:
+                arr_bin.append(x%2)
+                arr_bin.append(x//2)
+                break
+        if len(arr_bin) &lt; n:
+            for i in range(len(arr)-len(arr_bin)):
+                arr_bin.append(0)
+        arr_bin.reverse() 
+        maplist.append(arr_bin)
+        arr_bin, arr_map = [],[]
+    return maplist
+
+def main(map_case):
+    result,tmp = [],&quot;&quot;
+    for arr in arr_list:
+        map_case.append(numtobin(arr))
+    for case in zip(map_case[0],map_case[1]): # 두 가지 맵 배열을 각 행별로 비교하여 비밀지도 배열 완성
+        for i in range(len(case[0])):
+            if case[0][i] == 0 and case[1][i] == 0:
+                tmp += ' '
+            else:
+                tmp += '#'
+        result.append(tmp)
+        tmp = &quot;&quot;
+    print(&quot;n =%d&quot;%n)
+    print(&quot;arr1 =&quot;,arr_list[0])
+    print(&quot;arr2 =&quot;,arr_list[1],&quot;\n&quot;)
+    print(result)
+
+if __name__ == &quot;__main__&quot;:
+    n = 5
+    arr_list = [[9, 20, 28, 18, 11],[30, 1, 21, 17, 28]]
+#    arr_list = [[46, 33, 33 ,22, 31, 50],[27 ,56, 19, 14, 14, 10]]
+    map_case =[]
+    main(map_case)
+</code></pre>
+
+<ul>
+<li>결과값</li>
+</ul>
+<pre><code class="python">n =5
+arr1 = [9, 20, 28, 18, 11]
+arr2 = [30, 1, 21, 17, 28] 
+
+['#####', '# # #', '### #', '#  ##', '#####']
+
+n =6
+arr1 = [46, 33, 33, 22, 31, 50]
+arr2 = [27, 56, 19, 14, 14, 10] 
+
+['######', '###  #', '##  ##', ' #### ', ' #####', '### # ']
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/01/24 15:58</p>
+                                <p class="static-profile" style="margin:0;padding:0;">justbegin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10281"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">class Program
+    {
+
+        static void Main(string[] args)
+        {
+
+            int[] arr1 = { 9,20,28,18,11};
+            int[] arr2 = { 30,1,21,17,28};
+            Hiddenmap hdm = new Hiddenmap(arr1);
+            Hiddenmap hdm2 = new Hiddenmap(arr2);
+            for (int i = 0; i &lt; hdm.FinalResulter().Length; i++)
+                Console.WriteLine(hdm.FinalResulter()[i]);
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            for (int i = 0; i &lt; hdm2.FinalResulter().Length; i++)
+                Console.WriteLine(hdm2.FinalResulter()[i]);
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+
+            for (int i=0;i&lt;arr1.Length;i++)
+            {
+                strcompare(hdm.FinalResulter()[i], hdm2.FinalResulter()[i]);
+            }
+
+
+        }
+        public static void strcompare(string str1,string str2)
+        {
+            string result=&quot;&quot;;
+
+            for(int i = 0; i &lt; str1.Length; i++)
+            {
+                if(str1[i] == str2[i])
+                {
+                    result += str1[i];
+                }
+                else if(str1[i] == '#')
+                {
+                    result += str1[i];
+                }
+                else if (str2[i] == '#')
+                {
+                    result += str2[i];
+                }
+
+            }
+            Console.WriteLine(result);
+        }
+    }
+
+class Hiddenmap
+    {
+        public int[] arr;
+        public Hiddenmap(int[] arr)
+        {
+            this.arr = arr;
+        }
+
+
+        public string[] FinalResulter()
+        {
+            string[] finalcodearr = new string[arr.Length];
+            int primenum1 = 0;
+            int settingnum = 0;
+            for (int i = 0; i &lt; arr.Length; i++)
+            {
+                if (i == 0)
+                    primenum1 = arr[i];
+
+                if (arr[i] &gt; primenum1)
+                    primenum1 = arr[i];
+
+            }
+            while(Math.Pow(2,settingnum) - 1 &lt;= primenum1)
+            {
+                settingnum++;
+            }
+
+            for (int i = 0; i &lt; arr.Length; i++)
+            {
+                finalcodearr[i] = this.converter(settingnum, arr[i]);
+            }
+            return finalcodearr;
+        }
+
+        public string converter(int n, int num)
+        {
+            string result = &quot;&quot;;
+            string ReverseResult = &quot;&quot;;
+            for (int i = 0; i &lt; n; i++)
+            {
+                if (num &gt;= 1)
+                {
+                    if (num % 2 == 1)
+                        result += &quot;#&quot;;
+                    else
+                        result += &quot;0&quot;;
+
+                    num = num / 2;
+                }
+                else
+                {
+                    result += &quot;0&quot;;
+                }
+
+            }
+            for (int i = result.Length - 1; i &gt; -1; i--)
+                ReverseResult += result[i];
+
+            return ReverseResult;
+        }
+    }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/01/24 16:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">아작</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10293"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">        internal string[] PrintSecretMapBitControl(int n, int[] arr1, int[] arr2)
+        {
+            var outputs = new string[n];
+            for (var i = 0; i &lt; n; i++)
+            {
+                var curr = arr1[i] | arr2[i];
+                var temp = Convert.ToString(curr, 2);
+                temp = temp.Replace(&quot;0&quot;, &quot; &quot;).Replace(&quot;1&quot;, &quot;#&quot;);
+                outputs[i] = temp;
+            }
+            return outputs;
+        }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/01/25 12:16</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Straß Böhm Jäger</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10401"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n = 5
+inputs1 = [23,17,22, 11]
+inputs2 = [3,26,29,30]
+output = list()
+for j in range(0,len(inputs1)):
+    ret = ''
+    num = inputs1[j] | inputs2[j]
+    for i in range(0,n):
+        if num % 2 == 0 :ret = ' ' + ret
+        else: ret = '#' + ret
+        num = int(num / 2)
+    output.append(ret)
+print(output)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/01/31 09:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">윤승현</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10479"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># 파이썬
+
+sample1 = (5, [9, 20, 28, 18, 11], [30, 1, 21, 17, 28])
+sample2 = (6, [46, 33, 33, 22, 31, 50], [27, 56, 19, 14, 14, 10])
+input_sample = sample2
+
+
+def draw_map(n, arr1, arr2):
+    line_s = []
+    for t in range(n):
+        c1 = arr1[t]
+        c2 = arr2[t]
+        line = ''
+        m = 2**(n-1)
+        for _ in range(n):
+            if c1 &gt;= m or c2 &gt;= m:
+                line += '#'
+                if c1 &gt;= m: c1 -= m
+                if c2 &gt;= m: c2 -= m
+                m /= 2
+            else:
+                line += '_'
+                m /= 2
+        line_s.append(line)
+    for m in line_s:
+        print(m)
+    return line_s
+
+
+print(draw_map(input_sample[0], input_sample[1], input_sample[2]))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/03 23:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">olclocr</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10729"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def treasuremap(n,arr1, arr2):
+    def decode(n, arr):
+        l = list()
+        for i in arr:
+            a = list()
+            for j in range(n):
+                if i%2 == 1:
+                    a.append('#')
+                else:
+                    a.append(' ')
+                i = i//2
+            a.reverse()
+            l.append(a)
+        return l
+    map1 = decode(n, arr1)
+    map2 = decode(n, arr2)
+    result = list()
+    for i in range(n):
+        b = list()
+        for j in range(n):
+            if map1[i][j] == ' ' and  map2[i][j] == ' ':
+                b.append(' ')
+            else:
+                b.append('#')
+        result.append(b)
+    return result
+
+
+a = int(input())
+l1 = list(map(int, input(&quot;공백으로 수를 구분하시오 :&quot;).split(' ')))
+l2 = list(map(int, input(&quot;공백으로 수를 구분하시오 :&quot;).split(' ')))
+for i in treasuremap(a, l1, l2):
+    print(i)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/15 10:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김동하</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10807"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>package solr.example.solr.example;</p>
+<p>import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;</p>
+<p>public class MapCalcu {</p>
+<pre><code>public static void main(String[]args) throws Exception{
+    final int RANDOM = 100;
+
+    BufferedReader br =new BufferedReader(new InputStreamReader(System.in));
+    List&lt;String&gt; result = new ArrayList&lt;String&gt;();
+
+    System.out.println("Input");
+    int n = Integer.valueOf(br.readLine());
+    if(n&gt;16||n&lt;1) {
+        System.out.println("Retry");
+        return;
+    }
+    int [] arr1 = new int[n];
+    int [] arr2 = new int[n];
+
+    for(int i=0; i&lt;n;i++) {
+        int value = (int)(Math.random()*RANDOM)+1;
+        arr1[i]=value;          
+        for(int j=0;j&lt;i;j++) {
+            if(arr1[j] == arr1[i]) {
+                --i;
+            }
+        }           
+    }
+    for(int i=0; i&lt;n;i++) {
+        int value = (int)(Math.random()*RANDOM)+1;
+        arr2[i] = value;            
+        for(int j=0;j&lt;i;j++) {
+            if(arr2[j] == arr2[i]) {
+                --i;
+            }
+        }           
+    }
+    //end for
+
+    for(int i=0;i&lt;n;i++) {          
+        String wall = "";
+        String one = Integer.toBinaryString(arr1[i]);
+        String two = Integer.toBinaryString(arr2[i]);
+
+        char[] ones = one.toCharArray();
+        char[] twos = two.toCharArray();
+        for(char o:ones) {
+            if(o == '1') {
+                wall+="#";
+            }else {
+                for(char t:twos) {
+                    if(t == '0') {
+                        wall+=" ";
+                    }else {
+                        wall+="#";
+                    }
+                }//end twos
+            }               
+        }//end ones
+        result.add(wall);
+    }//end n for
+    System.out.println("N="+n);
+    for(int i:arr1) {
+    System.out.print(i+" ");
+    }
+    System.out.println();
+    for(int j:arr2) {
+        System.out.print(j+" ");
+    }
+    System.out.println();
+    System.out.println("결과="+result.toString());
+}
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/19 16:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">윤재욱</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11037"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def secretMap(n, arr1, arr2):
+    for i in range(n):
+        print(str(bin(arr1[i]|arr2[i]))[2:].zfill(n).replace(&quot;1&quot;,&quot;#&quot;).replace(&quot;0&quot;,&quot;  &quot;))
+
+secretMap(5 , [9, 20, 28, 18, 11], [30, 1, 21, 17, 28])
+secretMap(6 , [46, 33, 33 ,22, 31, 50], [27 ,56, 19, 14, 14, 10])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/03/08 13:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">노간</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11114"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="javascript">(function run(n, arr1, arr2) {
+  function split(element) {
+    let list = [];
+    while(element !== 0) {
+      if(element % 2 == 1)
+        list.unshift(1);
+      else
+        list.unshift(0);
+      element = parseInt(element / 2);
+    }
+    while(list.length &lt; n)
+      list.unshift(0);
+    return list;
+  };
+  function join(arr1, arr2) {
+    let result = []
+      , tmp = [];
+    for (let i = 0; i &lt; arr1.length; i++) {
+      for (let j = 0; j &lt; arr1[i].length; j++) {
+        if((arr1[i][j] || arr2[i][j]) === 0)
+          tmp.push(' ');
+        else
+          tmp.push('#');
+      }
+      result.push(tmp)
+      tmp = [];
+    }
+    return result;
+  }
+  let binary_arr1 = new Array()
+    , binary_arr2 = new Array()
+  if (n &lt; 0 &amp;&amp; n &gt; 16 &amp;&amp; arr1.length !== n &amp;&amp; arr2.length !== n)
+    return;
+  arr1.map((element) =&gt; binary_arr1.push(split(element)));
+  arr2.map((element) =&gt; binary_arr2.push(split(element)));
+  return join(binary_arr1, binary_arr2)
+})();
+</code></pre>
+
+<h2 id="_1">함수 설명</h2>
+<h3 id="split">split</h3>
+<p>받은 요소 하나를 2진수로 나누어 저장합니다.</p>
+<h3 id="join">join</h3>
+<p>두 요소를 합쳐서 '#' 혹은 ' '으로 복호화 합니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/03/14 13:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">정주원</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11134"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def test(n):
+    n = int(n)
+    d = []
+
+    arr1 = str(input(&quot;arr1 배열 입력 : &quot;)).split(&quot;,&quot;)
+    arr2 = str(input(&quot;arr2 배열 입력 : &quot;)).split(&quot;,&quot;)
+    for i in range(n):
+        arr1[i] = str(&quot;{0:0&gt;&quot; + str(n) + &quot;}&quot;).format(str(bin(int(arr1[i]))).split(&quot;0b&quot;)[-1])
+        arr2[i] = str(&quot;{0:0&gt;&quot; + str(n) + &quot;}&quot;).format(str(bin(int(arr2[i]))).split(&quot;0b&quot;)[-1])
+    for k in range(n):
+        s = &quot;&quot;
+        # print(arr1[k])
+        for l in range(n):
+            if arr1[k][l] == &quot;1&quot; or arr2[k][l] == &quot;1&quot;:
+                s += &quot;#&quot;
+            else:
+                s += &quot; &quot;
+        d.append(s)
+    print(d)
+if __name__ == &quot;__main__&quot;:
+    test(input(&quot;n의 값 입력 : &quot;))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/03/15 16:39</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김태우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11307"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def decrypt_map(n, map1,map2):
+    result = [0 for i in range(n)]
+    for i in range(n):
+        result[i] = map1[i] | map2[i]
+    return result
+
+def print_map(n, map1):
+    for i in range(n):
+        for s in bin(map1[i]):
+            if s == '1': 
+                print(&quot;#&quot;, end = &quot;&quot;)
+            elif s == '0' : 
+                print(&quot; &quot;, end = &quot;&quot;)
+        print(&quot;&quot;)
+    print(&quot;&quot;)
+
+#해독함수
+def decrypt(n, arr1, arr2):
+    decrypted_map1 = decrypt_map(n, arr1,arr2)
+    print_map(n, decrypted_map1)
+
+decrypt(5, [9, 20, 28, 18, 11], [30, 1, 21, 17, 28])
+decrypt(6, [46, 33, 33 ,22, 31, 50], [27 ,56, 19, 14, 14, 10])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/03/23 14:45</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Sangwoon Park</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11435"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def solvemap(n, arr1, arr2):
+    map1 = [bin(x)[2:] for x in arr1]
+    for scan in map1:
+        if len(scan) != n:
+            map1[map1.index(scan)] = '0'*(n-len(scan)) + scan
+    map2 = [bin(x)[2:] for x in arr2]
+    for scan in map2:
+        if len(scan) != n:
+            map2[map2.index(scan)] = '0'*(n-len(scan)) + scan
+    summap = list(zip(map1, map2))
+    finalmap = ['' for y in range(n)]
+    for f, s in summap:
+        for making in range(n):
+            if int(f[making]) or int(s[making]):
+                finalmap[summap.index((f, s))] = finalmap[summap.index((f, s))] + '#'
+            else: finalmap[summap.index((f, s))] = finalmap[summap.index((f, s))] + ' '
+    return finalmap
+</code></pre>
+
+<p>아래 코드를 더하면 지도가 프린트됩니다<code>{.python}
+maps = solvemap(5, [9, 20, 28, 18, 11], [30, 1, 21, 17, 28])
+for printing in maps:
+    print(printing)</code></p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/03/29 20:14</p>
+                                <p class="static-profile" style="margin:0;padding:0;">myyh2357</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11653"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">#include&lt;iostream&gt;
+
+using namespace std;
+
+int main()
+{
+    int iArr1[] = { 9, 20, 28, 18, 11 };
+    int iArr2[] = { 30, 1, 21, 17, 28 };
+    int n = 5;
+    int array[5][5];
+    int devide;
+
+    for(int i = 0; i &lt; n; i++)
+    {
+        iArr1[i] |= iArr2[i];
+    }
+
+    for (int i = 0; i &lt; n; i++)
+    {
+        for (int j = 0; j &lt; n; j++)
+        {
+            devide = iArr1[i] % 2;
+            iArr1[i] /= 2;
+            array[i][j] = devide;
+        }
+    }
+
+    for (int i = 0; i &lt; n; i++)
+    {
+        for (int j = 0; j &lt; n; j++)
+        {
+            (array[i][4 - j] == 0) ? cout &lt;&lt; &quot; &quot; : cout &lt;&lt; &quot;#&quot;;
+        }
+        cout &lt;&lt; endl;
+    }
+
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/04/10 23:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jun ki Kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11674"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def s_bin(n):
+    return bin(n)[2:].replace('1', '#').replace('0', ' ')
+
+n = int(input(&quot;n: &quot;))
+arr1 = list(map(int,input(&quot;arr1: &quot;).split(&quot;,&quot;)))
+arr2 = list(map(int,input(&quot;arr2: &quot;).split(&quot;,&quot;)))
+s_arr = [arr1[i] | arr2[i] for i in range(n)]
+
+print(list(map(s_bin, s_arr)))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/04/12 01:13</p>
+                                <p class="static-profile" style="margin:0;padding:0;">정익수</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11807"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="scala">object Main extends App {
+    def binary(x:Int):String = {
+        x match {
+            case 0 =&gt; &quot;0&quot;
+            case 1 =&gt; &quot;1&quot;
+            case _ =&gt; binary(x/2) + (x%2).toString
+        }
+    }
+    def fitLength(n:Int, x:String) = &quot;0&quot;*(n-x.length) + x
+    def findMoney(n:Int, arr1:Array[Int], arr2:Array[Int]):List[String] = {
+        var ansMap:List[String] = List.empty[String]
+        val findMap = arr1.map(binary(_)).map(fitLength(n, _)).zip(arr2.map(binary(_)).map(fitLength(n, _)))
+        var str = &quot;&quot;
+        for((x, y) &lt;- findMap){
+            str = &quot;&quot;
+            for(i &lt;- 0 until x.length){
+                if(x(i) == y(i) &amp;&amp; x(i) == '0'){
+                    str += &quot; &quot;
+                } else str += &quot;#&quot;
+            }
+            ansMap = ansMap :+ str
+        }
+        ansMap
+    }
+
+    println(findMoney(5, Array(9, 20, 28, 18, 11), Array(30, 1, 21, 17, 28)))
+    println(findMoney(6, Array(46, 33, 33, 22, 31, 50), Array(27, 56, 19, 14, 14, 10)))
+
+
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/04/17 22:55</p>
+                                <p class="static-profile" style="margin:0;padding:0;">한강희</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11852"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def secret(n,arr1,arr2):
+    if n &lt; 1 or n &gt; 16 :
+        return &quot;insert the right number&quot;
+    else :
+        mylist = []
+        for i,j in zip(arr1,arr2) :
+            bini = str(bin(i))[2:] if len(str(bin(i))[2:]) == n else '0' * (n-len(str(bin(i))[2:])) + str(bin(i))[2:]
+            binj = str(bin(j))[2:] if len(str(bin(j))[2:]) == n else '0' * (n-len(str(bin(j))[2:])) + str(bin(j))[2:]
+            new = []
+            for a,b in  zip(bini, binj):
+                if a == b == '0' : new.append(' ')
+                else : new.append('#')
+            news = ''.join(new)
+            mylist.append(news)
+        return mylist
+
+print(secret(5,[9,20,28,18,11],[30,1,21,17,28]))
+print(secret(6, [46, 33, 33 ,22, 31, 50], [27 ,56, 19, 14, 14, 10]))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/04/23 18:15</p>
+                                <p class="static-profile" style="margin:0;padding:0;">yijeong</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11880"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">public void Test2()
+        {
+            const int sqr = 5;
+            int[] mapCode1 = new int[sqr] { 9, 20, 28, 18, 11 };
+            int[] mapCode2 = new int[sqr] { 30, 1, 21, 17, 28 };
+            string[] resultMap = new string[sqr] { &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, };
+
+            for (int i = 0; i &lt; sqr; i++)
+            {
+                mapCode1[i] = mapCode1[i] | mapCode2[i];
+                resultMap[i] = Convert.ToString(Convert.ToUInt32(mapCode1[i]), 2);
+                resultMap[i] = resultMap[i].Replace(&quot;0&quot;, &quot; &quot;);
+                resultMap[i] = resultMap[i].Replace(&quot;1&quot;, &quot;#&quot;);
+                Console.WriteLine(&quot;Result map. Line {0} : {1}&quot;, (i + 1).ToString(), resultMap[i]);
+            }
+            Console.ReadKey();
+        }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/04/26 16:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">비트에이스</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12020"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">// 자바입니다
+    public static void main(String[] args) throws Exception { 
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(br.readLine());
+
+        int[] arr1 = {46, 33, 33 ,22, 31, 50};
+        int[] arr2 = {27 ,56, 19, 14, 14, 10};
+        String[] str = new String[t];
+        String[] str2 = new String[t];
+
+        for (int i=0; i&lt;t; i++) {
+            String a = Integer.toBinaryString(arr1[i]);
+            String b = Integer.toBinaryString(arr2[i]);
+            if (a.length() != t) { // 자바만 그런가 앞에 0처리를 못해서 t자리 될 때까지 앞에 0붙여줌
+                String tmp = new StringBuffer(a).reverse().toString();
+                while (tmp.length() != t) {
+                    tmp += &quot;0&quot;;
+                }
+                a = new StringBuffer(tmp).reverse().toString();
+            }
+            if (b.length() != t) {
+                String tmp = new StringBuffer(b).reverse().toString();
+                while (tmp.length() != t) {
+                    tmp += &quot;0&quot;;
+                }
+                b = new StringBuffer(tmp).reverse().toString();
+            }
+            str[i] = a;
+            str2[i] = b;
+        }
+        System.out.print(&quot;[&quot;);
+        for (int i=0; i&lt;t; i++) {
+            System.out.print(&quot;\&quot;&quot;);
+            for (int j=0; j&lt;t; j++) {
+                int a = Integer.parseInt(str[i].charAt(j) + &quot;&quot;) + Integer.parseInt(str2[i].charAt(j) + &quot;&quot;);
+                if (a == 2 || a == 1) System.out.print(&quot;#&quot;);
+                else if (a == 0) System.out.print(&quot; &quot;);
+            }
+            System.out.print(i != t-1 ? &quot;\&quot;, &quot; : &quot;\&quot;]&quot;);
+        }
+    } // 배열 입력받기 귀찮아서 걍 이클립스에 쳤어요. 잘 동작하네요
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/04 22:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">정몽준</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13021"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python</p>
+<pre><code class="python">def Map(n, arr1, arr2):
+    for i, j in zip(arr1, arr2):
+        a = i | j
+        print(*[&quot;#&quot; if k == &quot;1&quot; else &quot; &quot; for k in str(bin(a))[2:]])
+    print()
+
+Map(5, [9, 20, 28, 18, 11], [30, 1, 21, 17, 28])
+Map(6, [46, 33, 33 ,22, 31, 50], [27 ,56, 19, 14, 14, 10])
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/18 16:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Taesoo Kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13226"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def binary(num):
+    a = num
+    result = ''
+    while a &gt; 0:
+        a, b = divmod(a,2)
+        result = str(b)+result
+    return result
+
+def key(n, arr1, arr2):
+    if not(1&lt;= n &lt;= 16): raise 'n의 크기가 잘못 되었습니다'
+    for i in range(n):
+        if not(0 &lt;= arr1[i] &lt;= 2**n-1): raise 'arr1 정수 크기가 잘못 되었습니다'
+        arr1[i] = [int(j) for j in binary(arr1[i])]
+        while len(arr1[i]) &lt; n: arr1[i] = [0]+arr1[i]
+    for i in range(n):
+        if not(0 &lt;= arr2[i] &lt;= 2**n-1): raise 'arr2 정수 크기가 잘못 되었습니다'
+        arr2[i] = [int(j) for j in binary(arr2[i])]
+        while len(arr2[i]) &lt; n: arr2[i] = [0]+arr2[i]
+    for i in range(n):
+        for j in range(n):
+            if arr1[i][j] + arr2[i][j] &gt; 0: arr1[i][j] = '#'
+            else: arr1[i][j] = ' '
+    for i in range(n):
+        arr1[i] = ''.join(arr1[i])
+    return arr1
+
+grid = 5
+ar1 = [9, 20, 28, 18, 11]
+ar2 = [30, 1, 21, 17, 28]
+
+print(key(grid,ar1,ar2))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/29 13:14</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13536"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">   int nSize            = 0;
+    int nNumberOfCases  = 0;
+    cout &lt;&lt; &quot;한변의 크기를 정해주세요 : &quot;; cin &gt;&gt; nSize;   cout &lt;&lt; endl;
+    nNumberOfCases = pow(2, nSize);
+
+    int *nArrFir = new int[nSize];  
+    int *nArrSec = new int[nSize];
+    int *nArrRes = new int[nSize]; 
+
+    fill_n(nArrFir, nSize, 0);
+    fill_n(nArrSec, nSize, 0);
+    fill_n(nArrRes, nSize, 0);
+
+    cout &lt;&lt; &quot;First Array에 0 ~ &quot; &lt;&lt; nNumberOfCases &lt;&lt; &quot;의 숫자 &quot; &lt;&lt; nSize &lt;&lt; &quot;가지 입력해 주세요.&quot; &lt;&lt; endl;
+    for (int i = 0; i &lt; nSize; i++)
+    {
+        cout &lt;&lt; &quot;[&quot; &lt;&lt; i + 1 &lt;&lt; &quot;] : &quot;;
+        cin &gt;&gt; nArrFir[i];
+
+        if (nArrFir[i] &gt; nNumberOfCases)
+        {
+            cout &lt;&lt; &quot;입력 범위를 초과하였습니다. 다시 입력해주세요.&quot; &lt;&lt; endl;
+            i--;
+        }
+    }
+    cout &lt;&lt; endl;
+
+    cout &lt;&lt; &quot;Second Array에 0 ~ &quot; &lt;&lt; nNumberOfCases &lt;&lt; &quot;의 숫자 &quot; &lt;&lt; nSize &lt;&lt; &quot;가지 입력해 주세요.&quot; &lt;&lt; endl;
+    for (int i = 0; i &lt; nSize; i++)
+    {
+        cout &lt;&lt; &quot;[&quot; &lt;&lt; i + 1 &lt;&lt; &quot;] : &quot;;
+        cin &gt;&gt; nArrSec[i];
+
+        if (nArrSec[i] &gt; nNumberOfCases)
+        {
+            cout &lt;&lt; &quot;입력 범위를 초과하였습니다. 다시 입력해주세요.&quot; &lt;&lt; endl;
+            i--;
+        }
+    }
+    cout &lt;&lt; endl;
+
+    for (int i = 0; i &lt; nSize; i++)
+    {
+        nArrRes[i] = nArrFir[i] | nArrSec[i];
+    }
+
+    cout &lt;&lt; &quot;RESULT&quot; &lt;&lt; endl;
+    string strMap = &quot;&quot;;
+    for (int i = 0; i &lt; nSize; i++)
+    {
+        strMap = &quot;&quot;;
+        for (int j = 0; j &lt; nSize; j++)
+        {
+            int nCheck = nArrRes[i] &amp; (0x01 &lt;&lt; j);
+
+            if (nCheck == (0x01 &lt;&lt; j))
+                strMap = &quot;#&quot; + strMap;
+            else
+                strMap = &quot; &quot; + strMap;
+        }
+        cout &lt;&lt; strMap &lt;&lt; endl;
+    }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/12 17:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">신대수</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13546"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">public class Javatutorial {
+    public static void main(String[] args) {
+        int n = 5;
+        int[] arr1 = {9, 20, 28, 18, 11};
+        int[] arr2 = {30, 1, 21, 17, 28};
+
+        StringBuilder map = new StringBuilder();
+
+        for (int i = 0; i &lt; n; i++) {
+            int x = arr1[i] | arr2[i];
+            for (int j = 1 &lt;&lt; (n - 1); j &gt; 0; j /= 2) {
+                map.append(x &gt;= j ? &quot;#&quot;:&quot; &quot;);
+                x %= j;
+            }           
+            map.append(&quot;\n&quot;);
+        }       
+        System.out.println(map);
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/13 00:25</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13553"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3</p>
+<pre><code class="python">def special_plus(s1, s2):
+    result = &quot;&quot;
+    for i in range(len(s1)):
+        if s1[i] == &quot;0&quot; and s2[i] == &quot;0&quot;:
+            result += &quot; &quot;
+        else:
+            result += &quot;#&quot;
+    return result
+
+n = 5
+arr1 = [9, 20, 28, 18, 11]
+arr2 = [30, 1, 21, 17, 28]
+
+arr1_ = [bin(i)[2:].zfill(n) for i in arr1]
+arr2_ = [bin(i)[2:].zfill(n) for i in arr2]
+
+arr12_ = [special_plus(arr1_[i], arr2_[i]) for i in range(n)]
+
+print(arr1_)
+print(arr2_)
+print(arr12_)
+
+</code></pre>
+
+<p>결과</p>
+<pre><code class="python">['01001', '10100', '11100', '10010', '01011']
+['11110', '00001', '10101', '10001', '11100']
+['#####', '# # #', '### #', '#  ##', '#####']
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/13 06:53</p>
+                                <p class="static-profile" style="margin:0;padding:0;">WJ K</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13797"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">public class KaKaoTest {
+    private static final int[] map1 = {46, 33, 33, 22, 31, 50};
+    private static final int[] map2 = {27, 56, 19, 14, 14, 10};
+    private static final char LINE = '\n';
+    public static void main(String[] args) {
+        StringBuilder builder = new StringBuilder();
+        for ( int i=0, len=map1.length; i&lt;len; i++ ) {
+            String binaryString = Integer.toBinaryString(map1[i] | map2[i]).replace(&quot;1&quot;, &quot;#&quot;).replace(&quot;0&quot;, &quot; &quot;);
+            if ( binaryString.length() != len ) {
+                builder.append(' ');
+            } 
+            builder.append(binaryString).append(LINE);
+        }
+        System.out.println(builder);
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/26 20:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">kuckjwi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14756"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>import java.util.Scanner;</p>
+<p>public class secret_map {</p>
+<pre><code>public static void main(String[] args) {
+
+Scanner scanner = new Scanner(System.in);
+
+System.out.println("n을 입력해주세요.");
+int n = scanner.nextInt();
+int[][] map1 = new int[n][n];
+int[][] map2 = new int[n][n];
+String[][] map1xmap2 = new String[n][n];
+
+//map1 구성       
+for (int i=0; i&lt;n; i++) {
+
+    System.out.println("arr1" + i + " 행을 입력해주세요.");
+    int temp = scanner.nextInt();
+
+    for (int j=n-1; j&gt;=0; j--) {
+            double a = Math.pow(2, j);
+            if(temp&gt;=a) {
+            map1[i][n-j-1] = 1;
+            temp -= a;
+            } else {
+            map1[i][n-j-1] = 0;
+            }
+    }
+}
+//map1 구성
+
+
+//map2 구성
+for (int i=0; i&lt;n; i++) {
+
+    System.out.println("arr2" + i + " 행을 입력해주세요.");
+    int temp = scanner.nextInt();
+
+    for (int j=n-1; j&gt;=0; j--) {
+        double a = Math.pow(2, j);
+        if(temp&gt;=a) {
+            map2[i][n-j-1] = 1;
+            temp -= a;
+            } else {
+            map2[i][n-j-1] = 0;
+            }
+    }
+}
+//map2 구성
+
+//map1xmap2구성
+for(int i=0; i&lt;n; i++) {
+    for(int j=0; j&lt;n; j++) {
+        map1xmap2[i][j] = String.valueOf(map1[i][j] | map2[i][j]);
+        if(map1xmap2[i][j].equals("1")) {
+            map1xmap2[i][j]="#";
+        } else {
+            map1xmap2[i][j]=" ";
+        }
+        } 
+    }   
+//map1xmap2구성
+
+
+
+//출력
+System.out.print("[");
+for(int i=0; i&lt;n; i++) {
+    System.out.print("\"");
+    for(int j=0; j&lt;n; j++) {
+        System.out.print(map1xmap2[i][j]);
+    }
+    System.out.print("\",");
+}
+
+System.out.print("]");
+//출력
+
+}
+</code></pre>
+<p>}</p>
+<pre><code class="java">
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/28 17:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김찬영</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15354"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n = 5
+arr1 = [9, 20, 28, 18, 11]
+arr2 = [30, 1, 21, 17, 28]
+value = []
+for i in range(n):
+    a1 = bin(arr1[i])[2:].zfill(n)
+    a2 = bin(arr2[i])[2:].zfill(n)
+    v = ''
+    for j in range(n):
+        if a1[j] == '1' or a2[j] == '1':
+            v = v + '#'
+        else:
+            v = v + ' '
+    value.append(v)
+
+print(value)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/11/29 18:25</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Dae Su Jeong</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15529"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="swift">class Question1 {
+// 1. 비밀 지도(난이도: 하)
+
+  static func execute(_ n : Int,
+                      _ arr1: [Int],
+                      _ arr2: [Int]) -&gt; [String]{
+    var mapData = [String]()
+
+    for idx in 0..&lt;n {
+      let xor = String(arr1[idx] | arr2[idx], radix: 2)
+
+      var binary = xor.map{ char -&gt; String in
+        if char == &quot;1&quot; {
+          return &quot;#&quot;
+        } else {
+          return &quot; &quot;
+        }}.joined()
+
+      if binary.count &lt; n {
+        binary = &quot; &quot; + binary
+      }
+
+      mapData.append(binary)
+    }
+    return mapData
+  }
+
+  static func test01() -&gt; Bool {
+    let arr1 = [9,20,28,18,11]
+    let arr2 = [30,1,21,17,28]
+    let result = [&quot;#####&quot;,&quot;# # #&quot;, &quot;### #&quot;, &quot;#  ##&quot;, &quot;#####&quot;]
+    return execute(5, arr1, arr2) == result
+  }
+
+  static func test02() -&gt; Bool {
+    let arr1 = [46, 33, 33 ,22, 31, 50]
+    let arr2 = [27 ,56, 19, 14, 14, 10]
+    let result = [&quot;######&quot;, &quot;###  #&quot;, &quot;##  ##&quot;, &quot; #### &quot;, &quot; #####&quot;, &quot;### # &quot;]
+    return execute(6, arr1, arr2) == result
+  }
+
+  static func testAll() -&gt; Bool {
+    return test01() &amp;&amp; test02()
+  }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/12/13 15:38</p>
+                                <p class="static-profile" style="margin:0;padding:0;">InKwon Kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16064"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+void program(int arr[], int num,vector&lt;char&gt;&amp;iv);
+void wrapper(vector&lt;char&gt;&amp;iv, vector&lt;char&gt;&amp;iv2);
+int  main(void)
+{
+    int num;
+    cin &gt;&gt; num;
+    vector&lt;char&gt; cv;
+    vector&lt;char&gt;cv2;
+
+
+  int arr[5] = { 9,20,28,18,11 };
+  program(arr, num,cv);
+  int arr2[5] = { 30,1,21,17,28 };
+  program(arr2, num, cv2);
+  wrapper(cv, cv2);
+  for (int i = 0; i &lt; cv.size(); i++)
+  {
+      cout &lt;&lt; cv[i];
+  }
+  cout &lt;&lt; endl;
+
+
+
+}
+void wrapper(vector&lt;char&gt;&amp;iv, vector&lt;char&gt;&amp;iv2)
+{
+    for (int i = 0; i &lt; iv.size(); i++) {
+        if (iv[i] == '#'|| iv2[i] == '#')iv[i] = '#';
+    }
+}
+
+void program(int arr[], int num,vector&lt;char&gt;&amp;iv)
+{
+    for (int j = 0; j &lt; 5; j++)
+    {
+        iv.push_back('&quot;');
+        for (int i = 0; i &lt; 5; i++)
+        {
+
+
+            if (arr[j] % 2 != 0) {
+                iv.push_back('1');
+            }
+            else {
+                iv.push_back('0');
+            }
+            arr[j] = arr[j] / 2;
+        }
+        iv.push_back('&quot;');
+        iv.push_back(',');
+    }
+
+    for (vector&lt;char&gt;::iterator itr = iv.begin(); itr &lt; iv.end(); itr++)
+    {
+        if (*itr == '1') {
+            *itr = '#';
+        }
+        else if(*itr=='0') {
+            *itr =' ';
+        }
+
+    }
+}
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/01/18 18:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김상범</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16190"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def bina(mp,n):
+    l = len(bin(mp)[2:])
+    return ''.join(list(map(lambda x : '#' if x == '1' else ' ',('' if l == n else '0'*(n-l)) + bin(mp)[2:])))
+
+def comp(mp1,mp2):
+    mp = ''
+    for x in zip(mp1,mp2):
+        if x == (' ',' '):
+            mp += ' '
+        else:
+            mp += '#'
+    return mp
+
+def maps(n,mp1,mp2):
+    maps = []
+    for x in range(n):
+        maps.append(comp(bina(mp1[x],n),bina(mp2[x],n)))
+    return maps
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/01/23 16:14</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김영성</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16451"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def Treasure(len, arr1, arr2):
+    for i in range(len):
+        arr1[i] = (bin(arr1[i]|arr2[i])[2:]).zfill(len).replace('1','#').replace('0',' ')
+  print(arr1)
+
+Treasure(6,[46,33,33,22,31,50],[27,56,19,14,14,10])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/02/03 16:03</p>
+                                <p class="static-profile" style="margin:0;padding:0;">얀차</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16586"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n = int(input())
+arr1 = list(map(int, input().split()))
+arr2 = list(map(int, input().split()))
+
+if n &lt; 1 or n &gt; 16:
+    raise Exception('too large')
+
+if len(arr1) != n or len(arr2) != n:
+    raise Exception(&quot;not in range&quot;)
+
+def secret_map(arr1, arr2, n):
+    arr_bin1 = []
+    arr_bin2 = []
+    for i in arr1:
+        x = bin(i)[2:]
+        arr_bin1.append(list(x.zfill(n)))
+    for i in arr2:
+        x = bin(i)[2:]
+        arr_bin2.append(list(x.zfill(n)))
+    return arr_bin1, arr_bin2
+
+
+def is_wall(arr1, arr2):
+    result = []
+
+    for i in range(len(arr1)):
+        temp = ''
+        for j in range(len(arr2)):
+            if arr1[i][j] == '1' or arr2[i][j] == '1':
+                temp += '#'
+            else:
+                temp += ' '
+        result.append(temp)
+
+    return result
+
+x, y = secret_map(arr1, arr2, n)
+print(is_wall(x, y))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/02/11 17:00</p>
+                                <p class="static-profile" style="margin:0;padding:0;">D.H.</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17334"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+int main() {
+    int i, j, n, *arr1, *arr2;
+    scanf(&quot;%d&quot;, &amp;n);
+    if (n&lt;1||16&lt;n) return -1;
+    arr1 = (int *)malloc(sizeof(int)*n);
+    arr2 = (int *)malloc(sizeof(int)*n);
+    if (!(arr1 &amp;&amp; arr2)) return -1;
+    for(i = 0; i &lt; n; i++) scanf(&quot;%d&quot;, arr1+i);
+    for(i = 0; i &lt; n; i++) scanf(&quot;%d&quot;, arr2+i);
+    for(i = 0; i &lt; n; i++) {
+        arr1[i] |= arr2[i];
+        for(j = n-1; j &gt;= 0; j--)
+            printf(&quot;%c&quot;, arr1[i]&amp;(1&lt;&lt;j)?'#':' ');
+        printf(&quot;\n&quot;);
+    }
+    free(arr1);
+    free(arr2);
+    return 0;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/03/30 07:33</p>
+                                <p class="static-profile" style="margin:0;padding:0;">홍승표</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20149"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">public class 비밀지도 {
+
+    public static void main(String[] args) {
+
+        Scanner scan = new Scanner(System.in);
+        int n = scan.nextInt();
+
+        Scanner scan2 = new Scanner(System.in);
+        int[] arr1_int = Arrays.stream(scan2.nextLine().split(&quot;, &quot;)).mapToInt(Integer::valueOf).toArray();
+        int[] arr2_int = Arrays.stream(scan2.nextLine().split(&quot;, &quot;)).mapToInt(Integer::valueOf).toArray();
+
+        ArrayList&lt;StringBuffer&gt; 출력 = new ArrayList&lt;StringBuffer&gt;();
+
+        for(int i=0; i&lt;n; i++) {
+            int a = Integer.parseInt(Integer.toBinaryString(arr1_int[i]))+Integer.parseInt(Integer.toBinaryString(arr2_int[i]));
+            StringBuffer bf = new StringBuffer();
+            bf.append(&quot;\&quot;&quot;);
+            for(int j =0;; j++) {
+                if(a==0) {
+                    break;
+                }
+                if(a%10==0) {
+                    bf.append(&quot; &quot;);
+                    a=a/10;
+                }
+                else {
+                    bf.append(&quot;#&quot;);
+                    a=a/10;
+                }
+            }
+            bf.append(&quot;\&quot;&quot;);
+            출력.add(bf.reverse());
+        }
+        System.out.println(출력);
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/12/07 18:43</p>
+                                <p class="static-profile" style="margin:0;padding:0;">big Ko</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20769"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n=int(input(&quot;0이상 16이하의 n을 입력하십시오: &quot;))
+arr1=list(map(int,input(&quot;[배열1]숫자를 연속해서 입력하십시오: &quot;).split(&quot;,&quot;)))
+arr2=list(map(int,input(&quot;[배열2]숫자를 연속해서 입력하십시오: &quot;).split(&quot;,&quot;)))
+
+def change(n): #십진법으로 표현된 수를 이진법으로 변환시켜주는 함수
+    d=&quot;01&quot;
+    q,r=divmod(n,2)
+    if q==0:
+        return d[r]
+    else:
+        return change(q)+d[r]
+
+lst1,lst2=[],[]
+for num1 in arr1: #arr1에 담긴 n개의 숫자에 대해 이진법으로 변환
+    bn=change(num1)
+    while len(bn)&lt;n: #이진법으로 변환시킨 수의 길이가 n보다 작으면 
+        bn=&quot;0&quot;+bn   #그 길이가 n이 될 때까지 앞에 0을 붙인다.(ex)n:5, num1: 6 -&gt; 110 -&gt; 00110) 
+    lst1.append(bn)
+for num2 in arr2:
+    bn2=change(num2)
+    while len(bn2)&lt;n:
+        bn2=&quot;0&quot;+bn2
+    lst2.append(bn2)
+#print(lst1)
+#print(lst2)
+
+elst=[]
+for i in range(len(lst1)):
+    num=int(lst1[i])+int(lst2[i]) #두 리스트에 있는 변환된 이진법의 수를 더 함(ex) 01001+11110=12111)
+    if len(str(num))&lt;len(lst1[i]): #만약 변환된 이진수 둘 다 0으로 시작할 경우, 정수로 변환 시 앞의 0이 사라지므로,
+        num=&quot;0&quot;+str(num)  #더한 결과의 길이가 원본 이진수의 길이보다 작을 경우 앞에 0을 추가 
+    nlst=list(map(str,str(num)))
+    for i in range(len(nlst)):
+        if int(nlst[i])&gt;0: #합한 이진수의 결과에서 각 자리에 있는 수가 0보다 클 경우 &quot;#&quot;으로
+            nlst[i]=&quot;#&quot;
+        else:
+            nlst[i]=&quot; &quot; #그렇지 않을 경우 &quot; &quot;(공백)으로 변환
+    elst.append(&quot;&quot;.join(nlst))
+print(elst)
+</code></pre>
+
+<p>결과</p>
+<pre><code>n =5
+arr1 = 9, 20, 28, 18, 11
+arr2 = 30, 1, 21, 17, 28
+['#####', '# # #', '### #', '#  ##', '#####']
+
+n =6
+arr1 = 46, 33, 33, 22, 31, 50
+arr2 = 27, 56, 19, 14, 14, 10
+['######', '###  #', '##  ##', ' #### ', ' #####', '### # ']
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/28 19:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박시원</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20904"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n = int(input(&quot;1~16 : &quot;))
+arr1 = []
+arr2 = []
+
+for i in range(n):
+    arr1.append(int(input()))
+for i in range(n):
+    arr2.append(int(input()))
+
+
+arr1_bin =[]
+arr2_bin =[]
+
+for i in arr1 :
+    Bin = bin(i)
+    Bin = Bin[2:]
+    arr1_bin.append(Bin)
+for j in arr2:
+    Bin = bin(j)    
+    Bin =Bin[2:]
+    arr2_bin.append(Bin)
+
+print(arr1_bin)    
+print(arr2_bin)    
+
+count = 0
+
+result_list =[]
+i = 0
+while count &lt; n:    
+    result = &quot;&quot;
+    if len(arr1_bin[i]) &gt; len(arr2_bin[i]) :
+        temp = ((len(arr1_bin[i]) - len(arr2_bin[i]))) * '0' + arr2_bin[i]
+        temp1 = arr1_bin[i]
+    elif len(arr1_bin[i]) &lt; len(arr2_bin[i]) :
+        temp = ((len(arr2_bin[i]) - len(arr1_bin[i]))) * '0' + arr1_bin[i]
+        temp1 = arr2_bin[i]
+    else :
+        temp =  arr2_bin[i]
+        temp1 = arr1_bin[i]
+
+    for j in range(len(temp)):
+        if temp[j] == '1' or temp1[j] == '1':
+            result += &quot;#&quot;
+        else :
+            result += &quot; &quot;
+    result_list.append(result)
+    i = i+1
+    count +=1
+print(result_list)
+
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/02/09 19:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">semipooh</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_21470"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># 지도1과 2는 랜덤으로 생성하게 하였습니다
+# 좀 더 간단한 방법이 있을텐데 라인이 길어진것 같습니다 ㅠ
+
+import random
+
+def get_bin_array(nn):
+    arr=[]
+    for i in range (0,nn):
+        a=random.randint(0,2**nn-1)
+        print (a,' ',end='')
+        j=0
+        b=[]
+        while(j&lt;nn):
+            b.append(a%2)
+            a=a//2
+            j=j+1
+        b.reverse()
+        arr.append(b)
+    print()
+    return arr
+
+def print_arr(x):
+    print()
+    for i in range (0,n):
+        for j in range (0,n):
+            if x[i][j]==1:
+                print('#',end='')
+            else:
+                print(' ',end='')
+        print() 
+
+def print_arr_two(x,y):
+    print()
+    for i in range (0,n):
+        for j in range (0,n):
+            if (x[i][j] + y[i][j]) ==0:
+                print(' ',end='')
+            else:
+                print('#',end='')
+        print() 
+
+n=int(input('비밀지도의 크기를 입력하세요....'))
+
+print()
+arr1=[]
+print('arr1 = ',end='')
+arr1=get_bin_array(n)
+print(arr1)
+
+print()
+arr2=[]
+print('arr2 = ',end='')
+arr2=get_bin_array(n)
+print(arr2)
+
+print_arr(arr1)
+print_arr(arr2)
+print_arr_two(arr1,arr2)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/03/20 03:11</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Buckshot</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22271"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def SM(m1, m2):
+    output = []
+    arr = [format(a1 | a2, 'b') for a1, a2 in zip(m1, m2)]
+    mapping = {'1': '#', '0': ' '}
+    for s in arr:
+        for key, replacement in mapping.items():
+            s = s.replace(key, replacement)
+        output.append(s)
+    return output
+
+if __name__ == '__main__':
+    print(SM([9, 20, 28, 18, 11], [30, 1, 21, 17, 28]))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/11 13:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hwaseong Nam</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22386"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n = int(input())
+arr1 = [9, 20, 28, 18, 11]
+arr2 = [30, 1, 21, 17, 28]
+arr1ref = []
+arr2ref = []
+arrfinal = []
+for i in arr1:
+    arr1ref.append(bin(i)[2::].zfill(n))
+for i in arr2:
+    arr2ref.append(bin(i)[2::].zfill(n))
+for i in range(0,n):
+    for k in range(0,n):
+        arrfinal.append(int(arr1ref[i][k]) + int(arr2ref[i][k]))
+result = [arrfinal[i * n:(i + 1) * n] for i in range((len(arrfinal) + n - 1) // n )] 
+print(result) 
+for i in range(0,n):
+    for k in range(0,n):
+        if result[i][k] &gt;= 1:
+            result[i][k] = '#'
+        else:
+            result[i][k] = ' '
+print(result)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/20 22:55</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Money_Coding</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22771"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def binary_sum(n, arr1, arr2):
+    v_list=[]
+    for i in range(n):
+        v_str=''
+        b_val=bin(arr1[i]|arr2[i])[2:]
+        cnt=len(b_val)
+        while cnt&lt;n:
+            v_str+=' '
+            cnt+=1
+        for j in range(len(b_val)):
+            if b_val[j]=='1':v_str+='#'
+            else:v_str+=' '
+        v_list.append(v_str)
+    return v_list
+
+
+if __name__ == &quot;__main__&quot;:
+    print(binary_sum(5,[9, 20, 28, 18, 11],[30, 1, 21, 17, 28]))
+    print(binary_sum(6,[46, 33, 33 ,22, 31, 50],[27 ,56, 19, 14, 14, 10]))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/07/20 16:02</p>
+                                <p class="static-profile" style="margin:0;padding:0;">배기경</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23210"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package Test;
+
+public class Test2 {
+    public static void main(String[] args) {
+        int[] arr1 = {46, 33, 33 ,22, 31, 50};
+        int[] arr2 = {27 ,56, 19, 14, 14, 10};
+        int n = 6;
+
+        String[] map1 = new String[arr1.length];
+        String[] map2 = new String[arr2.length];
+        String[] result = new String[arr1.length];
+
+        for(int a = 0; a &lt; arr1.length; a++) {
+            map1[a] = IntToBinary(arr1[a],n);
+            map2[a] = IntToBinary(arr2[a],n);
+        }
+
+        for(int a = 0; a &lt; map1.length; a++) {
+            result[a] = mergeString(map1[a],map2[a]);
+        }
+
+        for(String x : result) System.out.print(x +&quot;,&quot;);
+
+    }
+
+    public static String IntToBinary(int a, int n) {
+        String temp = Integer.toBinaryString(a);
+        while(temp.length() &lt; n) {
+            String zero = &quot;0&quot;;
+            temp = zero.concat(temp);
+        }
+        return temp;
+    }
+
+    public static String mergeString(String input1, String input2) {
+        StringBuilder result = new StringBuilder();
+        for(int i = 0; i &lt; input1.length(); i++) {
+            if(input1.charAt(i) == input2.charAt(i)) { 
+                if(input1.charAt(i) == '0') result.append(&quot; &quot;);
+                else result.append(&quot;#&quot;);
+            } else {
+                result.append(&quot;#&quot;); 
+            }
+        }
+        return result.toString();
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/09/19 14:43</p>
+                                <p class="static-profile" style="margin:0;padding:0;">nazunamoe</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23846"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def secretMap(n, arr1, arr2):
+    temp1 = [bin(i)[2:].zfill(n) for i in arr1]
+    temp2 = [bin(i)[2:].zfill(n) for i in arr2]
+    result = []
+    for i in range(n):
+        temp = ''
+        for k in range(n):
+            if int(temp1[i][k]) or int(temp2[i][k]):
+                temp += '#'
+            if not(int(temp1[i][k]) or int(temp2[i][k])):
+                temp += ' '
+        result.append(temp)
+    print(result)
+
+
+secretMap(5, [9, 20, 28, 18, 11], [30, 1, 21, 17, 28])
+secretMap(6, [46, 33, 33 ,22, 31, 50], [27 ,56, 19, 14, 14, 10])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/12/01 16:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김우석</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24370"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>def binary(number):</p>
+<pre><code>  for_answer=[]
+
+  while number:
+
+    for_answer.append(number%2)
+
+    number=int(number/2)
+
+
+  for_answer.reverse()
+
+  for_answer=[str(x) for x in for_answer]
+
+  return "".join(for_answer)
+
+def treasure_map(n,arr1,arr2):
+
+  array=[[' ']*n for i in range(n)]
+
+  for_answer=[]
+
+  for i in range(0,n,1):
+
+    bin1=binary(arr1[i])
+
+    binxx=bin1.replace('1','#')
+
+    binx=binxx.replace('0',' ')
+
+    bin2=binary(arr2[i])
+
+    binyy=bin2.replace('1','#')
+
+    biny=binyy.replace('0',' ')
+
+    len1=len(bin1)
+
+    len2=len(bin2)
+
+    for j in range(-1,-len1-1,-1):
+
+      if array[i][-j-1]==' ':
+
+        array[i][-j-1]=binx[j]
+
+    for k in range(-1,-len2-1,-1):
+
+      if array[i][-k-1]==' ':
+
+        array[i][-k-1]=biny[k]
+
+    array[i].reverse()
+
+    array[i]=[str(x) for x in array[i]]
+
+    array[i]=''.join(array[i])
+
+    for_answer.append(array[i])
+
+  return for_answer
+
+def main():
+
+  n=int(input(""))
+
+  arr1=input("")
+
+  arrx=arr1.split(' ')
+
+  arrx=[int(x) for x in arrx]
+
+  arr2=input("")
+
+  arry=arr2.split(' ')
+
+  arry=[int(x) for x in arry]
+
+  print(treasure_map(n,arrx,arry))
+
+main()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/01/17 22:02</p>
+                                <p class="static-profile" style="margin:0;padding:0;">전준혁</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24533"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def merger(first, second, n):
+  arr1 = [(n-len(str(bin(i))[2:]))*'0'+str(bin(i))[2:] for i in first]
+  arr2 = [(n-len(str(bin(i))[2:]))*'0'+str(bin(i))[2:] for i in second]
+  mergedarr = ['']*n
+  for i in range(n):
+    for j in range(n):
+      mergedarr[i] += '#' if arr1[i][j]=='1' or arr2[i][j]=='1' else ' '
+  return mergedarr
+
+a=[46, 33, 33 ,22, 31, 50]
+b=[27 ,56, 19, 14, 14, 10]
+n=6
+print(merger(a, b, n))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/01/30 23:25</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박영빈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24881"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># 이진수로 변환
+def convert(n):
+    result = ''
+    while True:
+        q, r = divmod(n, 2)
+        result = str(r) + result
+        n = q
+        if q == 0:
+            break
+    return result
+
+def secret_map(n, arr1, arr2):
+    new_arr1 = [convert(i).zfill(n) for i in arr1]
+    new_arr2 = [convert(j).rjust(n, '0') for j in arr2]
+
+    for i in range(n):
+        for j in range(n):
+            if new_arr1[i][j] == '0' and new_arr2[i][j] == '0':
+                print(' ', sep='', end='')
+            else:
+                print('#', sep='', end='')
+        print()
+
+secret_map(5, [9, 20, 28, 18, 11], [30, 1, 21, 17, 28])
+secret_map(6, [46, 33, 33, 22, 31, 50], [27, 56, 19, 14, 14, 10])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/02/25 12:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Ha</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24967"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def secret_map(arr1,arr2,n):
+    q=[]
+    w=[]
+    z=[]
+    t=[]
+    for i in arr1:
+        a = int(bin(i)[2:])  
+        q.append(a)
+    for j in arr2:
+        b = int(bin(j)[2:])
+        w.append(b)
+    for a in range(len(arr1)):
+        z.append(q[a]+w[a])
+    for i in z:
+        r = str(i)
+        p=''
+        for v in range(len(r)):
+            if r[v]=='1' or r[v]=='2':
+                p+=&quot;#&quot;
+            else:
+                p+='0'
+        if len(p)&lt;n:
+            for i in range(n-len(p)):
+                a = p.split()
+                a.insert(i,' ')
+                p = ''.join(a)
+        t.append(p)
+        for i in range(len(t)):
+            t[i] = t[i].replace('0',' ')
+    print(t)
+
+
+arr1 = [46, 33, 33 ,22, 31, 50]
+arr2 = [27 ,56, 19, 14, 14, 10]
+secret_map(arr1,arr2,6)
+</code></pre>
+
+<p>['######', '###  #', '##  ##', ' #### ', ' #####', '### # ']</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/03/12 21:58</p>
+                                <p class="static-profile" style="margin:0;padding:0;">fox.j</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25519"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def smap(n,a,b):
+    if 1&lt;=n&lt;=16 :
+        a1 = &quot;&quot;
+        b1 = ''
+        for a,b in zip(a,b):
+            a1 += f'{bin(a)[2:]:0&gt;{n}} '
+            b1 += f'{bin(b)[2:]:0&gt;{n}} '
+        l= []
+        e = ''
+        for i in range(n):
+            for i2 in range(n):
+                if a1.split()[i][i2]=='0' and b1.split()[i][i2]=='0': e +=' '
+                else : e += '#'
+            l.append(e)
+            e = ''
+        return l
+    else : return '1&lt;=n&lt;=16'
+
+n = 6
+a =[46, 33, 33 ,22, 31, 50]
+b =[27 ,56, 19, 14, 14, 10]
+
+print(smap(n,a,b))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/06/07 12:00</p>
+                                <p class="static-profile" style="margin:0;padding:0;">약사의혼자말</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25674"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def binary(num):
+    result = []
+    num_temp = int(num)
+    while num_temp &gt;= 2 :
+        result.append(num_temp%2)
+        num_temp = num_temp // 2 
+    result.append(num_temp)
+
+    result.reverse()
+    return result
+
+def array_generation(n):
+    array = []
+    for i in range(1, n+1):
+        array_input = int(input('input array {} : '.format(i)) )
+        if array_input &gt;= 0 and array_input &lt;= (2**n -1):
+            array.append(array_input)
+        else:
+            print('ERROR : invalid input')
+            exit()
+
+    return array
+
+def translation_array(_list):
+    result = []
+    for member in _list:
+        _temp = binary(member)
+        for i in range(len(_list) - len(_temp)):
+            _temp.insert(0, 0)
+
+        result_temp = []
+        for member1 in _temp:
+            if member1 == 1:
+                result_temp.append('#')
+            else:
+                result_temp.append(' ')
+        result.append(''.join(result_temp))
+
+    return result
+
+def array_comparison(array1, array2):
+    n = len(array1)
+    result = []
+    for i in range(n):
+        result_temp = []
+        for j in range(n):
+            if array1[i][j] == '#' or array2[i][j] == '#':
+                result_temp.append('#')
+            elif array1[i][j] == ' ' and array2[i][j] == ' ':
+                result_temp.append(' ')
+        result.append(''.join(result_temp))
+
+    return result
+
+if __name__ == '__main__':
+    n = int(input('Type n (between 1 and 16) : '))
+    if n &gt;=1 and n &lt;=16:
+        array1 = translation_array(array_generation(n))
+        array2 = translation_array(array_generation(n))
+
+        print(array_comparison(array1, array2))
+
+    else:
+        print('ERROR : invalid range of n (1 ~ 16)')
+        exit()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/07/02 09:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">DSHIN</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26489"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#codingdojing_secret_map_re
+
+'''
+1. n을 정수로 입력받는다. 
+2. arr1, arr2를 입력받는다. ex) 9, 20, 28, 10, 11 형식
+3. 숫자만 남긴다.
+4. zip해서 bit연산 |
+5. 2진법 숫자로 변환 후, 1은 #, 0은 공백으로 변환
+'''
+import sys
+
+n = eval(input('n: '))
+
+arr1 = list(map(eval,input('arr1: ').split(',')))
+arr2 = list(map(eval,input('arr2: ').split(',')))
+
+if len(arr1) != n and len(arr1) != n:
+    print('input error')
+    sys.exit()
+else:
+    result = [a|b for a,b in zip(arr1, arr2)]
+
+##tranlate to binary num.
+
+secret_map = []
+for i in result:
+    secret_map.append(bin(i)[2:].zfill(n).translate(str.maketrans('10', '# ')))
+
+print(secret_map)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/10/17 17:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jaeman Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27012"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def Sol (a,b):
+   arr=[]
+   for i in range(len(a)):
+      if int(a[i])+int(b[i])==0:
+         arr.append(' ')
+      else:
+         arr.append('#')
+   return &quot;&quot;.join(arr)
+
+while True: 
+    n =  int(input(&quot;비밀지도의 변의 길이:&quot;))
+    if n&gt;=1 and n&lt;=16:
+        break
+
+arr1=[]
+arr2=[]
+arr = &quot;&quot;.join(['0' for i in range(n)])
+for i in range(n):
+    while True:
+        print(&quot;첫번째 지도의 &quot;,i+1,&quot;번째&quot;)
+        x=int(input(&quot;원소를 입력하시오&quot;))
+        if x&gt;=0 and x&lt;=2**n -1 :
+            a = arr+bin(x)[2:]
+            arr1.append(a[-n:])
+            break
+
+for k in range(n):
+    while True:
+        print(&quot;두번째 지도의 &quot;,k+1,&quot;번째&quot;)
+        x=int(input(&quot;원소를 입력하시오&quot;))
+        if x&gt;=0 and x&lt;=2**n -1 :
+            a = arr+bin(x)[2:]
+            arr2.append(a[-n:])
+            break
+
+result = []
+for j in range(len(arr1)):
+    result.append(Sol(arr1[j],arr2[j]))
+
+print(result)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/13 23:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">양캠부부</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29682"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">using System;
+using System.Collections.Generic;
+
+namespace solution
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int n = 5;
+            int[] arr1 = new int[] { 9, 20, 28, 18, 11 };
+            int[] arr2 = new int[] { 30, 1, 21, 17, 28 };
+
+            //int n = 6;
+            //int[] arr1 = new int[] { 46, 33, 33, 22, 31, 50 };
+            //int[] arr2 = new int[] { 27, 56, 19, 14, 14, 10 };
+
+            var map = makeMap(arr1, arr2, n);
+
+            Console.WriteLine(&quot;\n\t [\&quot;{0}\&quot;]&quot;, string.Join(&quot;\&quot;, \&quot;&quot;, map));
+        }        
+
+        private static List&lt;string&gt; makeMap(int[] arr1, int[] arr2, int n)
+        {
+            List&lt;string&gt; mapLst = new List&lt;string&gt;();
+            string str = &quot;&quot;;
+            int row = arr1.Length;
+            for (int r = 0; r &lt; row; r++)
+            {
+                str = &quot;&quot;;
+                string str1 = int.Parse(Convert.ToString(arr1[r], 2)).ToString(&quot;D&quot;+n.ToString());
+                string str2 = int.Parse(Convert.ToString(arr2[r], 2)).ToString(&quot;D&quot; + n.ToString());
+                for (int c = 0; c &lt; n; c++)
+                {
+                    str += (str1[c] == '0' &amp;&amp; str2[c] == '0') ? &quot; &quot; : &quot;#&quot;;
+                }
+                mapLst.Add(str);
+            }
+            return mapLst;
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/10/04 18:13</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

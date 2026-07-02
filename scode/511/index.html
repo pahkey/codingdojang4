@@ -1,0 +1,1975 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="출처 : [https://www.acmicpc.net/problem/1937](https://www.acmicpc.net/problem/1937)
+
+n*n의 크기의 대나무 숲이 있다. 그리고 각 지역마다 대나무의 양이 다르다. 그런데 욕심쟁이...">
+    <title>욕심쟁이 판다 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">욕심쟁이 판다</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">5</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 4</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>출처 : <a href="https://www.acmicpc.net/problem/1937">https://www.acmicpc.net/problem/1937</a></p>
+<p>n*n의 크기의 대나무 숲이 있다. 그리고 각 지역마다 대나무의 양이 다르다. 그런데 욕심쟁이 판다는 어떤 지역에서 대나무를 먹기 시작한다. 그리고 그 곳의 대나무를 다 먹어 치우면 상, 하, 좌, 우 중 한 곳으로 이동을 한다. 그리고 또 그곳에서 대나무를 먹는다. 그런데 단 조건이 있다. 이 판다는 매우 욕심이 많아서 대나무를 먹고 자리를 옮기면 그 옮긴 지역에 그 전 지역보다 대나무가 많이 있어야 한다. 만약에 그런 지점이 없으면 이 판다는 불만을 가지고 단식 투쟁을 하다가 죽게 된다(-_-)</p>
+<p>이 판다의 사육사는 이런 판다를 대나무 숲에 풀어 놓아야 하는데, 어떤 지점에 처음에 풀어 놓아야 하고, 어떤 곳으로 이동을 시켜야 둘 다 소중한 생명이지만 판다가 최대한 오래 살 수 있는지 고민에 빠져 있다. 우리의 임무는 이 사육사를 도와주는 것이다. n*n 크기의 대나무 숲이 주어져 있을 때, 이 판다가 최대한 오래 살려면 어떤 경로를 통하여 움직여야 하는지 구하여라.</p>
+<p><strong>입력</strong></p>
+<p>첫째 줄에 대나무 숲의 크기 n(1&lt;=n&lt;=500)이 주어진다. 그리고 둘째 줄부터 1+n번째 줄 까지 대나무 숲의 정보가 주어진다. 대나무 숲의 정보는 공백을 사이로 두고 각 지역의 대나무의 양이 정수 값으로 주어진다.</p>
+<p><strong>출력</strong></p>
+<p>첫째 줄에는 판다가 최대한 살 수 있는 일수(K)를 출력한다.</p>
+<p>예제 입력</p>
+<pre><code>4
+14 9 12 10
+1 11 5 4
+7 15 2 13
+6 3 16 8
+</code></pre>
+
+<p>예제 출력</p>
+<pre><code>4
+</code></pre>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">다이나믹 프로그래밍</span>
+                
+                    <span class="label label-tag label-xs">최장 증가 부분열(LIS)</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2016/06/02 19:35</p>
+                    <p class="static-profile" style="margin:0;padding:0;">iljimae</p>
+                </div>
+            </div>
+
+            
+                <a name="comment_2091"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">대나무를 먹는 시간이 없네요. 한 곳에 있는 대나무를 다 먹는 데 대나무 양에 상관없이 하루가 걸린다... 라고 생각하면 되겠죠?</span>
+                    -
+                    <span style="font-size:11px;">
+                        Noname,
+                        2017/08/20 22:18
+                    </span>
+                </div>
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>23개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_3845"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">3</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>어떠한 수열이 주어졌을때 이 수열의 최장 증가 부분열을 찾는것은 다이나믹 프로그래밍으로 해결할 수 있는 유명한 문제입니다. </p>
+<p>참고자료 <a href="http://dyngina.tistory.com/16">http://dyngina.tistory.com/16</a></p>
+<p>이 문제는 2차원 배열에 대해서 최장 증가 부분열 알고리즘을 적용하면 됩니다. 모든 n*n점 (i,j)에 대해서 판다의 시작점을 정해준뒤에 dfs로 탐색하면서 얻을 수 있는 가장 긴 증가하는 수열의 길이를 얻으면 됩니다.</p>
+<pre><code class="cpp">#include &lt;iostream&gt; 
+#include &lt;cstdio&gt; 
+#include &lt;cstdlib&gt; 
+#include &lt;algorithm&gt; 
+using namespace std;
+
+int forest[501][501];  
+int dp[501][501]; 
+int dy[4] = {1,0,-1,0}; 
+int dx[4] = {0,1,0,-1};  
+int n; 
+
+bool inRange(int y,int x){
+    return (y &gt;= 0 &amp;&amp; y &lt; n &amp;&amp; x &gt;= 0 &amp;&amp; x &lt; n); 
+}
+
+int find(int y,int x){
+    if (dp[y][x] == 0){
+        dp[y][x] = 1; 
+        for (int i = 0; i &lt; 4; i++){
+            int ny = y+dy[i], nx = x+dx[i];  
+            if (inRange(ny,nx) &amp;&amp; forest[ny][nx] &gt; forest[y][x]){
+                dp[y][x] = max(dp[y][x],find(ny,nx)+1); 
+            }
+        }
+    }
+    return dp[y][x];  
+}
+
+int main(){
+    scanf(&quot;%d&quot;,&amp;n);  
+    for (int i = 0; i &lt; n; i++){
+        for (int j = 0; j &lt; n; j++){
+            scanf(&quot;%d&quot;,&amp;forest[i][j]);  
+        }
+    }
+    // dp 테이블 채우기  
+    int res = 0;  
+    for (int i = 0; i &lt; n; i++){
+        for (int j = 0; j &lt; n; j++){ // 팬더의 시작좌표를 정해주고 최댓값을 갱신한다.  
+            res = max(res,find(i,j));  
+        }
+    }
+    printf(&quot;%d\n&quot;,res);  
+    return 0; 
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/06/02 20:09</p>
+                                <p class="static-profile" style="margin:0;padding:0;">iljimae</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3883"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<pre><code class="ruby">def max_trail(bamboos, n=[*0...bamboos.size])
+  trees = n.product(n).map {|x,y| [y,x,bamboos[x][y]] }
+  nexts = -&gt;x,y,v { trees.select {|ex,ey,ev| (ex-x).abs+(ey-y).abs &lt;2 &amp;&amp; ev&gt;v} }
+  trail = -&gt;t,max=0 { t[0] ? trail[t.flat_map{|e|nexts[*e]}, max+1] : max }
+  trail[trees]
+end
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby">bamboos_1 = [ [0, 0],
+              [0, 0] ]
+expect(max_trail(bamboos_1)).to eq 1
+
+bamboos_2 = [ [ 1, 6, 7],
+              [ 2, 5, 8],
+              [ 3, 4, 9] ] 
+expect(max_trail(bamboos_2)).to eq 9 
+
+bamboos_3 = [ [14, 9,12,10],
+              [ 1,11, 5, 4],
+              [ 7,15, 2,13],
+              [ 6, 3,16, 8] ]            
+expect(max_trail(bamboos_3)).to eq 4
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/06/05 22:56</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4011"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from multiprocessing import Pool
+from random import randint
+import os, sys
+
+c = os.cpu_count()
+sys.setrecursionlimit(2**13)
+
+data = list(list(int(i) for i in j.split())for j in '''14 9 12 10
+1 11 5 4
+7 15 2 13
+6 3 16 8'''.split('\n'))
+
+
+#N = 52
+#data = list(list(randint(1, 100) for i in range(N)) for j in range(N))
+
+class block(object):
+    def __init__(self, N):
+        self.N = N; self.l, self.r, self.u, self.d = [None]*4
+    def move_lower(self):
+        return list((x for x in (self.u, self.d, self.l, self.r) if x != None and x.N &lt; self.N))
+    def move_lower_chain(self, res = [], history = []):
+        return (lambda temp: (res.append(history + [self.N]) if len(temp) == 0 else list(x.move_lower_chain(res, history + [x.N]) for x in temp), res)[1])(self.move_lower())
+
+def setmap(li):
+    res, n = [], len(li)
+    for j in range(n):
+        res.append([])
+        for i in range(n):
+            res[j].append(block(li[j][i]))
+            if i &gt; 0: res[j][i-1].r, res[j][i].l = res[j][i], res[j][i-1]
+            if j &gt; 0: res[j-1][i].d, res[j][i].u = res[j][i], res[j-1][i]
+    temp, res = res[:], []
+    return sorted((lambda temp, res: (list(list((res.append(i)) for i in j) for j in temp), res)[1])(temp, res), key = lambda x: x.N)[::-1]
+def proc(m, number, cores):
+    res = []
+    for i in range(number, len(m), cores):
+        res.append(max(map(len, m[i].move_lower_chain())))
+        if max(res) &gt; len(m)-(i+1): break
+    return res
+def check(m):
+    with Pool() as p:
+        temp = p.starmap(proc, ((m, number, c) for number in range(c)))
+    return max((lambda res: (list(list(res.append(y) for y in x) for x in temp), res)[1])([]))
+
+if __name__ == '__main__':
+    m = setmap(data)
+    print(check(m))
+</code></pre>
+
+<p>재귀함수 제한 늘려도 52가 한계네요. 52 기준 1초 미만으로 나옵니다.
+파이썬 3.5.1</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/06/27 00:32</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Flair Sizz</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4063"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C 언어 입니다.
+입력받은 배열 N x N 과 가장긴거리를가지는 값을 가질 배열 N x N 
+배열의 크기를 넘어가지 않으면서 현재의 (j, i) 보다 큰값을 찾아나가면서 1씩 증가시켜줍니다.
+LIS를 을 만족시키고싶었는데 재귀형식으로 된거같네요
+DP도 만족시키고싶어서 최대거리를 미리 구해놨으면 그쪽방향은 배열의 값을 바로 읽게했습니다.
+코드길이를 줄이면서 간단하게 하고싶은데 요령이 없네요. ㅡ.ㅜ 앞으로 더 잘하겠습니당</p>
+<pre><code class="cpp">#define _CRT_SECURE_NO_WARNINGS
+#include&lt;stdio.h&gt;
+#include&lt;malloc.h&gt;
+
+
+int isPath(int **a, int i, int j)
+{
+    if (i == -1 || j == -1 || i == 4 || j == 4)
+        return 0;
+
+    return a[i][j];
+}
+int max(int a, int b, int c, int d)
+{
+    int max = a;
+    if (max &lt; b)
+        max = b;
+    if (max &lt; c)
+        max = c;
+    if (max &lt; d)
+        max = d;
+    return max;
+}
+int initial(int **a, int **l, int j, int i)
+{   
+    int left = 0, right = 0, up = 0, down = 0;
+    if (a[j][i] &lt; isPath(a, j , i + 1))
+    {
+        if (l[j][i + 1] == 0)
+            right = initial(a, l, j, i + 1);
+        else
+            right = l[j][i + 1];
+    }
+    if (a[j][i] &lt; isPath(a, j , i -1))
+    {
+        if (l[j][i - 1] == 0)
+            left = initial(a, l, j , i -1);
+        else
+            left = l[j][i - 1];
+    }
+    if (a[j][i] &lt; isPath(a, j + 1, i))
+    {
+        if (l[j + 1][i] == 0)
+            down = initial(a, l, j + 1, i);
+        else
+            down = l[j + 1][i];
+    }
+    if (a[j][i] &lt; isPath(a, j - 1, i))
+    {
+        if (l[j - 1][i] == 0)
+            up = initial(a, l, j - 1, i);
+        else
+            up = l[j - 1][i];
+    }
+
+    return 1 + max(left, right, up, down);
+}
+
+int main()
+{
+    int n = 0;
+
+    scanf(&quot;%d&quot;, &amp;n);
+
+    int **a;
+    a = (int **)malloc(sizeof(int*) * n);
+    for (int i = 0; i &lt; n; i++)
+        a[i] = (int*)malloc(sizeof(int) * n);
+
+    for (int j = 0; j &lt; n; j++)
+        for (int i = 0; i &lt; n; i++)
+            scanf(&quot;%d&quot;, &amp;a[i][j]);
+
+
+    int** LIS = (int**)malloc(sizeof(int*) * n);
+    for (int i = 0; i &lt; n; i++)
+        LIS[i] = (int*)malloc(sizeof(int) * n);
+
+    for (int j = 0; j &lt; n; j++)
+        for (int i = 0; i &lt; n; i++)
+            LIS[j][i] = 0;
+    for (int j = 0; j &lt; n; j++)
+    {
+        for (int i = 0; i &lt; n; i++)
+        {
+            LIS[j][i] = initial(a, LIS, j, i);
+        }
+    }
+
+    for (int j = 0; j &lt; n; j++)
+    {
+        for (int i = 0; i &lt; n; i++)
+            printf(&quot;%d &quot;, LIS[j][i]);
+        printf(&quot;\n&quot;);
+    }
+
+
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/07/03 23:43</p>
+                                <p class="static-profile" style="margin:0;padding:0;">양 상호</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4102"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Delphi 2010 DP(Dynamic Program방식) 사용</p>
+<pre><code class="delphi">type
+  TArrayInt2d = array of array of Integer;
+
+function fnGeedyPanda(const M: TArrayInt2d; RCnt, CCnt: Integer; var ci, cj: Integer): Integer;
+var
+  V: array of array of Integer;
+  CMax, i, j: Integer;
+
+  function fnSearchValue(A, b, minVal: Integer): Integer;
+  var
+    val: Integer;
+  begin
+    if (A &lt; 0) or (A = RCnt) or (b &lt; 0) or (b = CCnt) then
+      exit(0);
+
+    if V[i, j] &lt;&gt; -1 then
+     exit(V[i, j]);
+    val := M[A, b];
+    if val &lt;= minVal then
+      exit(0);
+    result := 1 + Max(Max(fnSearchValue(A - 1, b, val), fnSearchValue(A + 1, b, val)),
+      Max(fnSearchValue(A, b - 1, val), fnSearchValue(A, b + 1, val)));
+  end;
+
+begin
+  SetLength(V, RCnt, CCnt);
+  for i := 0 to RCnt - 1 do
+    for j := 0 to CCnt - 1 do
+      V[i, j] := -1; // 초기값이 -1 
+  CMax := 0;
+  ci := 0;
+  cj := 0;
+  for i := 0 to RCnt - 1 do
+    for j := 0 to CCnt - 1 do
+      if V[i, j] = -1 then
+      begin
+        V[i, j] := fnSearchValue(i, j, -1);
+        if CMax &lt; V[i, j] then
+        begin
+          ci := i;
+          cj := j;
+          CMax := V[i, j];
+        end;
+      end;
+  result := CMax;
+end;
+
+procedure TForm4.btn욕심쟁이판다Click(Sender: TObject);
+Const
+  C: array [0 .. 3, 0 .. 3] of Integer = ((14, 9, 12, 10), (1, 11, 5, 4), (7, 15, 2, 13), (6, 3, 16, 8));
+var
+  ci, cj, CMax: Integer;
+  M: TArrayInt2d;
+begin
+  // Dreedy 방식
+  SetLength(M, 4, 4);
+  for ci := 0 to 3 do
+    for cj := 0 to 3 do
+      M[ci, cj] := C[ci, cj];
+
+  CMax := fnGeedyPanda(M, 4, 4, ci, cj);
+  Memo1.Lines.Add(format('욕심쟁이 판다: Pos %d (%d,%d), Count: %d', [M[ci, cj], ci + 1, cj + 1, CMax]));
+end;
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/07/08 14:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">강 경수</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4700"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>부족한 점이 많아서 다른분보다 코드가 길은거 같아여 
+test</p>
+<p>0 0</p>
+<p>0 0 </p>
+<p>1</p>
+<p>1 6 7</p>
+<p>2 5 8</p>
+<p>3 4 9</p>
+<p>9</p>
+<p>14 9 12 10</p>
+<p>1 11 5 4</p>
+<p>7 15 2 13</p>
+<p>6 3 16 8</p>
+<p>4</p>
+<pre><code>#include &lt;stdlib.h&gt;
+#include&lt;stdio.h&gt;
+
+
+int getMax(int t1, int t2);
+int LIS(int** f, int** k, int n, int x, int y);
+
+void main(void) {
+
+    int n =  0;
+
+    scanf(&quot;%d&quot;,&amp;n);
+
+    int** f = (int**)malloc(sizeof(int*) * n );
+    for(int i = 0; i&lt;n ; i++) {
+         f[i] = (int*)malloc(sizeof(int) * n );
+    }
+
+    for(int i = 0; i&lt;n ; i++)
+        for(int j= 0; j&lt;n ; j++) 
+            scanf(&quot;%d&quot;,&amp;f[i][j]);
+
+
+    int** k = (int**)malloc(sizeof(int*) * n );
+    for(int i = 0; i&lt;n ; i++) {
+         k[i] = (int*)malloc(sizeof(int) * n );
+    }
+    for(int i = 0; i&lt;n ; i++)
+        for(int j= 0; j&lt;n ; j++) 
+            k[i][j] = 1;
+    int max = 0;
+    for(int i = 0; i&lt;n ; i++)
+        for(int j= 0; j&lt;n ; j++) 
+            max = getMax(max, LIS(f, k, n, i, j));
+
+    printf(&quot;%d\t&quot;, max);
+}
+
+int getMax(int t1, int t2) {
+    if(t1 &gt; t2)
+        return t1;
+    else
+        return t2;
+}
+
+int LIS(int** f, int** k, int n, int x, int y) {
+
+    for(int i = 0; i&lt;n ; i++) {
+        for(int j= 0; j&lt;n ; j++) {
+            if(f[i][j] &gt;= f[x][y]) {
+            if(i+1 &lt; n &amp;&amp; f[i][j] &lt; f[i+1][j])
+                k[i+1][j] = k[i][j] + 1;
+            if(j+1 &lt; n &amp;&amp; f[i][j] &lt; f[i][j+1])
+                k[i][j+1] = k[i][j] + 1;
+            if(i-1 &gt;= 0 &amp;&amp; f[i][j] &lt; f[i-1][j])
+                k[i-1][j] = k[i][j] + 1;
+            if(j-1 &gt;= 0 &amp;&amp; f[i][j] &lt; f[i][j-1])
+                k[i][j-1] = k[i][j] + 1;
+            }
+        }
+    }
+
+    int max = 0;
+    for(int i = 0; i&lt;n ; i++) {
+        for(int j= 0; j&lt;n ; j++) {
+            if(f[i][j] &gt;= f[x][y]) {
+            if(i+1 &lt; n &amp;&amp; f[i][j] &gt; f[i+1][j])
+                max = getMax(max ,k[i+1][j]);
+            if(j+1 &lt; n &amp;&amp; f[i][j] &gt; f[i][j+1])
+                max = getMax(max ,k[i][j+1]);
+            if(i-1 &gt;= 0 &amp;&amp; f[i][j] &gt; f[i-1][j])
+                max = getMax(max ,k[i-1][j]);
+            if(j-1 &gt;= 0 &amp;&amp; f[i][j] &gt; f[i][j-1])
+                max = getMax(max ,k[i][j-1]);
+            }
+            k[i][j]= max + 1;
+            max = 0;
+        }
+    }
+
+    for(int i = 0; i&lt;n ; i++) {
+        for(int j= 0; j&lt;n ; j++) {
+            max = getMax(max ,k[i][j]);
+        }
+    }
+    return max;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/09/02 14:00</p>
+                                <p class="static-profile" style="margin:0;padding:0;">코딩초보</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4752"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>자바입니다</p>
+<pre><code class="java">package study;
+
+import java.util.Scanner;
+
+public class panda {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int fr[][] = new int[n][n];
+
+        for (int i = 0; i &lt; n; i++) {
+            for (int j = 0; j &lt; n; j++) {
+                fr[i][j] = sc.nextInt();
+            }
+        }
+
+        int temp, answer = 0;
+        for (int i = 0; i &lt; n; i++) {
+            for (int j = 0; j &lt; n; j++) {
+                temp = solve(n, i, j, fr);
+                if (answer &lt; temp) {
+                    answer = temp;
+                }
+            }
+        }
+
+        System.out.println(answer);
+
+    }
+
+    public static int solve(int n, int x, int y, int fr[][]) {
+        int result = 1;
+        int dir[] = { 0, 0, 0, 0 };
+        if (x &gt; 0 &amp;&amp; fr[x][y] &lt; fr[x - 1][y]) {
+            dir[0] = solve(n, x - 1, y, fr) + 1;
+        }
+        if (y &gt; 0 &amp;&amp; fr[x][y] &lt; fr[x][y - 1]) {
+            dir[1] = solve(n, x, y - 1, fr) + 1;
+        }
+        if (x + 1 &lt; n &amp;&amp; fr[x][y] &lt; fr[x + 1][y]) {
+            dir[2] = solve(n, x + 1, y, fr) + 1;
+        }
+        if (y + 1 &lt; n &amp;&amp; fr[x][y] &lt; fr[x][y + 1]) {
+            dir[3] = solve(n, x, y + 1, fr) + 1;
+        }
+
+        for (int i = 0; i &lt; 4; i++) {
+            if (result &lt; dir[i]) {
+                result = dir[i];
+            }
+        }
+
+        return result;
+    }
+}
+</code></pre>
+
+<p>어떻게 하면 더 깔끔하게 할 수 있을거 같은데 그냥 마무리</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/09/08 17:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">JD</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4803"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>대나무 덕후 욕심쟁이 판다 색히</p>
+<pre><code class="cpp">#include &lt;stdio.h&gt;
+#define SIZE 4
+
+enum { ROOT, L, R, T, B };
+
+int maxDepth = 0;
+
+void next(int a[SIZE][SIZE], int row, int col, int preDir, int preVal, int preDepth) {
+    int curVal = a[row][col];
+    int cond = 0;
+    cond = cond || row &lt; 0;
+    cond = cond || col &lt; 0;
+    cond = cond || row &gt; SIZE - 1;
+    cond = cond || col &gt; SIZE - 1;
+    cond = cond || (preDir != ROOT &amp;&amp; preVal &gt;= curVal);
+    if(cond) {
+        if(preDepth &gt; maxDepth)
+            maxDepth = preDepth;
+        return; 
+    }
+
+    int curDepth = preDepth + 1;    
+    if(preDir != R) next(a, row    , col - 1, L, curVal, curDepth);
+    if(preDir != L) next(a, row    , col + 1, R, curVal, curDepth);
+    if(preDir != B) next(a, row - 1, col    , T, curVal, curDepth);
+    if(preDir != T) next(a, row + 1, col    , B, curVal, curDepth);
+}
+
+int main() {
+    int a[SIZE][SIZE] = {
+                    { 14,  9, 12, 10 }, 
+                    {  1, 11,  5,  4 },
+                    {  7, 15,  2, 13 },
+                    {  6,  3, 16,  8 }
+                };
+
+    for(int row = 0; row &lt; SIZE; row++) {
+        for(int col = 0; col &lt; SIZE; col++) {
+            next(a, row, col, ROOT, a[row][col], 0);
+        }
+    }
+    printf(&quot;maxDepth: %d&quot;, maxDepth);   
+    return 0;
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/09/16 22:33</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이 종성</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4903"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>자바입니다. 간단하게 작성하려고했는데 생각보다 길게 작성이됬네요.</p>
+<pre><code class="java">public class GreedyPanda {
+    private int[][] forest;
+    private int size;
+    private int MAX;
+
+    private final int[] X = { 0, 1, 0, -1 };
+    private final int[] Y = { 1, 0, -1, 0 };
+
+    public GreedyPanda(int size, int[][] forest) {
+        this.size = size;
+        this.MAX = size * size;
+        this.forest = forest;
+    }
+
+    public int getMaximumAliveDay() {
+        int result = 0;
+        int temp = 0;
+        for (int i = 0; i &lt; this.size; i++) {
+            for (int j = 0; j &lt; this.size; j++) {
+                temp = findMaximumPath(i, j);
+                result = temp &gt; result ? temp : result;
+                if (result == this.MAX) {
+                    return result;
+                }
+            }
+        }
+        return result;
+    }
+
+    private int findMaximumPath(int x, int y) {
+        int result =1;
+        int nextX, nextY, temp;
+
+        for (int i = 0; i &lt; 4; i++) {
+            temp = 0;
+            nextX = x + X[i];
+            nextY = y + Y[i];
+
+            if (inForest(nextX, nextY) &amp;&amp; forest[x][y] &lt; forest[nextX][nextY]) {
+                if ((temp = findMaximumPath(nextX, nextY)+1) &gt; result) {
+                    result = temp;
+                }
+            }
+        }
+        return result;
+    }
+
+    private boolean inForest(int x, int y) {
+        return (x &gt;= 0 &amp;&amp; x &lt; size &amp;&amp; y &gt;= 0 &amp;&amp; y &lt; size);
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/07 16:53</p>
+                                <p class="static-profile" style="margin:0;padding:0;">한인규(Hayden)</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4921"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Ruby</p>
+<pre><code class="ruby">def max_trail(bamboos, n=[*0...bamboos.size])
+  trees = n.product(n).map {|x,y| [y,x,bamboos[x][y]] }
+  nexts = -&gt;x,y,v { trees.select {|ex,ey,ev| (x-ex).abs+(y-ey).abs &lt;2 &amp;&amp; ev&gt;v } }
+  trail = -&gt;xy,cnt=1,t=nexts[*xy] { t[0]? t.map {|e| trail[e,cnt+1] } : cnt }
+  trees.map(&amp;trail).flatten.max
+end
+
+
+Test
+bamboos_1 = [ [0, 0],
+              [0, 0] ]
+expect(max_trail(bamboos_1)).to eq 1
+
+bamboos_2 = [ [ 1, 6, 7],
+              [ 2, 5, 8],
+              [ 3, 4, 9] ] 
+expect(max_trail(bamboos_2)).to eq 9 
+
+bamboos_3 = [ [14, 9,12,10],
+              [ 1,11, 5, 4],
+              [ 7,15, 2,13],
+              [ 6, 3,16, 8] ]            
+expect(max_trail(bamboos_3)).to eq 4
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/09 18:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박 동민</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5159"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">#include&lt;iostream&gt;
+#include&lt;vector&gt;
+using namespace std;
+#define FSIZE 4
+int arr[FSIZE][FSIZE] = { { 14, 9, 12, 10 },{ 1, 11, 5, 4 },{ 7, 15, 2, 13 },{ 6, 3, 16, 8 } };
+int xRot[4] = { 0, 1, 0, -1 };
+int yRot[4] = { 1, 0, -1, 0 };
+
+int findPath(int _x, int _y, vector&lt;int&gt; v);
+int main()
+{
+    vector&lt;int&gt; vvv;
+    int pSuvDate = 0;
+    int cSuvDate = 0;
+
+    for (int i = 0; i &lt; FSIZE; i++)
+    {
+        for (int j = 0; j &lt; FSIZE; j++)
+        {
+            cout &lt;&lt; arr[i][j] &lt;&lt; &quot; : &quot;;
+            vvv.push_back(arr[i][j]);
+            cSuvDate = findPath(i, j, vvv);
+            if (pSuvDate &lt; cSuvDate)
+                pSuvDate = cSuvDate;
+            vvv.clear();
+            cout &lt;&lt; endl;
+
+        }
+    }
+    cout &lt;&lt; &quot;result&quot; &lt;&lt; pSuvDate &lt;&lt; endl;
+    return 0;
+}
+int findPath(int _x, int _y, vector&lt;int&gt; v)
+{
+    vector&lt;int&gt;  vvv = v;
+    int suvDate[4] = { 1, 1, 1, 1 };
+    bool isEnd = true;
+    for (int i = 0; i &lt; 4; i++)
+    {
+        if (0 &lt;= _y + yRot[i] &amp;&amp; _y + yRot[i] &lt;= FSIZE-1 &amp;&amp; 0 &lt;= _x + xRot[i] &amp;&amp; _x + xRot[i] &lt;= FSIZE-1)
+        {
+            if (arr[_x][_y] &lt; arr[_x + xRot[i]][_y + yRot[i]])
+            {
+                vvv.push_back(arr[_x + xRot[i]][_y + yRot[i]]);
+                suvDate[i] += findPath(_x + xRot[i], _y + yRot[i], vvv);
+                isEnd = false;
+                vvv.pop_back();
+            }
+        }
+    }
+    int a = 0;
+    if (isEnd)
+    {
+        cout &lt;&lt; endl;
+        for (int i = 0; i &lt; vvv.size(); i++)
+            cout &lt;&lt; &quot;=&quot; &lt;&lt; vvv[i];
+    }
+    for (int i = 0; i &lt; 4; i++)
+    {
+        if (suvDate[a] &lt;= suvDate[i])
+            a = i;
+    }
+    return suvDate[a];
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/11/02 19:37</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이 재화</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5195"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>시작점부터 더 큰 값이 있는 칸으로 옮겨갈 수 있는 최대 길이..</p>
+<p>일단 <code>main()</code>부터.. </p>
+<pre><code class="c">int main(int argc, const char * argv[]) {
+    int area[] = {
+        14,9,12,10,
+        1,11,5,4,
+        7,15,2,13,
+        6,3,16,8
+    };
+    int days = howLongWillPandaLive(area, 4);
+    printf(&quot;%d\n&quot;, days);
+    return 0;
+}
+</code></pre>
+
+<p>쉽게 접근하면 각 지점에서 모두 최대로 살수있는 날을 구해서 그 중의 가장 큰값을 구하면 될듯.</p>
+<pre><code class="c">int howLongWillPandaLive(int area[], int n) {
+    int max = 0;
+    for (int i=0; i&lt;n; i++) {
+        for (int j=0; j&lt;n; j++) {
+            int days = howLong(area, n, i, j);
+            if (max &lt; days) {
+                max = days;
+            }
+        }
+    }
+    return max;
+}
+</code></pre>
+
+<p>시작점으로부터 가장 오래 살 수 있는 날은.. 재귀적으로 모든 가능한 방향으로 갈 수 있는 만큼.. 마치 depth first search 같네요.
+일단 재귀로 풀어봅니다.</p>
+<pre><code class="c">int howLong(int area[], int n, int r, int c) {
+    int days = 1;
+    int current = area[r*n + c];
+
+    // 더 많은 쪽으로 옮겨갈 수 있다.
+    if (r &gt; 0 &amp;&amp; area[(r-1)*n + c] &gt; current) days = max(days, 1+howLong(area, n, r-1, c));
+    if (c &gt; 0 &amp;&amp; area[r*n + (c-1)] &gt; current) days = max(days, 1+howLong(area, n, r, c-1));
+    if (r+1 &lt; n &amp;&amp; area[(r+1)*n + c] &gt; current) days = max(days, 1+howLong(area, n, r+1, c));
+    if (c+1 &lt; n &amp;&amp; area[r*n + (c+1)] &gt; current) days = max(days, 1+howLong(area, n, r, c+1));
+
+    return days;
+}
+</code></pre>
+
+<p>끝!</p>
+<p>그런데 <code>howLong</code>이 너무 많이 불리는 문제가.. 그 값은 늘 같음 (그 점에서 시작해서 가장 오래 살수 있는 날)
+그럼 기억해두기 (memoization)</p>
+<pre><code class="c">int howLongWillPandaLive(int area[], int n) {
+    int *memo = (int*)calloc(n*n, sizeof(int));
+
+    int max = 0;
+    for (int i=0; i&lt;n; i++) {
+        for (int j=0; j&lt;n; j++) {
+            int days = howLong(area, n, i, j, memo);
+            if (max &lt; days) {
+                max = days;
+            }
+        }
+    }
+    free(memo);
+    return max;
+}
+</code></pre>
+
+<p><code>howLong()</code>은 <code>memo</code>에 이미 값이 있으면 그 값을 바로 반환하고 아니면 계산해서 기억해두기</p>
+<pre><code class="c">int howLong(int area[], int n, int r, int c, int memo[]) {
+    int days = 1;
+    int current = area[r*n + c];
+
+    if (memo[r*n + c] &gt; 0) return memo[r*n + c];
+
+    // 더 많은 쪽으로 옮겨갈 수 있다.
+    if (r &gt; 0 &amp;&amp; area[(r-1)*n + c] &gt; current) days = max(days, 1+howLong(area, n, r-1, c, memo));
+    if (c &gt; 0 &amp;&amp; area[r*n + (c-1)] &gt; current) days = max(days, 1+howLong(area, n, r, c-1, memo));
+    if (r+1 &lt; n &amp;&amp; area[(r+1)*n + c] &gt; current) days = max(days, 1+howLong(area, n, r+1, c, memo));
+    if (c+1 &lt; n &amp;&amp; area[r*n + (c+1)] &gt; current) days = max(days, 1+howLong(area, n, r, c+1, memo));
+
+    memo[r*n + c] = days;
+    return days;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/11/05 14:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Han Jooyung</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5235"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>c++ 재귀로 풀어봤습니다.</p>
+<pre><code class="cpp">#include&lt;iostream&gt;
+
+using namespace std;
+
+int maxDay = 0;
+
+void find(int i, int j, int n, int input[4][4], int day)
+{
+    if(maxDay &lt; day)
+        maxDay = day;
+
+    day++;
+
+    if(i &gt; 0 &amp;&amp; input[i-1][j] &gt; input[i][j]) //up
+        find(i-1,j,n,input,day);
+
+    if(i &lt; n-1 &amp;&amp; input[i+1][j] &gt; input[i][j]) //down
+        find(i+1,j,n,input,day);
+
+    if(j &gt; 0 &amp;&amp; input[i][j-1] &gt; input[i][j]) //left
+        find(i,j-1,n,input,day);
+
+    if( j &lt; n-1 &amp;&amp; input[i][j+1] &gt; input[i][j]) //right
+        find(i,j+1,n,input,day);
+
+    return;
+}
+
+void main()
+{
+    cout&lt;&lt;&quot;Hello Stranger!!?&quot;&lt;&lt;endl;
+
+    int input[4][4] = { 14,9,12,10, 1,11,5,4, 7,15,2,13, 6,3,16,8 };
+
+    for(int i=0; i&lt;4; i++)
+    {
+        int day = 1;
+
+        for(int j=0; j&lt;4; j++)
+            find(i,j,4,input,day);
+    }
+
+    cout&lt;&lt;maxDay;
+
+}
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/11/10 02:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이재웅</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5413"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def greedyPanda(n,bamboo,i,j):
+    max_cnt = 1 
+    if bamboo.dirlst[i][j] != '0000':
+        for a,b in enumerate(bamboo.dirlst[i][j]):
+            cnt = 1
+            if b != '1':
+                continue
+            if a == 0:
+                cnt = greedyPanda(n,bamboo,i-1,j) + 1
+            if a == 1:
+                cnt = greedyPanda(n,bamboo,i,j+1) + 1
+            if a == 2:
+                cnt = greedyPanda(n,bamboo,i+1,j) + 1
+            if a == 3:
+                cnt = greedyPanda(n,bamboo,i,j-1) + 1
+            if cnt &gt; max_cnt:
+                max_cnt = cnt
+    return max_cnt
+
+class Bamboo_g:
+    def __init__(self,n,lst):
+        self.n = n
+        self.lst = [[None for j in range(self.n)] for i in range(self.n)]
+        for i in range(self.n):
+            for j in range(self.n):
+                self.lst[i][j] = int(lst[i][j])
+        self.dirlst = self.createDirect(lst)
+
+    def createDirect(self,lst):
+        dir_lst = [[None for j in range(self.n)] for i in range(self.n)]
+        for i in range(self.n):
+            for j in range(self.n):
+                num = 0
+                add_zero = ''
+                if i &gt; 0:
+                    if self.lst[i-1][j] &gt; self.lst[i][j]:
+                        num += 8
+                if i &lt; n-1:
+                    if self.lst[i+1][j] &gt; self.lst[i][j]:
+                        num += 2
+                if j &gt; 0:
+                    if self.lst[i][j-1] &gt; self.lst[i][j]:
+                        num += 1
+                if j &lt; n-1:
+                    if self.lst[i][j+1] &gt; self.lst[i][j]:
+                        num += 4
+                if num &lt; 2:
+                    add_zero += '0'
+                if num &lt; 4:
+                    add_zero += '0'
+                if num &lt; 8:
+                    add_zero += '0'
+                dir_lst[i][j] = add_zero+bin(num)[2:]
+        return dir_lst
+
+n = int(input(':'))
+lst = [[None for j in range(n)] for i in range(n)]
+
+for i in range(n):
+    tmp_line = input().split(' ')
+    for j in range(n):
+        lst[i][j] = tmp_line[j]
+
+b = Bamboo_g(n,lst)
+
+max_cnt = 0
+for i in range(n):
+    for j in range(n):
+        cnt = greedyPanda(n,b,i,j)
+        max_cnt = max(max_cnt,cnt)
+print(max_cnt)
+
+</code></pre>
+
+<p>n*n 크기의 방향리스트를 만들어서 리스트를 참조하며 재귀적으로 함수를 호출합니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/11/26 13:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">바바</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6748"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class Panda {
+
+    static int n;
+    static int m;
+    static int[][] a;
+
+    public static void main(String[] args) throws FileNotFoundException {
+        String path = Panda.class.getResource(&quot;&quot;).getPath();
+        Scanner sc = new Scanner(new File(path + &quot;Panda.txt&quot;));
+        n = sc.nextInt();
+        a = new int[n][n];
+        for (int i = 0; i &lt; n; i++) {
+            for (int j = 0; j &lt; n; j++) {
+                a[i][j] = sc.nextInt();
+            }
+        }
+
+        for (int i = 0; i &lt; n; i++) {
+            for (int j = 0; j &lt; n; j++) {
+                recursive(i, j, a[i][j], 0);
+            }
+        }
+
+        System.out.println(m);
+    }
+
+
+    private static void recursive(int y, int x, int s, int c) {
+        //좌
+        System.out.print(s);
+        if (x &gt; 0 &amp;&amp; s &lt; a[y][x - 1]) {
+            c = c + 1;
+            recursive(y, x - 1, a[y][x - 1], c);
+        }
+        //상
+        if (y &gt; 0 &amp;&amp; s &lt; a[y - 1][x]) {
+            c = c + 1;
+            recursive(y - 1, x, a[y - 1][x], c);
+        }
+        //우
+        if (x &lt; n - 1 &amp;&amp; s &lt; a[y][x + 1]) {
+            c = c + 1;
+            recursive(y, x + 1, a[y][x + 1], c);
+        }
+        //하
+        if (y &lt; (n - 1) &amp;&amp; s &lt; a[y + 1][x]) {
+            c = c + 1;
+            recursive(y + 1, x, a[y + 1][x], c);
+        }
+
+        if (m &lt; c) {
+            m = c;
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/04/03 13:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">genius.choi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8418"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def LIS(i, j):
+    global life
+    if life[i][j] &gt;= 0:
+        return life[i][j]
+
+    M = 0
+    for dx, dy in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
+        k, l = i + dx, j + dy
+        if 0 &lt;= k &lt; N and 0 &lt;= l &lt; N and bamboo[k][l] &gt; bamboo[i][j]:
+                M = max(M, LIS(k, l))
+
+    life[i][j] = M + 1
+    return life[i][j]
+
+
+N = 4
+bamboo = [[14, 9, 12, 10], [1, 11, 5, 4], [7, 15, 2, 13], [6, 3, 16, 8]]
+life = [[-1 for y in bamboo[0]] for x in bamboo]
+
+M = 0
+for i in range(N):
+    for j in range(N):
+        M = max(M, LIS(i, j))
+
+print(M)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/20 23:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9830"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>haskell</p>
+<pre><code class="haskell">import Data.Array
+import Data.Function
+import Data.Function.Memoize
+
+solution :: Array (Int, Int) Int -&gt; Int
+solution arr = maximum $ flip fmap (indices arr) $ memoFix $
+    \r x -&gt; 1 + foldr max 0 (r &lt;$&gt; filter (on (&lt;) (arr!) x) (nbrs x))
+    where nbrs (a,b) = filter (inRange . bounds $ arr) [(a+1,b),(a-1,b),(a,b+1),(a,b-1)]
+
+main = print $ solution $ listArray ((0,0), (3,3)) [14,9,12,10,1,11,5,4,7,15,2,13,6,3,16,8]
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/12/24 23:03</p>
+                                <p class="static-profile" style="margin:0;padding:0;">sodii</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12348"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>아이디어 : 항상 자기 자신보다 큰 수로 이동하기 때문에 자기 자신에 돌아오는 길은 없다.
+따로 DP를 사용할 필요가 없고, max 값만 구하면 되기 때문에 n*n 개 각각의 경로의 수를 카운트해서 그 중 가장 긴 경로를 출력한다. </p>
+<pre><code class="scala">def panda(arr:Array[Array[Int]]):Int = {
+      val direction = List((1, 0), (0, 1), (-1, 0), (0, -1))
+
+      def countPath(x: Int, y: Int, cnt: Int):Int = {
+        if(x &gt;= 0 &amp;&amp; y &gt;= 0 &amp;&amp; x &lt; arr.length &amp;&amp; y &lt; arr.length){
+          var maxCnt = cnt
+          for((a, b) &lt;- direction){
+            if(x + a &gt;= 0 &amp;&amp; y + b &gt;= 0 &amp;&amp; x + a &lt; arr.length &amp;&amp; y + b &lt; arr.length &amp;&amp; arr(x + a)(y + b) &gt; arr(x)(y)){
+              maxCnt = Math.max(maxCnt, countPath(x + a, y + b, cnt + 1))
+            }
+          }
+          maxCnt
+        }
+        else {
+          cnt
+        }
+      }
+
+      var max = 0
+      for(i &lt;- 0 until arr.length; j &lt;- 0 until arr.length){
+        max = Math.max(max, countPath(i, j, 1))
+      }
+      max
+    }
+    println(panda(
+      Array(
+        Array(14 ,9, 12 ,10),
+        Array(1 ,11, 5 ,4),
+        Array(7 ,15, 2 ,13),
+        Array(6 ,3, 16 ,8)
+      )
+    ))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/16 20:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">한강희</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13820"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><em>단순 recurison</em></p>
+<pre><code class="python">def panda(mat,x,y):
+    dr = ( (1,0),(-1,0),(0,1),(0,-1) )
+
+    nib = []
+    for dx,dy in dr:
+        if 0&lt;=x+dx&lt;len(mat) and 0&lt;=y+dy&lt;len(mat[0]) and mat[x][y] &lt; mat[x+dx][y+dy]:
+            nib.append(panda(mat,x+dx,y+dy))
+    if not nib: return 1
+    return max(nib)+1
+
+sample = '''\
+14 9 12 10
+1 11 5 4
+7 15 2 13
+6 3 16 8'''
+
+board = [[*map(int,i.split())] for i in sample.split('\n')]
+
+print(max(panda(board,i,j) for i in range(len(board)) for j in range(len(board[0]))))
+</code></pre>
+
+<p><em>메모이제이션</em></p>
+<pre><code class="python">memo = {}
+def panda(mat,x,y):
+    if (x,y) in memo: return memo[(x,y)]
+    dr = ( (1,0),(-1,0),(0,1),(0,-1) )
+
+    nib = []
+    for dx,dy in dr:
+        if 0&lt;=x+dx&lt;len(mat) and 0&lt;=y+dy&lt;len(mat[0]) and mat[x][y] &lt; mat[x+dx][y+dy]:
+            nib.append(memo[(x+dx,y+dy)] if (x+dx,y+dy) in memo else panda(mat,x+dx,y+dy))
+
+    if not nib: memo[(x,y)] = 1
+    else: memo[(x,y)] = max(nib)+1
+    return memo[(x,y)]
+
+sample = '''\
+14 9 12 10
+1 11 5 4
+7 15 2 13
+6 3 16 8'''
+
+board = [[*map(int,i.split())] for i in sample.split('\n')]
+
+print(max(panda(board,i,j) for i in range(len(board)) for j in range(len(board[0]))))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/29 12:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17612"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">class Panda:
+    def __init__(self, size, data):
+        self.n = size
+        self.d = data
+        self.direc = ((1,0),(-1,0),(0,1),(0,-1))
+
+    def max_depth(self, x, y):
+        c = self.d[(x,y)]
+        temp = []
+        for dx, dy in self.direc:
+            nx = x + dx
+            ny = y + dy
+            if 0&lt;=nx&lt;self.n and 0&lt;=ny&lt;self.n:
+                if self.d[(nx,ny)] &gt; c:
+                    temp.append(self.max_depth(nx,ny))
+        if temp:
+            return 1 + max(temp)
+        else:
+            return 1
+
+    def find_max_life(self):
+        ans = 0
+        for x in range(self.n):
+            for y in range(self.n):
+                a = self.max_depth(x,y)
+                if a &gt; ans:
+                    ans = a
+        print(ans)
+
+
+n = int(input())
+
+data = {}
+for y in range(n):
+    line = input().split(' ')
+    for x in range(n):
+        data[(x,y)] = int(line[x])
+
+
+P = Panda(n, data)
+print('정답 :')
+P.find_max_life()
+</code></pre>
+
+<pre><code>4
+14 9 16 10
+1 11 12 4
+2 15 7 13
+3 5 6 8
+정답 :
+8
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/04/27 11:36</p>
+                                <p class="static-profile" style="margin:0;padding:0;">messi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18181"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3.7 사용. 출제의도와 맞는 풀이 방식인진 잘 모르겠지만 풀어봤습니다.</p>
+<pre><code class="python">def isNum(S): #문자열S를 받아서 S가 자연수이면 True
+    try:
+        N=int(S)
+        if N&gt;=1:
+            return True
+        else:
+            return False
+    except:
+        return False
+
+class GreedyPanda:
+    def __init__(self):
+        self.K=1 #판다의 수명 초기값 (일)
+
+    def get_N(self): #N 입력받기
+        while(True): 
+            tmp=input('N: ')
+            N=int(tmp) if isNum(tmp) and int(tmp)&lt;=500 else 0
+            if N:
+                self.N=N
+                break
+            else:
+                print('1&lt;=N&lt;=500인 정수 N을 입력하세요\n')
+
+    def get_bamboo(self): #장소별 대나무양 입력받기(중복없이 N**2개 자연수)
+        N=self.N
+        while(True): 
+            print('장소별 대나무 양을 입력하세요')
+            self.bamboo=[]
+            bamboo_set=set(self.bamboo) #중복검사용
+            i=1
+            while(i&lt;=N):
+                tmp=input('{}행: '.format(i)).split(' ')
+                bamboo_col=[int(x) for x in tmp if isNum(x)]
+                if len(set(bamboo_col))==N:
+                    bamboo_set.update(bamboo_col)
+                    self.bamboo.append(bamboo_col)
+                    i+=1
+                else:
+                    print('Error. 다시 입력하세요')
+            if len(bamboo_set)!=N**2:
+                print('중복된 값이 있습니다. 다시 입력하세요.\n')
+            else:
+                break
+        return self.bamboo
+
+    #본문
+    def Panda_Life(self): #대나무량을 받고 판다의 수명 K를 반환
+        self.K=1 #초기화
+        self.get_N()
+        self.get_bamboo()
+        self.choice=[]
+        self.dead_point=[]
+        N=self.N
+        for i,v1 in enumerate(self.bamboo):
+            col=[]
+            for j,v2 in enumerate(v1):
+                r='' #'상하좌우'순서대로 이웃한 지역의 대나무양이 더 많으면 1, 적으면 0, 지정한 범위를 넘어가면 x
+                     # ex&gt; r='101x' 위 지역과 왼쪽 지역이 대나무양이 더 많고, 오른쪽에는 더이상 지역이 없다   
+                #상
+                if i==0: #위로 더 이상 이동할 지역이 존재하지 않음
+                    r+='x'
+                else: #위 지역에 대나무가 더 많으면 1 아니면 0
+                    r+='1' if self.bamboo[i-1][j]&gt;v2 else '0'
+                #하
+                if i==N-1: #아래로 더 이상 이동할 지역이 존재하지 않음
+                    r+='x'
+                else: #아래 지역에 대나무가 더 많으면 1 아니면 0
+                    r+='1' if self.bamboo[i+1][j]&gt;v2 else '0'
+                #좌
+                if j==0: #왼쪽으로 더 이상 이동할 지역이 존재하지 않음
+                    r+='x'
+                else: #왼쪽 지역에 대나무가 더 많으면 1 아니면 0
+                    r+='1' if self.bamboo[i][j-1]&gt;v2 else '0'
+                #우
+                if j==N-1: #오른쪽으로 더 이상 이동할 지역이 존재하지 않음
+                    r+='x'
+                else: #오른쪽 지역에 대나무가 더 많으면 1 아니면 0
+                    r+='1' if self.bamboo[i][j+1]&gt;v2 else '0'
+                col.append(r)
+                if '1' not in r: # 판다가 이동할 선택지가 없는 포인트. 판다는 이 포인트들에서만 죽는다.
+                    self.dead_point.append([i,j]) #좌표를 저장
+            self.choice.append(col)
+
+        #판다가 죽게 될 위치에서부터 역추적하여 최장루트의 길이를 찾는다
+        for p in self.dead_point:  
+            self.cycle(p[0], p[1], 1) #재귀함수 호출
+
+        print('판다의 최대수명은 {}일 입니다.'.format(self.K)) #최종 출력
+
+    def cycle(self, i,j, days): #재귀함수. (i, j)에서 역순으로 거슬러올라간다(=0인 방향으로 추적)
+        if self.choice[i][j][0]=='0': #상
+            self.cycle(i-1,j,days+1)
+        if self.choice[i][j][1]=='0': #하
+            self.cycle(i+1,j,days+1)
+        if self.choice[i][j][2]=='0': #좌
+            self.cycle(i,j-1,days+1)
+        if self.choice[i][j][3]=='0': #우
+            self.cycle(i,j+1,days+1)
+        elif days&gt;self.K: #더 이상 갈곳이 없음(=출발점으로 돌아옴) and 최대길이(수명) 갱신
+            self.K=days
+            #루프 종료
+
+if __name__==&quot;__main__&quot;:
+    a=GreedyPanda()
+    a.Panda_Life()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/06/08 15:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">왕초보</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23222"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">inp=&quot;&quot;&quot;14 9 12 10
+1 11 5 4
+7 15 2 13
+6 3 16 8&quot;&quot;&quot;
+inp2=&quot;&quot;&quot;1 6 7
+2 5 8
+3 4 9&quot;&quot;&quot;
+inp3=&quot;&quot;&quot;0 0
+0 0&quot;&quot;&quot;
+lst=[ln.split(&quot; &quot;) for ln in inp.split(&quot;\n&quot;)]
+lst2=[ln.split(&quot; &quot;) for ln in inp2.split(&quot;\n&quot;)]
+lst3=[ln.split(&quot; &quot;) for ln in inp3.split(&quot;\n&quot;)]
+
+elst=[]
+sd=1
+def solve(y,x,lst):
+    global sd
+    cn=int(lst[y][x])
+    for dy,dx in [(1,0),(0,1),(-1,0),(0,-1)]:
+        ny,nx=y+dy,x+dx
+        if 0&lt;=ny&lt;len(lst) and 0&lt;=nx&lt;len(lst[0]):
+            if int(lst[ny][nx])&gt;cn:
+                sd+=1
+                solve(ny,nx,lst)
+                sd-=1
+    elst.append(sd)
+    return elst
+</code></pre>
+
+<p>출력 </p>
+<pre><code class="python">elst=[] #elst는 매번 빈 리스트로 초기화
+for y in range(len(lst)):
+    for x in range(len(lst[0])):
+        solve(y,x,lst)
+print(max(elst)) #4
+
+elst=[]
+for y in range(len(lst2)):
+    for x in range(len(lst2[0])):
+        solve(y,x,lst2)
+print(max(elst)) #9
+
+elst=[]
+for y in range(len(lst3)):
+    for x in range(len(lst3[0])):
+        solve(y,x,lst3)
+print(max(elst)) #1
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/09/20 19:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박시원</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29736"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">paths = []
+def findRoute(n, r, c, cnt, lst):
+    dr = [-1,0,1,0]
+    dc = [0,1,0,-1]
+    gonext = False
+    for i in range(4):
+        if 0&lt;= r+dr[i] &lt; n and 0&lt;= c+dc[i] &lt; n and lst[r+dr[i]][c+dc[i]]&gt;lst[r][c]:
+            findRoute(n, r+dr[i], c+dc[i], cnt+1, lst)
+            gonext = True
+    if gonext == False:
+        paths.append(cnt)
+
+
+# n = int(input('대나무 숲의 크기 n(1&lt;=n&lt;=500): '))
+# bambooForest = []
+# for i in range(n):
+#     baboos = [int(j) for j in input('%d번째 대나무 숲의 정보: ' %(i+1)).split()]
+#     bambooForest.append(baboos)
+n = 4
+bambooForest = [[14, 9, 12, 10], [1, 11, 5, 4], [7, 15, 2, 13], [6, 3, 16, 8]]
+for r in range(n):
+    for c in range(n):
+        findRoute(n,r,c,1, bambooForest)
+print(max(paths))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/11/03 16:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

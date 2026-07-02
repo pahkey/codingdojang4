@@ -1,0 +1,800 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="내부에 파일이 몇개 담긴 폴더 ex) 직박구리 가 있습니다.
+
+이 폴더를 같은 디렉토리에 통째로 복사하려고 하는데
+복사를 진행할때마다 사본, 사본_1, 사본_2 .....처럼 이름을 지으려고 합니다.
+
+만약 사본이라는 폴더가 이미 있으면...">
+    <title>폴더 복사하기 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">폴더 복사하기</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">1</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 2</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>내부에 파일이 몇개 담긴 폴더 ex) 직박구리 가 있습니다.</p>
+<p>이 폴더를 같은 디렉토리에 통째로 복사하려고 하는데
+복사를 진행할때마다 사본, 사본_1, 사본_2 .....처럼 이름을 지으려고 합니다.</p>
+<p>만약 사본이라는 폴더가 이미 있으면 사본_1 을,</p>
+<p>사본 과 사본_1, 사본_2 가 모두 있다면 사본_3을,</p>
+<p>사본 과 사본_2, 사본_3 이 있다면 비어있는 사본_1 을 </p>
+<p>생성하는 코드를 작성하세요.</p>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">OS</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2018/09/28 13:35</p>
+                    <p class="static-profile" style="margin:0;padding:0;">Hyuk</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>13개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_14763"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from pathlib import Path
+import shutil
+
+src = input('폴더명: ')
+if not Path(src).exists() or not Path(src).is_dir():
+    raise Exception(src + ': invalid directory')
+
+# 사본_100 까지만.
+for dst in ['사본'] + ['사본_'+str(n) for n in range(1, 101)]:
+    if not Path(dst).exists():
+        shutil.copytree(src, dst)
+        break
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/29 05:29</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14767"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import os, shutil
+
+def copycopy(dir, path):
+  name = os.path.basename(dir)
+  if not os.path.isdir(os.path.join(path, name)):
+    shutil.copytree(dir, os.path.join(path, name))
+    return
+  idx = 1
+  while True:
+    newname = name + '_{}'.format(idx)
+    if not os.path.isdir(os.path.join(path, newname)):
+      shutil.copytree(dir, os.path.join(path, newname))
+      return
+    idx += 1
+
+copycopy('x:/xxx/folder', 'x:/xxx')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/29 13:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14858"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import shutil, os
+
+#print(os.getcwd())
+input1 = input(&quot;input dir name : &quot;)
+postfix=1
+folder_list = os.listdir('.')
+#for dir in folder_list:
+#    print(dir)
+while True:
+    newname = input1+'_'+str(postfix)
+    if newname not in folder_list:
+        break;
+    else:
+        postfix += 1
+
+shutil.copytree(input1, newname)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/10/09 15:37</p>
+                                <p class="static-profile" style="margin:0;padding:0;">phg98</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15089"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import os
+import shutil
+
+def Making_Name(A):
+    folder = os.listdir(&quot;C:/&quot;)
+    print(folder)
+    folder.sort()
+    cnt=0;
+    for i in folder :
+        if i.find(&quot;사본&quot;)==-1 :
+            result = &quot;사본&quot;
+        else :
+            if i.find('_')==-1 :
+                result = &quot;사본_1&quot;
+            else :
+                cnt+=1
+                if cnt!=int(i[i.find('_')+1:]) :
+                    result =&quot;사본_&quot;+str((cnt))
+                    break
+                else :
+                    result = &quot;사본_&quot;+ str((cnt+1))
+    shutil.copytree(&quot;C:/&quot;+A, &quot;C:/&quot;+result)
+    folder_after=os.listdir(&quot;C:/&quot;)
+    print(&quot;=&quot;*130)
+    print(folder_after)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/11/05 22:45</p>
+                                <p class="static-profile" style="margin:0;padding:0;">쨔이</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15374"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#폴더 복사하기
+
+import os,shutil
+
+print(os.listdir())
+a=1
+sub=1
+New ='사본'
+shutil.copytree('직박구리',New)
+
+while a:    
+    if New in os.listdir():
+        New ='사본'
+        New+='_'+str(sub)
+        sub+=1
+        shutil.copytree('직박구리',New)
+
+    if '사본_3' in os.listdir():
+        a=0
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/12/01 15:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">S.H</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15451"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def folder_copy(folder):
+  folder_list = ['사본', '사본_1', '사본_2', '사본_3', '비어있는 사본_1']
+  n = len(folder_list)
+  for i in range(n-1):
+    if os.path.isdir(folder_list[i]) is not True:
+      shutil.copytree(folder, folder_list[i])
+      return
+    elif (os.path.isdir(folder_list[i])) is True &amp; (os.path.isdir(folder_list[i+1]) is False):
+      shutil.copytree(folder, folder_list[i+1])
+      return
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/12/05 19:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Gerrad kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15468"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C#: Exception 처리는 생략하였습니다.</p>
+<pre><code class="cs">using System;
+using System.IO;
+
+namespace CD202
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            CopyFolder cp = new CopyFolder(@&quot;D:\Temp\test&quot;);
+            cp.MakeACopy();
+
+            Console.ReadKey();
+        }
+    }
+
+    class CopyFolder
+    {
+        // 원래 폴더 경로
+        private readonly DirectoryInfo OriginalPath;
+
+        // 부모 폴더 경로
+        private readonly DirectoryInfo ParentPath;
+
+        // 사용 가능한 다음 사본 폴더 경로
+        private DirectoryInfo NextTargetPath
+        {
+            get
+            {
+                int label = 0;
+                string nextTargetPathNameTry = &quot;사본&quot;;
+                while (Directory.Exists($&quot;{ParentPath}\\{nextTargetPathNameTry}&quot;))
+                {
+                    label++;
+                    nextTargetPathNameTry = $&quot;사본_{label}&quot;;
+                }
+                return new DirectoryInfo($&quot;{ParentPath}\\{nextTargetPathNameTry}&quot;);
+            }
+        }
+
+        public CopyFolder(string originalPath)
+        {
+            OriginalPath = new DirectoryInfo(originalPath);
+            ParentPath = Directory.GetParent(originalPath);
+        }
+
+        // 다음 사본 폴더에 원래 폴더 내용 복사
+        public void MakeACopy()
+        {
+            DirectoryInfo TargetPath = NextTargetPath; // 복사 대상 경로명에 대해
+
+            // 원래 경로명 문자열을 대상 경로명 문자열로 치환함에 의해 폴더 및 파일 복사함
+
+            // 사본 (하위)폴더 생성
+            Directory.CreateDirectory(TargetPath.FullName);
+            foreach (string dirPath in Directory.GetDirectories(OriginalPath.FullName, &quot;*&quot;, 
+                SearchOption.AllDirectories))
+            {
+                Directory.CreateDirectory(dirPath.Replace(OriginalPath.FullName, TargetPath.FullName));
+            }
+
+            // 사본 폴더에 파일 복사
+            foreach (string filePath in Directory.GetFiles(OriginalPath.FullName, &quot;*.*&quot;, 
+                SearchOption.AllDirectories))
+            {
+                File.Copy(filePath, filePath.Replace(OriginalPath.FullName, TargetPath.FullName), true);
+            }
+        }
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/12/07 17:09</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15469"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>폴더 파일을 사본폴더에 복사하는데 하위 폴더에 있는 파일을 어떻게 복사할지 모르겠습니다.</p>
+<pre><code class="java">import java.io.*;
+
+public class Question_2 {
+    /* 현재 디렉토리  */
+    static final String DIR = System.getProperty(&quot;user.dir&quot;);
+    static boolean b = true;
+
+    public static void main(String[] args) {
+        File dir = new File(DIR);
+        CreateDir d1 = new CreateDir(dir);
+
+        while(b) {
+            d1.CreateDirectory();
+            b = false;
+        }
+
+        System.exit(0);
+    }
+}
+
+class CreateDir {
+    static File dir;
+    static File temp;
+    static int count = 0;
+    static boolean b = true;
+
+    CreateDir() {}
+
+    CreateDir(File dir) {
+        this.dir = dir;
+    }
+
+    static void CreateDirectory() {
+        while(b) {
+            if(count == 0) {
+                temp = new File(dir, &quot;사본&quot;);
+                temp.mkdir();
+                copys(dir, temp);
+            } 
+            else if(count &lt;= 3) {
+                temp = new File(dir, &quot;사본&quot; + &quot;_&quot; + count);
+                temp.mkdir();
+                copys(dir, temp);
+            } else if(count &gt; 3) {
+                temp = new File(dir, &quot;비어있는 &quot; + &quot;사본&quot; + &quot;_&quot; + 1);
+                temp.mkdir();
+                copys(dir, temp);       
+                b = false;
+            }
+            count++;
+        }   
+    } 
+
+    public static void copys(File selectFile, File copyFile) { //복사할 디렉토리, 복사될 디렉토리
+        File[] filelist = selectFile.listFiles();
+        for (File file : filelist) {
+            File temp = new File(copyFile.getAbsolutePath() +&quot;\\&quot;+ file.getName()); 
+
+            if (file.isDirectory()) {
+                temp.mkdirs();       
+//                copys(file, temp); 
+//                사용하면 무한루프 발생!! 어떻게 해결하지??
+            } else {
+                FileInputStream fis = null;
+                FileOutputStream fos = null;
+
+                try {
+                    fis = new FileInputStream(file);
+                    fos = new FileOutputStream(temp);
+
+                    int data = 0;
+                    while((data=fis.read()) != -1) {
+                        fos.write(data);
+                    }
+
+                } catch(Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        fis.close();
+                        fos.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/12/07 17:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">youngjoon kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17106"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="actionscript">directory = list(input().split())
+temp = []
+
+for i in directory:
+    if i == '사본':
+        temp.append(0)
+    else:
+        temp.append(int(i.split('_')[1]))
+
+for i in range(len(directory)):
+    if i in temp:
+        continue
+    else:
+        directory.append('사본_' + str(i))
+
+if len(temp) == len(directory):
+    directory.append('사본_' + str(len(temp)))
+
+if '사본_0' in directory:
+    directory.remove('사본_0')
+    directory.append('사본')
+
+print(directory)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/03/13 16:12</p>
+                                <p class="static-profile" style="margin:0;padding:0;">D.H.</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17501"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>import os,shutil</p>
+<p>print(os.listdir())
+a=1
+sub=1
+New ='사본'
+shutil.copytree('직박구리',New)</p>
+<p>while a:  <br />
+    if New in os.listdir():
+        New ='사본'
+        New+='_'+str(sub)
+        sub+=1
+        shutil.copytree('직박구리',New)</p>
+<pre><code>if '사본_3' in os.listdir():
+    a=0
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/04/13 10:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">신동준</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20649"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from pathlib import Path
+import shutil
+
+src = input('폴더명: ')
+if not Path(src).exists() or not Path(src).is_dir():
+    raise Exception(src + ': invalid directory')
+
+# 사본_100 까지만.
+for dst in ['사본'] + ['사본_'+str(n) for n in range(1, 101)]:
+    if not Path(dst).exists():
+        shutil.copytree(src, dst)
+        break
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/20 16:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김민규</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22363"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import os
+import glob
+import shutil
+
+def makedir(p):
+    d = list(filter(os.path.isdir, glob.glob(p+'*')))
+    n = list(map(lambda m: m[-1][-1], sorted(d)))
+    if not '본' in n: return '_사본'
+    elif len(n) == 2 and n[-1] == '본': return '_사본_1'
+    else:
+        if int(n[-1])+2 == len(n):
+            return '_사본_'+str(int(n[-1])+1)
+        else:
+            for i in range(1, int(n[-1])):
+                if not str(i) in n:
+                    return '_사본_'+str(i)
+
+if __name__ == '__main__':
+    os.chdir('C://python_learning/codingdojang')
+    p = '직박구리'
+    md = makedir(p)
+    shutil.copytree('직박구리', p+md)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/18 01:41</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hwaseong Nam</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_27038"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import os
+
+i=1
+try:
+    os.mkdir('사본')
+except FileExistsError :
+    while True:
+        try :
+            os.mkdir('사본_'+str(i))
+            break
+        except FileExistsError :
+            i+=1
+</code></pre>
+
+<p>os 모듈을 사용해봤어요
+mkdir 함수를 이용하고, 증가 변수 i를 뒀습니다
+사본,사본_1,사본_2 . . .  생성 시도를 하면서 동일한 이름의 파일이 있으면 다음 회문을 돌리는 시퀀스로 짰어요
+이럴때는 예외 처리가 참 유용하네요</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/18 23:24</p>
+                                <p class="static-profile" style="margin:0;padding:0;">양캠부부</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

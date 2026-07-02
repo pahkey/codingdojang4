@@ -1,0 +1,1054 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="n개의 의자에 n명의 사람이 각각 앉아 있다. 이들의 자리를 재배치 하려고 할때, 한 사람도 처음 앉았던 자리에 다시 앉지 않도록 자리를 재배치하는 경우의 수를 X(n)이라고 하자. **n (0 &lt; n &lt;=10)을 입력받아 X(n)을 출력하는 프...">
+    <title>자리 바꾸기 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">자리 바꾸기</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">7</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 3</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>n개의 의자에 n명의 사람이 각각 앉아 있다. 이들의 자리를 재배치 하려고 할때, 한 사람도 처음 앉았던 자리에 다시 앉지 않도록 자리를 재배치하는 경우의 수를 X(n)이라고 하자. <strong>n (0 &lt; n &lt;=10)을 입력받아 X(n)을 출력하는 프로그램을 작성하라.</strong></p>
+<pre><code>입력예1: 
+2
+</code></pre>
+
+<pre><code>출력예1: 
+X(2) = 1
+</code></pre>
+
+<pre><code>입력예2: 
+3
+</code></pre>
+
+<pre><code>출력예2: 
+X(3) = 2
+</code></pre>
+
+<pre><code>입력예3: 
+4
+</code></pre>
+
+<pre><code>출력예3: 
+X(4) = 9
+</code></pre>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">recursive function</span>
+                
+                    <span class="label label-tag label-xs">dynamic programming</span>
+                
+                    <span class="label label-tag label-xs">derangement</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2019/08/25 16:34</p>
+                    <p class="static-profile" style="margin:0;padding:0;">왕초보</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>17개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_19043"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">4</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3.7</p>
+<pre><code class="python">n = int(input())
+result = 0
+for i in range(0,n+1):
+    fac = 1
+    for a in range(i+1, n+1):
+        fac *= a
+    result += fac * (-1)**i
+print('X(%d) ='%n, result)
+</code></pre>
+
+<h5 id="input">Input</h5>
+<pre><code class="no-highlight">4
+6
+</code></pre>
+
+<h5 id="output">Output</h5>
+<pre><code class="no-highlight">X(4) = 9
+X(6) = 265
+</code></pre>
+
+<p>이런 순열을 <a href="https://wiki.mathnt.net/index.php?title=Derangement">교란순열</a>이라고 합니다.
+점화식을 재귀함수로 구현하면 속도가 느려서 일반항을 For로 구현했습니다.</p>
+<p>X(1000)은 0.27초, X(2000)은 1.7초 정도 걸립니다. 이중루프 O(n<sup>2</sup>)</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/08/26 17:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">AY</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19159"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>
+</code></pre>
+
+<p>저는 
+처음 임의대로 자리를 정하고,
+처음 사람이 자리를 잡고, 두번째 사람이 빈자리에 자리잡고,... 해서 순차적으로 자리를 옮겨가면서 모든 경우의 수를 돌려서 처음 자리랑 비교해서 다른 경우를 카운트 해서 구하려고 했습니다.</p>
+<p>이런 문제를 볼때마다 사실 좀 고민이 됩니다.
+수학적으로 계산을 한 다음에 그 수식을 이용하여 값만 계산하는 것을 시키는게 맞는지...
+아니면 반복적으로 체크해서 답을 구하도록 하는 것이 맞는지...
+어떤게 맞다는 없겠지만, 그리고 물론 전자가 시간상으로는 훨씬 빠를 것 입니다만...</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/09/05 09:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">류원형</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19027"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>X(k-1)까지의 답을 알고 있고, k번째 사람이 추가 된 경우를 생각한다.
+자리를 재배치 했을때 k번째 사람의 입장에서 생각하면 2가지 경우로 나뉜다
+
+패턴1. 재배치 후 k번째 사람과 x번째 (1 &lt;= x &lt;= k-1) 사람이 자리가 서로 맞바뀐(swap) 경우.
+즉 재배치 후 k번째 사람이 x번째 자리에 앉고, x번째 사람이 k번째 사람이 앉게 된 경우.
+
+k번째 사람과 x번째 사람 외의 k-2명이 자리를 재배치하면 된다. 즉 하나의 x값에 X(k-2)가지 경우의 수가 존재.
+x를 고르는 경우의 수는 k-1가지이므로 
+
+패턴1의 총 경우의 수는 (k-1) * X(k-2)
+
+패턴2. 패턴1 이외의 경우. 
+즉 재배치 후의 k번째 사람이 x번째 (1 &lt;= x &lt;= k-1)자리에 앉았을때, x번째 사람이 k번째 자리 이외의 자리에 앉게 된 경우.
+
+이 경우 k번째 사람을 제외한 나머지 k-1명의 사람들은, 나머지 k-1개의 의자들 중에서 앉을 수 없는 자리가 각각 1개씩 있게 되기 때문에(x번째 사람은 k번째 자리에 앉을 수 없고, 그 외의 사람들은 원래 자기 자리에 앉을 수 없음) 하나의 x값에 
+X(k-1)가지 경우의 수가 존재. 
+x를 고르는 경우의 수는 k-1가지이므로 
+
+패턴1의 총 경우의 수는 (k-1) * X(k-1)
+
+따라서 다음과 같은 점화식이 성립한다.
+
+X(1) = 0
+X(2) = 1
+X(k) = (k-1) * {X(k-1)+X(k-2)}  ( 단, k &gt;= 3 )
+
+위 점화식을 이용하면 쉽게 X(n)을 구할 수 있다.
+</code></pre>
+
+<p>C++</p>
+<hr />
+<pre><code class="cpp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+class SeatChanger {
+public:
+    SeatChanger() : N_MAX(10), X(N_MAX, 0){
+        X[1] = 1;
+        for (unsigned int i = 2; i &lt; N_MAX; i++) {
+            X[i] = i * (X[i - 1] + X[i - 2]); //X[n-1] = X(n)
+        }
+    }
+    unsigned long get_X(unsigned int n) { return n &lt;= N_MAX ? X[ n - 1 ] : 0 ; }
+private:
+    const unsigned int N_MAX;
+    vector&lt;unsigned long&gt; X; 
+};
+
+int main() {
+    SeatChanger s;
+    unsigned int n;
+
+    cout &lt;&lt; &quot;n: &quot;;
+    cin &gt;&gt; n;
+    cout &lt;&lt; &quot;X(&quot; &lt;&lt; n &lt;&lt; &quot;) = &quot; &lt;&lt; s.get_X(n) &lt;&lt; endl;
+
+    return 0;
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/08/25 16:56</p>
+                                <p class="static-profile" style="margin:0;padding:0;">왕초보</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19054"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">x = int(input(&quot;숫자 입력(1~10): &quot;))
+def change(x):
+    if x == 1: return 0
+    elif x == 2: return 1
+    else:
+        return (x-1) * (change(x-1) + change(x-2))
+print(change(x))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/08/27 15:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김상호</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19099"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="javascript">// memoization
+const Gmemo = {
+    fac: [1, 1, 2],
+    X: [1, 0, 1],
+};
+const fac = n =&gt; {
+    const memo = Gmemo.fac;
+    if (memo[n] === undefined)
+        memo[n] = n * fac(n - 1);
+    return memo[n]
+};
+const comb = (n, k) =&gt; fac(n) / (fac(n - k) * fac(k));
+const X = n =&gt; {
+    const memo = Gmemo.X;
+    if (memo[n] === undefined) {
+        let res = fac(n);
+        for (let i = 0; i &lt; n; i++)
+            res -= X(i) * comb(n, i);
+        memo[n] = res;
+    }
+    return memo[n];
+};
+
+console.log(X(6)); // 265
+console.log(X(10)); // 1334961
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/08/29 17:00</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19125"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>X([1, 2, 3, 4]) 에서 1과 [2, 3, 4] 중 하나의 자리를 바꾼다. 예를 들어 1과 2의 자리를 바꾸면</p>
+<p>1을 제외한 2, [3, 4] 에 대해,</p>
+<p>2는 남은 세 자리 중 어디에 앉아도 상관 없고, 나머지 [3, 4] 는 원래 자리에 있으므로 반드시 자리를 바꿔야 한다.</p>
+<p>이 상태를 Y(2, [3, 4])라고 하면,</p>
+<p>1) 2가 현재 자리에 눌러앉으면 X([3, 4])가 되고,</p>
+<p>2) 2가 [3, 4] 중 하나와 자리를 바꾸면 2를 제외하고 Y(3, [4]) 또는 Y(4, [3])이 된다.</p>
+<p>.</p>
+<p>=&gt; Let</p>
+<p>X(n): n명이 모두 원래 자리에 앉아있을 때(즉 반드시 자리를 바꿔줘야 할 때) 경우의 수</p>
+<p>Y(n): 1명은 이미 자리를 뺏겨서 n개 자리 중 아무 데나 앉을 수 있고, (n-1)명은 원래 자리에 앉아 있을 때 경우의 수</p>
+<p>.</p>
+<p>=&gt;</p>
+<p>X(1) = 0</p>
+<p>X(n) = (n-1) * Y(n-1)</p>
+<p>Y(1) = 1</p>
+<p>Y(n) = X(n-1) + (n-1) * Y(n-1)</p>
+<pre><code class="python">from itertools import permutations
+
+
+def X_rec(n):
+    def Y(m):
+        return 1 if m &lt;= 1 else X_rec(m - 1) + (m - 1) * Y(m - 1)
+
+    return 0 if n &lt;= 1 else (n - 1) * Y(n - 1)
+
+
+def X_dyn(n):
+    x = [0, 0]
+    y = [None, 1]
+    for i in range(2, n+1):
+        x.append((i-1) * y[i-1])
+        y.append(x[i-1] + (i-1) * y[i-1])
+
+    return x[n]
+
+
+def X_bf(n):
+    return sum(1 for _ in filter(
+        lambda seq: all(i != elm for i, elm in enumerate(seq)),
+        permutations(range(n))
+    ))
+
+
+# n = int(input('n='))
+# print('X({}) = {}'.format(n, X_rec(n)))
+for X in (X_rec, X_dyn, X_bf):
+    print([X(n) for n in range(11)])
+
+</code></pre>
+
+<p>결과 </p>
+<pre><code>[0, 0, 1, 2, 9, 44, 265, 1854, 14833, 133496, 1334961]
+[0, 0, 1, 2, 9, 44, 265, 1854, 14833, 133496, 1334961]
+[1, 0, 1, 2, 9, 44, 265, 1854, 14833, 133496, 1334961]
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/09/03 11:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19319"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><a href="https://wiki.mathnt.net/index.php?title=%EA%B5%90%EB%9E%80%EC%88%9C%EC%97%B4_(derangement)">교란순열</a>이라는 힌트를 주신 <a href="http://codingdojang.com/profile/answer/11427">AY</a>님 덕분에 간단히 풀었습니다.</p>
+<p>C#</p>
+<pre><code class="cs">using System;
+
+namespace CD239
+{
+    class Program
+    {
+        static void Main()
+        {
+            while (true)
+            {
+                int number = int.Parse(Console.ReadLine()); // 0 &lt; number &lt;= 10
+                Console.WriteLine($&quot;X({number}) = {Derangement(number)}&quot;);
+            }
+        }
+
+        static int Derangement(int num)
+        {
+            if (num == 0) { return 1; }
+            if (num == 1) { return 0; }
+            return (num - 1) * (Derangement(num - 1) + Derangement(num - 2));
+        }
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/09/16 19:17</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19398"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">#include&lt;stdio.h&gt;
+
+int Derangment(int n);
+
+int main(void)
+{
+    //교란순열 점화식 D(n) = (n-1)(D(n-1)+D(n-2))
+    int x;
+    int result; //결과값
+
+    printf(&quot;N의 값을 기입하시오.\n&quot;);
+    scanf(&quot;%d&quot;, &amp;x);
+
+    result = Derangment(x);
+
+    printf(&quot;결과값은 %d 입니다.&quot;, result);
+
+    return 0;
+}
+
+int Derangment(int n)
+{
+    if (n == 1)
+    {
+        return 0;
+    }
+    else if (n == 2)
+    {
+        return 1;
+    }
+    else
+    {
+        return (n - 1)*(Derangment(n - 2) + Derangment(n - 1));
+    }
+}
+</code></pre>
+
+<p>Derangement 라는 사용자 함수를 이용하여 소스를 구현 해보았습니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/09/23 13:02</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Ecarose</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19435"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from __future__ import print_function, division
+
+def sekigae(n) :
+    if n == 1 :
+        return 0
+    elif n == 2 :
+        return 1
+    return (n-1)*(sekigae(n-1)+sekigae(n-2))
+
+sekigae(6)
+</code></pre>
+
+<p>결과</p>
+<p>265</p>
+<p>교란순열의 점화식을 이용해서 풀었습니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/09/26 10:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GG</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19958"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>자바를 이용하니 꽤 길게 나왔네요... 배열과 난수를 사용해서 자리 재배치를 했습니다</p>
+<pre><code class="java">package coding_test;
+
+import java.util.Random;
+
+public class SwitchSit {
+
+    public void X(int[] arr) {
+
+        System.out.println(&quot;-----------------&quot;);
+        int n=0;
+        outer : for (int i = 0; i &lt; arr.length;) {
+            arr[i] = new Random().nextInt(arr.length) + 1;
+            n++;
+            if(n&gt;1000) {
+                System.err.println(&quot;다시 컴파일 해주십시오&quot;);
+                break;
+            }
+            if(arr[i] == i+1) {
+                continue;
+            }
+
+            for (int j = 0; j &lt; i; j++) {
+
+                if( arr[i] == arr[j] ) {
+                    continue outer;
+                }//if
+            }//inner
+            System.out.printf(&quot;x(%d) = %d\n&quot;,i+1,arr[i]);
+            i++;
+        }//outer
+    System.out.println();
+    }//x()
+
+
+    public static void main(String[] args) {
+
+        int[] number = new int[10];
+
+        for (int i = 0; i &lt; number.length; i++) {
+            number[i] = i+1;
+            System.out.print(number[i]+&quot; &quot;);
+        }//for
+        System.out.println();
+
+        SwitchSit sw = new SwitchSit();
+        sw.X(number);
+    }//main
+
+}
+
+</code></pre>
+
+<p>먼저 1~10까지 숫자값을 입력받습니다 그후의 출력결과</p>
+<pre><code>1 2 3 4 5 6 7 8 9 10 
+-----------------
+x(1) = 2
+x(2) = 6
+x(3) = 8
+x(4) = 3
+x(5) = 1
+x(6) = 9
+x(7) = 10
+x(8) = 7
+x(9) = 4
+x(10) = 5
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/11/16 21:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">권태욱</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20558"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬으로 했습니다.</p>
+<pre><code class="python">x=int(input(&quot;x between 1 to 10=&quot;))
+D(1)=0
+D(2)=1
+k=0
+if x==1:
+    a=0
+if x==2:
+    a=1
+if x=&gt;3:
+    for k in range (3,x):
+        k=(k-1)*(D(1)+D(2))
+        D(1)=D(2)
+        D(2)=k
+    a=k
+print(a)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/15 07:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Michael</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_21750"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬3.7</p>
+<pre><code class="python">n = int(input())
+
+dp = [0 for _ in range(10 + 1)]
+dp[2] = 1
+for i in range(3, 10 + 1):
+  dp[i] = (i - 1) * (dp[i - 2] + dp[i - 1])
+
+print(f'X({n}) = {dp[n]}')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/04/12 17:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">디디</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23053"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>각 경우와 경우의 수를 출력하게 만들어 보았습니다.</p>
+<pre><code class="python">n=int(input(&quot;n을 입력하십시오(0 &lt; n &lt;= 10): &quot;))
+elst=eval(repr([&quot; &quot;]*n))
+def solve():
+    global countnum
+    for i in range(1,n+1):
+        if elst[i-1]==&quot; &quot;:
+            for num in range(1,n+1):
+                if num!=i and elst.count(num)==0:
+                    elst[i-1]=num
+                    solve()
+                    elst[i-1]=&quot; &quot;
+            return
+    countnum+=1
+    print(elst)
+solve(),print(countnum)
+</code></pre>
+
+<p>출력</p>
+<pre><code class="python">n을 입력하십시오(0 &lt; n &lt;= 10): 2
+[2, 1]
+1
+
+n을 입력하십시오(0 &lt; n &lt;= 10): 3
+[2, 3, 1]
+[3, 1, 2]
+2
+
+n을 입력하십시오(0 &lt; n &lt;= 10): 4
+[2, 1, 4, 3]
+[2, 3, 4, 1]
+[2, 4, 1, 3]
+[3, 1, 4, 2]
+[3, 4, 1, 2]
+[3, 4, 2, 1]
+[4, 1, 2, 3]
+[4, 3, 1, 2]
+[4, 3, 2, 1]
+9
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/09/01 18:13</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박시원</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23926"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>저는 제 즐거움을 위해 수열공식 안 쓰고 하렵니다 ^^
+역시나 n이 10보다 커지면 돌리는데 1분이 넘어가네요.</p>
+<pre><code class="python">def Deploy(seated, lastseat):
+    global N, Count
+    if (N==lastseat):
+        Count = Count+1
+        return
+    for i in range(1,N+1):
+        if seated.count(i)==0 and i!=lastseat+1:
+            next_seated = seated.copy()
+            next_seated.append(i)
+            Deploy(next_seated, lastseat+1)
+
+N = int(input(&quot;n: &quot;))
+Count = 0
+Deploy([],0)
+print(&quot;X(n)=&quot;,Count)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/12/09 13:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김준우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27295"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>// Rust</p>
+<p>// f(2) = 1, f(3) = 2이고, f(n)/(n-1) = f(n-2) + (n-2) * (f(n-3) + (n-3) * (... 식으로 주어집니다</p>
+<p>fn n_seats() {</p>
+<pre><code>let n = 4;    
+println!("{}", f(n));
+</code></pre>
+<p>}
+fn f(n: usize) -&gt; usize {</p>
+<pre><code>match n {
+    2..=3 =&gt; n - 1,
+    n =&gt; {  let mut result = 3; // f(2) + 2
+            for i in 3..n-1 { result = i * result + f(i);}
+            result * (n-1) }
+}
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/02/09 18:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">JW KIM</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29421"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import itertools
+
+n = int(input())
+seat = list(range(n))
+nPr = itertools.permutations(seat,n)
+seat_rearrangements = list(nPr)
+
+count = 0
+for seat_rearrangement in seat_rearrangements:
+  local_count = 0
+  for person in range(n):
+    if seat[person] != seat_rearrangement[person]:
+      local_count +=1
+  if local_count == n:
+    count += 1
+
+print(f&quot;X({n}) = {count}&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/07/14 08:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">스탠리</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29500"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">using System;
+using System.Collections.Generic;
+
+namespace solution
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //Console.Write(&quot;n을 입력 하세요: &quot;);
+            //int n = int.Parse(Console.ReadLine());
+
+            //List&lt;List&lt;int&gt;&gt; seatList = new List&lt;List&lt;int&gt;&gt;();
+            //switchSeats(n, new List&lt;int&gt;(), seatList);
+            //Console.WriteLine(&quot;\n   X({0}) = {1}&quot;,n, seatList.Count);
+
+            int[] arrX = new int[10];
+            arrX[1] = 0;
+            arrX[2] = 1;
+            for (int n = 2; n &lt; 7; n++)
+            {
+                if (n &gt;= 3)
+                {
+                    arrX[n] = (n - 1) * (arrX[n - 2] + arrX[n - 1]);
+                }
+                List&lt;List&lt;int&gt;&gt; seatList = new List&lt;List&lt;int&gt;&gt;();
+                switchSeats(n, new List&lt;int&gt;(), seatList);
+                Console.WriteLine(&quot;\n   X({0}) = {1},  비교: {2}&quot;, n, seatList.Count, arrX[n]);
+            }
+        }
+
+        private static void switchSeats(int n, List&lt;int&gt; list, List&lt;List&lt;int&gt;&gt; seatList)
+        {
+            if(list.Count == n)
+            {
+                seatList.Add(new List&lt;int&gt;(list));
+                return;
+            }
+
+            for (int i = 0; i &lt; n; i++)
+            {
+                if( i != list.Count &amp;&amp; !list.Contains(i))
+                {
+                    list.Add(i);
+                    switchSeats(n, list, seatList);
+                    list.RemoveAt(list.Count - 1);
+                }
+            }
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/07/28 16:37</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

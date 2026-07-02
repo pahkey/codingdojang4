@@ -1,0 +1,1764 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="출처 : [http://poj.org/problem?id=1089](http://poj.org/problem?id=1089)
+
+### 문제 설명
+n개의 닫힌 구간 [ai; bi]의 순열이 있습니다(i=1,2, ..., n). 이들 구간을 합...">
+    <title>Intervals - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">Intervals</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">7</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 3</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>출처 : <a href="http://poj.org/problem?id=1089">http://poj.org/problem?id=1089</a></p>
+<h3 id="_1">문제 설명</h3>
+<p>n개의 닫힌 구간 [a<sub>i</sub>; b<sub>i</sub>]의 순열이 있습니다(i=1,2, ..., n). 이들 구간을 합쳐서 서로 겹치지 않는 닫힌 구간들의 합으로 나타낼 수 있습니다. 문제는 구간의 수를 최소로 하는 표현방법을 찾아내는 것입니다. 이 표현의 구간들은 출력 파일에서 반드시 증가하는 방향으로 나타나야 합니다. a &lt;= b &lt; c &lt;= d 이고 또 그런 경우에만 구간 [a; b]와 [c; d]가 증가하는 방향이라고 말합니다.</p>
+<h3 id="_2">입력</h3>
+<p>입력의 첫 줄에는 정수 n이 있습니다. (3 &lt;= n &lt;= 50000). 이것은 구간의 수를 나타냅니다. (i+1)번째 줄에는 한 개의 공백으로 구분되는 두 개의 정수 a<sub>i</sub>, b<sub>i</sub>가 있습니다. 이것은 구간 [a<sub>i</sub>; b<sub>i</sub>]를 나타내는 표현입니다. 각각은 그 구간의 시작과 끝을 나타냅니다. (1 &lt;= a<sub>i</sub> &lt;= b<sub>i</sub> &lt;= 1000000)</p>
+<h3 id="_3">출력</h3>
+<p>출력은 서로 겹치지 않는 모든 구간 쌍의 표현을 담고 있어야 합니다. 각 줄은 하나의 구간 표현을 담고 있어야 합니다. 이 표현은 각 구간의 시작과 끝을 나타내는 두 개의 정수와 그 사이의 공백 하나로 이뤄져야 합니다. 출력의 구간들은 증가하는 순서로 존재해야 합니다.</p>
+<h3 id="sample-input">Sample Input</h3>
+<pre><code>5
+5 6
+1 4
+10 10
+6 9
+8 10
+</code></pre>
+
+<h3 id="sample-output">Sample Output</h3>
+<pre><code>1 4
+5 10
+</code></pre>
+
+<p>제약조건 : 시간 제한 1000ms, 메모리 제한 10000Kbytes</p>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2014/03/24 15:43</p>
+                    <p class="static-profile" style="margin:0;padding:0;">Kim Jaeju</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>26개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_517"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">2</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import re
+def get_interval():
+    n = int(input())
+    r = re.compile(&quot;(\d+)\s(\d+)&quot;)
+
+    intervals = []
+    for i in range(0, n):
+        line = input()
+        matches = r.match(line)
+
+        d = tuple(int(num) for num in matches.groups())
+        intervals.append(d)
+    return intervals
+
+
+#main
+rng = (-1, -1)
+for interval in sorted(get_interval()):
+    if rng == (-1, -1):
+        rng = interval
+    elif interval[0] &gt; rng[1]:  
+        print(&quot;%d %d&quot; % rng)
+        rng = interval
+    elif interval[1] &gt;= rng[1]:
+        rng = (rng[0], interval[1])
+
+print(&quot;%d %d&quot; % rng)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/03/24 22:15</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Kim Jaeju</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2863"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>일단 정렬한 후,
+결과리스트에 하나씩 집어넣되,
+넣을 항목이 결과리스트의 마지막항목과 겹치는 부분이 있으면 두 구간을 합쳐서 결과리스트의 
+마지막 항목을 수정하고,
+겹치는 구간이 없으면 결과리스트의 마지막에 그냥 추가해줍니다.</p>
+<pre><code class="python">intv = [(5,6),(1,4),(10,10),(6,9),(8,10)]
+intv.sort()
+res =intv[:1]
+for a,b in intv:
+    ta,tb = res[-1]
+    if a &lt;= tb:
+        tb = max(tb,b)
+        res[-1] = (ta,tb)
+    else :
+        res.append((a,b))
+print res
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/01/23 12:31</p>
+                                <p class="static-profile" style="margin:0;padding:0;">상파</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2261"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">굳!</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Taesoo Kim,
+                                    2018/06/29 15:29
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3302"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>구간을 정렬해서 이웃한 구간과 겹치면 하나로 만들어주면 됩니다. 정렬해서 결과에 합쳐나가면 쉽긴합니다만,
+정렬하지 않고 처리하도록 구현해보았습니다. </p>
+<pre><code class="python">class Range:
+    def __init__(self, s, e):
+        assert s &lt;= e, &quot;invalid range&quot;
+        self.s = s
+        self.e = e
+
+    def __add__(self, rng):
+        m, n = (self, rng) if self.s &lt; rng.s else (rng, self)
+        if m.e &lt; n.s:
+            return None
+        elif m.e &gt; n.e:
+            return Range(m.s, m.e)
+        else:
+            return Range(m.s, n.e)
+
+    def intersection(self, rng) -&gt; bool:
+        m, n = (self, rng) if self.s &lt; rng.s else (rng, self)
+        return m.e &gt;= n.s
+
+    def __repr__(self):
+        return &quot;%d %d&quot; % (self.s, self.e)
+
+    def __lt__(self, rng):
+        return self.s &lt; rng.s
+
+data = []
+result = []
+_n = int(input())
+for _ in range(_n):
+    x, y = [int(x) for x in input().split()][:2]
+    data.append(Range(x, y))
+
+while data:
+    r = data.pop()
+    for i, a in enumerate(result):
+        if a.intersection(r):
+            result.pop(i)
+            data.append(a + r)
+            break
+    else:
+        result.append(r)
+
+for i in result:
+    print(i)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/03/29 16:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">룰루랄라</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2615"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def united_intervals(lis):
+    ret=[]
+    for e1 in lis:
+        i=0
+        while i&lt;len(ret):
+            e2=ret[i]
+            if e1[0] &lt;= e2[1] :
+                ret[i]=(e2[0], max(e1[1],e2[1]))
+                break
+            i+=1
+        if i==len(ret):
+            ret.append(e1)
+    return ret
+
+lis=[(5,6) , (1,4) , (10,10) ,(6,9),  (8,10)]
+lis.sort()
+print united_intervals(lis)
+</code></pre>
+
+<p>그렇게 신박하지도 않고 무난한풀이인거같네요..</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/12/26 17:31</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김 매미</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3290"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<pre><code class="ruby">pairs = proc { (1..gets.to_i).map { gets.split(/ /).map &amp;:to_i }.sort }
+ni_pw = proc { pairs[].chunk_while{|(_,a),(b,_)|a&gt;=b}.map {|e| e.flatten.minmax*' '} }
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby">$stdin = StringIO.new(&quot;5\n1 4\n5 6\n6 9\n8 10\n10 10\n&quot;) # test data
+expect(ni_pw[]).to eq [&quot;1 4&quot;, &quot;5 10&quot;]
+</code></pre>
+
+<p><strong>Output</strong></p>
+<pre><code class="ruby"># puts ni_pw[]
+5
+5 6
+1 4
+10 10
+6 9
+8 10
+
+# output
+1 4
+5 10
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/03/27 08:11</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3975"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">class operatorException(BaseException):pass
+class customException(BaseException):pass
+
+class rng:
+    def __init__(self, start, stop):
+        self.start, self.stop = start, stop
+    def __or__(self, other):
+        if self.start &gt; other.stop or self.stop &lt; other.start:
+            raise operatorException
+        return rng(min([self.start, other.start]),max([self.stop, other.stop]))
+    def __str__(self):
+        return ', '.join(map(str, (self.start, self.stop)))
+
+def f(x):
+    while 1:
+        try:
+            for i in range(len(x)):
+                for j in range(i+1, len(x)):
+                    try:
+                        k = x[i]|x[j]
+                        x.pop(j); x.pop(i)
+                        x.insert(0, k)
+                        raise customException
+                    except operatorException:
+                        pass
+        except customException:
+            pass
+        else:
+            break
+    return x
+
+while __name__ == '__main__':
+    for x in sorted(f(list(rng(*list(map(int, input('&gt;&gt;&gt;&gt;&gt;&gt;').split()))) for x in range(int(input('&gt;&gt;&gt;'))))
+), key = lambda x: x.start):
+        print(x)
+
+</code></pre>
+
+<p>범위 객체를 만들어 연산자 오버로딩하여 사용하였습니다.</p>
+<p>파이썬 3.5.1</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/06/21 22:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Flair Sizz</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4044"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C#으로 작성했습니다.</p>
+<pre><code class="cs">using System;
+using System.Collections.Generic;
+using System.Linq;
+
+        public class Interval
+        {
+            public int Count { get; set; }
+            public int Max { get; set; }
+            public int Min { get; set; }
+            public Interval(int max, int min)
+            {
+                Count = Math.Abs(max - min);
+                Max = max;
+                Min = min;
+            }
+        }
+
+        public List&lt;Interval&gt; GetInterval(List&lt;Interval&gt; inputs, int curr, List&lt;Interval&gt; outputs = null)
+        {
+            var max = inputs.Max(i =&gt; i.Max);
+            var temp = inputs.First();
+            if (outputs == null) outputs = new List&lt;Interval&gt;();
+            var remainders = new List&lt;Interval&gt;();
+            foreach (var input in inputs)
+            {
+                if (input.Max &lt; temp.Min || temp.Max &lt; input.Min)
+                {
+                    remainders.Add(input);
+                    continue;
+                }
+                if (input.Min &lt; temp.Min) temp.Min = input.Min;
+                if (input.Max &gt; temp.Max) temp.Max = input.Max;
+            }
+            outputs.Add(temp);
+            if (remainders.Count != 0) outputs = GetInterval(remainders, remainders.First().Min, outputs);
+            return outputs;
+        }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/06/30 21:56</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Straß Böhm Jäger</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6005"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>예제만 돌려봐서 다른 예제를 적용했을 때 맞는지 모르겠어요...</p>
+<p>닫힌 구간을 하나씩 합치는 식으로 했는데....</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#define MAX_COL 1000
+
+struct Pair {
+    int low;
+    int high;
+};
+
+void main() {
+
+    int i = 0;
+    int T = 5;
+    Pair *pair = (Pair*) malloc (sizeof(Pair) * T);
+    for(int i=0; i&lt;T;i++)
+        scanf(&quot;%d %d&quot;, &amp;pair[i].low, &amp;pair[i].high);
+
+    int min =  pair[0].low;
+    int max =  pair[0].high;
+    int m1 = 0;
+    int m2 = 0;
+    int interval = 100;
+    for(int i = 1;i&lt;T   ;i++) {
+        if(m1!=0 &amp;&amp; m2!=0 &amp;&amp; ((pair[i].low &gt; min &amp;&amp; pair[i].high &lt; m1) || (pair[i].low &gt; m2 &amp;&amp; pair[i].high &lt; max)))
+            continue;
+        else if(max &lt; pair[i].low &amp;&amp; pair[i].low &gt; min) {
+            max = pair[i].high;
+        }
+        else if(max &gt; pair[i].high &amp;&amp; pair[i].high &gt; min) {
+            min = pair[i].low;
+        }
+        else if(max &lt; pair[i].low) {
+            m1 = max;
+            max = pair[i].high;
+            m2  = pair[i].low;
+        }
+        else if(min &gt; pair[i].high) {
+            m2  = min;
+            min = pair[i].low;
+            m1  = pair[i].high;
+
+        }
+
+    }   
+
+    if(m1 == 0)
+        printf(&quot;%d %d\n&quot;, min, max);
+    else
+        printf(&quot;%d %d\n%d %d\n&quot;, min, m1, m2, max);
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/01/23 16:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">코딩초보</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6082"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import time
+start = time.time()
+_list = sorted([[5,6],[1,4],[10,10],[6,9],[8,10]])
+#_list = sorted([list(map(int,input().split(' '))) for x in range(int(input()))])
+result, tmp = list(),_list[0]
+for x in range(len(_list)-1):
+    if tmp[1] &lt; _list[x+1][0]:
+        result.append(_list[x])
+        tmp = _list[x+1]
+    else:
+        tmp = [tmp[0],_list[x+1][1]]
+result.append(tmp)
+print(result)
+print(time.time() - start)
+
+#### 2017.02.01 D-386 ####
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/02/01 22:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GunBang</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6474"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+struct XY {
+    int x, y;
+};
+/*qsort를 위한 compare 함수*/
+int compare(const void *A, const void *B) {
+    int a, b;
+    a = ((struct XY*)A)-&gt;x;
+    b = ((struct XY*)B)-&gt;x;
+    return a -b;
+}
+
+/*n을 먼저 입력받고 a,b를 입력받은 후 qsort로 a값 기준으로 정렬했습니다.
+그 후 앞의 b값과 뒤의 a값을 비교해 b값이 작다면 범위내에 없는것이고
+크거나 같으면 하나의 구간이 됩니다. 그리고 범위 내에 포함이 되었다면
+포함된 XY를 0으로 만들어 줍니다.
+이후 출력할 때 0을 제외하게 만들어 유효한 순서쌍만 출력하게 합니다.*/
+int main() {
+    int n = 0; scanf_s(&quot;%d&quot;, &amp;n);
+    struct XY* xy = (struct XY*)malloc(sizeof(struct XY) * n);
+    for (int i = 0; i &lt; n; i++) {
+        scanf_s(&quot;%d %d&quot;, &amp;xy[i].x, &amp;xy[i].y);
+    }
+    qsort(xy, n, sizeof(struct XY), compare);
+
+    for (int i = 0, j = 1; i &lt; n;i = j, j++) {
+        for (;xy[i].y &gt;= xy[j].x &amp; j &lt; n;j++) { //xy[i].y &gt;= xy[j].x는 전의 b값이 뒤의 a값과 비교하여 크거나 같으면 반복문 가능
+            if (xy[i].y &lt; xy[j].y) {    //(1,6), (3,3) 이런경우를 위해 썼습니다.
+                xy[i].y = xy[j].y;
+                xy[j].x = 0; xy[j].y = 0;
+            }
+            else {
+                xy[j].x = 0; xy[j].y = 0;
+            }
+        }
+    }
+
+    for (int i = 0; i &lt; n; i++) {
+        if (xy[i].x == 0) continue;
+        printf(&quot;%d %d\n&quot;, xy[i].x, xy[i].y);
+    }
+    free(xy);
+    return 0;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/03/05 20:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">KimSeonbin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6703"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.Arrays;
+import java.util.Scanner;
+
+import static java.lang.System.in;
+
+public class Intervals {
+
+    static int n;
+    static int k = 10000;
+    static int s = 0;
+    static int e = 0;
+    static int a[];
+    static int b[];
+    static int c[];
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(in);
+
+        n = sc.nextInt();
+        a = new int[n];
+        b = new int[n];
+        c = new int[k];
+
+        Arrays.fill(c, 0);
+
+        for (int i = 0; i &lt; n; i++) {
+            a[i] = sc.nextInt();
+            b[i] = sc.nextInt();
+        }
+
+        for (int i = 1; i &lt;= k; i++) {
+            for (int j = 0; j &lt; n; j++) {
+                int s = a[j];
+                int e = b[j];
+                if (s &lt;= i &amp;&amp; e &gt; i) {
+                    c[i - 1] = 1;
+                }
+            }
+        }
+
+        for (int i = 0; i &lt; k; i++) {
+            if (c[i] == 1 &amp;&amp; s == 0) {
+                s = i + 1;
+            }
+            if (c[i] == 0) {
+                e = i + 1;
+            }
+            if (s != 0 &amp;&amp; e != 0 &amp;&amp; s &lt;= e) {
+                System.out.println(s + &quot; &quot; + e);
+                s = 0;
+                e = 0;
+            }
+        }
+    }
+}
+</code></pre>
+
+<p>시작과 종료가 같은 구간이 어떻게 표현되는게 맞는지 모르겠네요</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/03/29 15:12</p>
+                                <p class="static-profile" style="margin:0;padding:0;">genius.choi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7611"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>javascript</strong></p>
+<pre><code class="javascript">var input = 
+`5
+5 6
+1 4
+10 10
+6 9
+8 10`;
+
+var lines = input.split(&quot;\n&quot;);
+var size = parseInt(lines[0]);
+var data = lines.slice(1).map(v =&gt; v.split(&quot; &quot;).map(v =&gt; parseInt(v)))
+                .sort((a,b) =&gt; a[1] - b[1])
+                .sort((a,b) =&gt; a[0] - b[0]);
+var interval = [data[0] || [0, 0]];
+for (let i = 1; i &lt; size; i++) {
+    if (interval[interval.length - 1][1] &gt;= data[i][0]) {
+        interval[interval.length - 1][1] = data[i][1];
+    } else {
+        interval.push(data[i]);
+    }
+}
+console.log(interval.map(v =&gt; v.join(&quot; &quot;)).join(&quot;\n&quot;));
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/21 17:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">funnystyle</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7857"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3으로 풀었습니다.</p>
+<pre><code class="python">n, items = int(input()), []
+for i in range(n):
+    items.append([int(x) for x in input().split()])
+items.sort(key=lambda x: x[0])
+
+result = []
+for x in items:
+    if result and result[-1][1] &gt;= x[0]:
+        result[-1][1] = max(result[-1][1], x[1])
+    else:
+        result.append(x)
+
+for x in result:
+    print('%d %d' % (x[0], x[1]))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/07/14 12:58</p>
+                                <p class="static-profile" style="margin:0;padding:0;">SOUP</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7909"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python: 정렬 후 구간 하나씩 병합/덧붙이기. O(nlogn) + O(n)</p>
+<pre><code class="python">intv = [(5,6), (1,4), (10,10), (6,9), (8, 10)]
+intv.sort(key = lambda x: x[0]);
+
+res = [intv.pop(0)]
+while intv:
+    (a1, b1), (a2, b2) = res[-1], intv.pop(0)
+
+    if b1 &lt; a2:
+        res += [(a2, b2)]
+    else:
+        res[-1] = (a1, b2)
+
+for (a, b) in res:
+    print(a, b)
+</code></pre>
+
+<p>.</p>
+<p>Python: Mergesort. O(n) ~ O(nlogn)</p>
+<p>Mergesort를 약간 변형해서 merge할 때 구간을 하나로 합치는 과정을 추가했습니다.</p>
+<p>merge할 때 시작점이 작은 순서로 들어오는 게 보장되므로, res 리스트에 rng를 추가할 때 res의 마지막 요소 res[-1]과 rng를 비교해서 가능하면 하나로 합치고, 아니면 원래 하던대로 그냥 덧붙입니다.</p>
+<p>위 코드에서 정렬 끝내 놓고 하던 작업을 정렬하면서 해치워버린다고 생각하면 됩니다.</p>
+<p>수행 시간은 mergesort이므로 O(nlogn)이고, </p>
+<p>여기서는 구간이 합쳐지면 개수가 줄어들기 때문에 최적의 경우 n + n/2 + n/4 + ... 1 이 되어서 O(n)입니다.</p>
+<pre><code class="python">
+class Range:
+    def __init__(self, s, e):
+        self.s = s
+        self.e = e
+
+def Rappend(lst, rng):
+    if not lst or lst[-1].e &lt; rng.s:
+        lst.append(rng)
+    else:
+        lst[-1] = Range(lst[-1].s, rng.e)
+
+def merge(lst1, lst2):
+    res = []
+    while lst1 and lst2:
+        if lst1[0].s &lt;= lst2[0].s:  Rappend(res, lst1.pop(0))
+        else:                       Rappend(res, lst2.pop(0))
+
+    while lst1: Rappend(res, lst1.pop(0))
+    while lst2: Rappend(res, lst2.pop(0))
+    return res
+
+def mergesort(lst):
+    if len(lst) &lt;= 1: return lst
+    m = len(lst) // 2
+    left = mergesort(lst[:m])
+    right = mergesort(lst[m:])
+    return merge(left, right)
+
+ranges = [Range(x[0], x[1]) for x in [(5,6), (1,4), (10,10), (6,9), (8, 10)]]
+for rng in mergesort(ranges):
+    print(rng.s, rng.e)
+</code></pre>
+
+<p>.</p>
+<p>C# 연습</p>
+<pre><code class="cs">using System;
+using System.Collections.Generic;
+using System.Linq;
+using static System.Console;
+
+class Range : IComparable&lt;Range&gt;
+{
+    public int start { get; set; }
+    public int end { get; set; }
+
+    public Range(int start, int end)
+    {        
+        if (start &gt; end)
+        {
+            throw new Exception(&quot;invalid range&quot;);
+        }
+        this.start = start;
+        this.end = end;
+    }
+
+    private static void swap(ref Range r1, ref Range r2)
+    {
+        Range tmp = r1;
+        r1 = r2;
+        r2 = tmp;
+    }
+
+    public int CompareTo(Range other)
+    {
+        return this.start - other.start;
+    }
+
+
+    public static Range operator +(Range r1, Range r2)  // 반드시 public static
+    {
+        if (r1 is null)
+        {
+            return r1;
+        }
+
+        if (r2 is null)
+        {
+            return r1;
+        }
+
+        if (r1.start &gt; r2.start) // swap
+        {
+            swap(ref r1, ref r2);
+        }
+
+        if (r1.end &lt; r2.start)
+        {
+            return null;
+        }
+        else
+        {
+            try  // 그냥 한번 써 봤음..
+            {
+                return new Range(r1.start, r2.end);
+            }
+            catch (Exception e)
+            {
+                WriteLine(e);
+                return null;
+            }
+        }
+    }    
+}
+
+class Intervals
+{
+    static void Main(string[] args)
+    {
+        Range[] ranges = new Range[] { new Range(5, 6), new Range(1, 4), new Range(10, 10), new Range(6, 9), new Range(8, 10)};
+        Array.Sort&lt;Range&gt;(ranges);
+
+        List&lt;Range&gt; result = new List&lt;Range&gt; { };
+
+        foreach (Range range in ranges)
+        {
+            Range lastestResult, addedRange;
+
+            lastestResult = result.Count &gt; 0 ? result.Last() : null;
+            addedRange = lastestResult + range;
+
+            if (addedRange is null)
+            {
+                result.Add(range);
+            }
+            else
+            {
+                result[result.Count - 1] = addedRange;
+            }
+        }
+
+        foreach (Range range in result)
+        {
+            WriteLine(&quot;{0} {1}&quot;, range.start, range.end);
+        }
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/07/18 22:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10489"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <h1 id="36">파이썬 3.6</h1>
+<pre><code class="python">&quot;&quot;&quot;
+아이디어&gt;
+- 리스트의 각 순열 set을 순차 비교하여, 서로 간에 겹치는 부분이  있는지를 확인합니다.
+- 서로 겹치는 부분이 없는 순열이 있는 경우 result에 추가 시키고,
+- 서로 겹치는 부분이 있는 경우 새로운 리스트(result2)에 모든 요소들을 추가시켜 최소값, 최대값을 찾아 새로운 순열을 표현합니다.
+&quot;&quot;&quot;
+def inputdata(data):
+    n = int(input(&quot;n = &quot;))
+    for i in range(n):
+        data.append(input(&quot;data %d : &quot;%(i+1)).split())
+
+def intervals(data):
+    tmp,result,result2,a,b,count = [],[],[],{},{},0
+    for i,value in enumerate(data):
+        a = { a for a in range(int(value[0]),int(value[1])+1)}
+        for h in data[i+1:]:
+            b = { b for b in range(int(h[0]),int(value[1])+1)}
+            if len(a &amp; b) != 0:
+                count += 1
+                tmp.extend(list(a|b))
+        if count == 0:
+            if i != len(data)-1 and len(a &amp; set(tmp)) == 0:
+                result.append(value)
+        else:
+            result2.extend(list(a|b))
+        count = 0
+        tmp = []
+    print(' '.join(result[0]))
+    print(' '.join([str(min(result2)),str(max(result2))]))
+
+if __name__ == &quot;__main__&quot;:
+    data = []
+    inputdata(data)
+    print(&quot;\n&quot;)
+    intervals(data)
+</code></pre>
+
+<ul>
+<li>결과값</li>
+</ul>
+<pre><code class="python">n = 5
+data 1 : 5 6
+data 2 : 1 4
+data 3 : 10 10
+data 4 : 6 9
+data 5 : 8 10
+
+
+1 4
+5 10
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/04 11:13</p>
+                                <p class="static-profile" style="margin:0;padding:0;">justbegin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10790"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def interval(l):
+    def intervaladd(a, b):
+        def nocommonadd(a, b):
+            result = 0
+            c = int(len(a)/2)
+            if not (len(a) - 1):
+                if a[0][0] &lt; b[0]:
+                    result += 1
+                else:
+                    pass
+            elif b[0] &lt; a[c][0]:
+                result = nocommonadd(a[:c], b)
+            else:
+                result = nocommonadd(a[c:], b) + c
+            return result
+        indicies = list()
+        for i in range(len(a)):
+            if a[i][0] &gt; b[1] or a[i][1] &lt; b[0]:
+                pass
+            else:
+                indicies.append(i)
+        if indicies:
+            a[indicies[0]:indicies[-1] + 1] = [[min(a[indicies[0]][0], b[0]), max(a[indicies[-1]][1], b[1])]]
+        else:
+            a.insert(nocommonadd(a, b), b)
+        return a
+    a = len(l)
+    result = [l.pop(0)]
+    for i in range(a-1):
+        intervaladd(result, l[i])
+    return result
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/18 20:29</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김동하</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11802"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package codingdojang;
+
+import java.util.Scanner;
+
+public class ex53 {
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt(); // 입력되는 구간 개수
+        int in[][] = new int[n][2]; // 구간 별 왼쪽 닫는 구간, 오른쪽 닫는 구간
+
+        int max = 0; // 오른 구간 중 가장큰 숫자
+
+        for(int i=0; i&lt;in.length; i++) {
+            in[i][0] = sc.nextInt();
+            in[i][1] = sc.nextInt();
+            max = Math.max(max,in[i][1]);
+        }
+
+        boolean arr[] = new boolean[max+1]; // 가장 큰 숫자를 포함하는 배열 생성
+
+        for(int i=0; i&lt;in.length; i++) {
+            if(in[i][0]==in[i][1]) arr[in[i][1]] = true; // 숫자 하나만을 구간으로 가질때
+            else { // 숫자 2개이상을 구간으로 가질때
+                for(int j=in[i][0]+1; j&lt;=in[i][1]; j++) { // 왼쪽 닫는 구간을 제외한 모든 구간을 true
+                    arr[j] = true;
+                }
+            }
+        }
+
+        /*
+        for(int i=0; i&lt;arr.length; i++) {
+            if(arr[i]) System.out.println(i); 
+        }
+        */
+
+        int newin[][] = new int[n][2]; // 새로 변경되는 최대구간!!
+        int temp; // 각 구간별 수정되는 오른쪽 닫는 구간
+
+        for(int x=0; x&lt;in.length; x++) { // 모든 구간에 대해 구간 재지정
+
+            newin[x][0] = in[x][0];
+            temp = in[x][1];
+
+            for(int y=in[x][0]+1;y&lt;max+1&amp;&amp;arr[y]; y++) { // 처음 구간부터 y를 1씩올리는데 기간이 이어질때까지 루프
+                System.out.println(&quot;in[&quot;+ x + &quot;]의 &quot; + y + &quot;쪽확인중!!&quot;);
+                for(int i=0; i&lt;in.length; i++) { // 각 y마다 오른닫는구간을 계속확인
+                    if(y == in[i][1]) temp = Math.max(temp, in[i][1]); // 만약 연속되는 y와 오른닫는구간이 같아진다면 temp에 계속 저장
+                }
+            }
+            newin[x][1] = temp;
+        }
+
+        for(int i=0; i&lt;arr.length; i++) {
+            if(!arr[i]) {
+                for(int j=0; j&lt;newin.length; j++) {
+                    if(i==newin[j][0]) {
+                        System.out.println(newin[j][0]+ &quot; &quot; + newin[j][1]);
+                        break;
+                    }
+                }
+            }
+        }
+
+    }
+
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/04/17 15:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이병호</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12679"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.Scanner;
+
+public class Intervals {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int num = Integer.valueOf(sc.nextLine().trim());
+        int[][] Inter = new int[num][2];
+        for (int i = 0; i &lt; num; i++) {
+            String[] temp = sc.nextLine().split(&quot; &quot;);
+            Inter[i][0] = Integer.valueOf(temp[0]);
+            Inter[i][1] = Integer.valueOf(temp[1]);
+        }
+        int[] ans = new int[2];
+        while (true) {
+            num = ans[1];
+            for (int i = 0; i &lt; Inter.length; i++)
+                if (num &lt; Inter[i][0]) {
+                    ans = Inter[i];
+                    break;
+                }
+            for (int i = 0; i &lt; Inter.length; i++)
+                if (num &lt; Inter[i][0] &amp;&amp; ans[0] &gt; Inter[i][0])
+                    ans = Inter[i];
+            for (int i = 0; i &lt; Inter.length; i++)
+                if (ans[1] &gt;= Inter[i][0] &amp;&amp; ans[1] &lt; Inter[i][1])
+                    ans[1] = Inter[i][1];
+            if (num == ans[1])
+                break;
+            System.out.println(ans[0] + &quot; &quot; + ans[1]);
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/30 19:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김지훈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13230"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python</p>
+<pre><code class="python">n = int(input())
+arr = []
+for _ in range(n):
+    a, b = map(int, input().split(' '))
+    arr.append([a,b])
+arr.sort()
+ans = []
+x = arr[0][0]
+y = arr[0][1]
+for i in range(1, n):
+    if x &lt;= arr[i][0] &lt;= y &lt;= arr[i][1]:
+            y = arr[i][1]
+    else:
+        ans.append([x, y])
+        x = arr[i][0]
+        y = arr[i][1]
+ans.append([x, y])
+[print(i) for i in ans]
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/29 15:25</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Taesoo Kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13557"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def interval(li):
+    li.sort()
+    r = [li[0]]
+    for i in range(1,len(li)):
+        if r[-1][0] &lt;= li[i][0] &lt;= r[-1][1]: r[-1][0],r[-1][1] = min(r[-1][0],li[i][0]),max(r[-1][1],li[i][1])
+        else: r.append(li[i])
+    return r
+
+print(interval([[5,6],[1,4],[10,10],[12,14],[6,9],[8,10]]))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/13 16:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14577"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n=int(input())
+a = [0]*n
+b = [0]*n
+result_range=[0]*1000000
+
+# max()함수를 사용하여 어디까지 범위를 사용할지 계산.
+for i in range(n):
+    a[i],b[i]=map(int,input().split(' '))
+    for step in range(a[i],b[i]):
+        result_range[step]=1
+# 적용되는 범위를 1로 설정한 배열을 숫자로 표현할 단계.
+print(result_range[:max(b)+1])
+idx=0
+while True:
+    if result_range[idx] == 1:
+        print(idx, end=' ')
+        while result_range[idx] != 0:
+            idx+=1
+        print(idx)
+    else:
+        idx+=1
+        continue
+    if idx &gt;= max(b):
+        break
+    else:
+        continue
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/09 09:11</p>
+                                <p class="static-profile" style="margin:0;padding:0;">JaehakChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20103"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python3</p>
+<pre><code class="python">def merge_sections(sections):
+    sections.sort()
+    merged = True
+    while merged:
+        merged = False
+        for idx in range(len(sections) - 1):
+            if sections[idx][1] &gt;= sections[idx + 1][0]:
+                hi = max(sections[idx][1], sections[idx + 1][1])
+                sections[idx][1] = hi
+                del sections[idx + 1]
+                merged = True
+                break
+
+
+def main():
+    size = int(input())
+    sections = []
+    for _ in range(size):
+        section = list(map(int, input().split()))
+        sections.append(section)
+
+    merge_sections(sections)
+    for section in sections:
+        print(&quot; &quot;.join(map(str, section)))
+
+
+if __name__ == '__main__':
+    main()
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/12/02 18:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20157"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import re
+
+inp1, EXT = input(&quot;INPUT : &quot;), [],
+
+for i in range(1, int(inp1)+1) : #리스트 EXT에 입력된 범위들을 튜플 형식으로 저장
+    ad_ext = input(&quot;INPUT : &quot;)
+    ad_com = re.compile(&quot;\d+&quot;)
+    EXT.append(tuple(map(int, ad_com.findall(ad_ext))))
+EXT.sort() #EXT 정렬
+res = [EXT[0]] #res에 EXT[0]값만 저장해놓습니다.
+
+for m in range(1, int(inp1)) :
+    if res[-1][1] &gt;= EXT[m][0] : # 순서대로 res의 마지막 항과 겹치는지 확인해서 겹치면 범위 수정
+        res[-1] = (res[-1][0], max(res[-1][1], EXT[m][1]))
+    else : #겹치지 않을 시 해당 튜플을 res에 추가
+        res.append(EXT[m])
+print(res)
+</code></pre>
+
+<p>결과</p>
+<pre><code>INPUT : 4
+INPUT : 5 8
+INPUT : 7 10
+INPUT : 1 2
+INPUT : 11 12
+[(1, 2), (5, 10), (11, 12)]
+</code></pre>
+
+<pre><code>INPUT : 5
+INPUT : 5 6
+INPUT : 1 4
+INPUT : 10 10
+INPUT : 6 9
+INPUT : 8 10
+[(1, 4), (5, 10)]
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/12/11 15:43</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GG</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27211"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>//Rust
+fn interval() {</p>
+<pre><code>let mut vec = vec![(5, 6), (1, 4), (10, 10), (6, 9), (8, 10)];
+vec.sort_by_key(|w| w.0);
+
+let mut i = 0;  // idx
+let mut j;
+while i &lt; vec.len() {
+    j = i + 1;
+    while j &lt; vec.len() {
+        if vec[i].1 &gt;= vec[j].0 {
+            if vec[i].1 &lt;= vec[j].1 {vec[i].1 = vec[j].1;}
+            vec.remove(j);
+            j -= 1;
+        }
+        j += 1;
+    }
+    i += 1;
+}
+println!("{:?}", vec);
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/31 20:12</p>
+                                <p class="static-profile" style="margin:0;padding:0;">JW KIM</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27391"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">while True:
+    n = int(input('구간의 수를 입력하시오'))
+    if n&gt;=3 and n&lt;=50000:
+        break
+a = []
+for k in range(n):
+    print(k+1,'번째 ',end='')
+    a.append(list(map(int,input('구간을 입력하시오').split(' '))))
+
+a.sort()
+arr=[]
+arr.append(a[0])
+for k in range(len(a)-1):
+    if max(a[k])&lt;min(a[k+1]):
+        arr.append(a[k+1])
+    else  :
+        arr[-1][1]= max(a[k+1])
+
+for i in arr:
+    print(i[0],' ',i[1])
+
+</code></pre>
+
+<p>각 구간을 입력받아서 2차원배열에 넣습니다.
+구간들이 모여있는 배열을 오름차순 정렬 합니다.
+처음 구간부터 시작해서, 현재 구간의 max 값과 다음 순서 구간의 최소값을 비교하여,
+접하는지 여부를 판단합니다.
+겹치면, 구간을 합치고,  안겹치면 다음구간을 다시 배열 arr에 넣어 분리하는 방식으로 함수를 짰어요</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/02/19 15:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">양캠부부</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29815"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">inp = &quot;&quot;&quot;5
+5 6
+1 4
+10 10
+6 9
+8 10&quot;&quot;&quot;
+arr_inp = inp.split('\n')
+
+N = int(arr_inp[0])
+
+inp_data = []
+for i in range(1, N+1):
+    inp_data.append([int(x) for x in arr_inp[i].split()])
+
+inp_data = sorted(inp_data)
+
+res = []
+a, b = inp_data[0][0], inp_data[0][1]
+for i in range(1, N):
+    if b &lt; inp_data[i][0]:
+        res.append([a,b])
+        a, b = inp_data[i][0], inp_data[i][1]
+    elif b &lt; inp_data[i][1]:
+        b = inp_data[i][1]
+res.append([a,b])
+
+for i in range(len(res)):
+    print(res[i][0], ' ', res[i][1])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/12/23 20:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

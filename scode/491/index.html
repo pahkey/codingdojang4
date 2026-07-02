@@ -1,0 +1,3932 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="연구자의 연구업적을 평가할 때 사용되는 지표 중 h-index와 g-index라는 것이 있다.
+
+
+* h-index : 인용 횟수가 h번 이상인 논문이 h개일 때 가능한 h의 최댓값
+* g-index : 인용 횟수가 높은 상위 g개 논문의...">
+    <title>h-index &amp; g-index - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">h-index &amp; g-index</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">3</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 2</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>연구자의 연구업적을 평가할 때 사용되는 지표 중 h-index와 g-index라는 것이 있다.</p>
+<ul>
+<li>h-index : 인용 횟수가 h번 이상인 논문이 h개일 때 가능한 h의 최댓값</li>
+<li>g-index : 인용 횟수가 높은 상위 g개 논문의 인용 횟수 총합이 g²이상일 때 가능한 g의 최댓값</li>
+</ul>
+<p>어떤 학자가 쓴 논문 각각의 인용 횟수가 주어질 때, h-index와 g-index를 계산하시오.</p>
+<p>e.g.)</p>
+<ul>
+<li>입력 : 0 15 4 0 7 10 0</li>
+<li>h-index : 4</li>
+<li>g-index : 6</li>
+</ul>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2015/11/02 20:50</p>
+                    <p class="static-profile" style="margin:0;padding:0;">김 정우</p>
+                </div>
+            </div>
+
+            
+                <a name="comment_2064"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">h번 이상인 논문이 h개 &quot;이상&quot;일 때 라고 해야 정확할 것 같습니다.
+만약 예시 입력에서 5가 하나 더 있어 0 15 4 0 7 10 0 5 라면, 
+인용5회 이상이 4개, 인용4회 이상이 5개, ... 니까 가능한 h가 없습니다.</span>
+                    -
+                    <span style="font-size:11px;">
+                        Noname,
+                        2017/07/05 23:54
+                    </span>
+                </div>
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>69개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_2495"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def findH(index):
+    index.sort(reverse=True)
+    for i, j in enumerate(index):
+        if (i+1) == j : return index[i]
+    return None
+
+def findG(index):
+    index.sort(reverse=True)
+    sum = 0
+    for i, j in enumerate(index):
+        sum =  sum + j
+        if (i+1)**2 &gt; sum : return i
+    return None
+
+index = [0,15,4,0,7,10,0]
+
+print('h-Index : ' + str(findH(index)))
+print('g-Index : ' + str(findG(index)))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/11/14 06:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이 규환</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9142"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># 한글 처리 in Atom 1.21.1 + Anaconda(Python 3.6.3)
+import sys
+import io
+
+sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding='utf-8')
+sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding='utf-8')
+
+# 연구자의 연구업적을 평가할 때 사용되는 지표 중 h-index와 g-index라는 것이 있다.
+# h-index : 인용 횟수가 h번 이상인 논문이 h개일 때 가능한 h의 최댓값
+# g-index : 인용 횟수가 높은 상위 g개 논문의 인용 횟수 총합이 g²이상일 때 가능한 g의 최댓값
+# 어떤 학자가 쓴 논문 각각의 인용 횟수가 주어질 때, h-index와 g-index를 계산하시오.
+
+quotations = [0, 15, 4, 0, 7, 10, 0]
+
+# h-index
+for h in range(min(max(quotations), len(quotations)), 0, -1):
+    count = 0
+    for number in quotations:
+        if number &gt;= h:
+            count += 1
+    if count == h:
+        print(&quot;h-index =&quot;, h)
+        break
+
+# g-index
+quotations.sort(reverse=True)
+for g in range(len(quotations), 0, - 1):
+    if sum(quotations[0:g]) &gt;= g**2:
+        print(&quot;g-index =&quot;, g)
+        break
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/31 08:03</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jace Alan</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2151"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">와..이건 문제도 답도 원리를 이해하기 힘드네요 ㅠㅠ</span>
+                                -
+                                <span style="font-size:11px;">
+                                    june davis,
+                                    2017/12/20 15:17
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2454"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3.5 입니다. g-index 문제 반대로 이해하고 한참을 헤맸네요.</p>
+<pre><code class="python"># Function to find h-index
+def FindHIndex(cntList):
+    cntDict = {}
+
+    for cnt in cntList:
+        cntDict[cnt] = 1 + (0 if cntDict.get(cnt) is None else cntDict.get(cnt))
+
+    beforeCnt = 0
+
+    for cnt in sorted(cntDict, reverse = True):
+        cntDict[cnt] += beforeCnt
+        beforeCnt = cntDict[cnt]
+
+        if cntDict[cnt] &gt;= cnt:
+            return cnt
+
+# Function to find g-index
+def FindGIndex(cntList):
+    sumList = sorted(cntList, reverse = True)
+
+    beforeSum = 0
+
+    for i in range(len(sumList)):
+        sumList[i] += beforeSum
+        beforeSum = sumList[i]
+
+        if i * i &gt;= sumList[i]:
+            return i
+
+# Main
+# Input string
+input = '0 15 4 0 7 10 0'
+
+# Input list from input string
+quoteCnt = [int(x) for x in input.split(' ')]
+
+# Find h-index
+hIndex = FindHIndex(quoteCnt)
+print('h-index: '+str(hIndex))
+
+# Find g-index
+gIndex = FindGIndex(quoteCnt)
+print('g-index: '+str(gIndex))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/11/03 01:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Donald</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2456"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">paperquote = [ 0, 15, 4, 0 , 7, 10, 0 ]
+
+paperquote.sort(reverse=True)
+
+for i in range( max( paperquote ) ) :
+    cnt = 0
+    for j in paperquote :
+        if j &gt;= i : cnt += 1
+    if cnt &lt; i : print &quot;h-index : %d&quot;%(i-1) ; break
+
+for i in range(1, len( paperquote ) + 1 ) :
+    cnt = 0
+    sum = 0
+    for j in paperquote :
+        cnt += 1
+        sum += j
+        if cnt == i : break 
+    if ( sum &lt; i * i ) : print &quot;g-index : {0}&quot;.format(i-1) ; break
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/11/03 09:17</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Kim JungRae</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1623"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">아 이 방식으로는 g-index가 전체 논문 인용횟수와 같을 때 출력이 안 되네요....</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Kim JungRae,
+                                    2015/11/03 09:18
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2460"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">#include &lt;iostream&gt;
+#include &lt;map&gt;
+#include &lt;functional&gt;
+#include &lt;cmath&gt;
+
+using namespace std;
+
+int main(int argc, const char * argv[]) {
+
+    int n;
+    cin &gt;&gt; n; // 논문 데이터의 개수
+
+    map&lt;int, int, greater&lt;int&gt;&gt; t_map;
+    for (int i = 0; i &lt; n; i++) { // 논문 인용횟수 입력 루프
+        int r;
+        cin &gt;&gt; r;
+
+        if (t_map.find(r) != t_map.end()) {
+            t_map[r]++;
+        } else t_map[r] = 1;
+    }
+
+    // h-index, g-index 계산부
+    int g = 0;
+    bool g_found = false;
+    int h = 0;
+    bool h_found = false;
+    int c = 0;
+    int r = 0;
+    for (auto i : t_map) {
+        c += i.second;
+        if (!h_found &amp;&amp; c &gt;= i.first) {
+            h = c;
+            h_found = true;
+        }
+        int r_i = i.first * i.second + r;
+        if (!g_found) {
+            int c_2 = c * c;
+            if (r_i &gt;= c_2) {
+                g = c;
+                r = r_i;
+            } else {
+                if (i.first &gt; 0) {
+                    g += floor((i.first - 2 * g + sqrt(i.first * (i.first - 4 * g) + 4 * r)) * 0.5); // 2차방정식 근의 공식에 따른 일반해
+                } else {
+                    g = floor(sqrt(r));
+                }
+                g_found = true;
+            }
+
+        }
+        if (g_found &amp;&amp; h_found) break;
+    }
+
+    cout &lt;&lt; &quot;h-index : &quot; &lt;&lt; h &lt;&lt; endl;
+    cout &lt;&lt; &quot;g-index : &quot; &lt;&lt; g &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/11/04 17:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Chromatics</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2572"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>c++로 작성하였습니다.</p>
+<pre><code class="cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    int h_index = 0, g_index = 0;
+    int index[7] = { 0, 15, 4, 0, 7, 10, 0 };
+    int temp = 0;
+    for (int i = 0; i &lt; sizeof(index) / sizeof(int); i++) {
+        if (i + 1 &lt;= index[i])
+            h_index++;
+
+        temp += index[i];
+        if (temp &gt;= (i + 1) * (i + 1))
+            g_index++;
+
+    }
+    cout &lt;&lt; &quot;h_index : &quot; &lt;&lt; h_index &lt;&lt; endl;
+    cout &lt;&lt; &quot;g_index : &quot; &lt;&lt; g_index &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/12/05 17:32</p>
+                                <p class="static-profile" style="margin:0;padding:0;">에카</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2658"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">Cite_Index = [0, 15, 4, 0, 7, 10, 0]
+Cite_Index.sort(reverse=True)
+
+h_index = 1
+
+while True:
+    for x in range(len(Cite_Index)):
+        if Cite_Index[x] &lt; h_index:
+            break
+    if x &gt; h_index:
+        h_index += 1
+    elif x == h_index:
+        break
+    else:
+        print('There is no h_index')
+        h_index = 0
+        break
+
+for x in range(1,len(Cite_Index)+1):
+    if sum(Cite_Index[:x]) &lt; x ** 2:
+        g_index = x-1
+        break
+
+print('h_index:  %d\ng_index:  %d' % (h_index,g_index))
+</code></pre>
+
+<p>인용횟수가 모두 0인 경우도 고려하였습니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/12/31 10:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">SPJung</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2789"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">L = [0,15,4,0,7,10,0]
+def h_index(L):
+    index = 0
+    while True:
+        if len(filter(lambda x : x&gt;=index, L))&gt;=index: index +=1
+        else : return index-1
+def g_index(L):
+    index = 0
+    while True:
+        if sum(sorted(L,reverse=True)[0:index])&gt;=index*index : index +=1
+        else : return index-1
+
+print h_index(L)
+print g_index(L)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/01/13 22:14</p>
+                                <p class="static-profile" style="margin:0;padding:0;">상파</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3209"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬3.4입니다.</p>
+<pre><code class="python">idx = [0, 15, 4, 0, 7, 10 ,0]
+
+cnt = 0
+h_index = []
+for h in range(1, len(idx) + 1):
+    for i in idx: 
+            if i &gt;= h: cnt += 1
+    if h == cnt: h_index.append(h)
+    cnt = 0
+print('h-index: {}'.format(max(h_index)))
+
+g_index = []
+idx.sort(reverse = True)
+for g in range(1, len(idx) + 1):
+    if sum(idx[:g]) &gt;= g ** 2: g_index.append(g)
+print('g-index: {}'.format(max(g_index)))   
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/03/20 00:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">디디</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3240"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬입니다. </p>
+<pre><code class="python">def h(xs):
+    return max([x for x in xs if len([y for y in xs if y &gt;= x]) == x])
+
+def g(xs):
+    return max([g for g in range(1, len(xs)) 
+               if sum(sorted(xs, reverse=True)[:g]) &gt;= g**2])
+
+d = [int(x) for x in input().split()]
+print(&quot;h-index: {}&quot;.format(h(d)))
+print(&quot;g-index: {}&quot;.format(g(d)))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/03/23 09:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">룰루랄라</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3396"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>constructor에서 입력값은 받고 있습니다. </p>
+<pre><code class="java">
+    // 0 , 15, 4, 0, 7, 10, 0
+    int indexOfQuote[];
+    public HIndexGIndex(){
+
+    }
+
+    public HIndexGIndex(int[] index){
+        this.indexOfQuote = index;
+    }
+    public int getGIndex(){
+        int total = 0 , g = 0 ;
+
+        // 1. check count of quote
+        for(int i = 0 ;i &lt; indexOfQuote.length ;i++){
+            if(indexOfQuote[i] !=0) {
+                total += indexOfQuote[i];
+            }
+        }
+
+        g = (int) Math.sqrt((double)total);
+
+        return g;
+
+    }
+
+    public int getHIndex(){
+        int count= 0, h_index= 0;
+        // 1. check count of quote
+        for(int i = 0 ;i &lt; indexOfQuote.length ;i++){
+            if(indexOfQuote[i] !=0) {
+                count++;
+            }
+        }
+        // 2. check count of the over than h numbers.
+        for(int j = 0 ; j &lt; indexOfQuote.length ;j++){
+            if( indexOfQuote[j] &gt;= count){
+                h_index++;
+            }
+        }
+
+        return h_index;
+
+    }
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/04/12 22:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">xeo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3406"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def h_index(li):
+    highest = list(sorted(li))[-1]
+    result = []
+    for h in range(highest):
+        qtd = list((1 if i&gt;=h else 0 for i in li)).count(1)
+        if qtd == h:
+            result.append(h)
+    if len(result) != 0:
+        return max(result)
+
+def g_index(li):
+    rvrsd = list(reversed(sorted(li)))
+    result = []
+    for g in range(len(rvrsd)):
+        t = rvrsd[:g+1]
+        if sum((x**2 for x in t)) &gt; g**2:
+            result.append(g)
+    if len(result) != 0:
+        return max(result)
+
+while __name__ == '__main__':
+    li = list(int(x) for x in input(&quot;&gt;&gt;&gt;&quot;).split())
+    print(h_index(li))
+    print(g_index(li))
+</code></pre>
+
+<p>풀긴 풀었는데 문제가 이해가 안되네요;; 혹시 잘못된 것이 있으면 알려주세요.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/04/14 12:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Flair Sizz</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3820"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C#으로 작성했습니다.</p>
+<pre><code class="cs">using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Coding
+{
+    public static class Question095ProfessorIndexes
+    {
+
+        public static void Answer()
+        {
+            var inputs = new List&lt;int&gt; { 15, 10, 7, 4, 0, 0, 0 };
+            ProfessorIndexes(inputs);
+        }
+
+        public static void ProfessorIndexes(List&lt;int&gt; inputs)
+        {
+            var hIndex = GetHIndex(inputs);
+            var gIndex = GetGIndex(inputs);
+        }
+
+        public static int GetHIndex(List&lt;int&gt; inputs)
+        {
+            for (int i = inputs.Count; i &gt; 0; i--)
+                if (inputs.Count(c =&gt; c &gt;= i) == i) return i;
+            return 0
+        }
+
+        public static int GetGIndex(List&lt;int&gt; inputs)
+        {
+            var sum = inputs.Sum();
+            for (int i = inputs.Count; i &gt; 0; i--)
+            {
+                if (i * i == sum) return i;
+                else sum -= inputs[i - 1];
+            }
+            return 0;
+        }
+
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/05/31 23:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Straß Böhm Jäger</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4272"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<pre><code class="ruby">paper_eval_by_citations = -&gt;str, cs=str.split.map(&amp;:to_i) do
+  puts &quot;hidx : #{ cs.select {|h| cs.count {|e|e &gt;= h} == h }.max }&quot;
+  puts &quot;gidx : #{ (0..cs.size).select {|g| cs.max(g).sum &gt;= g**2 }.max }&quot;
+end
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby">expect { paper_eval_by_citations[&quot;0 15 4 0 7 10 0&quot;] }.
+                to output( &quot;hidx : 4\ngidx : 6\n&quot; ).to_stdout
+</code></pre>
+
+<p><strong>Output</strong></p>
+<pre><code class="ruby">#=&gt; paper_eval_by_citations[&quot;0 15 4 0 7 10 0&quot;]
+hidx : 4
+gidx : 6
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/07/28 19:27</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4813"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def find_h_g_index(input):
+    #convert input string to integer list
+    score = [int(n) for n in input.split()]
+
+    #find h index
+    h_candidate = [x for x in score if x &gt; 0]
+    h_index = len(h_candidate)
+
+    #find g index
+    g_candidate = sorted(score)
+    g_index = 0
+    for i in range(1, len(g_candidate)):
+        #slicing list starting from the end
+        if i^2 &lt;= sum(g_candidate[-i:]):
+            g_index = max(g_index, i)
+
+
+    return h_index, g_index
+
+print(find_h_g_index(' 0 15 4 0 7 10 0'))
+</code></pre>
+
+<p>문제를 잘 못이해해서 조금 헤맸네요 ^^;;;</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/09/18 10:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Kim Sean</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5388"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">index = [0, 15, 4, 0, 7, 10, 0]
+index.sort(reverse=True)
+h_index = 0
+g_index = 0
+for i in range(len(index)):
+    if i + 1 &lt;= index[i]:
+        h_index = i+1
+    else:
+        break 
+for i in range(1, len(index) + 1):
+    g2 = i**2
+    if sum(index[0:i]) &gt;= g2:
+        g_index = i
+    else:
+        break
+print('h-index : %d' % h_index)
+print('g-index : %d' % g_index)
+</code></pre>
+
+<p>Python 3.5.2에서 작성하였습니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/11/24 10:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Yeo HyungGoo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5529"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">a = input(&quot;논문의 인용횟수를 적으세요 = &quot;)
+a_list = a.split(&quot; &quot;)
+num =[]
+for i in a_list:
+    num.append(int(i))
+num.sort()
+num.reverse()
+
+true_num = len(num) - num.count(False)     
+while 1:
+    big = []
+    for i in range(0, len(num) - 1):
+        if num[i] &gt;= true_num:
+            big.append(num[i])
+    number = len(big)
+
+    if number == true_num:
+        print(&quot;h-index = &quot; + str(true_num))
+        break
+
+    else:
+        true_num = true_num -1
+
+
+string = len(num)   #string = 14
+while 1:
+    sum=0
+    for i in range(0, string-1):
+        sum = sum + num[i]
+    if sum &gt;= string**2:
+        print(&quot;g-index = &quot; + str(string))
+        break
+    else :
+        string = string -1
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/12/08 00:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Kim Da Seul</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5619"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <h1 id="include">include <stdio.h></h1>
+<h1 id="include_1">include <malloc.h></h1>
+<p>void sorting(int arr[], int n) {
+    int i, j;
+    for (i = 0; i &lt; n; i++) {
+        for (j = 0; j &lt; (n-i-1); j++) {
+            if (arr[j] &lt; arr[j+1]) {
+                int tmp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = tmp;
+            }
+        }
+    }
+    return;
+}</p>
+<p>int h_index(int arr[], int n) {
+    int i, N = 0;
+    while(1) {
+        int cnt = 0;
+        for (i = 0; i &lt; n; i++) { if (N &lt;= arr[i]) cnt++; }
+        if (cnt &lt; N) return (N-1);
+        N++;
+    }
+}</p>
+<p>int g_index(int arr[], int n) {
+    int i, N = 0;
+    int <em>arr2 = (int</em>)malloc(sizeof(int)*n);
+    for (i = 0; i &lt; n; i++) { arr2[i] = arr[i]; }
+    sorting(arr2, n);</p>
+<pre><code>while(1) {
+    int sum = 0;
+    for (i = 0; i &lt; N; i++) { sum += arr2[i]; }
+    if (sum &lt; N*N) { free(arr2); return (N-1); }
+    N++;
+}
+</code></pre>
+<p>}</p>
+<p>int main() {
+    int i, n;
+    printf("How many? : ");
+    scanf("%d", &amp;n);
+    int <em>arr = (int</em>)malloc(sizeof(int)*n);
+    for (i = 0; i &lt; n; i++) { scanf("%d", arr+i); }</p>
+<pre><code>printf("h-index : %d\n", h_index(arr, n));
+printf("g-index : %d\n", g_index(arr, n));
+free(arr);
+return 0;
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/12/18 22:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">리코둔</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5972"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">h = max([len([1 for y in [0,15,4,0,7,10,0] if y &gt; x]) for x in [0,15,4,0,7,10,0]])
+print('h-index :', h)
+
+_list = [0,15,4,0,7,10,0]
+g,step, result = 0,0,0
+for x in sorted(_list,reverse=True):
+    step += 1
+    result += x
+    if step**2 &gt;= result:
+        g = step
+        break
+print('g-index :', g)
+
+#### 2017.01.18 D-400 ####
+</code></pre>
+
+<p>문제를 잘이해한건가 모르게써여.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/01/18 23:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GunBang</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6170"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def paper(data):
+    data.sort()
+    data.reverse()
+    n=len(data)
+    h=n
+    g=n
+    while 1:
+        if sum(1 for x in data if x&gt;=h)&gt;=h:
+            break
+        else:
+            h-=1
+    while 1:
+        if sum(x for x in data[0:g])&gt;=g**2:
+            break
+        else:
+            g-=1
+    print(&quot;h-index = %d, g-index = %d&quot; %(h,g))
+paper([0, 15, 4, 0, 7, 10, 0])
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/02/14 01:32</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김구경</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6407"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="matlab">sort, cumsum 등의 함수를 이용했습니다
+
+% input
+input_arr=[0 15 4 0 7 10 0];
+
+% sorting
+sorted_citation_num=sort(input_arr,'descend');
+h_index=find((1:length(input_arr))     &gt;=sorted_citation_num,1,'first')
+g_index=find((1:length(input_arr)).^2 &gt;=cumsum(sorted_citation_num),1,'first')
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/03/02 01:32</p>
+                                <p class="static-profile" style="margin:0;padding:0;">c0din9</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6559"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.Arrays;
+
+public class HindexGindex {
+
+    public static void main(String[] args) {
+        Integer[] i = new Integer[]{0, 15, 4, 0, 7, 10, 0};
+        long c = Arrays.asList(i).stream().filter(j -&gt; j != 0).count();
+        long h = Arrays.asList(i).stream().filter(k -&gt; k &gt;= c).count();
+        double g = Math.sqrt(Arrays.asList(i).stream().mapToInt(Integer::intValue).sum());
+        System.out.printf(&quot;h-index : %s , g-index : %s&quot;, h, g);
+    }
+}
+</code></pre>
+
+<p>문제 뜻을 몰라 한참을 ...</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/03/14 10:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">genius.choi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6598"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">quote = [0,15,4,0,7,10,0]
+
+def h_index(quote):
+    quote.sort(reverse=True)
+        m = []
+        n = []
+    for h in range(len(quote)):
+        for q in quote:
+            if q &gt;= h: m.append(h)
+        if m.count(h) == h : n.append(h)
+    return sorted(n)[0]
+
+
+def g_index(quote):
+    sum = 0
+    count = 0
+    g =[]
+    quote.sort(reverse=True)
+    for q in quote:
+        sum += q
+        count += 1
+        if sum &gt;= count**2:
+            g.append(count)
+    return max(g)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/03/17 16:25</p>
+                                <p class="static-profile" style="margin:0;padding:0;">ken choi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7011"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>python 3.4.2</p>
+<pre><code class="python">def find_index(sort,cal):
+    for j in range(len(sort)):
+        if sort[j] &gt;= cal[j]:
+            index = sort[j]
+            break
+    return index
+
+cit = ['0','15','4','0','7','10','0']
+cit_int = list(map(int, cit))
+num_paper = len(cit)
+
+h = [x for x in range(1,num_paper+1)]
+g = [y**2 for y in range(1,num_paper+1)]
+h_list = sorted(cit_int, reverse=True)
+sum = 0
+g_list = []
+for i in range(num_paper):
+    sum += cit_int[i]
+    g_list.append(sum)
+
+h_index = find_index(h,h_list)
+g_index = find_index(g,g_list)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/04/27 06:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">예강효빠</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7319"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">a = input(&quot;입력 : &quot;)
+No = [int(x) for x in a.split(' ')]
+com = []
+for i in range(len(No)):
+    Count = 0
+    for j in range(len(No)):
+        if No[j] &gt;= i:
+            Count += 1
+    if Count == i:
+        com.append(i)
+print(&quot;h-index : %d&quot; % max(com))
+No.sort()
+com1 = []
+for i in range(len(No)):
+    Count = 0
+    for j in range(len(No)):
+        if sum([x for x in No[-j:]]) &gt;= i ** 2:
+            com1.append(i)
+print(&quot;g-index : %d&quot; % max(com1))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/05/30 16:26</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jaehwi  Han</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7778"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">list = [0,15,4,0,7,10,0]
+list.sort(reverse = True)
+len = len(list)
+
+for cnt in range(1, len+1):
+    h = list[cnt-1]
+    if h &lt;= cnt:
+        print('h-index =', h)
+        break
+
+sum = 0
+for g in range(1, len+1):
+    sum += list[g-1]
+    if sum &lt; g**2:  # ** 연산자 그냥 한번 써 봤음
+        print('g-index =', g-1)
+        break
+
+if g &gt; len:
+    print('g-index =', len)
+</code></pre>
+
+<p>푸는 거보다 문제를 이해하는 게 어렵네요.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/07/06 00:06</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8630"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <h1 id="java">JAVA</h1>
+<pre><code class="java">    public static void main(String[] args) {
+        int[] list = {0, 15, 4, 0, 7, 10, 0};
+        int len = list.length;
+        int highNum = 0;
+        int cnt = 0;
+        int result = 0;
+        int square = 0;
+        int sum = 0;
+
+        Arrays.sort(list);
+        highNum = list[len - 1];
+
+        for(int i = 0; i &lt;= highNum; i++) {
+            for(int j = 0; j &lt; len; j++) {
+                if(list[j] &gt;= i) {
+                    cnt++;
+                }
+            }
+
+            if(i == cnt) {
+                result = i;
+            }
+
+            cnt = 0;
+        }
+
+        System.out.println(&quot;h-index: &quot; + result);
+
+        for(int i = 1; i &lt;= len; i++) {
+            square = i * i;
+            for(int j = len - 1; j &gt;= len - i; j--) {
+                sum += list[j];
+            }
+
+            if(sum &gt;= square) {
+                result = i;
+            }
+
+            sum = 0;
+        }
+
+        System.out.println(&quot;g-index: &quot; + result);
+    }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/30 15:08</p>
+                                <p class="static-profile" style="margin:0;padding:0;">androot</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8758"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># python 3.6
+inp = &quot;0 15 4 0 7 10 0&quot;
+inpg = list(sorted(map(int, inp.split()), reverse=True))
+inph = list(filter(bool, inpg))
+h_idx = 0
+for h in range(1, len(inph) + 1):
+    if len([cited for cited in inph if cited &gt;= h]) &gt;= h:
+        h_idx = h
+g_idx = 0
+for g in range(1, len(inpg) + 1):
+    if sum(inpg[:g]) &gt;= g**2:
+        g_idx = g
+print(&quot;h-index: %d\ng-index: %d\n&quot; % (h_idx, g_idx))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/09/08 16:55</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9316"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">inp = list(map(int,'0 15 4 0 7 10 0'.split()))
+
+def findHG(inp):
+    inp.sort(reverse = True)
+    H, G, sum = 0, 0, 0
+    for i in range(1, len(inp) + 1):
+        sum += inp[i-1]
+        if i &gt;= inp[i-1] and H == 0:
+            H = i
+        if sum &lt;= i*i and G == 0:
+            G = i
+    return H, G
+
+print(findHG(inp))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/11/20 13:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">songci</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9332"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>python</p>
+<pre><code class="python">L = [0, 15, 4, 0, 7, 10, 0]
+
+def h(L):
+    for i in sorted(L)[::-1]:
+        h = 0
+        for j in L:
+            if j &gt;= i: h += 1
+        if i == h: return h
+
+print(h(L))
+
+def g(L, g = 0):
+    G = 0
+    for i in sorted(L)[::-1]:
+        g += 1 ; G += i
+        if g*g &gt;= G: return g
+
+print(g(L))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/11/21 15:32</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이택성</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9599"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def hindex(index):
+    tmp=sorted(index)
+    result=0
+    for i in range(1, tmp[-1]+1):
+        if len([x for x in tmp if x&gt;=i])&gt;=i:
+            result=i
+    return(result)
+
+def gindex(index):
+    tmp=sorted(index, reverse=True)
+    result=0
+    for i in range(len(tmp)):
+        if sum(tmp[:i])&gt;=(i+1)**2:
+            result=i+1
+    return(result)
+
+nums=list(map(int, input('인용횟수: ').split()))
+print('h-index값: {}'.format(hindex(nums)))
+print('g-index값: {}'.format(gindex(nums)))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/12/13 02:03</p>
+                                <p class="static-profile" style="margin:0;padding:0;">빗나감</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9833"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">        int list[] = {0,15,4,5,7,10,0};
+
+        ArrayList newList = new ArrayList();
+        //먼저 0값은 계산에 사용되지 않으므로, 이를 제거
+
+        for(int i=0; i&lt;list.length; i++)
+        {
+            if(list[i] !=0)
+            {
+                newList.add(list[i]);
+            }
+        }
+
+        //h개의 가능 횟수
+        int maxSize = newList.size();
+
+        boolean isMax = true;
+        while(isMax)
+        {
+            //4번 다 true여야 함
+            for(int j=0; j&lt;newList.size(); j++)
+            {
+                if((int)newList.get(j) &lt; maxSize)
+                {
+                    isMax = false;
+                }
+            }
+
+            if(isMax == false)
+            {
+                maxSize--;
+            }
+            else
+            {
+                break;
+            }
+
+        }
+
+        System.out.println(&quot;b = &quot;+maxSize);
+//•g-index : 인용 횟수가 높은 상위 g개 논문의 인용 횟수 총합이 g²이상일 때 가능한 g의 최댓값
+        //a+b &gt; 2^2
+
+        //먼저 역순으로 정렬
+        Collections.sort(newList);
+        Collections.reverse(newList);
+
+        int gVal = 0;
+        int gNum = 0;
+        for(int k=0; k&lt;newList.size(); k++)
+        {
+            gVal += (int)newList.get(k);
+            int checkNum=(k+1)*(k+1);
+
+            if(gVal &lt; checkNum )
+            {
+                gNum = k-1;
+                break;
+            }
+            if(k == newList.size()-1)
+            {
+                gNum=newList.size();
+            }
+        }
+        System.out.println(&quot;k ==&quot;+gNum);
+
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/12/25 03:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김준학</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9835"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">&quot;&quot;&quot;
+- 주어진 논문 인용횟수를 내림차순으로 정렬
+- 각 논문의 인용횟수가 논문의 개수 이상인지 확인하여 리스트에 추가하여 요소 개수의 최대값(h_list)을 출력
+- 인용횟수가 높은 논문부터 누적합산해서 합산한 개수의 제곱이 합 이상이라는 조건을 만족할때까지 비교하여 합산 개수의 최대값(g_list)를 출력 
+&quot;&quot;&quot;
+
+quotation_count = [0, 15, 4 ,0 , 7 ,10 ,0]
+
+def indexcal(x):
+    h_list = []
+    g_list = []
+    result = 0
+    x.sort(reverse=True)
+    for i in x:
+        result += i
+        g_list.append(len(g_list))
+        if i &gt;= len(h_list):
+            h_list.append(i)
+        if result &gt;= len(g_list)**2:
+            g = len(g_list)
+    print(&quot;h-index : %d&quot; % len(h_list))
+    print(&quot;g-index : %d&quot; % g)
+
+
+indexcal(quotation_count)   
+</code></pre>
+
+<ul>
+<li>결과값</li>
+</ul>
+<pre><code class="python">h-index : 4
+g-index : 6
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/12/25 13:17</p>
+                                <p class="static-profile" style="margin:0;padding:0;">justbegin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9902"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.Arrays;
+public class hIndexgIndex {
+    public static void main(String[] args) {
+        int[] arr = {0, 15, 4, 0, 7, 10 ,0};
+
+        for(int i=0; i&lt;arr.length; i++) {
+            for(int j=i; j&lt;arr.length; j++) {
+                if(arr[i]&lt;arr[j]) {
+                    int temp;
+                    temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+        }
+        System.out.println(Arrays.toString(arr));
+        //g-index를 구해보자 
+        int gIn=0;
+        int gSum=0;
+        for(int i=0; i&lt;arr.length; i++) {
+            //gIn은 인덱스 값들을 차례대로 더해나간다
+            gSum = gSum + arr[i];
+            if(gSum &gt;= (i+1)*(i+1)) {
+                gIn++;
+            }
+            else {
+                break;
+            }           
+        }
+        int hIn=1;
+        for(hIn=1; hIn&lt;arr.length; hIn++) {
+            int count=0;
+
+            for(int i=0; i&lt;arr.length; i++) {
+                if(arr[i]&gt;=hIn) {
+                    count++;
+                }
+            }
+            if(count&lt;hIn) {
+                hIn--;
+                break;
+            }
+        }
+
+
+        System.out.println(hIn);
+        System.out.println(gIn);
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/12/29 15:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김기덕</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10042"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">input = [0, 15, 4, 0, 7, 10, 0]
+
+def getHindex():
+    test_true = []
+
+    i = 1
+    while i &lt; max(input):
+        if testHindex(i) == i:
+            test_true.append(i) # 명제 true인 값 보관
+
+        i += 1
+
+    print(max(test_true))
+
+# h-index를 구하는 공식 메소드화
+def testHindex(h):
+    count = 0
+
+    for quote_num in input:
+        if quote_num &gt;= h:
+            count += 1
+
+    return count
+
+def getGindex():
+    test_true = []
+
+    i = 1
+    while i &lt; len(input):
+        if testGindex(i) &gt;= pow(i, 2):
+            test_true.append(i)
+
+        i += 1
+
+    print(max(test_true))
+
+
+# g-index를 구하는 공식 메소드화
+def testGindex(g):
+    copy_input = input # 입력값 복사본 생성
+
+    copy_input.sort()
+    copy_input.reverse()
+
+    sum = 0
+    for quote_num in copy_input[0:g+1]: # list[0:2] - list의 [0] ~ [1]까지 추출
+        sum += pow(quote_num, 2)
+
+    return sum
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/01/07 00:38</p>
+                                <p class="static-profile" style="margin:0;padding:0;">임지호</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10485"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def hindex(preferences):
+    a = preferences
+    a.sort()
+    a.reverse()
+    h = 1
+    index = 0
+    while(a[h-1] &gt;= h):
+        index = h
+        h += 1
+    return index
+
+def gindex(preferences):
+    a = preferences
+    a.sort()
+    a.reverse()
+    g = 1
+    index = 0
+    while(sum(a[:g]) &gt;= g*g):
+        index = g
+        g += 1
+    return index
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/04 01:38</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김동하</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10592"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def hindex(a):
+    a.sort(reverse=True)
+    i=0
+    while i+1&lt;=a[i]:
+        i+=1
+        if i==len(a):break
+    print(i)
+</code></pre>
+
+<pre><code class="python">def gindex(a):
+    a.sort(reverse=True)
+    g=1
+    while sum(a[:g])&gt;=g*g:
+        g+=1
+        if g-1==len(a):break
+    print(g-1)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/07 21:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">추천은 다 읽음</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10673"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def indexes():
+    paper_list=raw_input('type each papers reference number:')
+    a=paper_list.split(' ')
+    a=[int(x) for x in a]
+#h-index
+
+    h_index=0
+    i=0
+    count=0
+
+    for h_index in range(len(a)+1):
+        for i in range(len(a)):
+            if a[i]&gt;=h_index:
+                count +=1
+
+        if count==h_index:
+            break
+        count=0
+    print('h-index: %d' %(h_index))
+
+#g-index 
+
+    g_index=0
+    i=0
+    count=0
+
+    a.sort()
+    a.reverse()
+
+    for g_index in range(len(a)+1):
+        for i in range(1,len(a)+1):
+            if sum(a[:i])&gt;=g_index**2:
+                count +=1
+
+        if count&lt;g_index:
+            break
+        count=0
+    print('g-index: %d' %(g_index))
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/13 14:13</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Da ne</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10743"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">nNum=int(input('논문개수를 입력하세요\n'))
+num_list=[]
+for k in range(nNum):
+    num_list.append(int(input(&quot;인용횟수를 입력하세요\n&quot;)))
+
+for g in range(nNum,-1,-1):           
+    temp_counter=0
+    for c in num_list:
+        if g&lt;=c:
+            temp_counter+=1
+    if temp_counter==g:
+        print(&quot;h-index: &quot;+str(g))
+        break
+
+num_list.sort()
+num_list.reverse()
+
+for b in range(nNum,-1,-1):
+    temp_sum=0
+    for a in range(b):
+        temp_sum+=num_list[a]
+    if temp_sum&gt;=b**2:
+        print(&quot;g-index: &quot;+str(b))
+        break
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/16 08:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">D B</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11176"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">&quot;&quot;&quot;
+author: Kenny Jeon
+date: 03/18/2018
+&quot;&quot;&quot;
+
+
+def func(num_list):
+    h_idx = g_idx = 0
+    # declare variables
+    num_list.sort(reverse=True)
+    # reverse sort
+    for h in range(len(num_list)):
+        if h_idx &lt; num_list[h] &lt;= h+1:
+            h_idx = h+1
+    # calculate h_idx
+
+    for g in reversed(range(len(num_list))):
+        if g_idx**2 &lt; (g+1)**2 &lt;= sum(num_list[0:g]):
+            g_idx = g+1
+    # calculate g_idx
+
+    return h_idx, g_idx
+
+
+if __name__ == &quot;__main__&quot;:
+    numbers = [0, 15, 4, 0, 7, 10, 0]
+    h_index, g_index = func(numbers)
+    print(&quot;H-index: %d, G-index: %d&quot; % (h_index, g_index))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/03/18 01:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Kenny Jeon</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11431"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def indexing(*quate):
+    for h in range(len(quate) + 1):
+        hindex = [x for x in quate if x &gt;= h]
+        if len(hindex) &lt; h:
+            hindex = [x for x in quate if x &gt;= h-1]
+            break
+    for g in range(len(quate) + 1):
+        args = sorted(list(quate), reverse=True)
+        gindex = args[:g]
+        if sum(gindex) &lt; g**2:
+            gindex = args[:g-1]
+    return (len(hindex), len(gindex))
+</code></pre>
+
+<p>Python 3</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/03/29 18:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">myyh2357</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11830"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬으로 작성했습니다.</p>
+<pre><code class="python">mylist=[ int(myli) for myli in input('').split(' ')]
+h_index,g_index=mylist[0],1
+mylist.sort()
+
+for myli1 in mylist:
+    count=0
+    for myli2 in mylist:
+        if myli1&lt;=myli2:
+            count+=1
+    if count&lt;myli1:
+        break
+    else:
+        h_index=myli1
+
+while True:
+    if sum(mylist[-(g_index):])&gt;=(g_index)*(g_index):
+        g_index+=1
+    else:
+        g_index-=1
+        break
+
+print(h_index, g_index)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/04/20 17:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박종범</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12107"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def hgindex(string):
+    lim = string.split()
+    operands = []
+    for x in lim:
+        operands.append(int(x))
+
+    dic = {}
+    h_index = 0
+    for number in operands: # h-index
+        h_index = number # number 라고 가정
+        count = 0
+        for k in operands:
+            if h_index &lt;= k:
+                count += 1                
+            else:
+                pass
+
+        if h_index == count:
+            dic[h_index] = count
+
+    l1 = operands[::] # g-index
+    l1.sort(reverse = True)
+    lst = []
+    g = 1
+    dic2 = {}
+
+    while True: # g =1 개부터 차례차례 구해봄
+        a = l1[:g-1]
+        total = 0
+        g += 1
+        for number in a:
+            total = number + total
+
+        if total &gt; g ** 2:
+            dic2[g+1] = 'answer'
+
+        if g == len(l1):
+            break
+
+    result1 = list(dic.keys())[0]
+    result2 = sorted(list(dic2.keys()))[-1]
+
+
+    printing1 = &quot;h-index: {}&quot;.format(result1)
+    printing2 = &quot;g-index: {}&quot;.format(result2)
+
+    return printing1,printing2
+
+print(hgindex('0 15 4 0 7 10 0'))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/07 22:14</p>
+                                <p class="static-profile" style="margin:0;padding:0;">최우성</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12951"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python</p>
+<pre><code class="python">def findH(citation):
+    h = 0
+    for i in set(citation):
+        num_i = 0
+        for j in citation:
+            if j &gt;= i:
+                num_i += 1#num_i는 i번 이상인 논
+        if num_i &gt;= i:
+            h = max(h, i)
+    return h
+def findG(citation):
+    a = sorted(citation, reverse=True)
+    g, tmp_sum = 0, 0
+    for i in range(len(a)):
+        tmp_sum += a[i]
+        if tmp_sum &gt;= (i+1)**2:
+            g = i+1
+        else:
+            break
+    return g
+
+citation = [0, 15, 4, 0, 7, 10, 0]
+print(findH(citation))
+print(findG(citation))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/11 15:56</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Taesoo Kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13195"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.Arrays;
+
+public class hindexgindex {
+    public static void main(String[] args) {
+        int[] input = { 0, 15, 4, 0, 7, 10, 0 };
+        Arrays.sort(input);
+        System.out.println(H(input));
+        System.out.println(G(input));
+    }
+
+    private static int H(int n[]) {
+        for (int i = n[n.length - 1]; i &gt; -1; i--) {
+            int H = 0;
+            for (int j = 0; j &lt; n.length; j++)
+                if (i &lt;= n[j])
+                    H++;
+            if (i == H)
+                return H;
+        }
+        return 0;
+    }
+
+    private static int G(int n[]) {
+        for (int i = 1; i &lt; n.length; i++) {
+            int G = 0;
+            for (int j = 1; j &lt;= i; j++)
+                G += n[n.length - j];
+            if (Math.pow(i, 2) == G)
+                return i;
+        }
+        return 0;
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/27 19:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김지훈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13274"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def h_index(Q):
+    for h in reversed(range(len(Q))):
+        if len([i for i in Q if i &gt;= h]) == h: return h
+    return 0
+def g_index(Q):
+    Q.sort(reverse=True)
+    for g in reversed(range(len(Q))):
+        if sum(Q[:g]) &gt;= g**2: return g
+    return 0
+
+
+Q = [int(i) for i in input('인용 횟수 입력(공백으로 구분): ').split()]
+
+print('h-index: {}\ng-index: {}'.format(h_index(Q),g_index(Q)))
+
+</code></pre>
+
+<pre><code>인용 횟수 입력(공백으로 구분): 0 15 4 0 7 10 0
+h-index: 4
+g-index: 6
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/02 05:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14274"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">inp=input(&quot;각 논문의 인용 횟수를 띄어쓰기로 구분해서 입력하시오&quot;).split()
+int_inp=list(map(int,inp))
+
+#h index
+hindex=0
+
+for i in range(len(int_inp)):  #string inp에 들어있는 각각의 원소에 대하여
+    count=0
+
+    for j in range(len(int_inp)):  #i 번째 원소와 각각의 원소를 대조. 해당 원소보다 크거나 같은 원소가 있다면 count +1
+        if int_inp[i]&lt;=int_inp[j]: 
+            count+=1             
+
+    if count&gt;=int_inp[i]:
+        hindex=max(hindex,int_inp[i])
+
+print(&quot;h-index is&quot;,hindex)
+
+
+#g index
+inp_sorted=sorted(int_inp, reverse=True)
+
+gindex=0
+summation=0   
+
+for i in range(len(inp_sorted)):
+
+    summation+=inp_sorted[i]
+    gindex=i+1
+
+    if summation&lt;gindex**2:
+        gindex=i
+        print(&quot;g-index is&quot;,gindex)
+        break
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/23 21:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">JW Yoo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15397"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="r">x &lt;- c(0, 15, 4, 0, 7, 10, 0)
+
+x_sort &lt;- sort(x, decreasing = T)
+index_h &lt;- 0
+index_g &lt;- 0
+
+for (i in seq(x_sort)){
+  if (sum(head(x_sort, i) &gt;= i) &gt;= i){
+    index_h &lt;- i
+  }
+  if (sum(head(x_sort, i)) &gt;= i ^ 2){
+    index_g &lt;- i
+  }
+}
+
+index_h
+index_g
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/12/03 14:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">physche</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16183"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def hgindex(*quot):
+    quot = list(sorted(list(quot)))[::-1]
+
+    print(list(x for x in range(len(quot),0,-1) if sum(quot[:x]) &gt;= x**2)[0])
+    print(list(x for x in range(len(quot),0,-1) if len(list(i for i in quot if i &gt;= x)) == x)[0])
+</code></pre>
+
+<p>풀어서 작성한 것입니다.</p>
+<pre><code class="python">def hgindex(*quot):
+
+    quot,g,h = list(sorted(list(quot)))[::-1],[],[]
+
+    for x in range(len(quot),0,-1):
+
+        if sum(quot[:x]) &gt;= x**2:
+            g.append(x)
+
+        if len(list(i for i in quot if i &gt;= x)) == x:
+            h.append(x)
+
+    return g[0],h[0]
+</code></pre>
+
+<p>좀 더 빠르다고 생각하는 버전</p>
+<pre><code class="python">def hgindex(*quot):
+
+    quot,g,h = list(sorted(list(quot)))[::-1],0,0
+
+    for x in range(len(quot),0,-1):
+        if sum(quot[:x]) &gt;= x**2:
+            g = x
+            break
+
+    for x in range(len(quot),0,-1):
+        if len(list(i for i in quot if i &gt;= x)) == x:
+            h = x
+            break
+
+    return g,h
+</code></pre>
+
+<p>원래 둘 중 하나를 쓸려 했지만 실행속도의 차이가 0.0으로 나오네요.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/01/23 13:17</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김영성</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16329"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">inp1 = '0 15 4 0 7 10 0'
+
+A = inp1.split(' ')
+A = [int(x) for x in A]
+
+# h-index
+hary = []
+for hind in range(0, max(A)+1):
+    cnt = 0
+    for Aind in range(0, len(A)):
+        if A[Aind] &gt;= hind: cnt += 1
+    hary += [[hind, cnt]]
+for hind in range(max(A)-1, -1, -1):
+    if hary[hind][0] == hary[hind][1]:
+        h_index = hind
+        break
+
+# g-index
+gary1 = []
+for gind in range(0, len(A)):
+    gary = sorted(A, reverse = True)
+for gind in range(0, len(A)):
+    if gind == 0:
+        gary1 = [gary[0]]
+    else:
+        gary1 += [gary1[gind-1] + gary[gind]]
+for gind in range(len(A)-1, -1, -1):
+    if gary1[gind] &gt;= (gind+1)**2:
+        g_index = gind+1
+        break
+
+print(g_index, h_index)
+
+</code></pre>
+
+<p>답:
+h_index = 4
+g_index = 6</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/01/29 16:14</p>
+                                <p class="static-profile" style="margin:0;padding:0;">판다네밥상</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16344"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package Work;
+
+import java.util.Arrays;
+
+public class KimSanghyeop {
+
+    public static void main(String args[])
+    {
+        int arr[] = {0,15,4,0,7,10,0};
+        Arrays.sort(arr);
+
+        int h_index=0, g_index=0;
+        int cnt;
+        int sum=0;
+        for(int f1=0;f1&lt;arr.length;f1++)
+        {
+            // G Index
+            sum+=arr[arr.length-1-f1];
+
+            if(f1*f1&gt;=sum)
+            {
+                g_index=f1;
+            }
+
+
+            // H index
+            cnt=0;
+            for(int f2=0;f2&lt;arr.length;f2++)
+            {
+                if(arr[f1] &lt;=arr[f2])
+                {
+                    cnt+=1;
+                }
+            }
+
+            if(cnt ==arr[f1] &amp;&amp; h_index &lt;=cnt)
+            {
+                h_index=cnt;
+            }
+        }       
+
+        System.out.println(&quot;H Index : &quot;+h_index);
+        System.out.println(&quot;G_Index : &quot;+g_index);
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/01/30 11:32</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김상협</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16463"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">study = list(map(int, input().split()))
+
+def h_index(study):
+    study.sort()
+    result = []
+    for i in study:
+        count = 0
+        for j in study:
+            if i &lt;= j:
+                count += 1
+        if i == count:
+            result.append(i)
+    result.sort()
+    return result[-1]
+
+def g_index(study):
+    study.sort(reverse=True)
+    result = []
+    total = 0
+    count = 1
+    for i in study:
+        total += i
+        if total &gt;= count ** 2:
+            result.append(count)
+        count += 1
+    result.sort()
+    return result[-1]
+
+print('h-index : {}\ng-index : {}'.format(h_index(study),g_index(study)))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/02/04 15:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">D.H.</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17835"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def h_idx(L):
+    h = 1
+    while h &lt;= len(L):
+        count = sum(x &gt;= h for x in L)
+        if count &lt; h:
+            h -= 1
+            break
+        h += 1
+    return h
+
+def g_idx(L):
+    L.sort()
+    L.reverse()
+    g = 1
+    while g &lt;= len(L):        
+        if sum(L[:g]) &lt; g*g:
+            g -= 1
+            break
+        g += 1
+    return g
+
+L = list(map(int, input().split()))
+print(h_idx(L))
+print(g_idx(L))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/12 16:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">messi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20052"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.*;
+public class h_indexG_index {
+
+    static String[] strs = new Scanner(System.in).nextLine().split(&quot; &quot;);
+    static int[] nums = Arrays.stream(strs).mapToInt(Integer::parseInt).toArray();
+
+    public static void main(String[] args) {
+        h_Index();
+        g_Index();
+    }
+
+    public static void h_Index(){
+        Arrays.sort(nums);
+        int h최댓값 = 0;
+        for(int i=0; i&lt;nums.length; i++) {
+            int count = 0;
+            for(int j=0; j&lt;nums.length; j++) {
+                if(nums[j]&gt;=nums[i]) {
+                    count++;
+                }
+            }
+            if(nums[i]==count) {
+                if(count&gt;h최댓값) {
+                    h최댓값=count;
+                }
+            }
+        }
+        System.out.println(&quot;h-index : &quot;+h최댓값);
+    }
+
+    public static void g_Index() {
+        Arrays.sort(nums);
+        int 최댓값 = 0;
+        for(int i=0; i&lt;nums.length; i++) {
+            int 총합 = 0;
+            for(int j=nums.length-1; j&gt;nums.length-2-i; j--) {
+                총합+=nums[j];
+            }
+            if(총합&gt;=(i+1)*(i+1)) {
+                if(i+1&gt;최댓값) {
+                    최댓값 = i+1;
+                }
+            }
+        }
+        System.out.println(&quot;g-index : &quot;+최댓값);
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/11/25 19:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">big Ko</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20660"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">
+data = [0,15,4,0,7,10,0]
+
+h_index = 0
+
+for i in data:    
+    value = 0
+    for j in data:
+        if i &gt;= j :
+            value +=1            
+    if i == value :
+        h_index = i
+
+print(&quot;h-index :&quot;,h_index)    
+
+g=len(data)
+Count = g
+g_index = 0
+
+data.sort()
+Run =True
+while Run:
+
+    data_sum = 0
+    for k in data:
+        data_sum += k
+
+    data.remove(k)
+    Count -=1
+
+    for l in range(g,0,-1):                
+        if data_sum &gt;= l**2 :
+            break
+    Run = False
+
+    g_index = l
+
+
+print(&quot;g-index :&quot;,g_index)
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/20 23:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">semipooh</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_21775"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">index=str(input('input.....')).split(' ')
+gmax,hmax=0,0
+
+for i in range(len(index)):
+    index[i]=int(index[i])
+index.sort(reverse=True)
+
+for i in range (1,len(index)):
+    n,gsum=0,0
+
+    for j in range (0,len(index)):
+        if index[j]&gt;=i:
+            n+=1
+    if hmax&lt;n and n==i:
+        hmax=n
+
+    for j in range (0,i):
+        gsum+=index[j]  
+    if gsum&gt;=i**2:
+        if i&gt;gmax:
+            gmax=i
+
+print ('h-index : ',hmax,'\ng-index : ',gmax)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/04/15 18:37</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Buckshot</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2684"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">&lt;결과&gt;
+
+input.....0 15 4 0 7 10 0
+h-index :  4
+g-index :  6</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Buckshot,
+                                    2020/04/15 18:37
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22059"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def hg(tn):
+    tn_s = sorted(tn, reverse=True)
+    dict = {'h': 0, 'g': 0}
+    for i in tn:
+        if i == len([j for j in tn if j &gt;= i]):
+            if dict['h'] &lt; i:
+                dict.update(h=i)
+
+    for j in range(len(tn_s), 0, -1):
+        if (j**2) &lt;= sum(tn_s[:j+1]):
+            if dict['g'] &lt; j:
+                dict.update(g=j)
+
+    return dict['h'], dict['g']
+
+def main():
+    thesis_num = [0, 15, 4, 0, 7, 10, 0]
+    h, g = hg(thesis_num)
+    print('h-index: {}\ng-index: {}'.format(h, g))
+
+if __name__ == '__main__':
+    main()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/03 16:09</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hwaseong Nam</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22331"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">paper = list((str(input()).split()))
+paper = list(map(int, paper))
+paper.sort()
+h_index = []
+g_index = []
+for i in range(0,max(paper)):
+    cnt = 0
+    for j in paper:
+        if i &lt;= j:
+            cnt += 1
+        else:
+            continue
+    if i == cnt:
+        h_index.append(i)
+    else:
+        continue
+for g in range(1,len(paper)+1):
+    if sum(paper[-1:-(g+1):-1]) &gt;= len(paper[-1:-(g+1):-1])**2:
+        g_index.append(g)    
+print('h-index:',max(h_index))
+print('g-index:',max(g_index))    
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/14 13:14</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Money_Coding</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23257"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">num=&quot;0 15 4 0 7 10 0&quot;
+
+def h_index(num) :
+    num = num.split(&quot; &quot;)
+    number = []
+
+    for i in range(0, (len(num))) :
+        number += [int(num[i])]
+    number.sort()
+    k=1
+
+    while k &gt; 0 :
+        if number[-k] &gt;= k :
+            k+=1
+            continue
+        else :
+            print(k-1)
+            break
+
+h_index(num)
+
+num=&quot;0 15 4 0 7 10 0&quot;
+
+def g_index(num) :
+    num = num.split(&quot; &quot;)
+    number = []
+    for i in range(0, (len(num))) :
+        number += [int(num[i])]
+    number.sort()
+
+    k=1
+    while k &gt; 0 :
+        if sum(number[-k:]) &gt;= k**2 :
+            k+=1
+            continue
+        else :
+            print(k-1)
+            break
+
+g_index(num)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/09/25 09:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">KangJin Moon</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23801"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">index = list(map(int, input().split(&quot; &quot;)))
+index.sort()
+h_index = []
+g_index = []
+for i in range(0, max(index) + 1):
+    count = 0
+    for k in index:
+        if k &gt;= i:
+            count += 1
+    h_index.append(count)
+    if h_index[i] == i:
+        print(&quot;h-index : &quot; + str(i))
+        break
+for i in range(0, max(index) + 1):
+    if sum(index[-i:]) &gt;= i**2:
+        g_index.append(i)
+print(&quot;g-index : &quot; + str(max(g_index)))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/11/26 20:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김우석</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24194"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>def main():</p>
+<pre><code>print(h_index([0,15,4,0,7,10,0]))
+
+print(g_index([0,15,4,0,7,10,0]))
+</code></pre>
+<p>def h_index(lista):</p>
+<pre><code>lenght=len(lista)
+
+for i in range(lenght,0,-1):
+
+  count=0
+
+  for j in lista:
+
+    if j&gt;=i:
+
+      count+=1
+
+  if count==i:
+
+    return i
+
+    break
+</code></pre>
+<p>def g_index(listb):</p>
+<pre><code>listb.sort()
+
+listb.reverse()
+
+length=len(listb)
+
+for i in range(length,0,-1):
+
+  sumnumber=0
+
+  for j in range(0,i,1):
+
+    sumnumber+=listb[j]
+
+  if sumnumber&gt;=i*i:
+
+    return i
+
+    break
+</code></pre>
+<p>main()</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/01/02 20:14</p>
+                                <p class="static-profile" style="margin:0;padding:0;">전준혁</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24948"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def h_index(list_input):
+    value_h = 0
+
+    for i in range(max(list_input)+1):
+        count = 0
+        for aa in list_input:
+            if aa &gt;= i:
+                count += 1
+        if i &lt;= count :
+            value_h = i
+
+    return print('VALUE H : ', value_h)
+
+def g_index(list_input):
+    value_g = 0
+
+    for i in range(len(list_input)):
+        sum = 0
+        for member in sorted(list_input, reverse=True)[0:i:]:
+            sum += member
+            if sum &gt;= i**2:
+                value_g = i
+
+    return print('VALUE G : ', value_g)
+
+
+h_index([0, 15, 4, 0, 7, 10, 0])
+g_index([0, 15, 4, 0, 7, 10, 0])        
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/03/09 08:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">DSHIN</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24994"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def hIndex(a):
+    b=[]
+    count=0
+    for i in a:
+        if min(a)&lt;=i:
+            count+=1
+            if min(a)&lt;=count:
+                b.append(min(a))
+                a.remove(min(a))  
+    print(max(b))
+a = [0,15,4,0,7,10,0]
+hIndex(a)
+
+def gIndex(a):
+    b=[]
+    count=0
+    for i in a:
+        if min(a)&lt;=i:
+            count+=1
+            if sum(a)&gt;=count**2:
+                b.append(count)
+    print(max(b))
+
+a = [0,15,4,0,7,10,0]
+gIndex(a)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/03/17 21:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">fox.j</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25693"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">input = list(map(int,'0 15 4 0 7 10 0'.split(' ')))
+
+for i in range(len(input)):
+    times = 0
+    for j in input:
+        if j &gt;= i:
+            times += 1
+    if times == i:
+        print('h-index:',i)
+        break
+
+input.sort(reverse = True)
+for i in range(len(input)):
+    if sum(input[0:i]) &gt;= i**2:
+     print('g-index:',i)
+     break
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/07/06 16:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">ss2663</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26028"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#codingdojing_h&amp;g_index
+#내림차순으로 정렬해서 계산. 조건이 맞지 않는 경우를 찾으면 break
+
+a = list(map(int, input('IF: ').split()))
+a.sort(reverse = True) #[15, 10, 7, 4, 0, 0, 0]
+
+def h_index(a):
+    for i in range(len(a)):
+        if a[i] &gt;= i+1: continue 
+        else: 
+            return i
+            break
+    return len(a) #전체 논문수에 해당될 때
+
+def g_index(a):
+    for i in range(len(a)):
+        if sum(a[:i+1]) &gt;= (i+1)**2: continue 
+        else: 
+            return i
+            break
+    return len(a) #전체 논문수에 해당될 때
+
+h = h_index(a)
+g = g_index(a)
+
+print(f'h-index: {h}')
+print(f'g-index: {g}')
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/08/13 18:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jaeman Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26939"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">
+arr = [0,15,4,0,7,10,0]
+
+def H_index(arr):
+    a=sorted(arr)
+    h_arr =[]
+    for i in a :
+        n=0
+        h =i
+        for k in a :
+            if k&gt;=h:
+                n+=1
+        if h==n :
+            h_arr.append(h)
+    return print(&quot;h-index : &quot;,max(h_arr))
+
+def G_index (arr):
+    a=list(reversed(sorted(arr)))
+    g_arr=[]
+    sum =0
+    for i in range(len(a)):
+        sum+=a[i]
+        g=i+1
+        if sum&gt;=g**2:
+            g_arr.append(g)
+    return print(&quot;g-index : &quot;,max(g_arr))
+H_index(arr)
+G_index(arr)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/03 22:26</p>
+                                <p class="static-profile" style="margin:0;padding:0;">양캠부부</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27148"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>// Rust</p>
+<p>fn index(vec_: Vec<usize>) -&gt; (usize, usize) {</p>
+<pre><code>let mut vec = vec_;
+vec.sort();
+vec.reverse();
+let mut h_index = 0;
+let mut g_index = 0;
+
+for i in (1..=vec.len()).rev() {
+
+    // h-index : 인용이 h이상인 논문이 h개 이상
+    let mut count = 0;
+    for v in &amp;vec {
+        if h_index &gt; 0 { break; }
+        if *v &gt;= i {
+            count += 1;
+        }
+    }
+    if count &gt;= i {
+        h_index = i;
+    }
+
+    // g-index : 인용상위 g개 논문의 인용횟수 합이 g^2 이상
+    if g_index &gt; 0 { continue; }
+    if vec[..i].iter().sum::&lt;usize&gt;() &gt;= i.pow(2) {
+        g_index = i;
+    }
+}
+(h_index, g_index)
+</code></pre>
+<p>}</p>
+<h1 id="test">[test]</h1>
+<p>fn test() {</p>
+<pre><code>assert_eq!(index(vec![0,15,4,0,7,10,0]), (4, 6));
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/27 21:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">JW KIM</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27340"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">cit = '0 15 4 0 7 10 0'
+cit_num_list=[]
+for i in cit.split(' '): 
+    if int(i) not in cit_num_list: 
+        cit_num_list.append(int(i))
+
+cit_num_list.sort()
+print(f'cit_num_list :   {cit_num_list}')
+paper_num_list = [cit.split(' ').count(str(x)) for x in cit_num_list]
+print(f'paper_num_list : {paper_num_list}')
+
+h_list = [(cit_num_list[x] , sum(paper_num_list[x:])) for x in range(5)]
+print(f'h_list : {h_list}')
+print(f'h-index : {max([x[0] for x in h_list if x[0] &lt;= x[1]])}')
+
+cit_num = list(map(int,cit.split(' ')))
+cit_num.sort()
+print(f'cit_num : {cit_num[::-1]}')
+
+g_list = [sum(cit_num[::-1][:x+1]) for x in range(len(cit_num[::-1]))]
+print(f'g_list  : {g_list}')
+g_list_index = [x+1 for x in range(len(cit_num[::-1])) if g_list[x]&gt;=(x+1)**2]
+print(f'g_list_index  : {g_list_index}')
+print(f'g-index : {max(g_list_index)}')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/02/15 15:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">로만가</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_27439"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package org.javaturotials.ex;
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class test {
+    public static void main(String[] args) {    
+    Scanner sc =new Scanner(System.in);
+    int max = 0;
+    int sum=0;
+    int gdex = 0;
+    String str = sc.nextLine();
+    String[] arr =str.split(&quot; &quot;);
+    int[] irr = new int[arr.length];
+    for(int i=0; i&lt;arr.length; i++){
+        irr[i] = Integer.valueOf(arr[i]);
+    }
+    for(int i=0; i&lt;irr.length; i++) {
+        int count = 0;
+        for(int j=0; j&lt;irr.length; j++) {
+            if(irr[i]&lt;=irr[j]) {
+                count++;
+            }
+        }
+        sum+=irr[i];
+        if(count==irr[i]) {
+            max=count;
+            }   
+    }
+        gdex = (int)Math.sqrt(sum);
+    System.out.println(&quot;h-index: &quot; +  max);
+    System.out.println(&quot;g-index: &quot; +  gdex);
+    }
+    }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/02/22 19:24</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Kkubuck</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

@@ -1,0 +1,1427 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="출처: [Programming pearls](http://www.cs.bell-labs.com/cm/cs/pearls/sec012.html)
+
+중복되지 않는 7자리의 숫자들이 한줄 씩 나열된 파일이 있다.   
+파일안에는 총 1천만개까지 숫...">
+    <title>대용량 파일 소트 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">대용량 파일 소트</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">5</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 3</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>출처: <a href="http://www.cs.bell-labs.com/cm/cs/pearls/sec012.html">Programming pearls</a></p>
+<p>중복되지 않는 7자리의 숫자들이 한줄 씩 나열된 파일이 있다. <br />
+파일안에는 총 1천만개까지 숫자가 있을 수 있다고 한다. (n &lt; 10<sup>7</sup>)</p>
+<p>예)</p>
+<pre><code class="no-highlight">3123889
+0000007
+1000001
+4123789
+... 생략 ...
+</code></pre>
+
+<p>이 파일안의 숫자를 순서대로 소트된 결과를 파일로 저장하는 프로그램을 만드시오. </p>
+<hr />
+<p>도전과제 : 1MB 이하의 메모리만 사용하여 위 프로그램을 만드시오.</p>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2014/04/15 00:03</p>
+                    <p class="static-profile" style="margin:0;padding:0;">pahkey</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>23개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_595"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">2</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from bitarray import bitarray
+import random
+import sys
+
+def make_test_file(filename):
+    a = [i for i in range(10000000)]
+    random.shuffle(a)
+    f = open(filename, 'w')
+    for i in a:
+        f.write(format(i,'07d')+'\n')
+    f.close()
+
+
+def big_file_sort(filename):
+    a = bitarray(10000000)
+    a.setall(False)
+
+    print &quot;a is %s bytes.&quot; % sys.getsizeof(a)
+
+    for line in open(filename):
+        a[int(line)] = True
+
+    f = open(&quot;result.txt&quot;, 'w')
+    for i, v in enumerate(a):
+        if v:
+            f.write(format(i,'07d')+'\n')
+    f.close()
+
+#make_test_file(&quot;test.txt&quot;)
+big_file_sort(&quot;test.txt&quot;)
+</code></pre>
+
+<p>7자리 숫자에 중복이 없으므로 1천만건짜리 비트 배열로 풀어보았습니다.<br />
+최초 1천만건짜리 테스트 데이터를 생성한 후 파이썬의 bitarray를 이용해 보았습니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/04/16 13:45</p>
+                                <p class="static-profile" style="margin:0;padding:0;">pahkey</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_604"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>sort input.txt &gt; output.txt </p>
+<p>-_-;</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/04/20 11:28</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Kim Jaeju</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1508"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">없으면 제가 이렇게 풀려고 했는데, 역시 있네요. ㅎㅎ</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Shim Won,
+                                    2014/12/12 00:54
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_593"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#sort.py
+
+import random
+
+def m_file (file) :
+    arr=[]
+
+    while len(arr) &lt; 1000 :
+        ran=random.randint(0,10**7)
+        if ran not in arr :
+            arr.append(ran)
+    f=open(file,&quot;w&quot;)
+    for num in arr :
+        f.write(format(num,'07d')+'\n')
+    f.close()
+
+def f_open (file) :
+    arr=[]
+
+    f=open(file)
+    lines=f.readlines()
+    f.close()
+
+    for line in lines :
+        arr.append(int(line))
+    arr.sort()
+
+    return arr
+
+def print_list(arr) :
+    for num in arr :
+        print (format(num,'07d'))
+
+m_file(&quot;test.txt&quot;)
+print_list(f_open(&quot;test.txt&quot;))
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/04/16 01:37</p>
+                                <p class="static-profile" style="margin:0;padding:0;">서 동현</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_597"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Java 입니다</p>
+<p>randomNumber.txt 라는 입력 파일이 존재한다고 가정</p>
+<pre><code class="java">import java.io.*;
+import java.util.*;
+
+public class BitmapSort {
+    public static void main(String[] args) {
+
+        int[] num = new int[10000000];  // 데이터를 넣을 배열 생성
+
+        BitSet bitSet = new BitSet(10000000);   // 정렬을 위한 비트셋
+        bitSet.clear();  // 비트셋 초기화 false 세팅
+
+        try {
+        File myFile = new File(&quot;randomNumber.txt&quot;);
+        BufferedReader reader = new BufferedReader(new FileReader(myFile));
+        // 데이터 파일 읽기
+
+        int j=0;
+        String line = null;
+
+        while ( (line = reader.readLine()) != null ) {
+            StringTokenizer tokenizer = new StringTokenizer(line);
+            num[j] = Integer.parseInt (tokenizer.nextToken() );
+
+            bitSet.set(num[j], true);
+            // num[j] 의 값이 bitSet 의 인덱스로
+
+            j++;
+        }
+        reader.close();
+
+
+        File file = new File(&quot;sortedNumber.txt&quot;);
+        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+        // 파일 출력
+
+        for ( int k=0 ; k&lt;bitSet.length() ; k++ ) {
+            if ( bitSet.get(k) ) {   // bitSet 값이 true 일때만 파일에 쓰기
+                writer.write(Integer.toString(k));
+            writer.newLine();
+            }
+        }
+        writer.close();
+        } catch (IOException ex) { ex.printStackTrace(); }
+    }
+}
+</code></pre>
+
+<p>생각하는 프로그래밍 문제네요. 이거 자바로 풀었던거 올립니다.<br>
+데이터 생성 로직도 있습니다만 생략 합니다.<br>
+http://pearlstyle.tistory.com/31</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/04/17 00:33</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Lee Do Yun</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1417"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">int[] num = new int[1000000]; 요거 int[] num = new int[10000000]; 이걸로 수정되야 하지 않나요??  위에서 천만개의 수라고 한것 같은데..;;</span>
+                                -
+                                <span style="font-size:11px;">
+                                    23king,
+                                    2014/04/17 17:49
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1418"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">ㄴ 그런거 같네요. 수정 할께요</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Lee Do Yun,
+                                    2014/04/18 01:21
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_723"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3.2.5 기준입니다.</p>
+<pre><code class="python">fin = open('숫자.txt')
+number_list = []
+
+for line in fin:
+    number_list.append(line.strip())
+
+number_list.sort()
+
+open('숫자소트.txt',mode='w').write(&quot;\n&quot;.join(number_list))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/05/24 01:38</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Youngjin Shin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2171"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">public class Sorter {
+    public static void main(String[] args) {
+        boolean[] num = new boolean[10000000];
+
+        try {
+            File input = new File(&quot;input.txt&quot;);
+            BufferedReader reader = new BufferedReader(new FileReader(input));
+
+            String str = &quot;&quot;;
+            while((str = reader.readLine()) != null) {
+                num[Integer.parseInt(str)] = true;
+            }
+
+            reader.close();
+
+            File output = new File(&quot;output.txt&quot;);
+            BufferedWriter writer = new BufferedWriter(new FileWriter(output));
+
+            for(int i = 0; i &lt; num.length; i++) {
+                if(num[i]) {
+                    writer.write(new String().format(&quot;%07d\r\n&quot;, i));
+                }
+            }
+            writer.close();
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/07/21 18:27</p>
+                                <p class="static-profile" style="margin:0;padding:0;">고영감</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2941"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from bitarray import bitarray
+ba = bitarray(10**7)
+ba.setall(0)
+for n in file('s444.txt'):
+    ba[int(n)]=1
+f = open('s444_sorted.txt','w')
+for i in range(len(ba)):
+    if ba[i] : f.write(format(i,'07d')+'\n')
+f.close()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/01/30 19:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">상파</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3224"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">public class ddd {
+    public static final int Maximum=10000000;
+
+    HashSet&lt;Integer&gt; set;
+    ArrayList&lt;Integer&gt; list;
+    public static void main(String[] args) throws IOException {
+
+        ddd a=new ddd();
+
+        System.gc();
+        long preUseMemory=Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+
+        try{
+            a.readFile();
+            a.createFile2();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        long aftUserMemory=Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        long useMemory=(aftUserMemory-preUseMemory);
+        System.out.println(useMemory);
+
+    }
+
+    public void readFile() throws IOException{
+        list=new ArrayList&lt;Integer&gt;();
+
+        try{
+            File file=new File(&quot;d:/test.txt&quot;);
+            Scanner scan=new Scanner(file);
+            while(scan.hasNext()){
+                list.add(scan.nextInt());
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        Collections.sort(list);
+
+    }
+
+    public void createFile2() throws IOException{
+        PrintWriter pw=new PrintWriter(&quot;d:/move.txt&quot;);
+
+        Iterator hi =this.list.iterator();
+        while(hi.hasNext()){
+            pw.println(hi.next());
+        }
+        pw.close(); 
+        System.out.println(&quot;최종 정렬 파일 데이터 작성 종료&quot;);
+    }
+}
+</code></pre>
+
+<p>죄송한데 제가 짠 코드가 1MB인지 확인할 방법으로 메인에서와 같은 방법으로 했는데 저게 맞나요?
+제가볼때 저거는 이미 JVM에서 할당한 메모리를 파악하는것같은데 제가짠 코드의 메모리할당량이아닌...
+100MB이상나오더라구요 제가 확인한 메모리 확인방식은..</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/03/22 16:03</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김 종진</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3667"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>이번 기회에 bitarray를 알게되었네요.</p>
+<pre><code class="python">from bitarray import bitarray
+
+b = bitarray(10**7)
+with open('bigfile.txt', 'r') as f:
+    while True:
+        a = f.read(8)
+        if not a:
+            break
+        b[int(a.strip())] = 1
+    with open('result.txt', 'w') as g:
+        for i, v in enumerate(b):
+            if b:
+                g.write('{:07d}\n'.format(i))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/05/12 20:37</p>
+                                <p class="static-profile" style="margin:0;padding:0;">룰루랄라</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4243"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<p>루비 bitset, 크리스탈 bit_array를 사용했습니다.</p>
+<pre><code class="ruby">require 'bitset'
+
+sort_by_bit = -&gt;rf,wf,size,bs=Bitset.new(size) do
+  IO.foreach(rf) {|l| bs[l.to_i] = true }
+  File.open(wf,&quot;w&quot;) {|f| (0...size).each {|i| f.puts(i) if bs[i] } }
+end
+#=&gt; usage : sort_by_bit[&quot;unordered.txt&quot;, &quot;sorted.txt&quot;, size]
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby">unordered_nums = [*0...100].shuffle # shuffle randomly
+File.open(&quot;r.txt&quot;,&quot;w&quot;) {|f| unordered_nums.each {|n| f.puts(n) } }
+sort_by_bit[&quot;r.txt&quot;, &quot;w.txt&quot;,100]
+generated_file_nums = File.read(&quot;w.txt&quot;).split.map(&amp;:to_i)
+
+# shuffled arr.sort == generated file's arr 
+expect( unordered_nums.sort ).to eq generated_file_nums
+</code></pre>
+
+<p><strong>Crystal</strong></p>
+<pre><code class="ruby">require &quot;bit_array&quot;
+
+def sort_by_bit(rf, wf, size)
+  ba = BitArray.new(size)
+  File.each_line(rf) {|l| ba[l.to_i] = true }
+  File.open(wf, &quot;w&quot;) {|f| 0.upto(size-1) {|i| f.puts(i) if ba[i]} }
+end
+
+sort_by_bit(&quot;unordered.txt&quot;, &quot;ordered.txt&quot;, 5)
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby">unordered_nums = (0...100).to_a.shuffle # shuffle randomly
+File.open(&quot;r.txt&quot;,&quot;w&quot;) {|f| unordered_nums.each {|n| f.puts(n) } }
+sort_by_bit(&quot;r.txt&quot;, &quot;w.txt&quot;, 100)
+generated_file_nums = File.read(&quot;w.txt&quot;).split.map(&amp;.to_i)
+
+# shuffled arr.sort == generated file's arr
+unordered_nums.sort.should eq generated_file_nums
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/07/26 17:33</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6032"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>수가 천만개 이상 될 때면 선택정렬이 최적합이라 생각하고 선택정렬을 사용했습니다
+또한 선택 정렬은 추가메모리가 필요 없는것으로 알고 있습니다</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#define MAX_COLS 100
+
+void main() {
+    FILE* in = fopen(&quot;input.txt&quot;, &quot;rt&quot;);
+    FILE* out = fopen(&quot;output.txt&quot;, &quot;wt&quot;);
+    char s[MAX_COLS];
+    char s1[MAX_COLS];
+    int min_range = 0;
+    while (fgets(s1,MAX_COLS,in)) {
+        int min = 100000000;
+        FILE* f = fopen(&quot;input.txt&quot;, &quot;rt&quot;);
+        while(fgets(s,MAX_COLS,f)) {
+            int temp = atoi(s);
+            //printf(&quot;%d\n&quot;, temp);
+            if(min &gt; temp &amp;&amp; temp &gt; min_range)
+                min = temp;
+        }
+        min_range = min;
+        char a[10];
+        itoa(min,a,10);
+        a[8] = '\0';
+        strcat(a,&quot;\n&quot;);
+        fprintf(out, a);
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/01/26 15:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">코딩초보</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6103"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import random
+result,c = list(),0
+while c != 10000000:
+    result.append('%07d' % c)
+    c += 1
+random.shuffle(result)
+F = open(r'C:\Users\Cyber\Desktop\file.txt','w')
+F.write(' \n'.join(result))
+F.close()
+
+</code></pre>
+
+<p>파일생성</p>
+<pre><code class="python">F = open(r'C:\Users\Cyber\Desktop\file.txt','r')
+_list = F.read().split('\n')
+F.close()
+F = open(r'C:\Users\Cyber\Desktop\file.txt','w')
+F.write('\n'.join(sorted(_list)))
+F.close()
+
+#### 2017.02.04 D-383 ####
+
+</code></pre>
+
+<p>파일소트</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/02/04 23:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GunBang</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6336"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.BitSet;
+import java.util.Scanner;
+
+public class FileSort {
+
+    public static void main(String[] args) throws FileNotFoundException {
+        String path = FileSort.class.getResource(&quot;&quot;).getPath();
+        Scanner sc = new Scanner(new File(path + &quot;FileSort.txt&quot;));
+        PrintWriter pw = new PrintWriter(new File(&quot;FileSortResult.txt&quot;));
+        BitSet bs = new BitSet(10000000);
+
+        while (sc.hasNext()) {
+            bs.set(sc.nextInt(), true);
+        }
+
+        sc.close();
+
+        bs.stream().forEach(b -&gt; {
+            pw.println(b);
+        });
+
+        pw.close();
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/02/24 10:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">genius.choi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7926"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python</p>
+<p>메모리만 제한이니까 임시 파일 만들어서 기수정렬하면 될 거 같긴 한데 별로 하고 싶진 않네요-_-;</p>
+<p>또는 0~1백만 사이 숫자만 읽어서 정렬하고, 1백만~2백만 사이 숫자만 읽어서 정렬하고, ... 이렇게 해도 되긴 될 것 같습니다.</p>
+<p>그래도 비트맵이 제일 나은 듯</p>
+<p>최대값이 10만 정도만 돼도 한 세월이라 크기를 줄여서 돌렸습니다.</p>
+<pre><code class="python"># &quot;길가의풀&quot;님 컨닝(거의 똑같음)
+
+import bit_array
+import random
+
+def make_testfile(filename, n):
+    nums = list(range(10000))
+    random.shuffle(nums)
+    f = open(filename, 'w')
+    for i in range(n):
+        f.write(&quot;%07d\n&quot; % nums[i])
+
+    f.close()
+
+def read_file(filename, bitarr):    
+    f = open(filename, 'r')        
+    line = f.readline()
+    while line:
+        bitarr[int(line)] = 1
+        line = f.readline()
+    f.close()
+
+def write_file(filename, bitarr):
+    f = open(filename, 'w')
+    for i in range(bitarr.size):
+        if bitarr[i]:
+            f.write(&quot;%07d\n&quot; % i)
+    f.close()    
+
+make_testfile('in.txt', 100)
+bitarr = bit_array.BitArray(10000)
+read_file('in.txt', bitarr)
+write_file('out.txt', bitarr)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/07/19 23:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10499"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3.6</p>
+<pre><code class="python">import random
+
+def makefile():
+    data = ''
+    with open(&quot;c:\\Python\\test_sort.txt&quot;, 'w') as f:
+        for i in range(1000000):
+            data = random.randint(1,10000000)
+            data = str(data)+&quot;\n&quot;
+            if len(data) != 8:
+                data = (8-len(data))*'0'+data
+            f.write(data)
+
+def sort():
+    tmp = ''
+    with open(&quot;c:\\Python\\test_sort.txt&quot;, 'r') as f:
+        sort_list = f.read()
+    sort_list = sort_list.split(&quot;\n&quot;)
+    sort_list = sorted(sort_list)
+    del sort_list[0]
+    with open(&quot;c:\\Python\\test_sort_new.txt&quot;, 'w') as f:
+        for i in sort_list:
+            tmp = i + &quot;\n&quot;
+            f.write(tmp)
+
+if __name__ == &quot;__main__&quot;:
+    makefile()
+    sort()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/04 13:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">justbegin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10793"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def largesort(l):
+    def sorting(a, b):
+        result = 0
+        c = int(len(a)/2)
+        if not(len(a)-1):
+            if a[0] &lt; b:
+                result += 1
+            else:
+                pass
+        elif b &lt; a[c]:
+            result = sorting(a[:c], b)
+        else:
+            result = sorting(a[c:], b) + c
+        return result
+    result = [l[0]]
+    for i in range(1,len(l)):
+        result.insert(sorting(result,l[i]), l[i])
+    return result
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/18 21:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김동하</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13005"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+
+using namespace std;
+
+#define SIZE 10000
+
+void QuickSort(int arr[], int left, int right)
+{
+    int L = left, R = right;
+    int temp;
+    int pivot = arr[(left + right) / 2];
+
+    while (L &lt;= R)
+    {
+        while (arr[L] &lt; pivot)
+            L++;
+        while (arr[R] &gt; pivot)
+            R--;
+        if (L &lt;= R)
+        {
+            if (L != R)
+            {
+                temp = arr[L];
+                arr[L] = arr[R];
+                arr[R] = temp;
+            }
+            L++; R--;
+        }
+
+        if (left &lt; R)
+            QuickSort(arr, left, R);
+        if (L &lt; right)
+            QuickSort(arr, L, right);
+    }
+}
+
+int main()
+{
+    int arr[SIZE], i = 0;
+    char getNum[8];
+
+    ifstream open(&quot;file.txt&quot;);
+
+    while (!open.eof())
+    {
+        open.getline(getNum, 8);
+        arr[i] = atoi(getNum);
+        i++;
+    }
+
+    open.close();
+
+    QuickSort(arr, 0, i - 1);
+
+    ofstream write(&quot;output.txt&quot;);
+
+    for (int j = 0; j &lt; i; j++)
+    {
+        write &lt;&lt; arr[j] &lt;&lt; endl;
+    }
+
+    write.close();
+
+
+    return 0;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/16 23:13</p>
+                                <p class="static-profile" style="margin:0;padding:0;">서영균</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13366"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>처음에는 5만개씩 잘라서 정렬하고 tmp파일에 저장하는 방식을 생각했었는데....(파이썬에서 5만개 리스트가 약 1메가 차지하더군요)<br />
+비트맵 정렬 배워갑니다  </p>
+<p>bitarray가 아니라 직접 2진법으로 구현했는데 반복문 2천만번 장난 아니네요...결과는 포기합니다;;  </p>
+<pre><code class="python">bit = 0
+for i in open(inpath,'r',encoding='utf8'):
+    bit += 2**int(i)
+with open(outpath,'w',encoding='utf8') as out:
+    i = 0
+    while bit &gt; 0:
+        if bit%2 == 1: print('{:07}'.format(i),file=out)
+        bit = bit//2
+        i += 1
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/06 00:15</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14346"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package test;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+
+public class test {
+    public static void main(String[] args) {
+        String path = &quot;파일경로&quot;;
+        Scanner sc = null;
+        ArrayList&lt;Integer&gt; num = new ArrayList&lt;&gt;();
+        try {
+            sc = new Scanner(new File(path));
+            while (sc.nextLine() != null) {
+                num.add(sc.nextInt());
+            }
+            Collections.sort(num);
+        } catch (FileNotFoundException e) {
+        } finally {
+            sc.close();
+        }
+        FileWriter fw = null;
+        try {
+            fw = new FileWriter(new File(path));
+            for (int i = 0; i &lt; num.size(); i++) {
+                fw.write(num.get(i) + &quot;\r\n&quot;);
+            }
+            fw.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fw.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/26 19:43</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김지훈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14675"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from bitarray import
+aa = bitarray(10000000)
+aa.setall(0)
+ff=open('aa.txt','r')
+lines = ff.readlines()
+for n in lines:
+    n=n.split('\n')
+    aa[int(n[0])] = True
+ff.close()
+f = open('sorted_aa.txt','w')
+for i in range(10000000):
+    if aa[i]:
+        f.write(format(i,'07d')+'\n')
+f.close()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/18 14:37</p>
+                                <p class="static-profile" style="margin:0;padding:0;">JaehakChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20110"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3</p>
+<ol>
+<li>입력 파일을 일정 크기(<code>seg_size</code>)만큼씩 읽어서</li>
+<li>해당 부분을 정렬 후 구분된 파일(<code>seg_file</code>)로 저장</li>
+<li>각 파일의 내용에 대해 <code>heapq</code> - <code>merge</code> (여러 정렬된 입력을 단일 정렬된 출력으로 병합)</li>
+<li>구분된 임시 파일 삭제</li>
+</ol>
+<pre><code class="python">import itertools
+import heapq
+import contextlib
+import os
+
+
+def main():
+    inputfile = &quot;./input.txt&quot;  # 정렬할 파일 경로
+    outputfile = &quot;./output.txt&quot;  # 정렬된 파일 경로
+    seg_size = 5000  # 입력 파일에서 한 번에 읽어올 라인 수
+    seg_files = []  # 부분 정렬된 파일의 목록
+
+    with open(inputfile, &quot;r&quot;) as fi:
+        # seg_id: 부분 정렬된 파일을 저장할 식별자
+        for seg_id in itertools.count(1):
+            # 입력 파일로부터 seg_size 만큼씩 자료를 읽어서 정렬함
+            partially_sorted = sorted(itertools.islice(fi, seg_size))
+            if not partially_sorted:  # EOF
+                break
+            seg_file = f&quot;./seg_{seg_id}.txt&quot;  # 부분 정렬된 파일명
+            seg_files.append(seg_file)
+            with open(seg_file, &quot;w&quot;) as fo:
+                fo.writelines(partially_sorted)
+
+    # https://stackoverflow.com/questions/26240228/how-to-join-multiple-sorted-files-in-python-alphabetically
+    with contextlib.ExitStack() as stack:
+        files = [stack.enter_context(open(seg_file)) for seg_file in seg_files]
+        with open(outputfile, &quot;w&quot;) as fo:
+            fo.writelines(heapq.merge(*files))
+
+    # 부분 정렬 파일 삭제
+    for seg_file in seg_files:
+        os.remove(seg_file)
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/12/03 14:06</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27396"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from  random import *
+
+file = open('C:\Python\memo.txt','w')
+for k in range(1000):
+    a = str(randint(1000000,9999999))
+    file.write(a)
+    file.write('\n')
+file.close()
+
+file = open('memo.txt','r')
+r = file.read().split('\n')
+file.close()
+r.remove('')
+arr =sorted(list(map(int,r)))
+
+file = open('memo.txt','w')
+for k in arr:
+    file.write(str(k))
+    file.write('\n')
+file.close()
+
+</code></pre>
+
+<p>숫자를 정렬하는건 어렵지 않은데..
+메모리 사용량을 어떻게 알수있는지는.. 공부가 필요합니다 ㅜ</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/02/19 18:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">양캠부부</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29809"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def isLarge(su, value):
+    for i in range(7):
+        if su[i] &lt; value[i]:
+            return True
+        elif su[i] &gt; value[i]:
+            return False
+    return False
+
+def writeFile(filename, lst):
+    f = open(filename, 'w')
+    for i in range(len(lst)-1):
+        if lst[i]:
+            f.write(lst[i])
+    f.close()
+
+
+f = open('data.txt', 'r')
+line = [x for x in f.readlines()]
+lst = ['9999999']
+for val in line:
+    N = len(lst)
+    for i in range(len(lst)):
+        if isLarge(val, lst[i])==True:
+            lst.insert(i, val)
+            break
+
+f.close()
+
+write_file('result.txt', lst)
+print('end!!')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/12/19 20:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

@@ -1,0 +1,2055 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="**리스트에 있는 숫자들의 최빈값을 구하는 프로그램을 만들어라.**
+```
+[12, 17, 19, 17, 23] = 17
+[26, 37, 26, 37, 91] = 26, 37
+[28, 30, 32, 34, 144] = 없다
+
+최빈값 :...">
+    <title>최빈값 구하기 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">최빈값 구하기</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">6</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 2</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p><strong>리스트에 있는 숫자들의 최빈값을 구하는 프로그램을 만들어라.</strong></p>
+<pre><code>[12, 17, 19, 17, 23] = 17
+[26, 37, 26, 37, 91] = 26, 37
+[28, 30, 32, 34, 144] = 없다
+
+최빈값 : 자료의 값 중에서 가장 많이 나타난 값 
+① 자료의 값이 모두 같거나 모두 다르면 최빈값은 없다.
+② 자료의 값이 모두 다를 때, 도수가 가장 큰 값이 1개 이상 있으면 그 값은 모두 최빈값이다.
+</code></pre>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2018/08/07 14:49</p>
+                    <p class="static-profile" style="margin:0;padding:0;">로봇</p>
+                </div>
+            </div>
+
+            
+                <a name="comment_2319"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">자료의 값이 모두 다를 때 =&gt; 자료의 값이 모두 같거나 모두 다르지 않을 때
+가 맞지 않을까요</span>
+                    -
+                    <span style="font-size:11px;">
+                        Noname,
+                        2018/08/10 17:09
+                    </span>
+                </div>
+            
+                <a name="comment_2510"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">자료의 값이 모두 같을 때에는 그 값이 최빈값이 되어야 할 것 같은데요.</span>
+                    -
+                    <span style="font-size:11px;">
+                        Wonjin Park,
+                        2019/04/15 23:16
+                    </span>
+                </div>
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>36개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_14020"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">3</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def mode(lst):
+    freq = {x:lst.count(x) for x in set(lst)}
+    if len(freq) == 1 or len(freq) == len(lst):
+        return None
+    else:
+        return [x for x in freq.keys() if freq[x] == max(freq.values())]
+
+
+for lst in [[12, 17, 19, 17, 23], [26, 37, 26, 37, 91], [28, 30, 32, 34, 144]]:
+    print(lst, mode(lst))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/10 17:28</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2901"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">정말 간결한 표현이네요.. Good</span>
+                                -
+                                <span style="font-size:11px;">
+                                    로만가,
+                                    2022/02/19 10:56
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13954"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import collections
+def cb(list):
+    o = collections.Counter(list).most_common()
+    max,m = o[0][1],[]
+    for num in o:
+        if num[1] == max:m.append(num[0])
+    if len(m)==len(list):return '없음'
+    return m
+print(cb([1,2,3,4,5,5]))
+print(cb([1,2,3,4,4,5,5]))
+print(cb([1,2,3,4,5]))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/07 19:03</p>
+                                <p class="static-profile" style="margin:0;padding:0;">leak</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13984"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>def mode(n):
+    Max = 0
+    for x in list(set(n)):
+        if n.count(x) &gt; Max:
+            Max = n.count(x)
+    print(Max if Max &lt;= 1 else 'None')
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/08 21:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김영성</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14026"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def mode(v):
+    tmp = set(v)
+    if len(tmp) in (1, len(v)): return None
+    cnt = {}
+    for i in tmp:
+        getcnt = v.count(i)
+        try   : cnt[getcnt].append(i)
+        except: cnt[getcnt] = [i]
+    return cnt[max(cnt)]
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/10 18:38</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14055"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">
+public class Main {
+
+    public static void print(int a[])
+    {
+        int check[] =new int[a.length];
+        for(int i=0;i&lt;a.length;i++)
+        {
+            check[i]=0;
+
+        }
+        int maxidx=0;
+        for(int i=0; i&lt;a.length ;i++)
+        {
+
+            for(int j=i+1;j&lt;a.length;j++)
+            {
+                if( a[i] == a[j])
+                {
+                    check[i]++;
+
+                    if(check[maxidx]&lt;check[i])
+                    {
+                        maxidx=i;
+                    }
+                }
+            }
+        }
+        if(check[maxidx] ==0)
+        {
+            System.out.println(&quot;없다.&quot;);
+            return;
+        }
+        for(int i=0;i&lt;check.length;i++)
+        {
+            if(check[maxidx]==check[i])
+            {
+                System.out.printf(&quot;%d &quot;,a[i]);
+            }
+
+        }
+        System.out.printf(&quot;\n&quot;);
+
+    }
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+
+        int arr[] = {12, 17, 19, 17, 23};
+        int arr2[]={26, 37, 26, 37, 91};
+        int arr3[]={28, 30, 32, 34, 144};
+        print(arr);
+        print(arr2);
+        print(arr3);
+
+
+    }
+
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/11 19:25</p>
+                                <p class="static-profile" style="margin:0;padding:0;">luc</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14075"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C# Linq</p>
+<pre><code>class Program
+{
+    static void Main(string[] args)
+    {
+        int[] ary1 = { 12, 17, 19, 17, 23, 23 }; // 17
+        int[] ary2 = { 26, 37, 26, 37, 91 }; // 26, 37
+        int[] ary3 = { 28, 30, 32, 34, 144 }; // 없다
+
+        int[] ary = ary3;
+
+        var hash = new HashSet&lt;int&gt;(ary);
+
+        //모두 다른 값 or 동일한 값인 경우 체크
+        if (hash.Count == ary.Length || hash.Count == 1)
+        {
+            Console.WriteLine("최빈 값이 없습니다.");
+            return;
+        }
+
+        var cntLists =  from x in hash
+                        join y in ary on x equals y
+                        group x by x into gp
+                        select new
+                        {
+                            Key = gp.Key,
+                            Count = gp.Count()
+                        };
+
+        int max = cntLists.Max(x =&gt; x.Count);
+
+        var resultList = from x in cntLists
+                         where x.Count == max
+                         select x;
+
+        foreach (var v in resultList)
+        {
+            Console.WriteLine($"{v.Key}: {v.Count}개" );
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/12 19:06</p>
+                                <p class="static-profile" style="margin:0;padding:0;">클루</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14099"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">list1 = [[12, 17, 19, 17, 23],
+    [26, 37, 26, 37, 91],
+    [28, 30, 32, 34, 144]]
+
+def mode(l1):
+    a1 = {x:l1.count(x) for x in set(l1)}
+    a2 = [a for a in a1.keys() if a1[a] == max(a1.values())]
+    return &quot;없다&quot; if len(a1) == len(a2) else a2
+
+
+for l1 in list1:
+    print(l1, &quot;=&quot;, mode(l1))
+</code></pre>
+
+<p>출력</p>
+<pre><code class="python">[12, 17, 19, 17, 23] = [17]
+[26, 37, 26, 37, 91] = [26, 37]
+[28, 30, 32, 34, 144] = 없다
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/13 23:39</p>
+                                <p class="static-profile" style="margin:0;padding:0;">재즐보프</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14158"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="javascript">const arr = [12, 12, 12, 11];
+
+const getMode = (arr) =&gt; {
+  let mostFrequentCnt = 1;
+  const mode = [];
+  const _map = new Map();
+
+  for (const item of arr) {
+    const hasValue = _map.get(item);
+    const cnt = hasValue === undefined ? 1: hasValue + 1;
+    _map.set(item, cnt);
+  }
+
+  for (const [key, value] of _map) {
+    if (value &gt; mostFrequentCnt) {
+      mostFrequentCnt = value;
+    }
+  }
+
+  if (mostFrequentCnt === 1) return null;
+  for (const [key, value] of _map) {
+    if (value === mostFrequentCnt) {
+      mode.push(key);
+    }
+  }
+  if (mostFrequentCnt === arr.length) return null;
+  return mode;
+};
+
+
+if (getMode(arr)) {
+  console.log('최빈값:', getMode(arr).join(','));
+} else {
+  console.log('없다');
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/17 18:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">정지원</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14194"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.Arrays;
+
+public class TEST07 {
+
+    public static void main(String[] args) {
+        int[] data1 = {12, 17, 19, 17, 23,23};
+        int[] data2 = {26, 37, 26, 37, 91};
+        int[] data3 = {28, 30, 32, 34, 144};
+
+        int[] max = maxShow(data1);
+        for (int i = 0; i &lt; max.length; i++) {
+            if (max[i] != 0) {
+                System.out.print(max[i] + &quot; &quot;);             
+            }
+        }
+        System.out.println(&quot; &quot;);
+        max = maxShow(data2);
+        for (int i = 0; i &lt; max.length; i++) {
+            if (max[i] != 0) {
+                System.out.print(max[i] + &quot; &quot;);             
+            }
+        }
+        System.out.println(&quot; &quot;);
+        max = maxShow(data3);
+        for (int i = 0; i &lt; max.length; i++) {
+            if (max[i] != 0) {
+                System.out.print(max[i] + &quot; &quot;);             
+            }
+        }
+
+    }
+
+    public static int[] maxShow(int[] data) {
+        Arrays.sort(data);
+        int[] value = new int[data.length];
+        int[] showCnt = new int[data.length];
+
+        int[] max = new int[data.length];
+        int cnt = 1;
+        int init = data[0];
+        int idx = 0;
+        for (int i = 1; i &lt; data.length; i++) {
+
+            if (init == data[i]) {
+                cnt = cnt + 1;
+            }
+            else {
+                value[idx] = init;
+                showCnt[idx++] = cnt;
+                init = data[i];
+                cnt = 1;
+            }
+            if (i == (data.length - 1)) {
+                value[idx] = init;
+                showCnt[idx] = cnt;
+            }
+
+        }
+
+        idx = 0;
+        int max_value = searchMax(showCnt);
+        if (max_value == 1) {
+            return max;
+        }
+        for (int i = 0; i &lt; showCnt.length; i++) {
+            if (max_value == showCnt[i]) {
+                max[idx++] = value[i];
+            }
+        }
+
+        return max;
+    }
+
+    public static int searchMax(int[] data) {
+        int max = 0;
+        for (int i = 0; i &lt; data.length; i++) {
+            if (data[i] &gt; max) {
+                max = data[i];
+            }
+        }
+
+        return max;
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/20 15:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">gregorio</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14441"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<pre><code class="ruby">def most_freq(arr)
+  hash = arr.reduce(Hash.new(0)) {|h,freq| h[freq] += 1; h}
+  mfreq = hash.select {|_,freq| freq == hash.values.max }
+  mfreq.rassoc(1) ? &quot;not exist&quot; : mfreq.one? ? mfreq.keys[0] : mfreq.map(&amp;:first)
+end
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby">expect( most_freq([12, 17, 19, 17, 23]) ).to eq 17
+expect( most_freq([26, 37, 26, 37, 91]) ).to eq [26, 37]
+expect( most_freq([28, 30, 32, 34, 144]) ).to eq &quot;not exist&quot;
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/30 21:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14447"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from collections import Counter
+
+def most_common(xs):
+  c = Counter(xs)
+  return [x for x, y in c.items() if y == c.most_common()[0][1]]
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/31 11:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">룰루랄라</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15601"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def freq(lista):
+    freqdic = {}
+    for i in lista:
+        total = 0
+        for j in lista:
+            if(i==j):
+                total += 1
+        freqdic[i] = total
+    return max(freqdic,key=freqdic.get)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/12/20 20:26</p>
+                                <p class="static-profile" style="margin:0;padding:0;">오소영</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15775"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="matlab">clear
+clc
+%최빈값구하기(해당 함수 미사용)
+n=input('벡터 입력:');
+sortn=sort(n);%정렬
+count=1;
+c=1;
+k=1;
+for i=2:length(sortn)
+    if sortn(i)~=sortn(i-1)
+        if count&gt;c
+            c=count;
+            freq=sortn(i-1);
+            count=1;
+        elseif count==c &amp;&amp; count~=1
+            c=count;
+            freq(k)=freq;
+            freq(k+1)=sortn(i-1);
+            k=k+1;
+            count=1;
+        end
+    else
+        count=count+1;
+    end
+end
+if c==1 || count==length(n)
+    fprintf('최빈값은 없다\n');
+elseif length(freq)&gt;=2
+    fprintf('최빈값:\n');
+    disp(freq);    
+else
+    fprintf('최빈값: %d\n',freq);
+end
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/01/03 21:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GammaKnight</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15809"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def mode(lst):
+    cnt = {n:lst.count(n) for n in lst}
+    ret = [n for n in cnt.keys()
+           if cnt[n] == max(cnt.values()) and cnt[n] &gt; 1]
+    return ret
+
+for lst in [[12, 17, 19, 17, 23],
+            [26, 37, 26, 37, 91],
+            [28, 30, 32, 34, 144]]:
+    print(lst, mode(lst), sep=':')
+
+</code></pre>
+
+<hr />
+<hr />
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/01/05 16:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">눈떠담</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17104"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">sample = list(map(int, input().split()))
+
+count_result = []
+temp = []
+tempresult = []
+
+for i in sample:
+    count = 0
+    for j in sample:
+        if i == j:
+            count += 1
+    count_result.append(count)
+
+compare = count_result[0]
+
+for i in range(len(count_result) - 1):
+    if compare &lt; count_result[i + 1]:
+        compare = count_result[i + 1]
+
+for i in range(len(count_result)):
+    if compare == 1:
+        break
+    elif compare == count_result[i]:
+        tempresult.append(sample[i])
+
+result = list(set(tempresult))
+result.sort()
+
+if result == []:
+    print('없다')
+else:
+    print(result)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/03/13 11:41</p>
+                                <p class="static-profile" style="margin:0;padding:0;">D.H.</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17210"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def max_freq(lst):
+  if len(set(lst)) != len(lst):
+    freq_dict = {}
+    for num in lst:
+      freq_dict[num] = 0
+    for num in lst:
+      freq_dict[num] += 1
+
+    reverse_tuple = sorted([(j, i) for i, j in freq_dict.items()], key = lambda x: x[0], reverse=True)
+
+    dup = 0
+    for i in range(1, len(reverse_tuple)):
+      if reverse_tuple[0][0] == reverse_tuple[i][0]:
+        dup += 1
+
+    freq_tuple = [reverse_tuple[i][1] for i in range(dup+1)]
+
+    return freq_tuple
+
+  else:
+    return '최빈값이 없습니다.'
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/03/21 01:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Gerrad kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17358"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C#</p>
+<pre><code class="cs">using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace CD187
+{
+    internal class Program
+    {
+        private static void Main(string[] args)
+        {
+            List&lt;int&gt; testCase;
+            testCase = new List&lt;int&gt;() { 12, 17, 19, 17, 23 };
+            Console.WriteLine(Mode(testCase));
+            testCase = new List&lt;int&gt;() { 26, 37, 26, 37, 91 };
+            Console.WriteLine(Mode(testCase));
+            testCase = new List&lt;int&gt;() { 28, 30, 32, 34, 144 };
+            Console.WriteLine(Mode(testCase));
+        }
+
+        private static string Mode(List&lt;int&gt; list)
+        {
+            // 딕셔너리 구성(key = 숫자, value = 리스트 내의 개수)
+            var countDic = list.GroupBy(e =&gt; e).ToDictionary(g =&gt; g.Key, g =&gt; g.Count());
+            // 딕셔너리 아이템의 중복 개수가 중복 개수의 최대값과 동일한 아이템 개수 계산
+            int maxVal = countDic.Values.Max();
+            int criteria = countDic.Where(g =&gt; g.Value == maxVal).Select(g =&gt; g.Key).Count();
+            // 동일한 아이템 개수 == 리스트의 항목 개수인 경우(즉, 모두 같거나, 모두 다르거나) 최빈값 없음
+            string result = criteria == list.Count() ? &quot;없다&quot; :
+                // 그렇지 않은 경우 딕셔너리 키(리스트 항목)(들을) 반환
+                string.Join(&quot;, &quot;, countDic.Where(g =&gt; g.Value == maxVal).Select(g =&gt; g.Key));
+            return result;
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/04/01 14:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17522"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">mylist = [40, 40, 26, 26, 4]
+
+eval_list= [mylist.count(item) for item in mylist]
+res = []
+if max(eval_list) == 1:
+    print(&quot;No mode exists&quot;)
+else:
+    for val in range(0,len(eval_list)):
+        if eval_list[val] == max(eval_list):
+            res.append(mylist[val])
+
+for item in set(res):
+    print(item, end = &quot; &quot;)
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/04/15 23:27</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Wonjin Park</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18010"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def freq(a):
+    freqlist = []
+    freqset = set([])
+    result = {}
+    result2 = []
+    for i in a:
+        freqlist.append(i)
+        freqset.add(i)
+    if len(freqset) == len(freqlist):
+        return &quot;없다&quot;
+    else:
+        for j in freqlist:
+            c = freqlist.count(j)
+            result[j] = c
+        for k , l in result.items():
+            count = max(result.values())
+            if l == count:
+                result2.append(k)
+    print(result2)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/23 17:29</p>
+                                <p class="static-profile" style="margin:0;padding:0;">조관우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18196"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>def mode(n):
+    Max = 0
+    for x in list(set(n)):
+        if n.count(x) &gt; Max:
+            Max = n.count(x)
+    print(Max if Max &lt;= 1 else 'None')</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/06/09 15:25</p>
+                                <p class="static-profile" style="margin:0;padding:0;">신동준</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18936"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>java 입력받는 숫자의 개수는 10개이고, 입력값이 10000을 넘지않는 가정하에 품</p>
+<pre><code class="java">import java.util.*;
+
+public class q4 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ArrayList&lt;Integer&gt; array = new ArrayList&lt;&gt;();
+        int[][] count = new int[10000][2];
+        for (int i = 0; i &lt; 10; i++) {
+            array.add(sc.nextInt());
+        }
+        for (int i = 0; i &lt; 10; i++) {
+            count[array.get(0)][1]++;
+            array.remove(0);
+        }
+        int max_count = 0;
+        for (int i = 0; i &lt; 10000; i++) {
+            if (max_count &lt; count[i][1]) {
+                max_count = count[i][1];
+            }
+        }
+        if (max_count == 1) {
+            System.out.println(&quot;없다&quot;);
+            System.exit(0);
+        } else {
+            for (int i = 0; i &lt; 10000; i++) {
+                if (count[i][1] == max_count) {
+                    System.out.print(i + &quot; &quot;);
+                }
+            }
+        }
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/08/14 13:38</p>
+                                <p class="static-profile" style="margin:0;padding:0;">용 빈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20222"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">public class 최빈값구하기 {
+
+    public static void main(String[] args) {
+
+        Scanner scan = new Scanner(System.in);
+        String str = scan.nextLine();
+        ArrayList&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;();
+        ArrayList&lt;Integer&gt; list2 = new ArrayList&lt;Integer&gt;();
+        String[] arr = str.split(&quot;, &quot;);
+        for(int i=0; i&lt;5; i++) {
+            list.add(Integer.parseInt(arr[i]));
+        }
+
+        int mode = 0;
+        for(int i=0; i&lt;list.size(); i++) {
+            int count = 0;
+            for(int j=0; j&lt;list.size(); j++) {
+                if(list.get(i)==list.get(j)) {
+                    count++;
+                }
+            }
+            if(count&gt;=mode&amp;&amp;count&gt;1) {
+                mode = count;
+                list2.add(list.get(i));
+                list2.add(mode);
+                for(int k=0; k&lt;list.size(); k++) {
+                    if(list.get(i)==list.get(k)&amp;&amp;i!=k) {
+                        list.remove(k);
+                        k--;
+                    }
+                }
+            }
+        }
+        if(list2.size()&gt;1) {
+            int 빈도 = 0;
+            for(int i=1; i&lt;list2.size(); i=i+2) {
+                if(list2.get(i)&gt;=빈도) {
+                    빈도=list2.get(i);
+                }
+            }
+            for(int i=1; i&lt;list2.size(); i++) {
+                if(list2.get(i)==빈도) {
+                    System.out.print(list2.get(i-1)+&quot; &quot;);
+                }
+            }
+        }
+
+        else if(list2.size()==0) {
+            System.out.println(&quot;없다&quot;);
+        }
+
+    }
+
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/12/18 18:15</p>
+                                <p class="static-profile" style="margin:0;padding:0;">big Ko</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20435"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">lst1=[26, 37, 26, 37, 91]
+def mode(lst):
+    frq={}
+    nlst=[]
+    for n in lst:
+        frq[n]=frq.get(n,0)+1
+    vlst=list(frq.values())
+    if len(frq)==1 or len(lst)==len(frq) or len(set(vlst))==1: #최빈값이 없을 조건: 1. 모든 자료값이 같음, 2. 모든 자료값이 다름, 3.자료값의 도수가 전부 같을 경우
+        return None
+    else:
+        for n in list(frq.keys()):
+            if frq[n]==max(vlst):
+                nlst.append(n)
+        return nlst
+print(&quot;최빈값은&quot;,mode(lst1),&quot;입니다.&quot;) #26,37
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/02 14:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박시원</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20552"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">a = [28, 30, 32, 34, 144]
+if max(a)== min(a):
+    print(&quot;없다.&quot;)
+else:
+    a.sort()
+    b = 0
+    for i in range(len(a)):
+        if a[i-1] == a[i] :
+            print(a[i])
+        else:
+            b += 1
+            if b == int(len(a)):
+                print(&quot;없다.&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/14 22:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김민규</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_21431"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">N = list(map(int,input().split()))
+M = {}
+test = list()
+for i in N:
+    check = 0
+    go = 0
+    for j in range(len(test)):
+        if test[j] == i:
+            check = 1
+            go = j
+    if check == 0:
+        M[i] = 1
+        test.append(i)
+    elif check == 1:
+        M[test[go]] = M[test[go]] + 1
+
+finalcheck = 0
+usecheck = 0
+for i in sorted(M.items(), key=lambda x: x[1], reverse=True):
+    if usecheck != 0:
+        if usecheck != list(i)[1]:
+            break
+    elif usecheck == 0:
+        if list(i)[1] == 1:
+            finalcheck = 1
+            break
+    usecheck = list(i)[1]
+    print(str(list(i)[0]) + ' ', end='')
+if finalcheck == 1:
+    print(&quot;없다&quot;)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/03/18 22:37</p>
+                                <p class="static-profile" style="margin:0;padding:0;">BlakeLee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_21503"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">'''더 쉽게 하는 방법이 있을것 같긴 한데 
+참 어렵게 문제를 풀었습니다. 
+동작은 잘 하지만, 
+별로 시원한 느낌이 들지 않는 코드입니다'''
+
+import random
+num=[]
+numnum=random.randint(1,10)
+for i in range (0,numnum):
+    num.append(random.randint(1,10))
+
+numdic={}
+most=[]
+max=0
+
+for i in range (0,len(num)):
+    if not num[i] in numdic:
+        numdic[num[i]]=1
+    else:
+        numdic[num[i]]+=1
+
+print()
+for k,v in numdic.items():
+    if v&gt;max:
+        max=v
+
+print()
+for k,v in numdic.items():
+    if v==max:
+        most.append(k)
+
+print(num,' = ',end='')
+
+if max==1 or max==len(num):
+    print ('None')
+else:
+    for i in range (0,len(most)):
+        print(most[i],' ',end='')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/03/23 04:25</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Buckshot</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2635"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">[6, 5, 2, 9, 2, 1, 8, 6]  = 6  2
+
+[8, 7, 1, 7, 2, 4, 7, 9, 2]  = 7
+
+[9, 3, 8]  = None
+
+[4, 4, 7]  = 4
+
+[3, 6, 7, 1, 4, 8, 5]  = None
+
+[2, 8, 2, 9, 1, 9, 5]  = 2  9
+
+[1, 3, 5, 7, 6, 2, 7, 9, 7, 6]  = 7
+
+[7, 10, 7, 7]  = 7</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Buckshot,
+                                    2020/03/23 04:27
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22313"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from collections import Counter
+def mode(m):
+    c = Counter(m)
+    return '최빈값은 없다.' if len({v: k for k, v in c.items()}) == 1 \
+    else [k for k, v in c.items() if max(c.values()) == v]
+
+if __name__ == '__main__':
+    m = [26, 37, 26, 37, 91]
+    print(*mode(m))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/13 10:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hwaseong Nam</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23004"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.*;
+
+public class a {
+    public static void Mode(int[] num){
+        Set&lt;Integer&gt; set1 = new HashSet&lt;Integer&gt;();
+        for(int i=0;i&lt;num.length;i++){
+            set1.add(num[i]);
+        }
+        int[] set2 = new int[set1.size()];
+        int b = 0;
+        for(Integer x : set1) set2[b++] = x;
+
+        ArrayList&lt;Integer&gt; d = new ArrayList&lt;Integer&gt;();
+        for(int i=0;i&lt;set2.length;i++){
+            int c = 0;
+            for(int j=0;j&lt;num.length;j++){
+                if(set2[i]==num[j]){
+                    c = c + 1;
+                }
+            }
+            d.add(i, c);
+        }
+
+        Integer e = Collections.max(d);
+        ArrayList&lt;Integer&gt; set3 = new ArrayList&lt;Integer&gt;();
+        for(int i=0;i&lt;set2.length;i++){
+            int c1 = 0;
+            for(int j=0;j&lt;num.length;j++){
+                if(set2[i]==num[j]){
+                    c1 = c1 + 1;
+                }
+            }
+            if(c1==e){
+                set3.add(set2[i]);
+            }
+        }
+        System.out.println(set3);
+    }
+
+    public static void main(String[] args){
+        int[] list1 = {12, 17, 19, 17, 23};
+        int[] list2 = {26, 37, 26, 37, 91};
+        int[] list3 = {28, 30, 32, 34, 144};
+        Mode(list1);
+        Mode(list2);
+        Mode(list3);
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/08/21 22:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">skio</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26610"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def print_mode(c):
+    a = {i:c.count(i) for i in c}
+    b = [n for n in a.keys()
+        if a[n] == max(a.values()) and a[n] &gt; 1]
+    if b == []:
+        b = ['없다']
+
+    return &quot;{0}&quot;.format(b)
+
+c = [[12, 17, 19, 17, 23],[26, 37, 26, 37, 91],[28, 30, 32, 34, 144]]
+for i in c:
+    print(print_mode(i))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/11/04 20:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">서현준</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26910"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">
+def Max_Count(data):
+    d = {}
+    key_value = set(data)
+    for k in key_value:
+        cnt = data.count(k)
+        d[k]=cnt
+
+    Max = 0
+    result = []
+    for i in d:        
+        if Max &lt; d[i] :
+           Max = d[i]
+           keys = i
+        elif d[keys] == 1:
+            return None
+    for j in d:
+        if d[keys] == d[j]:
+            result.append(j)
+
+    print(result)
+
+Max_Count([12, 17, 19, 17, 23])
+Max_Count([26, 37, 26, 37, 91])
+Max_Count([28, 30, 32, 34, 144])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/12/29 17:36</p>
+                                <p class="static-profile" style="margin:0;padding:0;">semipooh</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27025"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n = int(input(&quot;배열 크기&quot;))
+arr = []
+for i in range(n):
+    print(i+1,&quot;번쨰&quot;)
+    arr.append(int(input(&quot;원소 입력&quot;)))
+set_arr = list(set(arr))        
+cnt_arr = []
+for k in set_arr:
+    cnt_arr.append([arr.count(k),k])
+
+max_cnt = max(cnt_arr)[0]
+
+if len(set(arr))==len(arr):
+    print(&quot;최빈값 없음&quot;)
+else:
+    for j in cnt_arr:
+        if j[0] == max_cnt :
+            print(j[1],end=&quot;, &quot;)
+</code></pre>
+
+<p>집합을 이용해서 원소를 분리했습니다
+[원소개소,원소] 를 2차배열에 담았고,  2차배열의 max값은 0번쨰 인덱스를 비교하는것을 이용했어요.</p>
+<blockquote></blockquote>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/18 00:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">양캠부부</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27185"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>// Rust</p>
+<p>// 자료형 변환 없이 HashMap으로 그냥 찾았습니다</p>
+<p>use std::collections::HashMap;
+fn mode() {</p>
+<pre><code>let input = [[12, 17, 19, 17, 23],
+                [26, 37, 26, 37, 91],
+                [28, 30, 32, 34, 144],];
+for list in input {
+    let mut map: HashMap&lt;u32, u32&gt; = HashMap::new();
+    for v in list {
+        let count = map.entry(v).or_default();
+        *count += 1;
+    }
+
+    // value max인 key 찾기
+    let max_count = map.values().max().unwrap();
+    let mut result = vec![];
+    if *max_count != 1 { 
+        result = map.iter().filter(|&amp;(_,v)| *v==*max_count).collect();
+    }
+    println!("{:?}", result);
+}
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/30 11:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">JW KIM</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27384"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">a = [28, 30, 32, 34, 144]
+b = sorted(list(set(a)))
+md = my_dict = {}
+
+for i in b:
+    md[i]=a.count(i)
+
+max_count = max(md.values())
+
+if max_count == 1 or max_count == len(a):
+    print('없다.')
+else:
+    for value, count in md.items():
+        if count == max(md.values()):
+            print(value)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/02/19 10:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">로만가</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27421"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>미숙한 코드입니다. 조언 부탁드려요</p>
+<pre><code class="java">package org.javaturotials.ex;
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class test {
+    public static void main(String[] args) {    
+    int max=-1;
+    int chm = 0;
+        int[] arr = {26, 37, 26, 37, 91};
+        int[] chc = new int[arr.length];
+    int[] siz = new int[arr.length];
+    for(int i=0; i&lt;arr.length; i++) {
+        int count=0;
+        for(int j=0; j&lt;arr.length; j++) {
+            if(i!=j) {
+                if(arr[i]==arr[j]) {
+                    count++;
+                }
+            }
+        }
+        if(max&lt;=count) {
+            max=count;
+            chc[i]=arr[i];
+        }
+        }
+
+    System.out.print(&quot;최빈값은: &quot;);
+    for(int i=0; i&lt;chc.length; i++) {
+        if(chc[i]!=0) {
+        System.out.print(chc[i] + &quot; &quot;);}
+    }
+    }
+    }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/02/21 14:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Kkubuck</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28012"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>자바로 풀어봤습니다. </p>
+<pre><code class="java">import java.util.Scanner;
+import java.util.ArrayList;
+
+public class test {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;&gt;();
+
+        // 입력 받기
+        while(true) {
+            System.out.print(&quot;숫자를 입력하시오: (그만 입력하고 싶으면 !을 입력하시오.)&quot;);
+            String inputData = scan.next();
+
+            if(inputData.equals(&quot;!&quot;)) {
+                break;
+            }else {
+                numbers.add(Integer.parseInt(inputData));
+            }
+        }
+
+        // 내림차순 정리
+        int max, maxidx;
+        for(int i=0; i&lt;numbers.size(); i++) {
+            max = numbers.get(i);
+            maxidx=i;
+            for(int j=i+1; j&lt;numbers.size(); j++) {
+                if(numbers.get(j)&gt;max) {
+                    maxidx=j;
+                    max=numbers.get(j);
+                }           
+            }
+            numbers.set(maxidx, numbers.get(i));
+            numbers.set(i, max);
+        }
+
+        // 최빈값 구하기
+        ArrayList&lt;Integer&gt; result = new ArrayList&lt;&gt;();
+        result.add(numbers.get(0));
+        int count=1, maxCount=1;
+
+        for(int i=1; i&lt;numbers.size(); i++) {
+            if(numbers.get(i-1)!= numbers.get(i)) {
+                if(count&gt;maxCount) {
+                    maxCount=count;
+                    result.clear();
+                    result.add(numbers.get(i-1));
+                }else if(count==maxCount) {
+                    result.add(numbers.get(i-1));
+                }
+
+                count = 1;
+            }else {
+                count++;
+            }
+        }
+
+        if(count==maxCount) {
+            result.add(numbers.get(numbers.size()-1));
+        }
+
+        // 빈도수에 따라 결과값 출력
+        if(maxCount!=1) {
+            System.out.println(&quot;최빈값:&quot;+result+&quot;\n&quot;);
+            System.out.printf(&quot;빈도수는 %d입니다.&quot;, maxCount); 
+        }else {
+            System.out.println(&quot;최빈값 없다.&quot;);
+        }
+
+
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/06/11 02:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">유로</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29628"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def findMostFrequentValue(lst):
+    dicValue = {}
+    n = 0
+    mfv = []
+    for v in lst:
+        if v not in dicValue.keys():
+            dicValue[v] = 0
+        dicValue[v] += 1
+        if n &lt; dicValue[v]:
+            n = dicValue[v]
+            mfv.clear()
+            mfv.append(v)
+        elif n == dicValue[v]:
+            mfv.append(v)
+    if len(mfv) == len(lst):
+        print('없다')
+    else:
+        print(mfv)
+
+
+findMostFrequentValue([12, 17, 19, 17, 23])
+findMostFrequentValue([26, 37, 26, 37, 91])
+findMostFrequentValue([28, 30, 32, 34, 144])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/09/09 20:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

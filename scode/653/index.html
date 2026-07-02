@@ -1,0 +1,357 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="2회차 까지는 시간-시점의 간격을 다룬 것이고  
+마지막 회차인 이번엔 시각(예:현재 오후 한시 정각)을 다루게 됩니다.  
+
+과거에는 태양 남중 시간이 정오-즉 낮 12시 였습니다.  
+이런경우  경도가 다르면 시각도 다르게 됩니다.  ...">
+    <title>일출,일몰 시각 계산하기.완-3)경도를 입력하고 대기 굴절보정하여 일출일몰 계산하기 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">일출,일몰 시각 계산하기.완-3)경도를 입력하고 대기 굴절보정하여 일출일몰 계산하기</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">1</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 4</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>2회차 까지는 시간-시점의 간격을 다룬 것이고<br />
+마지막 회차인 이번엔 시각(예:현재 오후 한시 정각)을 다루게 됩니다.  </p>
+<p>과거에는 태양 남중 시간이 정오-즉 낮 12시 였습니다.<br />
+이런경우  경도가 다르면 시각도 다르게 됩니다.  </p>
+<p>통신도 불가능하고, 이동도 걸어서 다니거나 마차 타고 다닐 때야 문제 없겠지만<br />
+요즘 그런 제도를 쓰면 강릉과 서울도 시간이 달라져 불편함이 끝도 없겠죠.<br />
+따라서 현대는 시간 기준선으로 시간을 정 합니다.<br />
+지구경도는 360도 이고 하루는 24시간 임으로  </p>
+<p>360/24 = 15  </p>
+<p>15도 차이가 나면 1시간 차이가 납니다.<br />
+1도는 4분 차이.  </p>
+<p>따라서 15도 마다 1시간 단위로 기준시각 경도가 설정되어 있고<br />
+우리나라와 일본은 도오쿄오 주변을 지나는 동경 135도를<br />
+중국은 북경 지방을 지나는 동경 120도를 기준으로 합니다.  </p>
+<p>그 중간쯤에 있는 서울중구는 127도로 살짝 120도에 가깝지만
+일본 지배 때문인지 동경135도가 기준입니다.  </p>
+<p>얼마전에 북한은 30분을 느추어 (지금은 원위치 되었나?) 세계의 지탄을 받았었습다. 
+15도 간격의 시간 기준선을 안지켰기 때문이죠.  </p>
+<p>그럼 본론으로 들어가서 127도인 서울에서 정오 12시에 태양 위치를 확인하면<br />
+태양은 동경 135도에 있기 때문에 8도 동쪽에 있게 됩니다.<br />
+따라서 남중시간은 8*4=32분이 느추어져 12:32분에 남중이 일어납니다.<br />
+일몰 일출도 경도에 따라 시간을 조정 해 주어야 합니다.</p>
+<p>세계에서 다 통하는 일출 일몰 계산기를 만들려면<br />
+시간 기준선과 위치 경도를 입력하고 계산하면 됩니다.<br />
+외부 서비스를 하려면 DB 에 지역명과 그지역의 경도위도를 자료로 넣어두고
+불러다 쓰면 될 겁니다.<br />
+여기서는 우리나라에서만 사용하는 것으로 하고, 135도를 시준 선으로 정합니다.</p>
+<p>태양광의 굴절 9분(낮길이를 9분 늘림)과, 경도차이를 보정하여 일출 일몰 시간을 출력 합니다.<br />
+9분보정은 비율은 1이 1일 이기 때문에<br />
+9/60/24=0.00625를 밤 비율에서 빼주면 됩니다.<br />
+앞서 회차까지 모두 정리하면</p>
+<hr />
+<p>밤길이의 비율은 2×Acos(tan(태양방향지구기울기)×tan(위도))  / 360
+태양방향지구기울기 : 하지 23.5, 춘분,추분 0, 동지 -23.5, 변화는 sin 곡선을 그림<br />
+경도에 따른 차이 : 135를 기준으로 1도 작으면 4분 시간 지연<br />
+굴절에 따른 오차 조정 : 밤길이를 약9분 줄인다.(낮길이는 9분 늘어 난다)  </p>
+<p>https://blog.naver.com/i_jeju/221509242068</p>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">지구과학</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2019/04/10 09:42</p>
+                    <p class="static-profile" style="margin:0;padding:0;">이이충학</p>
+                </div>
+            </div>
+
+            
+                <a name="comment_2548"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">ㅅ</span>
+                    -
+                    <span style="font-size:11px;">
+                        신동준,
+                        2019/06/09 15:24
+                    </span>
+                </div>
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>2개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_17700"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C#</p>
+<pre><code class="cs">using System;
+using System.Text;
+
+namespace CD223
+{
+    class Program
+    {
+        static void Main()
+        {
+            Console.Write(&quot;월(month): &quot;);
+            int month = int.Parse(Console.ReadLine());
+            Console.Write(&quot;일(day): &quot;);
+            int day = int.Parse(Console.ReadLine());
+            Console.Write(&quot;위도(degree): &quot;);
+            double latitude = double.Parse(Console.ReadLine());
+            Console.Write(&quot;경도(degree): &quot;);
+            double longitude = double.Parse(Console.ReadLine());
+
+            DayNightRatio testCase = new DayNightRatio(month, day, latitude, longitude);
+            Console.WriteLine(testCase.DisplayResult());
+        }
+    }
+
+    public class DayNightRatio
+    {
+        private readonly double AxialTilt;
+        private readonly double Latitude;
+        private readonly double Longitude;
+
+        public DayNightRatio(int month, int day, double latitude, double longitude)
+        {
+            AxialTilt = DateToAxialTilt(month, day);
+            Latitude = latitude;
+            Longitude = longitude;
+        }
+
+        private double NightRatio()
+        {
+            if (Math.Abs(AxialTilt) &gt; 90 - Math.Abs(Latitude))
+            {
+                return AxialTilt * Latitude &gt;= 0 ? 0 : 1;
+            }
+            double theta3Rad =
+                Math.Acos(Math.Tan(ToRad(AxialTilt)) * Math.Tan(ToRad(Latitude)));
+            return 2 * ToDeg(theta3Rad) / 360 - 0.00625; // 굴절 9분 보정
+        }
+
+        public string DisplayResult()
+        {
+            StringBuilder sb = new StringBuilder();
+            double ratio = NightRatio();
+            if (ratio &lt;= 0)
+            {
+                sb.AppendLine(&quot;계속 낮입니다.&quot;);
+            }
+            else if (ratio &gt;= 1)
+            {
+                sb.AppendLine(&quot;계속 밤입니다.&quot;);
+            }
+            else
+            {
+                TimeSpan sunrise =
+                    TimeSpan.FromSeconds(60 * 60 * 24 * ratio / 2);
+                sunrise += TimeSpan.FromMinutes((135 - Longitude) * 4);
+                TimeSpan sunset =
+                    TimeSpan.FromSeconds(60 * 60 * 12 + 60 * 60 * 24 * (1 - ratio) / 2);
+                sunset += TimeSpan.FromMinutes((135 - Longitude) * 4);
+                sb.AppendLine($&quot;일출 시간 {sunrise.ToString()}&quot;);
+                sb.AppendLine($&quot;일몰 시간 {sunset.ToString()}&quot;);
+            }
+            return sb.ToString();
+        }
+
+        // 월, 일 =&gt; 자전축 기울기 계산
+        private static double DateToAxialTilt(int month, int day)
+        {
+            // 평년(2019년, 365일) 기준으로 일차 계산
+            DateTime VernalEquinox = new DateTime(2019, 3, 21); // 춘분을 기준으로
+            DateTime checkDate = new DateTime(2019, month, day);
+            int timeSpan = (checkDate - VernalEquinox).Days;
+            timeSpan = timeSpan &lt; 0 ? 365 + timeSpan : timeSpan;
+            // Sin 함수 적용
+            double axialTilt = 23.5 * Math.Sin(ToRad(360 * (double)timeSpan / 365));
+            return axialTilt;
+        }
+
+        private static double ToRad(double degree) =&gt; 2 * Math.PI / 360 * degree;
+
+        private static double ToDeg(double rad) =&gt; 360 / (2 * Math.PI) * rad;
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/03 09:02</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_17482"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#일출, 일몰시간 계산
+import math
+
+def NightR(Q1,Q2): #밤 비율 계산
+    if  abs(Q2) &gt; abs(90)-abs(Q1):
+        if Q1*Q2 &gt; 0:
+           return 0
+        if Q1*Q2 &lt; 0:
+            return 1
+    rat1=math.acos(math.tan(math.radians(Q1))*math.tan(math.radians(Q2)))
+    rat2=2*math.degrees(rat1)
+    return rat2/360
+
+def ptime(tit,stim): #비율을 시간으로 계산 및 출력
+    nti=int(stim*24)
+    ims=stim*24 - nti
+    nmi=int(ims*60)
+    ims=ims*60 - nmi
+    nse=int(ims*60+0.5)
+    if nse==60 :     #반올림처리
+        nse=0
+        nmi=nmi+1
+        if nmi==60 :
+            nmi=0
+            nti=nti+1
+    print(tit,nti,':',nmi,':',nse)
+
+# 월    1   2  3  4  5  6   7   8   9  10  11  12
+lmsd=[285,316,344,10,40,71,101,132,163,193,214,254] #춘분(3.21)부터 전월까지 누적일
+mm=int(input('월입력 :'))
+dd=int(input('일입력 :'))
+
+se2=float(input('위도 입력 :')) #북위 +, 남위 -
+se3=float(input('경도 입력 :'))
+
+pd=lmsd[mm-1]+dd #경과 날자
+if pd &gt;= 365 :   #3월 21~31일 처리
+    pd=pd-365
+
+se1=23.5*math.sin(math.radians(pd*360/365)) #각도 계산 sin90
+nrat=NightR(se1,se2)
+nrat=nrat-0.00625 #9분보정
+
+if  nrat &lt;= 0:
+    print('계속 낮 입니다')
+else:
+    if nrat &gt;= 1:
+        print('계속 밤 입니다')
+    else :
+        ptime('일출시간',nrat/2+(135-se3)/360)
+        ptime('일몰시간',1-nrat/2+(135-se3)/360)
+</code></pre>
+
+<p>수행결과<br />
+월입력 :4<br />
+일입력 :15<br />
+위도 입력 :37.5<br />
+경도 입력 :127<br />
+일출시간 5 : 57 : 1<br />
+일몰시간 19 : 6 : 59  </p>
+<p>네이버에 올라온 4월 15일 일출일몰 시간(서울)
+일출 05:58
+일몰 19:07</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/04/11 09:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이이충학</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

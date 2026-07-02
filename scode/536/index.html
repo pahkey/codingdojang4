@@ -1,0 +1,842 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="이진트리를 그리기 위해 각 노드의 위치 (x,y)를 계산하는 문제다. 트리의 노드 위치를 결정하기 위한 레이아웃 알고리즘은 아래와 같다.
+
+출처: https://sites.google.com/site/prologsite/prolog-probl...">
+    <title>이진트리 레이아웃 #3 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">이진트리 레이아웃 #3</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">3</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 4</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>이진트리를 그리기 위해 각 노드의 위치 (x,y)를 계산하는 문제다. 트리의 노드 위치를 결정하기 위한 레이아웃 알고리즘은 아래와 같다.</p>
+<p>출처: https://sites.google.com/site/prologsite/prolog-problems/4</p>
+<h2 id="_1">레이아웃 알고리즘</h2>
+<p><img alt="" src="https://prof.ti.bfh.ch/hew1/informatik3/prolog/p-99/p66.gif" /></p>
+<p>모든 노드에서 좌우 간격의 대칭을 유지하면서 최대한 컴팩트하게 만든다.</p>
+<h2 id="_2">입출력</h2>
+<p>트리를 생성하기 위한 입력 포맷이나, 레이아웃이 적용된 각 노드의 위치를 출력하는 형식은 자유롭게 결정한다.</p>
+<h3 id="1">입력 예 #1</h3>
+<p><code>"n(k(c(a,e(d,g)),m),u(p(,q),))"</code>와 같이 입력받을 수 있다. <code>parent(left,right)</code>의 모양을 재귀적으로 표현한 것이다. (자식이 둘다 없으면 괄호부분이 생략된다.)</p>
+<h3 id="2">입력 예 #2</h3>
+<p><code>"nkcmaedgupq"</code>와 같이 입력 받아 각 글자를 노드의 라벨로 하여 이진탐색트리를 만들 수 있다.</p>
+<h3 id="3">입력 예 #3</h3>
+<p>입력을 따로 신경쓰고 싶지 않다면 코드로 직접 트리를 만들어도 된다. 만약 Java라면 다음과 같을 것이다.</p>
+<pre><code class="java">class Tree&lt;A&gt; {
+  A value;
+  Tree&lt;A&gt; left;
+  Tree&lt;A&gt; right;
+  ...
+}
+
+Tree&lt;String&gt; t = new Tree(&quot;root&quot;, new Tree(&quot;left&quot;, null, null), new Tree(&quot;right&quot;, null, null));
+</code></pre>
+
+<h3 id="1_1">출력 예 #1</h3>
+<p>inorder 출력으로 각 노드의 내용과 위치 (x,y)를 출력한다.</p>
+<pre><code>a 1 4
+c 2 3
+d 2 5
+e 3 4
+g 4 5
+...
+</code></pre>
+
+<h3 id="2_1">출력 예 #2</h3>
+<p>HTML/SVG/GraphViz 등으로 직접 그려도 좋을 것이다.</p>
+<h3 id="3_1">출력 예 #3</h3>
+<p>출력할 필요없이 테스트 코드로 확인해도 좋다.</p>
+<pre><code class="java">public void test() {
+  Tree&lt;Integer&gt; t = ...;
+  Tree&lt;Point&gt;   expected = ...;
+  assertEquals(expected, layout(t));
+}
+</code></pre>
+
+<h2 id="_3">확인하기</h2>
+<p><a href="https://jsbin.com/popudab">여기</a>에서 눈으로 결과를 확인할 수 있다.</p>
+<p>아래 입력들에 대해서 잘 동작하는지 확인해보자.</p>
+<ol>
+<li>qawrsxedcfvutgbyhnujmikolp</li>
+<li>qwertyuiopasdfghjklzxcvbnm</li>
+<li>afgzxtkjijbed</li>
+</ol>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">이진트리</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2016/11/16 06:26</p>
+                    <p class="static-profile" style="margin:0;padding:0;">Han Jooyung</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>5개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_5282"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <h2 id="_1">아이디어</h2>
+<p>노드의 양팔 길이가 대칭이다.
+재귀적으로 현재 노드에 대해 양쪽 자식이 모두 layout이 적용된 다음 컴팩트하게 자신의 팔 길이를 결정하면 된다.</p>
+<h3 id="_2">양쪽 자식들의 팔길이 대칭 맞추기</h3>
+<p>우선 양쪽 자식은 따로 계산되므로 팔 길이가 깊이별로 달라질 수 있는데, 이를 먼저 맞춰줘야 한다.
+예를 들어 왼쪽 자식은 팔길이가 최종 1-2-1으로 결정되었는데, 오른쪽 자식은 1-1-2로 결정되었다면
+최종은 깊이별로 더 큰 값으로 맞춰서 1-2-2가 되어야 한다.</p>
+<h3 id="_3">자신의 팔길이 결정하기</h3>
+<p>그런다음 컴팩트한 팔길이를 계산하려면 왼쪽 자식의 오른쪽 프로파일(단계별 가장 큰 x값들)과
+오른쪽 자식의 왼쪽 프로파일(단계별 가장 작은 x값들)을 계산하여 각 단계별로 x가 겹치지 않는 팔길이를 계산하면 된다.</p>
+<h3 id="_4">결정된 팔길이에 맞춰 양쪽 자식 떨어뜨리기</h3>
+<p>결정된 팔 길이에 맞춰서 다시 자식들을 translate하는 것도 필요.</p>
+<h2 id="_5">코드</h2>
+<p>재귀를 위한 도움함수 <code>layout3</code>를 호출한다.
+이때 기준 <code>x</code>는 마지막에 최소 <code>x</code> 기준점이 1이 되도록 translate해준다.
+최소 <code>x</code>를 찾으려면 모든 노드를 탐색해야 한다. (오른쪽 자식의 왼쪽 자식이 최소 x를 가질 수도 있으므로)</p>
+<pre><code class="c">void tree_layout3(tree* t) {
+    int height = tree_height(t) - 1;
+    int* arms = (int*)calloc(height, sizeof(int));
+    layout3(t, 0, 1, arms, height);  // arms 버퍼는 최종 결정된 팔길이를 저장한다.
+    int minx = tree_fold(t, INT_MAX, tree_xmin);
+    tree_translate_x(t, 1-minx);
+    free(arms);
+}
+</code></pre>
+
+<p>재귀 <code>layout3</code> 함수는 먼저 왼쪽 오른쪽 자식을 처리한 다음 자식들이 겹치지 않도록 양쪽으로 벌려놓는다.
+팔길이 대칭을 맞춰주기 위해 재귀계산을 할때 그 결과로 레벨별 팔길이를 반환한다.(<code>arms</code> 반환인자)</p>
+<pre><code class="c">void layout3(tree* t, int x, int y, int* arms, int n) {
+    int* armsLeft = (int*)calloc(n-1, sizeof(int));
+    int* armsRight = (int*)calloc(n-1, sizeof(int));
+
+    t-&gt;x = x;
+    t-&gt;y = y;
+
+    // 먼저 재귀적으로 팔 길이를 모두 결정한다. 이 때 x에서 시작하므로 겹칠 것이다.
+    if (t-&gt;left) layout3(t-&gt;left, x, y+1, armsLeft, n-1);
+    if (t-&gt;right) layout3(t-&gt;right, x, y+1, armsRight, n-1);
+
+    // 단계별 팔 길이 중 큰 쪽으로 맞춰주기
+    for (int i=0; i&lt;n-1; i++) {
+        arms[i+1] = max(armsLeft[i], armsRight[i]);
+    }
+
+    if (t-&gt;left) layout3_setArms(t-&gt;left, x, arms+1);
+    if (t-&gt;right) layout3_setArms(t-&gt;right, x, arms+1);
+
+    // 여기부터 armsLeft와 armsRight는 그냥 버퍼로 사용
+    for (int i=0; i&lt;n-1; i++) {
+        armsLeft[i] = INT_MIN;
+        armsRight[i] = INT_MAX;
+    }
+    // left의 오른쪽 프로파일
+    if (t-&gt;left) tree_right_profile(t-&gt;left, armsLeft);
+    // right의 왼쪽 프로파일
+    if (t-&gt;right) tree_left_profile(t-&gt;right, armsRight);
+
+    // 두 프로파일이 겹치지 않도록 현재 노드의 arm을 결정
+    int diff = INT_MAX;
+    for (int i=0; i&lt;n-1; i++) {
+        if (armsRight[i] == INT_MAX || armsLeft[i] == INT_MIN) break;
+        diff = min(diff, armsRight[i] - armsLeft[i]);
+    }
+
+    int arm = 1 + max(0, -diff / 2);
+
+    if (t-&gt;left) tree_translate_x(t-&gt;left, -arm);
+    if (t-&gt;right) tree_translate_x(t-&gt;right, arm);
+    arms[0] = arm; // 현재 노드 팔길이 저장
+
+    free(armsLeft);
+    free(armsRight);
+}
+</code></pre>
+
+<p>팔길이를 재설정하는 함수 <code>setArms</code></p>
+<pre><code class="c">void layout3_setArms(tree* t, int x, int* arms) {
+    t-&gt;x = x;
+    if (t-&gt;left) layout3_setArms(t-&gt;left, x-*arms, arms+1);
+    if (t-&gt;right) layout3_setArms(t-&gt;right, x+*arms, arms+1);
+}
+</code></pre>
+
+<p>왼쪽/오른쪽 프로파일 구하려면 모든 노드를 돌면서 x좌표의 min혹은 max를 저장하면 된다.
+<code>profile</code>은 레벨별로 최소값을 저장하기 위한 것이다.</p>
+<pre><code class="c">void tree_left_profile(tree* t, int* profile) {
+    *profile = min(t-&gt;x, *profile);
+    if (t-&gt;left) tree_left_profile(t-&gt;left, profile+1);
+    if (t-&gt;right) tree_left_profile(t-&gt;right, profile+1);
+}
+
+void tree_right_profile(tree* t, int* profile) {
+    *profile = max(t-&gt;x, *profile);
+    if (t-&gt;left) tree_right_profile(t-&gt;left, profile+1);
+    if (t-&gt;right) tree_right_profile(t-&gt;right, profile+1);
+}
+</code></pre>
+
+<p>마지막으로 트리 전체의 최소 x는 right profile의 min값으로 계산할 수도 있겠으나
+여기서는 <code>tree_fold</code> 라는 재귀함수를 이용하였다.</p>
+<pre><code class="c">int tree_xmin(tree* t, int l, int r) {
+    return min(t-&gt;x, min(l, r));
+}
+
+int tree_fold(tree* t, int z, int (*f)(tree*,int,int)) {
+    if (!t) return z;
+    int l = tree_fold(t-&gt;left, z, f);
+    int r = tree_fold(t-&gt;right, z, f);
+    return f(t, l, r);
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/11/16 12:08</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Han Jooyung</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5435"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<p>중복(x,y위치)을 갖는 컴팩트 트리를 대칭이 되도록 오른쪽에서 살며시 당기는 방식. 중복지점을 찾고 중복노드 둘의 공통부모를 찾은 뒤 공통부모 포함 우측 노드가 대칭이 되도록 이동/반복. 2번 풀이에서 Node 구조 수정(부모노드 검색 요건) minimize(당기기) 추가.</p>
+<pre><code class="ruby">add = -&gt;par,node do
+  par ? (node.y = par.y + 1; node.u = par.id) : (return node)
+  chd = node.val &lt; par.val ? par.l : par.r
+  chd ? add[chd, node] : (node.val &lt; par.val ? par.l = node : par.r = node)
+  par
+end
+
+calc_x = -&gt;node,par do
+  left_x = par.x + (node == par.l ? -1 : 1) if par
+  node.x = (node.l ? node.l.x + 1 : par&amp;.x &gt; 0 ? left_x : 1)
+  node.r.x = node.x + 1 if node.r
+end
+
+minimize = -&gt;nodes,vst do
+  find_dups = -&gt; { nodes.group_by {|e| [e.x, e.y]}.select {|_,v| v.size &gt; 1}.first }
+  while dups = find_dups[] do
+    d1u, d2u = dups[1].map {|e| parent_id = nodes[e.u] }
+    d1u, d2u = nodes[d1u.u], nodes[d2u.u] until d1u == d2u
+    d1u.x += 1
+    vst.map.with_index {|e,i| e.x += 2 if i &gt; vst.index {|e| e.id == d1u.id } }
+  end
+end
+
+layout = -&gt;tree_str=gets.chop,visits=[] do
+  Node = Struct.new(:id, :val, :x, :y, :l, :r, :u)
+  nodes = tree_str.chars.map.with_index {|c,i| Node.new(i, c, 0, 1)}
+  btree = nodes.reduce(&amp;add)
+  trav = -&gt;node,par=nil do
+    trav[node.l, node] if node.l
+    calc_x[node, par]
+    visits &lt;&lt; node
+    trav[node.r, node] if node.r
+  end
+  trav[btree]
+  minimize[nodes, visits]
+  puts visits.map {|e| [e.val, e.x, e.y].join(&quot; &quot;) }
+end
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby">minimized_tree1 = &quot;a 1 4\n&quot; + &quot;c 2 3\n&quot; + &quot;d 2 5\n&quot; + &quot;e 3 4\n&quot; + 
+                 &quot;g 4 5\n&quot; + &quot;k 3 2\n&quot; + &quot;m 4 3\n&quot; + &quot;n 5 1\n&quot; + 
+                 &quot;p 6 3\n&quot; + &quot;q 7 4\n&quot; + &quot;u 7 2\n&quot;
+expect{ layout[&quot;nkcmaedgupq&quot;] }.to output(minimized_tree1).to_stdout
+</code></pre>
+
+<p><strong>Output</strong></p>
+<pre><code class="ruby">cmd &gt; layout.call
+nkcmaedgupq
+a 1 4 
+c 2 3 
+d 2 5 
+e 3 4 
+g 4 5 
+k 3 2 
+m 4 3 
+n 5 1 
+p 6 3 
+q 7 4 
+u 7 2  
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/11/28 12:25</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1918"></a>
+                            <div class="comment_line comment-content">
+                                
+                                    <span style="color:orangered;">+1</span>
+                                
+                                <span style="white-space:pre-wrap;">입력을 &quot;qwertyuiopasdfghjklzxcvbnm&quot;(qwerty 순서대로) 로 하니 트리 노드들이 중복되는 문제가 있네요</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Han Jooyung,
+                                    2016/11/29 12:18
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1919"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">체크 감사합니다. 알려주신 케이스로 점검해보니 알고리즘에 문제가 있네요.(중복을 허용한 트리생성)</span>
+                                -
+                                <span style="font-size:11px;">
+                                    rk,
+                                    2016/11/29 15:13
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8033"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>일단 적당히 배치한 후에 subtree들이 겹치는지 판단하는 함수를 만들고,</p>
+<p>postorder로 순회하면서 안 겹칠 때까지 밀착시키는 게 그나마 간단해 보입니다만... 어렵게 했습니다.</p>
+<p>Han Jooyung 님 풀이와 접근 방법은 거의 같습니다. 더 복잡할 뿐..-_-;</p>
+<p>.</p>
+<p>메인 루틴:</p>
+<pre><code class="python">from math import ceil
+from itertools import zip_longest
+
+btree = &quot; nkucmp.ae...q....dg..................................&quot;
+arm   = [0 for x in btree]
+compute_armlength()
+def root_x(idx): return 1 if not e_self(idx) else arm[idx] + root_x(idx*2)
+inorder(1, root_x(1), 1)
+</code></pre>
+
+<p>트리와 각 노드의 팔 길이는 그냥 배열처럼 취급했습니다. (이전 레이아웃#2 문제 풀이 참고)</p>
+<p>인덱스 검사하기 귀찮아서 길이는 넉넉하게 줬구요.</p>
+<p>먼저 compute_armlength()로 각 노드의 팔 길이를 계산합니다.</p>
+<p>그리고 왼쪽 팔을 죽 따라가서 루트노드 x좌표를 계산한 후(root_x()함수) inorder로 순회하면서 출력합니다.</p>
+<p>일단 노드가 존재하는지 검사하는 함수들과</p>
+<pre><code class="python">def e_self(idx): return btree[idx] != '.'
+def e_left(idx): return btree[idx*2] != '.'
+def e_right(idx): return btree[idx*2+1] != '.'
+</code></pre>
+
+<p>루트노드부터 시작해서 각 노드의 팔 길이를 더하고 빼서 출력하는 재귀함수입니다.</p>
+<p>(루트 위치 안 잡고 한 번에 해 보려다가 상당히 삽질했음...)</p>
+<pre><code class="python">def inorder(idx, x, y):
+    if not e_self(idx): return
+    inorder(idx*2,   x-arm[idx], y+1)
+    print(btree[idx], x, y)
+    inorder(idx*2+1, x+arm[idx], y+1)
+</code></pre>
+
+<p>.</p>
+<p>그리고 팔 길이를 계산하는 함수:</p>
+<p>배열을 거꾸로 스캔하는데, 트리로 치면 BFS의 역순으로 탐색하는 게 됩니다. </p>
+<p>배열로 구현한 김에 해 봤는데 postorder로 순회해도 방문 순서는 약간 다르지만 같은 결과가 나옵니다.</p>
+<p>즉 어떤 노드 x의 팔 길이를 계산하는 시점에는 x의 자식을 루트로 하는 서브트리들은 계산이 끝난 상태입니다.</p>
+<p>자식이 없는 리프노드는 팔 길이가 0, </p>
+<p>자식이 하나뿐이면 1이고, </p>
+<p>자식이 둘이면 두 서브트리가 겹치지 않는 최소거리를 2로 나눈(팔이 두 개니까) 값이 팔 길이가 됩니다.</p>
+<pre><code class="python">def compute_armlength():
+    for i in range(len(btree)-1, 0, -1):
+        if not e_self(i):  # 노드 없는 자리
+            pass        
+        elif not e_left(i) and not e_right(i):  # 자식 없음
+            arm[i] = 0        
+        elif not e_left(i) and e_right(i) or e_left(i) and not e_right(i):  # 자식 하나
+            arm[i] = 1    
+        else:
+            arm[i] = ceil(mindiff(i) / 2)  # 자식 둘
+</code></pre>
+
+<p>.</p>
+<p>compute_armlength()의 마지막 줄에서 호출되는 mindiff()함수와 거기 딸린 함수입니다:</p>
+<pre><code class="python"># btree[idx]의 왼쪽 자식과 오른쪽 자식의 (배치 가능한) 최소거리
+def mindiff(idx):
+    leftsub  = vertical_border(idx*2,   'rightside')  # 왼쪽   자식의 오른쪽 세로경계선
+    rightsub = vertical_border(idx*2+1, 'leftside' )  # 오른쪽 자식의 왼쪽   세로경계선
+
+    # 각 depth별 최소 너비
+    if len(leftsub) &gt;= len(rightsub):
+        mindiff = list(map(lambda x: x[0] - x[1] + 1, zip_longest(leftsub, rightsub, fillvalue=1000000)))
+    else:
+        mindiff = list(map(lambda x: x[0] - x[1] + 1, zip_longest(leftsub, rightsub, fillvalue=-1000000)))
+
+    return max(mindiff)
+</code></pre>
+
+<p>mindiff() 함수는 </p>
+<p>vertical_border() 함수에서 왼쪽 서브트리의 오른쪽 세로경계선과 오른쪽 서브트리의 왼쪽 세로경계선을 받아 와서</p>
+<p>두 서브트리가 겹치지 않는 최소 거리를 구합니다.</p>
+<p>문제의 입력 예에서 루트 n를 예로 들면, </p>
+<p>k를 루트로 하는 서브트리의 왼쪽 세로경계선은 k-m-e-g 이고, k를 기준(0)으로 한 각각의 x좌표 offset은 [0, 1, 0, 1] 입니다.</p>
+<p>u을 루트로 하는 서브트리의 오른쪽 경계선은 u-p-q-? 이고, u를 기준(0)으로 x offset이 [0, -1, 0, ?] 입니다,</p>
+<p>적당한 수(fillvalue)를 채워서 리스트 길이를 맞추고 같은 depth끼리 차를 구하면 </p>
+<p>[0-0, 1-(-1), 0-0, 1-?] = [0, 2, 0, ?]</p>
+<p>이고, 이중 가장 큰 값이 2입니다.</p>
+<p>즉 이 2는 좌우 서브트리가 정확히 겹치는 k와 u의 거리이고, 안 겹쳐야 하니까 1을 더해서 3이 최소 거리가 됩니다.</p>
+<p>설명이 장황해서 죄송합니다-_-;</p>
+<pre><code class="python"># btree[idx]를 기준(0)으로, 이 서브트리의 왼쪽/오른쪽 세로경계선을 리턴한다.
+def vertical_border(idx, dir):
+    if not e_self(idx):
+        return []
+
+    # 왼쪽/오른쪽 서브트리의 dir방향 세로경계선
+    leftsub = vertical_border(idx*2, dir)
+    rightsub = vertical_border(idx*2+1, dir)
+
+    # 각 자식을 기준(0)으로 한 좌표이므로, 자신의 팔 길이만큼 이동시킴
+    leftsub  = [x - arm[idx] for x in leftsub]
+    rightsub = [x + arm[idx] for x in rightsub]
+
+    if dir == 'rightside':
+        # leftsub와 rightsub를 합쳐서, depth별로 제일 오른쪽 노드만 추린다.
+        bigger  = lambda x : x[0] if x[0] &gt;= x[1] else x[1]
+        merged = [bigger(x)  for x in zip_longest(leftsub, rightsub, fillvalue=-100000)]
+    else:
+        # leftsub와 rightsub를 합쳐서, depth별로 제일 왼쪽 노드만 추린다.
+        smaller = lambda x : x[0] if x[0] &lt;= x[1] else x[1]
+        merged = [smaller(x) for x in zip_longest(leftsub, rightsub, fillvalue=100000)]
+
+    return [0] + merged
+</code></pre>
+
+<p>추가) vertical_border는 DP로 하는 게 좋겠네요. 나중에 고치겠습니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/07/27 04:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9726"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from string import ascii_letters
+from itertools import count
+
+class node:
+    class PositionOverlap(Exception): pass
+
+    def __init__(self, name, left = None, right = None):
+        self.name = name
+        self.left = left
+        self.right = right
+        self.parent = None
+        if self.left:
+            self.left.parent = self
+        if self.right:
+            self.right.parent = self
+
+    def in_order_trav(self, counter = None, queue = {}, depth = 1):
+        if counter == None:
+            counter = count()
+        if self.left:
+            self.left.in_order_trav(counter, queue, depth + 1)
+        queue[next(counter)] = {depth:self}
+        if self.right:
+            self.right.in_order_trav(counter, queue, depth + 1)
+        return queue
+
+    def even_number_layout(self, width = 0, pos = 0, queue = {}, depth = 1):
+        if width == 0:
+            width = 2**(self.get_max_depth()-2)
+        if self.left:
+            self.left.even_number_layout(width/2, pos-width, queue, depth + 1)
+        queue[pos] = {depth:self}
+        if self.right:
+            self.right.even_number_layout(width/2, pos+width, queue, depth + 1)
+        return queue
+
+    def symmetry_layout(self, width_map = {}, pos = 0, queue = {}, depth = 1):
+        if depth == 1:
+            for i in range(1, self.get_max_depth()):
+                width_map[i] = 1
+            while True:
+                try:
+                    queue[pos] = {depth:self}
+                    if self.left:
+                        self.left.symmetry_layout(width_map, pos-width_map[depth], queue, depth + 1)
+                    if self.right:
+                        self.right.symmetry_layout(width_map, pos+width_map[depth], queue, depth + 1)
+                    return queue
+                except node.PositionOverlap:
+                    queue = {}
+        else:
+            if pos in queue and depth in queue[pos]:
+                sp_d = self.get_shared_parent(queue[pos][depth]).get_depth()
+                width_map[sp_d] += 1
+                raise node.PositionOverlap
+            if pos in queue:
+                queue[pos].update({depth:self})
+            else:
+                queue[pos] = {depth:self}
+            if self.left:
+                self.left.symmetry_layout(width_map, pos-width_map[depth], queue, depth + 1)
+            if self.right:
+                self.right.symmetry_layout(width_map, pos+width_map[depth], queue, depth + 1)
+
+    def get_max_depth(self, depth = 1):
+        res = depth
+        if self.left:
+            res = max(res, self.left.get_max_depth(depth + 1))
+        if self.right:
+            res = max(res, self.right.get_max_depth(depth + 1))
+        return res
+
+    def get_depth(self, depth = 1):
+        return (self.parent.get_depth(depth+1) if self.parent else depth)
+
+    def get_shared_parent(one, other):
+        while one.get_depth() &lt; other.get_depth():
+            other = other.parent
+            if other == None:
+                raise node.NoParent
+        while one.get_depth() &gt; other.get_depth():
+            one = one.parent
+            if one == None:
+                raise node.NoParent
+        while one != other:
+            one = one.parent
+            other = other.parent
+        return one
+
+    def __str__(self):
+        return self.name
+
+class table:
+    def __init__(self, queue:{int:{int:node}}):
+        self.max_height = max(max(queue[key]) for key in queue)
+        self.table = []
+        for i in range(self.max_height):
+            self.table.append(list(' ' * (int(max(queue) - min(queue))+1)))
+        transition = 0-min(queue)
+        for x in queue:
+            for y in queue[x]:
+                self.table[y-1][int(x + transition)] = queue[x][y].name
+
+    def __str__(self):
+        res = '   ' + ' '.join('%2d'%i for i in range(1, len(self.table[0])+1)) + '\n'
+        for height in range(1, self.max_height+1):
+            res += '%2d '%height + ' '.join('%2s'%i for i in self.table[height-1])
+            res += '\n'
+        return res
+
+def make_tree(_in):
+    t_in = list(_in)
+    for i in range(len(_in)-1, -1, -1):
+        char = t_in[i]
+        if char in ascii_letters:
+            if _in[i+1] == '(':
+                t_in.insert(i+2, ',')
+                t_in[i], t_in[i+1] = t_in[i+1], t_in[i]
+                t_in.insert(i+2, '\'')
+                t_in.insert(i+1, '\'')
+                t_in = t_in[:i] + list('node') + t_in[i:]
+            else:
+                t_in = t_in[:i] + list('node(\'') + [t_in[i], '\')'] + t_in[i+1:]
+
+    str_in = ''.join(t_in)
+    str_in = str_in.replace(',,', ', right=')
+    str_in = str_in.replace(',)', ')')
+
+    root = eval(str_in)
+    return root
+
+if __name__ == '__main__':
+    in_1 = 'n(k(c(a,h(g(e,),)),m),u(p(,s(q,)),))'
+    print(table(make_tree(in_1).in_order_trav()))
+    in_2 = 'n(k(c(a,e(d,g)),m),u(p(,q),))'
+    print(table(make_tree(in_2).even_number_layout()))
+    in_3 = 'n(k(c(a,e(d,g)),m),u(p(,q),))'
+    print(table(make_tree(in_3).symmetry_layout()))
+
+</code></pre>
+
+<p>각각의 깊이마다 어느 정도로 펼쳐질 지 결정하는 width_map을 초기화하고, 위치가 중복되는 노드들의 공통 부모를 찾아 벌어지는 폭이 커지도록 증가시키고 중복되지 않을 때까지 반복합니다. 이진트리 레이아웃 #1과 #2의 해법도 들어있어서 좀 깁니다.</p>
+<p>파이썬 3.6.2 64</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/12/20 01:34</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Flair Sizz</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_13818"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">class binarytreelayout:
+    def __init__(self,data=None):
+        self.tree = []
+        if data == None: return
+        else:
+            data = ''.join(j for i,j in enumerate(data) if j not in data[:i])
+            tmp = sorted(data)
+            item = ( [i,tmp.index(i)] for i in data )
+
+            for node in item:
+                depth,id = 0,0
+                while 1:
+                    if depth == len(self.tree): self.tree.append([None for i in range(2**depth)])
+                    if self.tree[depth][id] == None: self.tree[depth][id] = node; break
+                    if self.tree[depth][id][0] &gt; node[0]: id = id*2
+                    else: id = id*2 + 1
+                    depth += 1
+        return
+
+    def layout3(self):
+        for i in reversed(range(len(self.tree)-1)):
+            for j,k in enumerate(self.tree[i]):
+                if k:
+                    lnt = 1+min(self.__searchdepth(i+1,j&lt;&lt;1,1),self.__searchdepth(i+1,(j&lt;&lt;1)+1,0))
+                    while not self.__layoutedit(i,j,lnt): lnt += 1
+
+        tmp = min(j[1] for i in self.tree
+                       for j in i         if j is not None)
+
+        return (f'{j[0]} {j[1]+1-tmp} {i+1}' for i in range(len(self.tree))
+                                             for j in self.tree[i] if j)
+
+    def __layoutedit(self,x,y,lnt):
+        ys,ye = y,y
+        result = True
+        ldist,rdist = 0,0
+
+        if self.tree[x+1][y&lt;&lt;1] is not None: ldist = self.tree[x][y][1] - lnt - self.tree[x+1][y&lt;&lt;1][1]
+        if self.tree[x+1][(y&lt;&lt;1)+1] is not None: rdist = self.tree[x][y][1] + lnt - self.tree[x+1][(y&lt;&lt;1)+1][1]
+
+        while x &lt; len(self.tree)-1:
+            x,ys,ye = x+1, ys&lt;&lt;1, (ye&lt;&lt;1)+1
+            for i,j in enumerate(self.tree[x]):
+                if j:
+                    if ys &lt;= i &lt;= (ys+ye)&gt;&gt;1 : j[1] = self.tree[x][i][1] + ldist
+                    elif (ys+ye)&gt;&gt;1 &lt; i &lt;= ye: j[1] = self.tree[x][i][1] + rdist
+
+            tmp1 = (self.tree[x][i][1] for i in range((ys+ye)&gt;&gt;1, ys-1, -1) if self.tree[x][i])
+            tmp2 = (self.tree[x][i][1] for i in range(((ys+ye)&gt;&gt;1)+1, ye+1) if self.tree[x][i])
+
+            try:
+                if next(tmp1) &gt;= next(tmp2): result = False
+            except StopIteration: pass
+
+        return result
+
+    def __searchdepth(self,x,y,lor):
+        cnt = 0
+        while x &lt; len(self.tree)-1:
+            x, y = x+1, (y&lt;&lt;1)+lor
+            if self.tree[x][y] is not None: cnt += 1
+            else: break
+        return cnt
+
+data = 'nkcmaedgupq'
+x = binarytreelayout(data)
+
+for i in sorted(x.layout3()): print(i)
+</code></pre>
+
+<p>기본 팔길이 = 1 + min(노드의 왼쪽노드의 오른쪽 깊이, 오른쪽 노드의 왼쪽 깊이)<br />
+예) c, a는 None e는 1 &gt;&gt;&gt; a의 기본 팔길이 1<br />
+예) n, k:1 u:1 &gt;&gt;&gt; n의 기본 팔길이 1+1<br />
+예) k, c:2 m:None &gt;&gt;&gt; k의 기본 팔길이 1  </p>
+<p>기본 팔길이를 시작으로 해서 하위 트리가 겹치는지 확인<br />
+겹치면 팔길이를 1씩 증가</p>
+<p>이 방식을 아래쪽 깊이의 노드 부터 위로 계산</p>
+<pre><code>a 1 4  
+c 2 3  
+d 2 5  
+e 3 4  
+g 4 5  
+k 3 2  
+m 4 3  
+n 5 1  
+p 6 3  
+q 7 4  
+u 7 2  
+</code></pre>
+
+<pre><code># qawrsxedcfvutgbyhnujmikolp
+a 3 2
+b 1 6
+c 2 5
+d 3 4
+e 4 3
+f 5 4
+g 6 5
+h 7 6
+i 6 9
+j 7 8
+k 7 10
+l 8 11
+m 8 9
+n 8 7
+o 9 8
+p 10 9
+q 7 1
+r 10 3
+s 11 4
+t 10 7
+u 11 6
+v 12 5
+w 11 2
+x 12 3
+y 13 4
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/28 19:33</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

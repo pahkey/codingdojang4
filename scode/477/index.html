@@ -1,0 +1,1357 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="알고리즘은 아니고 난해한 문제인데 이런문제를 코딩도장 회원님들은 어떻게 해결하시는지 한수 배우고 싶어 올려봅니다.
+
+### 정황 :
+서버에서 JSON 타입의 데이터가 담긴 Array 형태의 문자열을 클라이언트 도구로 전달해 줍니다.
+이때 ...">
+    <title>JSON 파싱을 위한 문자열 자르기 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">JSON 파싱을 위한 문자열 자르기</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">2</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 3</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>알고리즘은 아니고 난해한 문제인데 이런문제를 코딩도장 회원님들은 어떻게 해결하시는지 한수 배우고 싶어 올려봅니다.</p>
+<h3 id="_1">정황 :</h3>
+<p>서버에서 JSON 타입의 데이터가 담긴 Array 형태의 문자열을 클라이언트 도구로 전달해 줍니다.
+이때 서버에서 설정한 버퍼( ex)32 byte )의 양만큼 JSON 문자열이 Stream 형태로 전달되는데 다음과 같이 블록단위로 끊어서 전달되는것이 아닌 이전에 보낸데이터와 추가로 보내는 데이터가 규칙없이 버퍼길이만큼 중첩되어 매번 보내집니다.</p>
+<h3 id="_2">서버에서 전달되는 문자열 :</h3>
+<pre><code class="javascript">1st : '[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot;'
+2nd : '[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;d&quot;'
+3rd : '[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;dsfswde&quot; }, { &quot;seq&quot; : 2, &quot;content&quot;'
+.
+.
+.
+last : '[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, ......................{ &quot;seq&quot; : n, &quot;content&quot; : &quot;rtyy&quot; } ]'
+</code></pre>
+
+<p>위 예처럼 들어온 문자열을 다음과 같이 JSON 객체로 인스턴스화 될 수 있도록(언어별 제공되는 JSON Parser 로 처리할 수 있도록) 문자열을 최소 블록별로 자르고 중복전송되는 데이터는 버리고 Array 형태로 만들어 줘야 합니다.</p>
+<h3 id="_3">결과물 :</h3>
+<pre><code class="javascript">1st : X
+2nd : [ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; } ]
+3rd : [ { &quot;seq&quot; : 1, &quot;content&quot; : &quot;dsfswde&quot; } ]
+.
+.
+.
+last : [ { &quot;seq&quot; : n, &quot;content&quot; : &quot;rtyy&quot; } ]
+</code></pre>
+
+<p>감사합니다.</p>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">문자열</span>
+                
+                    <span class="label label-tag label-xs">JSON</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2015/05/08 10:39</p>
+                    <p class="static-profile" style="margin:0;padding:0;">JakartaKim</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>21개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_1997"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>VB.NET</strong></p>
+<pre><code class="vbnet">    Sub Main()
+        Dim arr As New List(Of String)
+
+        Dim json As String = My.Computer.FileSystem.ReadAllText(&quot;C:\Users\진용\Desktop\example jons.txt&quot;)
+
+        Dim arD() As String = Split(json, &quot;[&quot;)
+
+        For i As Integer = 1 To arD.Length - 1
+            Dim bArr As New List(Of String)
+            Dim d() As String = Split(arD(i), &quot;{&quot;)
+
+            For j As Integer = 0 To d.Length - 1
+                If d(j).Contains(&quot;}&quot;) Then
+                    Dim itm As String = String.Format(&quot;{{ {0} }}&quot;, Trim(Split(d(j), &quot;}&quot;)(0)))
+
+                    If Not arr.Contains(itm) Then
+                        arr.Add(itm)
+                        bArr.Add(itm)
+                    End If
+                End If
+            Next
+
+            Console.WriteLine(String.Format(&quot;[ {0} ]&quot;, String.Join(&quot;, &quot;, bArr)))
+        Next
+
+        Console.ReadLine()
+    End Sub
+</code></pre>
+
+<p>위 데이터를 기준으로 파싱해보았습니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/06/12 21:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Steal</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2730"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="php">$parser = new Parse();
+$parser-&gt;parse_data('[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot;');
+$parser-&gt;parse_data('[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;d&quot;');
+$parser-&gt;parse_data('[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;dsfswde&quot; }, { &quot;seq&quot; : 2, &quot;content&quot;');
+$parser-&gt;parse_data('[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;dsfswde&quot; }, { &quot;seq&quot; : 2, &quot;content&quot; : &quot;rtyy&quot; }');
+$parser-&gt;printJson();
+
+class Parse {
+    private $pre_data   = &quot;&quot;;
+    private $json       = array();
+
+    function parse_data($data) {
+        $data = substr($data, 0, strrpos($data, &quot;}&quot;) + 1);
+        if (!$data) return false;
+
+        $del_str = $this-&gt;pre_data;
+        $this-&gt;pre_data = $data;
+        $data = str_replace($del_str, &quot;&quot;, $data);
+
+
+        $data = preg_replace(&quot;/\\[|\s/&quot;, &quot;&quot;, $data);
+        $data = explode(&quot;},{&quot;, $data);
+        foreach ($data as $value) {
+            $value = preg_replace(&quot;/\\{|\\}|\\,/&quot;, &quot;&quot;, $value);
+            if ($value) $this-&gt;json[] = &quot;[{&quot;.$value.&quot;}]&quot;;
+        }
+    }
+
+    function printJson() {
+        echo &quot;&lt;xmp&gt;&quot;; var_dump($this-&gt;json); echo &quot;&lt;/xmp&gt;&quot;;
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/01/08 11:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">물빛미르</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2940"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>s477.txt</p>
+<pre><code class="python">[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot;
+[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;d&quot;
+[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;dsfswde&quot; }, { &quot;seq&quot; : 2, &quot;content&quot;
+[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;dsfswde&quot; }, { &quot;seq&quot; : 2, &quot;content&quot; : &quot;rtyy&quot; } ]
+</code></pre>
+
+<p>s477.py</p>
+<pre><code class="python">prev_complete='[ '
+for line in file('s477.txt'):
+    p=prev_complete
+    while p and p[0]==line[0]:p=p[1:];line=line[1:]
+    buff=''
+    for c in line:
+        if c==&quot;{&quot; : inner = True
+        elif c==&quot;}&quot; : inner = False ;break
+        elif inner : buff += c
+    if not inner :
+        print '[ {'+buff+'} ]'
+        prev_complete += '{'+buff+'}, '
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/01/30 18:13</p>
+                                <p class="static-profile" style="margin:0;padding:0;">상파</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3584"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>일단 들어오는 JSON 포맷이 예시와 같다고만 가정하면 들어오는데로 스캔 위치를 계속 밀어나가면서 중괄호 사이를 추출합니다. (중괄호는 중첩될 수 있다고 가정하되, 올바른 포맷으로 들어온다고 가정합니다.)</p>
+<pre><code class="python">def do():
+    i = 0
+    last_i = 0
+    st = []
+    result = []
+    while True:
+        s = input()
+        if not s:
+            break
+        while i &lt; len(s):
+            if s[i] == '{':
+                last_i = i
+                st.append('{')
+            elif s[i] == '}':
+                if st[-1] == '{':
+                    st.pop()
+                    if len(st) == 0:
+                        result.append(s[last_i:i+1])
+            i += 1
+    return result
+do()
+</code></pre>
+
+<p>그런데, 데이터가 계속 중첩되어 들어온다면 최종 데이터만 받아서 처리하면 되지 않을까도 싶네요.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/05/04 10:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">룰루랄라</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4204"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<p>정규식으로 json 배열 획득 &gt; set에 입력 &gt; 버퍼별로 set에 새로 추가된 요소를 map.</p>
+<pre><code class="ruby">require 'set'
+rcved = -&gt;buffers,sets=Set.new {
+  buffers.map {|s| s.gsub(/{(.|^})+?}/).to_a.delete_if {|e| !sets.add?(e) } } }
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby">buffers = [ '[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot;',
+            '[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;d&quot;',
+            '[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;dsfswde&quot; }, { &quot;seq&quot; : 2, &quot;content&quot;' ]
+expected = [ [], 
+             ['{ &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }'],
+             ['{ &quot;seq&quot; : 1, &quot;content&quot; : &quot;dsfswde&quot; }'] ]
+expect( rcved[buffers] ).to eq expected
+</code></pre>
+
+<p><strong>Output</strong></p>
+<pre><code class="ruby">#=&gt; puts rcved[buffers] 빈 배열은 stdout에 출력되지 않음.
+{ &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }
+{ &quot;seq&quot; : 1, &quot;content&quot; : &quot;dsfswde&quot; }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/07/24 11:03</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5222"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>미완성 입력을 처리할 수 있도록 파서를 만드는 것도 좋을 것 같습니다.</p>
+<p>약식으로 객체, 배열, 정수, 문자열 만으로 구성된 JSON을 파싱한다면..</p>
+<p>결과를 저장할 때 complete 필드에 1(완성), 0(미완성)으로 표시하는 식이죠.</p>
+<pre><code class="c">typedef struct arr_t arr_t;
+typedef struct obj_t obj_t;
+
+typedef struct json_t json_t;
+struct json_t {
+    int type;
+    union {
+        char* s;
+        int    n;
+        arr_t* a;
+        obj_t* o;
+    } value;
+    int complete;
+};
+</code></pre>
+
+<p>최상위 파서 <code>json</code>은 첫 글자를 기준으로 <code>arr</code>, <code>obj</code>, <code>num</code>, <code>str</code>으로 분기합니다.</p>
+<pre><code class="c">json_t* json(context_t *c) {
+    spaces(c);
+    if (*c-&gt;s == '[') {
+        c-&gt;s++;
+        return arr(c);
+    }
+    if (*c-&gt;s == '{') {
+        c-&gt;s++;
+        return obj(c);
+    }
+    if (*c-&gt;s == '&quot;') {
+        c-&gt;s++;
+        return str(c);
+    }
+    if (*c-&gt;s == '-' || isdigit(*c-&gt;s)) {
+        return num(c);
+    }
+    assert(!&quot;[, {, \&quot;, num required&quot;);
+}
+
+typedef struct context_t context_t;
+struct context_t {
+    const char* s;
+};
+
+void spaces(context_t* c) {
+    while (*c-&gt;s == ' ')
+        c-&gt;s++;
+}
+</code></pre>
+
+<p>가장 쉬운 <code>num</code>의 경우는 일단 시작하면 미완성을 판단하기 어려워요. <code>-</code>만 나오고 마는 경우 정도?</p>
+<pre><code class="c">json_t* num(context_t* c) {
+    int sign = 1;
+    if (*c-&gt;s == '-') {
+        sign = -1;
+        c-&gt;s++;
+    }
+    if (*c-&gt;s == 0) {
+        return new_json_num(0, 0);
+    }
+
+    int value = 0;
+    while (isdigit(*c-&gt;s)) {
+        value *= 10;
+        value += *c-&gt;s++ - '0';
+    }
+    return new_json_num(value, 1);
+}
+</code></pre>
+
+<p><code>str</code>은 다음 따옴표가 나와야지 완성됩니다. (약식이라 quoted string을 제대로 지원하지는 않아요)</p>
+<pre><code class="c">json_t* str(context_t* c) {
+    const char* begin = c-&gt;s;
+    while (*c-&gt;s &amp;&amp; *c-&gt;s != '&quot;') {
+        c-&gt;s++;
+    }
+    if (*c-&gt;s == 0) {
+        return new_json_str(begin, c-&gt;s, 0);
+    }
+    return new_json_str(begin, c-&gt;s++, 1); // skip &quot;
+}
+</code></pre>
+
+<p><code>arr</code>은 ]가 나올때까지 ,로 구분된 <code>json</code>의 목록입니다.</p>
+<pre><code class="c">json_t* arr(context_t* c) {
+    spaces(c);
+    arr_t *a = new_arr();
+    while (*c-&gt;s &amp;&amp; *c-&gt;s != ']') {
+        json_t* value = json(c);
+        arr_add(a, value);
+        spaces(c);
+        if (*c-&gt;s == 0) {
+            break;
+        }
+        if (*c-&gt;s == ',') {
+            c-&gt;s++;
+        } else if (*c-&gt;s != ']'){
+            assert(!&quot;, or ] required&quot;);
+        }
+    }
+    if (*c-&gt;s == 0) // incomplete
+        return new_json_arr(a, 0);
+    c-&gt;s++; // skip ]
+    return new_json_arr(a, 1);
+}
+</code></pre>
+
+<p>가장 복잡한 <code>obj</code>는 ':'로 구분된 key-value를 저장해야죠.</p>
+<pre><code class="c">json_t* obj(context_t* c) {
+    spaces(c);
+    obj_t *o = new_obj();
+    while (*c-&gt;s &amp;&amp; *c-&gt;s != '}') {
+        json_t* key = json(c);
+        assert(key-&gt;type == STR);
+        arr_add(o-&gt;keys, key);
+
+        spaces(c);
+        if (*c-&gt;s == 0) {
+            break;
+        }
+        if (*c-&gt;s == ':') {
+            c-&gt;s++;
+        } else {
+            assert(!&quot;: required&quot;);
+        }
+
+        spaces(c);
+        if (*c-&gt;s == 0) {
+            break;
+        }
+
+        json_t* value = json(c);
+        arr_add(o-&gt;values, value);
+
+        spaces(c);
+
+        if (*c-&gt;s == 0) {
+            break;
+        }
+        if (*c-&gt;s == ',') {
+            c-&gt;s++;
+            spaces(c);
+        } else if (*c-&gt;s != '}') {
+            assert(!&quot;, or } required&quot;);
+        }
+    }
+    if (*c-&gt;s == 0) // incomplete
+        return new_json_obj(o, 0);
+    c-&gt;s++; // skip }
+    return new_json_obj(o, 1);
+}
+</code></pre>
+
+<p>이제 <code>complete</code> 필드를 이용하여 완성된 값인지 아닌지 판별할 수 있습니다.
+문제 상황에서는 배열의 요소들이 object인데 seq 필드가 유일하게 구분가능한 값을 가진다면
+쉽게 이미 처리한 것과 아닌것을 구분할 수 있을 것 같습니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/11/09 13:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Han Jooyung</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5558"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">class JsonStr():
+    def __init__(self):
+        self.pos = 0
+        self.str = ''
+    def get(self, str):
+        rarr = []
+        r = ''
+        pos = start = self.pos;
+        is_str = False
+        is_bs = False
+        for x in str[start:]:
+            pos+=1
+            if not is_str and x == '{':
+                r += x
+            elif r == '':
+                continue
+            elif not is_str and x == '}':
+                r += x
+                rarr += [r]
+                r = ''
+                self.pos = pos
+                continue
+            else:
+                r += x
+                if is_str and x == '\\':
+                    is_bs = not is_bs
+                elif not is_bs and (x == &quot;'&quot; or x == '&quot;'):
+                    isstr = not is_str
+
+        print('[' + ','.join(rarr) + ']' if rarr else '')
+
+
+json = JsonStr()
+json.get('[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot;')
+json.get('[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;d&quot;')
+json.get('[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;dsfswde&quot; }, { &quot;seq&quot; : 2, &quot;content&quot;}')
+json.get('[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;dsfswde&quot; }, { &quot;seq&quot; : 2, &quot;content&quot;}, \
+{ &quot;seq&quot; : 3, &quot;content&quot;}, { &quot;seq&quot; : 4, &quot;content4&quot; ')
+
+</code></pre>
+
+<p>Python 3.5.2에서 작성하였습니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/12/12 11:16</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Yeo HyungGoo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8511"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="perl">import json
+
+seq_arr = []
+def getJsonArray(line_str):
+    tot_arr = []
+    for idx1, char1 in enumerate(line_str):
+        if char1 == '{' and line_str.find('}', idx1+1) &gt;=0 :
+            json_string = line_str[idx1:line_str.find('}', idx1+1)+1]
+            obj = json.loads(json_string)
+            if seq_arr.count(obj['seq']) &lt;=0:
+                tot_arr.append(obj)
+                seq_arr.append(obj['seq'])
+    print((lambda x:x if len(x)&gt;0 else 'None')(tot_arr))
+
+
+
+getJsonArray('[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot;')
+getJsonArray('[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;d&quot;')
+getJsonArray('[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;dsfswde&quot; }, { &quot;seq&quot; : 2, &quot;content&quot;')
+getJsonArray('[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;dsfswde&quot; }, { &quot;seq&quot; : 2, &quot;content&quot; : &quot;dfdfdfd&quot; }')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/24 16:09</p>
+                                <p class="static-profile" style="margin:0;padding:0;">piko</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8618"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">buf = ['[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot;', 
+'[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;d&quot;',
+'[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;dsfswde&quot; }, { &quot;seq&quot; : 2, &quot;content&quot;',
+'[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;dsfswde&quot; }, { &quot;seq&quot; : 2, &quot;content&quot; : &quot;dfdfdfd&quot; }']
+
+
+start = 0
+bufsize = len(buf[0])
+p = 0
+for data in buf:
+    for i in range(p, len(data)):
+        if data[i] == '{':
+            start = i
+        elif data[i] == '}':
+            print('[' + data[start:i+1] + ']')
+            start = i + 1
+
+    p += bufsize
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/30 05:36</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8783"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">
+public class Example84 {
+
+    public static void main(String[] args) {
+        Example84 ex = new Example84();
+
+        String[] sArray = { &quot;'[ { \&quot;seq\&quot; : 0, \&quot;content\&quot; : \&quot;abcd\&quot;'&quot;,
+                &quot;'[ { \&quot;seq\&quot; : 0, \&quot;content\&quot; : \&quot;abcd\&quot; }, { \&quot;seq\&quot; : 1, \&quot;content\&quot; : \&quot;d\&quot;'&quot;,
+                &quot;'[ { \&quot;seq\&quot; : 0, \&quot;content\&quot; : \&quot;abcd\&quot; }, { \&quot;seq\&quot; : 1, \&quot;content\&quot; : \&quot;dsfswde\&quot; }, { \&quot;seq\&quot; : 2, \&quot;content\&quot;'&quot;,
+                &quot;'[ { \&quot;seq\&quot; : 0, \&quot;content\&quot; : \&quot;abcd\&quot; }, { \&quot;seq\&quot; : 1, \&quot;content\&quot; : \&quot;dsfswde\&quot; }, { \&quot;seq\&quot; : 2, \&quot;content\&quot; : \&quot;sssss\&quot; }, { \&quot;seq\&quot; : 3, \&quot;content\&quot;'&quot; };
+
+        for (String s : sArray) {
+            System.out.println(ex.jsonParsing(s));
+        }
+    }
+
+    private String jsonParsing(String s) {
+        Pattern pattern = Pattern.compile(&quot;\\{.*?\\}&quot;);
+        Matcher match = pattern.matcher(s);
+
+        List&lt;String&gt; list = new ArrayList&lt;&gt;();
+
+        while (match.find()) {
+            list.add(match.group());
+        }
+
+        Collections.reverse(list);
+        if (list.isEmpty())
+            return &quot;&quot;;
+        else
+            return String.format(&quot;[%s]&quot;, list.get(0));
+    }
+}
+
+</code></pre>
+
+<p>정규식으로 {} 패턴을 찾아 마지막 요소만 반영 하도록 해봤습니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/09/10 11:36</p>
+                                <p class="static-profile" style="margin:0;padding:0;">흑돼지</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9691"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from ast import literal_eval as lit
+
+def trans(son):
+    global count
+    global many
+    many+=1
+    tmp=son.split('}')
+    result='X'
+    if len(tmp)&gt;count+1:
+        result=[lit(tmp[count][2:]+' }')]
+        count+=1
+    return('{} : {}'.format(many, result))
+
+count=many=0
+while True:
+    json=input('quit(q): ')
+    if json=='q': break
+    print(trans(json))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/12/17 17:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">빗나감</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2146"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">닫는 중괄호로 잘라주고
+그렇게 생성된 리스트의 길이로 dict값을 반환할지 말지 결정하게 해봤습니다.
+문자열을 dict로 만들어주는거 중에 ast.literal_eval이 있어서 편하게 한거 같습니다.
+global쓰는게 마음에 만들긴 하지만 아직 배우는 단계라..</span>
+                                -
+                                <span style="font-size:11px;">
+                                    빗나감,
+                                    2017/12/17 17:25
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10151"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3.6</p>
+<pre><code class="python">def parser(data):
+    instance = []
+    data = list(data)
+    del data[0:2]
+    for i in data:
+        if i == '{':
+            instance.append(i)
+        else:
+            if i != ',':
+                instance.append(i)
+        if instance[len(instance)-2] == '}':
+            if not ''.join(instance) in data_instance:
+                data_instance.append(''.join(instance))
+            instance = []
+    if not data_instance:
+        return 'X'
+    else:
+        return [data_instance[-1]]
+
+if __name__ == &quot;__main__&quot;:
+    data_list = ['[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot;','[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;d&quot;','[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;dsfswde&quot; }, { &quot;seq&quot; : 2, &quot;content&quot;']
+    data_instance = []
+    data_dic = dict()
+    m = 1
+    for i,value in enumerate(data_list):
+        if i == 0 :
+            data_dic[str(i+1)+'st'] = parser(value)
+        elif i == 1:
+            data_dic[str(i+1)+'nd'] = parser(value)
+        elif i == 2 :
+            data_dic[str(i+1)+'rd'] = parser(value)
+        else:
+            data_dic[str(i+1)+'th'] = parser(value)
+
+    print(data_dic)
+</code></pre>
+
+<ul>
+<li>결과값</li>
+</ul>
+<pre><code class="python">{'1st': 'X', '2nd': ['{ &quot;seq&quot; : 0 &quot;content&quot; : &quot;abcd&quot; } '], '3rd': ['{ &quot;seq&quot; : 1 &quot;content&quot; : &quot;dsfswde&quot; } ']}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/01/14 20:34</p>
+                                <p class="static-profile" style="margin:0;padding:0;">justbegin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10385"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># 파이썬
+
+input_sample = [
+    &quot;&quot;&quot;1st : '[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot;'&quot;&quot;&quot;,
+    &quot;&quot;&quot;2nd : '[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;d&quot;'&quot;&quot;&quot;,
+    &quot;&quot;&quot;3rd : '[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;dsfswde&quot; }, { &quot;seq&quot; : 2, &quot;content&quot;'&quot;&quot;&quot;,
+    &quot;&quot;&quot;last :&quot;&quot;&quot;
+    ]
+
+
+def for_json_parse(list1, list2, i=0, j=0):
+    left_end = list1[i].find(&quot;:&quot;)
+    left = list1[i][:left_end]
+
+    right_start = list1[i].find(&quot;: &quot; + str(j))
+    right = list1[i][right_start:]
+
+    if &quot;}&quot; in right:
+        right_end = right.find(&quot;}&quot;)
+        right = right[:right_end]
+        list2.append(left + &quot;&quot;&quot;: [ { &quot;seq&quot; : &quot;&quot;&quot; + str(j) + &quot;&quot;&quot;, &quot;content&quot; &quot;&quot;&quot; + right + &quot; } ] &quot;)
+        i += 1
+        j += 1
+    else:
+        list2.append(left + &quot;: X&quot;)
+        i += 1
+
+    if left != &quot;last &quot;:
+        return for_json_parse(list1, list2, i, j)
+
+
+result = []
+for_json_parse(input_sample, result)
+for m in result: print(m)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/01/30 15:24</p>
+                                <p class="static-profile" style="margin:0;padding:0;">olclocr</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10738"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import re
+def parse(a):
+    l = re.findall('{.*?}', a)
+    b = [dict() for i in range(len(l))]
+    for i in range(len(l)):
+        l[i] = l[i].split(',')
+        for j in range(len(l[i])):
+            (key, value) = re.findall('\w+', l[i][j])
+            if re.match('\d', value):
+                value = int(value)
+            b[i][key] = value
+    if b == []:
+        return None
+    else:
+        return b[-1]
+
+
+while 1:
+    print(parse(input()))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/15 18:11</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김동하</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10870"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">'[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot;'
+'[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;d&quot;'
+'[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;dsfswde&quot; }, { &quot;seq&quot; : 2, &quot;content&quot;'
+'[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;dsfswde&quot; }, { &quot;seq&quot; : 2, &quot;content&quot;: &quot;rzqw&quot; }, { &quot;seq&quot; : 2,&quot;content&quot; : &quot;ksav&quot; }]'
+</code></pre>
+
+<p>파일에 있는거 ↑</p>
+<pre><code class="python">location=input(&quot;파일위치를 입력하세요:&quot;)
+f=open(location,'r')
+lines=f.readlines()
+lines=lines[1:]
+
+
+temp_len=0
+print(&quot;X&quot;)
+for line in lines:
+    for k in range(temp_len,len(line)):
+        if line[k]=='{':
+            index1=k
+        if line[k]=='}':
+            index2=k
+            break
+    print('[ %s ]'%line[index1:index2+1])
+    temp_len=index2+2
+
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/23 06:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">D B</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12898"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python</p>
+<pre><code class="python">buf = ['[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot;',
+'[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;d&quot;',
+'[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;dsfswde&quot; }, { &quot;seq&quot; : 2, &quot;content&quot;',
+'[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;dsfswde&quot; }, { &quot;seq&quot; : 2, &quot;content&quot; : &quot;dfdfdfd&quot; }',
+'[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;dsfswde&quot; }, { &quot;seq&quot; : 2, &quot;content&quot; : &quot;dfdfdfd&quot; }, { &quot;seq&quot; : 3, '      ]
+tmp_repo = list()
+for in_i, instream in enumerate(buf):
+    tmp_str = &quot;&quot;
+    chk = False
+    new = False
+    for c in instream:
+        if c == &quot;{&quot; or chk == True:
+            tmp_str += c
+            chk = True
+        if c == &quot;}&quot;:
+            chk = False
+            if tmp_str not in tmp_repo:
+                tmp_repo.append(tmp_str)
+                new = True
+            tmp_str = &quot;&quot;
+    if new is False:
+        print(&quot;{}: X&quot;.format(in_i))
+    else:
+        print(&quot;{}: [{}]&quot;.format(in_i, tmp_repo[-1]))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/08 15:41</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Taesoo Kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13504"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>정규식으로 찾았습니다. 파이썬에서는 정규식 결과가 좀 다르게 전달되네요 ...</p>
+<pre><code class="python">import re
+import json
+
+data = &quot;&quot;&quot;\
+1st : '[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot;'
+2nd : '[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;d&quot;'
+3rd : '[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;dsfswde&quot; }, { &quot;seq&quot; : 2, &quot;content&quot;'
+last : '[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;dsfswde&quot; }, { &quot;seq&quot; : 2, &quot;content&quot;:&quot;abcd&quot;},{ &quot;seq&quot; : 3, &quot;content&quot; : &quot;rtyy&quot; } ]'\
+&quot;&quot;&quot;
+
+history = set()
+
+for d in data.split('\n'):
+    index1 = d.split(':')[0]
+    a = re.findall(r'\{[.]|[^{]*\}',d)
+
+    if a:
+        a = ['{'+i for i in a]
+        a = list(set(a) - history)
+        history = set(a) | history
+        a_json = json.dumps(str(a)) # json 변환 가능 테스트
+        print(&quot;{} : {}&quot;.format(index1, a))
+    else :
+        print(&quot;{} : X&quot;.format(index1))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/10 23:14</p>
+                                <p class="static-profile" style="margin:0;padding:0;">재즐보프</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13709"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">sample = [
+'[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot;',
+'[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;d&quot;',
+'[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;dsfswde&quot; }, { &quot;seq&quot; : 2, &quot;content&quot;',
+'[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;dsfswde&quot; }, { &quot;seq&quot; : n, &quot;content&quot; : &quot;rtyy&quot; } ]']
+
+result,id = [],0
+for i in sample:
+    old = id+2
+    id = i.rfind('}, {') + 1
+    if id &gt; 0:
+        if old == id+2:
+            if i.rfind('} ]') &gt;= 0: result.append(''.join(['[ ',i[old:]]))
+        else: result.append(''.join(['[ ',i[old:id],' ]']))
+    else: result.append('X')
+
+for i in result: print(i)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/23 22:14</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14775"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def passingJSON():
+    _indata = open('jsondata.txt','r')
+    _result=[]
+    endIndex_=-1
+    _stratIndex=0
+    while True:
+        line = _indata.readline()
+        if not line: break
+        aa =1
+        while aa &gt; 0:
+            temp = line[_stratIndex:]
+            endIndex_ = temp.find('}')
+            if not endIndex_ ==-1:
+                _result.append(temp[temp.find('{'):endIndex_+1])
+                _stratIndex = endIndex_+1 +_stratIndex
+            aa = line[_stratIndex:].find('}')
+    for ii in _result:
+        print(ii)
+passingJSON()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/29 23:17</p>
+                                <p class="static-profile" style="margin:0;padding:0;">JaehakChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17978"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import re
+
+p1 = re.compile('(?&lt;=})[^}]+$')
+p2 = re.compile('.+(?={)')
+
+def parser(s):
+    s = p1.sub('', s)
+    s = p2.sub('', s)
+    s = '[ ' + s + ' ]'
+    return s
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/22 00:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">messi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_27484"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">
+first = '[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot;'
+second = '[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;d&quot;'
+third = '[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, { &quot;seq&quot; : 1, &quot;content&quot; : &quot;dsfswde&quot; }, { &quot;seq&quot; : 2, &quot;content&quot;'
+last = '[ { &quot;seq&quot; : 0, &quot;content&quot; : &quot;abcd&quot; }, ......................{ &quot;seq&quot; : n, &quot;content&quot; : &quot;rtyy&quot; } ]'
+
+order =[first,second,third,last]
+arr=[]
+
+def Json (a):
+    s=a
+    while '}' in s:
+        st = s.index('{')
+        end = s.index('}')
+        k =s[st:end+1]
+        try :
+            s = ('').join(s.split(s[st:end+2]))
+        except ValueError:
+            pass
+        if k not in arr:
+            arr.append([k])
+            print([k])
+
+for k in order:
+    Json(k)
+
+</code></pre>
+
+<p>결과물과 똑같이출력하는 함수는 따로 구현하진 않았구요
+위에 data stream에서 식별자를 중괄호 두개로 보고, 각 data 스트림마다 여닫는 중괄호의 index를 찾아서
+그 인덱스를 기준으로 슬라이싱 해서 배열에 추가해봤습니다.
+질문 주시면 답변드릴게요~</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/02/27 04:53</p>
+                                <p class="static-profile" style="margin:0;padding:0;">양캠부부</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

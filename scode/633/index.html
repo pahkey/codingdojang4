@@ -1,0 +1,761 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="```
+토너먼트 대진표를 만들 때, 부전승을 위한 빈자리(0)를 찾아라.
+(26개팀이 있을 때, 32개 자리 중,
+ 1-17-9-25-5-21..순으로 빈자리를 만들어라)
+  
+input:
+  26
+output:
+  [0, 2, 3...">
+    <title>토너먼트 대진표 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">토너먼트 대진표</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">1</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 3</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <pre><code>토너먼트 대진표를 만들 때, 부전승을 위한 빈자리(0)를 찾아라.
+(26개팀이 있을 때, 32개 자리 중,
+ 1-17-9-25-5-21..순으로 빈자리를 만들어라)
+  
+input:
+  26
+output:
+  [0, 2, 3, 4, 0, 6, 7, 8, 0, 10, 11, 12, 13, 14, 15, 16, 0, 18, 19, 20, 0, 22, 23, 24, 0, 26, 27, 28, 29, 30, 31, 32]
+</code></pre>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2018/09/28 17:51</p>
+                    <p class="static-profile" style="margin:0;padding:0;">박범수</p>
+                </div>
+            </div>
+
+            
+                <a name="comment_2394"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">은근 어렵네요 ㅎㅎ</span>
+                    -
+                    <span style="font-size:11px;">
+                        박범수,
+                        2018/09/28 18:00
+                    </span>
+                </div>
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>8개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_14764"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">2</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import math
+
+def binjari(n):
+  deg = math.ceil(math.log2(n))
+  res = [[1, 2**deg]]
+  cnt = 2**deg-n
+
+  while len(res) &lt; cnt:
+    for i in range(len(res)):
+      res.append([sum(res[i])//2+1, res[i][1]])
+      res[i][1] = sum(res[i])//2
+
+  return [res[i][0] for i in range(cnt)]
+
+# n = int(input())
+n = 26
+b = binjari(n)
+tournament = [0 if i+1 in b else i+1 for i in range(2**math.ceil(math.log2(n)))]
+
+print(tournament)
+</code></pre>
+
+<pre><code>절반씩 쪼개서 순서대로 추가한다
+첫번째 원소가 빈자리이다
+
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32]
+
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+[17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32]
+
+[1, 2, 3, 4, 5, 6, 7, 8]
+[17, 18, 19, 20, 21, 22, 23, 24]
+[9, 10, 11, 12, 13, 14, 15, 16]
+[25, 26, 27, 28, 29, 30, 31, 32]
+
+[1, 2, 3, 4]
+[17, 18, 19, 20]
+[9, 10, 11, 12]
+[25, 26, 27, 28]
+[5, 6, 7, 8]
+[21, 22, 23, 24]
+[13, 14, 15, 16]
+[29, 30, 31, 32]
+
+[1, 2]
+[17, 18]
+[9, 10]
+[25, 26]
+[5, 6]
+[21, 22]
+[13, 14]
+[29, 30]
+[3, 4]
+[19, 20]
+[11, 12]
+[27, 28]
+[7, 8]
+[23, 24]
+[15, 16]
+[31, 32]
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/29 11:55</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2396"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">이렇게 심플한 방법이 있었네요 ㅎ</span>
+                                -
+                                <span style="font-size:11px;">
+                                    박범수,
+                                    2018/09/29 12:36
+                                </span>
+                            </div>
+                        
+                            <a name="comment_2399"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">깔끔하네요</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Noname,
+                                    2018/09/29 17:07
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14773"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">public static void main(String[] args) {
+        int input = new Scanner(System.in).nextInt();
+        int total = 2;
+        for (int i = 0; Math.pow(2, i) &lt; input; i++)
+            total = (int) Math.pow(2, i + 1);
+        int zero = 0;
+        int k = 0;
+        do {
+            zero = (int) Math.pow(2, k);
+        } while (Math.pow(2, k++) &lt; total - input);
+        HashSet&lt;Integer&gt; temp = new HashSet&lt;&gt;();
+        while (temp.size() &lt; total - input)
+            temp.add((new Random().nextInt(zero) + 1) * total / zero - total / zero + 1);
+        for (int i = 1; i &lt; total + 1; i++)
+            System.out.print(temp.contains(i) ? &quot;0 &quot; : i + &quot; &quot;);
+    }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/29 17:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김지훈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14760"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Creator님 따라해 봤습니다.</p>
+<pre><code>from math import log2, ceil
+
+
+def split(ent):
+    m = (ent[0] + ent[1]) // 2
+    return (ent[0], m), (m+1, ent[1])
+
+
+def empty(size, n):
+    Q = [(1, size)]
+    while len(Q) &lt; n:
+        for i in range(len(Q)):
+            Q.append(None)
+            Q[i], Q[-1] = split(Q[i])
+
+    return [x[0] for x in Q][:size-n]
+
+
+n = 26
+size = 2**ceil(log2(n))
+entry = list(range(1, size+1))
+for x in empty(size, n):
+    entry[x-1] = 0
+
+print(entry)
+</code></pre>
+
+<hr />
+<p><strong>그 전 코드</strong></p>
+<p>결과에 과정을 끼워 맞추느라 좀 지저분한 코드가 됐습니다.</p>
+<p>일단 간단하게 큐를 사용한 코드.</p>
+<pre><code>from math import log2, ceil
+
+entry = 26
+fullentry = 2 ** ceil(log2(entry)) # 32
+match = list(range(fullentry + 1)) # [0,1,2,...,32]. 0은 안 씀
+
+Q = [1]
+partition = fullentry // 2
+
+for _ in range(fullentry - entry):
+    # 큐가 비면 리스트를 쪼개고(16x2=&gt;8x4=&gt;4x8=&gt;2x16), 17,9,5,3 순서로 하나씩 넣는다. 
+    if not Q:
+        partition //= 2
+        Q.append(match[1+partition])
+
+    # num=이번에 비울 자리
+    num = Q.pop(0)
+    match[num] = 0
+    print(num, end=' ')
+
+    # num과 짝이 되는 자리들(num+p) 중 비어있지 않은 자리를 큐에 넣는다(p=16,8,...,partition).
+    p = fullentry // 2
+    while p &gt;= partition:
+        pnum = num + p
+        if pnum &lt; len(match) and match[pnum] &gt; 0 and pnum not in Q:
+            Q.append(pnum)
+
+        p //= 2
+
+print()
+print(match[1:])
+</code></pre>
+
+<p>위의 풀이는 문제의 예시(26명)에서는 는 잘 되지만, 17~20명 또는 33명 이상이면 순서가 틀리기 시작합니다.</p>
+<p>그래서 PriorityQueue 를 달았는데... 구현이 힙으로 되어 있어서 stable하지 않습니다.</p>
+<p>논리적으로 <a href="https://static.lwn.net/images/ns/kernel/RSDL1.png">이런 모양</a>이나 <a href="http://contribute.geeksforgeeks.org/wp-content/uploads/Multilevel-Feedback-Queue-Scheduling-300x269.png">이런 모양</a>이어야 하는데 queue.PriorityQueue()로는 각각의 큐가 FCFS가 안 됩니다.</p>
+<p>FCFS가 안 되면 결과가 틀려지기 때문에, 이걸 해결하려고 중간에 일련번호를 하나 더 키로 넣었습니다.</p>
+<pre><code class="python">from math import log2, ceil
+import queue
+
+entry = 26
+fullentry = 2 ** ceil(log2(entry))
+match = [0] + list(range(1, fullentry + 1))
+
+# Q &lt;- (우선순위, 일련번호, 자리번호), 일련번호stabilizer = 0,1,2,3,... 무조건 증가함
+Q = queue.PriorityQueue()
+stb = 0
+Q.put((0, stb, 1))
+
+partition = fullentry // 2
+for _ in range(fullentry - entry):    
+    if Q.empty():
+        partition //= 2
+        stb += 1
+        Q.put((0, stb, match[1+partition]))
+
+    _, _, num = Q.get()
+    match[num] = 0
+    print(num, end=' ')
+
+    p = fullentry // 2
+    while p &gt;= partition:
+        pnum = num + p
+        if pnum &lt; len(match) and match[pnum] &gt; 0 and pnum not in [x[2] for x in Q.queue]:
+            stb += 1
+            Q.put((1/p, stb, pnum))
+
+        p //= 2
+
+print()
+print(match[1:])
+</code></pre>
+
+<p>결과(entry=26, 17, 33)</p>
+<pre><code>1 17 9 25 5 21 
+[0, 2, 3, 4, 0, 6, 7, 8, 0, 10, 11, 12, 13, 14, 15, 16, 0, 18, 19, 20, 0, 22, 23, 24, 0, 26, 27, 28, 29, 30, 31, 32]
+
+1 17 9 25 5 21 13 29 3 19 11 27 7 23 15 
+[0, 2, 0, 4, 0, 6, 0, 8, 0, 10, 0, 12, 0, 14, 0, 16, 0, 18, 0, 20, 0, 22, 0, 24, 0, 26, 0, 28, 0, 30, 31, 32]
+
+1 33 17 49 9 41 25 57 5 37 21 53 13 45 29 61 3 35 19 51 11 43 27 59 7 39 23 55 15 47 31 
+[0, 2, 0, 4, 0, 6, 0, 8, 0, 10, 0, 12, 0, 14, 0, 16, 0, 18, 0, 20, 0, 22, 0, 24, 0, 26, 0, 28, 0, 30, 0, 32, 0, 34, 0, 36, 0, 38, 0, 40, 0, 42, 0, 44, 0, 46, 0, 48, 0, 50, 0, 52, 0, 54, 0, 56, 0, 58, 0, 60, 0, 62, 63, 64]
+</code></pre>
+
+<p>그리고 안 풀려서 손으로 직접 써 본(...) 알고리즘:</p>
+<pre><code>Q: PriorityQueue. (우선순위, 일련번호, 자리번호)를 저장한다. 기준이 되는 자리에서 거리가 멀 수록 우선순위가 높다.
+PriorityQueue 가 최소값부터 뽑히기 때문에 실제로는 &quot;1/우선순위&quot; 로 저장했음.
+아래 내용에서 두 번째 키인 일련번호는 생했습니다.
+
+Q가 비면 리스트를 다시 반씩 쪼개고(partition//2), match[1+minsize]를 비우고 Q에 넣는다.
+
+partition = 16
+Q = [(0, 1)]  # (우선순위=0, 자리번호=1)
+pop (0, 1), 1번 삭제
+0 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16      17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32
+Q = [] + [(16, 1+16)] = [(16, 17)]
+
+pop (16, 17), 17번 삭제
+0 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16      0 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32
+Q = []
+
+
+partition = 8
+Q = [(0, 9)]
+pop (0, 9). 9번 삭제
+0 2 3 4 5 6 7 8      0 10 11 12 13 14 15 16      0 18 19 20 21 22 23 24      25 26 27 28 29 30 31 32
+Q = [] + [(16, 9+16), (8, 9+8)] = [(16, 25), (8, 17)] = [(16, 25)]
+# 범위를 벗어나거나, 이미 비어있거나, Q에 들어있는 숫자는 제외
+
+pop (16, 25), 25번 삭제
+0 2 3 4 5 6 7 8      0 10 11 12 13 14 15 16      0 18 19 20 21 22 23 24      0 26 27 28 29 30 31 32
+Q = [] + [(16, 25+16), (8, 25+8)] = []
+
+
+partition = 4
+Q = [(0, 5)]
+pop (0, 5), 5번 삭제
+0 2 3 4    0 6 7 8    0 10 11 12    13 14 15 16    0 18 19 20    21 22 23 24    0 26 27 28    29 30 31 32
+Q = [] + [(16, 5+16), (8, 5+8), (4, 5+4)] = [(16, 21), (8, 13), (4, 9)] = [(16, 21), (8, 13)]
+
+pop (16, 21), 21번 삭제
+0 2 3 4    0 6 7 8    0 10 11 12    13 14 15 16    0 18 19 20    0 22 23 24    0 26 27 28    29 30 31 32
+Q = [(8, 13)] + [(16, 21+16), (8, 21+8), (4, 21+4)] = ... = [(8, 13), (8, 29)]
+
+pop (8, 13), 13번 삭제
+0 2 3 4    0 6 7 8    0 10 11 12    0 14 15 16    0 18 19 20    0 22 23 24    0 26 27 28    29 30 31 32
+Q = [(8, 29)] + ... = [(8, 29)]
+
+pop (8, 29), 29번 삭제
+0 2 3 4    0 6 7 8    0 10 11 12    0 14 15 16    0 18 19 20    0 22 23 24    0 26 27 28    0 30 31 32
+Q = [] + ... = []
+
+
+partition = 2
+Q = [(0, 3)]
+pop (0, 3), 3번 삭제
+0 2  0 4  0 6  7 8     0 10  11 12  0 14  15 16     0 18  19 20  0 22  23 24    0 26  27 28  0 30  31 32
+Q = [] + ... = [(16, 19), (8, 11), (4, 7)]
+
+pop (16, 19), 19번 삭제
+0 2  0 4  0 6  7 8     0 10  11 12  0 14  15 16     0 18  0 20  0 22  23 24    0 26  27 28  0 30  31 32
+Q = [(8, 11), (4, 7)] + ... = [(8, 11), (8, 27), (4, 7), (4, 23)]
+
+&quot;일반 큐를 쓰면 여기서 [11, 7] + ... = [11, 7, 27, 23] 이 되어서 27과 7의 순서가 뒤바뀐다.
+또는 일련번호 없이 PriorityQueue를 쓰면 [(8, 27), (8, 11), (4, 23), (4, 7)] 이 될 수도 있다. 
+(같은 우선순위일 때 순서를 보장 못함)&quot;
+
+pop (8, 11), 11번 삭제
+0 2  0 4  0 6  7 8     0 10  0 12  0 14  15 16     0 18  0 20  0 22  23 24    0 26  27 28  0 30  31 32
+Q = [(8, 27), (4, 7), (4, 23)] + ... = [(8, 27), (4, 7), (4, 23), (4, 15)]
+
+pop (8, 27), 27번 삭제
+0 2  0 4  0 6  7 8     0 10  0 12  0 14  15 16     0 18  0 20  0 22  23 24    0 26  0 28  0 30  31 32
+Q = [(4, 7), (4, 23), (4, 15)]
+
+이하 생략
+
+7
+Q = [(4, 23), (4, 15)]
+23
+Q=[(4, 15), (4, 31)]
+15
+Q=[(4, 31)]
+31
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/28 22:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14793"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Creator님 방법으로 풀어봅니다.</p>
+<pre><code class="python">
+# m*1 배열을 반으로 쪼개어 1*m이 될 때까지 재귀
+def split(arr):
+    n = len(arr)
+    m = len(arr[0])
+    if m == 1:
+        return [i[0] for i in arr]
+    else:
+        m = int(m / 2)
+    next_arr = [[]] * n * 2
+    # 반으로 쪼개어 뒤에 붙이기
+    for i in range(n):
+        next_arr[i] = arr[i][:m]
+        next_arr[n + i] = arr[i][m:]
+
+    return split(next_arr)
+
+
+team_cnt = 26
+
+# 32강
+team_max = 2
+while team_cnt &gt;= team_max:
+    team_max *= 2
+
+team = [i + 1 for i in range(team_max)]
+
+# 빈자리 순서
+empty_orders = split([team])
+print(empty_orders)
+
+for i in range(team_max - team_cnt):
+    team[empty_orders[i] - 1] = 0
+
+print(team)
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/10/01 16:15</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박범수</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15111"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n, k = int(input()), 1
+while k &lt; n :
+    k *=2
+t, x, res, erase, tempidx = int(k / 2), k - n -1, [_ for _ in range(1, k+1)], set(), 0
+while x // 2 &gt; 0 : #log n
+    erase.update([x for x in range(tempidx, k-1, t)]) # n
+    t //= 2
+    x -= 2
+if x == 1:
+    temp =  [x for x in range(tempidx, k - 1, t)]
+    for _ in temp : # n
+        if _ not in erase :
+            erase.add(_)
+            break
+for __ in set(erase): res[__] = 0
+print(res)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/11/06 11:39</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Sukeoul Jang</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17178"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>비쥬얼 스튜디오 작성하였습니다. 배열과 반복문, switch문을 이용했어요.</p>
+<pre><code class="cpp">#include &lt;stdio.h&gt;
+
+void main() {
+
+    int input[32];
+
+    for (int i = 0; i &lt; 32; i++)
+    {
+        input[i] = i + 1;
+    }
+    int n = 1, m = 0;
+    while (n &lt; 7)
+    {
+        switch (n) {
+        case 2: case 4: case 6: m += 16; break;
+        case 3: m -= 8; break;
+        case 5: m -= 20; break;
+        }
+            input[m] = 0;
+        n++;
+    }
+    for (int i = 0; i &lt; 32; i++)
+    {
+        printf(&quot;%d &quot;, input[i]);
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/03/19 13:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Albert</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17872"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from fractions import Fraction
+
+def walkover_order(n):
+    Q = [Fraction(0), Fraction(1/2)]
+    idx = 1
+    while Q[idx].denominator != n:
+        t = Q[idx]
+        Q.append(t * Fraction(1/2))
+        Q.append(t * Fraction(1/2) + Fraction(1/2))
+        idx += 1
+    Q = list(map(lambda x : int(x * n), Q))
+    return Q
+
+def walkover_list(n, k):
+    p = n - k
+    Q = walkover_order(n)
+    L = [i+1 for i in range(n)]
+    for i in range(p):
+        L[Q[i]] = 0
+    print(L)
+</code></pre>
+
+<pre><code>&gt;&gt;&gt; walkover_list(32,26)
+[0, 2, 3, 4, 0, 6, 7, 8, 0, 10, 11, 12, 13, 14, 15, 16, 0, 18, 19, 20, 0, 22, 23, 24, 0, 26, 27, 28, 29, 30, 31, 32]
+&gt;&gt;&gt; walkover_list(32,12)
+[0, 0, 0, 4, 0, 6, 0, 8, 0, 0, 0, 12, 0, 14, 0, 16, 0, 0, 0, 20, 0, 22, 0, 24, 0, 0, 0, 28, 0, 30, 0, 32]
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/15 16:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">messi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29581"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def defaultPosition(n):
+    totalP = 1
+    while totalP &lt; n:
+        totalP *= 2
+    dplist = []
+    P, dfSu, s = totalP, totalP - n, 1
+    if dfSu == 1:
+        dplist.append(1)
+    elif dfSu &gt; 1:
+        dplist.append(1)
+        while True:
+            if s == dfSu:
+                break
+            idx = len(dplist)
+            for i in range(idx):
+                dplist.append(dplist[i] + P//2)
+                s += 1
+                if s == dfSu:
+                    break
+            P //= 2
+    #print(dplist)         # 빈자리(0)
+    res = [0 if i+1 in dplist else i+1 for i in range(totalP)]
+    print(res)
+
+
+defaultPosition(26)
+print(' =' * 10)
+defaultPosition(27)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/08/22 21:45</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

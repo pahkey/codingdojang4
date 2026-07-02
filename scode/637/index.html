@@ -1,0 +1,766 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="tic-tac-toe 게임은 3x3 게임판에서 O, X 한 쪽을 택하고, 
+
+가로/세로/대각선으로 먼저 한 줄(3개)을 만드는 쪽이 승리한다.
+
+3x3이라는 점을 제외하면 5목이 아니라 3목, 또는 빙고 게임과 같다.
+
+연관문제: [t...">
+    <title>unbeatable tic-tac-toe AI - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">unbeatable tic-tac-toe AI</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">3</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 4</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>tic-tac-toe 게임은 3x3 게임판에서 O, X 한 쪽을 택하고, </p>
+<p>가로/세로/대각선으로 먼저 한 줄(3개)을 만드는 쪽이 승리한다.</p>
+<p>3x3이라는 점을 제외하면 5목이 아니라 3목, 또는 빙고 게임과 같다.</p>
+<p>연관문제: <a href="http://codingdojang.com/scode/464">tic-tac-toe-game</a></p>
+<h1 id="_1">문제</h1>
+<p>플레이어 vs. AI tic-tac-toe 게임을 만든다.</p>
+<p>세부 규칙:</p>
+<ul>
+<li>누가 먼저 둘 지는 동전 던지기로 결정한다.</li>
+<li>선수가 X, 후수가 O가 된다.</li>
+<li>매 턴, 게임판의 상태와 누구 차례인지를 시각적으로 보인다.</li>
+<li>입출력 형식은 자유.</li>
+<li>게임판을 다 채우기 전이라도, 어느 쪽도 이길 수 없는 상태가 되면 무승부로 판정한다.</li>
+<li><strong>AI는 절대로 지지 않아야 한다</strong> (최소 무승부)</li>
+</ul>
+<h1 id="ai">AI 전략</h1>
+<p>원문: <a href="https://en.wikipedia.org/wiki/Tic-tac-toe#Strategy">Wikipedia - Tic-tac-toe</a></p>
+<blockquote>
+<p>Kevin Crowley, Robert S. Siegler (1993). "Flexible Strategy Use in Young Children's Tic-Tac-Toe". Cognitive Science. 17 (4): 531–561. doi:10.1016/0364-0213(93)90003-Q.</p>
+</blockquote>
+<p>다음 중 첫 번째로 <strong>"가능한"</strong> 수를 둔다:</p>
+<ol>
+<li><strong>Win</strong>: 한 줄에서 두 개가 내 자리이면 남은 한 자리에 둔다. 편의상, 한 줄에 같은 돌 2개가 있고 한 자리는 비어 있는 승리 직전의 상태를 2목이라고 하자.</li>
+<li><strong>Block</strong>: 상대가 2목이면 막는다.</li>
+<li><strong>Fork</strong>: 2목을 <strong>두 개</strong> 만들 <strong>"가능성이 있는"</strong> 자리에 둔다.</li>
+<li><strong>Blocking fork</strong>: 상대가 Fork할 자리가 하나뿐이면 거기를 막는다. 그렇지 않으면 상대가 Fork하면서 동시에 2목이 되는 자리를 막는다. 그것도 아니면 내가 2목을 만든다(단, 상대가 다음 수에 Fork가 가능해지면 안 된다). </li>
+<li><strong>Center</strong>: 가운데 둔다(확률적으로 구석 자리가 유리하지만, AI가 <strong>"절대 지지 않는"</strong> 결과는 다르지 않다).</li>
+<li><strong>Opposite corner</strong>: 상대가 구석 자리를 차지했으면, 반대편 자리를 차지한다.</li>
+<li><strong>Empty corner</strong>: 구석에 둔다.</li>
+<li><strong>Empty side</strong>: 아무 변의 중앙에 둔다.</li>
+</ol>
+<h2 id="_2">부연설명</h2>
+<p><strong>Fork:</strong></p>
+<p>아래 예에서 O가 둔 자리.</p>
+<p>주의: 원문에는 "두 개 이상"이 아니라 "두 개"라고 되어 있음.</p>
+<pre><code>_ _ _
+_ X _
+_ _ O
+</code></pre>
+
+<p><strong>Blocking Fork</strong>의 마지막 부분:</p>
+<p>다음 상태1 에서, O가 코너에 두면(2) X의 승리가 확정된다(3). </p>
+<pre><code>1:
+X _ _
+_ O _
+_ _ X
+
+2:
+X _ O
+_ O _
+_ _ X
+
+3:
+X _ O
+_ O _
+X _ X
+</code></pre>
+
+<h1 id="_3">도전과제</h1>
+<ol>
+<li>AI vs. AI 를 1000회 이상 시행해서 절대 지지 않음을 확인한다.</li>
+<li>위 전략으로 절대 지지 않음을 <strong>증명</strong>한다.</li>
+<li>4목, 5목으로 유사한 프로그램을 만든다.</li>
+</ol>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2018/10/15 22:18</p>
+                    <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>3개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_14927"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>어... 생각보다 빡세네요;;</p>
+<p>pygame으로 만들어 봤습니다.</p>
+<p>너무 길다 싶으면 TTTGame.run(), TTTGame.do_AI() 만 보시면 됩니다.</p>
+<pre><code class="python">from itertools import cycle, combinations
+import random
+import typing
+import pygame
+
+
+debug = print
+
+
+class TTTGUI:
+    WHITE, BLACK, BLUE = (255, 255, 255), (0, 0, 0), (0, 0, 255)
+
+    def __init__(self):
+        pygame.init()
+        self.scr = pygame.display.set_mode((470, 470))
+        # self.img = {'O':pygame.image.load('O.png'), 'X':pygame.image.load('X.png')}
+        # pygame.transform.scale(self.img['O'], (150, 150))
+        # pygame.transform.scale(self.img['X'], (150, 150))
+
+    def eventloop(self):
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    self.quit()
+                elif event.type == pygame.MOUSEBUTTONDOWN and 10&lt;=event.pos[0]&lt;=460 and 10&lt;=event.pos[1]&lt;=460:
+                    i, j = (event.pos[1]-10)//150, (event.pos[0]-10)//150
+                    return i*3+j
+
+    def _txtsurf(self, size, txt):
+        return pygame.font.SysFont(&quot;comicsansms&quot;, size).render(txt, False, TTTGUI.BLUE)
+
+    def intro(self, players):
+        self.scr.fill(TTTGUI.WHITE)
+        txt1 = self._txtsurf(36, 'X: ' + players[0].name)
+        txt2 = self._txtsurf(36, 'O: ' + players[1].name)
+        self.scr.blit(txt1, (100, 150))
+        self.scr.blit(txt2, (100, 250))
+        pygame.display.flip()
+        self.eventloop()
+
+    def display(self, brd):
+        self.scr.fill(TTTGUI.WHITE)
+        pygame.draw.line(self.scr, TTTGUI.BLACK, (160, 0), (160, 470))
+        pygame.draw.line(self.scr, TTTGUI.BLACK, (310, 0), (310, 470))
+        pygame.draw.line(self.scr, TTTGUI.BLACK, (0, 160), (470, 160))
+        pygame.draw.line(self.scr, TTTGUI.BLACK, (0, 310), (470, 310))
+
+        for i in range(3):
+            for j in range(3):
+                if brd[i*3+j] == 'O':
+                    pygame.draw.circle(self.scr, TTTGUI.BLACK, (85+j*150, 85+i*150), 60)
+                elif brd[i*3+j] == 'X':
+                    rect = pygame.Rect(25+j*150, 25+i*150, 120, 120)
+                    pygame.draw.line(self.scr, TTTGUI.BLACK, (rect.topleft), (rect.bottomright))
+                    pygame.draw.line(self.scr, TTTGUI.BLACK, (rect.topright), (rect.bottomleft))
+
+        pygame.display.flip()
+
+    def ending(self, msg=''):
+        self.scr.blit(self._txtsurf(72, msg), (100, 200))
+        pygame.display.flip()
+        self.eventloop()
+        self.quit()
+
+    def quit(self):
+        pygame.quit()
+        exit()
+
+
+class Player(typing.NamedTuple):
+    name: str
+    char: str
+    do: typing.Callable
+
+
+class TTTGame:
+    ROWS = ((0, 1, 2), (3, 4, 5), (6, 7, 8), (0, 3, 6), (1, 4, 7), (2, 5, 8), (0, 4, 8), (2, 4, 6))
+
+    def __init__(self):
+        self.brd = [' ' for _ in range(9)]
+        #P1 = Player('User', random.choice('OX'), self.do_player)
+        P1 = Player('User', 'X', self.do_player)
+        P2 = Player('AI', 'OX'.replace(P1.char, ''), self.do_AI)
+        self.players = (P1, P2) if P1.char=='X' else (P2, P1)
+
+        self.view = TTTGUI()
+        self.view.intro(self.players)
+
+    def _rowstr(self, row):
+        return [self.brd[p] for p in row]
+
+    def run(self):
+        assert any(p.do == self.do_player for p in self.players), &quot;at least 1 user&quot;
+        self.view.display(self.brd)
+        for player in  cycle(self.players):
+            pos = player.do(player.char)
+            self.brd[pos] = player.char
+            self.view.display(self.brd)
+
+            rows = [self._rowstr(r) for r in TTTGame.ROWS]
+            debug('brd:', self.brd, 'rows:', [''.join(r).replace(' ','_') for r in rows])
+            if all('O' in set(r) and 'X' in set(r) for r in rows):
+                self.view.ending('draw')
+            elif [player.char]*3 in rows:
+                self.view.ending(player.name + ' win!')
+
+    def do_player(self, me):
+        ret = self.view.eventloop()
+        return ret if self.brd[ret] == ' ' else self.do_player(me)
+
+    def do_AI(self, me):
+        CENTER, CORNERS, SIDES = 4, (0, 2, 6, 8), (1, 3, 5, 7)
+        enemy = 'OX'.replace(me, '')
+        rows = list(zip(TTTGame.ROWS, [self._rowstr(r) for r in TTTGame.ROWS]))
+
+        def winnable_rows(c):
+            for r, s in rows:
+                if c in s and s.count(' ') == 2:
+                    yield (r, s)
+
+        def winnable_pos(c) -&gt; set:
+            ret = set()
+            for r, s in winnable_rows(c):
+                ret.add(r[s.index(' ')])
+            return ret
+
+        def winning_pos(c) -&gt; set:
+            ret = set()
+            for r, s in rows:
+                if s.count(c) == 2 and ' ' in s:
+                    ret.add(r[s.index(' ')])
+            return ret
+
+        def forkable_pos(c) -&gt; set:
+            ret = set()
+            for r1, r2 in combinations(winnable_rows(c), 2):
+                ret |= set(r1[0]) &amp; set(r2[0])
+            return {x for x in ret if self.brd[x] == ' '}
+
+        # WIn
+        w = winning_pos(me)
+        if w:
+            debug('Win')
+            return w.pop()
+
+        # Block
+        ew = winning_pos(enemy)
+        if ew:
+            debug('Block')
+            return ew.pop()
+
+        # Fork
+        f = forkable_pos(me) - {CENTER}
+        if f:
+            debug('Fork')
+            return f.pop()
+
+        # Blocking fork
+        ewn, ef = winning_pos(enemy), winnable_pos(enemy)
+        if len(ef) == 1:
+            debug('Blocking fork(1)')
+            return ef.pop()
+        elif ef &amp; ewn:
+            debug('Blocking fork(2)')
+            return (ef &amp; ewn).pop()
+        else:
+            for p in winnable_pos(me):
+                self.brd[p] = me
+                if not forkable_pos(enemy):
+                    self.brd[p] = ' '
+                    debug('Blocking fork(3)')
+                    return p
+                self.brd[p] = ' '
+
+        # Center
+        if self.brd[CENTER] == ' ':
+            debug('Center')
+            return CENTER
+
+        # Opposite corner
+        for c, oc in combinations(CORNERS, 2):
+            if (self.brd[c], self.brd[oc]) == (enemy, ' '):
+                debug('Opposite corner')
+                return oc
+
+        # Empty corner
+        for c in CORNERS:
+            if self.brd[c] == ' ':
+                debug('Empty corner')
+                return c
+
+        # Empty side
+        debug('Empty side')
+        return self.brd.index(' ')
+
+
+TTTGame().run()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/10/18 21:24</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2441"></a>
+                            <div class="comment_line comment-content">
+                                
+                                    <span style="color:orangered;">+1</span>
+                                
+                                <span style="white-space:pre-wrap;">user 가 x 를잡고 가운데를둔뒤 오른쪽아래로두면 computer 의턴이 스킵되면서 user가이기네요</span>
+                                -
+                                <span style="font-size:11px;">
+                                    leak,
+                                    2018/10/31 10:31
+                                </span>
+                            </div>
+                        
+                            <a name="comment_2442"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">감사합니다. 확인해볼게요</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Noname,
+                                    2018/10/31 12:47
+                                </span>
+                            </div>
+                        
+                            <a name="comment_2446"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">수정했습니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Noname,
+                                    2018/11/05 14:19
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15335"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="r">ttt.win &lt;- function(x, ply, emy){
+  for (i in 1:3){
+    for (j in 1:3){
+      if (sum(x[i, ] == ply) == 2 &amp; sum(x[i, ] == '_') == 1){
+        x[i, which(x[i, ] == '_')] &lt;- ply
+        return(x)
+      } else if (sum(x[, j] == ply) == 2 &amp; sum(x[, j] == '_') == 1){
+        x[which(x[, j] == '_'), j] &lt;- ply
+        return(x)
+      } else if (sum(diag(x) == ply) == 2 &amp; sum(diag(x) == '_') == 1){
+        x[which(diag(x) == '_'), which(diag(x) == '_')] &lt;- ply
+        return(x)
+      } else if (sum(diag(x[1:3, 3:1]) == ply) == 2 &amp; sum(diag(x[1:3, 3:1]) == '_') == 1){
+        x[which(diag(x[1:3, 3:1]) == '_'), which(diag(x[1:3, 3:1]) == '_')] &lt;- ply
+        return(x)
+      } else {
+
+      }
+    }
+  }
+  return(x)
+}
+ttt.block &lt;- function(x, ply, emy){
+  for (i in 1:3){
+    for (j in 1:3){
+      if (sum(x[i, ] == emy) == 2 &amp; sum(x[i, ] == '_') == 1){
+        x[i, which(x[i, ] == '_')] &lt;- ply
+        return(x)
+      } else if (sum(x[, j] == emy) == 2 &amp; sum(x[, j] == '_') == 1){
+        x[which(x[, j] == '_'), j] &lt;- ply
+        return(x)
+      } else if (sum(diag(x) == emy) == 2 &amp; sum(diag(x) == '_') == 1){
+        x[which(diag(x) == '_'), which(diag(x) == '_')] &lt;- ply
+        return(x)
+      } else if (sum(diag(x[1:3, 3:1]) == emy) == 2 &amp; sum(diag(x[1:3, 3:1]) == '_') == 1){
+        x[which(diag(x[1:3, 3:1]) == '_'), which(diag(x[1:3, 3:1]) == '_')] &lt;- ply
+        return(x)
+      } else {
+
+      }
+    }
+  }
+  return(x)
+}
+ttt.fork &lt;- function(x, ply, emy){
+  du &lt;- x
+  ct &lt;- 0
+  for (i in 1:3){
+    for (j in 1:3){
+      if (du[i, j] == '_'){
+        du[i, j] &lt;- ply
+        if (sum(du[i, ] == ply) == 2 &amp; sum(du[i, ] == '_') == 1){
+          ct &lt;- ct + 1
+        }
+        if (sum(du[, j] == ply) == 2 &amp; sum(du[, j] == '_') == 1){
+          ct &lt;- ct + 1
+        }
+        if (sum(diag(du) == ply) == 2 &amp; sum(diag(du) == '_') == 1){
+          ct &lt;- ct + 1
+        }
+        if (sum(diag(du[1:3, 3:1]) == ply) == 2 &amp; sum(diag(du[1:3, 3:1]) == '_') == 1){
+          ct &lt;- ct + 1
+        }
+        if (ct &gt;= 2){
+          return(du)
+        }
+        du &lt;- x
+        ct &lt;- 0
+      }
+    }
+  }
+  return(x)
+}
+ttt.block.fork &lt;- function(x, ply, emy){
+  du &lt;- x
+  ct &lt;- 0
+  for (i in 1:3){
+    for (j in 1:3){
+      if (du[i, j] == '_'){
+        du[i, j] &lt;- emy
+        if (sum(du[i, ] == emy) == 2 &amp; sum(du[i, ] == '_') == 1){
+          ct &lt;- ct + 1
+        }
+        if (sum(du[, j] == emy) == 2 &amp; sum(du[, j] == '_') == 1){
+          ct &lt;- ct + 1
+        }
+        if (sum(diag(du) == emy) == 2 &amp; sum(diag(du) == '_') == 1){
+          ct &lt;- ct + 1
+        }
+        if (sum(diag(du[1:3, 3:1]) == emy) == 2 &amp; sum(diag(du[1:3, 3:1]) == '_') == 1){
+          ct &lt;- ct + 1
+        }
+        if (ct &gt;= 2){
+          du[i, j] &lt;- ply
+          return(du)
+        }
+        du &lt;- x
+        ct &lt;- 0
+      }
+    }
+  }
+  return(x)
+}
+ttt.center &lt;- function(x, ply, emy){
+  if (x[2, 2] == '_')
+  x[2, 2] &lt;- ply
+  return(x)
+}
+ttt.opposite.corner &lt;- function(x, ply, emy){
+  if (x[1, 1] == emy &amp; x[3, 3] == '_'){
+    x[3, 3] &lt;- ply
+    return(x)
+  } else if (x[1, 3] == emy &amp; x[3, 1] == '_'){
+    x[3, 1] &lt;- ply
+    return(x)
+  } else if (x[3, 1] == emy &amp; x[1, 3] == '_'){
+    x[1, 3] &lt;- ply
+    return(x)
+  } else if (x[3, 3] == emy &amp; x[1, 1] == '_'){
+    x[1, 1] &lt;- ply
+    return(x)
+  } else {
+    return(x)
+  }
+}
+ttt.empty.corner &lt;- function(x, ply, emy){
+  if (x[1, 1] == '_'){
+    x[1, 1] &lt;- ply
+    return(x)
+  } else if (x[1, 3] == '_'){
+    x[1, 3] &lt;- ply
+    return(x)
+  } else if (x[3, 1] == '_'){
+    x[3, 1] &lt;- ply
+    return(x)
+  } else if (x[3, 3] == '_'){
+    x[3, 3] &lt;- ply
+    return(x)
+  } else {
+    return(x)
+  }
+}
+ttt.empty.side &lt;- function(x, ply, emy){
+  for (i in 1:3){
+    for (j in 1:3){
+      if (x[i, j] == '_'){
+        x[i, j] &lt;- ply
+        return(x)
+      }
+    }
+  }
+}
+
+ply_set &lt;- c('O', 'X')
+
+ttt &lt;- function(x, ply, emy){
+  du &lt;- ttt.win(x, ply, emy)
+  if (!all(du == x)){
+    print(du)
+    return(du)
+  }
+  du &lt;- ttt.block(x, ply, emy)
+  if (!all(du == x)){
+    print(du)
+    return(du)
+  }
+  du &lt;- ttt.fork(x, ply, emy)
+  if (!all(du == x)){
+    print(du)
+    return(du)
+  }
+  du &lt;- ttt.block.fork(x, ply, emy)
+  if (!all(du == x)){
+    print(du)
+    return(du)
+  }
+  du &lt;- ttt.center(x, ply, emy)
+  if (!all(du == x)){
+    print(du)
+    return(du)
+  }
+  du &lt;- ttt.opposite.corner(x, ply, emy)
+  if (!all(du == x)){
+    print(du)
+    return(du)
+  }
+  du &lt;- ttt.empty.corner(x, ply, emy)
+  if (!all(du == x)){
+    print(du)
+    return(du)
+  }
+  du &lt;- ttt.empty.side(x, ply, emy)
+  if (!all(du == x)){
+    print(du)
+    return(du)
+  }
+}
+
+ply &lt;- 'O'
+emy &lt;- 'X'
+x &lt;- matrix('_', nrow = 3, ncol = 3)
+
+
+ttt_run &lt;- function(x, ply, emy){
+  while (sum(x == '_') != 0){
+    x &lt;- ttt(x, ply, emy)
+
+    ply &lt;- ply_set[which(ply_set == ply) %% 2 + 1]
+    emy &lt;- ply_set[which(ply_set == emy) %% 2 + 1]
+  }
+}
+
+ttt_run(x, ply, emy)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/11/28 10:03</p>
+                                <p class="static-profile" style="margin:0;padding:0;">physche</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_18643"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="haskell">{-# LANGUAGE TupleSections #-}
+
+import Data.List
+import Data.Ord
+import Data.Maybe
+import Control.Applicative
+import Control.Monad
+
+
+sortOnM f xs = liftM (map fst . sortBy (comparing snd)) $ mapM (\x -&gt; liftM (x,) (f x)) xs
+ifM b t f = do b &lt;- b; if b then t else f
+
+
+-- rules of the game
+newgame = const Nothing
+place i g n = if n == i then Just True else g n
+look = flip ($)
+invert = fmap $ fmap not
+emptySlots = filterM (fmap (== Nothing) . look) [1..9]
+
+
+cohorts = [[1,2,3], [4,5,6], [7,8,9], [1,4,7], [2,5,8], [3,6,9], [1,5,9], [3,5,7]]
+data GameResult = Won | Lost | Undecided | Draw deriving (Eq, Ord, Show)
+gameState = minimum . fmap cohortState . mapM (mapM look) cohorts
+ where
+  cohortState s = case sort . nub $ s of
+    [Just True]       -&gt; Won
+    [Just False]      -&gt; Lost
+    [Nothing, Just _] -&gt; Undecided
+    [Nothing]         -&gt; Undecided
+    otherwise         -&gt; Draw
+
+won = (== Won) . gameState
+done = (/= Undecided) . gameState
+
+
+-- strategy
+bestMove = head . mconcat [win, block, fork, blockFork, center, opposite, corner, side]
+  where
+    win         =  findMovesM $ won
+    fork        =  findMovesM $ (==2) . length . win
+    blockFork1  =  findMovesM $ null . fork . invert
+    blockFork2  = (findMovesM $ (&amp;&amp;)
+                                &lt;$&gt; not . null . win
+                                &lt;*&gt; null . liftA2 intersect fork block . invert)
+                  &gt;&gt;= sortOnM (fmap (fork . invert) . place)
+
+    blockFork = ifM (null . fork . invert) (pure []) $ blockFork1 &lt;&gt; blockFork2
+    opposite = corner &gt;&gt;= filterM (fmap (== Just False) . look . negate . subtract 10)
+
+    block = win . invert
+
+    center = filterAvailable [5]
+    corner = filterAvailable [1,3,7,9]
+    side   = filterAvailable [2,4,6,8]
+
+
+    findMovesM p = emptySlots &gt;&gt;= filterM (fmap p . place)
+    filterAvailable = liftA2 intersect emptySlots . pure 
+
+
+
+
+
+-- I/O
+
+render f = (&lt;&gt; &quot;\n---\n&quot;) $ [[1,2,3], [4,5,6], [7,8,9]] &gt;&gt;= (&gt;&gt;= (r . f)) &lt;&gt; const &quot;\n&quot;
+  where
+    r Nothing = &quot; &quot;
+    r (Just True) = &quot;O&quot;
+    r (Just False) = &quot;X&quot;
+
+main = mapM_ putStrLn $ fmap render $ takeWhile (not.done) $ iterate (invert . (bestMove &gt;&gt;= place)) newgame
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/07/23 00:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">sodii</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

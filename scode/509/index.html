@@ -1,0 +1,853 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="무게가 서로 다른 N 개의 물건이 있다. 각 물건은 1부터 N 까지 번호가 매겨져 있다. 우리는 일부 물건 쌍에 대해서 양팔 저울로 어떤 것이 무거운 것인지를 측정한 결과표를 가지고 있다. 이 결과표로부터 직접 측정하지 않은 물건 쌍의 비교 결과...">
+    <title>저울(KOI 2014지역본선 고등부 2번) - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">저울(KOI 2014지역본선 고등부 2번)</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">3</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 4</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>무게가 서로 다른 N 개의 물건이 있다. 각 물건은 1부터 N 까지 번호가 매겨져 있다. 우리는 일부 물건 쌍에 대해서 양팔 저울로 어떤 것이 무거운 것인지를 측정한 결과표를 가지고 있다. 이 결과표로부터 직접 측정하지 않은 물건 쌍의 비교 결과를 알아낼 수도 있고 알아내지 못할 수도 있다. 예를 들어, 총 6개의 물건이 있고, 다음 5개의 비교 결과가 주어졌다고 가정하자. ([1]은 1번 물건의 무게를 의미한다.) [1]&gt;[2], [2]&gt;[3], [3]&gt;[4], [5]&gt;[4], [6]&gt;[5] 우리는 [2]&gt;[3], [3]&gt;[4]로부터 [2]&gt;[4]라는 것을 알 수 있다. 하지만, 물건 2와 물건 6을 비교하는 경우, 앞서의 결과만으로는 어느 것이 무거운지 알 수 없다. 이와 같이, 물건 2는 물건 1, 3, 4와의 비교 결과는 알 수 있지만, 물건 5, 6과의 비교 결과는 알 수 없다. 물건 4는 모든 다른 물건과의 비교 결과를 알 수 있다. 비교 결과가 모순되는 입력은 없다고 가정한다. 위 예제의 기존 측정 결과에 [3]&gt;[1]이 추가되었다고 가정하자. 이 경우 [1]&gt;[2], [2]&gt;[3]이므로 우리는 [1]&gt;[3]이라는 것을 예측할 수 있는데, 이는 기존에 측정된 결과 [3]&gt;[1]과 서로 모순이므로 이러한 입력은 가능하지 않다. 물건의 개수 N 과 일부 물건 쌍의 비교 결과가 주어졌을 때, 각 물건에 대해서 그 물건과의 비교 결과를 알 수 없는 물건의 개수를 출력하는 프로그램을 작성하시오.</p>
+<p><strong>입력</strong></p>
+<p>첫 줄에는 물건의 개수 N 이 주어지고, 둘째 줄에는 미리 측정된 물건 쌍의 개수 M이 주어진다. 단, 5 ≤ N ≤ 100 이고, 0 ≤ M ≤ 2,000이다. 다음 M개의 줄에 미리 측정된 비교 결과가 한 줄에 하나씩 주어진다. 각 줄에는 측정된 물건 번호를 나타내는 두 개의 정수가 공백을 사이에 두고 주어지며, 앞의 물건이 뒤의 물건보다 더 무겁다</p>
+<p><strong>출력</strong></p>
+<p>여러분은 N개의 줄에 결과를 출력해야 한다. i 번째 줄에는 물건 i 와 비교 결과를 알 수 없는 물건의 개수를 출력한다.</p>
+<p>예제 입력</p>
+<pre><code>6
+5
+1 2
+2 3
+3 4
+5 4
+6 5
+</code></pre>
+
+<p>예제 출력</p>
+<pre><code>2
+2
+2
+0
+3
+3
+</code></pre>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">Floyd-Warshall</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2016/06/02 15:24</p>
+                    <p class="static-profile" style="margin:0;padding:0;">iljimae</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>10개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_3834"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>이 문제는 전체 노드에 대한 최단경로 문제인 플로이드 와셜 알고리즘으로 해결할 수 있습니다. 각 물건에 대해서 주어진 정보를 이용해서 더 무거운 물건에서 가벼운 물건으로 가중치 1인 간선을 그린다고 생각하면 우리는 물건을 정점으로하는 방향 그래프를 얻을 수 있습니다. 이 방향 그래프에서 어떠한 정점 i에서 j로 가는 방법 있거나 j에서 i로 가는 방법이 있다면 물건 i와 j의 비교결과를 알 수 있다는 뜻입니다. 따라서 플로이드 와셜 알고리즘으로 모든 정점에 대해서 최단거리를 구해준뒤에 각 물건에 대해서 비교결과를 알 수 있는 물건의 개수를 찾아낼 수 있습니다. 시간 복잡도는 O(N^3)이고, 아래는 제 C++코드입니다.</p>
+<pre><code class="cpp">#include &lt;iostream&gt;
+#include &lt;cstdlib&gt;
+#include &lt;algorithm&gt; 
+using namespace std;
+
+#define INF 987654321
+
+int relationship[101][101]; 
+
+int main(){
+    for (int i = 0; i &lt; 101; i++){
+        for (int j = 0; j &lt; 101; j++){
+            if (i == j) relationship[i][j] = 0;  
+            else relationship[i][j] = INF; 
+        }
+    }
+    int N,M; 
+    cin &gt;&gt; N &gt;&gt; M;  
+    for (int i = 0; i &lt; M; i++){
+        int a,b; 
+        cin &gt;&gt; a &gt;&gt; b;  
+        --a,--b; 
+        relationship[a][b] = 1; 
+    }
+    for (int k = 0; k &lt; N; k++){
+        for (int i = 0; i &lt; N; i++){
+            for (int j = 0; j &lt; N; j++){
+                relationship[i][j] = min(relationship[i][j],relationship[i][k]+relationship[k][j]);  
+            }
+        }
+    }
+    for (int i = 0; i &lt; N; i++){
+        int cnt = 0; 
+        for (int j = 0; j &lt; N; j++){
+            if (i == j) continue; 
+            if (relationship[i][j] == INF &amp;&amp; relationship[j][i] == INF){
+                ++cnt; 
+            }
+        }
+        cout &lt;&lt; cnt &lt;&lt; endl; 
+    }
+    return 0; 
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/06/02 15:38</p>
+                                <p class="static-profile" style="margin:0;padding:0;">iljimae</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1780"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">더 많은 데이터로 채점을 원하시면 <a href="https://www.acmicpc.net/problem/10159" rel="nofollow">https://www.acmicpc.net/problem/10159</a> 에서 코드를 제출해보세요!</span>
+                                -
+                                <span style="font-size:11px;">
+                                    iljimae,
+                                    2016/06/02 15:45
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8439"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>가중치가 없고 연결되었는지만 알면 되기 떄문에 굳이 O(N^3)으로 최단거리를 구할 필요는 없습니다.</p>
+<p>.</p>
+<p>먼저 주어진 비교 데이터를 단방향 간선으로 삼은 그래프 G = (V, E)와, </p>
+<p>G의 간선들을 뒤집은 그래프 G' = (V, E')를 만듭니다.</p>
+<p>(주의: 양방향 그래프 하나만 만들면 같은 결과가 안 나옵니다)</p>
+<p>.</p>
+<p>그리고 각 정점 v에 대해,</p>
+<p>그래프 G의 정점 v에서 DFS를 수행해서 v보다 확실히 큰 수들을 구하고, </p>
+<p>그래프 G'의 정점 v에서 DFS를 수행해서 정점 v보다 확실히 작은 수들을 구하면,</p>
+<p>이 둘의 합집합이 v보다 확실히 크거나 확실히 작은 정점들이 됩니다.</p>
+<p>.</p>
+<p>수행 시간은</p>
+<p>인접 리스트 생성에 O(E), </p>
+<p>DFS가 각 edge를 최대 한 번씩 검사하므로 O(E), 그리고 각 정점에서 DFS를 두 번 수행하므로 </p>
+<p>전체 수행시간은 O(E) + 2 * V * O(E) = O(VE) 가 됩니다.</p>
+<p>간선의 개수에 따라 최소 O(N), 평균 O(N^2) (정확하진 않음), 완전 그래프에서 O(N^3) 이라고 할 수 있습니다.</p>
+<pre><code class="python">def DFS(v, E, visit):
+    visit.add(v)
+    for w in E[v]:  # v--&gt;w 간선이 존재
+        if w not in visit:
+            DFS(w, E, visit)
+
+    return visit
+
+
+N, M, comp = 6, 5, [(1, 2), (2, 3), (3, 4), (5, 4), (6, 5)]
+V = range(1, N + 1)
+E, Ei = {v:set() for v in V}, {v:set() for v in V}  # 인접 리스트 * 2
+
+for u, v in comp:
+    E[u].add(v)
+    Ei[v].add(u) # 뒤집은 간선
+
+for v in V:
+    connected = DFS(v, E, set()) | DFS(v, Ei, set())
+    print(len(set(V) - connected))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/21 19:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3908"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<p>수정. { 대표수 =&gt; 비교 가능한 수 }로 표현.<br />
+{ 1=&gt;[1, 2, 3, 4], 6=&gt;[6, 5, 4] }. 2는 1234와 비교가능, 4는 1234, 654와 비교가능</p>
+<pre><code class="ruby">def make_group
+  scales = proc { (1..gets.to_i).map { gets.split.map(&amp;:to_i) } }
+  connect = -&gt;set,pair do
+    left, right = pair
+    pushed = set.select {|key,vals| set[key] &lt;&lt; right if vals.index(left) }
+    set[left] = set[right]? [left]+set.delete(right) : pair if pushed.size.zero?
+    set
+  end
+  [gets.to_i, scales[].reduce({}, &amp;connect)]
+end
+
+def unknowns
+  known = -&gt;i,group { group.reduce([]) {|a,(_,mem)| mem.index(i)? a|mem : a } }
+  n, group = make_group
+  (1..n).map {|i| n - known[i, group].size }
+end
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby">case_all_chained = [&quot;5&quot;, &quot;4&quot;, &quot;3 4&quot;, &quot;2 3&quot;, &quot;1 2&quot;, &quot;4 5&quot;].join(&quot;\n&quot;)
+case_part_merged = [&quot;5&quot;, &quot;4&quot;, &quot;2 3&quot;, &quot;1 3&quot;, &quot;5 4&quot;, &quot;2 4&quot;].join(&quot;\n&quot;)
+case_part_chained = [&quot;6&quot;, &quot;5&quot;, &quot;1 2&quot;, &quot;2 3&quot;, &quot;3 4&quot;, &quot;5 4&quot;, &quot;6 5&quot;].join(&quot;\n&quot;)
+
+$stdin = StringIO.new(case_all_chained) #=&gt; for stdin test
+expect( unknowns() ).to eq [0, 0, 0, 0, 0] #=&gt;{1=&gt;[1,2,3,4,5]}
+
+$stdin = StringIO.new(case_part_merged)
+expect( unknowns() ).to eq [3, 2, 1, 1, 3] #=&gt; {2=&gt;[2,3,4] 1=&gt;[1,3], 5=&gt;[5,4]}
+
+$stdin = StringIO.new(case_part_chained)
+expect( unknowns() ).to eq [2, 2, 2, 0, 3, 3] #=&gt; {1=&gt;[1,2,3,4], 6=&gt;[6,5,4]}
+</code></pre>
+
+<p><strong>Output</strong></p>
+<pre><code class="ruby">#=&gt; puts unknowns
+6
+5
+1 2
+2 3
+3 4
+5 4
+6 5
+
+2
+2
+2
+0
+3
+3
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/06/08 04:43</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3988"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>배열에 대한 정보를 받아 Matrix를 구성하여 대소 관계에 따른 값을 1로 정의하고 정량화된 값이 나오면 연결된 것으로, Inf가 나오면 관계를 알 수 없다고 정의한다. 정의된 관계에 따라 Matrix 값을 채워서 Inf가 나온 갯수가 해이다.</p>
+<p>""" -<em>- coding : utf-8 -</em>-
+from numpy import *</p>
+<p>""" 5 &lt;= a &lt;= 100, b &lt;= 2000
+a = 6;
+b = 5;</p>
+<p>k_relation = ([1, 2],
+              [2, 3],
+              [3, 4],
+              [5, 4],
+              [6, 5]);</p>
+<p>total_relation = zeros((a, a))</p>
+<p>""" array initialization
+for i in range(0, a, 1):
+    for j in range(0, a, 1):
+        if (i == j):
+            total_relation[i][j] = 0;
+        else:
+            total_relation[i][j] = inf;</p>
+<p>for k in range(0, b, 1):
+    m = k_relation[k][0] - 1;
+    n = k_relation[k][1] - 1;
+    if (m != n):
+        total_relation[m][n] = 1;
+        #total_relation[n][m] = -1;</p>
+<p>for k in range(0, a, 1):
+    for i in range(0, a, 1):
+        for j in range(0, a, 1):
+            i_temp = total_relation[i][j]
+            i_temp2 = total_relation[i][k] + total_relation[k][j]
+            total_relation[i][j] = min(i_temp, i_temp2)</p>
+<p>print "<strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*"
+print "Unknown relationship between items"
+print "</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong>*"
+for i in range(0, a, 1):
+    cnt = 0
+    for j in range(0, a, 1):
+        if (i != j):
+            if (total_relation[i][j] == inf and total_relation[j][i] == inf):
+                cnt = cnt + 1;
+    print i+1, "--&gt;  ", cnt</p>
+<p>print total_relation
+```</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/06/24 17:56</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Lee Giljae</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4787"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+
+int** relation;
+void lighter(int value, int** M, int size, int me);
+void heavier(int value, int** M, int size, int me);
+
+void main(void) {
+    int N = 0;
+    int M_size = 0;
+
+    scanf(&quot;%d&quot;,&amp; N);
+    scanf(&quot;%d&quot;,&amp; M_size);
+
+    int* out = (int*) malloc (sizeof(int) * N+1);
+    relation = (int**) malloc (sizeof(int*) * N+1);
+    for(int i = 0; i&lt;=N ;i++)
+        relation[i] = (int*) malloc (sizeof(int) * N+1);
+
+    int** M = (int**) malloc (sizeof(int*) * M_size); 
+    for(int i = 0 ; i &lt; M_size; i++)
+        M[i] = (int*) malloc (sizeof(int) * 2);
+
+    for(int i = 1 ; i &lt;= N; i++) 
+        for(int j = 1 ; j &lt;= N; j++)
+            relation[i][j] = 0;
+
+    for(int i = 1 ; i &lt;= N; i++) 
+        out[i] = 0;
+
+    for(int i = 0; i &lt; M_size; i++)
+        scanf(&quot;%d%d&quot;,&amp;M[i][0], &amp;M[i][1]);
+
+
+    for(int i = 1 ; i &lt;= N; i++) {
+        for(int j = 0 ; j &lt; M_size; j++) {
+            if(M[j][0] == i) {
+                relation[i][M[j][1]] = 1;  
+                lighter(M[j][1] ,M ,M_size, i);
+            } 
+        }
+
+        for(int j = 0 ; j &lt; M_size; j++) {
+            if(M[j][1] == i) {
+                relation[i][M[j][0]] = 1;
+                heavier(M[j][0] ,M ,M_size, i);
+            } 
+        }
+
+        for(int j = 1 ; j &lt;= N ; j++)
+            if(relation[i][j] == 0)
+                out[i]++;
+    }
+
+    printf(&quot;\n\n&quot;);
+    for(int i = 1; i&lt;= N; i++)
+        printf(&quot;%d\n&quot;, out[i]-1);
+} 
+void heavier(int value, int** M, int size, int me) {
+    for(int i = 0 ; i &lt; size; i++) {
+        if(value == M[i][1]) {
+            relation[me][M[i][0]] = 1;
+            heavier(M[i][0], M ,size, me);
+        }
+    }
+}
+
+void lighter(int value, int** M, int size, int me) {
+
+    for(int i = 0 ; i &lt; size; i++) {
+        if(value == M[i][0]) {  
+            relation[me][M[i][1]] = 1;
+            lighter(M[i][1], M ,size, me);
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/09/13 17:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">코딩초보</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4788"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+
+int** relation;
+void lighter(int value, int** M, int size, int me);
+void heavier(int value, int** M, int size, int me);
+
+void main(void) {
+    int N = 0;
+    int M_size = 0;
+
+    scanf(&quot;%d&quot;,&amp; N);
+    scanf(&quot;%d&quot;,&amp; M_size);
+
+    int* out = (int*) malloc (sizeof(int) * N+1);
+    relation = (int**) malloc (sizeof(int*) * N+1);
+    for(int i = 0; i&lt;=N ;i++)
+        relation[i] = (int*) malloc (sizeof(int) * N+1);
+
+    int** M = (int**) malloc (sizeof(int*) * M_size); 
+    for(int i = 0 ; i &lt; M_size; i++)
+        M[i] = (int*) malloc (sizeof(int) * 2);
+
+    for(int i = 1 ; i &lt;= N; i++) 
+        for(int j = 1 ; j &lt;= N; j++)
+            relation[i][j] = 0;
+
+    for(int i = 1 ; i &lt;= N; i++) 
+        out[i] = 0;
+
+    for(int i = 0; i &lt; M_size; i++)
+        scanf(&quot;%d%d&quot;,&amp;M[i][0], &amp;M[i][1]);
+
+
+    for(int i = 1 ; i &lt;= N; i++) {
+        for(int j = 0 ; j &lt; M_size; j++) {
+            if(M[j][0] == i) {
+                relation[i][M[j][1]] = 1;  
+                lighter(M[j][1] ,M ,M_size, i);
+            } 
+        }
+
+        for(int j = 0 ; j &lt; M_size; j++) {
+            if(M[j][1] == i) {
+                relation[i][M[j][0]] = 1;
+                heavier(M[j][0] ,M ,M_size, i);
+            } 
+        }
+
+        for(int j = 1 ; j &lt;= N ; j++)
+            if(relation[i][j] == 0)
+                out[i]++;
+    }
+
+    printf(&quot;\n\n&quot;);
+    for(int i = 1; i&lt;= N; i++)
+        printf(&quot;%d\n&quot;, out[i]-1);
+} 
+void heavier(int value, int** M, int size, int me) {
+    for(int i = 0 ; i &lt; size; i++) {
+        if(value == M[i][1]) {
+            relation[me][M[i][0]] = 1;
+            heavier(M[i][0], M ,size, me);
+        }
+    }
+}
+
+void lighter(int value, int** M, int size, int me) {
+
+    for(int i = 0 ; i &lt; size; i++) {
+        if(value == M[i][0]) {  
+            relation[me][M[i][1]] = 1;
+            lighter(M[i][1], M ,size, me);
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/09/13 17:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">코딩초보</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8382"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <ol>
+<li>파이썬 3.5</li>
+<li>고등학교 수학에서 나오는 인접행렬을 모티브로 하였습니다.</li>
+<li>numpy.array에서 한 행을 뽑아서 list를 만드는 법을 몰라서 #4에서 그냥 줄줄 풀어서 서술했습니다.</li>
+</ol>
+<pre><code class="python">import numpy as np
+
+#1. 정보 입력받기
+N = int(input('대상의 갯수:'))
+M = int(input('측정된 결과의 수:'))
+hub = []
+for i in range(M):
+    hub.append(input())
+
+#2. 인접행렬만들기
+Mx = np.eye(N,dtype=int)
+for str in hub:
+    Mx[int(str.split(' ')[0])-1][int(str.split(' ')[1])-1]=1
+    #hub에 저장되 있는 값은 'n m'형식이므로 n-1행 m-1열에 넣기위한 작업
+Mx = Mx + Mx.T - np.eye(N,dtype=int)
+
+#3. 행렬을 N-1번 곱하여 각각의 물건의 무게를 잴 수 있는지 파악
+Mx_adj = Mx
+for i in range(N-1):
+    Mx_adj = Mx_adj.dot(Mx)
+
+#4. 각 행의 0인 갯수 세기
+result=[]
+for i in range(N):
+    result_hub=[]
+    for j in range(N):
+        result_hub.append(int(Mx_adj[i][j]))
+    result.append(result_hub.count(0))
+
+#5. 출력
+for i in range(N):
+    print('물건{} {}'.format(i+1,result[i]))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/17 19:14</p>
+                                <p class="static-profile" style="margin:0;padding:0;">고든</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13855"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">N = 6
+inp = '''\
+1 2
+2 3
+3 4
+5 4
+6 5'''
+sample = [tuple(i.split()) for i in inp.split('\n')]
+
+for i,j in enumerate(sample):
+    for k in sample[i+1:]:
+        if j[0] == k[1] and (k[0],j[1]) not in sample: sample.append((k[0],j[1]))
+        elif j[1] == k[0] and (j[0],k[1]) not in sample: sample.append((j[0],k[1]))
+
+for i in range(1,N+1): print( N - (str(sample).count(str(i))+1) )
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/30 23:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20470"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import re
+
+N = int(input(&quot;N : &quot;)) # 주어지는 총량
+D_table = [[float('inf') for i in range(0, N)] for k in range(0, N)]
+M = int(input(&quot;M : &quot;)) # 비교 회수
+inp_com = re.compile(&quot;\d+&quot;)
+
+for o in range(0, M) :
+    tem_f = list(map(int, inp_com.findall(input(&quot;INPUT %s : &quot;% str(o+1)))))
+    D_table[tem_f[1]-1][tem_f[0]-1] = 1
+    P_table[tem_f[1]-1][tem_f[0]-1] = tem_f[1]
+def get_table(D) : # 플로이드-워셜 알고리즘
+    for k in range(0, len(D)) :
+        for i in range(0, len(D)) :
+            for j in range(0, len(D[0])) :
+                if D[i][j] &gt; D[i][k] + D[k][j] :
+                    D[i][j] = D[i][k] + D[k][j]
+    return D
+
+def route_ch(DD, co) : # 비교 불가능한 수의 개수 계산
+    for col in range(0, N) :
+        for row in range(0, N) :
+            if DD[col][row] != float('inf') :
+                co[row] += 1
+                co[col] += 1
+    [print(N-co[p]) for p in range(0, N)]
+
+get_table(D_table)
+route_ch(D_table, [1 for u in range(0, N)])
+</code></pre>
+
+<p>결과</p>
+<pre><code>N : 6
+M : 5
+INPUT 1 : 1 2
+INPUT 2 : 2 3
+INPUT 3 : 3 4
+INPUT 4 : 5 4
+INPUT 5 : 6 5
+2
+2
+2
+0
+3
+3
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/06 14:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GG</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29740"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def compLeft(left, lst, M):
+    for s in left:
+        for i in range(M):
+            if lst[i][1] == s and lst[i][0] not in left:
+                left.append(lst[i][0])
+                compLeft(left, lst, M)
+
+def compRight(right, lst, M):
+    for s in right:
+        for i in range(M):
+            if lst[i][0] == s and lst[i][1] not in right:
+                right.append(lst[i][1])
+                compRight(right, lst, M)
+
+def compare(num, lst, N, M):
+    left, right = [], []
+    for i in range(M):
+        if lst[i][0] == num:
+            right.append(lst[i][1])
+        if lst[i][1] == num:
+            left.append(lst[i][0])
+    compLeft(left, lst, M)
+    compRight(right, lst, M)
+    return N - len(left) - len(right) - 1
+
+
+N = int(input('대상의 갯수:'))
+M = int(input('측정된 결과의 수:'))
+weightComp = []
+for i in range(M):
+    w = [int(k) for k in input('%d번 결과: ' %(i+1)).split()]
+    weightComp.append(w)
+print(' 출 력')
+for p in range(1, N+1):
+    print(' ', compare(p, weightComp, N, M))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/11/04 19:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

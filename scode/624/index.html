@@ -1,0 +1,406 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="당신은 2018년 2월 10일에 육군 현역 입대를 했다.
+기쁘게도 군 기간 단축으로 인해 당신의 복무일이 줄어들게 되었다.
+군 기간 단축은 2017년 1월 3일 입대자부터 단계적으로 적용된다.
+
+단축 이전의 복무일은 21개월, 단축 이후의...">
+    <title>군 전역일 계산기 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">군 전역일 계산기</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">2</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 2</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>당신은 2018년 2월 10일에 육군 현역 입대를 했다.
+기쁘게도 군 기간 단축으로 인해 당신의 복무일이 줄어들게 되었다.
+군 기간 단축은 2017년 1월 3일 입대자부터 단계적으로 적용된다.</p>
+<p>단축 이전의 복무일은 21개월, 단축 이후의 복무일은 18개월이다.
+당신의 군 복무 기간은 남은 기간에 비례하여 2주에 1일씩 감소한다.</p>
+<p>문제는 당신이 짬이 안되서 선임들의 제대일도 함께 계산해야한다는 것이다.
+이 문제를 해결할 알고리즘을 작성하시오.</p>
+<p>첫줄에는 계산할 개수를 입력한다.</p>
+<p><strong>Input</strong></p>
+<pre><code class="cpp">5
+20170103
+20170817
+20171202
+20180110
+20180210
+</code></pre>
+
+<p><strong>Output</strong></p>
+<pre><code class="cpp">20181001
+20190429
+20190808
+20190912
+20191011
+</code></pre>
+
+<p>단 Date 관련 함수나 메서드는 사용을 금지한다.</p>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2018/08/31 22:14</p>
+                    <p class="static-profile" style="margin:0;padding:0;">김지훈</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>6개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_16411"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>음.. 문제에 대한 비판을 2가지 해보자면요
+1. 날짜계산을 date 관련 함수 메소드를 사용하지 않고 문제를 푼다면 날짜처리, 윤달, 월별 일수도 전부 다르기 때문에 사실상 전부 구현해서 푸는게 불가능
+2. 실제로 문제에서 주어진 input과 output도 틀렸음. 20171202에 입대해서 20190101 전역이라뇨?!?!</p>
+<p>해서 date관련 패키지를 임포트 했구요, dateutil은 뒤에 relativedelta 를 위해 추가로 다운받은 패키지인데
+21개월 복무라고 가정했을때, 입대를 한 월에 따라 일수가 639일, 638일 등으로 유동적이기 때문에 일수로 계산을 할 수가 없었습니다.
+그런데 파이썬 기본 날짜계산 api인 timedelta에서는 개월로 날짜계산 하는걸 지원하지 않았기 때문에 추가적으로 dateutil을 다운받았습니다.
+language는 python을 이용했구요
+혹시 문제대로 date관련 메소드나 함수를 이용하지 않고 푸실수 있는 능력자분 있으면 알려주시길..</p>
+<pre><code class="python">from datetime import datetime, timedelta
+from dateutil.relativedelta import relativedelta
+
+i = int(input())
+dayList = []
+dischargeList =[]
+for j in range(0,i):
+    dayList.append((input()))
+    year = dayList[j][0:4]
+    if(dayList[j][5] == 0):
+        month = dayList[6]
+    else:
+        month = dayList[j][4:6]
+    if(dayList[j][7] == 0):
+        day = dayList[8]
+    else:
+        day = dayList[j][6:8]  #년,월, 일이 잘 year month day에 string으로 찢어서 저장
+
+
+    joinarmytime = datetime(int(year),int(month),int(day))
+    standardtime = datetime(2017,1,3)
+    reduceday = ((joinarmytime - standardtime).days // 14) + 1 #줄어든 복무날짜 계산
+
+    dischargeList[j] = joinarmytime + relativedelta(months = 21) - timedelta(days=reduceday) #새 리스트에 저장
+
+for j in range(0,i):
+    print(dischargeList[j])
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/02/01 18:13</p>
+                                <p class="static-profile" style="margin:0;padding:0;">장형규</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2482"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">지적 감사합니다.
+output 잘못된 부분은 수정했습니다.
+
+문제에서 문제 당사자 본인 기준으로 21개월 선임 ~ 본인 제대일까지의 기간만 계산하면 되므로 윤달은 크게 고려할 필요가 없습니다. 정해진 기간내에서의 계산이니 필요하다면 하드코딩으로 박아넣어도 될 문제구요.
+월별 일수는 윤년이 아니라면 매년 동일하므로 큰 문제가 아니라고 생각합니다.
+
+Date 함수를 쓰면 너무 쉬워지기에 제한을 걸었었습니다.
+지금 다시 풀어보니 Date 함수 사용시 자바로 20줄 안되어 문제가 해결되네요.
+
+하지만 많은 분들이 Date 함수 없이도 충분히 푸실 수 있으시리라 생각됩니다.
+금지라고 해놨지만 코딩도장의 경우는 채점이 없으니 쓰고싶으신 분들은 얼마든지 쓰셔도 상관없다고 생각합니다.
+중요한 것은 생각하고 고민하며 코딩하고 이를 통해 실력을 키우는 것이라 생각합니다.
+
+감사합니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    김지훈,
+                                    2019/02/21 11:42
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17035"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">pass
+</code></pre>
+
+<p>제가 나중에 한 번 보기 위해서 그냥 이렇게 답 달아놓을게요 죄송합니다ㅜㅜ</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/03/07 14:45</p>
+                                <p class="static-profile" style="margin:0;padding:0;">D.H.</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17146"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>조금 애먹었네요 구글에서 여러 전역일 계산기를 보았는데 서로 다르게 출력하더라고요.</p>
+<p>우선 예제는 통과했고 윤년도 추가하고 제 생각엔 거의 모든 테스트를 통과할거라 생각하는데 오류가 있다면 알려주세요</p>
+<pre><code class="python">date,ms = list(input() for x in range(int(input()))),[31,28,31,30,31,30,31,31,30,31,30,31]
+
+def month(y,m,d,md):
+    return (y,(m,12)[m == 0],d+md) if d+md &gt; 0 else month((y,y-1)[m == 0],(m-1,12)[m == 0],ms[m-2]+(0,1)[((y%4==0 and y%100!=0) or y%400==0) and m == 2],d+md)
+
+for x in date:
+    x = int(x[:4]),int(x[4:6]),int(x[6:])
+    m,md = (12,(x[1]+21)%12)[x[1] != 3], (365*(x[0]-2017)+sum(ms[:x[1]-1])+x[2]-3)//14+1
+    y,m,d = month(x[0],m,x[2],-md-1)
+    print(y+(1,2)[x[1] &gt; 3],m,d)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/03/16 11:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김영성</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22339"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def ex(date):
+    m = [31,28,31,30,31,30,31,31,30,31,30,31]
+    for x in date:
+        d = int(x[:4]), int(x[4:6]), int(x[6:])
+        s = (365*(d[0]-2017)+sum(m[:d[1]-1])+d[2]-3)//14+1
+        ey = (d[0]+1, d[0]+2)[d[1]&gt;3]
+        em = (d[1]+9, (d[1]+9)-12)[d[1]&gt;3]
+        ed = d[2]-1
+
+        if ed &lt; s:
+            a = (1, s//28)[s//28 != 0]
+            if em-a &lt; 0:
+                ey = ey-1
+                em = em+12-a
+                ed = sum(m[em-2:em-2-a:-1])+ed - s
+            else:
+                ed = sum(m[em-2:em-2-a:-1])+ed - s
+                em = em - a
+        else:
+            ed = ed - s
+        print(ey, em, ed)
+
+if __name__ == '__main__':
+    date = list(input('입대일: ') for _ in range(int(input('입력 갯수: '))))
+    ex(date)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/14 17:32</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hwaseong Nam</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22570"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>ㅏㅜㅏㅓ</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/06/15 19:12</p>
+                                <p class="static-profile" style="margin:0;padding:0;">오지석</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_27416"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from datetime import datetime, timedelta
+from dateutil.relativedelta import relativedelta
+
+inp = '''5
+20170103
+20170817
+20171202
+20180110
+20180210'''
+
+number,*dates = inp.splitlines()
+
+for date in dates:
+    day_in =  datetime.strptime(date[:4]+'/'+date[4:6]+'/'+date[6:],'%Y/%m/%d')
+    od = day_out_original = day_in + relativedelta(months=21)
+
+    day_ref = datetime.strptime('2017/01/03','%Y/%m/%d')
+
+    dd = decrease_day = (day_in - day_ref)//14
+    cd = changed_day = od - dd
+    cd_str = datetime.strftime(cd,'%Y/%m/%d').replace('/','')
+
+    print(cd_str)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/02/21 11:09</p>
+                                <p class="static-profile" style="margin:0;padding:0;">로만가</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

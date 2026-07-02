@@ -1,0 +1,232 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="이 문제는 주어진 해시의 충돌(두 입력이 같은 출력을 가지는 경우)을 찾는 문제입니다. 해시함수는 python 언어로 작성되었습니다.
+```
+def numerize(string: str) -&gt; list[int]:
+    result = []...">
+    <title>해시의 충돌값 찾기 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">해시의 충돌값 찾기</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">2</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 3</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>이 문제는 주어진 해시의 충돌(두 입력이 같은 출력을 가지는 경우)을 찾는 문제입니다. 해시함수는 python 언어로 작성되었습니다.</p>
+<pre><code>def numerize(string: str) -&gt; list[int]:
+    result = []
+    for char in string:
+        result.append(ord(char)-96)
+    return result
+
+def hash(num_string: list[int]) -&gt; int:
+    result = 0
+    for i in range(len(num_string)):
+        result += ((i+2) ** (num_string[i])) * 2
+        result -= (i+2) ** (num_string[::-1][i])
+    return (result) % 100000007
+
+    print(hash(numerize(input())))
+</code></pre>
+
+<p>numerize 함수는 전처리 함수이고, hash 함수가 메인입니다. 이 코드는 임의의 문자열을 받으면 numerize와 hash를 차례로 지나며 0 이상 100000007 미만의 정수를 출력합니다.</p>
+<blockquote>
+<p>문제: 주어진 해시함수의 충돌을 찾는 코드와, 그 코드의 실행 결과로 str1, str2, hash_num 꼴의 출력(str1과 2는 충돌이 발생하는 문자열, hash_num은 충돌되는 해시값) 5개 이상을 제출하시오.
+당연히 많이 제출할수록 좋은 답이 되겠습니다.</p>
+</blockquote>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">hash</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2023/07/23 19:54</p>
+                    <p class="static-profile" style="margin:0;padding:0;">이준우</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>1개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line-last">
+                <a name="answer_29735"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3.12</p>
+<p><code>numerize</code> 함수에서 <code>ord(char) - 96</code> 연산을 하므로, 유니코드 값이 <code>96</code> 미만인 경우 <code>hash</code> 함수에서 음(-)의 지수 연산으로 인해 반환 값이 <code>float</code>이 될 수 있음(Type hint에서는 <code>int</code>로 명시). 따라서, 유니코드 값 <code>96</code> 이상의 출력가능한 문자열만 입력되는 것으로 가정</p>
+<pre><code class="python">import itertools
+import string
+
+
+def numerize(string: str) -&gt; list[int]:
+    result = []
+    for char in string:
+        result.append(ord(char) - 96)
+    return result
+
+
+def hash(num_string: list[int]) -&gt; int:
+    result = 0
+    for i in range(len(num_string)):
+        result += ((i + 2) ** (num_string[i])) * 2
+        result -= (i + 2) ** (num_string[::-1][i])
+    return (result) % 100000007
+
+
+def find_cases(assumelen=3):
+    # 유니코드 96 이상의 출력 가능한 문자열에 대해 길이 3인 문자열 순열 생성
+    pool = [
+        c for c in string.printable if (c not in string.whitespace) and (ord(c) &gt;= 96)
+    ]
+    teststrs = (&quot;&quot;.join(c) for c in itertools.permutations(pool, assumelen))
+
+    testrst: dict[int, list[str]] = {}  # key: hash =&gt; value: list[문자열]
+
+    for teststr in teststrs:
+        hashval = hash(numerize(teststr))
+        if hashval in testrst:
+            testrst[hashval].append(teststr)
+        else:
+            testrst[hashval] = [teststr]
+
+    # 충돌이 발생하는 문자열 선택
+    rst = sorted((k, v) for k, v in testrst.items() if len(v) &gt; 1)
+
+    for k, v in rst:
+        print(f&quot;{&quot;, &quot;.join(v)}, {k}&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    find_cases()
+
+&quot;&quot;&quot;
+bc`, de`, 20
+bca, dea, 25
+cd`, `ca, 34
+adc, cea, 201
+df`, `bd, 506
+c`e, dga, 1969
+bcf, def, 8147
+bcg, deg, 32659
+bch, deh, 130835
+bci, dei, 523795
+bcj, dej, 2096147
+bck, dek, 8386579
+pn`, ste, 9947047
+bc}, de}, 14302797
+bc|, de|, 19357996
+bct, det, 22053065
+bcy, dey, 22504863
+bc~, de~, 30952878
+bcl, del, 33550355
+bcm, dem, 34209548
+bcn, den, 36854512
+bcr, der, 38681729
+fpj, ~gd, 45138881
+mnk, noh, 46077056
+bco, deo, 47450752
+bcs, des, 55251140
+bcz, dez, 57128252
+bcq, deq, 59604914
+bc{, de{, 62730658
+bcv, dev, 65431646
+bcw, dew, 70115121
+bcp, dep, 89868480
+bcu, deu, 90309355
+bcx, dex, 97237629
+&quot;&quot;&quot;
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/11/03 09:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

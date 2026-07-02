@@ -1,0 +1,902 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="철수는 매우 큰 수들의 곱을 구하고자 했으나, 오버플로우로 인하여 제대로된 값을 구하지 못했다.
+철수를 위해 매우 큰 수들의 곱을 구해주는 프로그램을 만들어 주자.
+
+조건)
+1.입력값은 모두 1천만 이하의 자연수로 구성된다.
+2.출력값의...">
+    <title>매우 큰 수 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">매우 큰 수</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">6</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 3</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>철수는 매우 큰 수들의 곱을 구하고자 했으나, 오버플로우로 인하여 제대로된 값을 구하지 못했다.
+철수를 위해 매우 큰 수들의 곱을 구해주는 프로그램을 만들어 주자.</p>
+<p>조건)
+1.입력값은 모두 1천만 이하의 자연수로 구성된다.
+2.출력값의 형태는 다음을 따른다.
+  1,234,567,890 또는 1234567890 (부동 소수점 표현법은 불허한다.)</p>
+<p>예시)
+34566789 * 9989953^ 5 
+결과 : 3,439,349,130,987,378,995,741,000,108,452,472,269,377,477
+       (또는) 3439349130987378995741000108452472269377477</p>
+<p>242896 * 2345987 * 3948562 * 2673851 * 2349863 * 2 * 9873645 * 5728364 
+결과: 1,599,200,004,322,211,514,880,952,175,873,148,802,507,070,720
+        (또는) 1599200004322211514880952175873148802507070720</p>
+<p>//레벨 2 예상</p>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2020/08/27 23:12</p>
+                    <p class="static-profile" style="margin:0;padding:0;">최시우</p>
+                </div>
+            </div>
+
+            
+                <a name="comment_2819"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">어떤 언어가 오버플로우가 발생하나요?</span>
+                    -
+                    <span style="font-size:11px;">
+                        고태욱,
+                        2021/02/20 13:34
+                    </span>
+                </div>
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>9개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_23032"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">2</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>JAVA</p>
+<p>자바로 작성하였으며, Map과 HashMap을 사용했습니다.
+현재 있는 코드는 다른 기능도 포함하기에 쓸모없는 부분이 있을 수 있습니다.</p>
+<pre><code>package Testing;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class InfiniteInt {
+    public static void main(String[] args){
+        Number num1 = new Number(242896);
+
+        int multi[] = {2345987,3948562,2673851,2349863,2,9873645,5728364};
+        for(int temp:multi){
+            num1.multiflyNumber(temp);
+        }
+        System.out.println(num1.getNumber(','));
+        System.out.println(num1.getNumber());
+
+    }
+}
+
+class Number{
+    //a map reference for store each digits value
+    private Map&lt;Integer,Integer&gt; num = new HashMap&lt;Integer,Integer&gt;();
+
+    //initializing
+    Number(int input){
+        int length = String.valueOf(input).length();
+        for(int i = 0; i &lt; length ; i++){
+            num.put(i, input % 10);
+            input /= 10;
+        }
+    }
+    Number(){
+        num.put(0,0);
+    }
+
+    void setNumber(int input){//Be careful!, the old value will removed...
+        int length = String.valueOf(input).length();
+        num.clear();
+        for(int i = 0; i &lt; length ; i++){
+            num.put(i, input % 10);
+            input /= 10;
+        }
+    }
+
+    void addNumber(int input){
+        Number numTemp = new Number(input);
+        addNumber(numTemp);
+    }
+    void addNumber(Number numTemp){
+        int i = 0;
+        while(numTemp.getDigit(i) != -1){
+            int temp = (num.containsKey(i)? num.get(i) : 0) + numTemp.getDigit(i);
+            num.put(i, temp);
+            i++;
+        }
+        refactNumber();
+    }
+    void multiflyNumber(int input){
+        int i = 0;
+        while(num.containsKey(i)){
+            num.put(i , num.get(i) * input);
+            i++;
+        }
+        refactNumber();
+    }
+
+
+    void refactNumber(){
+        int i = 0;
+        if(!num.containsKey(0)){
+            return;
+        }
+        while(num.containsKey(i + 1) || num.get(i) &gt;= 10){//stop when key:i + 1 is doesn't exist and value of key 1 less than 10
+
+            if(num.get(i) &lt; 10){
+                i++;
+                continue;
+            }
+
+            int temp = (num.get(i) / 10) + (num.containsKey(i + 1) ? num.get(i + 1) : 0);
+            num.put((i + 1), temp);
+            num.put(i, num.get(i) % 10);
+            i++;
+
+        }
+    }
+
+    String getNumber(){
+        String value = &quot;&quot;;
+        for(int i = 0; i &lt; num.size(); i++){
+            value = num.get(i) + value;
+        }
+        return value;
+    }
+    String getNumber(char form){//you can get numbers formatted
+        String value = &quot;&quot;;
+        for(int i = 0; i &lt; num.size(); i++){
+            if(i % 3 == 0 &amp;&amp; i != 0){
+                value = &quot;,&quot; + value;
+            }
+            value = num.get(i) + value;
+        }
+
+        return value;//if form  == &quot;,&quot; ex) 12,345,678;
+    }
+    void printNumberHashMap(){
+        System.out.println(num.values());
+    }
+
+    int getDigit(int index){
+        if(num.containsKey(index)){
+            return num.get(index);
+        }else{
+            return -1;
+        }
+    }
+
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/08/27 23:16</p>
+                                <p class="static-profile" style="margin:0;padding:0;">최시우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23190"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python</p>
+<p>문제에서 주어진 계산 예에 대해 파이썬에서는 overflow 없이 바로 계산이 가능하나, BigNum 클래스를 만들어 각 자리별로 곱셈을 계산하고 연산자 오버로딩하는 방식으로 접근해보았습니다.</p>
+<pre><code class="python">import itertools
+
+
+class BigNum:
+    &quot;&quot;&quot;자연수 연산 클래스&quot;&quot;&quot;
+
+    def __init__(self, num: str):
+        self.numstr: str = num
+        # 1의 자리부터의 계산을 위한 inversed string
+        self.numstr_desc: str = self.numstr[::-1]
+
+    def __mul__(self, other):
+        &quot;&quot;&quot;곱셈 연산자(*) 매직 메소드&quot;&quot;&quot;
+        # 자리별 숫자의 곱셈 매칭을 위해 &quot;0&quot;으로 채운 zip
+        desc_grp = list(itertools.zip_longest(
+            self.numstr_desc, other.numstr_desc, fillvalue=&quot;0&quot;))
+        length = len(desc_grp)
+
+        # 인덱스0 = 1의 자리의 곱셉값 저장, ..., 인덱스n = n자리의 곱셉값 저장
+        rst = [0] * int(max(len(self.numstr), len(other.numstr)) * 2 + 1)
+        # 각 자리수별로 숫자를 곱하고 곱셈값의 10의 자리는 다음 인덱스에 더함
+        for idx1 in range(length):
+            for idx2 in range(length):
+                baseidx = idx1 + idx2
+                digit_multi = int(desc_grp[idx2][0]) * int(desc_grp[idx1][1])
+                for i, v in enumerate(d for d in str(digit_multi)[::-1]):
+                    rst[baseidx + i] += int(v)
+
+        # 각 자리별로 곱해진 결과 리스트 정리
+        for idx in range(len(rst) - 1):
+            if rst[idx] &gt;= 10:
+                rst[idx + 1] += (rst[idx] // 10)
+                rst[idx] = rst[idx] % 10
+
+        # 곱셈결과를 새로운 인스턴스로 반환
+        return BigNum(&quot;&quot;.join(map(str, rst[::-1])).lstrip(&quot;0&quot;))
+
+    def __pow__(self, power, modulo=None):
+        &quot;&quot;&quot;거듭제곱 연산자(**) 매직 메소드&quot;&quot;&quot;
+        # 거듭제곱 수만큼 곱셈 메소드 호출
+        rst = self
+        for _ in range(power - 1):
+            rst = self.__mul__(rst)
+        return rst
+
+    def __str__(self):
+        return self.numstr
+
+
+if __name__ == '__main__':
+    case1rst = BigNum(&quot;34566789&quot;) * BigNum(&quot;9989953&quot;) ** 5
+    print(case1rst)
+    # &quot;3439349130987378995741000108452472269377477&quot;
+
+    case2rst = BigNum(&quot;242896&quot;) * BigNum(&quot;2345987&quot;) * BigNum(&quot;3948562&quot;) \
+               * BigNum(&quot;2673851&quot;) * BigNum(&quot;2349863&quot;) * BigNum(&quot;2&quot;) \
+               * BigNum(&quot;9873645&quot;) * BigNum(&quot;5728364&quot;)
+    print(case2rst)
+    # &quot;1599200004322211514880952175873148802507070720&quot;
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/09/16 15:29</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2775"></a>
+                            <div class="comment_line comment-content">
+                                
+                                    <span style="color:orangered;">+1</span>
+                                
+                                <span style="white-space:pre-wrap;">파이썬에서는 예제가 오버플로우 없이 되는 것이었군요...
+C와 자바만 하다보니 처음 알게됬네요.
+하나 알아갑니다</span>
+                                -
+                                <span style="font-size:11px;">
+                                    최시우,
+                                    2020/09/16 15:34
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23242"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="haskell">{-# LANGUAGE FlexibleInstances, FlexibleContexts, TypeSynonymInstances #-}
+
+import Data.List
+
+type BigInt = [Int]
+radix = 10
+
+showBigInt :: BigInt -&gt; String
+showBigInt = reverse . (&gt;&gt;= show)
+
+carry :: [Int] -&gt; BigInt
+carry [] = []
+carry [0] = []
+carry [n] = carry [n, 0]
+carry (n:m:rest) = r : carry (m+q : rest)
+  where (q, r) = quotRem n radix
+
+instance Num BigInt where
+  fromInteger = carry . pure . fromInteger
+  a + b = carry $ fmap sum $ transpose [a,b]
+  a * b = sum $ do
+    (pos, digit) &lt;- zip [0..] b
+    pure $ replicate pos 0 ++ fmap (*digit) a
+
+  abs = undefined
+  signum = undefined
+  negate = undefined
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/09/23 10:26</p>
+                                <p class="static-profile" style="margin:0;padding:0;">sodii</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23552"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>어렵네요 ㅠㅠ</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/11/03 14:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이규동</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23579"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>import itertools</p>
+<p>class BigNum:
+    """자연수 연산 클래스"""</p>
+<pre><code>def __init__(self, num: str):
+    self.numstr: str = num
+    # 1의 자리부터의 계산을 위한 inversed string
+    self.numstr_desc: str = self.numstr[::-1]
+
+def __mul__(self, other):
+    """곱셈 연산자(*) 매직 메소드"""
+    # 자리별 숫자의 곱셈 매칭을 위해 "0"으로 채운 zip
+    desc_grp = list(itertools.zip_longest(
+        self.numstr_desc, other.numstr_desc, fillvalue="0"))
+    length = len(desc_grp)
+
+    # 인덱스0 = 1의 자리의 곱셉값 저장, ..., 인덱스n = n자리의 곱셉값 저장
+    rst = [0] * int(max(len(self.numstr), len(other.numstr)) * 2 + 1)
+    # 각 자리수별로 숫자를 곱하고 곱셈값의 10의 자리는 다음 인덱스에 더함
+    for idx1 in range(length):
+        for idx2 in range(length):
+            baseidx = idx1 + idx2
+            digit_multi = int(desc_grp[idx2][0]) * int(desc_grp[idx1][1])
+            for i, v in enumerate(d for d in str(digit_multi)[::-1]):
+                rst[baseidx + i] += int(v)
+
+    # 각 자리별로 곱해진 결과 리스트 정리
+    for idx in range(len(rst) - 1):
+        if rst[idx] &gt;= 10:
+            rst[idx + 1] += (rst[idx] // 10)
+            rst[idx] = rst[idx] % 10
+
+    # 곱셈결과를 새로운 인스턴스로 반환
+    return BigNum("".join(map(str, rst[::-1])).lstrip("0"))
+
+def __pow__(self, power, modulo=None):
+    """거듭제곱 연산자(**) 매직 메소드"""
+    # 거듭제곱 수만큼 곱셈 메소드 호출
+    rst = self
+    for _ in range(power - 1):
+        rst = self.__mul__(rst)
+    return rst
+
+def __str__(self):
+    return self.numstr
+</code></pre>
+<p>if <strong>name</strong> == '<strong>main</strong>':
+    case1rst = BigNum("34566789") * BigNum("9989953") ** 5
+    print(case1rst)
+    # "3439349130987378995741000108452472269377477"</p>
+<pre><code>case2rst = BigNum("242896") * BigNum("2345987") * BigNum("3948562") \
+           * BigNum("2673851") * BigNum("2349863") * BigNum("2") \
+           * BigNum("9873645") * BigNum("5728364")
+print(case2rst)
+# "1599200004322211514880952175873148802507070720"
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/11/04 15:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">고태욱</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23741"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>자바 math 에서 제공하는 BigInteger가 있더라구요.
+저희들이 모르는 숨겨진 api가 많은 것 같습니다.</p>
+<pre><code class="java">import java.math.BigInteger;
+
+public class BigNum {
+    public static void main(String[] args) {
+
+    int[] input = {4,45621,88897,1234567,9987};
+        String[] plate = new String[input.length]; 
+        for (int i = 0; i &lt; plate.length; i++) {
+            plate[i] = &quot;&quot;+input[i];
+        }
+
+        BigInteger result = new BigInteger(&quot;1&quot;);//new BigInteger 선언시 숫자형태의 String 데이터를 메개변수를 선언해야한다.
+
+        for (int i = 0; i &lt; plate.length; i++) {
+            result = result.multiply(new BigInteger(plate[i]));// BigInteger 클래스의 곱하기 매서드
+        }
+
+        System.out.println(result);
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/11/23 13:58</p>
+                                <p class="static-profile" style="margin:0;padding:0;">권태욱</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2778"></a>
+                            <div class="comment_line comment-content">
+                                
+                                    <span style="color:orangered;">+1</span>
+                                
+                                <span style="white-space:pre-wrap;">그게 자바의 장점이죠.
+정말 다양한 API가 있더라구요....</span>
+                                -
+                                <span style="font-size:11px;">
+                                    최시우,
+                                    2020/11/23 14:48
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23894"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>X와 Y를 곱할 때 십의 자릿수 이상 문자열을 각각 A, B라 하고
+일의 자릿수 문자를 각각 a, b라 하면
+X * Y = 100AB + 10(Ab+aB) + ab
+라는 공식을 recursion 형식으로 호출했습니다.</p>
+<pre><code class="python">def AddStr(str1, str2):
+    result = &quot;&quot;
+    carry = 0
+    islast = False
+    len1 = len(str1)
+    len2 = len(str2)
+    k1 = len1-1
+    k2 = len2-1
+    while (not islast):
+        if (k1&gt;=0):
+            x = int(str1[k1])
+            k1 = k1-1
+        else:
+            x = 0
+        if (k2&gt;=0):
+            y = int(str2[k2])
+            k2 = k2-1
+        else:
+            y = 0
+        if (k1&lt;0 and k2&lt;0):
+            islast = True
+        s = carry+x+y
+        if (s&gt;9):
+            s = s%10
+            carry = 1
+        else:
+            carry = 0
+        result = str(s) + result
+        if (islast and carry==1):
+            result = &quot;1&quot;+result
+    return result
+
+def MultStr(str1, str2):
+    len1 = len(str1)
+    len2 = len(str2)
+    if (len1==1 and len2==1):
+        return str(int(str1)*int(str2))
+    if (len1&gt;1):
+        A = str1[:len1-1]
+        a = str1[len1-1]
+    else:
+        a = str1
+    if (len2&gt;1):
+        B = str2[:len2-1]
+        b = str2[len2-1]
+    else:
+        b = str2
+    if (len1==1):
+        return AddStr(MultStr(a,B)+&quot;0&quot;,MultStr(a,b))
+    if (len2==1):
+        return AddStr(MultStr(b,A)+&quot;0&quot;,MultStr(a,b))
+    return AddStr(AddStr(MultStr(A,B)+&quot;00&quot;,str(int(a)*int(b))), AddStr(MultStr(a,B),MultStr(A,b))+&quot;0&quot;)
+
+InputStr = input(&quot;숫자*숫자*숫자 .. 형태로 입력하시오(각 1천만 이하): &quot;)
+InputList = InputStr.split('*')
+OutputStr = &quot;1&quot;
+for numstr in InputList:
+    OutputStr = MultStr(OutputStr, numstr)
+print(&quot;답= &quot;, OutputStr)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/12/07 14:55</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김준우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25227"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.math.BigInteger;
+import java.util.Scanner;
+
+public class NumEx1 {
+public static void main(String[] args) {
+Scanner scan= new Scanner(System.in);
+
+       int j=0;
+       int num;
+       int k=0;//횟수
+System.out.print(&quot;숫자를 누르세요(0을 계산이 종료됩니다):&quot;);
+       num=scan.nextInt();
+ //BigInteger i[]  = new BigInteger[100];
+ BigInteger sum =new BigInteger(&quot;1&quot;); 
+
+ while(num !=0 ) {
+       k=0;
+
+
+       BigInteger number  = BigInteger.valueOf(num);
+      sum = sum.multiply(number);
+    System.out.print(&quot;다음 수를 누르세요:없으면 0을 누르세요:&quot;);
+      num=scan.nextInt(); 
+
+      k++;
+
+ }
+
+    System.out.println(&quot; =====&gt; &quot;+sum);
+
+}//main
+}//class
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/04/20 15:41</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이동훈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29429"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">using System;
+using System.Collections.Generic;
+
+namespace solution
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //string problem = &quot;34566789 * 9989953^ 5&quot;;
+            string problem = &quot;242896 * 2345987 * 3948562 * 2673851 * 2349863 * 2 * 9873645 * 5728364&quot;;
+
+            Console.WriteLine(&quot;\n   {0} = {1}&quot;, problem, productOfVeryLargeNumbers(problem));
+        }
+
+        private static string productOfVeryLargeNumbers(string problem)
+        {
+            List&lt;List&lt;int&gt;&gt; numList = new List&lt;List&lt;int&gt;&gt;();
+            string Lsu = &quot;&quot;;
+            string Rsu = &quot;&quot;;
+            char op = ' ';
+
+            for (int i = 0; i &lt; problem.Length; i++)
+            {
+                if (problem[i] == ' ')
+                {
+                    continue;
+                }
+                else if (problem[i] == '*' || problem[i] == '^')
+                {
+                    if (op == '*')
+                    {
+                        putNumList(Rsu, numList);
+                        multipleBigNum(numList);
+                        Lsu = Rsu;
+                    }
+                    else if (op == '^')
+                    {
+                        poweBigNum(int.Parse(Rsu), Lsu, numList);
+                    }
+                    else
+                    {
+                        putNumList(Rsu, numList);
+                        Lsu = Rsu;
+                    }
+                    Rsu = &quot;&quot;;
+                    op = problem[i];
+                }
+                else
+                {
+                    Rsu += problem[i];
+                }
+            }
+            if(op == '*')
+            {
+                putNumList(Rsu, numList);
+                multipleBigNum(numList);
+            }
+            else if(op == '^')
+                poweBigNum(int.Parse(Rsu), Lsu, numList);
+
+
+            int N = numList[0].Count;
+            Lsu = &quot;&quot;;
+            for (int i = 0; i &lt; N; i++)
+            {
+                Lsu = numList[0][i] + Lsu;
+                if (i != N - 1 &amp;&amp; i % 3 == 2)
+                    Lsu = &quot;,&quot; + Lsu;
+            }
+
+            return Lsu;
+        }
+
+        private static void poweBigNum(int v, string Lsu, List&lt;List&lt;int&gt;&gt; numList)
+        {
+            for (int i = 1; i &lt; v; i++)
+            {
+                putNumList(Lsu, numList);
+                multipleBigNum(numList);
+            }
+        }
+
+        private static void putNumList(string su, List&lt;List&lt;int&gt;&gt; numList)
+        {
+            int N = su.Length - 1;
+            List&lt;int&gt; list = new List&lt;int&gt;();
+            for (int i = N; i &gt;= 0; i--)
+                list.Add(int.Parse(su[i].ToString()));
+
+            numList.Add(new List&lt;int&gt;(list));
+        }
+
+        private static void multipleBigNum(List&lt;List&lt;int&gt;&gt; numList)
+        {
+            List&lt;int&gt; list = new List&lt;int&gt;();
+            int N = numList.Count - 1;
+            int gop = 0;
+            int up = 0;
+            for (int i = 0; i &lt; numList[N].Count; i++)
+            {
+                gop = numList[N][i];
+                for (int j = 0; j &lt; numList[N-1].Count; j++)
+                {
+                    list.Add(0);
+                    up = numList[N - 1][j] * gop + up + list[i + j];
+                    list[i + j] = up % 10;
+                    up = up / 10;
+                }
+                int cnt = i + numList[N - 1].Count;
+                while (up &gt; 0)
+                {
+                    list.Add(0);
+                    list[cnt] += up;
+                    up = list[cnt] / 10;
+                    list[cnt++] %= 10;
+                }
+            }
+
+            N = list.Count - 1;
+            while(N &gt;= 0 &amp;&amp; list[N] == 0)
+            {
+                list.RemoveAt(N);
+                N--;
+            }
+            numList.Clear();
+            numList.Add(new List&lt;int&gt;(list));
+        }
+    }
+} 
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/07/15 20:41</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

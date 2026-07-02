@@ -1,0 +1,4148 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="### == 문제 설명 ==
+
+양의 정수 S0 의 각 아라비아 숫자들의 제곱의 합으로 양의 정수 S1을 만든다고 하자. 
+
+동일한 방법이라면, S1으로 S2를 만들 수 있고, 이 후로도 계속 만들 수 있다. 
+
+만약 어떤 i(i ≥ 1...">
+    <title>Happy Number - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">Happy Number</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">5</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 2</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <h3 id="_1">== 문제 설명 ==</h3>
+<p>양의 정수 S0 의 각 아라비아 숫자들의 제곱의 합으로 양의 정수 S1을 만든다고 하자. </p>
+<p>동일한 방법이라면, S1으로 S2를 만들 수 있고, 이 후로도 계속 만들 수 있다. </p>
+<p>만약 어떤 i(i ≥ 1)에 대해서 Si = 1이라면, 최초의 S0를 Happy Number라고 부른다. </p>
+<p>Happy Number가 아닌 수를 Unhappy Number라고 부른다.</p>
+<p>예를 들어, 7에서 시작하게 되면 다음과 같은 일련의 순서를 가지게 되며</p>
+<p>7, 49(=7^2), 97(=4^2+9^2), 130(=9^2+7^2), 10(=1^2+3^2), 1(=1^2),</p>
+<p>따라서 7은 즐거운 수이다.</p>
+<p>그리고 4는 </p>
+<p>4, 16(4^2), 37(1^2+6^2), 58(3^2+7^2), 89(5^2+8^2), 145(8^2+9^2), </p>
+<p>42(1^2+4^2+5^2), 20(4^2+2^2), 4(2^2)의 순서로 반복되므로 Unhappy Number이다.</p>
+<h3 id="_2">== 입력 ==</h3>
+<p>첫 라인은 인풋 케이스의 수 n이 주어지며 이후 n라인의 케이스가 주어진다.</p>
+<p>각 테스트 케이스는 한 개의 양의 정수 N으로 구성되며 N은 10^9 보다 작다.</p>
+<h3 id="_3">== 출력 ==</h3>
+<p>출력은 주어진 수 N이 Happy Number인지 Unhappy Number인지 여부에 따라 다음과 같이 출력한다.</p>
+<p>N이 Happy Number라면 “Case #p: N is a Happy number.”</p>
+<p>N이 Unhappy Number라면 “Case #p: N is an Unhappy number.”</p>
+<p>p는 1부터 시작하는 케이스의 번호이며 각각의 케이스는 한 줄에 결과를 표시한다.</p>
+<h3 id="_4">== 샘플 인풋 ==</h3>
+<p>3</p>
+<p>7</p>
+<p>4</p>
+<p>13</p>
+<h3 id="_5">== 샘플 출력 ==</h3>
+<p>Case #1: 7 is a Happy number.</p>
+<p>Case #2: 4 is an Unhappy number.</p>
+<p>Case #3: 13 is a Happy number.</p>
+<h3 id="_6">== 채점 기준 ==</h3>
+<ol>
+<li>
+<p>작성한 프로그램은 각각의 테스트케이스에 대해서 올바른 결과를 출력하여야 한다.</p>
+</li>
+<li>
+<p>입력 후 결과 출력까지 걸리는 시간이 빠르면 빠를수록 좋다.</p>
+</li>
+</ol>
+<p>(* 이번 문제는 정확한 결과만큼이나 속도도 중요합니다)</p>
+<ol>
+<li>
+<p>프로그램에서 사용한 자료구조 및 알고리즘이 적절하여야 한다.</p>
+</li>
+<li>
+<p>그 외 일반적인 코드 구조, 스타일, 에러/예외 처리 등이 적절할수록 좋다.</p>
+</li>
+</ol>
+<p>UVA 10591 문제이고, 이스트소프트 개발직군 샘플문제로 공개된 자료를 가져왔습니다. 채점기준을 준수한다면 난이도는 좀 더 상승될 것 같습니다.</p>
+<ul>
+<li>채점기준에서 속도가 중요하다 했는데, 대부분의 수들이 길지 않은 싸이클로 반복하다보니 처리시간은 순식간입니다. 수십, 수백만개의 Case에 대해 처리시간을 체크해봐야 차이가 날것 같습니다.</li>
+</ul>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">simple math</span>
+                
+                    <span class="label label-tag label-xs">happy numbers</span>
+                
+                    <span class="label label-tag label-xs">cycle finding (Floyd&#39;s cycle finding algorithm)</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2016/01/06 19:42</p>
+                    <p class="static-profile" style="margin:0;padding:0;">이 우람</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>69개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_3243"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">3</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>해피넘버, 언해피넘버 및 매 수행시의 이력을 다 저장하는 방법이 있지만, 
+모든 값을 캐싱하면서 캐싱한 값의 상태에 따라서 결과값을 찾습니다.</p>
+<ul>
+<li>해피넘버 ==&gt; 초기값 및 그간의 경로 중에서 값이 미정인 값은 모두 해피넘버</li>
+<li>언해피넘버, 미결정값 ==&gt; 해피넘버가 아닌 것으로 판명되므로 초기값 및 미결정 값은 모두 언해피넘버가 됩니다.</li>
+</ul>
+<p>재귀호출하면서 상태를 pending --&gt; 다음 결과에 따라 결과 확정하는 식으로 처리했습니다.</p>
+<pre><code class="swift">enum Happy {
+    case Happy, Unhappy, Pending
+}
+
+var cache = Dictionary&lt;Int, Happy&gt;()
+cache[1] = .Happy
+
+let next:(Int) -&gt; Int = {n in 
+    &quot;\(n)&quot;.utf8.map{ (Int($0) - 48)*(Int($0) - 48) }
+    .reduce(0, combine:(+))
+}
+
+func test(n: Int) -&gt; Bool {
+    if let r = cache[n] {
+        switch r {
+        case .Happy: return true
+        case .Unhappy: return false
+        default:
+            cache[n] = .Unhappy
+            return false
+        }
+    }
+    cache[n] = .Pending
+    let r = test(next(n))
+    cache[n] = r ? .Happy : .Unhappy
+    return r
+}
+
+func main(){
+    guard let input = readLine() else { return }
+    let data = input.characters.split(&quot; &quot;).map{ Int(String($0))! }
+    for (i, e) in data.enumerate() {
+        print(&quot;case #\(i+1) \(e) is \(test(e) ? &quot;a Happy&quot; : &quot;an Unhappy&quot;) number.&quot;)
+    }
+}
+
+main()
+</code></pre>
+
+<p>아래는 같은 아이디어에 대한 파이썬 구현입니다.</p>
+<pre><code class="python"># 0: unhappy
+# 1: happy
+# 2: pending
+cache = {1: 1}
+
+def f(n):
+    if n in cache:
+        if cache[n] == 1:
+            return True
+        cache[n] = 0
+        return False
+    cache[n] = 2
+    m = 0
+    while n &gt; 0:
+        m += (n % 10)**2
+        n = n // 10
+    r = f(m)
+    if r:
+        cache[n] = 1
+    else:
+        cache[n] = 0
+    return r
+
+p = int(input())
+ins = []
+for _ in range(p):
+    ins.append(int(input()))
+for i, e in enumerate(ins):
+    print(&quot;Case #{}: {} is {} number.&quot;.format(
+        i+1, e, &quot;a Happy&quot; if f(e) else &quot;an Unhappy&quot;))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/03/23 10:27</p>
+                                <p class="static-profile" style="margin:0;padding:0;">룰루랄라</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2816"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <ul>
+<li>두번째 풀이 이구요, 좀 더 효율적으로 해피넘버를 찾아보았습니다. 언어는 C#입니다.</li>
+<li></li>
+<li>현재의 S0가 언해피넘버로 정해졌을 경우, 그 수의 모든 Si들을 언해피넘버 테이블에 저장</li>
+<li>현재의 S0가 해피넘버로 정해졌을 경우, 그 수의 모든 Si들을 해피넘버 테이블에 저장</li>
+<li>그래서 다음 S0의 Si가 양쪽 테이블리스트상에 존재하는지 판단하는 방식입니다</li>
+<li>테이블에 존재한다면 계산하나마나 어차피 이전과 같은 결과로 수렴이 되기 때문입니다</li>
+<li>그래서 대부분의 S0들은 1-2번의 계산만으로 해피넘버가 판별될 수 있었습니다</li>
+<li></li>
+<li>제한수가 10^9 = 10억이지만 Si들은 1 ~ 729까지 뿐이 나오지 않기 때문에 테이블 메모리는 얼마 되지 않았습니다</li>
+<li>1도 하나의 해피넘버 Si로 보고 초기화시에 추가하였습니다</li>
+<li></li>
+<li>1부터 1000만까지 총 1000만개의 샘플 입니다. 제 컴퓨터에서(i7 4790k)의 처리시간은 약 0.66초 정도 나옵니다.</li>
+</ul>
+<pre><code class="cs">static void Main()
+{
+    Stopwatch sw = new Stopwatch();
+    sw.Start();
+
+    int i, temp, digit, si, nHappyNum = 0;
+    HashSet&lt;int&gt; listHappy = new HashSet&lt;int&gt;() { 1 };
+    HashSet&lt;int&gt; listUnhappy = new HashSet&lt;int&gt;();
+    List&lt;int&gt; listCurrent = new List&lt;int&gt;();
+
+    for (int s0 = 1; s0 &lt; 10000001; s0++)
+    {
+        if (listCurrent.Count &gt; 0) listCurrent.Clear();
+        temp = s0;
+
+        while (true)
+        {
+            si = 0;
+            do
+            {
+                digit = temp % 10;
+                si += digit * digit;
+            }
+            while ((temp /= 10) &gt; 0);
+
+            if (listUnhappy.Contains(si) || listCurrent.Contains(si))
+            {
+                for (i = 0; i &lt; listCurrent.Count; i++)
+                    listUnhappy.Add(listCurrent[i]);
+                break;
+            }
+            if (listHappy.Contains(si))
+            {
+                nHappyNum++;
+                for (i = 0; i &lt; listCurrent.Count; i++)
+                    listHappy.Add(listCurrent[i]);
+                break;
+            }
+
+            listCurrent.Add(si);
+            temp = si;
+        }
+    }
+
+    Console.WriteLine(string.Format(&quot;Elapsed Time : {0}&quot;, sw.Elapsed));
+    Console.WriteLine(string.Format(&quot;Number of HappyNumber (1 ~ 10000000) : {0}&quot;, nHappyNum));
+}
+</code></pre>
+
+<h3 id="_1">결과</h3>
+<ul>
+<li>Elapsed Time : 00:00:00.6631938</li>
+<li>Number of HappyNumber (1 ~ 10000000) : 1418854</li>
+</ul>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/01/17 23:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이 우람</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2705"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#Python 3.5
+T=[3,7,4,13]
+def happyNumber(d) :
+    numbers=[]
+    unhappy=[]
+    l=d
+    while(l != &quot;1&quot; ) :
+        for i in range(len(l)) :
+            a = int(l[i])*int(l[i])
+            numbers.append(a)
+        l = str(sum(numbers))
+        del numbers[0:len(numbers)]
+        if l == d : return False
+        for i in unhappy :
+            if i == l : return False
+        unhappy.append(l)
+    return True
+
+if len(T)-1 != T[0] :
+    print(&quot;영혼이 비정상...&quot;)
+    exit()
+else : T.pop(0)
+
+#T=range(2,10000) #속도테스트
+for i,d in enumerate(T) :
+    if happyNumber(str(d)) :
+        print(&quot;Case #&quot;+(str(i+1))+&quot;: %s is a Happy number.&quot;%d)
+    else :
+        print(&quot;Case #&quot;+(str(i+1))+&quot;: %s is an Unhappy number.&quot;%d)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/01/07 15:09</p>
+                                <p class="static-profile" style="margin:0;padding:0;">. anisky07</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2724"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">//class 
+//HappyNumber.isHappyNumber(7) is True;
+//HappyNumber.isHappyNumber(42) is false;
+public class HappyNubmer 
+{
+    public static bool isHappyNumber(int number)
+    {
+        bool isHappy = false;
+        List&lt;int&gt; numberList = new List&lt;int&gt; ();
+        int nextNumber = number;
+        while (true) {
+            nextNumber = getNextNumber (nextNumber);
+
+            if (numberList.Contains (nextNumber)) {
+                isHappy = false;
+                break;
+            }
+
+            if (nextNumber == 1) {
+                isHappy = true;
+                break;
+            }
+
+            numberList.Add (nextNumber);
+        }
+
+        return isHappy;
+    }
+
+    public static int getNextNumber(int number)
+    {
+        List&lt;int&gt; splitedNumbers = splitNumber (number);
+
+        int nextNumber = 0;
+        foreach (int splitedNumber in splitedNumbers) {
+            nextNumber += square (splitedNumber);
+        }
+
+        return nextNumber;
+    }
+
+    public static List&lt;int&gt; splitNumber(int number)
+    {
+        List&lt;int&gt; splitedNumber = new List&lt;int&gt; ();
+
+        int splitNumber = number;
+        while (true) {
+            splitedNumber.Insert(0,splitNumber % 10);
+
+            if (splitNumber &lt; 10)
+                break;
+
+            splitNumber = splitNumber / 10;
+        }
+
+        return splitedNumber;
+    }
+
+    public static int square(int number)
+    {
+        return number*number;
+    }
+}
+
+
+//nunit test
+[TestFixture]
+public class HappyNumberTest {
+    [Test,Sequential]
+    public void isHappyNumberTest([Values(7,42)]int n,[Values(true,false)]bool r)
+    {
+        bool check7 = HappyNubmer.isHappyNumber (n);
+        Assert.AreEqual (r, check7);
+    }
+
+    [Test]
+    public void getNextNumberTest()
+    {
+        int number1 = 7;
+        int nextNumber = HappyNubmer.getNextNumber (number1);
+
+        Assert.AreEqual (49, nextNumber);
+    }
+
+    [Test]
+    public void splitNumberTest()
+    {
+        int number1 = 130;
+        List&lt;int&gt; result = HappyNubmer.splitNumber (number1);
+
+        Assert.AreEqual (1, result [0]);
+        Assert.AreEqual (3, result [1]);
+        Assert.AreEqual (0, result [2]);
+        Assert.AreEqual (3, result.Count);
+    }
+
+    [Test]
+    public void squareTest()
+    {
+        int number1 = HappyNubmer.square (5);
+
+        Assert.AreEqual (number1, 25);
+
+    }
+}
+</code></pre>
+
+<p>공부중인 ttd를 활용해서 한번..</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/01/08 10:33</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김 현수</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2739"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def check_num(n, List):
+    if n == 1:
+        return 1
+
+    Next_n = sum([int(x) ** 2 for x in list(str(n))])
+
+    if Next_n in List:
+        return 0
+    else:
+        List.append(Next_n)
+        return check_num(Next_n, List)
+
+
+if __name__ == '__main__':
+    case_n = input('Input case number: n = ')
+    for i in range(int(case_n)):
+        while True:
+            n = int(input('Number: '))
+            if n &lt;= pow(10,9):
+                break
+        decision = check_num(n, [])
+        print('Happy Number' * decision + 'Unhappy Number' * (not decision))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/01/08 23:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">SPJung</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2765"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>초짜입니다. ^^
+문자열을 아직 잘 다루지 못 해 수학 함수로만 짜 봤습니다.
+제대로 짰는지 모르겠네요. 일단 test 결과는 제대로 나오는데...</p>
+<pre><code class="python"># tried to find happy number only with math functions
+
+import math
+n = int(input(&quot;how many happy number candidates? &quot;))
+
+while n &gt; 0:
+    a = int(input(&quot;type in happy number candidate: &quot;))
+    c = 10
+
+    while c &gt;=10:
+        b = math.floor(math.log10(a))
+        c = 0
+
+        while b &gt;= 0:
+            c = c + ((a // (10 ** b)) ** 2)
+            a = a % (10 ** b)
+            b = b - 1
+
+        a = c
+
+    if c == 1:
+        print (&quot;happy&quot;)
+    else:
+        print (&quot;unhappy&quot;)
+
+    n = n - 1
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/01/12 05:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Kwak Dong-ha</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2767"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python으로 작성</p>
+<pre><code class="python"># find happy number
+def is_happy_num(s0, history=[]):
+    s1 = sum(map(lambda x:x*x, [int(i) for i in repr(s0)]))    
+    if s1 == 1:
+        return True
+    elif s1 in history:
+        return False
+    else:
+        history.append(s1)
+        return is_happy_num(s1)
+
+# Test case
+for i, num in enumerate([3,7,4,13]):
+    case = &quot;Case #%d: %d is &quot; % (i, num)
+    result = &quot;Happy number.&quot; if is_happy_num(num, []) else &quot;an Unhappy number.&quot;
+    print(case + result)
+</code></pre>
+
+<p><strong>결과</strong>  <br />
+Case #0: 3 is an Unhappy number.<br />
+Case #1: 7 is Happy number.<br />
+Case #2: 4 is an Unhappy number.<br />
+Case #3: 13 is Happy number.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/01/12 09:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">윤태호</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2793"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Haskell로 작성</p>
+<pre><code class="haskell">import Data.Char (digitToInt)
+import Control.Monad (join)
+
+is_happy_number n history
+    | sumnum == 1 = True
+    | sumnum `elem` history = False
+    | otherwise = is_happy_number sumnum (sumnum:history)
+    where sumnum = sum [(digitToInt x)^2 | x&lt;-show(n)]
+
+test_happy_number n = join [show(n), &quot; is &quot;, (if is_happy_number n [] then &quot;a Happy&quot; else &quot;an Unhappy&quot;), &quot; number.&quot;]
+
+main = do
+    mapM_ putStrLn $ map test_happy_number [3,7,4,13]
+</code></pre>
+
+<p><strong>결과</strong><br />
+3 is an Unhappy number.<br />
+7 is a Happy number.<br />
+4 is an Unhappy number.<br />
+13 is a Happy number.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/01/14 12:56</p>
+                                <p class="static-profile" style="margin:0;padding:0;">윤태호</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2794"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>def happy(a) :
+ aa =[]
+ n=a</p>
+<p>while True:
+  b=n
+  s=0
+  while n&gt;0 :
+   s+= pow( n%10,2)
+   n/= 10</p>
+<p>if s == 1 :
+   print str(a) + " is happy number."
+   break
+  elif s in aa:
+   print str(a) + " is unhappy number."
+  else :
+   aa.append(b) 
+   n = s</p>
+<p>a = [7,4,13]</p>
+<p>for i in a:
+ happy(i)</p>
+<h1 id="_1">모바일로 작성해서 어떻게 보일지 모르겠네요</h1>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/01/14 18:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Kim JungRae</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2819"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C언어 입니다.!
+다른 분들의 경우를 참고해서 풀어봤어요~!(해쉬테이블)
+더 분발해야 겠습니다!</p>
+<pre><code class="cpp">#include &lt;stdio.h&gt;
+#define BK 1000
+#define SL 1
+int hashtable[BK][SL];
+
+int Hash(int key)
+{
+    return key % 10;
+}
+void AddNum(int num)
+{
+  int bucket = Hash(num);
+  if(hashtable[bucket][0] == 0){
+     hashtable[bucket][0] = num;
+  }
+}
+int FindNum(int num)
+{
+  int bucket = Hash(num);
+  return (hashtable[bucket][0] == num);
+}
+
+int main()
+{
+  int t, TC = 5;
+
+  for(t=0; t&lt;TC; t++){
+    int N, sN;
+    int sum, digit;
+
+    scanf(&quot;%d&quot;, &amp;N);
+    sN = N;
+    memset(hashtable, 0, sizeof(hashtable));
+
+    while(1){
+        sum = 0;
+        do
+        {
+          digit = N % 10;
+          sum += digit * digit;
+        }while((N/=10) &gt; 0);
+
+        N = sum;
+        //printf(&quot;N = %d \n&quot;, N);
+
+        if(N == 1) break;
+        else if((FindNum(sum)) == 1) break;
+        else AddNum(sum);
+    }
+
+    if(N == 1) printf(&quot;Case #%d : %d is Happy Number.\n&quot;, t+1, sN);
+    else printf(&quot;Case #%d : %d is Unhappy Number.\n&quot;, t+1, sN);
+
+  }
+
+  return 0;
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/01/18 11:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이 정연</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2886"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def isHappy(n):
+    l=[n]
+    while 1:
+        next = sum(int(x)**2 for x in str(n))
+        if next==1 : return True
+        if next in l : return False
+        l.append(next);n=next
+
+case =[int(raw_input()) for i in range(input())]
+for i,c in enumerate(case):
+    print 'Case #%d:%d is a %s number'%(i+1, c, ['Unhappy','Happy'][isHappy(c)])
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/01/24 21:45</p>
+                                <p class="static-profile" style="margin:0;padding:0;">상파</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2924"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def f(x):
+    r = sum([ ( r * r ) for r in [ int(_) for _ in str(x) ] ])
+    return f(r) if len(str(r)) &gt; 1 else r
+
+def hnvalid(x):
+    return ( '%d is a happy number.' % x ) if f(x) == 1 else ( '%d is an unhappy number.' % x )
+
+print hnvalid(3)
+print hnvalid(7)
+print hnvalid(4)
+print hnvalid(13)
+</code></pre>
+
+<p>Python 2.7 에서 작성하였습니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/01/28 18:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">如 月華</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3100"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<pre><code class="ruby">require 'set'
+
+nxt = -&gt;n { n.digits.sum {|e| e**2 } }
+chk = -&gt;n,seq=[1].to_set { n=nxt[n] while seq.add?(n); n == 1 ? &quot; H&quot; : &quot;n Unh&quot; }
+chk_happy = -&gt;nth,n=gets.to_i { &quot;Case ##{nth}: #{n} is a#{chk[n]}appy Number.&quot; }
+happy_checker = -&gt; { puts (1..gets.to_i).map(&amp;chk_happy) }
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby">expect(nxt[15]).to eq 26
+$stdin = StringIO.new(&quot;3\n4\n7\n13\n&quot;)
+expect{happy_checker.call}.to output(&quot;Case #1: 4 is an Unhappy Number.\n&quot; +
+                                     &quot;Case #2: 7 is a Happy Number.\n&quot; +
+                                     &quot;Case #3: 13 is a Happy Number.\n&quot;).to_stdout
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/03/08 17:16</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3352"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <h3 id="34">파이썬3.4<br></h3>
+<p>변환중의 값을 캐쉬하여 동일한 값이 있으면 False 처리하기 때문에 속도가 빠릅니다</p>
+<pre><code class="python">from functools import reduce
+
+def ishappy(n:int) -&gt; bool:
+    init = n
+    temp = () #캐쉬
+    while True:
+        n = sum(int(x)**2 for x in str(n))
+        if n in temp:
+            return False
+        else:
+            temp += n,
+        if n == init:
+            return False
+        elif n == 1:
+            return True
+%timeit ishappy(185719837494182639811762347812364987102365198239841293471293068412083461203) #10000 loops, best of 3: 61.8 µs per loop
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/04/09 10:14</p>
+                                <p class="static-profile" style="margin:0;padding:0;">디디</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3390"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import time
+
+def isHappy(n):
+    li = []
+    while 1:
+        n = sum(int(y)**2 for y in str(n))
+        if n in li and n != 1:
+#            print('no')
+            break
+        elif n == 1:
+#            print('yes')
+            break
+        li.append(n)
+
+if __name__ == '__main__':
+    a = time.time()
+    for x in range(1,1000000):
+        isHappy(x)
+    print(time.time()-a)
+</code></pre>
+
+<p>컴파일 언어가 역시 빠르네요;; 백만 기준으로 25.94032382965088초 나옵니다. i7-6700HQ 파이썬 3.5.1</p>
+<p>===</p>
+<pre><code class="python">import time, itertools
+from multiprocessing import Process, Queue
+
+CORE = 8
+MULTIPLY = 1000000
+
+def isHappy(n):
+    li = []
+    while 1:
+        n = sum(int(y)**2 for y in str(n))
+        if n in li and n != 1:
+            return False
+        elif n == 1:
+            return True
+        li.append(n)
+def happyProcess(start, end, output):
+    li = []
+    for x in range(start, end):
+        li.append(isHappy(x))
+    output.put(li)
+if __name__ == '__main__':
+    a = time.time()
+    procs = [];output = [];result = []
+    for x in range(CORE):
+        output.append(Queue())
+        exec('procs.append(Process(target = happyProcess, args = ('+str(x*MULTIPLY)+','+str((x+1)*MULTIPLY)+', output['+str(x)+'])))')
+    for x in procs:
+        x.start()
+        print(x)
+    for x in range(CORE):
+        exec('result.append(output['+str(x)+'].get())')
+    for x in range(CORE):
+        exec('output['+str(x)+'].close()')
+    for x in procs:
+        x.join()
+    result = list(itertools.chain(*result))
+    print(','.join((str(time.time()-a), str(len(result)))))
+    print('result stored in \'result\' object')
+</code></pre>
+
+<p>멀티프로세스 버전입니다. cpu 점유율 100프로까지 치솟네요. 작업 적으면 프로세스 줄이면 더 빠릅니다. 저는 하이퍼스레딩 켜놔서 우선 8코어로 놨습니다. 총 계산량은 MUTIPLY 곱하기 CORE 이니 하나 줄이면 하나를 올려야 합니다. 이거 잊어먹고 MULTIPLY에 천만 넣었다가 8천만개 계산했네요;;</p>
+<p>577.9152545928955초, 80000000개</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/04/12 15:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Flair Sizz</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3485"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>def check_num(n, List):
+    if n == 1:
+        return 1</p>
+<pre><code>Next_n = sum([int(x) ** 2 for x in list(str(n))])
+
+if Next_n in List:
+    return 0
+else:
+    List.append(Next_n)
+    return check_num(Next_n, List)
+</code></pre>
+<p>if <strong>name</strong> == '<strong>main</strong>':
+    case_n = input('Input case number: n = ')
+    for i in range(int(case_n)):
+        while True:
+            n = int(input('Number: '))
+            if n &lt;= pow(10,9):
+                break
+        decision = check_num(n, [])
+        print('Happy Number' * decision + 'Unhappy Number' * (not decision))</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/04/22 15:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김수현</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3681"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#파이썬3.5.1
+def happy(n):
+    n = int(n)
+    numlist = set()
+    numlist.add(n)
+    old = None
+    while True:
+        new = len(numlist)
+        if new == old:
+            return False
+        old = len(numlist)
+        n = eval('**2+'.join(str(n)+'0'))
+        if n == 1:
+            return True
+        numlist.add(n)
+
+case = []
+n = int(input())
+for i in range(n):
+    case.append(int(input()))
+for i in range(len(case)):
+    ans = happy(case[i])
+    if ans:
+        print('Case #%d : %d is a Happy number.' % (i+1,case[i]))
+    else:
+        print('Case #%d : %d is a Unhappy number.' % (i + 1, case[i]))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/05/14 10:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">차우정</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3829"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="r">sum.fun = function(x){
+  tmp = c()
+  for(i in 1:nchar(x))
+  {
+    tmp[i] = as.numeric(substr(x, i, i))
+  }
+
+  tmp1 = sum(tmp^2)
+  return(tmp1)
+}
+
+sum2.fun = function(x){
+  a1 = input  = x
+  for(j in 1:(10^9)){
+
+    # cat(&quot;input : &quot;, input, &quot;, j : &quot;, j, &quot;th iter , x : &quot;, a1[j], &quot; \n&quot;)
+    a2 = sum.fun(a1[j])
+    a1 = c(a1, a2)
+
+    if(a2 == input) {return(paste0(&quot;when case : &quot;, x, &quot;, result : &quot; ,&quot;UNHAPPY, with &quot;, j, &quot;th iterations&quot;)); break}
+    if(a2 == 1) {return(paste0(&quot;when case : &quot;, x, &quot;, result : &quot;, &quot;HAPPY, with &quot;, j, &quot;th iterations&quot;)); break}
+    if(sum(a1[-1] %in% a2) &gt; 1) {return(paste0(&quot;when case : &quot;, x, &quot;, result : UNHAPPY with infinite iterations&quot;)); break}
+  }
+}
+
+y = sample(size = 100, c(1:2000), replace = F)
+system.time(aa &lt;- sapply(y, sum2.fun))
+</code></pre>
+
+<p>R로 작성하였습니다.
+100개의 숫자에 대해 153초가 나오네요. 다른 분들에 비해 많이 느린 듯 합니다.</p>
+<p>[1] "when case : 1278, result : UNHAPPY with infinite iterations"</p>
+<p>[2] "when case : 1680, result : UNHAPPY with infinite iterations"</p>
+<p>[3] "when case : 1289, result : UNHAPPY with infinite iterations"</p>
+<p>[4] "when case : 121, result : UNHAPPY with infinite iterations" </p>
+<p>[5] "when case : 98, result : UNHAPPY with infinite iterations"  </p>
+<p>[6] "when case : 684, result : UNHAPPY with infinite iterations" </p>
+<p>....</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/06/02 10:58</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Byun Seongjun 변성준</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3839"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬3
+반복되는경우를 try문으로 처리해보았습니다.</p>
+<pre><code class="python">def Happy_num(a):
+    try:
+        Sum = 0
+        for i in str(a):
+            Sum += int(i)*int(i)
+        if Sum == 1:
+            return &quot;is a Happy number.&quot;
+        else:
+            return Happy_num(Sum)
+    except:
+        return &quot;is an Unhappy number.&quot;
+
+trynum = 0
+
+while 1:
+    num = int(input())
+    trynum += 1
+    print('Case #', trynum,':', num, Happy_num(num))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/06/02 16:36</p>
+                                <p class="static-profile" style="margin:0;padding:0;">징짱더럽</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3881"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C#으로 작성했습니다. Hashset으로 구현했습니다.</p>
+<pre><code class="cs">using System.Collections.Generic;
+
+    public static class Question098FindHappyNumbers
+    {
+
+        // time taken: 00:05:27:21
+        public static void Answer()
+        {
+            var output1 = FindHappyNumbers(3);
+            var output2 = FindHappyNumbers(7);
+            var output3 = FindHappyNumbers(4);
+            var output4 = FindHappyNumbers(13);
+        }
+
+        public static bool FindHappyNumbers(int input)
+        {
+            var curr = input;
+            var outputs = new HashSet&lt;int&gt;();
+            while(true)
+            {
+                outputs.Add(curr);
+                var index = curr.ToString().Length;
+                var last = curr;
+                curr = 0;
+                for (int i = 0; i &lt; index; i++)
+                    curr += int.Parse(last.ToString()[i].ToString()) 
+                        * int.Parse(last.ToString()[i].ToString());
+                if (outputs.Contains(curr)) return false;
+                if (curr == 1) return true;
+            }
+        }
+
+    }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/06/05 18:13</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Straß Böhm Jäger</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3892"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p> 이 문제를 해결하기 위해서 과정을 simulate 하면서 여태까지 나왔던 숫자들을 기억(캐쉬)해줍니다. 만약 1이 나오기전에 나왔던 숫자가 또 나온다면 Unhappy number입니다. C++ code입니다. </p>
+
+<pre><code class="cpp">#include &lt;iostream&gt; 
+#include &lt;cstdlib&gt; 
+#include &lt;cstdio&gt; 
+#include &lt;cstring&gt; 
+#include &lt;algorithm&gt; 
+#include &lt;vector&gt; 
+using namespace std; 
+
+vector&lt;int&gt; cache;  
+
+bool chk(int number){
+    while (true){
+        if (number == 1) return true; 
+        if (find(cache.begin(),cache.end(),number) != cache.end()) return false;  
+        cache.push_back(number);  
+        int temp = number;  
+        number = 0;  
+        while (temp){
+            number += (temp%10)*(temp%10); 
+            temp /= 10; 
+        }
+    }
+    return false;  
+}
+
+int main(){
+    int n; 
+    scanf(&quot;%d&quot;,&amp;n); 
+    for (int i = 1; i &lt;= n; i++){
+        cache.clear(); 
+        int number; 
+        scanf(&quot;%d&quot;,&amp;number); 
+        if (chk(number)){
+            printf(&quot;Case #%d: %d is a Happy number.\n&quot;,i,number); 
+        }else{
+            printf(&quot;Case #%d: %d is an Unhappy number.\n&quot;,i,number); 
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/06/06 15:39</p>
+                                <p class="static-profile" style="margin:0;padding:0;">iljimae</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4238"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.Scanner;
+
+public class test {
+
+    public static void main(String[] argv) {
+
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        int[] k = new int[n];
+
+        for(int i =0; i &lt; n; i++){
+            k[i] = sc.nextInt();
+        }
+
+        for(int i =0 ; i&lt;k.length; i++){
+            if(happyNum(k[i])){
+                System.out.println(&quot;\nCase #&quot;+i+&quot;: &quot;+ k[i] + &quot; is a Happy number&quot;);
+            }else{
+                System.out.println(&quot;\nCase #&quot;+i+&quot;: &quot;+ k[i] + &quot; is a UnHappy number&quot;);
+            }
+        }
+
+    }
+
+
+    public static boolean happyNum(int num){
+
+        String splitNum = String.valueOf(num);
+        boolean isRoop = true;
+        boolean isHappy = false;
+
+        while(isRoop){
+
+            int value = 0;
+
+            for(int i = 0; i &lt; splitNum.length(); i ++){
+                value += Math.pow(Integer.parseInt(splitNum.substring(i, i+1)), 2);
+            }
+
+            if(value &lt; 10){
+
+                isRoop = false;
+
+                if(value == 1){
+                    isHappy = true;
+                }else{
+                    isHappy = false;
+                }
+            }else{
+                splitNum = String.valueOf(value);
+            }
+        }
+
+        return isHappy;
+
+    }
+
+}
+
+
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/07/26 15:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이 승준</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4567"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def is_happy(n):
+    s_list=[]
+    while 1:
+        s=sum([int(x)**2 for x in str(n)]) #제곱의 합
+        '''
+        s가 1이면 True, 같은 s가 또 나오면 False
+        '''
+        if s==1: return True
+        elif s in s_list: return False
+        else:
+            s_list.append(s)
+            n=s
+
+how_much=int(input('입력의 수? '))
+inputs=[]
+for k in range(how_much):
+    inputs.append(int(input('수를 입력하세요 : ')))
+for k in range(how_much):
+    if bool(is_happy(inputs[k]))==True:
+        print(&quot;Case #%d: %d is a Happy Number&quot; %(k+1, inputs[k]))
+    else:
+        print(&quot;Case #%d: %d is an Unhappy Number&quot; %(k+1, inputs[k]))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/08/13 23:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">최승호</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7005"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <ol>
+<li>파이썬 3.x입니다.</li>
+<li>몇몇 unhappy number의 S_n들에서 4가 공통으로 발견이 되어서 판단기준에 넣었습니다.</li>
+<li>판단의 기준은 함수의 합성을 100번까지만 하였습니다. S_n들이 결국에 순환이 되어 더 크게 잡지 않았습니다.</li>
+<li>위의 내용들은 정확히 증명을 하여 푼 것은 아닙니다. 지적할거 지적해 주십시요.</li>
+</ol>
+<pre><code class="python">def HN(composition, x):
+    j = 0
+    result = 0
+    while j &lt; composition:
+        for i in range(len(str(x))):
+            result += int(str(x)[i])**2
+        x = result
+        result = 0
+        j += 1
+    return x
+
+#main
+casenum = int(input('인풋 케이스의 수 :'))
+hub = []
+for i in range(casenum):
+    hub.append(int(input()))
+
+for i in range(casenum):
+    for j in range(100):
+        if HN(j, hub[i]) == 1:
+            print('Case #{}: {} is the happy number.'.format(i+1,hub[i]))
+            break
+        if HN(j, hub[i]) == 4:
+            print('Case #{}: {} is the unhappy number.'.format(i+1,hub[i]))
+            break
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/04/26 18:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">고든</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7016"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">#include &lt;iostream&gt;
+#include &lt;cmath&gt;
+#include &lt;iomanip&gt;
+#include &lt;ctime&gt;
+
+using namespace std;
+
+bool is_happy(int num);
+int reverse_int(int num);
+
+int main()
+{
+    clock_t startTime;
+    int size;
+    int *numbers;
+    cout &lt;&lt; &quot;The number of case: &quot;;
+    cin &gt;&gt; size;
+    numbers = new int[size];
+    cout &lt;&lt; &quot;Numbers: &quot;;
+    for (int i = 0; i &lt; size; i++) {
+        cin &gt;&gt; *(numbers + i);
+    }
+    startTime = clock();
+    cout &lt;&lt; &quot;==================================&quot; &lt;&lt; endl;
+    for (int i = 0; i &lt; size; i++) {
+        cout &lt;&lt; &quot;Case #&quot; &lt;&lt; setw(3) &lt;&lt; i + 1 &lt;&lt; &quot;: &quot; &lt;&lt;*(numbers + i)&lt;&lt; endl;
+        if (is_happy(*(numbers + i)))
+            cout &lt;&lt; endl &lt;&lt; *(numbers + i) &lt;&lt; &quot; is a Happy number.&quot; &lt;&lt; endl &lt;&lt; endl;
+        else
+            cout &lt;&lt; endl &lt;&lt; *(numbers + i) &lt;&lt; &quot; is an Unhappy number.&quot; &lt;&lt; endl &lt;&lt; endl;
+    }
+    delete[] numbers;
+    cout &lt;&lt; &quot;Calculation time: &quot; &lt;&lt; double(clock() - startTime) / (double)CLOCKS_PER_SEC &lt;&lt; &quot; seconds.&quot; &lt;&lt; endl;
+    return 0;
+}
+
+bool is_happy(int num)
+{
+    int temp = num, power_sum = 0;
+    int table[729]; // Happy number를 판별할 때 사용하기 위한 배열
+
+    for (int i = 0; i &lt; 729; i++) {
+        while (temp) {
+            power_sum += (temp % 10)*(temp % 10);
+            temp /= 10;
+        }
+        table[i] = power_sum;
+        cout &lt;&lt; power_sum &lt;&lt; &quot; &quot;;
+        if (power_sum == 1)
+            return true;
+        for (int j = 0; j &lt; i; j++) {
+            if (power_sum == table[j] || reverse_int(power_sum) == table[j])
+                return false;
+        }
+        temp = power_sum;
+        power_sum = 0;
+    }
+}
+
+int reverse_int(int num) {
+    int result = 0;
+
+    while (num != 0) {
+        result *= 10;
+        result += (num % 10);
+        num /= 10;
+    }
+    return result;
+}
+</code></pre>
+
+<pre><code class="no-highlight">The number of case: 5
+Numbers: 7 4 13 2847 958375
+==================================
+Case #  1: 7
+49 97 130 10 1
+7 is a Happy number.
+
+Case #  2: 4
+16 37 58 89 145 42 20 4 16
+4 is an Unhappy number.
+
+Case #  3: 13
+10 1
+13 is a Happy number.
+
+Case #  4: 2847
+133 19 82 68 100 1
+2847 is a Happy number.
+
+Case #  5: 958375
+253 38 73 58 89 145 42 20 4 16 37
+958375 is an Unhappy number.
+
+Calculation time: 0.009 seconds.
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/04/28 00:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GyuHo Han</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7571"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">// 즐거운 수 - C#
+// 무한 재귀 함수는 catch가 안 돼요
+using System;
+namespace HappyhappyImhappy
+{
+    class Program
+    {
+        static bool Ishappy(int num, int def, int count)
+        {
+            if (count == 8500) // 예측되는 StackOverflowExeption 발생 타이밍에서 안됨 반환.
+                return false;
+            int digit = (int)Math.Log10(num) + 1;
+            int[] row = new int[digit];
+            for (int i = 0; i &lt; digit; i++)
+                row[i] = num / (int)Math.Pow(10, i) % 10;
+            int result = 0;
+            foreach (int n in row)
+                result += n * n;
+            if (result == 1)
+                return true;
+            else if (result == def)
+                return false;
+            else
+                return Ishappy(result, def, ++count);
+        }
+        static void Main(string[] args)
+        {
+            Console.WriteLine(&quot;READY &gt;&gt;&gt;&quot;);
+            int attempt = int.Parse(Console.ReadLine());
+            int[] nums = new int[attempt];
+            for (int i = 0; i &lt; attempt; i++)
+                nums[i] = int.Parse(Console.ReadLine());
+            for (int i = 0; i &lt; attempt; i++)
+                Console.WriteLine(&quot;Case #{0}: {1} is {2}&quot;, i + 1, nums[i], Ishappy(nums[i], nums[i], 0) ? &quot;a Happy number.&quot; : &quot;an Unhappy number.&quot;);
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/19 10:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jeong Hoon Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8362"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def HappyNumber(n):
+    k = n
+    a = 0
+    while n != a:
+        a = 0
+        for i in str(k):
+            a += int(i)**2
+        if a == 1:
+            print(&quot;%d is Happy Number&quot;%n)
+            break
+        else:
+            k = a
+    if a != 1:
+        print(&quot;%d is Unhappy Number&quot;%n)
+
+HappyNumber(7)
+HappyNumber(4)
+HappyNumber(13)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/15 17:13</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이현우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8442"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>중간에 싸이클이 있으면 무한히 반복되기 때문에 반드시 싸이클을 검사해야 정확한 답을 알 수 있습니다.</p>
+<p>변환을 반복하면서 한 번 나왔던 숫자들을 history에 저장합니다.</p>
+<p>만약 1이 나오거나, happy로 이미 판명된 수가 나오면 history에 있는 수는 모두 happy입니다.</p>
+<p>반면 같은 수가 다시 나오거나(싸이클), unhappy로 이미 판명된 수가 나오면 history에 있는 수는 모두 unhappy입니다.</p>
+<pre><code class="python">def isHappy(n):
+    global happyset, unhappyset
+
+    def dsum(n):
+        return 0 if n == 0 else (n % 10)**2 + dsum(n // 10)
+
+    history = set()
+    while True:
+        history.add(n)
+        n = dsum(n)
+
+        if n== 1 or n in happyset:
+            happyset |= history
+            return True
+
+        if n in history or n in unhappyset:
+            unhappyset |= history
+            return False
+
+
+happyset, unhappyset = set(), set()
+N = 100000
+print(sum([isHappy(n) for n in range(N)]), 'happy numbers under ', N) # 14376
+</code></pre>
+
+<p>자바 연습</p>
+<pre><code class="java">import java.util.HashSet;
+
+public class test {
+    static HashSet&lt;Integer&gt; happySet = new HashSet&lt;Integer&gt;();
+    static HashSet&lt;Integer&gt; unhappySet = new HashSet&lt;Integer&gt;();
+
+    public static int dsum(int n) {
+        if (n == 0) { 
+            return 0;
+        } else {
+            int d = n % 10;
+            return d * d + dsum(n / 10);
+        }
+    }
+
+    public static boolean isHappy(int n) {
+        HashSet&lt;Integer&gt; currentSet = new HashSet&lt;Integer&gt;();
+        while (true) {
+            currentSet.add(n);
+            n = dsum(n);    
+            if (n == 1 || happySet.contains(n)) {
+                happySet.addAll(currentSet);
+                return true;
+            }
+            if (currentSet.contains(n) || unhappySet.contains(n)) {
+                unhappySet.addAll(currentSet);              
+                return false;
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        int N = 100;
+        int cnt = 0;
+        for (int i = 2; i &lt; N; i++) {
+            if (isHappy(i)) {
+                cnt++;
+            }
+        }
+        System.out.printf(&quot;%d happy numbers under %d\n&quot;, cnt, N);
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/22 00:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8529"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def happyCh(num1):
+    num2 = num1
+    num1 = sum([x ** 2 for x in (list(map(int, str(num1))))])
+    while num1 &gt;= 10:
+        num1 = sum([x ** 2 for x in (list(map(int, str(num1))))])
+    if num1 == 1:
+        print(num2,'is a Happy number.')
+    else:
+        print(num2, 'is an Unhappy number.')
+
+cnt = input('첫 라인은 인풋 케이스의 수 n : ')
+input_arr = []
+if cnt == '' or cnt == 0:
+    exit()
+for i1 in range(0, int(cnt)):
+    input_arr.append(input('케이스 :'))
+for n1 in input_arr:
+    happyCh(int(n1))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/25 09:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">piko</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9280"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import time
+t = time.time()
+
+#inp = '20 15 7 4 13 15 3 2 3 4 5 88 79 8 21 3 5 55 7454 45 5'.split()
+inp = ['100000'] + [str(i) for i in range(2, 100002)]
+happynum = set([])
+unhappynum = set([])
+
+def isHappy(n):
+    global happynum
+    global unhappynum
+
+    cache = set(n)
+    while 1:
+        n = str(sum([int(i)**2 for i in n]))
+        if n in {'1'} | happynum:
+            happynum.update(cache)
+            return 'Happy'
+        elif n in cache | unhappynum:
+            unhappynum.update(cache)
+            return 'Unhappy'
+        cache.add(n)
+
+for i in range(1, int(inp[0])+1):
+    print('Case #%d: %s is a %s number' %(i, inp[i], isHappy(inp[i])))
+
+print(time.time()-t)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/11/15 20:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">songci</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10623"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3.6</p>
+<pre><code class="python">import time
+
+def inputdata():
+    N = int(input(''))
+    data = [input('') for i in range(N)]
+    return data
+
+def happynum(n):
+    Si,tmp = 0,list(n)
+    while Si != 1:
+        Si = sum([ int(i)**2 for i in tmp])
+        tmp = list(str(Si))
+# 1이 아닌 자연수중 가장 작은 제곱수는 4이므로, unhappynumber의 Si는 4로 수렴한다.
+        if Si == 4:
+            return &quot;%s is an Unhappy number.&quot;%n
+    return &quot;%s is an Happy number.&quot;%n
+
+def main(data):
+    for n,value in enumerate(data):
+        print(&quot;Case #%d: %s&quot;%(n+1,happynum(value)),&quot;\n&quot;)
+
+if __name__ == &quot;__main__&quot;:
+    data = inputdata()
+    startTime = time.time()
+    main(data)
+    print(&quot;runtime: %fs&quot;%(time.time() - startTime))
+</code></pre>
+
+<p>*결과값</p>
+<pre><code class="python">4
+7
+4
+13
+56603269873654
+Case #1: 7 is an Happy number. 
+
+Case #2: 4 is an Unhappy number. 
+
+Case #3: 13 is an Happy number. 
+
+Case #4: 56603269873654 is an Unhappy number. 
+
+runtime: 0.112007s
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/09 15:06</p>
+                                <p class="static-profile" style="margin:0;padding:0;">justbegin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10837"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>digit square에 의해 1000초과일때 항상 감소수열이므로 미리 1000개의 happy값을 리스트로 만들고 1000보다 큰 수는 digitsquare하여 1000보다 작게 만든 후 리스트에서 불러왔습니다.
+test case 100000개 2초내로 나오네요.</p>
+<pre><code class="python">import time
+import random
+def digitsquare(n):
+    result = 0
+    while n // 10:
+        result += (n % 10) * (n % 10)
+        n = n // 10
+    result += n * n
+    return result
+def happy(n):
+    seq = [n]
+    def place(a, n):
+        index = 0
+        b = int(len(a) / 2)
+        if len(a) == 1:
+            if a[0] &lt;= n:
+                index += 1
+        elif n &lt; a[b]:
+            index += place(a[:b], n)
+        else:
+            index += place(a[b:], n) + b
+        return index
+    while 1:
+        n = digitsquare(n)
+        if n == 1:
+            return &quot;happy&quot;
+        c = place(seq, n)
+        seq.insert(c, n)
+        if c != 0:
+            if not(seq[c]-seq[c-1]):
+                return &quot;unhappy&quot;
+a = [random.randint(1, 1000000000) for i in range(1000000)]
+start_time = time.time()
+b = [happy(i) for i in range(1, 1001)]
+for i in a:
+    while i &gt; 1000:
+        i = digitsquare(i)
+    print(b[i-1])
+print(time.time()- start_time)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/21 01:39</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김동하</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10978"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>각 자릿수를 추출하고 제곱해서 합한뒤(nextNum) list에 저장합니다. 
+list에는 처음 입력숫자도 저장합니다.
+list의 해당 숫자가 한번 더 나온다면 unhappy Number
+또는 nextNum이 1이 되면 HappyNum이 됩니다.</p>
+<pre><code class="cs">using System;
+using System.Collections.Generic;
+
+namespace CSharp_Test
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List&lt;int&gt; list = new List&lt;int&gt;();
+
+            int testcase = int.Parse(Console.ReadLine());
+
+            for(int i = 1; i &lt;= testcase; i++)
+            {
+                int n = int.Parse(Console.ReadLine());
+                list.Add(n);
+
+                //각 자릿수의 제곱
+                while (true)
+                {
+                    Console.WriteLine(n);
+
+                    int nextNum = 0;
+                    bool flag = false;
+                    int divideNum = 1;
+
+                    while (n / divideNum &gt;= 1)
+                    {
+                        int tempNum;
+                        tempNum = (n % (divideNum * 10) / divideNum);
+                        tempNum *= tempNum; //제곱
+                        nextNum += tempNum;
+                        Console.WriteLine(&quot;자릿수 {0}&quot;, tempNum); //디버그
+
+                        divideNum *= 10;
+                    }
+                    for(int j = 0; j &lt; list.Count; j++)
+                    {
+                        //이미 있는 수가 나왔다면
+                        if (list[j] == nextNum)
+                            flag = true;
+                    }
+                    if (nextNum == 1) //1이 나왔다면
+                    {
+                        Console.WriteLine(&quot;Case #{0} : is a Happy Number&quot;, i);
+                        break;
+                    }
+                    else if(flag == true)
+                    {
+                        Console.WriteLine(&quot;Case #{0} : is an Unhappy Number&quot;, i);
+                        break;
+                    }
+
+                    list.Add(nextNum);
+                    n = nextNum;
+                }
+            }
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/03/03 16:28</p>
+                                <p class="static-profile" style="margin:0;padding:0;">와디더</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11013"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def happy(a):
+    new = eval((&quot;**2+&quot;.join(str(a[len(a)-1]) ))+&quot;**2&quot;)
+    if new in a:
+        return print(str(a[0])+&quot; is a unhappy number&quot;)
+    elif new==1:
+        return print(str(a[0])+&quot; is a happy number&quot;)
+    else:
+        happy(a+[new])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/03/06 19:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김자현</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11014"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp"># include &lt;stdio.h&gt;
+
+
+void happy(int n[], int nn) {
+    int a = n[nn-1], SqrSum = 0, Mul = 1;
+    int re[1000];
+    while (a &gt;= 1) {
+        SqrSum += (a % 10)*(a % 10);
+        a = a/10;
+    }
+    for (int i = 0; i &lt; nn; i++) {
+        Mul *= (SqrSum - n[i]);
+    }
+    if (SqrSum == 1){
+        printf(&quot;%d is a happy number\n&quot;, n[0]);
+    }else if(Mul==0){
+        printf(&quot;%d is an unhappy number\n&quot;, n[0]);
+    }
+    else {
+        for (int i = 0; i &lt; nn; i++) {
+            re[i] = n[i];
+        }
+        re[nn]=SqrSum;
+        happy(re, nn+1);
+    }
+}
+int main() {
+    int m[1];
+    printf(&quot;숫자를 입력하시오.\n&quot;);
+    scanf_s(&quot;%d&quot;, m);
+    happy(m, 1);
+    return(0);
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/03/06 21:08</p>
+                                <p class="static-profile" style="margin:0;padding:0;">탁성하</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11100"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">b=[]
+def happy_num(x):
+    b.append(x)
+    a=[int(i) for i in list(str(x))]
+    a=sum([i**2 for i in a])
+    if a==1 : print(b[0], 'is happy number.')
+    elif a in b : print(b[0], 'is unhappy number.')
+    else : happy_num(a)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/03/13 20:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">코끼리식당</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11692"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Swift입니다.
+숫자 이력을 비교해서 반복되는 숫자가 나오면 Happy Number가 아닌 것으로 판단했습니다.</p>
+<pre><code>import Foundation
+
+var happyPattern   = Set&lt;Int&gt;()
+var unHappyPattern = Set&lt;Int&gt;()
+
+func isHappyNumber(_ givenNumber: Int) -&gt; Bool {
+    var number = givenNumber
+    var numberHistory = [Int]()
+    var nextNumber = 0
+
+    while nextNumber != 1 {
+        nextNumber = Array(String(number)).reduce(0, { let digit = Int(String($1))!; return $0 + digit * digit })
+        if happyPattern.contains(nextNumber) { 
+            for history in numberHistory {
+                happyPattern.insert(history)
+            }
+            return true
+        } else if unHappyPattern.contains(nextNumber) {
+            for history in numberHistory {
+                unHappyPattern.insert(history)
+            }
+            return false 
+        } else {
+            if nextNumber != 1 {
+                if (numberHistory.filter {$0 == nextNumber}.count == 0) {
+                    numberHistory.append(nextNumber)
+                    number = nextNumber
+                } else {
+                    return false
+                }
+            }
+        }
+    }
+    return true
+}
+
+print(&quot;7 - \(isHappyNumber(7))&quot;)
+print(&quot;4 - \(isHappyNumber(4))&quot;)
+print(&quot;13 - \(isHappyNumber(13))&quot;)
+print(&quot;1234569789 - \(isHappyNumber(1234569789))&quot;)
+print(&quot;9999999 - \(isHappyNumber(9999999))&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/04/13 02:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">졸린하마</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12003"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">    static int f(int num) { // 다음 값을 구하는 메서드
+        int ans = 0;
+        while(num&gt;0) {
+            ans += Math.pow(num%10, 2);
+            num /= 10;
+        }
+        return ans;
+    }
+
+    public static void main(String[] args) throws Exception { 
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(br.readLine());
+
+        for (int i=0; i&lt;t; i++) {
+            int x = Integer.parseInt(br.readLine()); // 초기값
+            int tmp = x; 
+            while(true) {
+                tmp = f(tmp);
+                if(tmp == x) { // 메서드를 돌리다가 tmp가 초기값이 될 때
+                    System.out.println(x + &quot; is unhappy&quot;);
+                    break;
+                } else if (tmp == 1) { // 1이 될 때
+                    System.out.println(x + &quot; is happy&quot;);
+                    break;
+                } else  // 그것도 아니면 계속 돌림
+                    continue;
+            }
+        }
+    } // 자바입니다
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/03 23:15</p>
+                                <p class="static-profile" style="margin:0;padding:0;">정몽준</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12230"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="scala">def happyNUm(N:Int): Unit ={
+      var set = Set[Int]()
+      def loop(num:Int): Unit ={
+        println(set)
+        num match {
+          case 1 =&gt; println(s&quot;${N} is Happy number&quot;)
+          case _ =&gt; {
+            if(set(num)) println(s&quot;${N} is Unhappy number&quot;)
+            else {
+              set += num
+              loop(num.toString.map(v =&gt; (v.toInt - 48)*(v.toInt - 48)).sum)
+            }
+          }
+        }
+      }
+      loop(N)
+    }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/12 20:27</p>
+                                <p class="static-profile" style="margin:0;padding:0;">한강희</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13154"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>for를 통해 100만번을 돌려봤지만 모두 1과 4로 귀결됬습니다.<br>
+1이면 해피넘버 4이면 언해피넘버가 됩니다.<br>
+1~100만까지의 모든 수를 체크했을시 3초정도 걸립니다.<br></p>
+<pre><code class="java">import java.util.Scanner;
+
+public class Count {
+    public static void main(String[] args) {
+        int n = new Scanner(System.in).nextInt();
+        System.out.println(CheckHappy(n) ? n + &quot; is a Happy number.&quot; : n + &quot; is an Unhappy number.&quot;);
+    }
+
+    private static boolean CheckHappy(int n) {
+        int sum = 0;
+        for (int i = 0; i &lt; (n + &quot;&quot;).length(); i++)
+            sum += Math.pow(Integer.valueOf((n + &quot;&quot;).substring(i, i + 1)), 2);
+        return sum == 1 ? true : sum == 4 ? false : CheckHappy(sum);
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/25 21:11</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김지훈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13269"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def HappyNumber(n):
+     Num = []
+     for x in range(0,n):
+          Num.append(int(input(&quot;\n number : &quot;)))
+     for n in Num:
+          lis,n1 = [],n
+          while True:
+               n = sum(int(i)**2 for i in list(str(n)))
+               if n == 1:
+                    print(&quot;%d is a Happy number.&quot; %(n1))
+                    break
+               elif n in lis:
+                    print(&quot;%d is an Unhappy number.&quot; %(n1))
+                    break
+               lis.append(n)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/01 22:39</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김영성</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13780"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">eachsq = lambda x: sum(int(i)**2 for i in str(x))
+n = int(input())
+m = []
+for _ in range(n): m.append(int(input()))
+
+hpn,nhn,tmp = set(),set(),[]
+for i in range(n):
+    tmp.clear()
+    tmp.append(m[i])
+    while 1:
+        tmp.append(eachsq(tmp[-1]))
+        if tmp[-1] == 1 or tmp[-1] in hpn:
+            hpn |= set(tmp)
+            print('Case #{}: {} is Happy number.'.format(i+1,m[i]))
+            break
+        elif tmp[-1] == m[i] or tmp[-1] in nhn:
+            nhn |= set(tmp)
+            print('Case #{}: {} is UnHappy number.'.format(i+1,m[i]))
+            break
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/26 00:11</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15395"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="r">happy.number &lt;- function(x){
+
+  orig &lt;- x
+  x &lt;- as.character(x)
+  x_split &lt;- as.numeric(strsplit(x, '')[[1]])
+  x &lt;- sum(x_split ^ 2)
+  #print(x)
+
+  while(x != orig){
+    x &lt;- as.character(x)
+    x_split &lt;- as.numeric(strsplit(x, '')[[1]])
+    x &lt;- sum(x_split ^ 2)
+    #print(x)
+
+    if (x == 1){
+      temp_happy &lt;- paste(orig, ' is a Happy number.', sep = '')
+      return(temp_happy)
+    }
+  }
+  temp_unhappy &lt;- paste(orig, ' is an Unhappy number.', sep = '')
+  return(temp_unhappy)
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/12/03 13:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">physche</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16965"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def happy(n):
+    happylist=[]
+    k=n
+    while True:
+        sqrsum=0
+        for i in str(k):
+            sqrsum+=int(i)**2
+        if sqrsum==1:
+            return True
+        elif sqrsum in happylist:
+            return False
+        else:
+            k=sqrsum
+            happylist.append(sqrsum)
+            continue
+
+checklist=[]
+num=int(input(&quot;How many numbers to check?: &quot;))
+for i in range(num):
+    number=int(input(&quot;Input number ({0}): &quot;.format(i+1)))
+    checklist.append(number)
+
+for i in range(len(checklist)):
+    if happy(checklist[i]):
+        print(&quot;Case #{0}: {1} is a Happy number.&quot;.format(i+1,checklist[i]))
+    else:
+        print(&quot;Case #{0}: {1} is an Unappy number.&quot;.format(i+1,checklist[i]))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/03/01 22:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">ykleeac</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17615"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def isHappy(n):
+    def f(k):
+        s = 0
+        while k &gt; 0:
+                s += (k % 10) ** 2
+                k = k // 10
+        return s
+
+    m = n
+    while True:
+        m = f(m)
+        if m == 1:
+                print(&quot;HAPPY&quot;)
+                return
+        if m == n:
+                print(&quot;UNHAPPY&quot;)
+                return
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/04/27 14:03</p>
+                                <p class="static-profile" style="margin:0;padding:0;">messi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18048"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3.7</p>
+<pre><code class="python">class HappyNum:
+    def __init__(self, num: int):
+        self.num = num
+        self.pool = []  # 각 자리수 제곱의 합이 저장될 시퀀스
+
+    def getstatstr(self):
+        next_num = self.num
+        while next_num not in self.pool:  # 시퀀스 내 숫자가 없으면
+            self.pool.append(next_num)  # 추가 하고
+            next_num = HappyNum._getnext(next_num)  # 다음 시퀀스 계산
+        # 1인 경우 a happy 아니면 an unhappy
+        return f&quot;{self.num} is {'a Happy' if next_num == 1 else 'an Unhappy'} number.&quot;
+
+    @staticmethod
+    def _getnext(num: int):  # 숫자 -&gt; 각 자리수 제곱의 합
+        return sum(int(c) ** 2 for c in str(num))
+
+
+def main():
+    numcases = int(input())
+    cases = [int(input()) for _ in range(numcases)]
+    for i, v in enumerate(cases):
+        case = HappyNum(v)
+        print(f&quot;Case #{i + 1}: {case.getstatstr()}&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/27 21:03</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18442"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">p = int(input('')); L = []
+for i in range(p) :
+    L.append(input(''))
+for N in range(len(L)):
+    tmp = int(L[N]); result = 0
+    while True :
+        for s in str(L[N]) :
+            result += int(s)**2
+        if result == 1 :
+            print('Case #%d: %d is a Happy number.' % (N+1, tmp))
+            break
+        elif result == tmp :
+            print('Case #%d: %d is an Unhappy number.' % (N+1, tmp))
+            break
+        L[N] = result
+        result = 0
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/07/05 11:09</p>
+                                <p class="static-profile" style="margin:0;padding:0;">조현우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18902"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>python</p>
+<pre><code class="python">p = int(input('숫자 리스트의 길이를 입력하세요&gt; '))
+num_list = list(map(int,input('p개의 양의 정수를 입력하세요&gt; ').split()))
+def happy(n):
+    num = n
+    while True:
+        sum = 0
+        for i in range(len(list(str(num)))):
+            sum += int(list(str(num))[i])**2
+        num = sum
+        if num == 1:
+            return str(n) + ' is a Happy number.'
+            break
+        if num == 4:
+            return str(n) + ' is an Unhappy number.'
+            break
+for i in range(len(num_list)):
+    print('Case #' + str(i+1) + ': ' + happy(num_list[i]))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/08/11 10:58</p>
+                                <p class="static-profile" style="margin:0;padding:0;">apriori</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20053"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.*;
+public class HappyNumber {
+
+    public static void main(String[] args) {
+
+        Scanner scan = new Scanner(System.in);
+        int n = scan.nextInt();
+        int[] nums = new int[n];
+        for(int i=0; i&lt;n; i++) {
+            nums[i]=scan.nextInt();
+        }
+        ArrayList&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;();
+        String A = null;
+        for(int i=0; i&lt;n; i++) {
+            int N = 0;
+            list.clear();
+            list.add(nums[i]);
+            N=nums[i];
+            outerLoop:
+                while(true) {
+                    if(nums[i]*nums[i]!=nums[i]) {
+                        A = Integer.toString(N);
+                        String[] B = A.split(&quot;&quot;);
+                        int a = 0;
+                        for(int j=0; j&lt;B.length; j++) {
+                            a += Integer.parseInt(B[j])*Integer.parseInt(B[j]);
+                        }
+                        list.add(a);
+                        N=a;
+                        if(N==1) {
+                            System.out.println(&quot;Case #&quot;+(i+1)+&quot;: &quot;+nums[i]+&quot; is a Happy number.&quot;);
+                            break;
+                        }
+                        else {
+                            for(int k=0; k&lt;list.size()-1; k++) {
+                                if(a==list.get(k)) {
+                                    System.out.println(&quot;Case #&quot;+(i+1)+&quot;: &quot;+nums[i]+&quot; is an Unhappy number.&quot;);
+                                    break outerLoop;
+                                }
+                            }
+                        }
+                    }
+            }
+        }
+    }
+}
+</code></pre>
+
+<p>어떻게 풀었는지......</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/11/25 20:26</p>
+                                <p class="static-profile" style="margin:0;padding:0;">big Ko</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20625"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n=input(&quot;양의 정수 n을 입력하십시오: &quot;)
+fn=n #최종 출력을 위한 n을 할당
+while True: #행복수 계산 과정
+    result=0
+    for num in n:
+        result+=int(num)**2
+    n=str(result)
+    #print(n) #행복수를 찾는 과정을 진행하다보면 행복수가 아닌 수들은 계산 과정에서
+    #37(또는 73),58(또는 85),89(또는 98),145,42(24는 안 나오는 것 같음),20,(경우에 따라 4나오기 전에 2),4가 나오는 과정이 반복됨.
+    if n==&quot;1&quot;: #계산 결과가 1이면 행복수
+        print(fn, &quot;is a Happy number&quot;)
+        break
+    elif n==&quot;4&quot;: #따라서 행복수가 아닌 수들의 계산 과정에서 나오는 수들 중 1개가 나오면 break를 하고 그 수를 출력.(여기선 그냥 4라고 해봄.)
+        print(fn, &quot;is a Unhappy number&quot;)
+        break
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/19 13:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박시원</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20693"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">
+data = input(&quot;숫자 입력 : &quot;)
+Run = True
+
+sum_list =[]
+while Run:
+    sum = 0
+    for i in data:
+        sum = sum + int(i)**2
+    print(sum)
+
+    if sum == 1:
+        #print(sum)
+        print(&quot;Happy Number&quot;)
+        Run = False
+
+    else :
+        if sum in sum_list:
+            #print(sum)
+            print(&quot;Unhappy Number&quot;)
+            Run = False
+        else :
+            sum_list.append(sum)
+            data=str(sum)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/22 20:39</p>
+                                <p class="static-profile" style="margin:0;padding:0;">semipooh</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_21785"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#파이썬
+
+def mulsum(x):    # 입력받은 수의 각 자리수의 제곱의 합을 구해주는 함수
+    sum=0
+    for k in range(len(str(x))):
+        sum+=(int(str(x)[k]))**2
+    return sum
+
+n=int(input('n='))
+c=[]
+for i in range (n):
+    a=int(input('case'+str(i)+': '))
+    if a&gt;0 and a&lt;10**9: # 1보다 크고 10^9인 경우에만 리스트에 추가시킴
+        c.append(a)
+
+for i in range (len(c)):
+   c_list,a=[],c[i]
+   while (1):
+      c_list.append(a) #mulsum함수를 돌린 값을 리스트에 추가시킴
+      a=mulsum(a) 
+      if a==1:
+         print ('Case #'+str(i)+': '+str(c[i])+' is a Happy Number')
+         break
+
+      if a in c_list: # mulsum 함수를 돌린값이 리스트에 이미 있으면 Unhappy
+         print ('Case #'+str(i)+': '+str(c[i])+' is a Unhappy Number')
+         break
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/04/16 10:28</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Buckshot</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2685"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">&lt;결과&gt;
+
+n=10
+case0: 7
+case1: 4
+case2: 13
+case3: 28
+case4: 55
+case5: 17
+case6: 43
+case7: 98
+case8: 10
+case9: 22
+Case #0: 7 is a Happy Number
+Case #1: 4 is a Unhappy Number
+Case #2: 13 is a Happy Number
+Case #3: 28 is a Happy Number
+Case #4: 55 is a Unhappy Number
+Case #5: 17 is a Unhappy Number
+Case #6: 43 is a Unhappy Number
+Case #7: 98 is a Unhappy Number
+Case #8: 10 is a Happy Number
+Case #9: 22 is a Unhappy Number</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Buckshot,
+                                    2020/04/16 10:29
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22065"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import time
+def happy(e):
+    k = [str(e)]
+    while k[len(k)-1] != '1' and not ((k[len(k)-1] in k[:len(k)-1]) and k.index(k[len(k)-1]) != 0):
+        s = 0
+        for i in k[len(k)-1]:
+            s += int(i) ** 2
+        k.append(str(s))
+    print('{} is a {}'.format(e, 'Happy Number' if k[len(k)-1] == '1' else 'Unhappy Number'))
+
+if __name__ == '__main__':
+    t = time.time()
+    for x in range(1, 1000000):
+        happy(x)
+    print(time.time() - t)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/04 11:33</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hwaseong Nam</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2711"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">999997 is a Unhappy Number
+999998 is a Happy Number
+999999 is a Unhappy Number
+34.42694973945618
+100만개 기준 34초 나오네요.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Hwaseong Nam,
+                                    2020/05/04 13:33
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22268"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def check_happy(n):
+    num_list = [n]
+    def add_squared(x):
+        return sum([int(i) ** 2 for i in str(x)])
+    while True:
+        next_num = add_squared(num_list[-1])
+        if next_num == 1:
+            return True
+        if next_num in num_list:
+            return False
+        num_list.append(next_num)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/11 00:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김준혁</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22336"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n =str(input())
+happylist = [n,]
+for i in happylist:
+    ilist = '0'
+    for k in range(0,len(i)):
+        ilist = str(int(ilist) + (int(i[k])**2))
+        print(ilist)
+    if ilist == '1':
+        print('happynumber')
+    elif len(happylist) &gt; 1 and happylist[0] == happylist[-1]:
+        print(&quot;unhappy number&quot;)
+        break
+    else:
+        happylist.append(ilist)
+print(happylist)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/14 17:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Money_Coding</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23179"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def happyNumber(n) :
+    mem = [n]
+    while True :
+        n = sum([int(i)**2 for i in list(str(n))])
+        if n == 1 : return print(&quot;%d is a happy number.&quot; %mem[0])
+        elif n in mem : return print(&quot;%d is an unhappy number.&quot; %mem[0])
+        else : 
+            mem.append(n)
+            continue
+
+if __name__ == &quot;__main__&quot; :
+    happyNumber(3)
+    happyNumber(44488)
+    happyNumber(44)
+</code></pre>
+
+<p>결과</p>
+<pre><code>3 is an unhappy number.
+44488 is a happy number.
+44 is a happy number.
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/09/15 15:37</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GG</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23799"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def happyNumber(n):
+    number = &quot;,&quot;.join(str(n)).split(&quot;,&quot;)
+    while 1:
+        result = 0
+        for i in range(0,len(number)):
+            result += int(number[i])**2
+        if result == 1:
+            print(str(n)+&quot; is a Happy number&quot;)
+            break
+        elif result == n:
+            print(str(n) + &quot; is a Unhappy number&quot;)
+            break
+        else:
+            number = &quot;,&quot;.join(str(result)).split(&quot;,&quot;)
+            continue
+
+
+happyNumber(7)
+happyNumber(4)
+happyNumber(13)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/11/26 18:45</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김우석</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24200"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>def happy_number(numbers):</p>
+<pre><code>  for_answer=[numbers]
+
+  new_number=0
+
+  check=False
+
+  while check==False:
+
+    new_number=0
+
+    while numbers&gt;0:
+
+      new_number+=(numbers%10)*(numbers%10)
+
+      numbers=numbers//10
+
+    if new_number in for_answer:
+
+      check=True
+
+    for_answer.append(new_number)
+
+    numbers=new_number
+
+    if new_number==1:
+
+      return 'a Happy Number'
+
+      break
+
+  return 'an Unhappy Number'
+
+print('{} is {}'.format(3,happy_number(3)))
+
+print('{} is {}'.format(7,happy_number(7)))
+
+print('{} is {}'.format(13,happy_number(13)))
+
+print('{} is {}'.format(4,happy_number(4)))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/01/03 16:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">전준혁</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24983"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def Happynum():
+
+    n = int(input('number of input : '))
+
+    number_list = []
+
+    for i in range(n):
+        number_list.append(input('NUMBER : '))
+
+    count = 0
+    case = []
+
+    for member in number_list:
+        while True:        
+            if count == 0:
+                case.append(member)
+
+            sum = 0
+            for aa in case[-1]:
+                sum += int(aa)**2
+                # print(aa, sum)
+
+            if sum == 1:
+                print('Case {} : {} is a Happy number'.format(3-n, member))
+                case.append(str(sum))
+                # print(case)
+                case = []
+                n = n - 1
+                count = 0
+                break
+            elif str(sum) in case:
+                print('Case {} : {} is an Unhappy number'.format(3-n, member))
+                case.append(str(sum))
+                # print(case)
+                case = []
+                n = n - 1
+                count = 0
+                break
+            else:
+                # print('APPENDED:', str(sum))
+                case.append(str(sum))
+
+            if count == 50 : 
+                count = 0
+                break
+            count += 1
+
+Happynum()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/03/15 08:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">DSHIN</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25014"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">e=int(input(&quot;숫자를 입력하세요 : &quot;))
+a=0
+w=0
+a=e
+c=[]
+while True:
+    for j in range(len(str(e))):
+        w+=int(str(e)[j])**2
+    if 1 in c:
+        break
+    elif w in c:
+        break
+    else:
+        c.append(w)
+    e=0
+    e+=w
+    w=0
+if 1 in c:
+    print(&quot;{} is a Happy Number&quot;.format(a))
+
+else:
+    print(&quot;{} is a Unhappy Number&quot;.format(a))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/03/22 22:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">fox.j</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25494"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">case = int(input('sample count :'))
+c = 0
+while c&lt;case:
+    n = int(input('sample:'))
+    c +=1
+    h= [0]
+    h.append(n)
+    while h[-1]&gt;=1:
+        if h[-1] == h[-2]:
+            print(f'case #{c} {n} is an Unhappy number.')
+            break
+        elif h[-1]==1:
+            print(f'case #{c} {n} is a Happy number.')
+            break
+        else :
+            for i in str(h[-1]):
+                l=[]
+                l.append(int(i)**2)
+            s= sum(l)
+            h.append(s)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/06/03 10:03</p>
+                                <p class="static-profile" style="margin:0;padding:0;">약사의혼자말</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25814"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def happynum(n):
+     num = [n]
+     while n != 1 or n &lt; pow(10,9):
+         k = 0
+         for i in str(n):
+             k += int(i)**2
+         n = k
+         num.append(k)
+         continue
+     return print(num)
+
+def result(n):
+    if happynum(n).count(n) &gt;= 2:
+           return print(&quot;Unhappy Number&quot;)
+    elif happynum(n).count(n) == 1: return print(&quot;Happy Number&quot;)
+
+
+happynum(7)
+result(n)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/07/19 14:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">ss2663</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26070"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#codingdojing_happyNum_re
+#각 자리의 수의 합.. 아무리 커봤자 99*자릿수 천을 넘어갈 일은 없다.
+#데이터셋이 많다는 가정하에, 다른 방식으로 수정. 집합을 이용한다. happy를 분석하는 과정에서 
+# 판별하는 숫자가, happy나 unhappyset에 없다면, 그 숫자를 처음부터 끝까지 분석.
+# 각 중간 숫자를 비교할 필요는 없을 듯, 어차피 몇 번 돌면 다 포함되어 있을텐데
+# 처음 풀이는 틀렸다. 예를 들어, 2의 경우, 처음숫자가 아니라 다른 숫자들이 반복된다. set으로 비교해야 하겠네.
+
+def happyNum(s):
+
+    return str(sum([int(i)**2 for i in s]))
+
+n = eval(input('sample num: '))
+
+happySet = set()
+unhappySet = set()
+currentSet = set()
+
+for i in range(1, n+1):
+
+    s1 = str(i)
+
+    while True:
+        if s1 in happySet or s1 == '1':         #최종값이 1이거나, 이미 셋에 포함되어 있기때문에 add안한다. 
+            happySet.update(currentSet)
+            currentSet.clear()
+            print(f'Case #{i}: {i} is a happy number.')
+            break
+        elif s1 in unhappySet or s1 in currentSet: #최종값이 이미 현재 셋에 있거나, 언해피 셋에 있기 때문에 add 안해도 됨.
+            unhappySet.update(currentSet)
+            currentSet.clear()
+            print(f'Case #{i}: {i} is a unhappy number.')
+            break
+        else: 
+            currentSet.add(s1)  #검사한 숫자
+            s1 = happyNum(s1)   #새로운 숫자
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/08/17 11:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jaeman Lee</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2924"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">집합자료형 괜찮네요 ..!</span>
+                                -
+                                <span style="font-size:11px;">
+                                    김시영,
+                                    2022/06/23 22:50
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26941"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n = int(input(&quot;TEST CASE 수는?&quot;))
+num_arr =[]
+
+for i in range(n):
+    while True :
+        print(i+1,&quot;번째&quot;)
+        a = int(input(&quot;검증할 숫자는?&quot;))
+        if a&gt;=0 and a&lt;10**9 :
+            num_arr.append(a)
+            break
+
+def Solution(n) :
+    a = n
+    arr =[]
+    while True :
+        sum =0
+        b = list(map(int,str(a)))
+        for k in b :
+            sum += k**2
+        if sum in arr:
+            break
+        arr.append(sum)
+        a = sum
+
+    if 1 in arr:
+        print(n,&quot;is a Happy number&quot;)
+    else :
+        print(n,&quot;is an Unhappy number&quot;)
+
+for k in num_arr :
+    Solution(k)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/04 11:58</p>
+                                <p class="static-profile" style="margin:0;padding:0;">양캠부부</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27149"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>// Rust</p>
+<p>// happy인지 unhappy인지 결과가 나오면 바로 결과를 return합니다</p>
+<p>// 중간 계산 값들을 map에 넣을지 고민입니다</p>
+<p>use std::collections::HashMap;
+fn happy_number(n: usize) -&gt; bool {</p>
+<pre><code>let mut map: HashMap&lt;usize, bool&gt; = HashMap::new();
+let mut vec = vec![n];
+loop {
+    let mut d = vec[vec.len()-1];
+    let mut sum = 0;
+    while d &gt; 0 {
+        sum += (d % 10).pow(2);
+        d /= 10;
+    }
+    if sum == 1 {
+        return true;
+    }        
+    if vec.contains(&amp;sum) {
+        return false;
+    }
+    vec.push(sum);
+}
+</code></pre>
+<p>}</p>
+<h1 id="test">[test]</h1>
+<p>fn test() {</p>
+<pre><code>assert_eq!(happy_number(7), true);
+assert_eq!(happy_number(4), false);
+assert_eq!(happy_number(13), true);
+assert_eq!(happy_number(0), false);
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/27 22:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">JW KIM</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27344"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">a = '''3
+
+7
+
+4
+
+13'''
+
+sam_list =list(map(int,a.split('\n\n')))
+sam_num = sam_list[0]
+
+def happy_seq(n):
+    seq = []
+    seq.append(n)
+    jud = sum([int(x)**2 for x in str(n)])
+    while jud not in seq:
+        seq.append(jud)
+        jud = sum([int(x)**2 for x in str(seq[-1])])
+
+    if min(seq) == 1: return 'is a Happy number.'
+    else: return 'is an Unhappy number.'
+
+for i in range(sam_num):
+    print(f'{sam_list[i+1]} {happy_seq(sam_list[i+1])}')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/02/16 09:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">로만가</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28122"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">for n in range(1,100000):
+    S = sum([int(i)*int(i) for i in str(n)])
+    Slist = [n]
+    while S != 1 and S not in Slist:
+        Slist.append(S)
+        S = sum([int(i)*int(i) for i in str(S)])
+    if S == 1:
+        count += 1
+        print(f&quot;Case #{n}: {n} is a Happy number.&quot;)
+    else:
+        print(f&quot;Case #{n}: {n} is a Unhappy number.&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/06/23 22:43</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김시영</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29751"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>// javascript 입니다.
+// 고수님들 제 풀이 평가 부탁드립니다 ~.~</p>
+<pre><code class="javascript">
+const solution = (num) =&gt; {
+  // 캐시에 값을 담고 캐시의 값과 일치한다면 종료 후 판별하여 리턴
+  const cache = [];
+
+  let result = 0;
+  while(result !== 1){
+    result = String(result===0?num:result).split('').map(i=&gt;parseInt(i**2)).reduce((a,b) =&gt; (a+b));
+    if(cache.some(i=&gt; i===result)){
+      break;
+    }
+    cache.push(result);
+  }
+  if(result===1){
+    return `${num} is a Happy Number`;
+  }else{
+    return `${num} is an Unhappy Number`;
+  }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/11/14 20:28</p>
+                                <p class="static-profile" style="margin:0;padding:0;">전찬혁</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29755"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def isHappyNumber(N, lst):
+    nextN = 0
+    while N &gt; 0:
+        nextN += (N % 10)**2
+        N //= 10
+    if nextN == 1:
+        return True
+    elif nextN in lst:
+        return False
+    else:
+        lst.append(nextN)
+        return isHappyNumber(nextN, lst)
+
+n = int(input('인풋 케이스의 수: '))
+inputN = []
+for i in range(n):
+    inputN.append(int(input('{}번째 양의 정수는: '.format(i+1))))
+
+print(' =' * 10)
+for i, N in enumerate(inputN):
+    if isHappyNumber(N, [N]):
+        print('Case #{0}: {1} is a Happy number'.format(i+1, N))
+    else:
+        print('Case #{0}: {1} is an Unhappy number'.format(i+1, N))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/11/17 16:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

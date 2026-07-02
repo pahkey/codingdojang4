@@ -1,0 +1,704 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="* 전에 올라온 이차방정식 문제가 2개 있었지만, 허근 표기는 하지 않았습니다.
+* 이 문제에서는 허근까지 나타내어야 합니다.
+* 실근, 중근의 경우에는 수치로 나타내지만, 허근의 경우에는 a+bi(단, i=루트 -1) 꼴의 **문자열**로 ...">
+    <title>허근까지 나타내는 이차방정식 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">허근까지 나타내는 이차방정식</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">2</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 4</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <ul>
+<li>전에 올라온 이차방정식 문제가 2개 있었지만, 허근 표기는 하지 않았습니다.</li>
+<li>이 문제에서는 허근까지 나타내어야 합니다.</li>
+<li>실근, 중근의 경우에는 수치로 나타내지만, 허근의 경우에는 a+bi(단, i=루트 -1) 꼴의 <strong>문자열</strong>로 나타내어야 합니다.</li>
+<li>허근일 경우, a가 0이면 bi 꼴로만 출력해야 하며, b가 1이면 a+i 꼴로만 출력해야 합니다.</li>
+<li>입력값은 이차항의 계수, 일차항의 계수, 상수항이며, 해를 구하기 위해 어떤 방식을 사용할지는 자유입니다.</li>
+<li>해는 실수부분과 허수부분이 모두 <em>정수가 되도록 반올림</em>해야 합니다.</li>
+</ul>
+<p>예시 input</p>
+<pre><code>1 4 5
+</code></pre>
+
+<p>예시 output</p>
+<pre><code>-2 + i, -2 - i
+</code></pre>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">수학</span>
+                
+                    <span class="label label-tag label-xs">sqrt</span>
+                
+                    <span class="label label-tag label-xs">format</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2021/07/03 09:27</p>
+                    <p class="static-profile" style="margin:0;padding:0;">이준우</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>10개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_25825"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">2</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>복소수.real은 복소수의 실수 부분을, 복소수.imag는 허수 부분을 반환하는 것을 사용했습니다.</p>
+<pre><code class="python">a, b, c = map(int, input().split())
+
+D=b**2-4*a*c
+
+if D&gt;0:
+    print('실근: {0:.0f}, {1:.0f}'.format((-b+D**0.5)/(2*a),(-b-D**0.5)/(2*a)))
+
+elif D==0:
+    print('중근: {:.0f}'.format(-b/(2*a)))
+
+else:
+    A=(-b+D**0.5)/(2*a)
+    if A.imag==1:
+        AA='{:.0f}+i'.format(A.real)
+        BB='{:.0f}-i'.format(A.real)
+    else:
+        AA='{0:.0f}+{1:.0f}i'.format(A.real,A.imag)
+        BB='{0:.0f}-{1:.0f}i'.format(A.real,A.imag)
+    print('허근: ', AA, BB,)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/07/20 14:14</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김용왕</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26081"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import math
+
+Nlist = list(map(int,input().split()))
+icheck = 1 if (Nlist[1]**2 - 4*Nlist[0] * Nlist[2]&lt;0) else 0
+N1 = -Nlist[1]/2 if (Nlist[1]%2 == 0) else -Nlist[1]
+N2 = math.sqrt(abs((Nlist[1]/2)**2 - (Nlist[0]*Nlist[2]))) if (Nlist[1]%2 == 0) else math.sqrt(abs((Nlist[1]**2) - (4*Nlist[0]*Nlist[2])))
+if (icheck == 0):
+    print(N1+N2,'\n',N1-N2) if (N1+N2 != N1-N2) else print(N1+N2)
+else:
+    print(f&quot;{N1} + {N2} i&quot;)
+    print(f&quot;{N1} - {N2} i&quot;)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/08/18 14:27</p>
+                                <p class="static-profile" style="margin:0;padding:0;">BlakeLee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26103"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C#</p>
+<pre><code class="cs">using System;
+using System.Numerics;
+
+namespace 허근까지
+{
+    class Program
+    {
+        static void Main()
+        {
+            var solution = new QuadraticEquation(1, 4, 5);
+            Console.WriteLine(solution);
+        }
+    }
+
+    class QuadraticEquation
+    {
+        private readonly double quadraticCoeff, linearCoeff, constantCoeff;
+
+        public QuadraticEquation(double quadraticCoeff, double linearCoeff, double constantCoeff)
+        {
+            this.quadraticCoeff = quadraticCoeff; // 2차항 계수
+            this.linearCoeff = linearCoeff; // 1차항 계수
+            this.constantCoeff = constantCoeff; // 상수항 계수
+            this.Discriminant = Math.Pow(linearCoeff, 2.0) - 4.0 * this.quadraticCoeff * this.constantCoeff;
+        }
+
+        // 판별식
+        public double Discriminant { get; }
+
+        // 해를 문자열 표현으로 반환
+        public override string ToString()
+        {
+            Complex solution1 = (-linearCoeff + Complex.Sqrt(Discriminant)) / (2.0 * quadraticCoeff);
+            Complex solution2 = (-linearCoeff - Complex.Sqrt(Discriminant)) / (2.0 * quadraticCoeff);
+            string expression1 = Complex2Expression(solution1);
+            string expression2 = Complex2Expression(solution2);
+            return Discriminant == 0 ? $&quot;{expression1}&quot; : $&quot;{expression1}, {expression2}&quot;;
+        }
+
+        // 복소수 클래스를 문자열 표현으로 변환
+        private static string Complex2Expression(Complex complex)
+        {
+            // 해의 정수 반올림
+            int realValue = (int)Math.Round(complex.Real);
+            int imagValue = (int)Math.Round(complex.Imaginary);
+            // 해를 경우따른 문자열로 표현
+            string first = realValue != 0 ? $&quot;{realValue}&quot; : &quot;&quot;;
+            string sign = imagValue &lt; 0 ? &quot;-&quot; : &quot;+&quot;;
+            string second = Math.Abs(imagValue) != 1 ? $&quot;{Math.Abs(imagValue)}i&quot; : &quot;i&quot;;
+            if (imagValue == 0)
+            {
+                second = string.Empty;
+                sign = string.Empty;
+            }
+            string expression = $&quot;{first}{sign}{second}&quot;;
+            if (expression == &quot;&quot;)
+            {
+                expression = &quot;0&quot;;
+            }
+            return expression;
+        }
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/08/20 11:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26360"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>근의 공식을 적용시켰습니다. 허근의 경우에는 sqrt(-x) = sqrt(x) * i 임을 이용했습니다.</p>
+<pre><code class="python">a = int(input('이차항의 계수를 입력하세요. '))
+b = int(input('일차항의 계수를 입력하세요. '))
+c = int(input('상수항의 계수를 입력하세요. '))
+d = b**2 - 4*a*c
+
+if d &lt; 0:
+    real = round(-b / (2*a))
+    imag = round((abs(d) ** 0.5) / (2*a))
+    if real:
+        if imag == 1: print(f'{real} + i, {real} - i')
+        else: print(f'{real} + {imag}i, {real} - {imag}i')
+    else:
+        if imag == 1: print('i, -i')
+        else: print(f'{imag}i, -{imag}i')
+elif d == 0:
+    print(round((-b + d ** 0.5) / (2*a)))
+else:
+    print(round((-b + d ** 0.5) / (2*a)), end=', ')
+    print(round((-b - d ** 0.5) / (2*a)))
+</code></pre>
+
+<p>실행 결과입니다.</p>
+<pre><code class="python">이차항의 계수를 입력하세요. 1
+일차항의 계수를 입력하세요. 4
+상수항의 계수를 입력하세요. 3
+-1, -3
+이차항의 계수를 입력하세요. 1
+일차항의 계수를 입력하세요. 4
+상수항의 계수를 입력하세요. 4
+-2
+이차항의 계수를 입력하세요. 1
+일차항의 계수를 입력하세요. 4
+상수항의 계수를 입력하세요. 5
+-2 + i, -2 - i
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/09/21 17:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이준우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26979"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import math
+
+def bangjung2(a,b,c):
+    a=int(a)
+    b=int(b)
+    c=int(c)
+    check=b**2-4*a*c
+    aa=round(-b/(2*a))
+    bb=round(math.sqrt(abs(check))/(2*a))
+    #print (check)
+
+    if check&gt;0:
+        #실근
+        print ('x=%d, %d' %(aa+bb, aa-bb))        
+
+    elif check==0:
+        #중근
+        print ('x=%d' %(aa))        
+
+    else:
+        #허근
+        if abs(bb)==1:
+            print ('x=%d+i, %d-i' %(aa, aa)) 
+        else:
+            print ('x=%d+%di, %d-%di' %(aa,abs(bb), aa,abs(bb)))         
+
+
+in_num=input('이차방정식의 a b c를 입력해주세요')
+in_num=in_num.split(' ')
+
+bangjung2(in_num[0],in_num[1],in_num[2])
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/08 00:08</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Buckshot</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2882"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">이차방정식의 a b c를 입력해주세요1 4 4
+x=-2
+
+
+이차방정식의 a b c를 입력해주세요1 4 5
+x=-2+i, -2-i
+
+
+이차방정식의 a b c를 입력해주세요1 4 3
+x=-1, -3</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Buckshot,
+                                    2022/01/08 00:09
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28226"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import sys
+
+from numpy import equal
+
+
+def determinatoR ( A , B , C ) :
+      determinantt = B**2 - 4*(A)*(C)
+      if determinantt &gt;= 0 : return True
+      else : return False
+
+
+def realformulA ( A , B , C ) :
+      resultt1 = int((-B + (B**2 - 4*A*C)**(1/2))/2*A)
+      resultt2 = int((-B - (B**2 - 4*A*C)**(1/2))/2*A)
+      print(f'{resultt1}'+',' , f'{resultt2}')
+
+
+def imaginaryfomulA ( A , B , C ) :
+      resultt1 = int(-B / ( 2*A ))
+      resultt2 = int(((-(B**2 -4*A*C))*(1/2))/(2*A))
+      if resultt1 == 0 :
+            print( f'{resultt2}'+',' , f'{-(resultt2)}' )
+      elif resultt2 == 1 :
+            print( f'{resultt1}' , '+' , 'i'+',' ,f'{resultt1}' , '+' , 'i' )
+      else :
+            print( f'{resultt1}' , '+' , f'{resultt2}'+'i'+',' ,f'{resultt1}' , '+' , f'{-(resultt2)}'+'i' )
+
+
+
+equationlistt = []
+equationlistt = (sys.stdin.readline().strip()).split(' ')
+equationlistt = list(map(float,equationlistt))
+if determinatoR(equationlistt[0],equationlistt[1],equationlistt[2]) == True :
+      realformulA (equationlistt[0],equationlistt[1],equationlistt[2])
+elif determinatoR(equationlistt[0],equationlistt[1],equationlistt[2] ) == False :
+      imaginaryfomulA(equationlistt[0],equationlistt[1],equationlistt[2]) 
+else : pass
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/07/15 23:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">손은상</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28492"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import math as m
+a = int(input(&quot;이차식 계수 : &quot;))
+b = int(input(&quot;일차식 계수 : &quot;))
+c = int(input(&quot;상수식 계수 : &quot;))
+D = b**2 - 4*a*c
+
+if (D &gt; 0):
+    print(&quot;답 : %f, %f&quot; % ((-b - m.sqrt(D))/(2*a), (-b + m.sqrt(D))/(2*a)))
+elif (D == 0):
+    print(&quot;답 : %d&quot; % (-b/2))
+else:
+    print(&quot;답 : %f - %fi, %f + %fi&quot; % (-b / (2*a), m.sqrt(-D) / (2*a), (-b / (2*a)), m.sqrt(-D) / (2*a)))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/08/31 01:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">코딩재미</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28774"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from typing import Union
+
+from cmath import sqrt
+
+class Complex:
+    def __init__(self, z: Union[complex, int], n: int = 0):
+        if type(z) == complex:
+            self.real = z.real
+            self.imag = z.imag
+        if type(z) == int:
+            self.real = z
+            self.imag = n
+    def __str__(self):
+        if self.imag == 0:
+            result = f&quot;{self.real:.0f}&quot;
+        elif self.real == 0:
+            result = f&quot;{self.imag:.0f}i&quot;
+        elif self.imag == 1:
+            result = f&quot;{self.real:.0f} + i&quot;
+        elif self.imag == -1:
+            result = f&quot;{self.real:.0f} - i&quot;
+        elif self.imag &gt; 0:
+            result = f&quot;{self.real:.0f} + {self.imag:.0f}i&quot;
+        elif self.imag &lt; 0:
+            result = f&quot;{self.real:.0f} - {-self.imag:.0f}i&quot;
+
+        return result
+
+a, b, c = map(int,input().split())
+
+sol1 = Complex((-b + sqrt(b**2 - 4*a*c))/(2*a))
+sol2 = Complex((-b - sqrt(b**2 - 4*a*c))/(2*a))
+print(f&quot;{sol1}, {sol2}&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/11/07 16:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">isaac024</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29342"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">using System;
+
+namespace solution
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine(&quot;이차방정식 ax² + bx + c = 0 에서 a b c 을 입력하세요.(예: 1 -3 2)&quot;);
+            string[] coeff = Console.ReadLine().Split(' ');
+
+            Console.WriteLine(&quot;{0}x² + {1}x + {2} = 0 의 해: {3}&quot;,coeff[0], coeff[1], coeff[2], solution(coeff));
+        }
+
+        private static string solution(string[] coeff)
+        {
+            string ans = &quot;&quot;;
+            double a = double.Parse(coeff[0]);
+            double b = double.Parse(coeff[1]);
+            double c = double.Parse(coeff[2]);
+
+            double D = b * b - 4 * a * c;
+            string strD = &quot;&quot;;
+            if (D &lt; 0)
+            {
+                int rootD = (int)Math.Round(Math.Sqrt(-D) / (2 * a));
+                strD = rootD == 1 ? &quot;i&quot; : rootD.ToString() + &quot;i&quot;;
+                if (-b / (2 * a) == 0)
+                    ans = strD + &quot; , -&quot; + strD;
+                else
+                    ans = Math.Round(-b/(2*a)) + &quot; + &quot; + strD + &quot; ,  &quot; + Math.Round(-b / (2 * a)) + &quot; - &quot; + strD;
+            }
+            else if (D &gt; 0)
+            {
+                double dd = Math.Sqrt(D) / (2 * a);
+                Console.WriteLine(-b / (2 * a) + &quot; : &quot;+ dd);
+                ans = Math.Round((-b - Math.Sqrt(D)) / (2 * a)).ToString() + &quot; , &quot; + Math.Round((-b + Math.Sqrt(D)) / (2 * a)).ToString();
+            }
+            else
+                ans = Math.Round(-b/(2*a)).ToString();
+
+            return ans;
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/06/18 19:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29417"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import math
+
+coef = input(a)
+a,b,c = coef.split( )
+a, b, c = float(a), float(b),float(c)
+
+discriminant = math.pow(b,2)-4*a*c
+if discriminant &gt;=0:
+  x1, x2 = (-b+math.sqrt(discriminant))/(2*a),  (-b-math.sqrt(discriminant))/(2*a)
+  print(int(round(x1,0)),int(round(x2,0)))
+else:
+  print(f&quot;{int(round((-b/(2*a)),0))}+{int(round(math.sqrt(abs(discriminant))/(2*a),0))}i&quot;, f&quot;{int(round((-b/(2*a)),0))}-{int(round(math.sqrt(abs(discriminant))/(2*a),0))}i&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/07/13 14:38</p>
+                                <p class="static-profile" style="margin:0;padding:0;">스탠리</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

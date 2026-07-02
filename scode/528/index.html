@@ -1,0 +1,1506 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="**문제**
+지민이는 수의 리스트가 있을 때, 이를 짝지어 각 쌍의 합이 소수가 되게 하려고 한다. 예를 들어, {1, 4, 7, 10, 11, 12}가 있다고 하자. 지민이는 다음과 같이 그룹지을 수 있다.
+
+1 + 4 = 5, 7 + 1...">
+    <title>소수 쌍 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">소수 쌍</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">2</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 4</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p><strong>문제</strong>
+지민이는 수의 리스트가 있을 때, 이를 짝지어 각 쌍의 합이 소수가 되게 하려고 한다. 예를 들어, {1, 4, 7, 10, 11, 12}가 있다고 하자. 지민이는 다음과 같이 그룹지을 수 있다.</p>
+<p>1 + 4 = 5, 7 + 10 = 17, 11 + 12 = 23</p>
+<p>또는</p>
+<p>1 + 10 = 11, 4 + 7 = 11, 11 + 12 = 23</p>
+<p>수의 리스트가 주어졌을 때, 지민이가 모든 수를 다 짝지었을 때, 첫번째 수와 어떤 수를 짝지었는지 오름차순으로 출력하는 프로그램을 작성하시오. 위의 예제에서 1 + 12 = 13으로 소수이다. 그러나, 남은 4개의 수를 합이 소수가 되게 짝지을 수 있는 방법이 없다. 따라서 예제의 답은 4, 10이다.</p>
+<p><strong>입력</strong>
+첫째 줄에 리스트의 크기 N이 주어진다. N은 50보다 작거나 같은 자연수이며, 짝수이다. 둘째 줄에 리스트에 들어있는 수가 주어진다. 리스트에 들어있는 수는 1,000보다 작거나 같은 자연수이며, 중복되지 않는다.</p>
+<p><strong>출력</strong>
+첫째 줄에 정답을 출력한다. 없으면 -1을 출력한다.</p>
+<p><strong>예제 입력</strong></p>
+<p>6</p>
+<p>1 4 7 10 11 12</p>
+<p><strong>예제 출력</strong></p>
+<p>4 10</p>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">네트워크 플로우</span>
+                
+                    <span class="label label-tag label-xs">이분 매칭</span>
+                
+                    <span class="label label-tag label-xs">소수 판정</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2016/09/30 08:10</p>
+                    <p class="static-profile" style="margin:0;padding:0;">iljimae</p>
+                </div>
+            </div>
+
+            
+                <a name="comment_1860"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">코드 테스트하는 저지: <a href="https://www.acmicpc.net/problem/1017" rel="nofollow">https://www.acmicpc.net/problem/1017</a></span>
+                    -
+                    <span style="font-size:11px;">
+                        iljimae,
+                        2016/09/30 08:11
+                    </span>
+                </div>
+            
+                <a name="comment_1862"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">입력할 때 무조건 오름차순이어야 하는 건가요?</span>
+                    -
+                    <span style="font-size:11px;">
+                        C295HB,
+                        2016/10/03 17:16
+                    </span>
+                </div>
+            
+                <a name="comment_1864"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">정답을 출력할때 오름차순으로 출력하시면 됩니다! 리스트에 있는 수들은 오름차순으로 주어진다는 보장이 없습니다.</span>
+                    -
+                    <span style="font-size:11px;">
+                        iljimae,
+                        2016/10/04 05:21
+                    </span>
+                </div>
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>16개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_4902"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>소수인지 검사</p>
+<pre><code class="cpp">
+bool is_prime_number(int num)
+{
+    for (int n = 2; n &lt; (num / 2); n++)
+    {
+        if (num % n == 0)
+            return false;
+    }
+
+    return true;
+}
+
+</code></pre>
+
+<p>배열을 순회/재귀하며 사용하지 않은 값들로 소수 짝을 이룰 수 있는지 검사</p>
+<pre><code class="cpp">
+bool check_child_prime(int size, int arr[])
+{
+    int key = -1;
+    for (int n = 0; n &lt; size; n++)
+    {
+        if (arr[n] == 0)
+            continue;
+
+        if (key == -1)
+        {
+            key = n;
+        }
+        else if (is_prime_number(arr[key] + arr[n]))
+        {
+            int key_val = arr[key];
+            int n_val = arr[n];
+            arr[key] = 0;
+            arr[n] = 0;
+            bool res = check_child_prime(size, arr);
+
+            arr[key] = key_val;
+            arr[n] = n_val;
+
+            if (res == true)
+                return true;
+        }
+    }
+
+    for (int n = 0; n &lt; size; n++)
+    {
+        if (arr[n] != 0)
+            return false;
+    }
+
+    return true;
+}
+</code></pre>
+
+<p>배열의 원본 데이터를 순회하며 출력할 값이 있으면 출력</p>
+<pre><code class="cpp">
+void do_pair_prime(int size, int arr[])
+{
+    // 짝을 이뤄야하기 때문에 홀수는 안됨
+    if (size &lt;= 0 || size % 2 != 0)
+    {
+        printf(&quot;-1&quot;);
+        return;
+    }
+
+    int key = arr[0];
+    arr[0] = 0;
+
+    int search_count = 0;
+
+    for (int n = 1; n &lt; size; n++)
+    {
+        if (is_prime_number(key + arr[n]))
+        {
+            int n_val = arr[n];
+            arr[n] = 0;
+            if (check_child_prime(size, arr))
+            {
+                search_count++;
+                printf(&quot;%d &quot;, n_val);
+            }
+            arr[n] = n_val;
+        }
+    }
+
+    if (search_count &lt;= 0)
+        printf(&quot;-1&quot;);
+}
+
+</code></pre>
+
+<p>값을 입력 받고 첫번째 수를 제외, 오름차순으로 정렬</p>
+<pre><code class="cpp">void pair_prime()
+{
+    int in_size;
+    scanf_s(&quot;%d&quot;, &amp;in_size);
+
+    std::list&lt;int&gt; in_list;
+    for (int n = 0; n &lt; in_size; n++)
+    {
+        int val;
+        scanf_s(&quot;%d&quot;, &amp;val);
+        in_list.push_back(val);
+    }
+    int front = in_list.front();
+    in_list.pop_front();
+    in_list.sort();
+    in_list.push_front(front);
+
+    int* in_arr = new int[in_size];
+    for (int n = 0; n &lt; in_size; n++)
+    {
+        in_arr[n] = in_list.front();
+        in_list.pop_front();
+    }
+
+    do_pair_prime(in_size, in_arr);
+
+    delete[] in_arr;
+
+    printf(&quot;\n&quot;);
+    system(&quot;pause&quot;);
+}
+</code></pre>
+
+<p>출력 값</p>
+<pre><code class="cpp">6
+1 4 7 10 11 12
+4 10
+계속하려면 아무 키나 누르십시오 . . .
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/07 16:34</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이 광표</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4920"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">
+소수인지 검사
+
+bool is_prime_number(int num)
+{
+    for (int n = 2; n &lt; (num / 2); n++)
+    {
+        if (num % n == 0)
+            return false;
+    }
+
+    return true;
+}
+
+
+
+배열을 순회/재귀하며 사용하지 않은 값들로 소수 짝을 이룰 수 있는지 검사
+
+bool check_child_prime(int size, int arr[])
+{
+    int key = -1;
+    for (int n = 0; n &lt; size; n++)
+    {
+        if (arr[n] == 0)
+            continue;
+
+        if (key == -1)
+        {
+            key = n;
+        }
+        else if (is_prime_number(arr[key] + arr[n]))
+        {
+            int key_val = arr[key];
+            int n_val = arr[n];
+            arr[key] = 0;
+            arr[n] = 0;
+            bool res = check_child_prime(size, arr);
+
+            arr[key] = key_val;
+            arr[n] = n_val;
+
+            if (res == true)
+                return true;
+        }
+    }
+
+    for (int n = 0; n &lt; size; n++)
+    {
+        if (arr[n] != 0)
+            return false;
+    }
+
+    return true;
+}
+
+
+배열의 원본 데이터를 순회하며 출력할 값이 있으면 출력
+
+void do_pair_prime(int size, int arr[])
+{
+    // 짝을 이뤄야하기 때문에 홀수는 안됨
+    if (size &lt;= 0 || size % 2 != 0)
+    {
+        printf(&quot;-1&quot;);
+        return;
+    }
+
+    int key = arr[0];
+    arr[0] = 0;
+
+    int search_count = 0;
+
+    for (int n = 1; n &lt; size; n++)
+    {
+        if (is_prime_number(key + arr[n]))
+        {
+            int n_val = arr[n];
+            arr[n] = 0;
+            if (check_child_prime(size, arr))
+            {
+                search_count++;
+                printf(&quot;%d &quot;, n_val);
+            }
+            arr[n] = n_val;
+        }
+    }
+
+    if (search_count &lt;= 0)
+        printf(&quot;-1&quot;);
+}
+
+
+
+값을 입력 받고 첫번째 수를 제외, 오름차순으로 정렬
+void pair_prime()
+{
+    int in_size;
+    scanf_s(&quot;%d&quot;, &amp;in_size);
+
+    std::list&lt;int&gt; in_list;
+    for (int n = 0; n &lt; in_size; n++)
+    {
+        int val;
+        scanf_s(&quot;%d&quot;, &amp;val);
+        in_list.push_back(val);
+    }
+    int front = in_list.front();
+    in_list.pop_front();
+    in_list.sort();
+    in_list.push_front(front);
+
+    int* in_arr = new int[in_size];
+    for (int n = 0; n &lt; in_size; n++)
+    {
+        in_arr[n] = in_list.front();
+        in_list.pop_front();
+    }
+
+    do_pair_prime(in_size, in_arr);
+
+    delete[] in_arr;
+
+    printf(&quot;\n&quot;);
+    system(&quot;pause&quot;);
+}
+
+
+출력 값
+6
+1 4 7 10 11 12
+4 10
+계속하려면 아무 키나 누르십시오 . . .
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/09 18:16</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박 동민</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4969"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <h1 id="java">JAVA</h1>
+<p>첫 숫자를 기준 값으로 놓고, 이 기준값과 순회 하면서 짝을 짓습니다. 짝을 지은 수 중 합이 소수면 일단 기준 값의 짝을 저장합니다.
+그런후 기준 값과 짝을 제외한 List로 재귀 호출을 합니다. 재귀 호출할 process 함수는 인자로 받은 리스트의 첫번째 값을 지역 기준값으로 놓고, 순회하면서 짝과의 합이 소수인지 검사하고 소수라면 기준값과 짝을 제거한 List로 process함수를 재호출 합니다. 이렇게 해서 List가 모두 비어졌으면 최초 기준값의 짝을 print 합니다.</p>
+<pre><code class="java">
+    private static void setPrimeNumber(int num);
+</code></pre>
+
+<p>이 함수는 인자로 받은 num 이하의 숫자들이 소수인지 아닌지 판단할 수 있는 값을 계산합니다. </p>
+<pre><code class="java">import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+
+/**
+ * Created by moonti on 2016. 10. 16..
+ */
+public class PrimeNumberPair {
+
+    private static final int SIZE = 1005;
+    private static int[] sPN = new int[SIZE];
+    private static int n;
+    private static LinkedList&lt;Integer&gt; numbers = new LinkedList&lt;&gt;();
+    private static int firstNumbersPair;
+    private static LinkedList&lt;Integer&gt; result = new LinkedList&lt;&gt;();
+
+
+    public static void main(String[] args) {
+        n =  Integer.parseInt(args[0]);
+        for (int i=1; i&lt;=n; i++) {
+            numbers.add(Integer.parseInt(args[i]));
+        }
+        setPrimeNumber(1000);
+
+        int first = numbers.get(0);
+        for (int i = 1; i&lt;n; i++) {
+            if (isPrimeNumber(first + numbers.get(i))) {
+                firstNumbersPair = numbers.get(i);
+                LinkedList&lt;Integer&gt; clone = (LinkedList&lt;Integer&gt;) numbers.clone();
+                clone.remove(0);
+                clone.remove(i-1);
+                if (clone.size() == 0) {
+                    result.add(firstNumbersPair);
+                } else {
+                    process(clone);
+                }
+            }
+        }
+        Collections.sort(result);
+        for (Integer num: result) {
+            System.out.print(&quot; &quot; + num);
+        }
+
+    }
+
+    private static void process(LinkedList&lt;Integer&gt; list) {
+        int first = list.get(0);
+        for (int i = 1; i&lt;list.size(); i++) {
+            if (isPrimeNumber(first + list.get(i))) {
+                LinkedList&lt;Integer&gt; clone = (LinkedList&lt;Integer&gt;) list.clone();
+                clone.remove(0);
+                clone.remove(i-1);
+                if (clone.size() == 0) {
+                    result.add(firstNumbersPair);
+                } else {
+                    process(clone);
+                }
+            }
+        }
+    }
+
+    private static void setPrimeNumber(int num) {
+        for (int i=1; i&lt;=num; i++) {
+            for (int j=1; j*i&lt;= num; j++) {
+                sPN[j*i]++;
+            }
+        }
+    }
+
+    private static boolean isPrimeNumber(int num) {
+        if (sPN[num] &lt; 3) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/16 23:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Moon TaeMin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4984"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><img alt="" src="http://postfiles4.naver.net/20161017_115/wooyeonb_1476701589161k8KkO_PNG/%BC%D2%BC%F6%BD%D6.PNG?type=w580" /></p>
+<pre><code class="cpp">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int size;
+int* flag;
+int* data;
+int* out;
+int index;
+
+void coupling(int count, int value);
+bool verdict(int a, int b);
+void initflag();
+void sorting();
+void main() {
+    int count = 0;
+    index = 0;
+
+    scanf(&quot;%d&quot;, &amp;size);
+    data = (int*) malloc (sizeof(int) * size);
+    for(int i = 0; i &lt; size; i++) 
+        scanf(&quot;%d&quot;, &amp;data[i]);
+
+    sorting();
+
+    out = (int*) malloc (sizeof(int) * size);
+    for(int i = 0; i &lt; size; i++) 
+        out[i] = 0;
+
+    flag = (int*) malloc (sizeof(int) * size);
+    for(int i = 0; i &lt; size; i++) 
+        flag[i] = 0;
+    flag[0] = 1;
+
+    for(int i = 1; i &lt; size; i++) { 
+        if(!verdict(data[0], data[i])) continue; // 소수가 아니라면 패스
+        flag[i] = 1;
+        coupling(1, data[i]);
+        flag[i] = 0;
+        initflag();
+    }
+
+    bool b = false;
+    for(int i = 0; i &lt; size; i++)
+        if(out[i] != 0) {
+            printf(&quot;%d\n&quot;, out[i]);
+            b = true;
+        }
+    if(b == false)
+        printf(&quot;-1&quot;);
+}
+
+void coupling(int count, int value) {
+    if(count == 3) {
+        bool clear = true;
+        for(int i = 1; i &lt; size; i++)
+            if(flag[i]==0)
+                clear = false;
+
+        if(clear == true) {
+            out[index] = value;
+            index++;
+        }
+    }
+
+    for(int i = 1; i &lt; size; i++) {
+        if(flag[i] == 0) {
+            flag[i] = 1;
+            for(int j = 1 ; j &lt; size; j++) {
+                if(flag[j] == 0 &amp;&amp; i!=j) {
+                    if(!verdict(data[i], data[j])) continue; // 소수가 아니라면 패스
+                    flag[j] = 1;
+                    count++;
+                    coupling(count, value);
+                    flag[j] = 0;
+                }
+            }
+            flag[i] = 0;
+        }
+    }
+}
+
+bool verdict(int a, int b) { //소수면 1
+    int temp = a+b;
+    int k = temp/2;
+    if(temp == 2)
+        return true;
+
+    for(int i = 2; i &lt;= k; i++) 
+        if(temp%i==0)
+            return false;
+    return true;
+}
+
+void initflag() {
+    for(int i = 1; i &lt; size; i++) 
+        flag[i] = 0;
+}
+
+void sorting() {
+    for(int i = 1 ; i &lt; size  ; i++) {
+        int index = i;
+        for(int j = i-1  ; j &gt;= 0  ; j--) {
+            int temp;
+            if(data[index] &lt; data[j]) {
+                temp = data[index];
+                data[index] = data[j];
+                data[j] = temp;
+                index = j;
+            }
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/17 19:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">코딩초보</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5054"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>재귀로 풀어서 엄청 느리겠지만...일단
+<code>이분매칭</code>이 뭔지 좀 공부해봐야겠네요.</p>
+<pre><code class="python"># 1000보다 작은 수 두개의 합이 소수인지 판별해야하므로 2000이하의 소수를
+# 에라토스테네스의 체로 판별합니다.
+p = [False, False] + [True] * 2000
+for i, n in enumerate(p):
+    if n:
+        p[i*2:-1:i] = [False] * (2000 // i - 1)
+primes = [x for x in range(2000) if p[x]]
+
+
+def do(xs):
+    if len(xs) is 0:
+        return [], True
+    if len(xs) is 1:
+        return [], False
+    result = []
+    (x, *ys) = xs
+    for (i, y) in enumerate(ys):
+        zs = ys[:i] + ys[i+1:]
+        if p[x + y]:
+            k, r = do(zs)
+            if r:
+                result.append(y)
+    j = len(result) &gt; 0
+    return result, j
+
+
+def main():
+    n = int(input())
+    xs = [int(x) for x in input().split(' ')][:n]
+    ys, z = do(xs)
+    if z:
+        print(&quot; &quot;.join(str(x) for x in sorted(ys)))
+    else:
+        print(-1)
+
+
+if __name__ == '__main__':
+    main()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/24 18:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">룰루랄라</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5215"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>1000보다 작은 소수를 미리 구해놓으면 쉽겠군요.
+에라토스테네스의 체로 </p>
+<pre><code class="c">char primes[1000];
+
+int main(int argc, const char * argv[]) {
+    memset(primes, -1, 1000); // -1 for undecided yet
+    // sieve
+    primes[0] = 0;
+    primes[1] = 0;
+    for (int i=2; i&lt;1000; i++) {
+        if (primes[i] == 0)
+            continue;
+        primes[i] = 1;
+        for (int p=i*2; p&lt;1000; p += i) {
+            primes[p] = 0;
+        }
+    }
+</code></pre>
+
+<p>이제 <code>primes[i]</code>는 i가 소수일 때 1, 아니면 0입니다.</p>
+<p>리스트의 첫 숫자와 결합하여 소수인 수들에 대해서 
+남은 수들도 짝으로 소수가 만들어지는지 확인해봐야겠네요.</p>
+<pre><code class="c">    int nums[] =  {1, 4, 7, 10, 11, 12};
+
+    for (int i=1; i&lt;6; i++) {              // 1자리부터 시작
+        if (primes[nums[0] + nums[i]]) {   // 0자리와 i자리 합쳐 소수?
+            swap(nums, i, 1);              // i자리를 1번으로 옮긴 뒤 2~6 자리들에 확인
+            if (pairprime(nums, 2, 6)) { 
+                swap(nums, i, 1);
+                printf(&quot;%d &quot;, nums[i]);    // 맞으면 출력
+            } else {
+                swap(nums, i, 1);          // 맞든 틀리든 원래대로 값 되돌려놓기
+            }
+        }
+    }
+</code></pre>
+
+<p>그런데 이 로직은 <code>pairprime</code>에서 그대로 사용될 듯 합니다.
+범위 i~j 의 값들이 짝 소수 되려면 첫 값이랑 소수 되는 짝을 제외한 나머지들에 대해 재귀적으로 확인하면 되겠네요.</p>
+<pre><code class="c">int pairprime(int nums[], int start, int end) {
+    if (start &gt;= end) return 1;
+    for (int i=start + 1; i&lt;end; i++) {
+        if (primes[nums[start] + nums[i]]) {
+            swap(nums, i, start + 1);
+            if (pairprime(nums, start + 2, end)) {
+                swap(nums, i, start + 1);
+                return 1;
+            }
+            swap(nums, i, start + 1);
+        }
+    }
+    return 0;
+}
+</code></pre>
+
+<p><code>swap</code>을 했다가 되돌리는 걸 빼먹어서 틀린 답이 나오더군요. ㅎㅎ</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/11/08 21:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Han Jooyung</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6198"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def prime(n):
+    if n&lt;2:
+        return 0
+    if sum(x for x in range(2,n) if n%x==0)==0:
+        return 1
+    else:
+        return 0
+def prime_ex(data):
+    if data==[]:
+        return 1
+    n=data.pop(0)
+    for i in range(len(data)):
+        if prime(n+data[i])==1:
+            if prime_ex(data[0:i]+data[i+1:])==1:
+                return 1
+            else:
+                return -1
+
+def prime_pair(data):
+    n=data[0][0]
+    data=data[1]
+    result=[]
+    a=data.pop(0)
+    for i in range(n-1):
+        if prime(a+data[i])==1:
+            if prime_ex(data[0:i]+data[i+1:])==1:
+                result+=[data[i]]
+    result.sort()
+    if result==[]:
+        return -1
+    else:
+        return result
+prime_pair([[6],[1,4,7,10,11,12]])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/02/15 21:58</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김구경</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7615"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>python 3.6 using itertools.combinations()</p>
+<pre><code class="python">from itertools import combinations
+from math import sqrt
+
+def generate_groups(lst, n):
+    if not lst: 
+        yield [] 
+    else: 
+        for group in (((lst[0],) + xs) for xs in combinations(lst[1:], n-1)):
+            for groups in generate_groups([x for x in lst if x not in group], n): 
+                yield [group] + groups
+
+def isPrime(n):
+    find_factor = list((i, n//i) for i in range(1, int(sqrt(n))+1) if n%i == 0)
+    if len(find_factor) == 1: return True
+    else: return False
+</code></pre>
+
+<p>입출력문</p>
+<pre><code># input
+from random import sample
+
+how_many_numbers = int(input())
+in_lst = sorted(sample(range(1,1001), how_many_numbers))
+print(*iter(in_lst), sep=' ')
+
+# output
+result = []
+
+for x in generate_groups(in_lst, 2):
+    a = True
+    for y in x: a &amp;= isPrime(sum(y))
+    if a == True: result.append(x[0][1])
+
+if result: print(*iter(set(result)), sep=' ')
+else: print('-1')
+
+&gt;&gt;&gt;
+ 6
+342 490 547 623 932 977
+-1
+&gt;&gt;&gt;
+ 8
+3 9 10 11 14 17 18 20
+10 14 20
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/22 05:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">예강효빠</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8322"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def primes_under(n):
+    nums, primes = set(range(2, n)), set()
+    while nums:
+        p = min(nums)
+        primes.add(p)
+        nums -= set(range(p, n, p))
+
+    return primes
+
+
+def pairable(lst):
+    global primes
+
+    if not lst:
+        return True
+
+    for i in range(1, len(lst)):
+        if lst[0]+lst[i] in primes and pairable(lst[1:i]+lst[i+1:]):
+            return True
+
+    return False
+
+
+inp = '6 1 4 7 10 11 12'
+n, *lst = map(int, inp.split())
+primes = primes_under(1001)
+for i in range(1, n):
+    if lst[0]+lst[i] in primes and pairable(lst[1:i]+lst[i+1:]):
+        print(lst[i], end=' ')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/11 19:28</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9249"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def isPrime(num):
+    return all([num%i for i in range(2, num//2+1)]) if num &gt; 1 else False
+
+def popFriend(arr):
+    for i in range(1, len(arr)):
+        if isPrime(arr[0]+arr[i]):
+            return [arr[0], arr[i]], arr[1:i]+arr[i+1:]
+    return False, []
+
+inp = '6\n1 4 7 10 11 12'
+n, nums = int(inp.split()[0]), [int(i) for i in inp.split()[1:]]
+
+res = []
+for i in range(1, len(nums)):
+    nums = nums[:1]+nums[2:]+[nums[1]]
+    tmp = nums
+    sol = []
+    while len(tmp):
+        friends, tmp = popFriend(tmp)
+        if friends:
+            sol.append(friends)
+    if len(sol) == len(nums)//2:
+        res.append(sol[0][1])
+
+if len(res):
+    print(sorted(res))
+else:
+    print('-1')
+
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/11/13 14:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">songci</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12355"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="scala">    val primes = Array.fill(2001)(false)
+    for(i &lt;- 2 until primes.length){
+      var j = 1
+      var cnt = 0
+      while(j &lt;= Math.sqrt(i).toInt){
+        if(i % j == 0) cnt += 1
+        j += 1
+      }
+      if(cnt == 1) primes(i) = true
+    }
+
+    def primeSet(list:List[Int]):List[Int] = {
+      def check(idx:Int, comb:Array[Boolean]):Boolean = {
+        println(idx, comb.toList.mkString(&quot; &quot;))
+        idx match {
+          case x if list.length - 1 == idx =&gt; comb.count(_ == false) == 0
+          case x if comb(idx) =&gt; check(idx + 1, comb)
+          case _ =&gt; {
+            var res = false
+            for(i &lt;- idx + 1 until list.length){
+              var bool = false
+              if(!comb(i) &amp;&amp; primes(list(idx) + list(i))){
+                comb(i) = true
+                comb(idx) = true
+                println(idx, i)
+                bool = check(idx + 1, comb)
+              }
+              if(bool) res = true
+            }
+            res
+          }
+        }
+      }
+
+      var ans = List[Int]()
+      for(i &lt;- 1 until list.length){
+        if(primes(list(0) + list(i))){
+          println(list(i))
+          var combination = Array.fill(list.length)(false)
+          combination(0) = true
+          combination(i) = true
+          if(check(1 , combination)){
+            ans = list(i) +: ans
+          }
+        }
+      }
+      ans.sorted
+    }
+    println(primeSet(List(1, 4, 7, 10, 11, 12)))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/17 15:24</p>
+                                <p class="static-profile" style="margin:0;padding:0;">한강희</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13483"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import sys
+
+def is_prime_no( n ):
+    if n % 2 == 0:
+        return 0
+    else:
+        for i in range(2,(n&gt;&gt;1)+1):
+            if n % i == 0:
+                return 0
+        return 1
+
+def swap_v(l, i1, i2):
+    tmp = l[i1]
+    l[i1] = l[i2]
+    l[i2] = tmp
+
+def is_prime_pair_list(l, s, depth):
+    #print(&quot;{}{}&quot;.format(' '*depth*2, l[s:]))
+    if (len(l) - s) == 2:
+        if is_prime_no(l[s] + l[s+1]) == 1:
+            return 1
+        else:
+            return 0
+
+    ret = 0
+    v1 = l[s]
+    for i in range(s+1, len(l)):
+        v2 = l[i]
+        if is_prime_no(v1 + v2) == 1:
+            if i &gt; (s+1):
+                swap_v(l, s+1, i)
+            if is_prime_pair_list(l,s+2, depth+1) == 1:
+                ret = 1
+                break
+    return ret
+
+number_list = list(map(int, raw_input().split(' ')))
+if len(number_list) % 2 != 0:
+    print(&quot;you need to type event count of numbers&quot;)
+    sys.exit(0)
+
+v1 = number_list[0]
+l = []
+
+for i in range(1, len(number_list)):
+    number_list = sorted(number_list)
+    v2 = number_list[i]
+    #print(&quot;[{}:{}]&quot;.format(v1,v2))
+    if is_prime_no(v1 + v2) == 1:
+        if i &gt; 1:
+            swap_v(number_list, 1, i)
+        if is_prime_pair_list(number_list,2, 1) == 1:
+            l.append(number_list[1])
+
+print(&quot;{}&quot;.format(l))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/10 14:13</p>
+                                <p class="static-profile" style="margin:0;padding:0;">구름과비</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13853"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def isprime(n):
+    for i in range(2,int(n**0.5)+1):
+        if n%i == 0: return False
+    return True
+
+def paircheck(lst):
+    ret = []
+    if lst == []: return True
+    for i in range(1,len(lst)):
+        if isprime(lst[0]+lst[i]) and bool(paircheck(lst[1:i]+lst[i+1:])):
+            ret.append(lst[i])
+    return ret
+
+inp = [1,4,7,10,11,12]
+
+x = sorted(paircheck(inp))
+print( x if x else -1 )
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/30 22:16</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14313"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package test;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class test {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int numTemp[] = new int[sc.nextInt()];
+        for (int i = 0; i &lt; numTemp.length; i++)
+            numTemp[i] = sc.nextInt();
+        ArrayList&lt;Integer&gt; num = new ArrayList&lt;&gt;();
+        ArrayList&lt;Integer&gt; ans = new ArrayList&lt;&gt;();
+        for (int i = 0; i &lt; numTemp.length; i++)
+            num.add(numTemp[i]);
+        int with1st = 0;
+        int[] Pnum = Pnum(num.get(num.size() - 2) + num.get(num.size() - 1));
+        for (int n = 0; n &lt; numTemp.length - 1; n++) {
+            for (int l = 0; l &lt; numTemp.length / 2; l++)
+                end: for (int i = 0; i &lt; num.size() - 1; i++)
+                    for (int j = i + 1; j &lt; num.size(); j++)
+                        restart: for (int k = 0; k &lt; Pnum.length; k++)
+                            if (num.get(i) + num.get(j) == Pnum[k]) {
+                                if (num.get(i) == numTemp[0])
+                                    for (int m = 0; m &lt; ans.size(); m++)
+                                        if (ans.get(m) == num.get(j))
+                                            break restart;
+                                if (num.get(i) == numTemp[0])
+                                    with1st = num.get(j);
+                                num.remove(j);
+                                num.remove(i);
+                                break end;
+                            }
+            if (num.size() == 0 &amp;&amp; with1st != 0)
+                ans.add(with1st);
+            with1st = 0;
+            for (int i = 0; i &lt; numTemp.length; i++)
+                num.add(numTemp[i]);
+        }
+        for (int i = 0; i &lt; ans.size(); i++)
+            System.out.print(ans.get(i) + &quot; &quot;);
+    }
+
+    private static int[] Pnum(int n) {
+        ArrayList&lt;Integer&gt; Pnum = new ArrayList&lt;&gt;();
+        Boolean go = true;
+        for (int i = 3; i &lt; n + 1; i++) {
+            for (int j = 2; j &lt; i; j++)
+                if (i % j == 0)
+                    go = false;
+            if (go)
+                Pnum.add(i);
+            go = true;
+        }
+        int[] temp = new int[Pnum.size()];
+        for (int i = 0; i &lt; Pnum.size(); i++)
+            temp[i] = Pnum.get(i);
+        return temp;
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/25 22:09</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김지훈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17940"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import sys
+
+# 2000이하 소수 리스트
+primes = list(range(2, 2001))
+for i in range(2, 2001):
+    primes = list(filter(lambda x : not (x%i == 0 and x &gt; i), primes))
+
+k = 0
+def f(L, idx=1, ans=[]):
+    if not L:
+        global k
+        k += 1
+        sys.stdout.write(str(ans[1]) + ' ')
+        return
+    if idx == len(L):
+        return
+    if L[0] + L[idx] in primes:
+        T = L[:]
+        A = ans[:]
+        A.append(T.pop(0))
+        A.append(T.pop(idx-1))
+
+        f(T, 1, A)
+
+    f(L, idx+1, ans)
+
+
+N = int(sys.stdin.readline())
+L = list(map(int, sys.stdin.readline().strip('\n').split()))
+L.sort()
+f(L)
+if k == 0: sys.stdout.write('-1')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/20 01:02</p>
+                                <p class="static-profile" style="margin:0;padding:0;">messi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29728"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">result = []
+
+def isPrime(num):
+    for i in range(2, (num // 2) + 1):
+        if num % i == 0:
+            return False
+    return True
+
+
+def findPrime(i, lst, nums):
+    if len(lst) == len(nums):
+        result.append(lst)
+        return
+    for n in range(i, len(nums) - 1):
+        if nums[n] not in lst:
+            for j in range(n + 1, len(nums)):
+                if (nums[j] not in lst) and isPrime(nums[n] + nums[j]):
+                    newlst = lst.copy() + [nums[n], nums[j]]
+                    findPrime(n, newlst, nums)
+
+
+N = int(input('리스트의 크기: '))
+nums = [int(i) for i in input('리스트에 들어있는 수: ').split()]
+findPrime(0, [], nums)
+s = set()
+for r in result:
+    s.add(r[1])
+print(sorted(s) if len(s) &gt;0 else -1)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/10/30 14:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

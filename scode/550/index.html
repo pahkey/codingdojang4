@@ -1,0 +1,1120 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="* [프로젝트 오일러 84번 문제](https://projecteuler.net/problem=84)
+* [사이냅 번역본](http://euler.synap.co.kr/prob_detail.php?id=84)
+
+&lt;모노폴리&gt;라는 보드게임의 놀...">
+    <title>4면체 주사위로 모노폴리를 하면 방문 확률이 높은 칸은? - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">4면체 주사위로 모노폴리를 하면 방문 확률이 높은 칸은?</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">4</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 4</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <ul>
+<li><a href="https://projecteuler.net/problem=84">프로젝트 오일러 84번 문제</a></li>
+<li><a href="http://euler.synap.co.kr/prob_detail.php?id=84">사이냅 번역본</a></li>
+</ul>
+<p>&lt;모노폴리&gt;라는 보드게임의 놀이판은 표준적으로 아래와 같은 모양을 하고 있습니다.</p>
+<pre><code class="no-highlight">&gt;&gt;&gt;
+GO  A1  CC1 A2  T1  R1  B1  CH1 B2  B3  JAIL
+H2                                      C1
+T2                                      U1
+H1                                      C2
+CH3                                     C3
+R4                                      R2
+G3                                      D1
+CC3                                     CC2
+G2                                      D2
+G1                                      D3
+G2J F3  U2  F2  F1  R3  E3  E2  CH2 E1  FP
+</code></pre>
+
+<p>각 플레이어는 GO로 표시된 칸에서 출발하며, 6면체 주사위 두 개를 던져서 나온 값만큼 시계방향으로 말을 전진시킵니다. 여기서 추가적인 조건이 없다면 말이 각 칸을 방문할 확률은 모두 똑같이 2.5%가 되겠지만, 실제로는 특별한 규칙이 적용되는 G2J (Go To Jail - 감옥으로 가시오), CC (Community Chest - 공동기금), CH (Chance - 찬스) 같은 칸이 있어서 그렇게 되지는 않습니다.</p>
+<p>G2J 외에도 CC나 CH에서 "감옥으로 가시오" 카드를 뽑으면 플레이어는 바로 감옥으로 가야 하고, 또 "더블"이 3번 연속 나왔을 때도 그 값만큼 이동하는 대신 감옥으로 직행합니다. 
+(역주: 두 주사위의 숫자가 똑같이 나오면 말을 그만큼 이동시킨 다음에 주사위를 한번 더 던지는데, 이것을 더블이라고 합니다)</p>
+<p>CC와 CH에서 사용할 카드들은 게임을 시작할 때 잘 섞어서 엎어둡니다. 플레이어의 말이 CC나 CH에 도착하면, 해당되는 카드를 한 장 뽑아서 거기 쓰인 지시를 따르며 카드는 맨 밑으로 다시 집어넣습니다. 각각의 더미는 16장의 카드로 구성되는데, 그 중에서 칸의 이동에 관련된 것들만 보면 다음과 같습니다.</p>
+<p>공동기금 카드 (16장 중 2장):</p>
+<ol>
+<li>
+<p>출발지로 전진</p>
+</li>
+<li>
+<p>감옥으로 이동</p>
+</li>
+</ol>
+<p>찬스 카드 (16장 중 10장):</p>
+<ol>
+<li>
+<p>출발지로 전진</p>
+</li>
+<li>
+<p>감옥으로 이동</p>
+</li>
+<li>
+<p>C1으로 이동</p>
+</li>
+<li>
+<p>E3로 이동</p>
+</li>
+<li>
+<p>H2로 이동</p>
+</li>
+<li>
+<p>R1으로 이동</p>
+</li>
+<li>
+<p>다음 R(철도 회사)로 이동</p>
+</li>
+<li>
+<p>다음 R로 이동</p>
+</li>
+<li>
+<p>다음 U(시설 회사)로 이동</p>
+</li>
+<li>
+<p>뒤로 3칸 후퇴</p>
+</li>
+</ol>
+<p>이 문제의 핵심은, 주사위를 굴렸을 때 말이 어떤 칸에 도착할 확률이 얼마나 되는가입니다.
+G2J의 경우는 도착 즉시 감옥으로 이동해야 하므로 0의 확률을 가질 것이고, CH 칸은 5/8의 확률로 다른 칸으로 이동하게 되니 그 다음으로 낮은 확률을 가지게 될 것입니다. 여기서는 방문 확률에 집중하기 위해, 감옥을 단순히 방문하는 것(Just Visiting)과 감옥으로 보내진 것을 구별하지 않기로 합니다. 또, 감옥에서 더블이 나오면 석방되는 원래의 규칙도 무시하기로 합니다 (항상 다음 턴에 돈을 내고 석방되는 것으로 가정합니다).</p>
+<p>통계적으로 가장 방문 확률이 높은 칸들을 뽑아보면 감옥 (6.24%), E3 (3.18%), 출발지 (3.09%)의 순이 됩니다. 출발지부터 시계방향으로 각 칸에 00 ~ 39의 번호를 매겨 보면 이 세 칸은 각각 10, 24, 00에 해당되고, 이것을 이어 붙이면 102400 이라는 문자열을 만들 수 있습니다.</p>
+<p>만약에 6면체 대신 4면체로 된 주사위 두 개를 써서 게임을 플레이한다면, 가장 방문 확률이 높은 세 칸의 번호를 이어 붙인 문자열은 무엇이 되겠습니까?</p>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2017/06/19 08:21</p>
+                    <p class="static-profile" style="margin:0;padding:0;">Jeong Hoon Lee</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>7개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_7567"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">// 모노폴리 - C#
+using System;
+
+namespace Monopolyby4
+{
+    enum board
+    {
+        GO, A1, CC1, A2, T1, R1, B1, CH1, B2, B3, JAIL, C1, U1, C2, C3, R2, D1, CC2, D2, D3, FP, E1, CH2, E2, E3, R3, F1, F2, U2, F3, G2J, G1, G2, CC3, G3, R4, CH3, H1, T2, H2
+    }
+    class Program
+    {
+        static board CC(board now)
+        {
+            Random r = new Random();
+            int select = r.Next(0, 16);
+            if (select == 0)
+                return board.GO;
+            else if (select == 10)
+                return board.JAIL;
+            else
+                return now;
+        }
+        static board CH(board now)
+        {
+            Random r = new Random();
+            int select = r.Next(0, 16);
+            switch(select)
+            {
+                case 1:
+                    return board.GO;
+                case 2:
+                    return board.JAIL;
+                case 3:
+                    return board.C1;
+                case 4:
+                    return board.E3;
+                case 5:
+                    return board.H2;
+                case 6:
+                    return board.R1;
+                case 7:
+                case 8:
+                    if ((int)now &gt; 35 || (int)now &lt; 5)
+                        return board.R1;
+                    else if ((int)now &gt; 5 &amp;&amp; (int)now &lt; 15)
+                        return board.R2;
+                    else if ((int)now &gt; 15 &amp;&amp; (int)now &lt; 25)
+                        return board.R3;
+                    else if ((int)now &gt; 25 &amp;&amp; (int)now &lt; 35)
+                        return board.R4;
+                    else
+                        return now;
+                case 9:
+                    if ((int)now &gt; 28 || (int)now &lt; 12)
+                        return board.U1;
+                    else if ((int)now &gt; 12 &amp;&amp; (int)now &lt; 28)
+                        return board.U2;
+                    else
+                        return now;
+                case 10:
+                    return now - 3;
+                default:
+                    return now;
+            }
+        }
+        static void Main(string[] args)
+        {
+            board position = board.GO;
+            Random r = new Random();
+            int doublecount = 0;
+            int[] frequent = new int[40];
+            for (int i = 0; i &lt; 1000000; i++) // 표본을 최대한 많이
+            {
+                int dice1 = r.Next(1, 5);
+                int dice2 = r.Next(1, 5);
+                if (dice1 == dice2)
+                    doublecount++;
+                else
+                    doublecount = 0;
+                if (doublecount == 3)
+                    position = board.JAIL;
+                else
+                    position += dice1 + dice2;
+                if ((int)position &gt; 39)
+                    position -= 40;
+                if (position == board.CC1 || position == board.CC2 || position == board.CC3)
+                    position = CC(position);
+                else if (position == board.CH1 || position == board.CH2 || position == board.CH3)
+                    position = CH(position);
+                else if (position == board.G2J)
+                    position = board.JAIL;
+                frequent[(int)position]++;
+            }
+            int[] result = new int[3];
+            int[] txt = new int[3];
+            for (int i = 0; i &lt; 3; i++)
+            {
+                for (int j = 0; j &lt; 40; j++)
+                {
+                    if (i == 0)
+                    {
+                        if (frequent[j] &gt; result[i])
+                        {
+                            result[i] = frequent[j];
+                            txt[i] = j;
+                        }
+                    }
+                    else if (i == 1)
+                    {
+                        if (frequent[j] &gt; result[i] &amp;&amp; j != txt[0])
+                        {
+                            result[i] = frequent[j];
+                            txt[i] = j;
+                        }
+                    }
+                    else if (i == 2)
+                    {
+                        if (frequent[j] &gt; result[i] &amp;&amp; j != txt[0] &amp;&amp; j != txt[1])
+                        {
+                            result[i] = frequent[j];
+                            txt[i] = j;
+                        }
+                    }
+                }
+            }
+            Console.WriteLine(&quot;{0}{1}{2}&quot;, txt[0], txt[1], txt[2]);
+            // 답은 101524(JAIL, R2, E3)
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/19 08:26</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jeong Hoon Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7658"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <h1 id="36">파이썬 3.6으로 했습니다.</h1>
+<p>결과는 10 15 24가 나옵니다...</p>
+<pre><code class="python">#코딩도장 135번 문제
+import random
+
+matrix = ['GO', 'A1', 'CC1', 'A2', 'T1', 'R1', 'B1', 'CH1', 'B2', 'B3', 'JAIL', 'C1', 'U1', 'C2', 'C3', 'R2', 'D1', 'CC2', 'D2', 'D3', 'FP', 'E1', 'CH2', 'E2', 'E3', 'R3', 'F1', 'F2', 'U2', 'F3', 'G2J', 'G1', 'G2', 'CC3', 'G3', 'R4', 'CH3', 'H1', 'T2', 'H2']
+matrix_count=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+card_CH = ['GO', 'JAIL', 'C1', 'E3', 'H2', 'R1', 'R', 'R', 'U', '-3', 'Bomb', 'Bomb', 'Bomb', 'Bomb', 'Bomb', 'Bomb']
+card_CC = ['GO', 'JAIL', 'Bomb', 'Bomb', 'Bomb', 'Bomb', 'Bomb', 'Bomb', 'Bomb', 'Bomb', 'Bomb', 'Bomb', 'Bomb', 'Bomb', 'Bomb', 'Bomb']
+R = []; U = []
+i = 0; dice = 0; dice2 = 0
+pos = 0; double_count = 0
+matrix_size = len(matrix)
+
+def throw_dice() :
+    return random.randrange(1, 5)
+def init_card() :
+    random.shuffle(card_CH)
+    random.shuffle(card_CC)
+def draw_card_CH() :
+    temp = card_CH.pop()
+    card_CH.insert(0, temp)
+    return temp
+def draw_card_CC() :
+    temp = card_CC.pop()
+    card_CC.insert(0, temp)
+    return temp
+
+#CC?, CH?를 구분하기 위해 만들었던 함수.
+#겸사겸사 G2J도 넣어 G2J 처리를 용이하게 할려고 끼어 넣었습니다.
+def check_where(position) :
+    if position.find('CC') != -1 :
+        return 'CC'
+    elif position.find('CH') != -1 :
+        return 'CH'
+    elif position.find('G2J') != -1 :
+        return 'G2J'
+    else :
+        return 'ANY'
+
+#R과 U의 위치를 미리 파악한 후 다음 R, U의 위치를 빠르게 찾게 하기위해
+#만들었습니다.
+def where_R() :
+    i = 0
+    while i &lt; len(matrix):
+        if matrix[i].find('R') != -1 :
+            R.append(i)
+        i += 1
+def where_U() :
+    i = 0
+    while i &lt; len(matrix):
+        if matrix[i].find('U') != -1 :
+            U.append(i)
+        i += 1
+def next_R(pos) :
+    i = 0
+    while i &lt; (len(R)-1) :
+        if R[i] &lt; pos &lt; R[i+1] :
+            return R[i+1]
+        i += 1
+    else :
+        return R[0]
+def next_U(pos) :
+    i = 0
+    while i &lt; (len(U)-1) :
+        if U[i] &lt; pos &lt; U[i+1] :
+            return U[i+1]
+        i += 1
+    else :
+        return U[0]
+
+#card를 뽁고난 후의 행동
+def do_card(draw) :
+    global pos; global matrix_count
+
+    if draw == 'GO' :
+        pos = matrix.index('GO')
+        matrix_count[pos] += 1
+    elif draw == 'JAIL' :
+        pos = matrix.index('JAIL')
+        matrix_count[pos] += 1
+    elif draw == 'C1' :
+        pos = matrix.index('C1')
+        matrix_count[pos] += 1
+    elif draw == 'E3' :
+        pos = matrix.index('E3')
+        matrix_count[pos] += 1
+    elif draw == 'H2' :
+        pos = matrix.index('H2')
+        matrix_count[pos] += 1
+    elif draw == 'R1' :
+        pos = matrix.index('R1')
+        matrix_count[pos] += 1
+    elif draw == 'R' :
+        pos = next_R(pos)
+        matrix_count[pos] += 1
+    elif draw == '-3' :     #3칸 뒤로는 3칸 뒤에 CC가 있을수도 있어서 pos만 바꾸고
+        pos = pos - 3       #메인 반복문에서 다시 한번 CC에 가는지 체크합니다.
+    elif draw == 'U' :
+        pos = next_U(pos)
+        matrix_count[pos] += 1
+    elif draw == 'Bomb' :
+        matrix_count[pos] += 1
+
+init_card(); where_U(); where_R()
+while i &lt; 1000000 :
+    dice  = throw_dice()
+    dice2 = throw_dice()
+
+    if dice == dice2 :
+        double_count += 1
+    else :
+        double_count = 0
+
+    #더블이 3번 나오면 JAIL행
+    if double_count == 3 :
+        double_count = 0
+        pos = matrix.index('JAIL')
+        matrix_count[pos] += 1
+        continue
+
+    pos = (pos + dice + dice2) % matrix_size
+
+    result = check_where(matrix[pos])
+
+    if result == 'G2J' :
+        pos = matrix.index('JAIL')
+        matrix_count[pos] += 1
+    elif result == 'CH' :
+        draw = draw_card_CH()
+        do_card(draw)
+
+        if draw == '-3' :
+            result = check_where(matrix[pos])
+            if result == 'CC' :
+                draw = draw_card_CC()
+                do_card(draw)
+            else :
+                matrix_count[pos] += 1
+    elif result == 'CC' :
+        draw = draw_card_CC()
+        do_card(draw)
+    else :
+        matrix_count[pos] += 1
+    i += 1
+
+#제가 많이 부족해서 sorting함수를 따로 구현을 해서 matrix, matrix_count를 
+#함께 sorting해야 할 것 같습니다...
+#matrix 리스트내에서 한꺼번에 할 수 있는 방법이 있을거 같긴한데
+#파이썬을 시작한 지 며칠 안 돼서 잘 모르겠네요...
+
+#matrix_count 기준으로 matrix_count, matrix 동시에 sorting하기
+#bubble sort
+length = len(matrix_count) - 1
+temp = list(matrix)
+for i in range(length) :
+    for j in range(length - i) :
+        if matrix_count[j] &lt; matrix_count[j+1] :
+            matrix_count[j], matrix_count[j+1] = matrix_count[j+1], matrix_count[j]
+            matrix[j], matrix[j+1] = matrix[j+1], matrix[j]
+
+print(str(temp.index(matrix[0])), str(temp.index(matrix[1])), str(temp.index(matrix[2])))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/27 23:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">KimSeonbin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8194"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>저는 R1이 1등으로 나오는데... </p>
+<pre><code class="python">from random import randint, shuffle
+from itertools import cycle
+
+
+class Board:
+    #  0  1  2  3  4  5  6   7  8  9  10   11 12 13 14 15 16 17  18 19 20 21 22  23 24 25 26 27 28 29 30  31 32 33  34 35 36  37 38 39
+    # GO A1 CC1 A2 T1 R1 B1 CH1 B2 B3 JAIL C1 U1 C2 C3 R2 D1 CC2 D2 D3 FP E1 CH2 E2 E3 R3 F1 F2 U2 F3 G2J G1 G2 CC3 G3 R4 CH3 H1 T2 H2
+    GO, JAIL = 0, 10
+    CC, CH = (2, 17, 33), (7, 22, 36)
+    #R, U = (5, 15, 25, 35), (12, 28)
+    C1, E3, H2, R1 = 11, 24, 39, 5
+
+
+class Piece:
+    def __init__(self):
+        self.pos = Board.GO
+        self.dblcnt = 0
+
+    def goto(self, func):
+        self.pos = func(self.pos)
+
+    def run(self):
+        d1, d2 = randint(1, 4), randint(1, 4)
+        self.dblcnt = 0 if d1 != d2 else self.dblcnt + 1
+        if self.dblcnt &gt;= 3:
+            self.pos = Board.JAIL
+            dblcnt = 0
+        else:
+            self.pos = (self.pos + d1 + d2) % 40
+
+
+def ccdeck_gen():
+    deck = [lambda p:Board.GO, lambda p:Board.JAIL] + [lambda p: p] * 14
+    shuffle(deck)
+    while True:
+        yield from cycle(deck)
+
+
+def chdeck_gen():
+    nextR = lambda p: {7:15, 22:25, 36:5}[p]
+    nextU = lambda p: {7:12, 22:28, 36:12}[p]
+
+    deck = [(lambda x: POS) for POS in [Board.GO, Board.JAIL, Board.C1, Board.E3, Board.H2, Board.R1]] + \
+           [nextR, nextR, nextU, lambda p: (p-3) % 40] + \
+           [lambda p: p] * 6
+    shuffle(deck)
+    while True:
+        yield from cycle(deck)
+
+
+visitcnt = {x:0 for x in range(40)}
+piece, ccdeck, chdeck = Piece(), ccdeck_gen(), chdeck_gen()
+for i in range(100000):
+    visitcnt[piece.pos] += 1
+    piece.run()
+
+    if piece.pos in Board.CC:
+        piece.goto(next(ccdeck))
+    elif piece.pos in Board.CH:
+        piece.goto(next(chdeck))
+        if piece.pos in Board.CC:
+            piece.goto(next(ccdeck))
+
+highest = sorted(visitcnt.items(), key=lambda x: x[1], reverse=True)[:3]
+print(''.join('{:02}'.format(item[0]) for item in highest)) # 051015
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/04 08:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9223"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import random
+
+def castDices():
+    FACE = 4
+    dice1 = random.randint(1, FACE)
+    dice2 = random.randint(1, FACE)
+    return (dice1, dice2)
+
+def readChest(loc):
+    card = chest.pop()
+    chest.insert(0, card)
+    return board.index(card) if card in ('GO', 'JAIL') else loc
+
+def readChance(loc):
+    card = chance.pop()
+    chance.insert(0, card)
+    if card in ('GO', 'JAIL', 'C1', 'E3', 'H2', 'R1'):
+        return board.index(card)
+    elif card[0:4] == 'next':
+        for i in range(1, 40):
+            if board[(loc + i) % 40][0] == card[4]:
+                return (loc + i) % 40
+    elif card == 'back3':
+        if board[(loc - 3)][0:2] == 'CC':
+            return readChest(loc - 3)
+        else:
+            return loc - 3
+    else:
+        return loc
+
+
+board = ['GO', 'A1', 'CC1', 'A2', 'T1', 'R1', 'B1', 'CH1', 'B2', 'B3', 'JAIL', 'C1', 'U1', 'C2', 'C3', 'R2', 'D1',
+         'CC2', 'D2', 'D3', 'FP', 'E1', 'CH2', 'E2', 'E3', 'R3', 'F1', 'F2', 'U2', 'F3', 'G2J', 'G1', 'G2', 'CC3',
+         'G3', 'R4', 'CH3', 'H1', 'T2', 'H2']
+trace = [0] * 40
+chest = ['GO', 'JAIL'] + ['pass'] * 14
+chance = ['GO', 'JAIL', 'C1', 'E3', 'H2', 'R1', 'nextR', 'nextR', 'nextU', 'back3'] + ['pass'] * 6
+random.shuffle(chest)
+random.shuffle(chance)
+loc = 0
+double = 0
+
+# play game
+for i in range(1000000):
+    trace[loc] += 1
+
+    dices = castDices()
+
+    double = double+1 if dices[0] == dices[1] else 0
+    loc = board.index('JAIL') if double == 3 else (loc + sum(dices)) % 40
+
+    if board[loc] == 'G2J':
+        loc = board.index('JAIL')
+    elif board[loc][0:2] == 'CC':
+        loc = readChest(loc)
+    elif board[loc][0:2] == 'CH':
+        loc = readChance(loc)
+
+result = sorted([(trace[i], i) for i in range(40)], reverse=1)
+print('%02d%02d%02d' % (result[0][1], result[1][1], result[2][1]))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/11/09 15:39</p>
+                                <p class="static-profile" style="margin:0;padding:0;">songci</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14401"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from random import *
+
+def monopoly_count():
+  global cur
+  pos = board[cur]
+
+  if pos == 'G2J': cur = 10; cnt[cur] += 1
+  elif pos[:2] in 'CCH':
+    card_name = next(card[pos[:2]])
+    if card_name == 'hold': cnt[cur] += 1
+    elif card_name in 'RU': cur = nextRU(card_name, cur); cnt[cur] += 1
+    elif card_name == 'b3': cur -= 3; monopoly_count()
+    else: cur = board.index(card_name); cnt[cur] += 1
+  else: cnt[cur] += 1
+
+def nextRU(v1, v2):
+  for i in RU_pos[v1]:
+    if v2 &lt; i: return i
+  return RU_pos[v1][0]
+
+def dice_throw():
+  double = 0
+  while True:
+    double %= 3
+    d1, d2 = randint(1,4), randint(1,4)
+    double = double+1 if d1==d2 else 0
+    yield d1+d2, double
+def CC_pop():
+  card = ['GO', 'JAIL']+['hold']*14
+  shuffle(card)
+  while True: yield from card
+def CH_pop():
+  card = ['GO', 'JAIL', 'C1', 'E3', 'H2', 'R1', 'R', 'R', 'U', 'b3']+['hold']*6
+  shuffle(card)
+  while True: yield from card
+
+board = ['GO', 'A1', 'CC1', 'A2', 'T1', 'R1', 'B1', 'CH1', 'B2', 'B3', 'JAIL', 'C1', 'U1', 'C2', 'C3', 'R2', 'D1', 'CC2', 'D2', 'D3', 'FP', 'E1', 'CH2', 'E2', 'E3', 'R3', 'F1', 'F2', 'U2', 'F3', 'G2J', 'G1', 'G2', 'CC3', 'G3', 'R4', 'CH3', 'H1', 'T2', 'H2']
+cnt = [0]*40
+card, dice = {'CC': CC_pop(), 'CH': CH_pop()}, dice_throw()
+cur = 0
+RU_pos = {'R': [i for i,j in enumerate(board) if j in 'R1R2R3R4'], 'U': [i for i,j in enumerate(board) if j in 'U1U2']}
+
+for i in range(1000000):
+  move_cnt, double_cnt = next(dice)
+  cur = (cur+move_cnt)%40 if double_cnt&lt;3 else 10
+  monopoly_count()
+
+print('{:0&gt;2}{:0&gt;2}{:0&gt;2}'.format(*(i[0] for i in sorted(enumerate(board), key = lambda x: cnt[x[0]], reverse=True)[:3])))
+# print(sorted(enumerate(board), key = lambda x: cnt[x[0]], reverse=True))
+# print(sorted((100*i/sum(cnt) for i in cnt), reverse=True))
+
+# 101524
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/28 21:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19146"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>예전에 풀이에 썼던 코드입니다.
+게임당300번 주사위를 굴리고 1000게임 정도하면 됩니다.
+게임당 주사위를 너무 많이 굴리거나, 게임수가 부족하면 답이 다르게 나올 수 있습니다.</p>
+<pre><code class="python">from random import randrange
+
+
+def play(face=6):
+    M = 300 # 게임당 주사위 굴리는 횟수
+    pos = 0 # 시작위치
+    rooms = ('GO', 'A1', 'CC1', 'A2', 'T1', 'R1', 'B1', 'CH1', 'B2', 'B3',
+            'JAIL', 'C1', 'U1', 'C2', 'C3', 'R2', 'D1', 'CC2', 'D2', 'D3',
+            'FP', 'E1', 'CH2', 'E2', 'E3', 'R3', 'F1', 'F2', 'U2', 'F3',
+            'G2J', 'G1', 'G2', 'CC3', 'G3', 'R4', 'CH3', 'H1', 'T2', 'H2')
+    result = dict()
+
+    deck = [
+        ['GO', 'JAIL'] + [''] * 14,  # GO, JAIL외 다른 카드 14장
+        ['GO', 'JAIL', 'C1', 'E3', 'H2', 'R1', 'NR', 'NR', 'NU','-3'] +\
+        [''] * 6
+    ]
+
+    '''카드 덱 섞기: 임의의 카드와 첫번째 카드를 서로 바꿈'''
+    for d in range(2):
+        for _ in range(100):
+            i = randrange(len(deck[d]) - 1) + 1
+            deck[d][0], deck[d][i] = deck[d][i], deck[d][0]
+
+
+    def run_dice():
+        '''주사위를 굴리기: 두 개의 주사위를 굴려서 각 결과를 튜플로 반환'''
+        return (randrange(face) + 1, randrange(face) + 1)
+
+
+    def flip_card(p:int, d:int) -&gt; int:
+        '''카드를 하나 뒤집고, 그 결과에 따라 이동한 방번호를 리턴한다.
+        '''
+        c = deck[d].pop(0)
+        deck[d].append(c)
+
+        if c == '': # 이동과 관련없는 키드
+            pass
+        elif c == 'NR': # 다음 R
+            i = (([x[0] for x in rooms] * 2)[p+1:]).index('R') + 1
+            p = (p + i) % 40 
+        elif c == 'NU': # 다음 U
+            i = (([x[0] for x in rooms] * 2)[p+1:]).index('U') + 1
+            p = (p + i) % 40
+        elif c == '-3':
+            p = (p + 37) % 40
+        else:
+            p = rooms.index(c)
+        return p
+
+
+    def visit(p:int) -&gt; int:
+        '''특정 칸에 방문했을 때, 헤딩 칸에서의 액션을 수행한다. 리턴값은 액션 수행 후의 방의 위치'''
+        if rooms[p] == 'G2J':
+            p = 10
+        elif rooms[p][:2] in ('CC', 'CH'):
+            p = flip_card(p, 0 if rooms[p][1] == 'C' else 1)
+        return p
+
+
+    def move(p:int, dd:int=0) -&gt; (int, int):
+        '''현재위치, 누적더블수를 인자로 받고 주사위를 굴려 이동한 위치와 누적더블수를 리턴한다.'''
+        a, b = run_dice()
+        if a == b:
+            dd += 1
+            if dd == 3:
+                return (10, 0)
+        else:
+            dd = 0
+        p = visit((p + a + b) % 40)
+        return p, dd
+
+
+    for _ in range(M):
+        d = 0
+        while True:
+            pos, d = move(pos, d)
+            result[pos] = result.get(pos, 0) + 1
+            if d is 0:
+                break
+
+    return result
+
+
+def main(face=6):
+    d = {}
+    for _ in range(1000):
+        xs = play(face)
+        for k, v in xs.items():
+            d[k] = d.get(k, 0) + v
+    print('-' * 80)
+    s = sum(d.values())
+    result = [x for x in sorted(d.items(), key=lambda x: x[1], reverse=True)[:3]]
+    print(''.join(str(k) for k, _ in result))
+
+
+main(4)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/09/04 12:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">룰루랄라</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_19463"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>아마 문제 출제자가 의도했을 풀이지 않을까 싶습니다.</p>
+<p>각 40개의 칸에 대해서 다른 칸으로 이동할 확률을 구해놓습니다. 즉, f[ i ][ j ] = i칸에 도착했을 때 j칸으로 이동할 확률</p>
+<p>일반적인 칸이라면 이 값은 1이겠지만, 만약 찬스카드 이런거라면 제자리를 유지할 확률이 낮을테고, 어디 무인도 이런대로 가버리는 칸이라면 자기 자신에게 있을 확률이 아얘 0이 되버리죠.</p>
+<p>이제 주사위를 던져서 i칸에 있던 말이 j로 이동할 확률을 구할 수 있습니다. 이 확률값 c[ i ][ j ] = c[ i ][ (i + k)%40 ] * g[ k ] * f[ (i+k)%40 ][ j ] 으로 구해지게 됩니다. 여기서 f는 위에서 구힌 각 칸의 이동확률정보이고, g는 주사위를 2개 던져서 k가 나올 확률입니다.</p>
+<p>이렇게 구한 40x40 행렬 c를 곱한것은, 주사위를 한번 던진과 같은 효과를 봅니다. 즉, 이 행렬을 엄청 많이 거듭제곱을 하게되면 주사위를 많이 던진것과 같은 효과를 보는 것이죠.</p>
+<p>해당 문제에서 주의해야 할 점은, 더블이 연속으로 3번 나오면 무인도로 가버린다는 것입니다.</p>
+<p>위에서 구한 행렬만으로는 이런 경우에 대해선 반영이 안되있습니다.</p>
+<p>따라서 행렬을 40x40이 아닌 120x120으로 만들어서 c[x * 40 + i][y * 40 + j ] = 현재 더블이 연속으로 x번 나온 상태이며, 내 위치가 i일 때, 더블이 연속으로 y번 나오게 되며, 최종적으로 j에 도착하게 될 확률 이라고 수정해야지 제대로 동작합니다.</p>
+<p>이렇게 행렬을 만들어놓으면 나머지는 그냥 거듭제곱 열심히 하면 됩니다.</p>
+<p>저같은 경우 제곱한 결과랑 원래 행렬이랑 각 값의 오차의 합이 10^-15 이하면 계산을 그만두도록 했는데.. 제곱연산을 약 1178번 수행하게 됩니다.</p>
+<p>이는 c행렬을 2^1178번 거듭제곱한것과 같은 효과이며 (1178승이 아니라 2^1178 ~=  4.1 * 10^354 번 거듭제곱을 한 것!)
+이는 결국 주사위를 ~= 4.1 * 10^354 번 던진 결과라는 뜻이 됩니다. </p>
+<p>뭐, 대충 이런 이유로 적당히 뭐 백만번 천만번 시뮬레이션을 돌리는 여타 풀이와는 차원이 다른 신뢰도를 보여주는 방법입니다. 아마 이런 방식을 문제 출제한 사람이 원하지 않았을까 싶습니다.</p>
+<pre><code class="cpp">#include&lt;stdio.h&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+double c[120][120];
+double r[120][120];
+double z[120][120];
+double f[40][40];
+double g[80];
+void makec()
+{
+    int i, j, k;
+    //make f
+    for (i = 0; i &lt; 40; i++)
+        f[i][i] = 1;
+    // go to jail
+    f[30][10] = 1;
+    f[30][30] = 0;
+    // cc
+    int cc[3] = { 2, 17, 33 };
+    for (i = 0; i &lt; 3; i++)
+    {
+        int ci = cc[i];
+        f[ci][ci] = 14.0 / 16.0;
+        f[ci][0] = 1.0 / 16.0;
+        f[ci][10] = 1.0 / 16.0;
+    }
+    // ch
+    int ch[3] = { 7, 22, 36 };
+    for (i = 0; i &lt; 3; i++)
+    {
+        int ci = ch[i];
+        f[ci][ci] = 6.0 / 16.0;
+        f[ci][0] += 1.0 / 16.0;
+        f[ci][10] += 1.0 / 16.0;
+        f[ci][11] += 1.0 / 16.0;
+        f[ci][24] += 1.0 / 16.0;
+        f[ci][39] += 1.0 / 16.0;
+        f[ci][5] += 1.0 / 16.0;
+        if (ci &gt;= 5 &amp;&amp; ci &lt; 15) f[ci][15] += 2.0 / 16.0;
+        else if (ci &gt;= 15 &amp;&amp; ci &lt; 25) f[ci][25] += 2.0 / 16.0;
+        else if (ci &gt;= 25 &amp;&amp; ci &lt; 35) f[ci][35] += 2.0 / 16.0;
+        else f[ci][5] += 2.0 / 16.0;
+        if (ci &gt;= 12 &amp;&amp; ci &lt; 28) f[ci][28] += 1.0 / 16.0;
+        else f[ci][12] += 1.0 / 16.0;
+        f[ci][ci - 3] += 1.0 / 16.0;
+    }
+
+    int n = 4;
+    double dice = 1.0 / n / n;
+    for (i = 1; i &lt;= n; i++)
+    {
+        for (j = 1; j &lt;= n; j++)
+        {
+            k = i + j;
+            if (i == j)k += 40;
+            g[k] += dice;
+        }
+    }
+
+    //build c
+    //case 1 : double 0 state
+    for (i = 0; i &lt; 40; i++)
+    {
+        //no double
+        for (j = 0; j &lt; 40; j++)
+        {
+            double cur = g[j];
+            int tj = (i + j) % 40;
+            for (k = 0; k &lt; 40; k++)
+            {
+                c[i][k] += cur * f[tj][k];
+            }
+        }
+        //yes double
+        for (j = 0; j &lt; 40; j++)
+        {
+            double cur = g[j + 40];
+            int tj = (i + j) % 40;
+            for (k = 0; k &lt; 40; k++)
+            {
+                c[i][k + 40] += cur * f[tj][k];
+            }
+        }
+    }
+    //case 2 : double 1 state
+    for (i = 40; i &lt; 80; i++)
+    {
+        //no double
+        for (j = 0; j &lt; 40; j++)
+        {
+            double cur = g[j];
+            int tj = (i + j) % 40;
+            for (k = 0; k &lt; 40; k++)
+            {
+                c[i][k] += cur * f[tj][k];
+            }
+        }
+        //yes double
+        for (j = 0; j &lt; 40; j++)
+        {
+            double cur = g[j + 40];
+            int tj = (i + j) % 40;
+            for (k = 0; k &lt; 40; k++)
+            {
+                c[i][k + 80] += cur * f[tj][k];
+            }
+        }
+    }
+    //case 3 : double 2 state
+    for (i = 80; i &lt; 120; i++)
+    {
+        //no double
+        for (j = 0; j &lt; 40; j++)
+        {
+            double cur = g[j];
+            int tj = (i + j) % 40;
+            for (k = 0; k &lt; 40; k++)
+            {
+                c[i][k] += cur * f[tj][k];
+            }
+        }
+        //yes double. you have to jail!
+        for (j = 0; j &lt; 40; j++)
+        {
+            double cur = g[j + 40];
+            c[i][10] += cur;
+        }
+    }
+}
+void csq()
+{
+    int i, j, k;
+    for (i = 0; i &lt; 120; i++)
+        for (j = 0; j &lt; 120; j++)
+        {
+            r[i][j] = 0;
+            z[i][j] = c[i][j];
+        }
+    for (i = 0; i &lt; 120; i++)
+        for (k = 0; k &lt; 120; k++)
+            for (j = 0; j &lt; 120; j++)
+            {
+                r[i][j] += c[i][k] * c[k][j];
+            }
+    for (i = 0; i &lt; 120; i++)
+    {
+        double sum = 0;
+        for (j = 0; j &lt; 120; j++)
+            sum += r[i][j];
+        for (j = 0; j &lt; 120; j++)
+        {
+            c[i][j] = r[i][j] / sum;
+            z[i][j] -= c[i][j];
+        }
+    }
+}
+void process()
+{
+    int playtime = 0;
+    while (1)
+    {
+        playtime++;
+        csq();
+        double error = 0.0;
+        int i, j;
+        for (i = 0; i &lt; 120; i++)
+            for (j = 0; j &lt; 120; j++)
+                error += abs(z[i][j]);
+        if (error &lt; 1e-15)break;
+    }
+    printf(&quot;play 3 * 2^%d dices\n&quot;, playtime);
+    int i, j;
+    pair&lt;double, int&gt; px[40];
+    for (i = 0; i &lt; 40; i++) {
+        //printf(&quot;%d : %lf\n&quot;, i, c[0][i]);
+        px[i].first = c[0][i] + c[0][i + 40] + c[0][i + 80];
+        px[i].second = i;
+    }
+    sort(px, px + 40);
+    for (i = 39; i &gt;= 30; i--)printf(&quot;%d (%.15lf)\n&quot;, px[i].second, px[i].first);
+}
+int main()
+{
+    makec();
+    process();
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/09/27 23:26</p>
+                                <p class="static-profile" style="margin:0;padding:0;">pichulia</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

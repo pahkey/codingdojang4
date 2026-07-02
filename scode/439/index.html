@@ -1,0 +1,3226 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="출처 : [http://poj.org/problem?id=2823](http://poj.org/problem?id=2823)
+
+여기 배열이 하나 있습니다. 이 배열의 크기는 n으로 106을 넘지 않습니다. 그리고 이 배열의 왼쪽 끝에서 오른쪽...">
+    <title>Sliding Window - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">Sliding Window</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">8</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 3</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>출처 : <a href="http://poj.org/problem?id=2823">http://poj.org/problem?id=2823</a></p>
+<p>여기 배열이 하나 있습니다. 이 배열의 크기는 n으로 10<sup>6</sup>을 넘지 않습니다. 그리고 이 배열의 왼쪽 끝에서 오른쪽 끝으로 움직이고 있는 슬라이딩 윈도우가 있습니다. 이 윈도우의 길이는 k입니다. 여러분은 윈도우 안에 보이는 k개의 수만을 볼 수 있습니다. 윈도우는 한 번에 한 칸씩 오른쪽으로 움직입니다. 다음은 예제입니다.</p>
+<p><img alt="example" src="http://dl.dropboxusercontent.com/s/497qscoqwqgo6c9/sliding.PNG" /></p>
+<p>슬라이딩 윈도우가 각 위치에 있을 때 보이는 최대값과 최소값이 무엇인지 구하는 것이 여러분에게 주어진 문제입니다.</p>
+<p><strong>입력</strong></p>
+<p>입력은 두 개의 줄로 이루어져 있습니다. 첫 번째 줄은 배열의 길이와 슬라이딩 윈도우의 길이를 나타내는 두 개의 정수n과 k를 담고 있습니다. 다음 줄에 배열의 내용을 나타내는 n개의 정수가 담겨 있습니다.</p>
+<p><strong>출력</strong></p>
+<p>출력은 두 개의 줄을 담고 있어야 합니다. 첫 번째 줄은 윈도우가 왼쪽에서 오른쪽으로 움직일 때마다 윈도우에 보이는 최소값을 나타냅니다. 두번째 줄은 최대값입니다.</p>
+<p><strong>Sample Input</strong></p>
+<pre><code class="no-highlight">8 3
+1 3 -1 -3 5 3 6 7
+</code></pre>
+
+<p><strong>Sample Output</strong></p>
+<pre><code class="no-highlight">-1 -3 -3 -3 3 3
+3 3 5 5 6 7
+</code></pre>
+
+<hr />
+<pre><code class="no-highlight">Time Limit: 12000MS     
+Memory Limit: 65536K
+</code></pre>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2014/03/21 20:08</p>
+                    <p class="static-profile" style="margin:0;padding:0;">Kim Jaeju</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>47개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_510"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">8</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Naive Solution</strong></p>
+<p>이 문제를 풀기 위한 가장 간단한 풀이는 각 위치에 대해서 슬라이딩 윈도를 직접 대어 보고 최대값과 최소값이 무엇인지 찾는 것입니다. 2중 for문을 통해서 구현하면 되겠죠. O(NK)입니다.</p>
+<pre><code class="cpp">#include&lt;vector&gt;
+using namespace std;
+
+void slidingwindow_naive(vector&lt;int&gt; &amp;array, vector&lt;int&gt; &amp;minv, vector&lt;int&gt; &amp;maxv){
+    int pos;
+    for(pos=0; pos &lt; array.size(); ++pos){
+        int minval = maxval = array[pos];
+        int i;
+
+        for(i=1;i&lt;K;++i){
+            minval = min(minval, array[i]);
+            maxval = max(maxval, array[i]);
+        }
+
+        minv.push_back(minval);
+        maxv.push_back(maxval);
+    }
+}
+</code></pre>
+
+<p>하지만 이 풀이는 너무나 느립니다. N의 크기가 1000000까지 될 수 있고 K도 마찬가지이므로 이런 경우에는 아무리 코드를 최적화한다 하더라도 시간내에 답이 나오지 않습니다.</p>
+<p><strong>Binary-search Tree</strong></p>
+<p>이진 탐색 트리는 이진 트리의 일종으로 각 노드의 왼쪽 자식은 부모 노드가 지닌 값보다 작은 값을 지니고, 오른쪽 자식은 부모보다 큰 값을 갖도록 구성되어 있습니다. 균형잡힌 이진 트리의 경우 데이터의 삽입, 삭제가 O(lg N)만에 가능합니다.</p>
+<p>그리고 중요한 특징은, 이진 탐색 트리의 최소값과 최대값 역시 O(lg N)에 구할 수 있다는 것입니다. 이 방법 역시 O(N lg N)에 해결이 가능합니다.</p>
+<pre><code class="cpp">#include&lt;set&gt;
+#include&lt;vector&gt;
+#include&lt;utility&gt;
+using namespace std;
+
+void slidingwindow_bst(vector&lt;int&gt; array, vector&lt;int&gt; &amp;minv, vector&lt;int&gt; &amp;maxv){
+    // (value, pos) ìì¼ë¡ ì ì¥
+    // C++ pairì ê¸°ë³¸ less ì°ì°ì ìì ì¤ë ììë¥¼ ë¨¼ì  ë¹êµí¨ :)
+    set&lt;pair&lt;int, int&gt; &gt; bst;
+    int i;
+    for(i = 0; i &lt; K; ++i)
+        bst.insert( make_pair(array[i], i) );
+
+    minv.push_back( bst.begin() -&gt; first );
+    maxv.push_back( bst.rbegin() -&gt; first );
+
+    for(i = K; i &lt; array.size(); ++i){
+        bst.erase( make_pair( arrray[i - K], i-K );
+        bst.insert(make_pair( array[i]     , i   );
+        minv.push_back( bst.begin() -&gt; first );
+        maxv.push_back( bst.rbegin() -&gt; first );
+    }
+}
+</code></pre>
+
+<p><strong>Indexed Tree</strong>
+인덱스 트리라는 자료구조는 완전 이진 트리의 일종인데, 알고리즘 경시에 참여하는 사람들 사이에서 통용되는 이름입니다. 구간 트리라고도 불리는데 일반적인 구간 트리와는 약간 다릅니다. 일단 이 트리는 완전 이진 트리이므로 N보다 크거나 같은 가장 작은 2의 지수를 M이라 할 때, 2*M개의 저장공간을 필요로 합니다.</p>
+<p>각 노드는 자신이 가리키는 구간을 ‘대표하는’ 값을 지니게 됩니다. 예를 들어 이 문제의 경우 트리의 루트 노드는 Min( Array[0..M-1] ) 또는 대응되는 Max의 값을 가지게 되겠죠. 루트의 왼쪽 노드는 0 ~ M/2-1까지의 구간을 대표하고, 루트의 오른쪽 노드는 M/2 ~ M-1까지를 대표하고.. 이런 식으로 깊이가 한단계 깊어질 때마다 노드가 대표하는 구간의 크기가 절반씩 줄어듭니다. 깊이가 log M이 되면 각각 길이 1의 구간을 대표하고 있게 되죠. (그 위치에 해당하는 Array의 값을 지닌다는 뜻)</p>
+<p>트리의 갱신은 일단 가장 끝부분의 값을 바꾸고, 부모 노드를 하나씩 타고 올라오면서 값을 갱신해 줍니다. 두 자식의 값을 보고 자기자신을 바꾸는 recursive 함수를 작성하면 되겠죠?</p>
+<p>이렇게 하면 임의의 구간에 대한 값을 구하는 건 lg M 개의 노드만 선택하면 어떤 구간이라도 커버가 가능하기 때문에… O(lg M) = O(lg N)입니다. M &lt; 2*N이니까요.</p>
+<pre><code class="cpp">#include&lt;vector&gt;
+#include&lt;algorithm&gt;
+#include&lt;functional&gt;
+#include&lt;iostream&gt;
+using namespace std;
+
+class IndexedTree{
+private:
+    vector&lt;int&gt; minTree;
+    vector&lt;int&gt; maxTree;
+
+    int treeBegin;  
+    void initTree(){
+        int here;
+        for(here = treeBegin - 1; here &gt;= 1; --here){
+            const int leftChild = here * 2;
+            const int rightChild = leftChild + 1;
+
+            minTree[here] = minTree[leftChild] &lt; minTree[rightChild]? minTree[leftChild] : minTree[rightChild];
+            maxTree[here] = maxTree[leftChild] &gt; maxTree[rightChild]? maxTree[leftChild] : maxTree[rightChild];
+        }       
+    }
+public:
+    IndexedTree(vector&lt;int&gt; data){
+        for(treeBegin = 1; treeBegin &lt; data.size(); treeBegin &lt;&lt;=1);
+
+        minTree.resize(treeBegin * 2);
+        maxTree.resize(treeBegin * 2);
+
+        copy(data.begin(), data.end(), minTree.begin() + treeBegin);
+        copy(data.begin(), data.end(), maxTree.begin() + treeBegin);
+
+        initTree();
+    }
+
+    int getMin(int firstIndex, int lastIndex){
+        firstIndex += treeBegin;
+        lastIndex += treeBegin;
+
+        int result = 0x7fffffff;
+        while(firstIndex &lt; lastIndex){
+            result = min(result, minTree[firstIndex]);
+            result = min(result, maxTree[lastIndex]);
+
+            firstIndex = (firstIndex + 1) &gt;&gt; 1;
+            lastIndex = (lastIndex - 1) &gt;&gt; 1;
+        }
+        if(firstIndex == lastIndex)
+            return min(result, minTree[firstIndex]);
+        return result;
+    }
+
+    int getMax(int firstIndex, int lastIndex){
+        firstIndex += treeBegin;
+        lastIndex += treeBegin;
+
+        int result = -2147483648;
+        while(firstIndex &lt; lastIndex){
+            result = max(result, maxTree[firstIndex]);
+            result = max(result, maxTree[lastIndex]);
+
+            firstIndex = (firstIndex + 1) &gt;&gt; 1;
+            lastIndex = (lastIndex - 1) &gt;&gt; 1;
+        }
+        if(firstIndex == lastIndex)
+            return max(result, maxTree[firstIndex]);
+        return result;
+    }
+};
+
+int main(){
+    int n, k, i;
+    cin &gt;&gt; n &gt;&gt; k;
+
+    vector&lt;int&gt; data(n);
+    for(i = 0; i &lt; n; ++i){
+        cin &gt;&gt; data[i];
+    }
+
+    vector&lt;int&gt; mins;
+    vector&lt;int&gt; maxs;
+    IndexedTree it(data);
+
+    mins.reserve(n-k+1);
+    mins.reserve(n-k+1);
+    for(i = k-1; i &lt; n; ++i){
+        mins.push_back( it.getMin(i-k+1, i) );
+        maxs.push_back( it.getMax(i-k+1, i) );
+    }
+
+    for(i = 0; i &lt; mins.size(); ++i){
+        cout &lt;&lt; mins[i] &lt;&lt; &quot; &quot;;
+    }
+    cout &lt;&lt; &quot;\n&quot;;
+    for(i = 0; i &lt; maxs.size(); ++i){
+        cout &lt;&lt; maxs[i] &lt;&lt; &quot; &quot;;
+    }
+    return 0;
+}
+</code></pre>
+
+<p><strong>Optimal Solution</strong></p>
+<p>일단 배열을 2*K-1개씩 쪼갭니다. K=4이라면 배열을 7개 단위로 자르게 되겠네요. 다음을 봅시다.</p>
+<p>A[0] A[1] A[2] A[3] A[4] A[5] A[6]</p>
+<p>이때 중앙에서부터 계산을 시작하면 다음과 같은 배열은 O(K)만에 계산이 가능하겠죠?</p>
+<p>Min[0..3] Min[1..3] Min[2..3] A[3] Min[3..4] Min[3..5] Min[3..6]</p>
+<p>그런데 이걸 잘 보시면요. 이 배열만으로 슬라이딩 윈도우 내에서 최소값이 무엇인지 다 알 수 있어요.</p>
+<p>Min[0..3]은 배열 안에 있고요. Min[1..4] = Min[1..3]과 Min[3..4] 중 작은 값이죠.
+Min[2..5]는 Min[2..3]과 Min[3..5]중에 작은 값이죠…</p>
+<p>어헣 간단하죠?
+2*K-1개씩 배열을 나누면 대충 O(N/K)개의 부분배열이 나오죠? 각각의 부분배열에서 최대값과 최소값을 구하는 것은 O(K)만에 되니까 O(N/K) * O(K) = O(N) 이 되는 것입니다.</p>
+<pre><code class="cpp">#include&lt;cstdio&gt;
+#include&lt;vector&gt;
+using namespace std;
+
+int N,K;
+inline int min(int a,int b){return a&gt;b?b:a;}
+inline int max(int a,int b){return a&gt;b?a:b;}
+
+const int maxn=1000000;
+int data[2*maxn],deque_min[2*maxn],deque_max[2*maxn],M[maxn];
+
+int main(){
+    //var;
+    int pivot,i,j,c;
+
+    //code
+    scanf(&quot;%d %d&quot;,&amp;N,&amp;K);   
+
+    for(i=0;i&lt;N;i++)
+        scanf(&quot;%d&quot;,&amp;data[i]);
+
+    for(c=0,pivot=K-1;pivot&lt;N;pivot+=K){
+        deque_max[K-1]=deque_min[K-1]=data[pivot];
+
+        for(i=1;i&lt;K;i++){
+            deque_min[K-i-1]=min(deque_min[K-i],data[pivot-i]);
+            deque_max[K-i-1]=max(deque_max[K-i],data[pivot-i]);
+
+            if(pivot+i-1 &gt;= N-1) {
+                deque_max[K+i-1]=deque_min[K+i-1]=0x7fffffff;
+            }
+            else {
+                deque_min[K+i-1]=min(deque_min[K+i-2],data[pivot+i]);
+                deque_max[K+i-1]=max(deque_max[K+i-2],data[pivot+i]);
+            }
+        }
+        for(i=0,j=K-1;i&lt;K;++i,++j){
+            if(++c &gt; N-K+1) break;  
+            M[c-1]=max(deque_max[i],deque_max[j]);
+            printf(&quot;%d &quot;,min(deque_min[i],deque_min[j]));
+        }
+    }
+    printf(&quot;\n&quot;);
+    for(i=0;i&lt;N-K+1;++i)
+        printf(&quot;%d &quot;,M[i]);
+
+    return 0;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/03/23 16:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Kim Jaeju</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1387"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">좋은 글 감사합니다. 많은 공부가 될 것 같습니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    pahkey,
+                                    2014/03/24 00:29
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1429"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">저도 많은 공부가 될 것 같습니다. 유익한 풀이십니다!</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Lee MooYeol,
+                                    2014/04/29 08:53
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1559"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">아 정말 감사합니다 ㅠ</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Straß Böhm Jäger,
+                                    2015/02/08 19:27
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2853"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">2</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>윈도우는 항상 정렬된 상태로 유지됩니다.
+윈도우가 한칸 움직이면, 윈도우에서 왼쪽으로 벗어난 값은 윈도에서 지워비립니다.
+오른쪽에 새로 추가된 값은 윈도우에 적절한 위치를 찾아서 삽입합니다.
+정렬되어 있으므로 항상 윈도우의 젤 좌측값이 최소값, 젤 우측값이 최대값입니다.
+bisect.insort()는 파이썬 기본라이브러리에 있구요,
+정렬된 리스트에 정렬 상태를 유지하면서 원하는 값을 삽입하는 매우 빠른 메소드입니다.</p>
+<pre><code class="python">import bisect
+a, w = map(int, raw_input().split())
+array = list(map(int, raw_input().split()))
+window = array[:w]
+window.sort()
+mins=[window[0]]
+maxs=[window[-1]]
+for i in range(1,a-w+1):
+    window.remove(array[i-1])
+    n = array[i+w-1]
+    bisect.insort(window,n)
+    mins.append(window[0])
+    maxs.append(window[-1])
+for i in mins:print i,
+print
+for i in maxs:print i,
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/01/21 20:36</p>
+                                <p class="static-profile" style="margin:0;padding:0;">상파</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2260"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">배워갑니다~</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Taesoo Kim,
+                                    2018/06/29 14:59
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_498"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <blockquote>
+<p>Euclid Problem에서 길가의풀님께서 사용하신것처럼 저도 재귀를 사용해봤습니다.
+먼저 파일을 읽어온 다음, 비교할 <strong>숫자들의 수(num_size)</strong>, <strong>윈도우 크기(win_size)</strong>, <strong>숫자들(numbers)</strong>를 읽어옵니다.
+그런다음 각 윈도우별로 비교하기위해 <strong>find_extrema</strong> 함수를 호출하는데 이때 윈도우를 옮기는 것보다 비교가 끝난 숫자들을 버리는게
+나을것같아서 <strong>number.pop(0)</strong>으로 숫자들을 버린뒤 다시 <strong>find_extrema</strong> 함수를 반복적으로 호출하는 방식입니다.
+이때 다른 loop를 넣지않기 위해서 버리면서 계속 비교해나가다가 <strong>numbers</strong>가 비어버리면 에러를 출력하면서 결과를 리턴하게 해봤습니다.
+그리고 최종적인 <strong>result</strong>는 크기가 8인 리스트를 2개 가지고있는데 맨 뒤의 2개는 <strong>numbers</strong>의 사이즈가 윈도우의 크기보다 작을때 비교한것이기 때문에
+버리고 값을 출력했습니다.</p>
+</blockquote>
+<pre><code class="python">
+import os
+import sys
+
+#
+# Find Maximum and Minimum in each window
+#
+def find_extrema(win_size, numbers, result=[ [], [] ]):
+
+    try :
+        result[0].append(str(min(numbers[:win_size])))
+        result[1].append(str(max(numbers[:win_size])))
+        numbers.pop(0)
+    except ValueError : return result
+
+    return find_extrema(win_size, numbers, result)
+
+#
+# Main Part
+#
+
+path = os.path.dirname(os.path.abspath(__file__))
+
+try : f = open(path + &quot;/input.txt&quot;, 'r')
+except IOError : print(&quot;There isn't the input file 'input.txt'&quot;); sys.exit()
+
+line_1 = f.readline()
+line_2 = f.readline()
+
+num_size, win_size = map(int, line_1.split())
+numbers = list(map(int, line_2.split()))
+
+if num_size &gt; 10E6 or len(numbers) != num_size:
+    print(&quot;Wrong Input! Check 'input.txt'.&quot;)
+    sys.exit()
+else :
+    result = find_extrema(win_size,numbers)
+
+print(&quot; &quot;.join(result[0][:-2]))
+print(&quot; &quot;.join(result[1][:-2]))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/03/23 04:09</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Onkel</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_512"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬입니다.</p>
+<p>1,000,000 개이고 k가 1,000 일 때 제 PC에서 20초 가량 걸립니다.<br />
+K가 10,000 이상 넘어가면 답이 안나오네요, 너무 느려서..  </p>
+<p>위에 Kim Jaeju 님이 알려주신 알고리즘을 사용해 봐야 할 것 같습니다.</p>
+<pre><code class="python">def slide(src, k):
+    window = map(int, src.split())
+    last_index = len(window)-k
+    r1, r2 = [], []
+    for i in range(last_index+1):
+        current_window = window[i:i+k]
+        current_window.sort()
+        r1.append(current_window[0])
+        r2.append(current_window[-1])
+    return r1, r2
+
+print slide(&quot;1 3 -1 -3 5 3 6 7&quot;, 3)
+</code></pre>
+
+<p><strong>개선 1</strong></p>
+<p>bisect 모듈을 이용하여 윈도우 이동 시 매번 소트를 하지 않고 최초 한번만 소트한 후 값을 배열에 입력할 때 자동으로 정렬되도록 수정 해 보았습니다. (Kim Jaeju 님의 Binary-search Tree 를 참조하였습니다.)</p>
+<pre><code class="python">import bisect
+
+def slide(src, k):
+    window = map(int, src.split())
+    last_index = len(window)-k
+    r1, r2 = [], []
+
+    current_window = window[0:k]
+    current_window.sort()
+    r1.append(current_window[0])
+    r2.append(current_window[-1])
+
+    for i in range(last_index):
+        current_window.remove(window[i])
+        bisect.insort(current_window, window[k+i])
+        r1.append(current_window[0])
+        r2.append(current_window[-1])
+
+    return r1,r2
+</code></pre>
+
+<p>수행 결과:</p>
+<pre><code class="no-highlight">n:1,000,000, k:1,000 --&gt; 2초
+n:1,000,000, k:10,000 --&gt; 7초
+n:1,000,000, k:100,000 --&gt; 50초
+</code></pre>
+
+<p>개선은 되었지만 만족스럽진 않네요.. (이 알고리즘은 k가 커질수록 불리해 보이네요.)</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/03/24 00:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">pahkey</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1388"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">bisect는 그냥 Array insertion하는 모듈 아닌가요? 애초에 current_window에서 최대값과 최소값을 찾기만 하면 되는데 소팅을 한다는 것 자체가 낭비 같습니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Kim Jaeju,
+                                    2014/03/24 13:43
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1389"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">같은 로직을 Python에서 구현해야 한다면 OrderedDict를 쓰면 되겠네요.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Kim Jaeju,
+                                    2014/03/24 13:55
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1390"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">@Kim Jaeju 님, bisect.insort(L, k) 와 같이 사용하면 L이라는 array에 k가 정렬되어 insertion 됩니다. max, min 값을 구하는 것보다 sort 후 앞에값과 맨 뒤에 값을 취하는 방식이 좀 더 유리해 보여서 사용해 보았습니다. OrderedDict 도 한번 사용해 봐야 겠네요 ^^</span>
+                                -
+                                <span style="font-size:11px;">
+                                    pahkey,
+                                    2014/03/24 14:16
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1391"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">결국 Array내에서는 끼워넣을 자리를 찾고 나서 원소들을 순회하면서 뒤로 밀고 삽입해야 하기 때문에 시간복잡도 상으로도, 메모리 접근 횟수 상으로도 유리하지 않습니다. 대부분의 경우에서 그냥 루프 순회하면서 min, max값을 찾는 것보다 빠를 수 없다고 생각됩니다. 특히 데이터가 처음부터 마지막까지 쭈욱 내림차순으로 존재하는 경우 훨씬 시간이 오래 걸릴 것으로 예상할 수 있습니다.
+
+데이터 비교를 통해 수행하는 정렬은 O(n lg n)보다 빨라질 수 없음이 증명되어 있으며, 루프를 순회하면서 min, max값을 찾는 것은 O(n)입니다. 그래서 정렬보다 루프 한 번이 유리합니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Kim Jaeju,
+                                    2014/03/24 15:07
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1392"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">네, 알려주신 알고리즘으로 다른 방식으로 구현해 보려고 공부중입니다. ^^</span>
+                                -
+                                <span style="font-size:11px;">
+                                    pahkey,
+                                    2014/03/24 17:48
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12710"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.ArrayList;
+import java.util.Scanner;
+
+public class SlidingWindow {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String temp = sc.nextLine();
+        String[] Winpos = temp.split(&quot; &quot;);
+        int size = Integer.valueOf(Winpos[1]);
+        temp = sc.nextLine();
+        Winpos = temp.split(&quot; &quot;);
+        ArrayList&lt;Integer&gt; minA = new ArrayList&lt;&gt;();
+        ArrayList&lt;Integer&gt; maxA = new ArrayList&lt;&gt;();
+        for (int k = 0; k &lt; Winpos.length - size + 1; k++) {
+            int min = Integer.valueOf(Winpos[k]);
+            int max = Integer.valueOf(Winpos[k]);
+            for (int i = k + 1; i &lt; size + k; i++) {
+                min = min &gt; Integer.valueOf(Winpos[i]) ? Integer.valueOf(Winpos[i]) : min;
+                max = max &lt; Integer.valueOf(Winpos[i]) ? Integer.valueOf(Winpos[i]) : max;
+            }
+            minA.add(min);
+            maxA.add(max);
+        }
+        System.out.println(minA.toString());
+        System.out.println(maxA.toString());
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/31 18:26</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김지훈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_633"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>node.js (Javascript)로 짰습니다.
+K가 증가할수록 속도가 영 안나오는군요.
+배열을 다루는 방법에 따라, 기본 제공되는 수학함수를 쓰느냐 안쓰느냐에 따라서 퍼포먼스 편차가 엄청 심하네요.
+Kim Jaeju님 솔루션 보고 공부좀 해야 할 것 같습니다.</p>
+<pre><code class="javascript">var fs = require('fs');
+var util = require('util');
+
+console.log(&quot;[memory] after node.js module load: &quot;);
+console.log(util.inspect(process.memoryUsage()));
+var timer = process.hrtime();
+
+var data = fs.readFileSync('data.txt', {encoding: 'utf8'}).split(&quot;\n&quot;);
+var dataHeader = data[0].split(&quot; &quot;);
+var WINDOW_SCOPE_LENGTH = dataHeader[1];
+var WINDOW_ITEMS = data[1].split(&quot; &quot;).map(function (x) { return +x ; });
+data = null;
+dataHeader = null;
+
+console.log(&quot;[memory] after data load: &quot;);
+console.log(util.inspect(process.memoryUsage()));
+console.log(process.hrtime(timer));
+
+
+Array.prototype.min = function () {
+    return this.reduce(function (p, v) {
+        return ( p &lt; v ? p : v );
+    });
+};
+Array.prototype.max = function () {
+    return this.reduce(function (p, v) {
+        return ( p &gt; v ? p : v );
+    });
+};
+
+var minValueItems = [];
+var maxValueItems = [];
+for(var i = 0 ; i &lt; WINDOW_ITEMS.length - WINDOW_SCOPE_LENGTH + 1 ; i++) {
+    var scope = [];
+    for(var j = 0 ; j &lt; WINDOW_SCOPE_LENGTH; j++) {
+        scope.push(WINDOW_ITEMS[i+j]);
+    }
+
+    minValueItems[i] = scope.min();
+    maxValueItems[i] = scope.max();
+}
+
+fs.writeFileSync('result.txt', minValueItems.join(&quot; &quot;) + &quot;\n&quot; + maxValueItems.join(&quot; &quot;));
+
+
+console.log(&quot;[memory] after program execution: &quot;);
+console.log(util.inspect(process.memoryUsage()));
+console.log(process.hrtime(timer));
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/04/30 02:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Lee MooYeol</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_938"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>n=1,000,000 ,k=1,000만 되도 답이 안나오네요...</p>
+<pre><code class="python">#sliding_window.py
+import random
+import time
+
+start_time=0
+end_time=0
+def sliding_window():
+    column_length = int(raw_input(&quot;column's length: &quot;))
+    window_length = int(raw_input(&quot;sliding window's length: &quot;))
+    start_time=time.time()
+    row=[]
+    for num in range(column_length):
+        row.append(random.randint(-9, 9))
+    window=[]
+    max_number=[]
+    min_number=[]
+    for num in range(len(row)):
+        for leng in range(window_length):
+            if num+window_length-1 == len(row):
+                end_time=time.time()
+                print 'time limit: ',end_time-start_time
+                return column_length, window_length, row, max_number, min_number
+            window.append(row[num+leng])
+        max_number.append(max(window))
+        min_number.append(min(window))
+        window=[]
+
+column_length, window_length, row, max_number, min_number = sliding_window()
+
+print &quot;&quot;&quot;
+sample input:
+%s %s
+%s&quot;&quot;&quot;%(column_length, window_length, str(row)[1:-1])
+
+print &quot;&quot;&quot;
+sample output:
+%s
+%s&quot;&quot;&quot;%(str(min_number)[1:-1], str(max_number)[1:-1])
+
+</code></pre>
+
+<pre><code class="python">column's length: 8
+sliding window's length: 3
+time limit:  0.0
+
+sample input:
+8 3
+1, 6, 4, 0, 5, -9, 1, 0
+
+sample output:
+1, 0, 0, -9, -9, -9
+6, 6, 5, 5, 5, 1
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/08/21 23:29</p>
+                                <p class="static-profile" style="margin:0;padding:0;">안 태경</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_1100"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>JAVA</strong></p>
+<pre><code class="java">package Ex03;
+
+import java.util.Scanner;
+
+public class go2 {
+
+    public static void main(String args[]) {
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println(&quot;배열의 크기와 슬라이딩윈도우의 크기 입력&quot;);
+        int[] array = new int[sc.nextInt()];
+        int[] slidingWindow = new int[sc.nextInt()];
+        System.out.println(&quot;배열의 값 입력 (&quot; + array.length + &quot;개)&quot;);
+        for (int i = 0; i &lt; array.length; i++)
+            array[i] = sc.nextInt();
+        startSliding(array, slidingWindow);
+
+    }
+
+    public static void startSliding(int[] array, int[] slidingWindow) {
+
+        int[] max = new int[array.length - slidingWindow.length + 1];
+        int[] min = new int[array.length - slidingWindow.length + 1];
+        int maxValue = 0, minValue = 0;
+
+        for (int i = 0; i &lt; array.length - slidingWindow.length + 1; i++) {
+            for (int j = 0; j &lt; slidingWindow.length; j++)
+                slidingWindow[j] = array[j + i * 1];
+            maxValue = slidingWindow[0];
+            minValue = slidingWindow[0];
+            for (int k = 0; k &lt; slidingWindow.length - 1; k++) {
+                if (slidingWindow[k + 1] &gt; maxValue)
+                    maxValue = slidingWindow[k + 1];
+                if (slidingWindow[k + 1] &lt; minValue)
+                    minValue = slidingWindow[k + 1];
+            }
+            max[i] = maxValue;
+            min[i] = minValue;
+        }
+
+        System.out.println(&quot; array.length : &quot; + array.length +
+                  &quot;    slingWindow.length : &quot; + slidingWindow.length);
+        System.out.print(&quot; value : &quot;);
+        for (int i = 0; i &lt; array.length; i++)
+            System.out.print(array[i] + &quot; &quot;);
+        System.out.print(&quot;\n MAX : &quot;);
+        for (int i = 0; i &lt; max.length; i++)
+            System.out.print(max[i] + &quot; &quot;);
+        System.out.print(&quot;\n MIN : &quot;);
+        for (int i = 0; i &lt; min.length; i++)
+            System.out.print(min[i] + &quot; &quot;);
+        System.out.println();
+
+    }
+
+}
+
+</code></pre>
+
+<blockquote>
+<p>배열의 크기와 슬라이딩윈도우의 크기 입력</p>
+<p>10 3</p>
+<p>배열의 값 입력 (10개)</p>
+<p>6 5 2 3 1 82 5 7 3 91</p>
+<p>array.length : 10    slingWindow.length : 3</p>
+<p>value : 6 5 2 3 1 82 5 7 3 91 </p>
+<p>MAX : 6 5 3 82 82 82 7 91 </p>
+<p>MIN : 2 2 1 1 1 5 3 3</p>
+</blockquote>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/10/06 14:38</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이 동훈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_1146"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def core03(k):
+    result=[]
+    temp=a[:k]
+    NumMax=0
+    NumMin=0
+    for i in range(len(a)-k+1):
+
+        if i==0:
+            result.append([min(temp),max(temp)])
+        else:
+            PrevMin , PrevMax = result[-1][0] , result[-1][1]
+            OutNumber=temp.pop(0)
+            InNumber=a[k+i-1]
+            temp.append(InNumber)
+            if OutNumber==PrevMin:
+                CurMin=min(temp)
+                NumMin+=1
+            elif InNumber&lt;PrevMin:
+                CurMin=InNumber
+            else:
+                CurMin=PrevMin
+
+            if OutNumber==PrevMax:
+                CurMax=max(temp)
+                NumMax+=1
+            elif InNumber&gt;PrevMax:
+                CurMax=InNumber
+            else:
+                CurMax=PrevMax
+            result.append([CurMin,CurMax])
+    print(NumMax,NumMin)
+    return result
+
+import cProfile
+
+
+
+n=10**6
+
+k=10**5
+
+a= [1, 3, -1, -3, 5, 3, 6, 7]
+cProfile.run('print(core03(3))')
+#1 1
+#[[-1, 3], [-3, 3], [-3, 5], [-3, 5], [3, 6], [3, 7]]
+         #27 function calls in 0.000 seconds
+
+a=[int(random.randint(0,10))//1 for i in range(n)]
+#81864 81691
+#[[0, 10], [0, 10], [0, 10], [0, 10], [0, 10], [0, 10], [0, 10], [0, 10], [0, 10], [0, 10]]
+         #2863565 function calls in 477.668 seconds
+#10개 정도의 숫자가 반복하는 경우에는 취약한 모습입니다. 뭐 그럴수 밖에 없지만.. 
+
+a=[int(random.gauss(0,10))//1 for i in range(n)]
+#13 12
+#[[-46, 48], [-46, 48], [-46, 48], [-46, 48], [-46, 48], [-46, 48], [-46, 48], [-46, 48], [-46, 48], [-46, 48]]
+         #2700035 function calls in 21.682 seconds
+cProfile.run('print(core03(k)[:10])')
+</code></pre>
+
+<p>python3.4 로 작성.</p>
+<p>들어오는 수와 나가는 수를 이전 최대값 최소값과의 비교후 나가는 수가 최대값 또는 최소값과 같다면 최대치 최소치 찾는 함수를 돌리고 </p>
+<p>들어오는 수가 이전 최대값 보다 크거나 최소값보다 작으면 이번 최대값 또는 최소값을 변환. </p>
+<p>그렇지 않으면 유지하는 방식으로 작성하였습니다.</p>
+<p>따라서 수열의 성향을 좀 타는 방식이 되어버렸네요. 같은 값 randint 와 같은 랜덤 함수로 돌리면 최대치 최소치 함수를 무작정 쓰게 되버리는 단점이 있습니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/10/26 23:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Lee SeungChan</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_1656"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C#으로 작성했습니다. time complexity: O(n), space complexity: O(n) 입니다.</p>
+<pre><code class="cs">using System.Collections.Generic;
+
+        public int[] GetMaxSlidingWindow(List&lt;int&gt; inputs, int w)
+        {
+            var max_left = new int[inputs.Count];
+            var max_right = new int[inputs.Count];
+            max_left[0] = inputs[0];
+            max_right[inputs.Count - 1] = inputs[inputs.Count - 1];
+            for (int i = 1; i &lt; inputs.Count(); i++)
+            {
+                max_left[i] = (i%w == 0) ? inputs[i] : Math.Max(max_left[i - 1], inputs[i]);
+                var j = inputs.Count - i - 1;
+                max_right[j] = (j%w == 0) ? inputs[j] : Math.Max(max_right[j + 1], inputs[j]);
+            }
+            var outputs = new int[inputs.Count - w + 1];
+            for (int i = 0, j = 0; i + w &lt;= inputs.Count; i++)
+                outputs[j++] = Math.Max(max_right[i], max_left[i + w - 1]);
+            return outputs;
+        }
+
+        public int[] GetMinSlidingWindow(List&lt;int&gt; inputs, int w)
+        {
+            var min_left = new int[inputs.Count];
+            var min_right = new int[inputs.Count];
+            min_left[0] = inputs[0];
+            min_right[inputs.Count - 1] = inputs[inputs.Count - 1];
+            for (int i = 1; i &lt; inputs.Count(); i++)
+            {
+                min_left[i] = (i % w == 0) ? inputs[i] : Math.Min(min_left[i - 1], inputs[i]);
+                var j = inputs.Count - i - 1;
+                min_right[j] = (j % w == 0) ? inputs[j] : Math.Min(min_right[j + 1], inputs[j]);
+            }
+            var outputs = new int[inputs.Count - w + 1];
+            for (int i = 0, j = 0; i + w &lt;= inputs.Count; i++)
+                outputs[j++] = Math.Min(min_right[i], min_left[i + w - 1]);
+            return outputs;
+        }
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/02/08 20:17</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Straß Böhm Jäger</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2979"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<p>DP로 다시 구현했습니다. bsearch를 이용한 방법은 k값에 처리시간이 비례해서 k가 10만정도만 되어도 굉장히 느려지더군요. DP로 구현한 결과 k가 10만을 넘어가도 2.8 ~ 3.4초 사이에서 처리됩니다(화면 입출력 시간 제외). 알고리즘은 앞뒤로 순회하면서 min/max를 구한 뒤, 이를 이용해서 윈도우의 최소, 최대값을 구하는 방법입니다. 다음에 lazy, 비동기, 컴파일러 언어를 사용해서 다시 풀어보고 싶네요..</p>
+<pre><code class="ruby">l_min = -&gt;s { s.reduce([]) {|a,e| a &lt;&lt; [a[-1]||e, e].min } }
+r_min = -&gt;s { s.reverse_each.reduce([]) {|a,e| a.unshift([a[0]||e, e].min) } }
+l_max = -&gt;s { s.reduce([]) {|a,e| a &lt;&lt; [a[-1]||e, e].max } }
+r_max = -&gt;s { s.reverse_each.reduce([]) {|a,e| a.unshift([a[0]||e, e].max) } }
+
+s_window = lambda do
+  n, k, *arr = 2.times.flat_map { gets.split.map(&amp;:to_i) } # for stdin case
+  sl, sr, bl, br, mins, maxs = [[],[],[],[],[],[]]
+  arr.each_slice(k) {|s| sl+=l_min[s]; sr+=r_min[s]; bl+=l_max[s]; br+=r_max[s] }
+  (0..n-k).each {|i| mins &lt;&lt; [sr[i],sl[i+k-1]].min; maxs &lt;&lt; [br[i],bl[i+k-1]].max }
+  puts mins*' ', maxs*' '
+end
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby">$stdin = StringIO.new(&quot;8 3\n1 3 -1 -3 5 3 6 7\n&quot;)
+expect{ s_window[] }.to output(&quot;-1 -3 -3 -3 3 3\n&quot; + &quot;3 3 5 5 6 7\n&quot;).to_stdout
+
+# performance
+arr = (0...1_000_000).map {|i| rand(1_000_000) }
+Benchmark.bm(25) do |x|
+  x.report(&quot;case 1. n=10**6, k=10**4&quot;) { s_window[10*6, 10*4, arr] }
+  x.report(&quot;case 2. n=10**6, k=10**5&quot;) { s_window[10*6, 10*5, arr] }
+  x.report(&quot;case 3. n=10**6, k=5*10**5&quot;) { s_window[10*6, 5*10*5, arr] }
+end
+                                user     system      total        real
+case 1. n=10**6, k=10**4    3.240000   0.040000   3.280000 (  3.280056)
+case 2. n=10**6, k=10**5    3.220000   0.040000   3.260000 (  3.265054)
+case 3. n=10**6, k=5*10**5  2.990000   0.040000   3.030000 (  3.040523)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/02/09 18:39</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3049"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>python 3입니다.</p>
+<pre><code class="python">lis = [1,3,-1,-3,5,3,6,7]
+ln=len(lis)
+wn = 3
+
+for idx in range(0,ln-wn):
+    sub_lis = lis[idx:idx+wn+1]
+    print(max(sub_lis),end=' ')
+    print(min(sub_lis))
+</code></pre>
+
+<p>완전탐색. O(NK)
+문제를 그대로 코드로 옮겼네유</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/02/26 17:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김 매미</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3285"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬3.4입니다.</p>
+<pre><code class="python">def f(li, k, rt = []):
+    mn = min(li[:3])
+    mx = max(li[:3])
+    if len(li) &gt;= k:
+        rt.extend([mn, mx])
+        f(li[1:], k, rt)
+        retrun rt
+
+li = [1, 3, -1, -3, 5, 3, 6, 7]
+k = 3
+rt = f(li, k)
+print(rt[::2])
+print(rt[1::2])
+</code></pre>
+
+<p>아... 영혼도 알고리즘도 없는 결과물이네요. 윗분들이 말씀하시는것들을 생각하기에는, 제가 부족하고... 일단 결과물이라도 나와야겠다는 생각에 만들었습니다.<br>
+일단 n이 10^4만 되도 런타임에러가 나옵니다. maximum recursion depth exceeded in comparison<br>
+ㅜㅜ</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/03/25 16:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">디디</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3559"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#파이썬 3.4.2
+#n,w가 너무 크면 느려질 수 있습니다
+n,w = map(int,input().split())
+nums = list(map(int,input().split()))
+sM = [str(max(nums[x:x+w])) for x in range(n-w+1)]
+sm = [str(min(nums[x:x+w])) for x in range(n-w+1)]
+print('%s\n%s' % (' '.join(sm),' '.join(sM)))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/04/30 21:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">차우정</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3576"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>그냥 무식하게 풀었습니다. 10만개 짜리 랜덤 배열을 이용했을 때에도 대략 200~300ms 내에서 처리되네요.</p>
+<pre><code class="python">from random import randrange
+
+l, k = [int(x) for x in input().split()[:2]]
+# xs = [int(x) for x in input().split()[:l]]
+xs = [randrange(-100, 100) for _ in range(l)]
+
+def minmax(xs):
+    return min(xs), max(xs)
+
+def do(xs):
+    mins, maxs = [], []
+    for i in range(l-k+1):
+        x, y = minmax(xs[i:i+k])
+        mins.append(x)
+        maxs.append(y)
+    print(&quot; &quot;.join(str(x) for x in mins))
+    print(&quot; &quot;.join(str(x) for x in maxs))
+
+%time do(xs)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/05/03 17:53</p>
+                                <p class="static-profile" style="margin:0;padding:0;">룰루랄라</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3664"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3.4.4</p>
+<pre><code class="python">data_len, window = map(int, input().split())
+data = input().split()
+
+output = [[],[]]
+
+for i in range(-1, data_len - window):
+    output[0].append(min(data[:window]))
+    output[1].append(max(data[:window]))
+    data.append(data.pop(0))
+
+[print(&quot; &quot;.join(x)) for x in output]
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/05/12 19:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">SanghoSeo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3974"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from multiprocessing import Pool
+from random import randint
+from time import time
+from bisect import insort
+from os import cpu_count
+CORES = cpu_count()
+
+def gensrc(i):
+    with Pool() as p:
+        result = p.starmap(randint, ((-10, 10) for x in range(i)))
+    return result
+def f(x, y, startpoint, endpoint):
+    result = [];temp = sorted(x[startpoint:startpoint+y])
+    result.append((temp[0], temp[-1]))
+    for i in range(startpoint + 1, endpoint - y):
+        temp.remove(x[i-1])
+        insort(temp, x[i+y-1])
+        result.append((temp[0], temp[-1]))
+    return result
+
+while __name__ == '__main__':
+    temp = list(map(int, input().split()))
+#    target = list(map(int, input().split()))
+    target = gensrc(temp[0])
+    k = time()
+    with Pool() as p:
+        res = p.starmap(f, ((target, temp[1], int(x*temp[0]/CORES), int((x+1)*temp[0]/CORES)) for x in range(CORES)))
+    print(time()-k)
+</code></pre>
+
+<p>1000000 100000
+48.06775736808777초 나오네요. i7 6700hq 95퍼센트 로드. 2.5기가헤르츠 기준입니다. 샘플 생성시간은 제외하였습니다.</p>
+<p>파이썬 3.5.1 64</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/06/21 17:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Flair Sizz</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4801"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>c++로 풀어봤는데 어렵네요....일단 결과물은 나오는데 시간은 어떨지 모르겠네요
+10^5 까지는 잘 되는거 같습니다...?</p>
+<pre><code class="cpp">#include &lt;iostream&gt;
+#include &lt;time.h&gt;
+#include &lt;stdlib.h&gt;
+#define Maxsize 1000000
+using namespace std;
+
+void Sliding_window(int n,int k);
+void Move_window(int*w_arr,int *arr,int k,int n);
+void Binary_Search_Tree(int*w_arr,int k,int L);
+void Get_Max_Min(int*M,int*Max_arr,int*Min_arr,int L,int k);
+void Print_array(int*arr,int k);
+int ARR_LENGTH=0;
+int Max_arr[Maxsize];
+int Min_arr[Maxsize];
+int main()
+{
+    int n,k;
+    cin&gt;&gt;n&gt;&gt;k;
+    Sliding_window(n,k);
+    Print_array(Min_arr,n-k+1);
+    Print_array(Max_arr,n-k+1);
+    return 0;
+}
+void Sliding_window(int n,int k)
+{
+    int*arr=new int[n];
+    int*w_arr=new int[k];
+    srand((unsigned int)time(0));
+    for(int i=0;i&lt;n;i++)
+    {
+
+        arr[i]=rand()%9+1;
+    }
+    Move_window(w_arr,arr,k,n);
+}
+void Move_window(int*w_arr,int*arr,int k,int n)
+{
+    int c=0,L=0;
+    for(int i=k-1;i&lt;n;i++)
+    {
+        c=0;
+        for(int j=i-k+1;j&lt;=i;j++)
+        {
+            w_arr[c]=arr[j];
+            c++;
+        }
+
+        Binary_Search_Tree(w_arr,k,L);
+        L++;
+    }
+
+
+}
+void Binary_Search_Tree(int*w_arr,int k,int L)
+{
+    int root[1000]={0,};
+    int now=0,c=1;
+    root[0]=w_arr[now];
+    while(c&lt;k){
+        now=0;
+        while(1){
+
+            if(w_arr[c]&lt;root[now]){
+                now=(now*2)+1;
+            }
+            else if(w_arr[c]&gt;root[now]){
+                now=(now*2)+2;
+            }
+            else if(w_arr[c]==root[now])
+                break;
+            if(root[now]==0)
+                break;
+
+
+        }
+        root[now]=w_arr[c];
+        c++;
+    }
+    //Print_array(root,50);
+    Get_Max_Min(root,Max_arr,Min_arr,L,k);
+
+}
+void Get_Max_Min(int*M,int *Max_arr,int *Min_arr,int L,int k)
+{
+    int ma=M[0],mi=M[0],c=0;
+    for(int i=0;i&lt;100;i++){
+        if(M[i]!=0){
+            mi=min(mi,M[i]);
+            ma=max(ma,M[i]);
+            c++;
+        }
+        if(c==k)
+            break;
+    }
+    Max_arr[L]=ma;
+    Min_arr[L]=mi;
+}
+void Print_array(int*arr,int k)
+{
+    for(int i=0;i&lt;k;i++){
+        cout&lt;&lt;arr[i]&lt;&lt;&quot; &quot;;
+    }
+    cout&lt;&lt;endl;
+
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/09/16 10:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">leye195</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5591"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">#define _CRT_SECURE_NO_WARNINGS
+#include &lt;iostream&gt;
+#include &lt;windows.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+void Sliding();
+void Printarr(int*, int);
+void main() {
+    Sliding();
+    system(&quot;pause&quot;);
+}
+
+void Sliding() {
+    int n, k;
+    int min = 9999, max = 0;
+    cout &lt;&lt; &quot;input (배열크기 n, 윈도우크기 k): &quot;;
+    cin &gt;&gt; n &gt;&gt; k;
+    int* arr = new int[n];
+    int* minarr = new int[n - k + 1];   //최소값 저장할 배열
+    int* maxarr = new int[n - k + 1];   //최대값 저장할 배열
+    //배열의 요소개수 - 윈도우크기 + 1 은 최소값 혹은 최대값 배열의 크기이다
+    cout &lt;&lt; &quot;input (배열의 요소): &quot;;
+    for (int i = 0; i &lt; n; i++) {
+        cin &gt;&gt; arr[i];
+    }
+    for (int i = 0; i &lt; n; i++)
+    {
+        min = 9999;
+        max = 0;
+        if (k + i &lt; n + 1) {
+            for (int j = i; j &lt; k + i; j++) {
+                if (min &gt; arr[j]) {
+                    min = arr[j];
+                }
+                if (max &lt; arr[j]) {
+                    max = arr[j];
+                }
+            }
+            minarr[i] = min;
+            maxarr[i] = max;
+        }
+        else {
+            break;
+        }
+    }
+    Printarr(minarr, n-k+1);
+    Printarr(maxarr, n-k+1);
+    delete arr;
+    delete minarr;
+    delete maxarr;
+}
+void Printarr(int* arr, int n) {
+    for (int i = 0; i &lt; n; i++) {
+        cout &lt;&lt; arr[i] &lt;&lt; &quot; &quot;;
+    }
+    cout &lt;&lt; endl;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/12/15 09:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">개허접</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6003"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+void main() {
+    int arr_size;
+    int win_size;
+    scanf(&quot;%d %d&quot;, &amp;arr_size, &amp;win_size);
+    int* arr = (int*) malloc (sizeof(int) * arr_size);
+    for(int i=0;i&lt;arr_size;i++)
+        scanf(&quot;%d&quot;, &amp;arr[i]);
+    int* min = (int*) malloc (sizeof(int) * arr_size-2);
+    int* max = (int*) malloc (sizeof(int) * arr_size-2);
+    for(int i=0;i&lt;arr_size;i++) {
+        min[i] = 100;
+        max[i] = 0;
+    }
+
+    for(int i=0;i&lt;arr_size-2;i++) {
+        int* window = (int*) malloc (sizeof(int) * win_size);
+        memmove(window, arr+i, sizeof(int) * win_size);
+        for(int j=0;j&lt;win_size;j++) {
+            if(window[j] &lt; min[i])
+                min[i] = window[j];
+            if(window[j] &gt; max[i])
+                max[i] = window[j];
+        }
+    }
+
+    for(int i=0;i&lt;arr_size-2;i++) 
+        printf(&quot;%d &quot;, min[i]);
+    printf(&quot;\n&quot;);
+    for(int i=0;i&lt;arr_size-2;i++)
+        printf(&quot;%d &quot;, max[i]);
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/01/23 14:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">코딩초보</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6081"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import time
+start = time.time()
+#size, s_size = list(map(int,input(),split(' ')))
+size, s_size = 1000000, 1000
+max_list,min_list = list(),list()
+#_list = list(map(int,input().split(' ')))
+_list = [1 for x in range(size)]
+for x in range(size-s_size+1):
+    max_list.append(max(_list[x:x+s_size]))
+    min_list.append(min(_list[x:x+s_size]))
+#print(min_list,max_list,sep='\n')
+print(time.time()-start)
+
+#### 2017.02.01 D-386 ####
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/02/01 22:41</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GunBang</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7151"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.Arrays;
+import java.util.Scanner;
+
+public class SlidingWindow {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int e = n - k + 1;
+        int nn[] = new int[n];
+        int max[] = new int[e];
+        int min[] = new int[e];
+        for (int i = 0; i &lt; n; i++) {
+            nn[i] = sc.nextInt();
+        }
+
+        for (int i = 0; i &lt; e; i++) {
+            int temp[] = Arrays.copyOfRange(nn, i, i + k);
+            max[i] = Arrays.stream(temp).max().getAsInt();
+            min[i] = Arrays.stream(temp).min().getAsInt();
+        }
+
+        System.out.println(Arrays.toString(min));
+        System.out.println(Arrays.toString(max));
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/05/12 10:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">genius.choi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7548"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">// 미닫이 창문 - C#
+using System;
+namespace Window
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine(&quot;1. 배열의 크기 2. 창문의 크기&quot;);
+            string select = Console.ReadLine();
+            int size = int.Parse(select.Split(' ')[0]);
+            int window = int.Parse(select.Split(' ')[1]);
+            int[] home = new int[size];
+            Console.WriteLine(&quot;순서대로 배열의 내용...&quot;);
+            select = Console.ReadLine();
+            for (int i = 0; i &lt; size; i++)
+                home[i] = int.Parse(select.Split(' ')[i]);
+            int[] maxes = new int[size - window];
+            int[] mins = new int[size - window];
+            for (int i = 0; i &lt; size - window; i++) 
+            {
+                int[] part = new int[window];
+                Array.Copy(home, i, part, 0, window);
+                int max = int.MinValue, min = int.MaxValue;
+                foreach (int n in part)
+                {
+                    if (n &lt; min)
+                        min = n;
+                    if (n &gt; max)
+                        max = n;
+                }
+                maxes[i] = max; mins[i] = min;
+            }
+            foreach (int n in maxes)
+                Console.Write(&quot;{0} &quot;, n);
+            Console.WriteLine();
+            foreach (int n in mins)
+                Console.Write(&quot;{0} &quot;, n);
+            Console.WriteLine();
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/18 01:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jeong Hoon Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7673"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>python 3.6 using zip, 입력은 범위내 random</p>
+<p>구현</p>
+<pre><code class="python">def sliding_window(lst, n):
+    return (min(x) for x in zip(*(lst[i:] for i in range(n)))), (max(x) for x in zip(*(lst[i:] for i in range(n))))
+</code></pre>
+
+<p>입출력문</p>
+<pre><code class="python"># Input  
+from random import sample
+
+
+arr_len, win_size = map(int, input().split())
+arr = sample(range(-arr_len, arr_len), arr_len)
+print(*arr, sep = ' ')
+
+# Output
+mn, mx = sliding_window(arr, win_size)
+
+print(*mn, sep = ' ')
+print(*mx, sep = ' ')
+</code></pre>
+
+<p>결과</p>
+<pre><code class="python">&gt;&gt;&gt;  
+ 8 3
+-7 -1 7 -5 3 2 6 0
+
+-7 -5 -5 -5 2 0
+7 7 7 3 6 6
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/29 04:36</p>
+                                <p class="static-profile" style="margin:0;padding:0;">예강효빠</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7895"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python: BST 사용</p>
+<pre><code class="python">from BST import BST
+
+def sliding_window(arr, n, k):
+    bst = BST()
+    bst.addall(arr[:k])
+    min = [bst.min()]
+    max = [bst.max()]
+
+    for i in range(1, n - k + 1):
+        bst.add(arr[i+k-1])
+        bst.remove(arr[i-1])
+        min.append(bst.min())
+        max.append(bst.max())
+
+    return (min, max)
+
+</code></pre>
+
+<p>해놓고 보니 BST에서 중복 허용되게 바꿔야 정확하곘네요. 근데 기운이 없음T.T</p>
+<p>BST 직접 만들어 봤는데 쉽게 봤다가 학을 뗐네요. 너저분합니다.</p>
+<p><strong>추가</strong></p>
+<p>bisect 모듈을 써서 고쳐볼까 찾아봤는데, 검색만 O(logN)입니다.</p>
+<p>콤팩트하긴 하지만 리스트로 구현되어서 삽입이든 삭제(는 없지만)든 O(N)입니다.</p>
+<pre><code class="python">class BSTNode:
+    item = None
+    left = None
+    right = None
+
+    def __init__(self, item):
+        self.item = item
+        self.left = None
+        self.right = None
+
+
+# 중복 허용 안 됨
+class BST:
+    root = None
+
+    def __init__(self):
+        root = None
+
+    # __func/var: private, _func/var: protected
+    # private 을 이렇게 쓰는 게 맞나..?
+    # 찾고 있는 노드와 부모 노드를 같이 리턴하는 함수들. 있으면 편할까 싶었는데 어째 더 복잡해진 느낌
+
+    def __find(self, p, t, x):   
+        if not t:           return (p, None)
+        elif x == t.item:   return (p, t)
+        elif x &lt; t.item:    return self.__find(t, t.left, x)
+        else:               return self.__find(t, t.right, x)
+
+    def __leftmost(self, p, t):
+        if t.left:  return self.__leftmost(t, t.left)
+        else:       return (p, t)
+
+    def __rightmost(self, p, t):
+        if t.right: return self.__rightmost(t, t.right)
+        else:       return (p, t)
+
+
+    #public functions
+    def isempty(self):
+        return self.root == None
+
+    def max(self):
+        if self.isempty(): return None
+        (p, c) = self.__rightmost(None, self.root)
+        return c.item if c else None
+
+    def min(self):
+        if self.isempty(): return None
+        (p, c) = self.__leftmost(None, self.root)
+        return c.item if c else None
+
+    def find(self, x):
+        if self.isempty(): return None
+        (p, c) = self.__find(None, self.root, x)
+        return c.item if c else None
+
+    def add(self, x):
+        if self.isempty():
+            self.root = BSTNode(x)
+            return True
+
+        (p, c) = self.__find(None, self.root, x)
+        if c: return False  # x already exists
+
+        node = BSTNode(x)
+        if x &lt; p.item:  p.left = node
+        else:           p.right = node
+        return True
+
+    def addall(self, lst):
+        for item in lst:
+            self.add(item)
+
+    def remove(self, x): 
+        (p, c) = self.__find(None, self.root, x)       
+        if not c: return False  # empty or not found
+
+        # leaf node
+        if not c.left and not c.right:
+            if p:   # c is not root
+                if x &lt; p.item:  p.left = None
+                else:           p.right = None
+            del c
+            return True
+
+        # non-leaf node
+        if c.left:  # move rightmost node in left subtree of c
+            (lp, lc) = self.__rightmost(c, c.left)
+            if not lp:  pass                # lc is root
+            if lp == c: lp.left = lc.left   # lc is direct child of c
+            else:       lp.right = lc.left
+
+            c.item = lc.item
+            del lc
+            return True
+
+        else:       # move leftmost node in right subtree
+            (rp, rc) = self.__leftmost(c, c.right)
+            if not rp:  pass                # lc is root
+            if rp == c: rp.right = rc.right # lc is direct child of c
+            else:       rp.left = rc.right
+
+            c.item = rc.item
+            del rc
+            return True
+
+    def removeall(self, lst): 
+        for item in lst:
+            self.remove(item)
+
+    def sorted(self):
+        def trav(t):  #in-order
+            if not t: return []
+            return trav(t.left) + [t.item] + trav(t.right)
+        return trav(self.root)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/07/17 17:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8592"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="perl">[n, k] = map(int, input('배열의 길이와 슬라이딩 윈도우의 길이를 나타내는 두 개의 정수n과 k:').split(' '))
+arr = list(map(int, input('배열의 내용을 나타내는 n개의 정수:').split(' ')))
+min1 = []
+max1 = []
+for i1 in range(k-1, n):
+        arr1 = arr[i1-(k-1):i1+1]
+        min1.append(str(min(arr1)))
+        max1.append(str(max(arr1)))
+print(' '.join(min1))
+print(' '.join(max1))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/29 10:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">piko</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9025"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>package codingdojang;</p>
+<p>import java.util.Scanner;</p>
+<p>public class ex52 {</p>
+<pre><code>public static void main(String[] args) {
+    // TODO Auto-generated method stub
+    Scanner sc = new Scanner(System.in);
+
+    int n = sc.nextInt();
+    int k = sc.nextInt(); sc.nextLine();
+
+    int arr[] = new int[n];
+
+    for(int i=0; i&lt;n; i++) {
+        arr[i] = sc.nextInt();
+    }
+
+
+    sc.nextLine();
+
+    for(int i=0; i&lt;n-k+1; i++) {
+        System.out.print(Math.min(Math.min(arr[i], arr[i+1]),arr[i+2])+" ");
+    }
+
+    System.out.println();
+
+    for(int i=0; i&lt;n-k+1; i++) {
+        System.out.print(Math.max(Math.max(arr[i], arr[i+1]),arr[i+2])+" ");
+    }
+
+    System.out.println();
+}
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/16 10:33</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이병호</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10355"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>import java.util.Scanner;</p>
+<p>public class level_3_sliding_window {</p>
+<pre><code>public static void main(String[] args) {
+
+    System.out.println("배열의 길이와 슬라이딩 윈도우의 길이를 차례로 입력하세요.");
+    Scanner sc = new Scanner(System.in);
+    int arraysize = sc.nextInt(); // 배열의 길이.
+    int[] array = new int[arraysize];
+    int windowsize = sc.nextInt(); // 슬라이딩 윈도우의 길이.
+    int[] window = new int[windowsize];
+    int[] maxs = new int[arraysize - windowsize + 1]; // 최대값들을 저장할 배열.
+    int[] mins = new int[arraysize - windowsize + 1]; // 최소값들을 저장할 배열.
+
+    System.out.println("배열의 내용을 나타내는 정수값들을 입력하세요.");
+
+    for(int i = 0; i &lt; arraysize; i++) // 정수값들을 차례로 입력.
+    {
+        array[i] = sc.nextInt();
+    }
+
+    for(int i = 0; i &lt; arraysize - windowsize + 1; i++) // 윈도우를 결정할 반복문 작성.
+    {
+        for(int j = 0; j &lt; windowsize; j++)
+        {
+            window[j] = array[j + i];
+            int max = window[0];
+            int min = window[0];
+        for(int h = 0; h &lt; windowsize - 1; h++)
+        {
+            if(window[h + 1] &gt; max)
+            {
+                max = window[h + 1];
+            }
+            if(window[h + 1] &lt; min)
+            {
+                min = window[h + 1];
+            }
+            maxs[i] = max;
+            mins[i] = min;
+        }
+        }
+    }
+    System.out.print("window의 최소값들 : ");
+    for(int h = 0; h &lt;maxs.length; h++)
+    {
+        System.out.print(mins[h] + "    ");
+    }
+    System.out.println();
+    System.out.print("window의 최대값들 : ");
+    for(int h = 0; h &lt;maxs.length; h++)
+    {
+        System.out.print(maxs[h] + "    ");
+    }
+    sc.close();
+}
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/01/29 16:02</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Byam_Gyu</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10457"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3.6</p>
+<pre><code class="python">def sliding():
+    length,k = map(int, input().split())
+    source = input('').split()
+    print(&quot;\n&quot;)
+    print(' '.join([ min(source[i:i+3]) for i in range(len(source)-(k-1))]))
+    print(' '.join([ max(source[i:i+3]) for i in range(len(source)-(k-1))]))
+
+if __name__ == &quot;__main__&quot;:
+    sliding()
+</code></pre>
+
+<p>*결과값</p>
+<pre><code class="python">8 3
+1 3 -1 -3 5 3 6 7
+
+
+-1 -1 -1 -3 3 3
+3 3 5 5 6 7
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/02 17:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">justbegin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10786"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>입력 리스트 길이 1,000,000 슬라이드 길이 100,000일때 6초 내외로 걸립니다.</p>
+<pre><code class="python">def window(a, n):
+    maximums = list()
+    minimums = list()
+    maximums.append(max(a[:n]))
+    minimums.append(min(a[:n]))
+    maxcount = a[:n].index(maximums[0])
+    mincount = a[:n].index(minimums[0])
+    for i in range(len(a)-n):
+        if maxcount:
+            maximums.append(max(a[n+i], maximums[-1]))
+            if maximums[-2] == maximums[-1]:
+                maxcount -=1
+            else:
+                maxcount = n-1
+        else:
+            maximums.append(max(a[i+1:i+1+n]))
+            maxcount = a[i+1:i+1+n].index(maximums[-1])
+        if mincount:
+            minimums.append(min(a[n+i], minimums[-1]))
+            if minimums[-2] == minimums[-1]:
+                mincount -=1
+            else:
+                mincount = n-1
+        else:
+            minimums.append(min(a[i+1:i+1+n]))
+            mincount = a[i+1:i+1+n].index(minimums[-1])
+    return maximums, minimums
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/18 15:09</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김동하</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11657"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.Arrays;
+import java.util.Scanner;
+
+public class SlidingWindow {
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        Scanner sc = new Scanner(System.in);
+        String[] input = sc.nextLine().split(&quot; &quot;);
+        int arrayLength = Integer.parseInt(input[0]);
+        int windowLength = Integer.parseInt(input[1]);
+
+        int[] array = new int[arrayLength];
+
+        for(int i = 0; i&lt; arrayLength; i++){
+            array[i] = sc.nextInt();
+        }
+        int[] window = new int[windowLength];
+
+        int[] minArray = new int[arrayLength - windowLength + 1];
+        int[] maxArray = new int[arrayLength - windowLength + 1];
+
+        for(int i=0; i&lt; arrayLength - windowLength + 1 ; i++){
+            window[0] = array[i];
+            window[1] = array[i+1];
+            window[2] = array[i+2];
+            Arrays.sort(window);
+            minArray[i] = window[0];
+            maxArray[i] = window[2];
+        }
+        System.out.println(Arrays.toString(minArray));
+        System.out.println(Arrays.toString(maxArray));
+    }
+
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/04/11 01:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김태훈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11827"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="javascript">  let exlist = [[8,3],[1, 3, -1, -3, 5, 3, 6, 7]]
+
+
+  function window2 (x) {
+    let a = [];
+    let b = [];
+    for (let i = 0; i &lt; (x[0][0]- x[0][1]+1); i++) {
+     a.push( x[1].slice(i,i+x[0][1]).reduce((acc,item) =&gt; acc &gt; item ? item : acc))
+     b.push( x[1].slice(i,i+x[0][1]).reduce((acc,item) =&gt; acc &lt; item ? item : acc))
+     }
+     return [a,b]
+}
+
+console.log(window2(exlist))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/04/20 15:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Yungbin Kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12010"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">// 자바입니다
+public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] str = br.readLine().split(&quot; &quot;);
+        int n = Integer.parseInt(str[0]);
+        int win2 = Integer.parseInt(str[1]);
+        int win = 0;
+        String[] numbers = br.readLine().split(&quot; &quot;);
+        int[] nums = new int[n];
+        for (int i=0; i&lt;n; i++) {
+            nums[i] = Integer.parseInt(numbers[i]);
+        }
+
+        int[] mins = new int[n-win2+1];
+        int[] maxs = new int[n-win2+1];
+        int t = win2;
+        for (int i=0; i&lt;n-t+1; i++) {
+            int max = nums[i];
+            int min = nums[i];
+            for(int j=win; j&lt;win2; j++) {
+                max = Math.max(max, nums[j]);
+                min = Math.min(min, nums[j]);
+            }
+            mins[i] = min;
+            maxs[i] = max;
+            win++;
+            win2++;
+        }
+        System.out.println(Arrays.toString(mins));
+        System.out.println(Arrays.toString(maxs));
+    }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/04 11:38</p>
+                                <p class="static-profile" style="margin:0;padding:0;">정몽준</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12445"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def sliding_window(n, k, array):
+    minimum = []
+    maximum = []
+    for i in range(n - k + 1):
+        minimum.append(min(array[i:i + k]))
+        maximum.append(max(array[i:i + k]))
+    return minimum + maximum
+ans1 = [int(x) for x in input().split()]
+ans2 = [int(y) for y in input().split()]
+minmax = sliding_window(ans1[0], ans1[1], ans2)
+for prt1 in minmax[:int(len(minmax)/2)]:
+    print(prt1, end=' ')
+print()
+for prt2 in minmax[int(len(minmax)/2):]:
+    print(prt2, end=' ')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/22 19:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">myyh2357</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12712"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main() {
+    int length = 8,slid = 3, min, max;
+    int ary[] = { 1, 3 ,-1 ,-3 ,5 ,3 ,6 ,7 };
+    int *temp, *result;
+    temp = (int *)malloc(slid * sizeof(int));
+    result = (int *)malloc((length - slid + 1) * sizeof(int));
+
+    for (int i = 0; i &lt;= length - slid; i++) {
+        for (int j = i; j &lt; i + slid; j++) {
+            temp[j - i] = ary[j];
+        }
+        min = max = temp[0];
+        for (int j = 1; j &lt; slid; j++) {
+            min = min &lt; temp[j] ? min : temp[j];
+            max = max &gt; temp[j] ? max : temp[j];
+        }
+        printf(&quot;%d &quot;,min);
+        result[i] = max;
+    }
+    printf(&quot;\n&quot;);
+    for (int i = 0; i &lt;= length - slid; i++) {
+        printf(&quot;%d &quot;, result[i]);
+    }
+    free(result);
+    free(temp);
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/31 18:41</p>
+                                <p class="static-profile" style="margin:0;padding:0;">남해</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13229"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python</p>
+<pre><code class="python">n, k = 8, 3#n, k = map(int, input().split(&quot; &quot;))
+arr = [1, 3, -1, -3, 5, 3, 6, 7]#list(map(int, input().split(' ')))
+a = list()
+b = list()
+for i in range(len(arr)-k+1):
+    a.append(min(arr[i:i+k]))
+    b.append(max(arr[i:i+k]))
+print(a)
+print(b)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/29 14:53</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Taesoo Kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13519"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>새로 들어오는 값과, 나가는 값, 직전의 min,max값<br />
+4가지 값을 비교하여 min,max를 구합니다.</p>
+<pre><code class="python">n, k = map(int,input().split())
+while 1:
+    arr = list(map(int,input().split()))
+    if len(arr) == n: break
+    else: print('배열의 갯수가 틀립니다. 재입력 하세요.')
+
+for i in range(n-k+1):
+    tmp = arr[i:i+k]
+    if i == 0: r = [( (min(tmp),max(tmp)) )]
+    else:
+        if r[-1][1] == arr[i-1]:
+            if r[-1][1] &lt; tmp[-1]: r.append( (r[-1][0],tmp[-1]) )
+            elif r[-1][0] &gt; tmp[-1]: r.append( (tmp[-1],max(tmp)) )
+            else: r.append( (r[-1][0],max(tmp)) )
+        elif r[-1][0] == arr[i-1]:
+            if r[-1][0] &gt; tmp[-1]: r.append( (tmp[-1],r[-1][1]) )
+            elif r[-1][1] &lt; tmp[-1]: r.append( (min(tmp),tmp[-1]) )
+            else: r.append( (min(tmp),r[-1][1]) )
+        else:
+            if r[-1][0] &gt; tmp[-1]: r.append( (tmp[-1],r[-1][1]) )
+            elif r[-1][1] &lt; tmp[-1]: r.append( (r[-1][0],tmp[-1]) )
+            else: r.append( (r[-1][0],r[-1][1]) )
+
+for j in range(2):
+    for i in r:
+        print(i[j],end=' ')
+    print()
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/11 21:26</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13535"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3</p>
+<pre><code class="python">def fn(k, list1):
+    min_list = []
+    max_list = []
+    for i in range(len(list1) - k + 1):
+        window = []
+        for j in range(k):
+            window.append(list1[i+j])
+        min_list.append(min(window))
+        max_list.append(max(window))
+
+    return min_list, max_list
+
+k = 3
+list1 = [1, 3, -1, -3, 5, 3, 6, 7]
+
+print(fn(k, list1)[0])
+print(fn(k, list1)[1])
+</code></pre>
+
+<p>결과: k=3, list1 = [1, 3, -1, -3, 5, 3, 6, 7]</p>
+<pre><code class="python">[-1, -3, -3, -3, 3, 3]
+[3, 3, 5, 5, 6, 7]
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/12 16:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">WJ K</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14567"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>=&gt; core. </p>
+<pre><code>              1. 최대, 최소 구하기 =&gt;&gt; sorted()함수 사용 ==&gt; max() &amp; min()함수 사용
+
+              2. window값이 몇 번 이동하는지 (반복을 위해서)
+
+                       =&gt; 아래 그림을 보면 길이가 8인 배열에  크기가 3인 윈도우가 움직이는 걸을 가시화 함.
+
+                            여기서 보면, 마지막 2개 뺴고는 각 배열의 요소들은 윈도우 첫 번째에 위치
+
+                            즉, 윈도우의 맨 첫 번째 위치할 경우 == 윈도우 움직인 경우
+
+                            ==&gt; 윈도우의 첫 번째 위치로 선택받지 못하는 요소를 제외하면 윈도우의 이동 횟수가 나옴.
+</code></pre>
+<pre><code class="python">n,k = map(int, input().split(' '))
+input_num = list(map(int,input().split(' ')))
+cir = n-(k-1)
+max_arr=[]
+min_arr=[]
+for i in range(cir):
+    max_arr.append(max(input_num[i:i+k]))
+    min_arr.append(min(input_num[i:i+k]))
+print(min_arr)
+print(max_arr)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/08 16:34</p>
+                                <p class="static-profile" style="margin:0;padding:0;">JaehakChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19771"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C#</p>
+<pre><code class="cs">using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace CD052
+{
+    class Program
+    {
+        static void Main()
+        {
+            int[] inputSpec = Console.ReadLine().Trim().Split(' ').Select(s =&gt; int.Parse(s)).ToArray();
+            int arrayLength = inputSpec[0];
+            int windowLength = inputSpec[1];
+
+            List&lt;int&gt; inputList = Console.ReadLine().Trim().Split(' ').Select(s =&gt; int.Parse(s)).ToList();
+
+            DisplaySlidingMinMax(windowLength, inputList);
+        }
+
+        static void DisplaySlidingMinMax(int windowLength, List&lt;int&gt; inputArray)
+        {
+            Queue&lt;int&gt; window = new Queue&lt;int&gt;(inputArray.Take(windowLength - 1));
+            List&lt;int&gt; maxValues = new List&lt;int&gt;();
+            List&lt;int&gt; minValues = new List&lt;int&gt;();
+            // sliding window 큐에 새로운 입력 배열의 다음 항목 enqueue, 기존 항목 dequeue
+            // 최대, 최소값 확인
+            for (int idx = windowLength - 1; idx &lt; inputArray.Count; idx++)
+            {
+                window.Enqueue(inputArray[idx]);
+                if (window.Count &gt; windowLength) { _ = window.Dequeue(); }
+                maxValues.Add(window.Max());
+                minValues.Add(window.Min());
+            }
+
+            Console.WriteLine(string.Join(&quot; &quot;, minValues));
+            Console.WriteLine(string.Join(&quot; &quot;, maxValues));
+        }
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/10/28 11:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19983"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>어렵습니다...</p>
+<h1 id="include">include <iostream></h1>
+<p>using namespace std;</p>
+<p>int main(void){
+    //길이를 나타내는 n과 슬라이딩윈도우 사이즈를 나타내는 K 
+    int n,k;</p>
+<pre><code>cin &gt;&gt; n &gt;&gt; k;
+//입력받은 배열. 
+int arr[n];
+for(int i=0;i&lt;n;i++){
+    cin &gt;&gt; arr[i];
+}
+//반복할 횟수 
+int loop=n-k+1;
+//윈도우가 움직일때마다 최대 최소값을 넣어줄 배열. 
+int* maxArr=new int[loop];
+int* minArr=new int[loop];
+//윈도우의 처음과 끝을 알기위한 변수 
+int first=0,last=k;
+//윈도우가 움직이면서 최대최소값을 저장한다. 
+for(int i=0;i&lt;loop;i++){
+    int max=0,min=9999;
+    //윈도우내에서 최대/최소값을 찾는다. 
+    for(int j=first;j&lt;last;j++){
+        if(max&lt;arr[j])
+            max=arr[j];
+        if(min&gt;arr[j])
+            min=arr[j];
+    }
+    //찾은 값을 각 배열에 저장한다.
+    maxArr[i]=max;
+    minArr[i]=min;
+    //윈도우를 한칸씩 옴긴다.
+    first++;
+    last++; 
+}
+//결과 출력 
+for(int i=0;i&lt;loop;i++){
+    cout &lt;&lt; minArr[i]&lt;&lt;' ';
+}
+cout&lt;&lt;endl;
+for(int i=0;i&lt;loop;i++){
+    cout &lt;&lt; maxArr[i]&lt;&lt;' ';
+}
+delete[] maxArr;
+delete[] minArr;
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/11/19 15:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">채희범</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_21979"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def MAX(ary,index,W_l):
+    max=ary[index]
+    for i in range(index+1,index+W_l):
+        if max&lt;ary[i]:
+            max=ary[i]
+
+    return max
+def MIN(ary,index,W_l):
+    min=ary[index]
+    for i in range(index+1,index+W_l):
+        if min&gt;ary[i]:
+            min=ary[i]
+
+    return min
+
+N=int(input(&quot;배열 길이 : &quot;))
+W=int(input(&quot;윈도우 길이 : &quot;))
+ary=list(map(int,input(&quot;&quot;).split(&quot; &quot;)))
+list_max=[]
+list_min=[]
+for i in range(N-W+1):
+    list_max.append(MAX(ary,i,W))
+    list_min.append(MIN(ary,i,W))
+print(&quot;min :&quot;,list_min)
+print(&quot;max :&quot;,list_max)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/04/27 22:31</p>
+                                <p class="static-profile" style="margin:0;padding:0;">kim center</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25095"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import timeit
+import psutil
+
+p = psutil.Process()
+a, b = map(int, input('숫자 두 개를 입력하세요: ').split())
+l = list(map(int,input('배열을 입력하세요 : ').split()))
+start_time = timeit.default_timer() 
+r = []
+if a==len(l):
+    i=0
+    c=[]
+    while i&lt;=a-b:
+        for w in range(b):
+            c.append(l[i+w])
+        r.append(max(c))
+        i+=1
+terminate_time = timeit.default_timer()
+print(&quot;%f초 걸렸습니다.&quot; % (terminate_time - start_time)) 
+print(p.memory_info())
+print(r)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/04/01 20:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">fox.j</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25656"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">l = [1,3,-1,-3,5,3,6,7]
+result = [],[]
+for i in range(len(l)-2):
+    Lmin = min(l[i:i+2])
+    Lmax = max(l[i:i+2])
+    result[0].append(Lmin)
+    result[1].append(Lmax)
+print(f'{result[0]}\n{result[1]}')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/06/30 10:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">약사의혼자말</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27383"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>"""</p>
+<pre><code class="python">from random import randint
+
+n1 = int(input(&quot;배열의 길이를 입력하시오&quot;))
+n2 = int(input(&quot;슬라이딩 윈도우의 길이를 입력하시오&quot;))
+
+arr = [randint(-10,10) for _ in range(n1)]
+print(arr)
+
+max_arr=[]
+min_arr=[]
+
+
+for i in range(len(arr)-n2+1):
+    max_arr.append(max(arr[i:i+n2]))
+    min_arr.append(min(arr[i:i+n2]))
+
+for k in max_arr:
+    print(k,end=' ')
+print('')
+for k in min_arr:
+    print(k,end=' ')
+</code></pre>
+
+<p>"""</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/02/19 10:37</p>
+                                <p class="static-profile" style="margin:0;padding:0;">양캠부부</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29438"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">min_list = []; max_list = []
+nk = input()
+n , k = nk.split(&quot; &quot;)
+n = int(n); k = int(k)
+arr = [int(i) for i in input().split(&quot; &quot;)]
+
+for i in range(0,n-k+1):
+  window = arr[i:i+k]
+  min_list.append(min(window))
+  max_list.append(max(window))
+
+for i in min_list:
+    print(i,end=' ')
+print()
+for i in max_list:
+    print(i,end=' ')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/07/16 21:26</p>
+                                <p class="static-profile" style="margin:0;padding:0;">스탠리</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29816"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def minMaxFind(lst):
+    minv, maxv = lst[0], lst[0]
+    for i in range(1, len(lst)):
+        if lst[i]&lt;minv:
+            minv = lst[i]
+        elif lst[i]&gt;maxv:
+            maxv = lst[i]
+    return minv, maxv
+
+# arr_len, slide_len = map(int,input(' 배열의 길이와 슬라이딩 윈도우의 길이? : ').split())
+# arr_nums = [int(x) for x in input('배열의 내용을 나타내는 n개의 정수: ').split()]
+
+arr_len, slide_len = 8, 3
+arr_nums = [1,3,-1,-3,5,3,6,7]
+
+min_arr, max_arr = [], []
+
+for i in range(0, arr_len - slide_len + 1):
+    a, b = minMaxFind(arr_nums[i:i+slide_len])
+    min_arr.append(str(a))
+    max_arr.append(str(b))
+
+print(' '.join(min_arr))
+print(' '.join(max_arr))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/12/26 20:32</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

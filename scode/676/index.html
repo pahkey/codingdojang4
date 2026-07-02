@@ -1,0 +1,794 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="입력으로 N과 M이 주어졌을 때
+
+N ~ N+M 사이에 있는 소수들을 모두 구해보자.
+
+10^9 &lt;= N &lt;= 10^12, 0 &lt;= M &lt;= 10^6
+
+```{.cpp}
+입력 예제 :
+1000000000 100
+출력 예제 :
+1...">
+    <title>꽤 큰 소수들 구하기 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">꽤 큰 소수들 구하기</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">0</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 3</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>입력으로 N과 M이 주어졌을 때</p>
+<p>N ~ N+M 사이에 있는 소수들을 모두 구해보자.</p>
+<p>10^9 &lt;= N &lt;= 10^12, 0 &lt;= M &lt;= 10^6</p>
+<pre><code class="cpp">입력 예제 :
+1000000000 100
+출력 예제 :
+1000000007
+1000000009
+1000000021
+1000000033
+1000000087
+1000000093
+1000000097
+</code></pre>
+
+<pre><code class="cpp">입력 예제 :
+987123456789 1000000
+출력 예제 :
+987123456829
+987123456863
+987123456911
+987123456959
+987123456961
+987123456967
+987123456971
+987123456973
+987123456997
+....
+987124456399
+987124456427
+987124456519
+987124456523
+987124456529
+987124456541
+987124456547
+987124456553
+987124456583
+987124456613
+987124456621
+987124456657
+987124456711
+987124456751
+987124456757
+</code></pre>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">math</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2019/09/28 00:14</p>
+                    <p class="static-profile" style="margin:0;padding:0;">pichulia</p>
+                </div>
+            </div>
+
+            
+                <a name="comment_2579"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">참고로 O(M*sqrt(N))보다 더 빠른 풀이를 의도하고 출제했습니다.</span>
+                    -
+                    <span style="font-size:11px;">
+                        pichulia,
+                        2019/10/07 03:01
+                    </span>
+                </div>
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>12개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_19602"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">4</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <h4 id="python-37">Python 3.7</h4>
+<pre><code class="python">def lpn(N, M):
+    sqN = int((N+M)**.5)
+    aN = [0, 0] + [1] * (sqN - 1)
+    for i in range(2, int(sqN**.5) + 1):
+        if aN[i]:
+            aN[i*i::i] = [0] * ((sqN - (i-1)*i)//i)
+    prime = [i for i, v in enumerate(aN) if v]
+    del(aN)
+    bN = [1] * (M+1)
+    for i in prime:
+        rem = i-(N%i) if N%i &gt; 0 else 0
+        bN[rem::i] = [0] * ((M+i - rem)//i)
+    result = [i + N for i, v in enumerate(bN) if v]
+    return result
+</code></pre>
+
+<p>에라토스테네스의 채를 이용해서 (N+M)<sup>0.5</sup> 까지의 소수를 먼저 구하고, 다시 에라토스테네스의 채로 N부터 N+M까지의 소수를 구했습니다.</p>
+<p>시간복잡도는 O( (N+M)<sup>0.25</sup> + (N+M)<sup>0.5</sup>/ln((N+M)<sup>0.5</sup>) )입니다.</p>
+<p>여기서 (N+M)<sup>0.5</sup>/ln((N+M)<sup>0.5</sup>)는 가우스의 <a href="https://ko.wikipedia.org/wiki/소수_계량_함수">소수 계량 함수</a> 로써 2부터 (N+M)<sup>0.5</sup> 까지의 소수의 개수를 의미합니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/10/10 17:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">AY</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2605"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">시간 소요가 짧은 매우 훌륭한 코드입니다</span>
+                                -
+                                <span style="font-size:11px;">
+                                    maluchi,
+                                    2020/02/03 00:15
+                                </span>
+                            </div>
+                        
+                            <a name="comment_2765"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">실행해 보면 엄청나게 빠르게 답이 나옵니다. 그런데 설명이 이해가 안돼네요. 최대수의 근까지의 소수를 구해서, 그것으로 에라토스테네스의 채를 만드는 기본값으로 쓰면 되는 건가요? 수학응용의 한계네요.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Stony Lee,
+                                    2020/06/09 11:40
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19589"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>n부터 n+m까지 m개의 숫자를 돌면서 각각이 소수인지 아닌지 체크하는 루틴을 많이들 제시하네요..</p>
+<p>해당 방법으로 돌렸을 때 제가 두번째로 올려놓은 예시를 구하는데 무진장 오랜 시간이 걸릴겁니다..;;</p>
+<p>진짜 얼마나 걸리는지 시간을 측정해보려고 했는데.. 이 글을 쓰고있는 동안에 아직도 답을 못구했네요ㅋㅋㅋ</p>
+<p>암튼 O(M sqrt(N+M))의 시간복잡도를 가졌으니 거의 몇시간 단위의 시간이 필요하겠네요... </p>
+<p>일단 제가 의도했던 풀이를 올리겠습니다.</p>
+<p>에라토스테네스의 체를 응용한 풀이이며, 제한범위 내의 숫자에 대해서
+50ms 내외로 답을 구합니다. 출력이 좀 오래 걸리지만...</p>
+<p>시간복잡도는 O(X log(log(X))) 입니다. X=max(M, sqrt(N+M))</p>
+<pre><code class="cpp">#include&lt;stdio.h&gt;
+#include&lt;time.h&gt;
+long long int n, m;
+int pa[1000009];
+int pb[1000009];
+long long int sqrt(long long int a) {
+    long long int x = a;
+    int cnt = 70;
+    while (cnt--) {
+        x = (x + a / x) / 2;
+    }
+    return x;
+}
+int main() {
+    long t1, t2;
+    long long int i, j, k;
+    scanf(&quot;%lld %lld&quot;, &amp;n, &amp;m);
+    t1 = clock();
+    long long int maxi = sqrt(n + m) + 1;
+    for (i = 2; i &lt;= maxi; i++) {
+        if (pa[i] == 0) {
+            for (j = i; j &lt;= maxi / i; j++) {
+                pa[i * j] = 1;
+            }
+            for (j = (n - 1) / i + 1; j &lt;= (n + m) / i; j++) {
+                pb[(i * j) - n] = 1;
+            }
+        }
+    }
+    t2 = clock();
+    printf(&quot;total time : %ld ms\n&quot;, t2 - t1);
+    for (i = 0; i &lt;= m; i++) {
+        if (pb[i] == 0) {
+            printf(&quot;%lld\n&quot;, n + i);
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/10/10 01:14</p>
+                                <p class="static-profile" style="margin:0;padding:0;">pichulia</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19540"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>PHP</p>
+<pre><code class="php">$fn1 = function(int $n) : bool {
+    if ($n === 2 || $n === 3) {
+        return true;
+    }
+    if ($n &lt;= 1 || $n % 2 === 0) {
+        return false;
+    }
+    for ($i = 3, $c = ceil(sqrt($n)); $i &lt;= $c; $i = $i + 2) {
+        if ($n % $i == 0) return false;
+    }
+    return true;
+};
+
+$fn2 = function(int $i, int $j) use($fn1) : void {
+    foreach (range($i, $i + $j) as $n) {
+        if ($fn1($n)) {
+            echo $n.PHP_EOL;
+        }
+    }
+};
+</code></pre>
+
+<pre><code class="php">$fn2(1000000000, 100);
+/*
+1000000007
+1000000009
+1000000021
+1000000033
+1000000087
+1000000093
+1000000097
+*/
+</code></pre>
+
+<pre><code class="php">$fn2(987123456789, 1000000);
+/*
+987123456829
+987123456863
+987123456911
+987123456959
+987123456961
+987123456967
+987123456971
+987123456973
+...
+987124456547
+987124456553
+987124456583
+987124456613
+987124456621
+987124456657
+987124456711
+987124456751
+987124456757
+*/
+</code></pre>
+
+<p>ㅠㅠ</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/10/04 18:08</p>
+                                <p class="static-profile" style="margin:0;padding:0;">d124412</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19559"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>n,m=(input().split())
+n=int(n)
+m=int(m)</p>
+<p>sum=n+m
+n+=1</p>
+<p>while sum&gt;n:
+    if n==2 or n==3 or n==5 or n==7:
+        print(n)
+        n+=1
+    elif n%2==0 or n%3==0 or n%5==0 or n%7==0:
+        n+=1
+    else:
+        print(n)
+        n+=1</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/10/07 00:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">재철심</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2580"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">입력으로 &quot;3404825446 2&quot; 가 들어왔을 때 아무것도 출력되면 안됩니다;;
+심지어 시작하자마자 n에 1을 더하고 시작해서 n이 소수일 때도 출력을 안하고있네요.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    pichulia,
+                                    2019/10/07 03:05
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19582"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package prime_number;
+import java.util.Scanner;
+public class PrimeNumber {
+
+    boolean prime(long n){   // 소수인지 확인하는 함수.
+        long i;
+        boolean result=true;
+        for(i=2; i&lt;n; i++)
+            if(n%i==0) result=false;
+        return result;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        PrimeNumber p=new PrimeNumber();
+        System.out.println(&quot;Input two numbers:&quot;);
+        long l;
+        long N = sc.nextLong();
+        long M = sc.nextLong();
+        sc.close();
+        System.out.println(&quot;Output:&quot;);
+        for(l=N; l&lt;=N+M; l++) {      // 소수일 경우 출력
+            if(p.prime(l)) System.out.println(l);
+        }
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/10/08 19:56</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Katherine</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19586"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def gen(n,m):
+    a = [2]
+    nrange = int((n+m)/2) + ((n+m)&amp;2)
+    for x in range(1, nrange):
+        j = True
+        rex = x*2 + 1
+        for i in a:
+            if i**2 &gt; rex:
+                break
+            if rex % i ==0:
+                j = False
+                break
+        if j == True:
+                a.append(rex)
+    b = [x for x in a if n &lt;= x and x &lt;=n+m]
+    return b
+
+n,m = input().split()
+print(gen(int(n),int(m)))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/10/09 21:36</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이재현</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20616"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import math
+
+def isPrime(num):
+    if num == 1: return False
+
+    n = int(math.sqrt(num))
+    for k in range(2, n+1):
+        if num % k ==0: return False
+    return True
+
+while(True):
+    N, M = map(int, input().split())
+    if N &gt;= 1000000000 and N &lt;= 1000000000000 and M &gt;= 0 and M &lt;= 1000000:
+        break
+
+NM = N + M
+
+for k in range(N, NM +1):
+    if isPrime(k) : print(k)
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/18 21:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">BlakeLee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22521"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>N=int(input())
+M=int(input())</p>
+<p>prime=[]</p>
+<p>for i in range(N,M):</p>
+<pre><code>c=0
+
+for j in range(2,i):
+
+    if i%j==0:
+
+        c=1
+
+        break
+
+if c==0:
+
+    prime.append(i)
+</code></pre>
+<p>print(prime)</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/06/08 07:15</p>
+                                <p class="static-profile" style="margin:0;padding:0;">kim ih</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22718"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from math import sqrt, ceil
+
+
+# step1: 1000001 이하 소수들을 구한다.
+def primes():
+    LMT = ceil(sqrt(10 ** 12 + 10 ** 6)) + 1
+    sieve = [True] * LMT
+
+    for n in range(2, LMT):
+        if sieve[n]:
+            yield n
+            for m in range(n + n, LMT, n):
+                sieve[m] = False
+
+
+N, M = int(input()), int(input())
+
+# step2: 1000001 이하 모든 소수 p에 대해, [N, N + M]에서 p의 배수들을 제외시킨다.
+sieve = [True] * (M + 2)
+for p in primes():
+    for n in range(ceil(N / p) * p, N + M + 1, p):
+        sieve[n - N] = False
+
+for n in range(N, N + M + 1):
+    if sieve[n - N]:
+        print(n)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/07/13 00:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23470"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def is_prime(n):
+    return divmod(2**(n-1),n)[1]==1
+def all_prime(N, M):
+    P=[i for i in range(N, N+M+1) if is_prime(i)]
+    print(P)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/10/17 09:45</p>
+                                <p class="static-profile" style="margin:0;padding:0;">권태률</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26691"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>자바스크립트로 작성하였습니다.</p>
+<p>이게 로직이 반복문으로 작성되어서 예제에 나와잇는 엄청나게 큰 수를 구할 수는 있으나 연산 횟수가 너무 많아져서 렉이 걸리네요</p>
+<p>1000까지의 소수를 구해서 소수표와 비교해보니 연산은 잘 됩니다.</p>
+<pre><code class="javascript">var prime = (n,m) =&gt; {
+    for (i = n; i&lt;=n+m; i++) {
+       var count = 0;
+       for(j=2; j&lt;i; j++) if(i%j == 0) count++
+       if(count == 0 &amp;&amp; i!=1) console.log(i)        
+    }
+}
+
+prime(1,1000)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/11/24 11:15</p>
+                                <p class="static-profile" style="margin:0;padding:0;">유정효</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29489"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from math import sqrt
+
+
+def findPrimeNum(N, M):
+    if N % 2 == 0:
+        N += 1
+    pNum = []
+    for i in range(2, M+1, 2):
+        num = N +i
+        if num % 10 != 5:
+            isp = True
+            for j in range(3, int(sqrt(num))+1, 2):
+                if j % 10 != 5 and num % j == 0:
+                    isp = False
+                    break
+            if isp:
+                print(num)
+
+
+findPrimeNum(1000000000, 100)
+#findPrimeNum(987123456789, 1000000)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/07/25 14:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

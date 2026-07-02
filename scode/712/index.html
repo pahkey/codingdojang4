@@ -1,0 +1,593 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="비트맵 방식으로 적당하게 그린 원(동그라미)을 출력해보세요.
+사이즈를 입력받아 이것이 도화지의 가로와 세로의 길이가 되도록 하고,
+도화지는 &quot;□&quot; 기호로 채우고, 원은 &quot;■&quot;으로 그려봅니다.
+
+힌트: 원의 방정식은 x^2 + y^2 = (...">
+    <title>원 그리기 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">원 그리기</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">2</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 4</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>비트맵 방식으로 적당하게 그린 원(동그라미)을 출력해보세요.
+사이즈를 입력받아 이것이 도화지의 가로와 세로의 길이가 되도록 하고,
+도화지는 "□" 기호로 채우고, 원은 "■"으로 그려봅니다.</p>
+<p>힌트: 원의 방정식은 x^2 + y^2 = (반지름)^2 입니다.</p>
+<pre><code>#예시
+사이즈를 입력하세요?30
+□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□
+□□□□□□□□□□■■■■■■■■■■□□□□□□□□□□
+□□□□□□□□■■□□□□□□□□□□■■□□□□□□□□
+□□□□□□□■□□□□□□□□□□□□□□■□□□□□□□
+□□□□□■■□□□□□□□□□□□□□□□□■■□□□□□
+□□□□■■□□□□□□□□□□□□□□□□□□■■□□□□
+□□□□■□□□□□□□□□□□□□□□□□□□□■□□□□
+□□□■□□□□□□□□□□□□□□□□□□□□□□■□□□
+□□■□□□□□□□□□□□□□□□□□□□□□□□□■□□
+□□■□□□□□□□□□□□□□□□□□□□□□□□□■□□
+□■□□□□□□□□□□□□□□□□□□□□□□□□□□■□
+□■□□□□□□□□□□□□□□□□□□□□□□□□□□■□
+□■□□□□□□□□□□□□□□□□□□□□□□□□□□■□
+□■□□□□□□□□□□□□□□□□□□□□□□□□□□■□
+□■□□□□□□□□□□□□□□□□□□□□□□□□□□■□
+□■□□□□□□□□□□□□□□□□□□□□□□□□□□■□
+□■□□□□□□□□□□□□□□□□□□□□□□□□□□■□
+□■□□□□□□□□□□□□□□□□□□□□□□□□□□■□
+□■□□□□□□□□□□□□□□□□□□□□□□□□□□■□
+□■□□□□□□□□□□□□□□□□□□□□□□□□□□■□
+□□■□□□□□□□□□□□□□□□□□□□□□□□□■□□
+□□■□□□□□□□□□□□□□□□□□□□□□□□□■□□
+□□□■□□□□□□□□□□□□□□□□□□□□□□■□□□
+□□□□■□□□□□□□□□□□□□□□□□□□□■□□□□
+□□□□■■□□□□□□□□□□□□□□□□□□■■□□□□
+□□□□□■■□□□□□□□□□□□□□□□□■■□□□□□
+□□□□□□□■□□□□□□□□□□□□□□■□□□□□□□
+□□□□□□□□■■□□□□□□□□□□■■□□□□□□□□
+□□□□□□□□□□■■■■■■■■■■□□□□□□□□□□
+□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□
+</code></pre>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">수학</span>
+                
+                    <span class="label label-tag label-xs">반복문</span>
+                
+                    <span class="label label-tag label-xs">비트맵</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2021/05/22 21:07</p>
+                    <p class="static-profile" style="margin:0;padding:0;">Katherine</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>10개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_25409"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#drawing a circle
+import math
+
+N = int(input(&quot;Size:&quot;))
+half = (N-1)/2
+
+for i in range(N):
+          x = i - half
+          for j in range(N):
+                    y = j - half
+                    k = math.sqrt(x**2 + y**2)
+                    if half-1 &lt; k &lt;= half:
+                              print(&quot;■&quot;, end='')
+                    else:
+                              print(&quot;□&quot;, end='')
+          print()
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/05/22 21:13</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Katherine</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25428"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>자바입니다.</p>
+<pre><code>package may24;
+
+import java.util.Scanner;
+
+public class Test {
+    public static void main(String[] args) {
+        System.out.println(&quot;숫자 대입했을 때 원 만들기&quot;);
+        Scanner sc = new Scanner(System.in);
+        System.out.println(&quot;숫자를 입력해주세요. _ &quot;);
+        int code = sc.nextInt();
+        for (int i = -code/2; i &lt;= code/2; i++) {
+            for (int j = -code/2; j &lt;= code/2; j++) {
+                if(i * i + j * j &lt; code/2*code/2 &amp;&amp; i * i + j * j &gt; (code-2.5)/2*(code-2.5)/2) {
+                    System.out.print(&quot;■&quot;);
+                }else {
+                    System.out.print(&quot;□&quot;);
+                }
+            }
+            System.out.println(&quot;&quot;);
+        }
+        sc.close();
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/05/24 17:32</p>
+                                <p class="static-profile" style="margin:0;padding:0;">A-assasin Kr</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25446"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">for y in range(31):
+    for x in range(31):
+        if 15**2 - 15 &lt; (x-15)**2 + (y-15)**2 &lt; 15**2 + 15:
+            print('■', end='')
+        else:
+            print('□', end='')
+    print('')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/05/26 14:36</p>
+                                <p class="static-profile" style="margin:0;padding:0;">songci</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25549"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n=int(input(&quot;원을 그릴 크기를 정해주세요(가로세로길이)  &quot;))
+i=0
+j=0
+printo=''
+while i&lt;n:
+    while j&lt;n:
+        if abs((n-3)/2)&lt;=(math.sqrt((i+0.5-n/2)**2+(j+0.5-n/2)**2))&lt;=(n-1)/2:
+            printo+=&quot;■&quot;
+            j+=1
+
+        else:
+            printo+=&quot;□&quot;
+            j+=1
+    printo+='\n'
+    j=0
+    i+=1
+
+print(printo)
+</code></pre>
+
+<p>설명할 게 없네용...</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/06/15 01:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Happy Day</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26603"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>자바로 만든 소스입니다.</p>
+<pre><code>package circle;
+
+import java.util.*;
+
+public class circle {
+    public static void main(String[] args) {
+
+    Scanner sc = new Scanner(System.in);
+
+    System.out.print(&quot;사이즈를 입력하시오 : &quot;);
+    int num = sc.nextInt(); //정수 입출력 변수
+    for (int i = -num; i &lt;= num; i++) { //i = 세로줄, -num : 원의방정식 도입
+        for (int j = -num; j &lt;= num; j++) { //j = 가로줄, -num : 원의방정식 도입
+            if (i*i + j*j &lt; num*num &amp;&amp; i*i + j*j &gt;= (num-1)*(num-1)) { 
+                System.out.print(&quot;■&quot;);
+            }
+            else
+                System.out.print(&quot;□&quot;);
+        }
+        System.out.println(&quot;&quot;);
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/11/02 12:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">황도연</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28041"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>import math</p>
+<p>N = int(input("Size:"))
+half = (N-1)/2</p>
+<p>for i in range(N):
+          x = i - half
+          for j in range(N):
+                    y = j - half
+                    k = math.sqrt(x<strong>2 + y</strong>2)
+                    if half-1 &lt; k &lt;= half:
+                              print("■", end='')
+                    else:
+                              print("□", end='')
+          print()</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/06/14 20:26</p>
+                                <p class="static-profile" style="margin:0;padding:0;">for Heuristic Life ksh</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28699"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from math import sqrt
+
+size = int(input(&quot;Size: &quot;))
+mid = (size-1)/2
+
+for i in range(size):
+    x = i - mid
+    for j in range(size):
+        y = j - mid
+        r = sqrt(x**2 + y**2)
+        if mid-1 &lt; r &lt;= mid:
+            print(&quot;■&quot;, end=' ')
+        else:
+            print(&quot;□&quot;, end=' ')
+    print()
+</code></pre>
+
+<pre><code>□ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □
+□ □ □ □ □ □ □ □ □ □ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ □ □ □ □ □ □ □ □ □ □
+□ □ □ □ □ □ □ □ ■ ■ □ □ □ □ □ □ □ □ □ □ ■ ■ □ □ □ □ □ □ □ □
+□ □ □ □ □ □ ■ ■ □ □ □ □ □ □ □ □ □ □ □ □ □ □ ■ ■ □ □ □ □ □ □
+□ □ □ □ □ ■ ■ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ ■ ■ □ □ □ □ □
+□ □ □ □ ■ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ ■ □ □ □ □
+□ □ □ ■ ■ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ ■ ■ □ □ □
+□ □ □ ■ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ ■ □ □ □
+□ □ ■ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ ■ □ □
+□ □ ■ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ ■ □ □
+□ ■ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ ■ □
+□ ■ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ ■ □
+□ ■ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ ■ □
+□ ■ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ ■ □
+□ ■ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ ■ □
+□ ■ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ ■ □
+□ ■ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ ■ □
+□ ■ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ ■ □
+□ ■ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ ■ □
+□ ■ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ ■ □
+□ □ ■ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ ■ □ □
+□ □ ■ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ ■ □ □
+□ □ □ ■ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ ■ □ □ □
+□ □ □ ■ ■ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ ■ ■ □ □ □
+□ □ □ □ ■ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ ■ □ □ □ □
+□ □ □ □ □ ■ ■ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ ■ ■ □ □ □ □ □
+□ □ □ □ □ □ ■ ■ □ □ □ □ □ □ □ □ □ □ □ □ □ □ ■ ■ □ □ □ □ □ □
+□ □ □ □ □ □ □ □ ■ ■ □ □ □ □ □ □ □ □ □ □ ■ ■ □ □ □ □ □ □ □ □
+□ □ □ □ □ □ □ □ □ □ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ □ □ □ □ □ □ □ □ □ □
+□ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/10/24 21:26</p>
+                                <p class="static-profile" style="margin:0;padding:0;">isaac024</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28937"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">r = int(input(&quot;사이즈를 입력하세요 : &quot;))
+for y in range(r*2):
+    for x in range(r*2):
+        if -r &lt; (r-2)**2-((x-r)**2+(y-r)**2) &lt; r:
+            print('■',end='')
+        else:
+            print('□',end='')
+    print()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/01/17 19:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Shiroha</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29370"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import math
+
+size = int(input('Size: '))
+r = size // 2
+
+for row in range(size+1):
+    y = row - r + 0.5
+    for col in range(size+1):
+        x = col - r + 0.5
+        p = math.sqrt(y**2 + x**2)
+        if r-0.5 &lt; p &lt;= r:
+            print(&quot;■&quot;, end='  ')
+        else:
+            print(&quot;□&quot;, end='  ')
+    print()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/06/30 19:08</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29876"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">blocks=int(input(&quot;몇칸짜리 원을 만들까요?&quot;))
+ r=(blocks-3)/2
+circle=[]
+pie=blocks/3.14
+if blocks&lt;9:
+    pie=1
+for i in range(0,blocks):
+    for j in range(0,blocks):
+
+        length=(i-r-1)**2+(j-r-1)**2
+        if  abs((r**2)-length)&lt;pie:
+            print(&quot;■&quot;,end=&quot; &quot;)
+        else:
+            print(&quot;□&quot;,end=&quot; &quot;)
+    print()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2024/02/10 23:17</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Dr.Choi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

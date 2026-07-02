@@ -1,0 +1,3385 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="출처 : [programming-challenges.com](http://www.programming-challenges.com/pg.php?page=downloadproblem&amp;probid=110202&amp;format=html)
+
+알고리즘은 쉽...">
+    <title>Poker Hands - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">Poker Hands</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">5</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 4</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>출처 : <a href="http://www.programming-challenges.com/pg.php?page=downloadproblem&amp;probid=110202&amp;format=html">programming-challenges.com</a></p>
+<p>알고리즘은 쉽지만 어떻게 디자인을 할 지에 대해서 고민해 볼 수 있는 좋은 문제.</p>
+<hr />
+<p>포커용 카드는 52개의 카드로 이루어진다. 각 카드는 클럽, 다이아몬드, 하트, 스페이드(입력 데이터에서는 각각 C,D,H,S로 표시)중 한 가지 무늬를 가진다. 또한 각 카드는 2에서 10까지, 그리고 잭, 퀸, 킹, 또는 에이스(2,3,4,5,6,7,8,9,T,J,Q,K,A로 표기)의 값을 갖는다. 점수를 매길 때 위에 열거한 순서대로 등급이 매겨지며 2가 가장 낮고 에이스가 가장 높다. 무늬는 값에 영향을 끼치지 않는다.</p>
+<p>포커 패는 다섯 장의 카드로 구성되며 다음과 같은 순서로 등급이 매겨진다.</p>
+<ul>
+<li><strong>하이 카드</strong> : 아래에 있는 것 가운데 어떤 범주에도 속하지 않는 패는 그 중 가장 높은 카드의 값에 따라 등급이 매겨진다. 가장 높은 카드의 값이 같으면 그 다음 카드, 그 다음 카드도 같으면 그 다음 카드, 이런 식으로 등급이 매겨진다.</li>
+<li><strong>원 페어</strong> : 다섯 장의 카드 가운데 두 장의 값이 같은 경우. 같은 원 페어끼리 맞붙는 경우에는 더 높은 값을 가지는 원 페어 패에 더 높은 등급이 매겨진다. 값까지 같은 경우에는 나머지 카드의 값에 의해 더 높은 패가 결정된다.</li>
+<li><strong>투 페어</strong> : 두 쌍의 카드가 같은 값을 가지는 경우. 투 페어끼리 맞붙는 경우에는 그 중 더 높은 페어의 값에 의해 더 높은 등급이 매겨진다. 두 쌍이 값이 모두 같으면 남은 카드에 의해 더 높은 패가 결정된다.</li>
+<li><strong>쓰리 카드</strong> : 다섯 장 가운데 세 장이 같은 값을 가지는 경우. 쓰리 카드끼리 맞붙는 경우에는 세 장의 같은 값을 가지는 카드의 값에 의해 더 높은 패가 결정된다.</li>
+<li><strong>스트레이트</strong> : 다섯 장의 카드가 연속적인 값을 가지는 경우. 스트레이트끼리 맞붙을 경우에는 가장 높은 카드에 의해 더 높은 패가 결정된다.</li>
+<li><strong>플러쉬</strong> : 다섯 장의 카드의 무늬가 모두 같은 경우. 플러시끼리 맞붙을 경우에는 하이 카드의 규칙에 따라서 더 높은 패가 결정된다.</li>
+<li><strong>풀 하우스</strong> : 세 장의 카드가 같은 값을 가지고 나머지 두 장의 카드가 같은 값을 가지는 경우. 같은 값을 가지는 세 장의 카드의 우열에 의해 더 높은 패가 결정된다.</li>
+<li><strong>포카드</strong> : 네 장의 카드가 같은 값을 가지는 경우. 포카드끼리 맞붙는 경우에는 네 장의 같은 값을 가지는 카드의 값에 의해 더 높은 패가 결정된다.</li>
+<li><strong>스트레이트 플러시</strong> : 다섯 장의 카드가 무늬가 같으면서 모두 연속적인 값을 가지는 경우. 패에 있는 것 중 가장 높은 카드에 의해 더 높은 패가 결정된다.</li>
+</ul>
+<p>몇 쌍의 포커 패를 비교해서 어느 쪽이 이겼는지 아니면 무승부인지 알아내자.</p>
+<p><strong>Input</strong> </p>
+<p>입력 파일은 여러 줄로 구성되며 각 줄에는 열 장의 카드를 나타내는 값이 들어간다. 앞에 있는 다섯 장의 카드는 "Black"이라는 참가자의 카드고 뒤에 있는 다섯장의 카드는 "White"라는 참가자의 카드다.</p>
+<p><strong>output</strong> </p>
+<p>입력된 각 줄에 대해 다음 중 한 가지가 들어있는 행을 출력한다.(첫번째는 Black이 이기는 경우, 두 번째는 White가 이기는 경우, 세번째는 둘이 비기는 경우)</p>
+<pre><code class="no-highlight">Black wins.
+White wins.
+Tie.
+</code></pre>
+
+<p><strong> Sample Input </strong></p>
+<pre><code class="no-highlight">2H 3D 5S 9C KD 2C 3H 4S 8C AH
+2H 4S 4C 2D 4H 2S 8S AS QS 3S
+2H 3D 5S 9C KD 2C 3H 4S 8C KH
+2H 3D 5S 9C KD 2D 3H 5C 9S KH
+</code></pre>
+
+<p><strong> Sample Output </strong></p>
+<pre><code class="no-highlight">White wins.
+Black wins.
+Black wins.
+Tie.
+</code></pre>
+
+<p><strong> Test Case </strong></p>
+<p>다음 URL의 파일을 다운로드 후 체크하면 Black이 376번 승리</p>
+<ul>
+<li><a href="http://euler.synap.co.kr/files/poker.txt">http://euler.synap.co.kr/files/poker.txt</a></li>
+</ul>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2014/03/09 16:21</p>
+                    <p class="static-profile" style="margin:0;padding:0;">pahkey</p>
+                </div>
+            </div>
+
+            
+                <a name="comment_1341"></a>
+                <div class="comment_line comment-content">
+                    
+                        <span style="color:orangered;">+1</span>
+                    
+                    <span style="white-space:pre-wrap;">원 페어 : 다섯 장의 카드 가운데 두 장이 같은 경우 → 다섯 장의 카드 가운데 두 장의 &#39;값&#39;이 같은 경우</span>
+                    -
+                    <span style="font-size:11px;">
+                        Katherine,
+                        2014/03/13 05:10
+                    </span>
+                </div>
+            
+                <a name="comment_1343"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">아하 각 패가 어디에 속하는지 찾아내서, Poker hands are ranked by the following partial order from lowest to highest. 각자가 속한 것이 위에 적혀진 순서 중 더 아래쪽에 있는 패가 이기는거죠? → 만약 두 패가 같은 것에 속할 경우, 속한 것의 규칙에 따라서 승패를 결정하는거구요. 
+ 두번째 예시 2H 4S 4C 2D 4H 2S 8S AS QS 3S의 경우 Black은 풀하우스, White는 플러쉬인데, 위 순서에서 풀하우스가 플러쉬보다 더 아래에 있으므로 Black wins인거에요. 맞나요?</span>
+                    -
+                    <span style="font-size:11px;">
+                        Katherine,
+                        2014/03/13 08:34
+                    </span>
+                </div>
+            
+                <a name="comment_1344"></a>
+                <div class="comment_line comment-content">
+                    
+                        <span style="color:orangered;">+1</span>
+                    
+                    <span style="white-space:pre-wrap;">@Katherine 님, 네 맞습니다. 풀하우스가 플러쉬보다 높습니다. 그리고 같은 플러쉬끼리는 높은 숫자가 있는 플러쉬가 이기구요.. 이게 실제 포커규칙과 동일합니다. 이 문제가 좀 헷갈리시면 웹에서 포커규칙을 찾아보시면 더 도움이 될 거 같구요. 제가 봤을 때 기존 포커규칙과 다른것은 모양 우선순위만 안 따진다는 것 같습니다. 실제 포커에서는 동일한 플러쉬에 숫자도 동일하다면 &quot;스페이드&quot;를 든 사람이 이기거든요. ^^</span>
+                    -
+                    <span style="font-size:11px;">
+                        pahkey,
+                        2014/03/13 10:05
+                    </span>
+                </div>
+            
+                <a name="comment_1352"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">@길가의풀 님 아 네 감사합니다 ㅎㅎ; 풀어봐야겠어요 ㅎㅎ</span>
+                    -
+                    <span style="font-size:11px;">
+                        Katherine,
+                        2014/03/13 13:43
+                    </span>
+                </div>
+            
+                <a name="comment_1380"></a>
+                <div class="comment_line comment-content">
+                    
+                        <span style="color:orangered;">+1</span>
+                    
+                    <span style="white-space:pre-wrap;">카드 모양 사이에 우선순위가 있는 건 한국에만 존재하는 로컬 룰으로 알고 있습니다. 홀덤이든 세븐 포커든 모양은 상관하지 않는 걸로..</span>
+                    -
+                    <span style="font-size:11px;">
+                        Kim Jaeju,
+                        2014/03/19 16:59
+                    </span>
+                </div>
+            
+                <a name="comment_1746"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">백스트레이트(A,2,3,4,5)와 로얄스트레이트(마운틴;10,J,Q,K,A)는 어떻게하나요?</span>
+                    -
+                    <span style="font-size:11px;">
+                        차우정,
+                        2016/04/17 17:19
+                    </span>
+                </div>
+            
+                <a name="comment_1748"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">@차우정님, 스트레이트일 경우 A다음 K가 높으므로 마운틴의 경우가 더 높을것 같습니다.</span>
+                    -
+                    <span style="font-size:11px;">
+                        pahkey,
+                        2016/04/18 22:35
+                    </span>
+                </div>
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>16개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_469"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">2</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬으로 작성해봤습니다.
+라이브러리들을 잘 몰라서 좀 길어지는것같네요..</p>
+<pre><code class="python">import os
+import sys
+import re
+
+#
+# Kind of Cards and Order of Values
+#
+kind = ['S', 'C', 'D', 'H']
+order = ['2', '3', '4', '5', '6', '7',
+         '8', '9', 'T', 'J', 'Q', 'K', 'A']
+
+#
+# Ordering Algorithm
+#
+def ordering(list, order):
+
+    return [x for x in order for y in list if y == x]
+
+#
+# Checking Consecutive Number Algorithm
+#
+def isConsec(list):
+
+    ordered = ordering(list, order)
+    count = len(list)
+    for i in range(0, 13):
+        if ordered == ordering((order + order)[i:i+count], order):
+            # Return True and Value of highest card
+            return [True, ordered[-1]]
+
+    return [False]
+
+
+#
+# Gamer Class
+#
+class Gamer():
+
+    card = []
+    grade = 0
+    highest = ''
+
+    def __init__(self, name):
+        self.name = name
+
+    #
+    # Check Royal Straight Flush (Grade 10)
+    # Return True or False
+    #
+    def ro_str_flu(self):
+
+        for kin in kind:
+            if self.card[1].count(kin) == 5:
+                place = [i for i, x in enumerate(self.card[1]) if x == kin]
+                get_val = [ self.card[0][x] for x in place ]
+
+                if ordering(get_val, order) == ['T', 'J', 'Q', 'K', 'A']:
+                    self.grade = 10
+                    self.highest = 'A'
+                    return True
+
+        return False
+
+    #
+    # Check Straight Flush (Grade 9)
+    # Return True or False
+    #
+    def str_flu(self):
+
+        for kin in kind:
+            if self.card[1].count(kin) == 5:
+                place = [i for i, x in enumerate(self.card[1]) if x == kin]
+                get_val = [ self.card[0][x] for x in place ]
+                result = isConsec(get_val)
+
+                if result[0]:
+                    self.grade = 9
+                    self.highest = result[1]
+                    return True
+
+        return False
+
+    #
+    # Check Four Cards (Grade 8)
+    # Return True or False
+    #
+    def four_cards(self):
+
+        for x in order:
+            if self.card[0].count(x) == 4:
+                self.grade = 8
+                self.highest = x
+                return True
+
+        return False
+
+    #
+    # Check Full House (Grade 7)
+    # Return True or False
+    #
+    def full_house(self):
+
+        for x in order:
+            if self.card[0].count(x) == 3:
+                for y in order:
+                    if y != x and self.card[0].count(y) == 2:
+                        self.grade = 7
+                        self.highest = x
+                        return True
+
+        return False
+
+    #
+    # Check Flush (Grade 6)
+    # Return True or False
+    #
+    def flush(self):
+
+        for x in kind:
+            if self.card[1].count(x) == 5:
+                self.grade = 6
+                self.highest = ordering(self.card[0], order)
+                return True
+
+        return False
+
+    #
+    # Check Straight (Grade 5)
+    # Return True or False
+    #
+    def straight(self):
+
+        result = isConsec(self.card[0])
+        if result[0] == True:
+            self.grade = 5
+            self.highest = ordering(self.card[0], order)
+            return True
+
+        return False
+
+    #
+    # Check Triple (Grade 4)
+    # Return True or False
+    #
+    def triple(self):
+
+        for x in order:
+            if self.card[0].count(x) == 3:
+                self.grade = 4
+                self.highest = x
+                return True
+
+        return False
+
+
+    #
+    # Check Two Pairs (Grade 3)
+    # Return True or False
+    #
+    def two_pair(self):
+
+        for x in order:
+            if self.card[0].count(x) == 2:
+                for y in order:
+                    if self.card[0].count(y) == 2 and y != x:
+                        self.grade = 3
+                        self.highest = ordering([x,y], order)
+                        return True
+
+        return False
+
+
+    #
+    # Check One Pair (Grade 2)
+    # Return True or False
+    #
+    def one_pair(self):
+
+        for x in order:
+            if self.card[0].count(x) == 2:
+                self.grade = 2
+                self.highest = x
+                return True
+
+        return False
+
+    #
+    # Check High Card (Grade 1)
+    # Return name who have higher card
+    #
+    def high_card(self):
+
+        self.grade = 1
+        self.highest = ordering(self.card[0],order)
+
+        return True
+
+    functions = [ ro_str_flu, str_flu, four_cards,
+                  full_house, flush, straight,
+                  triple, two_pair, one_pair, high_card ]
+
+    Grade = [ '', 'High Card', 'Pair', 'Two Pair', 'Triple', 'Straight', 'Flush',
+              'Full House', 'Four of a Kind', 'Straight Flush', 'Royal Straight Flush']
+
+    #
+    # Check out what Gamer has
+    #
+    def what_has(self):
+
+        for function in self.functions:
+            result = function(self)
+            if result == True:
+                return
+
+#
+# Compare with Pop
+#
+def compare_pop(list1, list2):
+
+    while True:
+        try :
+            temp_1 = list1.pop()
+            temp_2 = list2.pop()
+        except IndexError : return -1
+
+        if order.index(temp_1) &gt; order.index(temp_2):
+            return 0
+        elif order.index(temp_1) &lt; order.index(temp_2):
+            return 1
+
+
+
+#
+# ------------------------------------------
+# Read Files
+#
+
+path = os.path.dirname(os.path.abspath(__file__))
+
+try : f = open( path + '/' + &quot;card games.txt&quot;, 'r')
+except IOError : print(&quot;'card games.txt' does not exist&quot;); sys.exit()
+
+temp = f.readlines()
+
+f.close()
+
+num_games = len(temp)
+
+if temp[num_games - 1] == &quot;\n&quot;:
+    del temp[num_games - 1]
+
+num_games = len(temp)
+
+#
+# Iterate games
+#
+for game in range(0, num_games):
+    black = Gamer(&quot;Black&quot;)
+    white = Gamer(&quot;White&quot;)
+
+    card_b = temp[game].split()[:5]
+    card_w = temp[game].split()[5:]
+
+    black.card = [ [ x[0] for x in card_b ], [ x[1] for x in card_b ]]
+    white.card = [ [ x[0] for x in card_w ], [ x[1] for x in card_w ]]
+
+    black.what_has()
+    white.what_has()
+
+    #
+    # Compare Black's and White's results
+    #
+    if black.grade &gt; white.grade:
+        print(black.name + &quot; is win as &quot; + black.Grade[black.grade])
+
+    elif black.grade &lt; white.grade:
+        print(white.name + &quot; is win as &quot; + white.Grade[white.grade])
+
+    else :
+        if len(black.highest) == 1:
+            if order.index(black.highest) &gt; order.index(white.highest):
+                print(black.name + &quot; is win as &quot; + black.Grade[black.grade]
+                      + ', ' + black.highest)
+            elif order.index(black.highest) &lt; order.index(white.highest):
+                print(white.name + &quot; is win as &quot; + white.Grade[black.grade]
+                      + ', ' + white.highest)
+            else :
+                print(&quot;Tie&quot;)
+
+        else :
+            result = compare_pop(black.highest, white.highest)
+            if result == 0:
+                print(black.name + &quot; is win as &quot; + black.Grade[black.grade])
+            elif result == 1:
+                print(white.name + &quot; is win as &quot; + white.Grade[white.grade])
+            else :
+                print(&quot;Tie&quot;)
+
+
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/03/17 11:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Onkel</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2917"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">2</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>실제 포커룰하고는 약간 다르죠.
+문제에서 주어진 룰에서는 A,2,3,4,5 스트레이트는 없어요.포커친지가 하두 오래되서.. 이게 백스트레이트였나요?
+그리고 실제룰에서는 무늬도 상하등급이 있는데 말이죠. 
+파이썬은 리스트나 튜플의 크기비교를 할때, 금은동 메달 비교하듯이 비교해줘서, 
+이럴때 정말 유용하네요.</p>
+<pre><code class="python">def rank(cards):
+    d={'T':10,'J':11,'Q':12,'K':13,'A':14}
+    for i in range(1,10) : d[str(i)]=i
+    shapes = [x[1] for x in cards]
+    nums = [d.get(x[0]) for x in cards]
+    nums.sort(reverse=True)
+    straight=flush=False
+    if len(set(shapes))==1 : flush=True
+    if len(set(nums))==5 and nums[0]-nums[4]==4 : straight=True
+    if straight &amp; flush : return [8]+nums #straight flush
+    if flush : return [5]+nums #flush
+    if straight : return [4]+nums #straight
+    if len(set(nums))==2:
+        for c in set(nums):
+            if nums.count(c)==4: return [7,c] # four cards
+            if nums.count(c)==3: return [6,c] # full house
+    if len(set(nums))==3:
+        for c in set(nums):
+            if nums.count(c)==3: return [3,c] # triple
+            if nums.count(c)==2:
+                for x in set(nums):
+                    if nums.count(x)==1:
+                        nums.remove(x)
+                        return [2]+nums+[x] # two pairs
+    for c in nums:
+        if nums.count(c)==2:
+            nums.remove(c)
+            return [1,c]+nums # one pair
+    return [0]+nums # high card
+
+count=0
+for line in file('s423.txt'): # http://euler.synap.co.kr/files/poker.txt
+    cc = line.split()
+    count += rank(cc[:5])&gt;rank(cc[5:])
+print count
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/01/28 04:55</p>
+                                <p class="static-profile" style="margin:0;padding:0;">상파</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_440"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>생각보다 재밌네요.</p>
+<p>스트레이트 체크하는거랑 패가 같을 경우에 높은 수 체크하는 부분이 좀 까다로웠습니다. 파이썬 itertools의 combination 함수를 몰랐으면 무척 애 먹었을 것 같네요.</p>
+<p>oop 스타일로 만들어 봤습니다.</p>
+<hr />
+<p>파이썬입니다.</p>
+<pre><code class="python">import unittest
+import itertools
+
+ORDER = ['2','3','4','5','6','7','8','9','T','J','Q','K','A']
+
+
+#
+# compare two card sets
+#
+def _compare(b_cards, w_cards):
+    r1 = reversed(sorted([ORDER.index(c.num) for c in b_cards]))
+    r2 = reversed(sorted([ORDER.index(c.num) for c in w_cards]))
+    for b, w in zip(r1, r2):
+        if b &gt; w: return 1
+        elif b &lt; w: return -1
+    return 0
+
+
+class Card:
+    def __init__(self, s):
+        self.num = s[0]
+        self.pat = s[1]
+
+
+class PokerHand:
+    def __init__(self, s):
+        self.cards = set([Card(c) for c in s.split()])
+        self.made = []
+
+        made_cards = [
+            StraightFlush(),
+            FourCard(),
+            FullHouse(),
+            Flush(),
+            Straight(),
+            ThreeCard(),
+            TwoPair(),
+            OnePair(),
+            HighCard(),
+        ]
+
+        for made in made_cards:
+            made.check_made(self.cards)
+            if made.isMade():
+                self.made.append(made)
+
+    def getTopMade(self):
+        levels = map(lambda m:m.level, self.made)
+        return self.made[levels.index(max(levels))]
+
+    def getHighCard(self):
+        levels = map(lambda m:m.level, self.made)
+        return self.made[levels.index(1)]
+
+    def win(self, other):
+        #
+        # compare top-made card level
+        #
+        b_made = self.getTopMade()
+        w_made = other.getTopMade()
+        if b_made.level &gt; w_made.level: return True
+        elif b_made.level &lt; w_made.level: return False
+
+        #
+        # if top-made level is same,
+        # compare which card is higher in made
+        #
+        c = self.getTopMade().compare(other.getTopMade())
+        if c == 1: return True
+        elif c==-1: return False
+
+        #
+        # if all is same, compare high card
+        #
+        c = self.getHighCard().compare(other.getHighCard())
+        if c == 1: return True
+        else: return False # Tie!!
+
+
+class Made:
+    def __init__(self):
+        self.name = self.__class__.__name__
+        self.cards_sets = []
+
+    def made(self, *cards):
+        for card in cards: 
+            self.cards_sets.append(card)
+
+    def isMade(self):
+        return self.cards_sets
+
+    def isSameNum(self, cards):
+        num = cards[0].num
+        for c in cards[1:]:
+            if c.num != num: return False
+            num = c.num
+        return True
+
+    def compare(self, other):
+        for b_cards, w_cards in zip(self.cards_sets, other.cards_sets):
+            c = _compare(b_cards, w_cards)
+            if c in [1, -1]: return c
+        return 0
+
+
+#
+# Made Cards (StraightFlush, FourCard, FullHouse, ...)
+#
+class StraightFlush(Made):
+    level = 9
+    def check_made(self, cards):
+        straight = Straight()
+        straight.check_made(cards)
+        flush = Flush()
+        flush.check_made(cards)
+        if straight.isMade() and flush.isMade():
+            self.made(cards)
+
+
+class FourCard(Made):
+    level = 8
+    def check_made(self, cards):
+        for cList in itertools.combinations(cards, 4):
+            if self.isSameNum(cList):
+                self.made(cList)
+
+
+class FullHouse(Made):
+    level = 7
+    def check_made(self, cards):
+        for cList in itertools.combinations(cards, 3):
+            remains = list(cards - set(cList))
+            if self.isSameNum(cList) and self.isSameNum(remains):
+                self.made(cList, remains)
+
+
+class Flush(Made):
+    level = 6
+    def check_made(self, cards):
+        cardList = list(cards)
+        pat = cardList[0].pat
+        for c in cardList[1:]:
+            if c.pat != pat: return
+            pat = c.pat
+        self.made(cardList)
+
+
+class Straight(Made):
+    level = 5
+    def check_made(self, cards):
+        minIndex, maxIndex = 99, -1
+        for c in cards:
+            idx = ORDER.index(c.num)
+            if idx &lt; minIndex: minIndex = idx
+            if idx &gt; maxIndex: maxIndex = idx
+        sorted_num = sorted(map(lambda c:c.num, cards))
+        if sorted_num == ['2','3','4','5','A']:
+            self.made(cards)
+        elif len(set(sorted_num))==5 and maxIndex-minIndex==4:
+            self.made(cards)
+
+
+class ThreeCard(Made):
+    level = 4
+    def check_made(self, cards):
+        for cList in itertools.combinations(cards, 3):
+            if self.isSameNum(cList):
+                self.made(cList)
+
+
+class TwoPair(Made):
+    level = 3
+    def check_made(self, cards):
+        for cList in itertools.combinations(cards, 2):
+            if self.isSameNum(cList):
+                for cList2 in itertools.combinations(cards-set(cList), 2):
+                    if self.isSameNum(cList2):
+                        #
+                        # higher first
+                        #
+                        if _compare(cList, cList2) == 1: 
+                            self.made(cList, cList2)
+                        else: 
+                            self.made(cList2, cList)
+
+
+class OnePair(Made):
+    level = 2
+    def check_made(self, cards):
+        for cList in itertools.combinations(cards, 2):
+            if self.isSameNum(cList):
+                self.made(cList)
+
+
+class HighCard(Made):
+    level = 1
+    def check_made(self, cards):
+        self.made(cards)
+
+
+#
+# Quiz line : in/out
+#
+def checkWinner(line):
+    cards = line.split()
+    black = PokerHand(&quot; &quot;.join(cards[:5]))
+    white = PokerHand(&quot; &quot;.join(cards[5:]))
+
+    if black.win(white):return &quot;Black wins.&quot;
+    elif white.win(black):return &quot;White wins.&quot;
+    else: return &quot;Tie.&quot;
+
+
+#
+# Test Code
+#
+class MyTest(unittest.TestCase):
+    def testCard(self):
+        c1 = Card(&quot;2H&quot;)
+        self.assertEquals(&quot;2&quot;, c1.num)
+        self.assertEquals(&quot;H&quot;, c1.pat)
+
+    def testMade(self):
+        fourCard = PokerHand(&quot;2H 2D 2S 2C 3D&quot;)
+        flush = PokerHand(&quot;AH 2H 3H 4H 7H&quot;)
+        straight = PokerHand(&quot;6H 2H 3H 4H 5D&quot;)
+        straightFlush = PokerHand(&quot;6H 2H 3H 4H 5H&quot;)
+        fullHouse = PokerHand(&quot;6H 6D 6S 4C 4H&quot;)
+        threeCard = PokerHand(&quot;6H 6D 6S 4C 5H&quot;)
+        twoPair = PokerHand(&quot;6H 6D 5S 4C 5H&quot;)
+        onePair = PokerHand(&quot;6H 6D 8S 7C 5H&quot;)
+        highCard = PokerHand(&quot;6H 7D 8S 9C JH&quot;)
+
+        self.assertEquals(8, fourCard.getTopMade().level)
+        self.assertEquals(&quot;FourCard&quot;, fourCard.getTopMade().name)
+        self.assertEquals(&quot;Flush&quot;, flush.getTopMade().name)
+        self.assertEquals(&quot;Straight&quot;, straight.getTopMade().name)
+        self.assertEquals(&quot;StraightFlush&quot;, straightFlush.getTopMade().name)
+        self.assertEquals(&quot;FullHouse&quot;, fullHouse.getTopMade().name)
+        self.assertEquals(&quot;ThreeCard&quot;, threeCard.getTopMade().name)
+        self.assertEquals(&quot;TwoPair&quot;, twoPair.getTopMade().name)
+        self.assertEquals(&quot;OnePair&quot;, onePair.getTopMade().name)
+        self.assertEquals(2, onePair.getTopMade().level)
+        self.assertEquals(&quot;HighCard&quot;, highCard.getTopMade().name)
+
+        self.assertTrue(fourCard.win(flush))
+        self.assertTrue(straightFlush.win(fourCard))
+        self.assertTrue(straightFlush.win(onePair))
+
+    def testSamePokerHand(self):
+        b = PokerHand(&quot;2H 2D 2S 2C AH&quot;)
+        w = PokerHand(&quot;3H 3D 3S 3C TH&quot;)
+        self.assertFalse(b.win(w))
+        self.assertTrue(w.win(b))
+
+    def testSameStraightFlush(self):
+        b = PokerHand(&quot;6H 2H 3H 4H 5H&quot;)
+        w = PokerHand(&quot;AH 2H 3H 4H 5H&quot;)
+        self.assertTrue(w.win(b))
+
+    def testSameFullHouse(self):
+        b = PokerHand(&quot;6H 6D 6S 4C 4H&quot;)
+        w = PokerHand(&quot;6H 6D 6S 5C 5H&quot;)
+        self.assertTrue(w.win(b))
+        b = PokerHand(&quot;2H 2D 2S AC AH&quot;)
+        w = PokerHand(&quot;6H 6D 6S 5C 5H&quot;)
+        self.assertTrue(w.win(b))
+
+    def testSameFlush(self):
+        b = PokerHand(&quot;AH 2H 3H 4H 5H&quot;)
+        w = PokerHand(&quot;6H 2H 3H 4H 5H&quot;)
+        self.assertTrue(b.win(w))
+
+    def testSameStraight(self):
+        b = PokerHand(&quot;6H 2H 3H 4H 5D&quot;)
+        w = PokerHand(&quot;AH 2H 3H 4H 5D&quot;)
+        self.assertTrue(w.win(b))
+
+    def testSameThreeCard(self):
+        b = PokerHand(&quot;6H 6D 6S 4C 5H&quot;)
+        w = PokerHand(&quot;3H 3D 3S 4C 5H&quot;)
+        self.assertTrue(b.win(w))
+
+        b = PokerHand(&quot;6H 6D 6S 4C 5H&quot;)
+        w = PokerHand(&quot;6H 6D 6S AC 5H&quot;)
+        self.assertTrue(w.win(b))
+
+        b = PokerHand(&quot;2H 2D 2S AC 5H&quot;)
+        w = PokerHand(&quot;6H 6D 6S 3C 5H&quot;)
+        self.assertTrue(w.win(b))
+
+    def testSameTwoPair(self):
+        b = PokerHand(&quot;6H 6D 5S 5C 8H&quot;)
+        w = PokerHand(&quot;6H 6D 5S 5C 7H&quot;)
+        self.assertTrue(b.win(w))
+
+        b = PokerHand(&quot;7H 7D 5S 5C 7H&quot;)
+        w = PokerHand(&quot;6H 6D 5S 5C 7H&quot;)
+        self.assertTrue(b.win(w))
+
+        b = PokerHand(&quot;6H 6D 5S 5C 7H&quot;)
+        w = PokerHand(&quot;6H 6D 4S 4C 7H&quot;)
+        self.assertTrue(b.win(w))
+
+    def testSameOnePair(self):
+        b = PokerHand(&quot;6H 6D 2S 3C AH&quot;)
+        w = PokerHand(&quot;6H 6D 2S 3C 4H&quot;)
+        self.assertTrue(b.win(w))
+
+        b = PokerHand(&quot;8H 8D 2S 3C 4H&quot;)
+        w = PokerHand(&quot;6H 6D 2S 3C 4H&quot;)
+        self.assertTrue(b.win(w))
+
+    def testCheckWinner(self):
+        print checkWinner(&quot;2H 3D 5S 9C KD 2C 3H 4S 8C AH&quot;)
+        print checkWinner(&quot;2H 4S 4C 2D 4H 2S 8S AS QS 3S&quot;)
+        print checkWinner(&quot;2H 3D 5S 9C KD 2C 3H 4S 8C KH&quot;)
+        print checkWinner(&quot;2H 3D 5S 9C KD 2D 3H 5C 9S KH&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    unittest.main()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/03/13 12:25</p>
+                                <p class="static-profile" style="margin:0;padding:0;">pahkey</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1348"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">오~~고생하셨어요
+글로 봐도 이해하기 힘든데ㅋㅋㅋ</span>
+                                -
+                                <span style="font-size:11px;">
+                                    승학,
+                                    2014/03/13 12:34
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1349"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">포커 룰을 모르는 분들은 문제를 이해하기가 어려울 수도 있을것 같습니다.. ㅎㅎ,, 전 포커를 즐기는 관계로 ㅋ</span>
+                                -
+                                <span style="font-size:11px;">
+                                    pahkey,
+                                    2014/03/13 12:37
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_460"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>JAVA입니다</p>
+<pre><code class="java">알고리즘:
+
+&lt;input_to_value 함수&gt;
+* 한 패(hand) 값 → value[line][hand][5]
+  한 패의 모양(suit)은 flush[][](5장 모두 같은지) 여부만 체크
+* 입력받은 value[][][5]를 작은 순서대로 재배열함 (ORDERING)
+
+&lt;typef 함수&gt;
+＃ comp[][] : 두 패(hand)모두 한 type일 경우, 승패를 위해 비교할 값
+    → High Card, Straight, Flush, Straight Flush) 가장 큰 값 ⇒ comp[l][hand]=value[l][hand][4];
+    → 같은 값의 쌍이 있는 type들) 같은 쌍을 이루는 값 (2Pairs: 큰 값의 쌍, Fullhouse: 3개 같은 값)
+# comp2[][] : 두 패 모두 2Pairs이고, 게다가 두 패의 comp까지 같을 경우,
+    값이 aabbc, aabcc (a&lt;b&lt;c) 등인 경우에는 comp를 제외하고 가장 큰 값(b,c)이 아닌,
+    더 작지만 또다른 쌍을 이루는 값 a를 비교해야 한다 → comp2[][]=a
+    (두 패 모두 2Pairs일 경우에만 사용하는 변수)
+
+* diff[line][hand][4]사용 : value 순서대로 앞숫자와 뒷숫자의 차이
+    diff[][][j]=value[][][j+1]-value[][][j+1];
+* diff[][][]==0 앞뒤 값(value)이 같다는 뜻
+  diff[][][]==1 앞뒤 값(value)이 연속이라는 뜻
+* count0: 한 패(hand)의 diff에서 0의 갯수   (앞뒤 한 쌍의 값이 같은 경우)
+  con0: 한 패의 diff에서 연속으로 0이 있는 경우의 수 (value가 연속으로 같은 값을 가짐)
+* count1: 한 패(hand)의 diff에서 1의 갯수
+    → (count1==4) : Straight (값 5개가 모두 연속)
+
+(?: 0이 아닌 수)
+* count0==1) 한 쌍의 value가 같음 ⇒ One Pair(type=1) 
+* count0==2) diff[][][4]=00??, ?00?, ??00 (con0==1) ⇒ 3개 value 같음: 3 of a Kind(type=3)
+         diff[][][4]=0?0?, ?0?0, 0??0 (con0==0) ⇒ 같은 value가 두 쌍: 2 Pairs(type=2)
+         ※ 0?0?일 경우 값은 aabbc (a&lt;b&lt;c)인데, 나중에 두 패 모두 2 Pairs일 경우 비교값(comp)는 가장 큰 값 c가 아닌,
+        쌍을 이루는 값 b다. 만약 comp(b)까지 같을 경우, c가 아닌 또 다른 쌍의 값 a를 다른 패와 비교해야 하므로,
+        이를 위해 comp2=a 설정.
+        0??0 aabcc인 경우도 마찬가지 comp2=a 
+        comp2[][]=(diff[][][0]==0)?value[][][0](a←aabbc,aabcc):value[][][1](b←abbcc일경우);
+* count0==3) diff[][][4]=000? or ?000 (con0==2) ⇒ 4개값 같음: 4 of a Kind(type=7)
+         diff[][][4]=0?00 or 00?0 (con0==1) ⇒ 3개값, 2개값 같음: Full house(type=6)
+         ※ 00?0일 경우 value는 aaabb인데 (a&lt;b), 나중에 두 패가 모두 Full house일 경우
+        비교할 값(comp)는 큰 수 b가 아닌 더 작지만 3개인 a 이므로,
+        (diff[][][1]==0)(00?0) → comp[][]=value[][][0](a);
+* 그 외 flush여부와 (count1==4)여부를 확인하여 Straight(type=4), Flush(type=5), Straight Flush(type=8) 체크.
+  두 개 이상의 type에 속할 경우 type 번호가 더 높은 쪽에 속하도록 코딩.
+  어느 타입에도 속하지 않으면 High Card(type=0) : Default로 설정
+
+&lt;win 함수&gt;
+* 변수를 type[][], comp, comp2, value 순서대로 이용하여 승패 결정
+</code></pre>
+
+<pre><code class="java">package h_Poker_Hands;
+import java.util.Scanner;
+public class PokerHands {
+
+    public static void main(String[] args) {
+        int N=20; //N:input lines Limit
+        Scanner in=new Scanner(System.in);
+        Function F=new Function();
+        int l, i, hand, L; char c;
+        String[] input=new String[N];
+        System.out.println(&quot;input. To stop inputting, please input '0'&quot;);
+        for(l=0;l&lt;N;l++){ input[l]=in.nextLine(); if(input[l].charAt(0)=='0') break;} L=l; /*Input*/
+
+        int[][][] value=new int[L][2][5]; //value[line][hand][i]
+        boolean[][] flush=new boolean[L][2]; //flush[line][hand]
+        int[][] type=new int[L][2]; //type[line][hand]
+        int[][] comp=new int[L][2]; //compared number: comp[line][hand] ←2 hands=the same type. 
+        int[][] comp2=new int[L][2]; //2 hands=both 2 pairs &amp;&amp; both comps are the same → compare comp2
+        int[] result=new int[L];
+
+        F.input_to_value(input, value, flush);
+        F.typef(value, flush, type, comp, comp2);
+        F.win(type, comp, comp2, value, result);
+
+        for(l=0;l&lt;L;l++){ 
+                //System.out.print(result[l]+&quot; &quot;);
+                switch(result[l]){
+                case 0: System.out.print(&quot;Black wins.&quot;); break;
+                case 1: System.out.print(&quot;White wins.&quot;); break;
+                case 2: System.out.print(&quot;Tie.       &quot;); break;
+                }
+                System.out.println();
+
+                /*PRINT the Process*//*
+                for(hand=0;hand&lt;2;hand++){
+                for(i=0;i&lt;5;i++) System.out.print((value[l][hand][i]&lt;10?&quot; &quot;:&quot;&quot;)+value[l][hand][i]+&quot; &quot;);
+                System.out.print(&quot;type:&quot;+type[l][hand]+&quot; comp:&quot;+((comp[l][hand]&lt;10)?&quot; &quot;:&quot;&quot;)+comp[l][hand]);
+                System.out.print(((hand==0)?&quot; (vs) &quot;:&quot;\n&quot;));
+                }
+                */
+        }
+    }
+}
+
+package h_Poker_Hands;
+import h_Poker_Hands1.Hand;
+public class Function {
+    int l, hand, i,j,k;
+
+    int c_to_v(char c){ //char to value function
+        int n=(int)c;
+        if(n&gt;=50 &amp;&amp; n&lt;=57) return (n-48); //(int)'2'==50, (int)'9'==57
+        else
+            switch(c){
+            case'T': return 10; case'J': return 11;
+            case'Q': return 12; case'K': return 13;
+            case'A': return 14; default: return 0; //0 couldn't be returned.
+            }
+    }
+
+    void input_to_value(String[] input, int[][][] value, boolean[][] flush){
+        int L=value.length, ia=0,ib=0, temp;
+        char c, suit='0';
+        boolean suit_check=true;
+        for(l=0;l&lt;L;l++){
+            for(hand=0; hand&lt;2; hand++){
+                /*input[l] → value[l][hand][5]*/
+                for(i=hand*5, j=0, suit_check=true; i&lt;(hand+1)*5; i++,j++){
+                    c=input[l].charAt(i*3);
+                    value[l][hand][j]=c_to_v(c);
+                }
+                /*flush CHECK*/
+                for(i=hand*5,j=0;i&lt;(hand+1)*5;i++,j++){
+                    if(j==0) suit=input[l].charAt(i*3+1);
+                    else if(input[l].charAt(i*3+1)!=suit){ flush[l][hand]=false; break;}
+                } if(j==5) flush[l][hand]=true;
+                /*ORDERING THE VALUES IN A HAND*/
+                for(j=0;j&lt;4;j++) for(k=1;j+k&lt;5;k++)
+                    if(value[l][hand][j]&gt;value[l][hand][j+k]){
+                        temp=value[l][hand][j];
+                        value[l][hand][j]=value[l][hand][j+k];
+                        value[l][hand][j+k]=temp;
+                    }
+            }
+        }
+    }
+
+    void typef(int[][][] value, boolean[][] flush, int[][] type, int[][] comp, int[][]comp2){
+        int L=value.length, count0,count1,con0,compare_num=0; //con0: continuous 0 of diff
+        int[][][] diff=new int[L][2][4];
+
+        for(l=0;l&lt;L;l++) for(hand=0;hand&lt;2;hand++){
+            count0=0; count1=0; con0=0;
+            type[l][hand]=0; comp[l][hand]=value[l][hand][4]; //0: HighCard ←Default
+
+            for(j=0;j&lt;4;j++){
+                diff[l][hand][j]=value[l][hand][j+1]-value[l][hand][j];
+                switch(diff[l][hand][j]){
+                case 0:
+                    count0++; //count0 of diff : a pair of values are the same.
+                    if(j&gt;0 &amp;&amp; diff[l][hand][j-1]==0) con0++; //con0: continuous 0
+                    if(compare_num&lt;value[l][hand][j]) compare_num=value[l][hand][j];
+                    break;
+                case 1: count1++; break; } //if(count1==4) → Straight
+            } 
+
+            if(count0&gt;0) comp[l][hand]=compare_num; //count0 of diff → comp: pair number    
+            switch(count0){
+            case 1: type[l][hand]=1;
+                break; //1:One Pair
+            case 2:
+                if(con0==1) type[l][hand]=3; //3: 3 of a kind
+                else{type[l][hand]=2; //2:Two Pairs
+                    comp2[l][hand]=(diff[l][hand][0]==0)?value[l][hand][0]:value[l][hand][1];
+                } //comp2: both 2 hands are Two Pairs &amp;&amp; both comps are the same → compare comp2
+                break;
+            case 3:
+                if(con0==2) type[l][hand]=7; //7: 4 of a kind
+                else{type[l][hand]=6;  //6: Full house
+                    if(diff[l][hand][1]==0) comp[l][hand]=value[l][hand][0];
+                    //full house) diff:0010 → value:aaabb → comp=a;(a&lt;b, but not b)
+                    }
+                break;
+            } 
+
+            if(count1==4 || flush[l][hand]){
+                if(count1==4 &amp;&amp; flush[l][hand]) type[l][hand]=8; //8:Straight Flush
+                else if(type[l][hand]&lt;4){
+                    if(flush[l][hand]) type[l][hand]=5; //5:flush
+                    else if(count1==4) type[l][hand]=4; //4:Straight
+                }
+                comp[l][hand]=value[l][hand][4]; //compare_number=the highest number
+            }
+        }
+    }
+
+    void win(int[][] type, int[][] comp, int[][] comp2, int[][][]value, int[] result){
+        int L=type.length;
+        for(l=0;l&lt;L;l++){ //result= 0:Black wins. 1:White wins. 2:Tie.
+        if(type[l][0]!=type[l][1]) result[l]=(type[l][0]&gt;type[l][1])?0:1;
+        else{
+            if(comp[l][0]!=comp[l][1]) result[l]=(comp[l][0]&gt;comp[l][1])?0:1;
+            else if(type[l][0]==2 &amp;&amp; comp2[l][0]!=comp2[l][1]) result[l]=(comp2[l][0]&gt;comp2[l][1])?0:1;
+            else{
+                for(j=4; j&gt;=0 &amp;&amp; value[l][0][j]==value[l][1][j]; j--);
+                if(j==-1) result[l]=2; //2: Tie. ←all values are the same.
+                else result[l]=(value[l][0][j]&gt;value[l][1][j])?0:1; //using the rules for High Card.
+            }
+        }
+        }
+    }
+}
+
+</code></pre>
+
+<pre><code class="java">#입출력예시 ( /*PRINT the Process*//* */ 풀었을 때)
+input. To stop inputting, please input '0'
+2H 3D 5S 9C KD 2C 3H 4S 8C AH
+2H 4S 4C 2D 4H 2S 8S AS QS 3S
+2H 3D 5S 9C KD 2C 3H 4S 8C KH
+2H 3D 5S 9C KD 2D 3H 5C 9S KH
+0
+White wins.
+ 2  3  5  9 13 type:0 comp:13 (vs)  2  3  4  8 14 type:0 comp:14
+Black wins.
+ 2  2  4  4  4 type:6 comp: 4 (vs)  2  3  8 12 14 type:5 comp:14
+Black wins.
+ 2  3  5  9 13 type:0 comp:13 (vs)  2  3  4  8 13 type:0 comp:13
+Tie.       
+ 2  3  5  9 13 type:0 comp:13 (vs)  2  3  5  9 13 type:0 comp:13
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/03/15 14:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Katherine</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1362"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">어휴 디자인하는데 굉장히 오래 걸렸네요ㅋㅋㅋ 제가 문제에서의 포커 룰을 제대로 이해한게 맞나요?ㅋㅋ</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Katherine,
+                                    2014/03/15 15:37
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1364"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">클래스 Hand h를 써서 main에는 for(l=0;l&lt;L;l++) for(hand=0;hand&lt;2;hand++){ F.input_to_value(input[l], h[l][hand], hand); ...}
+ 함수클래스에서는 h.value[j] 이런식으로 하려고 했는데 클래스 쓰니까 오류가 나네요 계속 ㅠㅠ 클래스를 더 공부해봐야겠어요 ㅠㅠ</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Katherine,
+                                    2014/03/15 16:55
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3279"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>먼저 우위에 있는 결과에 대해 점수를 부여합니다.
+이때 스트레이트플러쉬는 스트레이트의 점수 + 플러쉬의 점수가 되게,
+풀하우스는 스리카인드 + 원페어가
+투페어는 원페어 + 원페어가 되게 합니다. 
+또한 각 등급의 점수대는 넉넉하게 주고, 
+같은 등급에서 비교가 가능하도록 해당 패의 카드점수를 추가해줍니다. </p>
+<p>그런다음, 패에 포함된 카드 높은순, 패에 포함되지 않은 카드높은순으로 붙여서 튜플을 만들고
+이를 점수와 같이 리턴합니다. (파이썬은 튜플을 비교할 수 있습니다.) </p>
+<pre><code class="python">from urllib.request import urlopen
+
+'''
+royal-flush      500000
+straight-flush   250000
+four-card        170000
+full-house       160000
+flush            130000
+straight         120000
+three-cards      110000
+two-pair         100000
+one-pair          50000
+high-card            0
+'''
+
+def calculate(cards):
+
+    priorities = &quot;23456789TJQKA&quot;
+    def cardNumber(card):
+        return priorities.index(card[0]) + 2
+
+    cards.sort(key=cardNumber, reverse=True)
+    numbers = [0] * 15
+    patterns = dict(zip('CHSD', [0]*4))
+    order = ''.join((card[0] for card in cards))
+
+    for card in cards:
+        patterns[card[1]] += 1
+        numbers[cardNumber(card)] += 1
+
+    if order == 'TJQKA' and [x for x in numbers if x is 5]:
+        return 50000000, order
+
+    score = 0
+
+    # straight flush: 25000
+    # four of a kind: 17000
+    s = [x for x in cards if numbers[cardNumber(x)] is 4]
+    if s:
+        score += 170000
+        score += cardNumber(s[0])
+        order = ''.join([x[0] for x in s]) + ''.join([x[0] for x in cards if x not in s])
+
+    # flush: 13000
+    s = [x for x in cards if patterns[x[1]] is 5]
+    if s:
+        score += 130000
+        score += cardNumber(order[0])
+
+    # straight: 12000
+    if order[::-1] in priorities:
+        score += 120000
+        score += cardNumber(order[0])
+
+    # three of kind: 11000
+    s = [x for x in cards if numbers[cardNumber(x)] is 3]
+    if s:
+        score += 110000
+        score += cardNumber(s[0])
+        order = ''.join([x[0] for x in s]) + ''.join([x[0] for x in cards if x not in s])
+    # two pairs: 10000
+    # one pairs: 5000
+    s = [x for x in cards if numbers[cardNumber(x)] is 2]
+    for _ in s:
+        score += 25000
+    if s:
+        score += max([cardNumber(x) for x in s])
+        order = ''.join([x[0] for x in s]) + ''.join(x[0] for x in cards if x not in s)
+    # highcard
+    order_number = tuple((priorities.index(x) + 2 for x in order))
+    return score, order_number
+
+def duel(data):
+    b = calculate(data.split()[:5])
+    w = calculate(data.split()[5:])
+    return b &gt; w
+
+m = 0
+with urlopen('http://euler.synap.co.kr/files/poker.txt') as f:
+    for line in f.readlines():
+        m += 1 if duel(line.decode().strip()) else 0
+    print(m)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/03/24 21:31</p>
+                                <p class="static-profile" style="margin:0;padding:0;">룰루랄라</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3492"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">'''
+파이썬3.5.1입니다.
+위에 나온 링크로 테스트 해봤더니 379번이 나오더라고요.
+코드 보시면서 오류 있으시면 댓글로 알려주세요
+'''
+
+shape = ('C','D','H','S')
+numbers = ('2','3','4','5','6','7','8','9','T','J','Q','K','A')
+cardclass = ('HC','OP','TP','TH','ST1','ST2','ST3','FL','FH','FC','SF1','SF2','SF3')
+straight = [tuple(numbers[x+i] for i in range(5)) for x in range(9)]
+
+def cardit(l):
+    dic = []
+    for i in l:
+        dic.append((shape.index(i[1]),numbers.index(i[0])))
+    return sorted(dic)
+
+def check(card):
+    cardshape = [card[x][0] for x in range(len(card))]
+    cardnumbr = [card[x][1] for x in range(len(card))]
+    a = len(set(cardshape))
+    b = len(set(cardnumbr))
+    print(a,b,cardshape,cardnumbr)
+    if a &gt;= 2 and b == 5:
+        for i in range(len(card)):
+            card[i] = tuple(reversed(card[i]))
+        card.sort()
+        return ('HC',numbers[card.pop()[0]],cardnumbr)
+    elif a &gt;= 2 and b == 4:
+        for i in cardnumbr:
+            if cardnumbr.count(i) == 2:
+                return ('OP',numbers[i],cardnumbr)
+    elif a &gt;= 2 and b == 3:
+        for i in cardnumbr:
+            if cardnumbr.count(i) == 3:
+                return ('TH',numbers[i],cardnumbr)
+            elif cardnumbr.count(i) == 2:
+                p = set()
+                for i in cardnumbr:
+                    if cardnumbr.count(i) == 2:
+                        p.add(i)
+                p = list(p)
+                return ('TP',(numbers[int(p[0])],numbers[int(p[1])]),cardnumbr)
+    elif a &gt;= 2 and b == 2:
+        for i in set(cardnumbr):
+            if cardnumbr.count(i) == 3 or cardnumbr.count(i) == 2:
+                return ('FH',tuple(map(numbers.__getitem__,set(cardnumbr))),cardnumbr)
+            elif cardnumbr.count(i) == 4:
+                return ('FC',numbers[i],cardnumbr)
+    elif tuple(sorted(cardnumbr)) in straight or tuple(sorted(cardnumbr)) == ('2','3','4','5','A') \
+            or tuple(sorted(cardnumbr)) == ('A','J','K','Q','T'):
+        if len(set(cardshape)) == 1:
+            if tuple(sorted(cardnumbr)) == ('A','J','K','Q','T'):
+                return ('SF3','0',cardnumbr)
+            elif tuple(sorted(cardnumbr)) == ('2','3','4','5','A'):
+                return ('SF2','0',cardnumbr)
+            else:
+                return ('SF1',numbers[numbers.index(min(cardnumbr))+4],cardnumbr)
+        else:
+            if tuple(sorted(cardnumbr)) == ('A','J','K','Q','T'):
+                return ('ST3','0',cardnumbr)
+            elif tuple(sorted(cardnumbr)) == ('2','3','4','5','A'):
+                return ('ST2','0',cardnumbr)
+            else:
+                return ('ST1',numbers[numbers.index(min(cardnumbr))+4],cardnumbr)
+    elif a == 1:
+        return('FL',numbers[max(numbers.index(numbers[i]) for i in cardnumbr)],cardnumbr)
+
+def compare(B,W):
+    B = check(cardit(B))
+    W = check(cardit(W))
+    if cardclass.index(B[0]) &gt; cardclass.index(W[0]):
+        return 'Black wins.'
+    elif cardclass.index(B[0]) &lt; cardclass.index(W[0]):
+        return 'White wins.'
+    else:
+        if numbers.index(B[1]) &gt; numbers.index(W[1]):
+            return 'Black wins.'
+        elif numbers.index(B[1]) &lt; numbers.index(W[1]):
+            return 'White wins.'
+        else:
+            if sorted(B[2],reverse=True) &gt; sorted(W[2],reverse=True):
+                return 'Black wins.'
+            elif sorted(B[2],reverse=True) &lt; sorted(W[2],reverse=True):
+                return 'White wins.'
+            else:
+                return 'Tie.'
+
+c = input().split()
+B,W = c[:5],c[5:]
+print(compare(B,W))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/04/22 22:26</p>
+                                <p class="static-profile" style="margin:0;padding:0;">차우정</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4078"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">        public class Poker
+        {
+            public List&lt;string&gt; Black { get; set; }
+            public List&lt;string&gt; White { get; set; }
+
+            public Poker(List&lt;string&gt; black, List&lt;string&gt; white)
+            {
+                Black = black;
+                White = white;
+            }
+        }
+
+        public bool IsOnePairCard(List&lt;int&gt; input)
+        {
+            return input.GroupBy(i =&gt; i).Count(i =&gt; input.Count(c =&gt; i.Key == c) == 2) == 1;
+        }
+
+        public bool IsTwoPairCard(List&lt;int&gt; input)
+        {
+            return input.GroupBy(i =&gt; i).Count(i =&gt; input.Count(c =&gt; i.Key == c) == 2) == 2;
+        }
+
+        public bool IsThreeCard(List&lt;int&gt; input)
+        {
+            return input.GroupBy(i =&gt; i).Count(i =&gt; input.Count(c =&gt; i.Key == c) == 3) == 1;
+        }
+
+        public bool IsStraightCard(List&lt;int&gt; input)
+        {
+
+        }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/07/06 15:58</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Straß Böhm Jäger</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4190"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<p>하이카드~스트레이트플러쉬 각각에 0~8까지 스코어 부여, [플레이어 스코어, 역정렬된 카드] 형태로 만든 뒤 &lt;=&gt; 로 비교해서 승자 확인.</p>
+<pre><code class="ruby">to_n = &quot;23456789TJQKA&quot;.chars.zip(2..14).to_h
+hand = -&gt;cards do
+  ranks, suits = cards.map(&amp;:chars).transpose
+  pairs, nums = ranks.map(&amp;to_n).group_by {|_|_}.
+                      map {|k,g| [g.size,k] }.sort.reverse.transpose
+  kind = %w(11111 2111 221 311 32 41).zip([0,1,2,3,6,7]).to_h[pairs.join]
+  strt = 4 if nums.each_cons(2).all? {|i,j| i == j.next }
+  flsh = 5 if suits.uniq.one?; stfl = 8 if strt &amp;&amp; flsh
+  [[kind, strt, flsh, stfl].compact.max, nums]
+end
+
+play_poker = -&gt;file,games=File.readlines(file).map(&amp;:split) do
+  prt_result = -&gt;idx { puts %w(Tie. Black\ wins. White\ wins.)[idx] }
+  games.map {|cards| hand[cards[0,5]] &lt;=&gt; hand[cards[5,5]] }.each &amp;prt_result
+end
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby"># mocking file
+test_data = [&quot;2H 3D 5S 9C KD 2C 3H 4S 8C AH\n&quot;,
+             &quot;2H 4S 4C 2D 4H 2S 8S AS QS 3S\n&quot;,
+             &quot;2H 3D 5S 9C KD 2C 3H 4S 8C KH\n&quot;,
+             &quot;2H 3D 5S 9C KD 2D 3H 5C 9S KH\n&quot;]
+allow(File).to receive(:readlines).and_return(test_data)
+
+results = &quot;White wins.\nBlack wins.\nBlack wins.\nTie.\n&quot;
+expect{ play_poker[&quot;game_data.txt&quot;] }.to output(results).to_stdout
+</code></pre>
+
+<p><strong>Output</strong></p>
+<pre><code class="ruby">play_poker[&quot;input.txt&quot;]
+
+White wins.
+Black wins.
+Black wins.
+Tie.
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/07/21 19:33</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5889"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>흠냐.... ㅠㅠ 왜 377번이 나오는 걸가 ... </p>
+<p>찾기 귀찮아서.. 여기 까지만.....</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#define MAX_COLS 100000
+
+int mapping(char c);
+int highcard(char* player1, char* player2);
+int pokerhands(char* player, int card[]);
+void sort(int n[]);
+
+int b[6], w[6];
+int b_count=0;
+void main() {
+    FILE* f = fopen(&quot;input.txt&quot;, &quot;rt&quot;);
+    char s[MAX_COLS];
+     while (fgets(s, MAX_COLS, f) != NULL) {
+        int result = 0;
+        char black[15];
+        char white[15];
+        white[14] = '\0';
+        black[14] = '\0';
+        memcpy(black, s, sizeof(char) * 14);
+        memmove(white, s+15, sizeof(char) * 14);
+        int j=0;
+        for(int i=0;i&lt;13;i=i+3) {
+            b[j] = mapping(black[i]);
+            j++;
+        }
+        sort(b);
+        j = 0;
+        for(int i=0;i&lt;13;i=i+3) {
+            w[j] = mapping(white[i]);
+            j++;
+        }
+        sort(w);
+
+        int rw, rb;
+        rb = pokerhands(black, b); 
+        rw = pokerhands(white, w); 
+
+        if(rb &gt; rw)
+            b_count++;
+        else if(rb &lt; rw)
+            printf(&quot;&quot;);//printf(&quot;White win!!\n&quot;);
+        else if(rb == rw &amp;&amp; rb!=0) {
+            if(b[5] &gt; w[5])
+                b_count++;
+            /*if(b[5] &lt; w[5])
+                printf(&quot;White win!!\n&quot;);
+            if(b[5] == w[5])
+                printf(&quot;tie!!\n&quot;);*/
+        }
+        else {
+            int result = highcard(black, white);
+            if(result == 0)
+                b_count++;
+            /*else if(result == 1)
+                printf(&quot;White win!!\n&quot;);
+            else 
+                printf(&quot;tie!!\n&quot;);*/
+        }
+    }
+
+
+
+
+    printf(&quot;total result b win %d&quot;, b_count);
+}
+
+// 0 player1 win || 1 player2 win || 2 tie
+int highcard(char* player1, char* player2) {  
+    int result = 2;
+    int index  = 4;
+
+    while(index&gt;=0) {
+        if(b[index] &gt; w[index]) {
+            result = 0;
+            break;
+        }
+        if(b[index] &lt; w[index]) {
+            result = 1;
+            break;
+        }
+        if(b[index] == w[index]) index--;
+    }
+    return result;
+}
+
+//straigt flush 8
+//four card 7
+//full house 6
+//flush  5
+//straigt  4
+//three card 3
+//two pair  2
+//one pair  1
+
+int pokerhands(char* player, int card[]) {
+    bool straight_flush = true;
+    bool flush = true;
+    bool straight = true;
+    char temp = player[1];
+    for(int i=4;i&lt;13;i=i+3) {
+        if(temp != player[i]) {
+            straight_flush = false;
+            flush = false;
+        }
+        temp = player[i];
+    }
+    for(int i=0 ; i&lt;5 ;i++) {
+        if(card[0]+i != card[i]) {
+            straight_flush = false;
+            straight = false;
+        }
+    }
+
+    if(straight_flush) {
+        card[5] = card[4]; 
+        //printf(&quot;straight flush!!!\n&quot;);
+        return 8;
+    }
+
+    //------------------------------------
+    bool four_card = false;
+    bool three_card = false;
+    bool one_pair = false;
+    int count = 0;
+
+    for(int i=0 ; i&lt;13 ;i=i+3) {
+        count = 0;
+        for(int j=0 ; j&lt;13 ;j=j+3) {
+            if(mapping(player[i]) == mapping(player[j])) {
+                count++;
+                if(4==count) {
+                    four_card = true;
+                    card[5] = mapping(player[j]);
+                }
+                if(3==count) {
+                    three_card = true;
+                    card[5] = mapping(player[j]);
+                }
+                if(2==count) {
+                    one_pair = true;
+                    card[5] = mapping(player[j]);
+                }
+            }
+        }
+    }
+
+    if(four_card) {
+        //printf(&quot;four card!!!!\n&quot;);
+        return 7;
+    }
+    //------------------------------------
+
+    //------------------------------------
+    bool full_house = false;
+    bool two_pair = false;
+    int f=0;
+    int j=0;
+    for(int i=0;i&lt;5;i++) {
+        if(card[j] == card[i])
+            continue;
+        else {
+            j = i;
+            f++;
+        }
+    }
+    if(f == 1) full_house = true;
+    if(f == 2) two_pair = true;
+    if(full_house) {
+        card[5] = card[2];
+        //printf(&quot;full house!!!!\n&quot;);
+        return 6;
+    }
+    //------------------------------------
+
+    if(flush) {
+        card[5] = card[4];
+        //printf(&quot;flush!!!!\n&quot;);
+        return 5;
+    }
+    if(straight) {
+        card[5] = card[4];
+        //printf(&quot;straight!!!!\n&quot;);
+        return 4;
+    }
+    if(three_card) {
+        //printf(&quot;three card!!!!\n&quot;);
+        return 3;
+    }
+
+    if(two_pair) {
+        card[5] = card[3];
+        //printf(&quot;two_pair!!!!\n&quot;);
+        return 2;
+    }
+
+    if(one_pair) {
+        //printf(&quot;one_pair!!!!\n&quot;);
+        return 1;
+    }
+
+    return 0;
+}
+
+int mapping(char c) {
+    int val = 0;
+
+    if(c=='A') val = 14;
+    else if(c=='K') val = 13;
+    else if(c=='Q') val = 12;
+    else if(c=='J') val = 11;
+    else if(c=='T') val = 10;
+    else val = c-48;
+
+    return val;
+}
+
+void sort(int n[]) {
+    int min = 100;
+    int temp;
+    int index = 0;
+    for(int i = 0 ; i &lt; 5; i++) {
+        min = 100;
+        for(int j = i ; j&lt;5; j++) {
+            if(min &gt; n[j]) {
+                min = n[j];
+                index = j;
+            }
+        }
+        temp = n[i];
+        n[i] = n[index];
+        n[index] = temp;
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/01/10 16:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">코딩초보</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7416"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파일 입출력을 활용했습니다.</p>
+<pre><code class="cs">// 포커 카드 - C#
+using System;
+using System.IO;
+
+namespace Poker
+{
+    class Program
+    {
+        static void checker(string data, ref int result, ref int[] modi) // result와 modi 지정 및 판정.
+        {
+            int[] num = new int[5]; // 숫자를 저장하는 배열
+            char[] shape = new char[5]; // 모양을 저장하는 배열.
+            for (int i = 0; i &lt; 5; i++)
+            {
+                num[i] = grader(data[i * 3]); // 카드 숫자의 문자를 수치로 변경.
+                shape[i] = data[i * 3 + 1];
+            }
+            result = samefinder(num, ref modi);// 여기서 modi 배열도 정리함.
+            if (result == 0)
+                result = straightfinder(num); // 스트레이트 체크.
+            if (flushfinder(shape)) // 플러시 체크
+                if (result == 5) // 스트레이트면 스트레이트 플러시로
+                    result = 8;
+                else
+                    result = 4; // 그냥 플러시로
+            /* result 값에 대하여
+             * 하이 카드        : 됐고 가장 높은 거 ...0
+             * 원 페어          : 한 쌍의 같은 카드 ...1
+             * 투 페어          : 두 쌍의 같은 카드 ...2
+             * 쓰리 카드        : 세 개의 같은 카드 ...3
+             * 스트레이트       : 연속되는 다섯 개의 카드 ...4
+             * 플러시           : 무늬가 같은 다섯 개의 카드 ...5
+             * 풀 하우스        : 세 개 두 개씩 같은 카드 ...6
+             * 포 카드          : 네 개가 같은 카드 ...7
+             * 스트레이트 플러시: 무늬가 같고 연속되는 다섯 개의 카드 ...8 */
+        }
+        static int grader(int num) // 카드 문자를 우선 순위의 수치로 변경.
+        {
+            switch (num)
+            {
+                case 'A': return 14;
+                case 'K': return 13;
+                case 'Q': return 12;
+                case 'J': return 11;
+                case 'T': return 10;
+                case '9': return 9;
+                case '8': return 8;
+                case '7': return 7;
+                case '6': return 6;
+                case '5': return 5;
+                case '4': return 4;
+                case '3': return 3;
+                case '2': return 2;
+                default: return 0;
+            }
+        }
+        static int samefinder(int[] num, ref int[] modi) // 같은 숫자 찾기 및 modi 정렬.
+        {
+            int same1 = 0, same2 = 0; // 같은 숫자의 값을 저장
+            int counter1 = 0, counter2 = 0; // 같은 숫자가 나온 정도를 저장
+            int result = 0;
+            for (int i = 0; i &lt; 4; i++)
+                for (int j = i + 1; j &lt; 5; j++)
+                    if (num[i] == num[j])
+                    {
+                        if (same1 == 0)
+                            same1 = num[i];
+                        else if (same1 != num[i])
+                            same2 = num[i];
+                        if (num[i] == same1)
+                            counter1++;
+                        else if (num[1] == same2)
+                            counter2++;
+                    }
+            // 둘 같음 1, 셋 같음 3, 넷 같음 6.
+            if ((counter1 == 0 &amp;&amp; counter2 == 1) || (counter1 == 1 &amp;&amp; counter2 == 0)) // 원 페어
+                result = 1;
+            else if (counter1 == 1 &amp;&amp; counter2 == 1) // 투 페어
+                result = 2;
+            else if ((counter1 == 0 &amp;&amp; counter2 == 3) || (counter1 == 3 &amp;&amp; counter2 == 0)) // 쓰리 카드
+                result = 3;
+            else if ((counter1 == 1 &amp;&amp; counter2 == 3) || (counter1 == 3 &amp;&amp; counter2 == 1)) // 풀하우스
+                result = 6;
+            else if ((counter1 == 0 &amp;&amp; counter2 == 6) || (counter1 == 6 &amp;&amp; counter2 == 0)) // 포 카드
+                result = 7;
+            else
+                result = 0;
+            // modi 값 설정.
+            Array.Sort(num); // num을 적은 순으로 정렬, modi에 할당하기 용이하게 한다.
+            if (result == 6) // 풀하우스: 3개 같은 거 -&gt; 2개 같은 거
+                if (counter1 == 3)
+                {
+                    modi[0] = same1;
+                    modi[1] = same2;
+                }
+                else
+                {
+                    modi[0] = same2;
+                    modi[1] = same1;
+                }
+            else if (result == 2) // 투 페어: 같은 거 중 큰 거 -&gt; 같은 거 중 작은 거 -&gt; 나머지 하나
+            {
+                if (counter1 &gt; counter2)
+                {
+                    modi[0] = same1;
+                    modi[1] = same2;
+                }
+                else
+                {
+                    modi[0] = same2;
+                    modi[1] = same1;
+                }
+                modi[2] = num[4];
+            }
+            else if (result != 0) // 같은 거 -&gt; 나머지
+            {
+                if (counter1 &gt; counter2)
+                    modi[0] = same1;
+                else
+                    modi[0] = same2;
+                for (int i = 1; i &lt; 5; i++)
+                    modi[i] = num[4 - i];
+            }
+            else // 무조건 큰 것부터
+                for (int i = 0; i &lt; 5; i++)
+                    modi[i] = num[4 - i];
+            return result;
+        }
+        static int straightfinder(int[] num) // 스트레이트 탐색.
+        {
+            Array.Sort(num);
+            for (int i = 0; i &lt; 4; i++)
+                if (num[i] + 1 != num[i + 1])
+                    return 0;
+            return 5;
+        }
+        static bool flushfinder(char[] shape) // 플러시 탐색.
+        {
+            for (int i = 0; i &lt; 4; i++)
+                for (int j = i + 1; j &lt; 5; j++)
+                    if (shape[i] != shape[j])
+                        return false;
+            return true;
+        }
+        static void Main(string[] args)
+        {
+            int black_result = 0; int[] black_modi = { 0, 0, 0, 0, 0 };
+            int white_result = 0; int[] white_modi = { 0, 0, 0, 0, 0 };
+            // result는 모양 판정 결과, modi는 번호 우선 순위에 대한 배열.
+            FileStream fs = File.Create(&quot;data.txt&quot;); fs.Close(); // 입력 파일 생성
+            Console.WriteLine(&quot;Write your data on data.txt, and press any key.&quot;);
+            // 저 파일에 데이터를 쓴 뒤
+            Console.ReadKey();
+            StreamReader reader = new StreamReader(&quot;data.txt&quot;); // 파일 읽고
+            while (true)
+            {
+                if (reader.Peek() == -1) // 파일 끝이면 나가기
+                    break;
+                string data = reader.ReadLine(); // 일단 한 줄 가져오기
+                checker(data.Remove(14, 15), ref black_result, ref black_modi); // 뒷부분을 잘라 Black 체크.
+                checker(data.Remove(0, 15), ref white_result, ref white_modi); // 앞부분을 잘라 White 체크.
+                // result를 이용해 승패 체크
+                if (black_result &gt; white_result)
+                    Console.WriteLine(&quot;Black wins.&quot;);
+                else if (black_result &lt; white_result)
+                    Console.WriteLine(&quot;White wins.&quot;);
+                else // modi를 이용한 승패 체크.
+                {
+                    for (int i = 0; i &lt; 5; i++)
+                        if (black_modi[i] != white_modi[i])
+                        {
+                            if (black_modi[i] &gt; white_modi[i])
+                                Console.WriteLine(&quot;Black wins.&quot;);
+                            else
+                                Console.WriteLine(&quot;White wins.&quot;);
+                            break;
+                        }
+                        else
+                            if (i == 4)
+                               Console.WriteLine(&quot;Tie.&quot;);
+                }
+            }
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/08 15:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jeong Hoon Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8112"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python3</p>
+<p>hand의 숫자들을 큰 순서로 정렬한 nums와, nums를 카운팅한 pairs를 사용했습니다.</p>
+<p>예를 들어 예시 입력의 두 번째 줄 Black의 hand가 2H 4S 4C 2D 4H 이고 nums, pairs는 다음과 같습니다.</p>
+<p>nums = 4, 4, 4, 2, 2</p>
+<p>pairs = (4, 3) (2, 2)    : 4가 3장, 2가 2장이라는 뜻</p>
+<p>examine함수는 (등급, 같은 등급일 때 차례로 비교할 숫자들) 을 리턴합니다.</p>
+<pre><code class="python">
+hand_prio = ['stifl', 'four card', 'full house', 'flush', 'straight', 'three card', 'two pair', 'one pair', 'high card']
+num_prio = 'AKQJT98765432'
+
+def examine(hand):
+    isflush = lambda x: len(set(x)) == 1
+    isstraight = lambda x: ''.join(x) in (num_prio + 'A')
+
+    nums = sorted([x[0] for x in hand], key = lambda x : num_prio.index(x))
+    images = [x[1] for x in hand]    
+
+    pairs = list(filter(lambda x: x[1] &gt; 0, [(n, nums.count(n)) for n in num_prio]))
+    pairs.sort(key = lambda x : x[1], reverse = True)
+    rnums = list(filter(lambda x: x != pairs[0][0], nums))  # nums에서 첫 번쨰 페어의 숫자 제외
+    #print(nums, pairs)
+
+    if   isflush(images) and isstraight(nums):  return 'stifl', [nums[0]]
+    elif pairs[0][1] is 4:                      return 'four card', [pairs[0][0]]
+    elif pairs[0][1] is 3 and pairs[1][1] is 2: return 'full house', [pairs[0][0]]
+    elif isflush(images):                       return 'flush', nums
+    elif isstraight(nums):                      return 'straight', [nums[0]]
+    elif pairs[0][1] is 3:                      return 'three card', [pairs[0][0]]
+    elif pairs[0][1] is 2 and pairs[1][1] is 2: return 'two pair', [pairs[0][0]] + rnums
+    elif pairs[0][1] is 2:                      return 'one pair', [pairs[0][0]] + rnums
+    else:                                       return 'high card', nums
+
+def judge(black, white):
+    b_rank = hand_prio.index(black[0])
+    w_rank = hand_prio.index(white[0])
+
+    if b_rank == w_rank and black[1] == white[1]:
+        return &quot;Tie.&quot;     
+    elif b_rank &lt; w_rank or b_rank == w_rank and black[1] &lt; white[1]:
+        return &quot;Black wins.&quot;
+    else:
+        return &quot;White wins.&quot;
+
+
+inp = \
+&quot;&quot;&quot;2H 3D 5S 9C KD 2C 3H 4S 8C AH
+2H 4S 4C 2D 4H 2S 8S AS QS 3S
+2H 3D 5S 9C KD 2C 3H 4S 8C KH
+2H 3D 5S 9C KD 2D 3H 5C 9S KH&quot;&quot;&quot;
+
+for line in inp.split('\n'):
+    cards = line.split()
+    print(judge(examine(cards[:5]), examine(cards[5:])))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/01 08:16</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13596"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def hand(card):
+    cdnum = {'T':10,'J':11,'Q':12,'K':13,'A':14}
+    num, sh = [], []
+    for i in card: num.append(i[0]); sh.append(i[1])
+    num = sorted(((cdnum[i] if i in cdnum else int(i)) for i in num), reverse=True)
+
+    nc = {i:num.count(i) for i in set(num)}
+    rep_val = lambda x: sorted((i for i in nc if nc[i] == x), reverse=True)
+    st = bin(sum(2**i for i in num)).count('11111')
+    fl = True if len(set(i for i in sh)) == 1 else False
+
+    if st and fl: return 8, num
+    elif 4 in nc.values(): return 7, rep_val(4)
+    elif sorted(nc.values()) == [2,3]: return 6, rep_val(3)
+    elif fl: return 5, num
+    elif st: return 4, num
+    elif 3 in nc.values(): return 3, rep_val(3)
+    elif sorted(nc.values()) == [1,2,2]: return 2, rep_val(2) + rep_val(1)
+    elif 2 in nc.values(): return 1, rep_val(2) + rep_val(1)
+    else: return 0, num
+
+def winner(bc, wc):
+    bh, wh = hand(bc), hand(wc)
+    if bh == wh: print('Tie.'); return 'Tie'
+    elif bh &gt; wh: print('Black wins.'); return 'Black'
+    elif wh &gt; bh: print('White wins.'); return 'White'
+
+
+sample = open('D:/temp/poker.txt','r',encoding='utf8').read()
+cdli = sample.split('\n')
+print('{} Black win'.format(len([i for i in cdli if winner(i.split()[:5], i.split()[5:]) == 'Black'])))
+</code></pre>
+
+<p><em>결과</em></p>
+<pre><code>...
+Black wins.
+Black wins.
+Tie.
+376 Black win
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/16 04:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15362"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>점수는 족보 한계단이 올라갈때마다 100점씩 높은 점수를 부여하고 점수 이외의 두자리 숫자는 해당 족보의 높은 카드 값을 부여하여 단순히 점수만 비교해도 승패여부를 판단할 수 있습니다.</p>
+<p>기존의 표식을 뒷자리는 무늬, 앞자리는 숫자로 바꿔서 점수를 매깁니다.
+표기법을 바꾸는 함수 대신 random하게 카드를 뽑는 형식으로 만들었습니다.</p>
+<pre><code class="r">transf.deck &lt;- function(x){
+  cmb_deck &lt;- matrix(ncol = 2, nrow = length(x))
+  spt_deck &lt;- strsplit(x, '')
+  for (i in seq(length(x))){
+    cmb_deck[i, 1] &lt;- spt_deck[[i]][1]
+    cmb_deck[i, 2] &lt;- spt_deck[[i]][2]
+  }
+  cmb_deck &lt;- gsub('S', 1, cmb_deck)
+  cmb_deck &lt;- gsub('D', 2, cmb_deck)
+  cmb_deck &lt;- gsub('H', 3, cmb_deck)
+  cmb_deck &lt;- gsub('C', 4, cmb_deck)
+  cmb_deck &lt;- gsub('J', 11, cmb_deck)
+  cmb_deck &lt;- gsub('Q', 12, cmb_deck)
+  cmb_deck &lt;- gsub('K', 13, cmb_deck)
+  cmb_deck &lt;- gsub('A', 14, cmb_deck)
+
+  rem_deck &lt;- rep(NA, length(x))
+  for (i in seq(length(x))){
+    rem_deck[i] &lt;- as.numeric(paste(cmb_deck[i, 1], cmb_deck[i, 2], sep = ''))
+  }
+  return(rem_deck)
+}
+
+deck &lt;- c(141, 21, 31, 41, 51, 61, 71, 81, 91, 101, 111, 121, 131,
+          142, 22, 32, 42, 52, 62, 72, 82, 92, 102, 112, 122, 132,
+          143, 23, 33, 43, 53, 63, 73, 83, 93, 103, 113, 123, 133,
+          144, 24, 34, 44, 54, 64, 74, 84, 94, 104, 114, 124, 134)
+
+shuffle &lt;- sample(c(1:52), 10)
+white &lt;- sort(deck[head(shuffle, 5)])
+black &lt;- sort(deck[tail(shuffle, 5)])
+
+card.pat &lt;- function(x){
+  return(x %% 10)
+}
+card.num &lt;- function(x){
+  return(x %/% 10)
+}
+
+pk &lt;- function(x){
+
+  if (all(card.pat(x) == card.pat(x[1])) &amp; all(c(card.num(x[1]):(card.num(x[1]) + 4)) == card.num(x))){
+    point_pk &lt;- 800 + max(card.num(x))
+  } else if (all(card.num(x[1:4]) == card.num(x[1])) | all(card.num(x[2:5]) == card.num(x[5]))){
+    point_pk &lt;- 700 + max(card.num(x))
+  } else if (all(card.num(x[1:3]) == card.num(x[1])) &amp; all(card.num(x[4:5]) == card.num(x[5]))){
+    point_pk &lt;- 600 + card.num(x[1])
+  } else if (all(card.num(x[1:2]) == card.num(x[1])) &amp; all(card.num(x[3:5]) == card.num(x[5]))){
+    point_pk &lt;- 600 + card.num(x[5])
+  } else if (all(card.pat(x) == card.pat(x[1]))){
+    point_pk &lt;- 500 + max(card.num(x))
+  } else if (all(c(card.num(x[1]):(card.num(x[1]) + 4)) == card.num(x))){
+    point_pk &lt;- 400 + max(card.num(x))
+  } else if (all(card.num(x[1:3]) == card.num(x[1])) | all(card.num(x[2:4]) == card.num(x[3])) | all(card.num(x[3:5]) == card.num(x[5]))){
+    point_pk &lt;- 300 + card.num(x[3])
+  } else if (length(union(card.num(x), NULL)) == 3){
+    temp_pair &lt;- which(table(card.num(x)) == 2)
+    point_pk &lt;- 200 + max(as.numeric(names(temp_pair)))
+  } else if (length(union(card.num(x), NULL)) == 4){
+    temp_pair &lt;- which(table(card.num(x)) == 2)
+    point_pk &lt;- 100 + as.numeric(names(temp_pair))
+  } else {
+    point_pk &lt;- card.num(x[5])
+  }
+
+  if (any(card.num(x) == 14)){
+    du &lt;- x
+    du[card.num(du) == 14] &lt;- du[card.num(du) == 14] - 130
+    du &lt;- sort(du)
+    if (all(card.pat(du) == card.pat(du[1])) &amp; c(card.num(du[1]):(card.num(du[1]) + 5)) == card.num(du)){
+      point_pk &lt;- 800 + max(card.num(du))
+    } else if (c(card.num(du[1]):(card.num(du[1]) + 5)) == card.num(du) &amp; point_pk &lt; 400){
+      point_pk &lt;- 400 + max(card.num(du))
+    }
+  }
+  return(point_pk)
+}
+pb &lt;- function(x, y){
+  if (x &gt; y){
+    print('P1 win')
+  } else if (y &gt; x){
+    print('P2 win')
+  } else if (x &gt; 200 &amp; x &lt; 300){
+    tp_x &lt;- as.numeric(names(which(table(card.num(x)) == 1)))
+    tp_y &lt;- as.numeric(names(which(table(card.num(y)) == 1)))
+    if (x &gt; y){
+      print('P1 win')
+    } else if (y &lt; x){
+      print('P2 win')
+    }
+  } else if (x &gt; 100 &amp; x &lt; 200){
+    tp_x &lt;- max(as.numeric(names(which(table(card.num(x)) == 1))))
+    tp_y &lt;- max(as.numeric(names(which(table(card.num(y)) == 1))))
+    if (x &gt; y){
+      print('P1 win')
+    } else if (y &lt; x){
+      print('P2 win')
+    }
+  }
+}
+
+point_white &lt;- pk(white)
+point_black &lt;- pk(black)
+
+pb(point_white, point_black)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/11/30 13:27</p>
+                                <p class="static-profile" style="margin:0;padding:0;">physche</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28867"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>python</p>
+<pre><code class="python">import random
+
+shape_list = [&quot;c&quot;, &quot;s&quot;, &quot;h&quot;, &quot;d&quot;]
+number_list = [&quot;A&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;7&quot;, &quot;8&quot;, &quot;9&quot;, &quot;J&quot;, &quot;Q&quot;, &quot;K&quot;]
+deck = [{&quot;shape&quot;:s, &quot;number&quot;:n} for s in shape_list
+              for n in number_list]
+
+def straight_flush(player):
+    if flush(player) == 1:
+        if straight(player) == 1:
+            return 1
+    else:
+        return 0
+
+def countX(x, num):
+    def countY(y):
+        return num.count(y) == x
+    return countY
+
+def remove_num(x, y, num):
+    for i in range(y):
+        num.remove(x)
+
+def four_card(player):
+    num = [player[0][&quot;number&quot;], player[1][&quot;number&quot;], player[2][&quot;number&quot;], player[3][&quot;number&quot;], player[4][&quot;number&quot;]]
+    score4 = countX(&quot;4&quot;, num)
+
+    for i in number_list:
+        flag = score4(i)
+        if flag == True:
+            return 1
+
+def full_house(player):
+    if three_card(player) == 1:
+        num = [player[0][&quot;number&quot;], player[1][&quot;number&quot;], player[2][&quot;number&quot;], player[3][&quot;number&quot;], player[4][&quot;number&quot;]]
+        score3 = countX(&quot;3&quot;, num)
+
+        for i in number_list:
+            flag = score3(i)
+            if flag == True:
+                remove_num(i, 3, num)
+                if num[0] == num[1]:
+                    return 1
+
+def flush(player):
+    for i in range(4):
+        if player[i][&quot;shape&quot;] == player[i+1][&quot;shape&quot;]:
+            pass
+        else:
+            return 0
+    return 1
+
+def straight(player):
+    num = [player[0][&quot;number&quot;], player[1][&quot;number&quot;], player[2][&quot;number&quot;], player[3][&quot;number&quot;], player[4][&quot;number&quot;]]
+    if &quot;A&quot; in num:
+        if &quot;2&quot; in num:
+            if &quot;3&quot; in num:
+                if &quot;4&quot; in num:
+                    if &quot;5&quot; in num:
+                        return 1
+    if &quot;2&quot; in num:
+        if &quot;3&quot; in num:
+            if &quot;4&quot; in num:
+                if &quot;5&quot; in num:
+                    if &quot;6&quot; in num:
+                        return 1
+    if &quot;3&quot; in num:
+        if &quot;4&quot; in num:
+            if &quot;5&quot; in num:
+                if &quot;6&quot; in num:
+                    if &quot;7&quot; in num:
+                        return 1
+    if &quot;4&quot; in num:
+        if &quot;5&quot; in num:
+            if &quot;6&quot; in num:
+                if &quot;7&quot; in num:
+                    if &quot;8&quot; in num:
+                        return 1
+    if &quot;5&quot; in num:
+        if &quot;6&quot; in num:
+            if &quot;7&quot; in num:
+                if &quot;8&quot; in num:
+                    if &quot;9&quot; in num:
+                        return 1
+    if &quot;6&quot; in num:
+        if &quot;7&quot; in num:
+            if &quot;8&quot; in num:
+                if &quot;9&quot; in num:
+                    if &quot;J&quot; in num:
+                        return 1
+    if &quot;7&quot; in num:
+        if &quot;8&quot; in num:
+            if &quot;9&quot; in num:
+                if &quot;J&quot; in num:
+                    if &quot;Q&quot; in num:
+                        return 1
+    if &quot;8&quot; in num:
+        if &quot;9&quot; in num:
+            if &quot;J&quot; in num:
+                if &quot;Q&quot; in num:
+                    if &quot;K&quot; in num:
+                        return 1
+    else :
+        return 0
+
+def three_card(player):
+    num = [player[0][&quot;number&quot;], player[1][&quot;number&quot;], player[2][&quot;number&quot;], player[3][&quot;number&quot;], player[4][&quot;number&quot;]]
+    score3 = countX(3, num)
+
+    for i in number_list:
+        flag = score3(i)
+        if flag == True:
+            return 1
+
+def two_pairs(player):
+    num = [player[0][&quot;number&quot;], player[1][&quot;number&quot;], player[2][&quot;number&quot;], player[3][&quot;number&quot;], player[4][&quot;number&quot;]]
+    score2 = countX(2, num)
+
+    for i in number_list:
+        flag = score2(i)
+        if flag == True:
+            remove_num(i, 2, num)
+            if num[0] == num[1]:
+                return 1
+            elif num[0] == num[2]:
+                return 1
+            elif num[1] == num[2]:
+                return 1
+
+def one_pair(player): 
+    num = [player[0][&quot;number&quot;], player[1][&quot;number&quot;], player[2][&quot;number&quot;], player[3][&quot;number&quot;], player[4][&quot;number&quot;]]
+    score2 = countX(2, num)
+
+    for i in number_list:
+        flag = score2(i)
+        if flag == True:
+            return 1
+
+def high_card(Black, White):
+    black_big =  big_number_finder(Black)
+    white_big = big_number_finder(White)
+
+    if black_big &gt; white_big:
+        print(&quot;Black이 승리하였습니다&quot;)
+    if black_big &lt; white_big:
+        print(&quot;White가 승리하였습니다&quot;)
+    if black_big == white_big:
+        print(&quot;무승부입니다&quot;)
+
+def big_number_finder(player): 
+    num = [player[0][&quot;number&quot;], player[1][&quot;number&quot;], player[2][&quot;number&quot;], player[3][&quot;number&quot;], player[4][&quot;number&quot;]]
+
+    if &quot;A&quot; in num:
+        return 11
+    elif &quot;K&quot; in num:
+        return 10
+    elif &quot;Q&quot; in num:
+        return 9
+    elif &quot;J&quot; in num:
+        return 8
+    elif &quot;9&quot; in num:
+        return 7
+    elif &quot;8&quot; in num:
+        return 6
+    elif &quot;7&quot; in num:
+        return 5
+    elif &quot;6&quot; in num:
+        return 4
+    elif &quot;5&quot; in num:
+        return 3
+    elif &quot;4&quot; in num:
+        return 2
+    elif &quot;3&quot; in num:
+        return 1
+    elif &quot;2&quot; in num:
+        return 0
+def who_is_winner(Black, White): #승리판정
+    black_score = 0
+    white_score = 0
+    if straight_flush(Black) == 1:
+        black_score = 8
+        print(&quot;Black은 스트레이트 플러쉬입니다&quot;)
+    else:
+        if four_card(Black) == 1:
+            black_score = 7
+            print(&quot;Black은 포카드입니다&quot;)
+        else:
+            if full_house(Black) == 1:
+                black_score = 6
+                print(&quot;Black은 풀하우스입니다&quot;)
+            else:
+                if flush(Black) == 1:
+                    black_score = 5
+                    print(&quot;Black은 플러쉬입니다&quot;)
+                else :
+                    if straight(Black) == 1:
+                        black_score = 4
+                        print(&quot;Black은 스트레이트입니다&quot;)
+                    else:
+                        if three_card(Black) == 1:
+                            black_score = 3
+                            print(&quot;Black은 쓰리카드입니다&quot;)
+                        else:
+                            if two_pairs(Black) == 1:
+                                black_score = 2
+                                print(&quot;Black은 투페어입니다&quot;)
+                            else:
+                                if one_pair(Black) == 1:
+                                    black_score = 1
+                                    print(&quot;Black은 원페어입니다&quot;)
+                                else:
+                                    black_score = 0
+                                    print(&quot;Black은 하이카드입니다&quot;)
+    if straight_flush(White) == 1:
+        white_score = 8
+        print(&quot;White은 스트레이트 플러쉬입니다&quot;)
+    else:
+        if four_card(White) == 1:
+            white_score = 7
+            print(&quot;White은 포카드입니다&quot;)
+        else:
+            if full_house(White) == 1:
+                white_score = 6
+                print(&quot;White은 풀하우스입니다&quot;)
+            else:
+                if flush(White) == 1:
+                    white_score = 5
+                    print(&quot;White은 플러쉬입니다&quot;)
+                else :
+                    if straight(White) == 1:
+                        white_score = 4
+                        print(&quot;White은 스트레이트입니다&quot;)
+                    else:
+                        if three_card(White) == 1:
+                            white_score = 3
+                            print(&quot;White은 쓰리카드입니다&quot;)
+                        else:
+                            if two_pairs(White) == 1:
+                                white_score = 2
+                                print(&quot;White은 투페어입니다&quot;)
+                            else:
+                                if one_pair(White) == 1:
+                                    white_score = 1
+                                    print(&quot;White은 원페어입니다&quot;)
+                                else:
+                                    white_score = 0
+                                    print(&quot;White은 하이카드입니다&quot;)
+    #승리판정#
+    if black_score &gt; white_score:
+        print(&quot;Black이 승리하였습니다.&quot;)
+    elif black_score &lt; white_score:
+        print(&quot;white가 승리하였습니다.&quot;)
+    elif black_score == white_score:
+        if black_score == 0 and white_score == 0:
+            high_card(Black,White)
+        same(Black, White, black_score) #do 같은 족보(하이카드 제외)일경우 승리판정
+
+def same(player1, player2, score): #같은 족보일경우(하이카드 제외) 승리판정 
+    if score == 8: #스트레이트 플러쉬
+        black_score = big_number_finder(Black)
+        white_score = big_number_finder(White)
+        if black_score &gt; white_score:
+            print(&quot;Black이 승리하였습니다&quot;)
+        if black_score &lt; white_score:
+            print(&quot;White이 승리하였습니다&quot;)
+        if black_score == white_score:
+            print(&quot;무승부 입니다.&quot;)
+    if score == 7: #포카드
+        black_score = big_number_finder(Black)
+        white_score = big_number_finder(White)
+        if black_score &gt; white_score:
+            print(&quot;Black이 승리하였습니다&quot;)
+        if black_score &lt; white_score:
+            print(&quot;White이 승리하였습니다&quot;)
+        if black_score == white_score:
+            print(&quot;무승부 입니다.&quot;)
+    if score == 6: #풀하우스
+        black_score = full_house_finder(Black)
+        white_score = full_house_finder(White)
+        if black_score &gt; white_score:
+            print(&quot;Black이 승리하였습니다&quot;)
+        if black_score &lt; white_score:
+            print(&quot;White이 승리하였습니다&quot;)
+        if black_score == white_score:
+            print(&quot;무승부 입니다.&quot;)
+    if score == 5: #플러쉬
+        black_score = big_number_finder(Black)
+        white_score = big_number_finder(White)
+        if black_score &gt; white_score:
+            print(&quot;Black이 승리하였습니다&quot;)
+        if black_score &lt; white_score:
+            print(&quot;White이 승리하였습니다&quot;)
+        if black_score == white_score:
+            print(&quot;무승부 입니다.&quot;)
+    if score == 4: #스트레이트
+        black_score = big_number_finder(Black)
+        white_score = big_number_finder(White)
+        if black_score &gt; white_score:
+            print(&quot;Black이 승리하였습니다&quot;)
+        if black_score &lt; white_score:
+            print(&quot;White이 승리하였습니다&quot;)
+        if black_score == white_score:
+            print(&quot;무승부 입니다.&quot;)
+    if score == 3: #쓰리카드
+        black_score = three_card_finder(Black)
+        white_score = three_card_finder(White)
+        if black_score &gt; white_score:
+            print(&quot;Black이 승리하였습니다&quot;)
+        if black_score &lt; white_score:
+            print(&quot;White이 승리하였습니다&quot;)
+        if black_score == white_score:
+            print(&quot;무승부 입니다.&quot;)
+    if score == 2: #투페어
+        black_pair = two_pairs_finder(Black)
+        white_pair = two_pairs_finder(White)
+
+        if black_pair[0] &gt; black_pair[1]:
+            bp = 1
+        elif black_pair[0] &lt; black_pair[1]:
+            bp = 2
+        elif white_pair[0] &gt; white_pair[1]:
+            wp = 3
+        elif white_pair[0] &lt; white_pair[1]:
+            wp = 4
+
+        if bp == 1 and wp == 3: #black_pair[0], white_pair[0] 비교
+            if black_pair[0] &gt; white_pair[0]:
+                print(&quot;Black의 승리입니다&quot;)
+            if black_pair[0] &lt; white_pair[0]:
+                print(&quot;White의 승리입니다&quot;)
+            if black_pair[0] == white_pair[0]:
+                if black_pair[2] &gt; white_pair[2]:
+                    print(&quot;Black의 승리입니다&quot;)
+                if black_pair[2] &lt; white_pair[2]:
+                    print(&quot;White의 승리입니다&quot;)
+                if black_pair[2] == white_pair[2]:
+                    print(&quot;무승부입니다&quot;)
+        elif bp == 1 and wp == 4: #black_pair[0], white_pair[1] 비교
+            if black_pair[0] &gt; white_pair[1]:
+                print(&quot;Black의 승리입니다&quot;)
+            if black_pair[0] &lt; white_pair[1]:
+                print(&quot;White의 승리입니다&quot;)
+            if black_pair[0] == white_pair[1]:
+                if black_pair[2] &gt; white_pair[2]:
+                    print(&quot;Black의 승리입니다&quot;)
+                if black_pair[2] &lt; white_pair[2]:
+                    print(&quot;White의 승리입니다&quot;)
+                if black_pair[2] == white_pair[2]:
+                    print(&quot;무승부입니다&quot;)
+        elif bp == 2 and wp == 3: #black_pair[1], white_pair[0] 비교
+            if black_pair[1] &gt; white_pair[0]:
+                print(&quot;Black의 승리입니다&quot;)
+            if black_pair[1] &lt; white_pair[0]:
+                print(&quot;White의 승리입니다&quot;)
+            if black_pair[1] == white_pair[0]:
+                if black_pair[2] &gt; white_pair[2]:
+                    print(&quot;Black의 승리입니다&quot;)
+                if black_pair[2] &lt; white_pair[2]:
+                    print(&quot;White의 승리입니다&quot;)
+                if black_pair[2] == white_pair[2]:
+                    print(&quot;무승부입니다&quot;)
+        elif bp == 2 and wp == 4: #black_pair[1], white_pair[1] 비교
+            if black_pair[1] &gt; white_pair[1]:
+                print(&quot;Black의 승리입니다&quot;)
+            if black_pair[1] &lt; white_pair[1]:
+                print(&quot;White의 승리입니다&quot;)
+            if black_pair[1] == white_pair[1]:
+                if black_pair[2] &gt; white_pair[2]:
+                    print(&quot;Black의 승리입니다&quot;)
+                if black_pair[2] &lt; white_pair[2]:
+                    print(&quot;White의 승리입니다&quot;)
+                if black_pair[2] == white_pair[2]:
+                    print(&quot;무승부입니다&quot;)
+
+    if score == 1: #원페어
+        black_score = one_pair_finder(Black)
+        white_score = one_pair_finder(White)
+        if black_score &gt; white_score:
+            print(&quot;Black이 승리하였습니다&quot;)
+        if black_score &lt; white_score:
+            print(&quot;White이 승리하였습니다&quot;)
+        if black_score == white_score:
+            print(&quot;무승부 입니다.&quot;)
+
+def one_pair_finder(player):
+    num = [player[0][&quot;number&quot;], player[1][&quot;number&quot;], player[2][&quot;number&quot;], player[3][&quot;number&quot;], player[4][&quot;number&quot;]]
+
+    for n in number_list:
+        if num.count(n) == 2:
+            if n == &quot;A&quot;:
+                return 13
+            if n == &quot;J&quot;:
+                return 10
+            if n == &quot;Q&quot;:
+                return 11
+            if n == &quot;K&quot;:
+                return 12
+            return n
+
+def one_pair_finder2(player):
+    num = [player[0][&quot;number&quot;], player[1][&quot;number&quot;], player[2][&quot;number&quot;], player[3][&quot;number&quot;], player[4][&quot;number&quot;]]
+    score = one_pair_finder(player)
+    if score == 13:
+        remove_num(&quot;A&quot;, 2, num)
+    elif score == 2:
+        remove_num(&quot;2&quot;, 2, num)
+    elif score == 3:
+        remove_num(&quot;3&quot;, 2, num)
+    elif score == 4:
+        remove_num(&quot;4&quot;, 2, num)
+    elif score == 5:
+        remove_num(&quot;5&quot;, 2, num)
+    elif score == 6:
+        remove_num(&quot;6&quot;, 2, num)
+    elif score == 7:
+        remove_num(&quot;7&quot;, 2, num)
+    elif score == 8:
+        remove_num(&quot;8&quot;, 2, num)
+    elif score == 9:
+        remove_num(&quot;9&quot;, 2, num)
+    elif score == 10:
+        remove_num(&quot;J&quot;, 2, num)
+    elif score == 11:
+        remove_num(&quot;Q&quot;, 2, num)
+    elif score == 12:
+        remove_num(&quot;K&quot;, 2, num)
+
+    for n in number_list:
+        if num.count(n) == 2:
+            if n == &quot;A&quot;:
+                return 13
+            if n == &quot;J&quot;:
+                return 10
+            if n == &quot;Q&quot;:
+                return 11
+            if n == &quot;K&quot;:
+                return 12
+            return n
+
+def remainder_finder(player):
+    num = [player[0][&quot;number&quot;], player[1][&quot;number&quot;], player[2][&quot;number&quot;], player[3][&quot;number&quot;], player[4][&quot;number&quot;]]
+    score = one_pair_finder(player)
+    if score == 13:
+        remove_num(&quot;A&quot;, 2, num)
+    elif score == 2:
+        remove_num(&quot;A&quot;, 2, num)
+    elif score == 3:
+        remove_num(&quot;A&quot;, 2, num)
+    elif score == 4:
+        remove_num(&quot;A&quot;, 2, num)
+    elif score == 5:
+        remove_num(&quot;A&quot;, 2, num)
+    elif score == 6:
+        remove_num(&quot;A&quot;, 2, num)
+    elif score == 7:
+        remove_num(&quot;A&quot;, 2, num)
+    elif score == 8:
+        remove_num(&quot;A&quot;, 2, num)
+    elif score == 9:
+        remove_num(&quot;A&quot;, 2, num)
+    elif score == 10:
+        remove_num(&quot;A&quot;, 2, num)
+    elif score == 11:
+        remove_num(&quot;A&quot;, 2, num)
+    elif score == 12:
+        remove_num(&quot;A&quot;, 2, num)
+
+    if &quot;A&quot; in num:
+        remove_num(&quot;A&quot;, 2, num)
+    elif &quot;2&quot; in num:
+        remove_num(&quot;A&quot;, 2, num)
+    elif &quot;3&quot; in num:
+        remove_num(&quot;A&quot;, 2, num)
+    elif &quot;4&quot; in num:
+        remove_num(&quot;A&quot;, 2, num)
+    elif &quot;5&quot; in num:
+        remove_num(&quot;A&quot;, 2, num)
+    elif &quot;6&quot; in num:
+        remove_num(&quot;A&quot;, 2, num)
+    elif &quot;7&quot; in num:
+        remove_num(&quot;A&quot;, 2, num)
+    elif &quot;8&quot; in num:
+        remove_num(&quot;A&quot;, 2, num)
+    elif &quot;9&quot; in num:
+        remove_num(&quot;A&quot;, 2, num)
+    elif &quot;J&quot; in num:
+        remove_num(&quot;A&quot;, 2, num)
+    elif &quot;Q&quot; in num:
+        remove_num(&quot;A&quot;, 2, num)
+    elif &quot;K&quot; in num:
+        remove_num(&quot;A&quot;, 2, num)
+    return num 
+
+def three_card_finder(player):
+    num = [player[0][&quot;number&quot;], player[1][&quot;number&quot;], player[2][&quot;number&quot;], player[3][&quot;number&quot;], player[4][&quot;number&quot;]]
+
+    for n in number_list:
+        if num.count(n) == 3:
+            if n == &quot;A&quot;:
+                return 13
+            if n == &quot;J&quot;:
+                return 10
+            if n == &quot;Q&quot;:
+                return 11
+            if n == &quot;K&quot;:
+                return 12
+            return n
+
+def two_pairs_finder(player):
+    one_score = one_pair_finder #첫번째 페어쌍
+    two_score = one_pair_finder2 #두번째 페어쌍
+    remainder = remainder_finder(player) #나머지
+
+    if remainder == &quot;A&quot;:
+        remainder_score = 13
+    if remainder == &quot;2&quot;:
+        remainder_score = 2
+    if remainder == &quot;3&quot;:
+        remainder_score = 3
+    if remainder == &quot;4&quot;:
+        remainder_score = 4
+    if remainder == &quot;5&quot;:
+        remainder_score = 5
+    if remainder == &quot;6&quot;:
+        remainder_score = 6
+    if remainder == &quot;7&quot;:
+        remainder_score = 7
+    if remainder == &quot;8&quot;:
+        remainder_score = 8
+    if remainder == &quot;9&quot;:
+        remainder_score = 9
+    if remainder == &quot;J&quot;:
+        remainder_score = 10
+    if remainder == &quot;Q&quot;:
+        remainder_score = 11
+    if remainder == &quot;K&quot;:
+        remainder_score = 12
+    return [one_score, two_score, remainder_score]
+
+def full_house_finder(player):
+    num = [player[0][&quot;number&quot;], player[1][&quot;number&quot;], player[2][&quot;number&quot;], player[3][&quot;number&quot;], player[4][&quot;number&quot;]]
+
+    for n in number_list:
+        if num.count(n) == 3:
+            if n == &quot;A&quot;:
+                return 13
+            if n == &quot;J&quot;:
+                return 10
+            if n == &quot;Q&quot;:
+                return 11
+            if n == &quot;K&quot;:
+                return 12
+            return n
+
+pick = random.sample(deck,10)
+Black = pick[:5]
+White = pick[5:]
+
+print(f&quot;Black: {Black}&quot;)
+print(f&quot;White: {White}&quot;)
+
+who_is_winner(Black, White)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/12/11 23:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김성범</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29836"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">number = {'2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, 'T':10, 'J':11, 'Q':12, 'K':13, 'A':14}
+
+def pair(lst):
+    dict = {}
+    for c in lst:
+        if c[0] not in dict:
+            dict[c[0]] = 0
+        dict[c[0]] += 1
+
+    pairSu = 3
+    while pairSu &gt; 1:
+        pair = 0
+        for k in dict:
+            if dict[k]== pairSu:
+                pair = max(pair, number[k])
+        if pair&gt;0:
+            return pair*(10**(pairSu-1))
+        pairSu -= 1
+    return 0
+
+def straight(lst):
+    su = []
+    for l in lst:
+        su.append(number[l[0]])
+    su = sorted(su)
+    if su==[2,3,4,5,14]:
+        return 14*(10**3)
+
+    for i in range(1,5):
+        if su[i-1] + 1 != su[i]:
+            return pair(lst)
+    return su[-1] * (10**3)
+
+def flush(lst):
+    cnt = 0
+    su = number[lst[0][0]]
+    for c in lst:
+        if lst[0][1]==c[1]:
+            cnt += 1
+            su = max(su, number[c[0]])
+    if cnt == 5:
+        return su * (10**4)
+    return straight(lst)
+
+def fullHouse(lst):
+    dict = {}
+    for c in lst:
+        if c[0] not in dict:
+            dict[c[0]] = 0
+        dict[c[0]] += 1
+    if len(dict)==2:
+        for k in dict:
+            if dict[k]==3:
+                return number[k] * (10**5)
+    return flush(lst)    
+
+def fourcard(lst):
+    for i in [0, 1]:
+        cnt = 0
+        for c in lst:
+            if lst[i][0]==c[0]:
+                cnt += 1
+        if cnt == 4:
+            return num[lst[i][0]] * (10**6)
+    return fullHouse(lst)
+
+def straight_flush(lst):
+    su = []
+    for l in lst:
+        if lst[0][1]==l[1]:
+            su.append(number[l[0]])
+        else:
+            return fourcard(lst)
+    su = sorted(su)
+    if su==[2,3,4,5,14]:
+        return 14*(10**7)
+
+    for i in range(1,5):
+        if su[i-1]+1 != su[i]:
+            return su[-1] * 10000
+    return su[-1]*(10**7)
+
+def game(black, white):
+    B = straight_flush(black)
+    W = straight_flush(white)
+    if B &gt; W:
+        return 0
+    elif B==W and (B&lt;=140 or 20000&lt;B&lt;=1400000):
+        bsu, wsu = [], []
+        for i in range(5):
+            bsu.append(number[black[i][0]])
+            wsu.append(number[white[i][0]])
+        bsu, wsu = sorted(bsu), sorted(wsu)
+        for i in range(4,-1,-1):
+            if bsu[i]==wsu[i]: continue
+            elif bsu[i]&gt;wsu[i]: return 0
+            else: return 1
+        return 2
+    return 1
+
+
+inp = &quot;&quot;&quot;2H 3D 5S 9C KD 2C 3H 4S 8C AH
+2H 4S 4C 2D 4H 2S 8S AS QS 3S
+2H 3D 5S 9C KD 2C 3H 4S 8C KH
+2H 3D 5S 9C KD 2D 3H 5C 9S KH&quot;&quot;&quot;
+
+data = [d.split() for d in inp.split('\n')]
+
+for d in data:
+    bCards = d[:5]
+    wCards = d[5:]
+    res = game(bCards, wCards)
+    if res==0: print(&quot;Black wins.&quot;)
+    elif res==1: print(&quot;White wins.&quot;)
+    else: print(&quot;Tie.&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2024/01/15 22:00</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_30184"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>JAVA입니다.
+같은 값을 가진 카드의 등장 횟수를 값을 키, 등장 횟수를 값으로 하는 hashtable로 저장한 다음, 이를 다시 등장 횟수를 인덱스, 값을 값으로 하는 list로 변환하여 값을 내림차순으로 정렬하였습니다. 그 다음 각 조건을 확인하여 비교 대상이 되는 등장 횟수의 카드의 값들(예를 들어 쓰리 카드에서는 등장 횟수가 3인 카드만, 하이 카드는 등장 횟수가 1인 카드 전체 등)을 valuesToCompare에 넣고, compare 메소드에서 우선 두 Hand의 랭크를 비교하고, 같으면 두 Hand의 valuesToCompare를 우선순위 순으로 비교하는 방식으로 승패를 정했습니다.
+실행 결과 black이 376번 승리하였습니다.</p>
+<pre><code class="java">package question3.poker_hands;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.List;
+
+public class Main {
+
+    public static void main(String[] args) throws FileNotFoundException, IOException {
+        BufferedReader br = new BufferedReader
+                (new FileReader(Main.class.getResource(&quot;input.txt&quot;).getPath()));
+
+        Hashtable&lt;Character, Integer&gt; valueToNum = new Hashtable&lt;Character, Integer&gt;();
+
+        for (int i = 2; i &lt; 10; i++) {
+            valueToNum.put(Integer.toString(i).charAt(0), i);
+        }
+        valueToNum.put('T', 10);
+        valueToNum.put('J', 11);
+        valueToNum.put('Q', 12);
+        valueToNum.put('K', 13);
+        valueToNum.put('A', 14);
+
+        List&lt;Integer&gt; results = new ArrayList&lt;Integer&gt;();
+
+        while(true) {
+            String line = br.readLine();
+            if(line == null) {
+                break;
+            }
+
+            Card[] black = new Card[5];
+            Card[] white = new Card[5];
+
+            String[] cardStrs = line.split(&quot; &quot;);
+
+            for (int i = 0; i &lt; 5; i++) {
+                black[i] = new Card
+                        (cardStrs[i].charAt(1), valueToNum.get(cardStrs[i].charAt(0)));
+            }
+            for (int i = 5; i &lt; 10; i++) {
+                white[i-5] = new Card
+                        (cardStrs[i].charAt(1), valueToNum.get(cardStrs[i].charAt(0)));
+            }
+
+            Hand blackHand = new Hand(black);
+            Hand whiteHand = new Hand(white);
+
+            int result = blackHand.compare(whiteHand);
+            results.add(result);
+        }
+
+        br.close();
+
+        int blackWin = 0;
+
+        for (Integer integer : results) {
+            switch (integer) {
+            case 1:
+                System.out.println(&quot;Black wins.&quot;);
+                blackWin++;
+                break;
+            case -1:
+                System.out.println(&quot;White wins.&quot;);
+                break;
+            default:
+                System.out.println(&quot;Tie.&quot;);
+                break;
+            }
+        }
+
+        System.out.println(blackWin);
+    }
+
+}
+</code></pre>
+
+<hr />
+<pre><code class="java">package question3.poker_hands;
+
+public class Card {
+    char kind;
+    int value;
+
+    public Card(char kind, int value) {
+        this.kind = kind;
+        this.value = value;
+    }
+}
+</code></pre>
+
+<hr />
+<pre><code class="java">package question3.poker_hands;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Map;
+
+public class Hand {
+    Card[] cards;
+    boolean isFlush;
+    boolean isStraight;
+    int maxValue;
+    int minValue;
+    Hashtable&lt;Integer, Integer&gt; valueFrequency;
+    List&lt;List&lt;Integer&gt;&gt; cardCombinations;
+    //0~4번 인덱스: 빈도수가 1~5회인 카드의 value들 저장
+    int rank;
+    List&lt;Integer&gt; valuesToCompare;
+
+    public Hand(Card[] cards) {
+        this.cards = cards;
+        isFlush = true;
+        isStraight = false;
+        maxValue = 0;
+        minValue = 15; //개별 카드의 값은 14가 최대이므로 minValue는 15부터 시작
+        rank = 0;
+        valueFrequency = new Hashtable&lt;Integer, Integer&gt;();
+        cardCombinations = new ArrayList&lt;List&lt;Integer&gt;&gt;();
+        for (int i = 0; i &lt; 5; i++) {
+            cardCombinations.add(new ArrayList&lt;Integer&gt;());
+        }
+
+        valuesToCompare = new ArrayList&lt;Integer&gt;();
+
+        readHand();
+        sortCardCombination();
+        setRank();
+    }
+
+    void setRank() {
+        if(isStraight &amp;&amp; isFlush) {
+            //스트레이트 플러쉬
+            valuesToCompare.add(cardCombinations.get(0).get(0));
+            rank = 9;
+            return;
+        }
+        if(cardCombinations.get(3).size() == 1) {
+            //포카드
+            valuesToCompare.add(cardCombinations.get(3).get(0));
+            rank = 8;
+            return;
+        }
+        if(cardCombinations.get(2).size() == 1 &amp;&amp; cardCombinations.get(1).size() == 1) {
+            //풀 하우스
+            valuesToCompare.add(cardCombinations.get(2).get(0));
+            rank = 7;
+            return;
+        }
+        if(isFlush) {
+            //플러쉬
+            valuesToCompare.addAll(cardCombinations.get(0));
+            rank = 6;
+            return;
+        }
+        if(isStraight) {
+            //스트레이트
+            valuesToCompare.add(cardCombinations.get(0).get(0));
+            rank = 5;
+            return;
+        }
+        if(cardCombinations.get(2).size() == 1) {
+            //쓰리 카드
+            valuesToCompare.add(cardCombinations.get(2).get(0));
+            rank = 4;
+            return;
+        }
+        if(cardCombinations.get(1).size() == 2) {
+            //투 페어
+            valuesToCompare.add(cardCombinations.get(1).get(0));
+            valuesToCompare.add(cardCombinations.get(1).get(1));
+            valuesToCompare.add(cardCombinations.get(0).get(0));
+            rank = 3;
+            return;
+        }
+        if(cardCombinations.get(1).size() == 1) {
+            //원 페어
+            valuesToCompare.add(cardCombinations.get(1).get(0));
+            valuesToCompare.addAll(cardCombinations.get(0));
+            rank = 2;
+            return;
+        }
+        //하이 카드
+        valuesToCompare.addAll(cardCombinations.get(0));
+        rank = 1;
+        return;
+    }
+
+    void readHand() {
+        char kind = cards[0].kind;
+
+        for (Card card : cards) {
+            if(card.value &gt; maxValue) {
+                maxValue = card.value;
+            }
+            if(card.value &lt; minValue) {
+                minValue = card.value;
+            }
+
+            valueFrequency.put
+                (card.value, valueFrequency.getOrDefault(card.value, 0) + 1);
+
+            if(card.kind != kind) {
+                //모든 카드가 같은 종류가 아니므로 플러시가 아님
+                isFlush = false;
+            }
+        }
+
+        if(maxValue - minValue == 4 &amp;&amp; valueFrequency.keySet().size() == 5) {
+            //2, 3, 4, 5, 6과 같이 연속하는 5개의 숫자인 경우
+            isStraight = true;
+        }
+    }
+
+    void sortCardCombination() {
+        for (Map.Entry&lt;Integer, Integer&gt; entry : valueFrequency.entrySet()) {
+            Integer cardValue = entry.getKey();
+            Integer frequency = entry.getValue();
+
+            cardCombinations.get(frequency - 1).add(cardValue);
+        }
+
+        for (List&lt;Integer&gt; list : cardCombinations) {
+            Collections.sort(list, Collections.reverseOrder());
+        }
+    }
+
+    int compare(Hand otherHand) {
+        //자신이 이기면 1, 지면 -1, 비기면 0
+        if(this.rank != otherHand.rank) {
+            return (this.rank &gt; otherHand.rank) ? 1 : -1;
+        }
+
+        for (int i = 0; i &lt; this.valuesToCompare.size(); i++) {
+            if(this.valuesToCompare.get(i) &gt; otherHand.valuesToCompare.get(i)) {
+                return 1;
+            }
+            else if(this.valuesToCompare.get(i) &lt; otherHand.valuesToCompare.get(i)) {
+                return -1;
+            }
+        }
+
+        return 0;
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2025/02/15 22:34</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박준우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

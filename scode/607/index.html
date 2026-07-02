@@ -1,0 +1,1627 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="당신은 어느 한 게임회사에 입사했다.
+
+당신의 프로그래밍 관련 수상 경력이 엄청났던지라 당신은 입사하자마자 바로 일을 맡게 되었다.
+
+어느 한 RPG 게임의 PVP 컨텐츠의 랭킹을 구현하게되었다.
+
+**문제**
+
+사람의 수와 이름을...">
+    <title>PVP 랭킹 시스템 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">PVP 랭킹 시스템</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">2</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 3</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>당신은 어느 한 게임회사에 입사했다.</p>
+<p>당신의 프로그래밍 관련 수상 경력이 엄청났던지라 당신은 입사하자마자 바로 일을 맡게 되었다.</p>
+<p>어느 한 RPG 게임의 PVP 컨텐츠의 랭킹을 구현하게되었다.</p>
+<p><strong>문제</strong></p>
+<p>사람의 수와 이름을 입력받고 SEASON ENDED 를 입력 받을 때 까지 승패 기록을 입력하시고 랭킹을 출력하시오.</p>
+<p>처음은 모두 다 0점으로 시작하며 승리한 쪽은 +3 패배한 쪽은 -3 점수를 얻게 된다.</p>
+<p>점수가 마이너스가 될 수 없으며  그 말은 맨 처음 승패 기록에서 아무도 점수를 잃지 않는다. </p>
+<p>그러므로 만약 점수가 3점 미만이라면 점수를 잃지 않는다.</p>
+<p>부등호가 가리키는 쪽이 승리다.</p>
+<p>이름에 띄어쓰기는 들어가 있지 않다.</p>
+<p>점수가 똑같은 플레이어가 있을 경우 앞에 있는 플레이어의 순위가 높게 된다.</p>
+<p>(1 &lt; n &lt; 10000)</p>
+<p>입력)</p>
+<pre><code class="python">4
+A
+B
+C
+D
+A &lt; B
+B &lt; D
+D &lt; C
+C &lt; A
+SEASON ENDED
+
+</code></pre>
+
+<p>출력)</p>
+<pre><code class="python">A : 0
+B : 3
+C : 3
+D : 3
+</code></pre>
+
+<p><strong>1차 업데이트</strong></p>
+<p>게임이 생각보다 반응이 좋아 새롭게 업데이트를 하게 되었다.</p>
+<p>바로 점수에 따라 랭크를 만들고 그에 따른 보상을 주도록 하였다.</p>
+<p>기준에 따라 랭크를 점수뒤에 출력하게 하시오.</p>
+<p>100 점 이상 : 전설</p>
+<p>50 점 이상 : 고수</p>
+<p>20 점 이상 : 스승</p>
+<p>10 점 이상 : 제자</p>
+<p>그 이하    : 노예</p>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2018/07/31 13:50</p>
+                    <p class="static-profile" style="margin:0;padding:0;">김영성</p>
+                </div>
+            </div>
+
+            
+                <a name="comment_2315"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">&quot;점수가 마이너스가 될 수 없으며&quot;는 문맥상 최종결과에서가 아니라 대결을 치를 때마다 적용되어야 할 것 같습니다. 그러면 주어진 예에서 
+{&#39;A&#39;: 0, &#39;B&#39;: 0, &#39;C&#39;: 0, &#39;D&#39;: 0}
+A &lt; B  A+3, B-0  =&gt;  {&#39;A&#39;: 3, &#39;B&#39;: 0, &#39;C&#39;: 0, &#39;D&#39;: 0} 
+B &lt; D  B+3, D-0  =&gt;  {&#39;A&#39;: 3, &#39;B&#39;: 3, &#39;C&#39;: 0, &#39;D&#39;: 0} 
+D &lt; C  D+3, C-0  =&gt;  {&#39;A&#39;: 3, &#39;B&#39;: 3, &#39;C&#39;: 0, &#39;D&#39;: 3} 
+C &lt; A  C+3, A-3  =&gt;  {&#39;A&#39;: 0, &#39;B&#39;: 3, &#39;C&#39;: 3, &#39;D&#39;: 3} 
+
+이런 결과가 되는 게 아닐까요.
+
+그리고 &quot;맨 처음 승패 기록에서 아무도 점수를 잃지 않는다.&quot;는 의미가 애매합니다.
+저는 &quot;각 플레이어는, 자신의 첫 번째 전투에서는 지더라도 점수를 잃지 않는다&quot;라고 해석이 되는데, 시작 점수가 어차피 0점이니 위에 제가 쓴 방식이라면 의미 없는 규칙이 되어버립니다.</span>
+                    -
+                    <span style="font-size:11px;">
+                        Noname,
+                        2018/08/04 08:34
+                    </span>
+                </div>
+            
+                <a name="comment_2316"></a>
+                <div class="comment_line comment-content">
+                    
+                        <span style="color:orangered;">+1</span>
+                    
+                    <span style="white-space:pre-wrap;">제 코드를 보시면 알겠지만 전 Noname님과 같은 의미로 작성한 것이니 좀 더 이해가 되실 수 있게 수정을 하였습니다.
+알고 보니 제가 잘못 썼군요</span>
+                    -
+                    <span style="font-size:11px;">
+                        김영성,
+                        2018/08/04 14:52
+                    </span>
+                </div>
+            
+                <a name="comment_2317"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">빠른 수정 감사합니다!</span>
+                    -
+                    <span style="font-size:11px;">
+                        Noname,
+                        2018/08/04 16:40
+                    </span>
+                </div>
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>16개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_13866"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import random as rd
+import operator
+
+play_num=int(input('몇명이 가위바위보를 하십니까? :'))
+player_list=[]
+for i in range(1,play_num+1):
+    player_list.append(input('{}번째 플레이어의 이름을 입력하시오.'.format(i)))
+print('현재리그에 속한 플레이어 명단 : {} '.format(player_list))
+
+def main_versece(player):
+    a = {}
+    pointer=[]
+    for i in range(len(player)):
+        for j in range(i+1,len(player)):
+            ver=[]
+            print('이번경기는 {}와{}의 싸움입니다'.format(player[i],player[j]))
+            ver.append(player[i])
+            ver.append(player[j])
+            winer=ver.pop(rd.randrange(0,2))
+            ver=ver[0]
+            print('승자는 {} 이고 패자는 {}입니다 승자는 포인트 3점을얻습니다\n'.format(winer,ver))
+            key = winer
+            key_loser=ver
+            value = 3
+            if (key in a) :
+                a[key]+=value
+                if (key_loser in a):
+                    if (a[key_loser]-value)&lt;=0:pass
+                    else:a[key_loser]-=value
+                else:a[key_loser]=0
+            else:a[key] = value
+    return a
+
+def ranking(ver_result):
+    return (sorted(ver_result.items(), key=operator.itemgetter(1),reverse=True))
+
+print(ranking(main_versece(player_list)))
+</code></pre>
+
+<pre><code>몇명이 가위바위보를 하십니까? :5 
+1번째 플레이어의 이름을 입력하시오.a 
+2번째 플레이어의 이름을 입력하시오.b 
+3번째 플레이어의 이름을 입력하시오.c 
+4번째 플레이어의 이름을 입력하시오.d 
+5번째 플레이어의 이름을 입력하시오.e 
+현재리그에 속한 플레이어 명단 : ['a', 'b', 'c', 'd', 'e'] 
+이번경기는 a와b의 싸움입니다 
+승자는 a 이고 패자는 b입니다 승자는 포인트 3점을얻습니다 
+
+이번경기는 a와c의 싸움입니다
+승자는 a 이고 패자는 c입니다 승자는 포인트 3점을얻습니다
+
+이번경기는 a와d의 싸움입니다
+승자는 a 이고 패자는 d입니다 승자는 포인트 3점을얻습니다
+
+이번경기는 a와e의 싸움입니다
+승자는 a 이고 패자는 e입니다 승자는 포인트 3점을얻습니다
+
+이번경기는 b와c의 싸움입니다
+승자는 b 이고 패자는 c입니다 승자는 포인트 3점을얻습니다
+
+이번경기는 b와d의 싸움입니다
+승자는 d 이고 패자는 b입니다 승자는 포인트 3점을얻습니다
+
+이번경기는 b와e의 싸움입니다
+승자는 e 이고 패자는 b입니다 승자는 포인트 3점을얻습니다
+
+이번경기는 c와d의 싸움입니다
+승자는 d 이고 패자는 c입니다 승자는 포인트 3점을얻습니다
+
+이번경기는 c와e의 싸움입니다
+승자는 c 이고 패자는 e입니다 승자는 포인트 3점을얻습니다
+
+이번경기는 d와e의 싸움입니다
+승자는 e 이고 패자는 d입니다 승자는 포인트 3점을얻습니다
+
+[('a', 12), ('e', 6), ('c', 3), ('d', 3), ('b', 3)]
+으아아아 코드길이극혐이다.. 그리고 우리나라게임의특성상 렘덤 ㅈ망겜이좀더현식적인거같아 승자는 렌덤으로 했어요!
+그나저나 불공평한게임이네요 먼저싸우는사람이 연속으로싸워야해서 
+빨리지치겠네요 나중에 구현해봐야겠네요!
+풀이를보면 완전히다른문제가되었군요;
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/31 23:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">leak</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13865"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">#include&lt;iostream&gt;
+#include&lt;string&gt;
+
+using namespace std;
+int size_num()
+{
+    int size;
+    cout &lt;&lt; &quot;몇명이 게임을 이용하시겠습니까 &gt;&gt;&quot;;
+    while (true)
+    {
+        cin &gt;&gt; size;
+        if (size &lt;= 0 || size &gt; 10000)
+            continue;
+        else
+            break;
+    }
+    return size;
+}
+
+void Game(string s[],int p[],int size)
+{
+    string battle;
+
+    while (true)
+    {
+        cout &lt;&lt; &quot;승패 기록&gt;&gt;&quot;;
+        cin &gt;&gt; battle;
+        if (battle == &quot;End&quot;)
+            break;
+
+        if (battle.substr(1, 1) == &quot;&gt;&quot;)
+        {
+            for (int i = 0; i &lt; size; i++)
+            {
+                if (battle.substr(0, 1) == s[i])
+                    p[i] += 3;
+            }
+            for (int i = 0; i &lt; size; i++)
+            {
+                if (battle.substr(2, 1) == s[i])
+                {
+                    p[i] -= 3;
+                    if (p[i] &lt;= 0)
+                        p[i] = 0;
+                }
+            }
+        }
+        else if (battle.substr(1, 1) == &quot;&lt;&quot;)
+        {
+            for (int i = 0; i &lt; size; i++)
+            {
+                if (battle.substr(2, 1) == s[i])
+                    p[i] += 3;
+            }
+            for (int i = 0; i &lt; size; i++)
+            {
+                if (battle.substr(0, 1) == s[i])
+                {
+                    p[i] -= 3;
+                    if (p[i] &lt;= 0)
+                        p[i] = 0;
+                }
+            }
+        }
+    }
+
+}
+
+void View(string s[], int p[], int size)
+{
+    for (int i = 0; i &lt; size; i++)
+    {
+        if (p[i] &gt;= 100)
+            cout &lt;&lt; s[i] &lt;&lt; &quot;의 점수는 &quot; &lt;&lt; p[i] &lt;&lt; &quot; 입니다. 랭크는 전설입니다&quot; &lt;&lt; endl;
+        else if (p[i] &gt;= 50)
+            cout &lt;&lt; s[i] &lt;&lt; &quot;의 점수는 &quot; &lt;&lt; p[i] &lt;&lt; &quot; 입니다. 랭크는 고수입니다&quot; &lt;&lt; endl;
+        else if (p[i] &gt;= 20)
+            cout &lt;&lt; s[i] &lt;&lt; &quot;의 점수는 &quot; &lt;&lt; p[i] &lt;&lt; &quot; 입니다. 랭크는 스승입니다&quot; &lt;&lt; endl;
+        else if (p[i] &gt;= 10)
+            cout &lt;&lt; s[i] &lt;&lt; &quot;의 점수는 &quot; &lt;&lt; p[i] &lt;&lt; &quot; 입니다. 랭크는 제자입니다&quot; &lt;&lt; endl;
+        else
+            cout &lt;&lt; s[i] &lt;&lt; &quot;의 점수는 &quot; &lt;&lt; p[i] &lt;&lt; &quot; 입니다. 랭크는 제자입니다&quot; &lt;&lt; endl;
+    }
+}
+
+void Insert(string s[], int p[], int size)
+{
+    for (int i = 0; i &lt; size; i++)
+    {
+        cout &lt;&lt; i + 1 &lt;&lt; &quot;번째 선수&gt;&gt;&quot;;
+        cin &gt;&gt; s[i];
+        p[i] = 0;
+    }
+}
+int main()
+{
+    int size = size_num();
+    int *p = new int[size];
+    string *s = new string[size];
+
+    Insert(s, p, size);
+    Game(s, p, size);
+    View(s, p, size);
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/31 19:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jun ki Kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13873"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>업데이트 전 코드입니다.</p>
+<pre><code class="java">import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        int player = 0;
+        int tempWin = 0, tempLose = 0;
+        String st = &quot;&quot;;
+        ArrayList&lt;gamer&gt; gamers = new ArrayList&lt;&gt;();
+
+        try {
+            System.out.println(&quot;참가자는 몇명입니까 :&quot;);
+            player = new Scanner(System.in).nextInt();
+            for(int i = 0; i &lt; player; i++){
+                System.out.println((i + 1) + &quot;번째 참가자의 이름은 무엇인가요 :&quot;);
+                gamer g = new gamer(s.nextLine());
+                gamers.add(g);
+            }
+
+            System.out.println(&quot;게임의 결과를 입력해 주세요.\r\n종료시 SEASON ENDED를 입력해 주세요.\r\nEX)승자 &lt; 패자 \r\n스페이스를 넣어주세요.&quot;);
+            while (true) {
+                st = s.nextLine();
+                if(st.equals(&quot;SEASON ENDED&quot;))
+                    break;
+
+                for(int i = 0; i &lt; gamers.size(); i++){
+                    if(gamers.get(i).getName().equals(st.substring(0, st.indexOf(&quot; &quot;))))
+                        tempWin = i;
+                    if(gamers.get(i).getName().equals(st.substring(st.indexOf(&quot; &quot;) + 3)))
+                        tempLose = i;
+                }
+                gamers.get(tempWin).setScore((gamers.get(tempWin).getScore() + 3));
+                if(gamers.get(tempLose).getScore() &gt;= 3)
+                    gamers.get(tempLose).setScore((gamers.get(tempLose).getScore() - 3));
+            }
+
+            gamers = sort(gamers);
+
+            for(int i = 0; i &lt; gamers.size(); i++)
+                System.out.println((i + 1) + &quot;등은 &quot; + gamers.get(i).getScore() + &quot;점으로 &quot; + gamers.get(i).getName() + &quot;님입니다.&quot;);
+
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+    }
+
+    private static ArrayList&lt;gamer&gt; sort(ArrayList&lt;gamer&gt; G){
+        gamer tempG = new gamer(null);
+
+        for(int i = 1; i &lt; G.size(); i++){
+            for(int j = 1; j &lt; G.size(); j++){
+                if(G.get(j - 1).getScore() &lt; G.get(j).getScore()){
+                    tempG = G.get(j - 1);
+                    G.set(j - 1, G.get(j));
+                    G.set(j, tempG);
+                }
+            }
+        }
+
+        return G;
+    }
+}
+
+class gamer{
+    String name;
+    int score = 0;
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public int getScore() {
+        return score;
+    }
+    public void setScore(int score) {
+        this.score = score;
+    }
+    public gamer(String name) {
+        // TODO 自動生成されたコンストラクター・スタブ
+        this.name = name;
+    }
+}
+
+</code></pre>
+
+<p>이하 1차 업데이트 이후입니다.</p>
+<pre><code class="java">import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        int player = 0;
+        int tempWin = 0, tempLose = 0;
+        String st = &quot;&quot;;
+        ArrayList&lt;gamer&gt; gamers = new ArrayList&lt;&gt;();
+
+        try {
+            System.out.println(&quot;참가자는 몇명입니까 :&quot;);
+            player = new Scanner(System.in).nextInt();
+            for(int i = 0; i &lt; player; i++){
+                System.out.println((i + 1) + &quot;번째 참가자의 이름은 무엇인가요 :&quot;);
+                gamer g = new gamer(s.nextLine());
+                gamers.add(g);
+            }
+
+            System.out.println(&quot;게임의 결과를 입력해 주세요.\r\n종료시 SEASON ENDED를 입력해 주세요.\r\nEX)승자 &lt; 패자 \r\n스페이스를 넣어주세요.&quot;);
+            while (true) {
+                st = s.nextLine();
+                if(st.equals(&quot;SEASON ENDED&quot;))
+                    break;
+
+                for(int i = 0; i &lt; gamers.size(); i++){
+                    if(gamers.get(i).getName().equals(st.substring(0, st.indexOf(&quot; &quot;))))
+                        tempWin = i;
+                    if(gamers.get(i).getName().equals(st.substring(st.indexOf(&quot; &quot;) + 3)))
+                        tempLose = i;
+                }
+                gamers.get(tempWin).setScore((gamers.get(tempWin).getScore() + 3));
+                if(gamers.get(tempLose).getScore() &gt;= 3)
+                    gamers.get(tempLose).setScore((gamers.get(tempLose).getScore() - 3));
+            }
+
+            gamers = sort(gamers);
+
+            for(int i = 0; i &lt; gamers.size(); i++){
+                if(gamers.get(i).getScore() &gt;= 100){
+                    gamers.get(i).setRank(&quot;전설&quot;);
+                }else if(gamers.get(i).getScore() &gt;= 50){
+                    gamers.get(i).setRank(&quot;고수&quot;);
+                }else if(gamers.get(i).getScore() &gt;= 20){
+                    gamers.get(i).setRank(&quot;스승&quot;);
+                }else if(gamers.get(i).getScore() &gt;= 10){
+                    gamers.get(i).setRank(&quot;제자&quot;);
+                }else{
+                    gamers.get(i).setRank(&quot;노예&quot;);
+                }
+            }
+
+            for(int i = 0; i &lt; gamers.size(); i++)
+                System.out.println((i + 1) + &quot;등은 &quot; + gamers.get(i).getScore() + &quot;(&quot; + gamers.get(i).getRank() + &quot;)점으로 &quot; + gamers.get(i).getName() + &quot;님입니다.&quot;);
+
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+    }
+
+    private static ArrayList&lt;gamer&gt; sort(ArrayList&lt;gamer&gt; G){
+        gamer tempG = new gamer(null);
+
+        for(int i = 1; i &lt; G.size(); i++){
+            for(int j = 1; j &lt; G.size(); j++){
+                if(G.get(j - 1).getScore() &lt; G.get(j).getScore()){
+                    tempG = G.get(j - 1);
+                    G.set(j - 1, G.get(j));
+                    G.set(j, tempG);
+                }
+            }
+        }
+
+        return G;
+    }
+}
+
+class gamer{
+    String name;
+    String rank;
+    public String getRank() {
+        return rank;
+    }
+    public void setRank(String rank) {
+        this.rank = rank;
+    }
+    int score = 0;
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public int getScore() {
+        return score;
+    }
+    public void setScore(int score) {
+        this.score = score;
+    }
+    public gamer(String name) {
+        // TODO 自動生成されたコンストラクター・スタブ
+        this.name = name;
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/01 15:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">PuTa</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13875"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from collections import OrderedDict
+
+class player:
+    __name = OrderedDict()
+
+    def __init__(self):
+        self.score = 0
+
+    def rank(self):
+        r1 = (100,50,20,10,0)
+        r2 = ('전설','고수','스승','제자','노예')
+        for i,j in enumerate(r1):
+            if self.score &gt;= j: return r2[i]
+
+    @classmethod
+    def pvp(cls,winner,loser):
+        cls.__name[winner].score += 3
+        cls.__name[loser].score = 0 if cls.__name[loser].score &lt;= 3 else (loser.score-3)
+
+    @classmethod
+    def register(cls,nick): cls.__name[nick] = player()
+
+    @classmethod
+    def ladder(cls):
+        print('\n--------------- Ranking')
+        for i in sorted(cls.__name, key=lambda x: cls.__name[x].score, reverse=True):
+            print(i,':',cls.__name[i].score,':',cls.__name[i].rank())
+
+if __name__ == '__main__':
+    for _ in range(int(input('플레이어수: '))): player.register(input('플레이어 이름: '))
+    while 1:
+        tmp = input('PVP: ')
+        if tmp == 'SEASON ENDED': break
+        tmp = tmp.split()
+        if tmp[1] == '&lt;': tmp[0],tmp[2] = tmp[2],tmp[0]
+        player.pvp(*tmp[::2])
+
+    player.ladder()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/01 16:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13878"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">players = {}
+
+def PVP(n):
+    for x in range(n):
+        players[input('name : ')] = 0
+
+    while True:
+        r = input('record : ').split()
+        if ''.join(r) == 'SEASONENDED':
+            break
+        else:
+            players[r[0]] += 3 if r[1] == '&lt;' else 0 if players[r[0]] &lt; 3 else -3
+            players[r[2]] += 3 if r[1] == '&gt;' else 0 if players[r[2]] &lt; 3 else -3
+
+    value = list(players.values())
+    key = list(players.keys())
+
+    for x in range(n):
+        n = value.index(max(value))
+        rank = '신선' if value[n]&gt;100 else '고수' if value[n]&gt;50 else '스승' if value[n]&gt;20 else '제자' if value[n]&gt;10 else '노예'
+        print('%s : %d : %s' %(key[n], value[n], rank))
+        value[n] = -1
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/01 22:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김영성</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13880"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">data = line # input()
+data_line = data.split(&quot;\n&quot;)
+T = int(data[0])
+names = [data_line[x] for x in range(1, 1+T)]
+score = [0 for __ in range(T)]
+for fight in [data_line[_] for _ in range(1+T, len(data_line)-1)]:
+    temp = fight.split(&quot;&lt;&quot;)
+    winner, loser = temp[1].strip(), temp[0].strip()
+    w_idx, l_idx = names.index(winner), names.index(loser)
+    score[w_idx], score[l_idx] = score[w_idx] + 3, score[l_idx]-3
+for i in range(T):
+    print(&quot;%s : %d&quot; % (names[i], max(score[i],0)))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/02 02:36</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Sukeoul Jang</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13912"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">rawdata = \
+'''4
+A
+B
+C
+D
+A &lt; B
+B &lt; D
+D &lt; C
+C &lt; A
+SEASON ENDED'''
+
+data = rawdata.split('\n')
+n = int(data.pop(0))
+players, battles = data[:n], [s.split() for s in data[n:-1]]
+score = {p:0 for p in players}
+
+for b in battles:
+    (winner, loser) = (b[0], b[2]) if b[1] is '&lt;' else (b[2], b[0])
+    score[winner], score[loser] = score[winner] + 3, max(0, score[loser] - 3)
+
+rank = ['노예'] * 10 + ['제자'] * 10 + ['스승'] * 30 + ['고수'] * 50
+for p in sorted(score, key = lambda p: (score[p], len(players) - players.index(p)), reverse = True):
+    print(p, ':', score[p], rank[score[p]] if score[p] &lt; len(rank) else '전설')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/04 09:14</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13925"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>한 번 만들어 봤습니다만 조금 코드가 어수선 한 것 같네요.</p>
+<pre><code class="python">count_users = int(input(&quot;참여자 수를 입력하십시오. &quot;))
+
+users = {}
+for i in range(count_users):
+    users[input(&quot;참여자를 입력하십시오: &quot;)] = 0
+get_input = input(&quot;결과를 입력하십시오: &quot;)
+strr = &quot;&quot;
+while get_input != &quot;SEASON ENDED&quot;:
+    get_input = get_input.replace(' ', '')
+    sign_of_inequality = &quot;&gt;&quot;
+    sign_of_inequality_index = get_input.find(sign_of_inequality)
+    if sign_of_inequality_index &lt; 0:
+        sign_of_inequality = &quot;&lt;&quot;
+        sign_of_inequality_index = get_input.find(sign_of_inequality)
+    if sign_of_inequality_index &lt; 0:
+        continue
+    inputa = get_input[:sign_of_inequality_index]
+    inputb = get_input[sign_of_inequality_index+1:]
+
+    if sign_of_inequality == &quot;&gt;&quot;:
+        if users[inputa] &gt;= 3:
+            users[inputa] -= 3
+        users[inputb] += 3
+    if sign_of_inequality == &quot;&lt;&quot;:
+        users[inputa] += 3
+        if users[inputb] &gt;= 3:
+            users[inputb] -= 3
+    get_input = input(&quot;결과를 입력하십시오: &quot;)
+for u in users.keys():
+    lank = &quot;노예&quot;
+    score = users[u]
+    if score &gt;= 100:
+        lank = &quot;전설&quot;
+    elif score &gt;= 50:
+        lank = &quot;고수&quot;
+    elif score &gt;= 20:
+        lank = &quot;스승&quot;
+    elif score &gt;= 10:
+        lank = &quot;제자&quot;
+    print(u, &quot;:&quot;, score, &quot;(랭크:&quot;,lank,&quot;)&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/05 18:26</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김도영</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13926"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬의 딕셔너리 데이터 형을 사용해서 사용자의 데이터를 관리해봤습니다.</p>
+<pre><code class="python">def rank(score):
+    if 100 &lt;= score: return &quot;전설&quot;
+    elif 50 &lt;= score: return &quot;고수&quot;
+    elif 20 &lt;= score: return &quot;스승&quot;
+    elif 10 &lt;= score: return &quot;제자&quot;
+    else: return &quot;노예&quot;
+
+# 플레이어 입력
+number = int(input(&quot;N? &quot;))
+players = dict() # 플레이어이의 점수와 이름을 키, 벨류로 관리
+for n in range(number):
+    players[input(&quot;player{} name?: &quot;.format(n+1))] = 0
+
+# 대전 시작
+data = &quot;&quot;
+while (data != &quot;SEASON ENDED&quot;):
+    data = input()
+    if &quot;&lt;&quot; in data:
+         A, B = data.split(&quot;&lt;&quot;)
+    elif &quot;&gt;&quot; in data:
+         B, A = data.split(&quot;&gt;&quot;)
+    else:
+        continue # 어느쪽에도 속하지 않은 경우 패스
+
+    players[A.strip()] += 3
+    players[B.strip()] -= 3
+    # 점수 감소 결과가 0보다 작으면 0으로 세팅
+    if players[B.strip()] &lt; 0:
+        players[B.strip()] = 0
+
+# 결과 출력
+for p in players.keys():
+    print(p+&quot;:&quot; , players[p], rank(players[p]))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/05 22:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">재즐보프</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13966"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">memb_cnt = int(input())
+d = {}
+
+for i in range(memb_cnt):
+    t = input()
+    d[t] = 0
+
+while 1:
+    s = input()
+    if s == 'SEASON ENDED': break
+    s = s.split()
+    if s[1] == '&gt;':
+        (winner,loser) = (s[0], s[2])
+    else:
+        (winner,loser) = (s[2], s[0])
+
+    d[winner] += 3
+    d[loser] -= 3
+    if d[loser] &lt; 0: d[loser] = 0
+
+d = sorted(d.items(), key = lambda x: str(-x[1]) + x[0])
+print(d)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/08 08:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">구름과비</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14090"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C#</p>
+<pre><code>class Program
+{
+    static void Main(string[] args)
+    {
+        string input = "";
+        Dictionary&lt;string, int&gt; dcRank = new Dictionary&lt;string, int&gt;();
+
+        while (input != "SEASON ENDED")
+        {
+            input = Console.ReadLine();
+
+            //input check
+            if (input == "SEASON ENDED")
+                return; //종료
+            else if (input == "")
+                continue;
+
+            if (input.Replace(" ", "").Contains("&lt;"))
+            {
+                string[] temp = input.Split('&lt;');
+                dcRank[temp[0]] = dcRank[temp[0]] + 3;
+                dcRank[temp[1]]  = dcRank[temp[1]] - 3;
+
+                //0점이하 0으로 조정
+                dcRank[temp[1]] = dcRank[temp[1]] &lt; 0 ? 0 : dcRank[temp[1]]; 
+            }
+            else
+            {
+                if (!dcRank.ContainsKey(input))
+                    dcRank.Add(input, 0);
+            }
+
+            PrintRank(dcRank);
+        }
+    }
+
+    static void PrintRank(Dictionary&lt;string, int&gt; dcRank)
+    {
+        //점수 순 정렬
+        dcRank.OrderBy(x =&gt; x.Value);
+
+        //출력
+        foreach (var v in dcRank)
+        {
+            Console.WriteLine($"User:{v.Key} - Score:{v.Value} - {Title(v.Value)}");
+        }
+    }
+    static string Title(int Score)
+    {
+        if (Score &gt;= 100)
+            return "전설";
+        else if (Score &gt;= 50)
+            return "고수";
+        else if (Score &gt;= 20)
+            return "스승";
+        else if (Score &gt;= 10)
+            return "제자";
+        else
+            return "노예";
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/13 14:39</p>
+                                <p class="static-profile" style="margin:0;padding:0;">클루</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14184"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">player_no = int(input(&quot;플레이어의 수는?: &quot;))
+players = []
+for num in range(player_no):
+    player = input(&quot;{}번째 플레이어의 아이디는?: &quot;.format(num+1))
+    players.append(player)
+
+records = {}
+for player in players:
+    records[player] = 0
+
+while 1:
+    content = input(&quot;승패는?: \nex) A &lt; B\n&quot;)
+    if content == &quot;SEASON ENDED&quot;:
+        break
+    record = content.split(&quot; &quot;)
+    if record[0] and record[2] in players:
+        if record[1] == &quot;&lt;&quot;:
+            records[record[0]] += 3
+            if records[record[2]] &gt;= 3:
+                records[record[2]] -= 3
+        else:
+            records[record[2]] += 3
+            if records[record[0]] &gt;= 3:
+                records[record[0]] -= 3
+    else :
+        print(&quot;다시 입력해주세요.&quot;)
+
+rank = {}
+for player in players:
+    if records[player] &gt;= 100:
+        rank[player] = &quot;전설&quot;
+    elif records[player] &gt;= 50:
+        rank[player] = &quot;고수&quot;
+    elif records[player] &gt;= 20:
+        rank[player] = &quot;스승&quot;
+    elif records[player] &gt;= 10:
+        rank[player] = &quot;제자&quot;
+    else:
+        rank[player] = &quot;노예&quot;
+
+for name, score in records.items():
+    print(&quot;{} : {}  {}\n&quot;.format(name, score,rank[name]))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/19 23:37</p>
+                                <p class="static-profile" style="margin:0;padding:0;">lumiere_profuse</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16221"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">#include&lt;iostream&gt;
+#include&lt;string&gt;
+#include&lt;map&gt;
+using namespace std;
+
+int main(void)
+{
+    map&lt;string, int&gt;mp; map&lt;string, int&gt;::iterator itr;
+    string s;
+    int num;
+    cin &gt;&gt; num; cin.ignore();
+    int*arr = new int[num];
+    for (int i = 0; i &lt; num; i++)
+    {
+        arr[i] = 0;
+        getline(cin, s);
+        mp.insert(make_pair(s, arr[i]));
+    }
+    for (int i = 0; i &lt; num; i++)
+    {
+        getline(cin, s);
+        int ppos = s.find('&lt;');
+        string part1 = s.substr(0, ppos);
+        string part2 = s.substr(ppos + 1);
+        for (itr = mp.begin(); itr != mp.end(); itr++)
+        {
+            if (itr-&gt;first == part1)
+            {
+                itr-&gt;second += 3;
+
+            }
+            else if (itr-&gt;first == part2)
+            {
+                itr-&gt;second -= 3;
+                if (itr-&gt;second &lt; 0)
+                {
+                    itr-&gt;second = 0;
+                }
+            }
+        }
+    }
+
+    for (itr = mp.begin(); itr != mp.end(); itr++)
+    {
+        cout &lt;&lt; itr-&gt;first &lt;&lt; &quot;의 점수는 &quot; &lt;&lt; itr-&gt;second ;
+
+    }
+
+}
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/01/24 20:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김상범</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17492"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <h2 id="c">C</h2>
+<pre><code class="cpp">#define _CRT_SECURE_NO_WARNINGS
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+
+typedef struct _user{
+    char id[10];
+    int point;
+    char rank[10];
+} user;
+
+int main()
+{
+    int n;
+    char match[10];
+    printf(&quot;\n---------------------- 유저 수를 입력하세요 --------------------\n&quot;);
+    scanf(&quot;%d&quot;, &amp;n); getchar();
+    user **u = malloc(sizeof(user *)*n);
+    for (int i = 0; i &lt; n; i++)
+    {
+        u[i] = malloc(sizeof(user));
+        u[i]-&gt;point = 0;
+    }
+    printf(&quot;\n----------- %d 명의 유저 id를 순차적으로 입력하세요. -----------\n&quot;, n);
+    for (int i = 0; i &lt; n; i++)
+    {
+        printf(&quot;\n%d번째 입력 :                               &quot;, i+1);
+        scanf(&quot;%s&quot;, u[i]-&gt;id); getchar();
+    }
+    printf(&quot;\n----------------------- 플레이어 명단 --------------------------\n&quot;);
+    for (int i=0; i &lt; n; i++)
+        printf(&quot;                    %s\n&quot;, u[i]-&gt;id);
+    printf(&quot;\n----------------------------------------------------------------\n&quot;);
+    printf(&quot;\n----- 대전 결과를 입력하세요. (입력을 종료하려면 0을 입력) -----\n&quot;);
+    printf(&quot;------------ A &gt; B 와 같은 방식으로 입력하세요 (B 승) ------------\n&quot;);
+    while(1)
+    {
+        printf(&quot;\n   입력 :                                             &quot; );
+        scanf(&quot;%[^\n]s&quot;, match); getchar();
+        if (match[0] == '0')
+            goto END;
+        int count = 0;
+        int p, q, r=0;
+
+        char *ptr = strtok(match, &quot; &quot;);
+        for (int i = 0; i &lt; n; i++)
+        {
+            if (strcmp(u[i]-&gt;id, ptr) == 0)
+                p = i;
+        }
+
+        ptr = strtok(NULL, &quot; &quot;);
+        if (strcmp(&quot;&gt;&quot;, ptr) == 0)
+            r = 1;
+        ptr = strtok(NULL, &quot; &quot;);
+        for (int i = 0; i &lt; n; i++)
+        {
+            if (strcmp(u[i]-&gt;id, ptr) == 0)
+                q = i;
+        }
+        if (r == 0)
+        {
+            u[p]-&gt;point += 3;
+            if (u[q]-&gt;point &gt;= 3)
+                u[q]-&gt;point -= 3;
+        }
+        else
+        {
+            u[q]-&gt;point += 3;
+            if (u[p]-&gt;point &gt;= 3)
+                u[p]-&gt;point -= 3;
+        }
+    }
+END:
+    for (int i = 0; i &lt; n; i++)
+    {
+        printf(&quot;%s : %d\n&quot;, u[i]-&gt;id, u[i]-&gt;point);
+    }
+
+    for (int i = 0; i &lt; n; i++)
+        free(u[i]);
+    free(u);
+    return 0;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/04/12 15:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hyuk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18726"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;</p>
+<p>public class sol182 {</p>
+<pre><code>public static void main(String[] args) throws Exception {
+
+    Scanner sc = new Scanner(System.in);
+
+    int count = sc.nextInt();
+    sc.nextLine();
+
+    List&lt;String&gt; player = new ArrayList&lt;String&gt;();
+    int score[] = new int[count];
+
+    for(int i=0; i&lt;count; i++) {
+        player.add(sc.nextLine());
+    }
+
+
+    while(true) {
+
+        String parse = sc.nextLine();
+
+        if(parse.equals("SEASON ENDED")) break;
+
+        String loser = "";
+        String winner = "";
+        if (parse.contains("&lt;")) {
+
+            loser = parse.substring(0, parse.indexOf("&lt;")).trim();
+            winner = parse.substring(parse.indexOf("&lt;")+1).trim();
+
+        } else if(parse.contains("&gt;")) {
+
+            winner = parse.substring(0, parse.indexOf("&lt;")).trim();
+            loser = parse.substring(parse.indexOf("&lt;")+1).trim();
+        }
+
+        for(int j=0; j&lt;player.size(); j++) {
+
+            if(loser.equals(player.get(j))) {
+                if(score[j] &gt;= 3) score[j] -= 3;
+            }
+            if(winner.equals(player.get(j))) {
+                score[j] += 3;
+            }
+        }
+    }
+
+
+    for(int i=0; i&lt;score.length; i++) {
+        System.out.println(player.get(i)+ " : " + score[i]);
+    }
+}
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/07/29 17:55</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이병호</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_18904"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="objectivec">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+#define MAX 100
+
+int main(void)
+{
+    int man;
+    int i,j;
+    int rank[MAX];
+    char plna[MAX][MAX];
+    int plpo[MAX];
+    char pl1[MAX],pl2[MAX],whowin[MAX];
+    printf(&quot;총 플레이어 수 &gt;&gt; &quot;);
+    scanf(&quot;%d&quot;,&amp;man);
+
+    for(i=0; i&lt;man; i++)
+        scanf(&quot;%s&quot;,plna[i]);
+
+    printf(&quot;대전 기록 입력 &gt;&gt; \n&quot;);
+    while(1)
+    {
+        scanf(&quot;%s&quot;,pl1);
+        scanf(&quot;%s&quot;,whowin);
+        if(!strcmp(pl1,&quot;SEASON&quot;) &amp;&amp; !strcmp(whowin,&quot;ENDED&quot;))
+            break;
+        scanf(&quot;%s&quot;,pl2);
+
+        if(!strcmp(whowin,&quot;&lt;&quot;))
+        {
+            for(i = 0; i&lt;man; i++)
+            {
+                if(!strcmp(plna[i],pl1))
+                {
+                    plpo[i] += 3;
+                    i = 0;
+                    break;
+                }
+            }
+            if(i == man)
+            {
+                printf(&quot;1P 플레이어를 찾지 못했습니다. \n&quot;);
+                break;
+            }
+
+            for(i = 0; i&lt;man; i++)
+            {
+                if(!strcmp(plna[i],pl2))
+                {
+                    if(plpo[i] &gt; 2)
+                    {   
+                        plpo[i] -= 3;
+                    }
+                    i = 0;
+                    break;
+                }
+            }
+            if(i == man)
+            {
+                printf(&quot;2P 플레이어를 찾지 못했습니다. \n&quot;);
+                break;
+            }
+        }
+        else if(!strcmp(whowin,&quot;&gt;&quot;))
+        {
+            for(i = 0; i&lt;man; i++)
+            {
+                if(!strcmp(plna[i],pl2))
+                {
+                    plpo[i] += 3;
+                    i = 0;
+                    break;
+                }
+            }
+            if(i == man)
+            {
+                printf(&quot;2P 플레이어를 찾지 못했습니다. \n&quot;);
+                break;
+            }
+
+            for(i = 0; i&lt;man; i++)
+            {
+                if(!strcmp(plna[i],pl1))
+                {
+                    if(plpo[i] &gt; 2)
+                    {   
+                        plpo[i] -= 3;
+                    }
+                    i = 0;
+                    break;
+                }
+            }
+            if(i == man)
+            {
+                printf(&quot;1P 플레이어를 찾지 못했습니다. \n&quot;);
+                break;
+            }
+        }
+        else
+        {
+            printf(&quot;잘못된 전투 기록입니다. \n&quot;);
+            break;
+        }
+    }
+    for(i=0; i&lt;man; i++)
+        rank[i] = plpo[i];
+    for(i = 0; i&lt;man; i++)
+    {
+        for(j = i; j&lt;man; j++)
+        {
+            if(rank[i] &lt; rank[j])
+            {
+                int swp;
+                swp = rank[i];
+                rank[i] = rank[j];
+                rank[j] = swp; 
+
+            }
+        }
+    }
+    for(i = 0; i&lt;man; i++)
+    {
+        int p;
+        for(p = 0; p&lt;man; p++)
+        {
+            if(plpo[p] == rank[i])
+            {
+                j = p;
+                break;
+            }
+        }
+        printf(&quot;|| %d . %s : %d &quot;,i+1,plna[j],rank[i]); 
+        if(rank[i] &gt;= 100)
+            printf(&quot; [전설] \n&quot;);
+        else if(rank[i] &gt;= 50)
+            printf(&quot; [고수] \n&quot;);
+        else if(rank[i] &gt;= 20)
+            printf(&quot; [스승] \n&quot;);
+        else if(rank[i] &gt;= 10)
+            printf(&quot; [제자] \n&quot;);
+        else
+            printf(&quot; [노예] \n&quot;);
+    }
+    return 0;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/08/11 13:37</p>
+                                <p class="static-profile" style="margin:0;padding:0;">RADEAN STUDIO</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

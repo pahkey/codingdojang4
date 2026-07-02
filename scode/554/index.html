@@ -1,0 +1,1969 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="친화수란 a와 b라는 서로 다른 두 자연수가 있을 때, a의 자신을 제외한 약수를 모두 더하면 b가 되고, b의 자신을 제외한 약수를 모두 더하면 a가 되는 두 수의 쌍을 말한다. 예로 220, 284을 들면 220의 자신을 제외한 약수는 1, ...">
+    <title>친화수 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">친화수</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">3</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 2</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>친화수란 a와 b라는 서로 다른 두 자연수가 있을 때, a의 자신을 제외한 약수를 모두 더하면 b가 되고, b의 자신을 제외한 약수를 모두 더하면 a가 되는 두 수의 쌍을 말한다. 예로 220, 284을 들면 220의 자신을 제외한 약수는 1, 2, 4, 5, 10, 11, 20, 22, 44, 55, 110이고, 이를 모두 더하면 284이다. 또한 284의 자신을 제외한 약수는 1, 2, 4, 71, 142이고, 이를 모두 더하면 220이 되므로 220과 284는 친화수이다.</p>
+<p>자연수 A를 입력받았을 때, A 이하의 친화수의 쌍의 개수를 출력하는 프로그램을 만들어라.</p>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2017/08/01 15:13</p>
+                    <p class="static-profile" style="margin:0;padding:0;">P.Y.Thon</p>
+                </div>
+            </div>
+
+            
+                <a name="comment_2079"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">&quot;a와 b라는 서로 다른 두 자연수&quot; 라고 해야 정확할 것 같습니다.</span>
+                    -
+                    <span style="font-size:11px;">
+                        Noname,
+                        2017/08/03 03:39
+                    </span>
+                </div>
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>37개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_8166"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">4</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>친화수들(출처 위키백과): 
+(220, 284), (1184, 1210), (2620, 2924), (5020, 5564), (6232, 6368), (10744, 10856), (12285, 14595), (17296, 18416), (63020, 76084), (66928, 66992)</p>
+<p>간단한 코드</p>
+<pre><code class="python">A = int(input('A='))
+
+divsum = lambda n: sum(x for x in range(1, n//2+1) if n % x == 0)
+cnt = 0
+for i in range(1, A+1):
+    if i != divsum(i) and divsum(i) &lt;= A and i == divsum(divsum(i)):
+        cnt += 1
+
+print(cnt // 2)
+</code></pre>
+
+<p>위 코드는 10000정도 넣으면 한 세월 걸립니다.</p>
+<p>그래서...</p>
+<p>A이하 모든 수들의 (자신을 제외한) 약수의 합을 먼저 구하고 (에라토스테네스의 체와 비슷한 방법을 썼습니다),</p>
+<p>그 중에서 친화수를 찾습니다.</p>
+<pre><code class="python">A = int(input('A='))
+
+sumdiv = [0] * (A+1)
+for i in range(1, A+1):
+    for j in range(i+i, A+1, i):  # 2*i 부터 시작
+        sumdiv[j] += i
+
+fams = []
+for i in range(A+1):
+    try:
+        if i != sumdiv[i] and i == sumdiv[sumdiv[i]]:
+            fams.append((i, sumdiv[i]))
+            sumdiv[i] = -1  # 중복쌍 제거
+    except IndexError:
+        pass
+
+print(len(fams), fams)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/03 03:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8144"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<pre><code class="ruby">def amicable_pairs(limit)
+  fsum = -&gt;n { (2..(n**0.5).to_i).sum(1) {|f| n%f &gt; 0 ? 0 : [f,n/f].uniq.sum } }
+  hash = (1..limit).map {|e| [e, fsum[e]] }.to_h
+  puts hash.select {|k,v| hash[v] == k &amp;&amp; k &lt; v }.size
+end
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby">expect { amicable_pairs(220) }.to output(&quot;0\n&quot;).to_stdout
+expect { amicable_pairs(284) }.to output(&quot;1\n&quot;).to_stdout
+expect { amicable_pairs(20000) }.to output(&quot;8\n&quot;).to_stdout
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/01 20:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8249"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">result = int(input())
+count = []
+def divisor(x):
+    a = 0
+    for i in range(1, int(x/2 + 1)):
+        if x % i == 0:
+            a = a + i
+    return a
+
+for i in range(1, result):
+        if i == divisor(divisor(i)) and i != divisor(i):
+            count.extend([i, divisor(i)])
+
+realCount = list(set(count))
+print(int(realCount.__len__() / 2))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/07 13:58</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이건우 (ekeon)</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8732"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># python 3.6
+import math
+
+
+def divsum(val):
+    &quot;&quot;&quot;val의 진약수 합 반환&quot;&quot;&quot;
+    rst = set()
+    for i in range(1, int(math.sqrt(val) + 1)):
+        if val % i == 0:
+            rst.update([i, val // i])
+    return sum(rst) - val
+
+
+def amicnum(val):
+    &quot;&quot;&quot;자연수 val에 대해 친화수가 존재할 경우 쌍 반환&quot;&quot;&quot;
+    val1 = divsum(val)
+    val2 = divsum(val1)
+    if val2 == val and val != val1:
+        return (val, val1)
+
+
+num = int(input(&quot;Input a natural number: &quot;))
+amic_lst = list()
+for i in range(1, num + 1):
+    val = amicnum(i)
+    if val is not None and max(val) &lt;= num:
+        amic_lst.append(val)
+print(len(amic_lst) // 2, amic_lst)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/09/06 16:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9088"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>출력하기로 했으면 중복되는 거도 뺄려고 했는데 막상생각하니 머리가 안돌아가네요
+count세는거기 때문에 2로 나누어주기만 했습니다.</p>
+<pre><code class="cs">using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CodingCSharp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int A;
+            int B;
+            int ASum = 0;
+            int BSum = 0;
+            int count = 0;
+
+            A = Convert.ToInt32(Console.ReadLine());
+
+            //ASum은 B BSum은 A인 경우 찾기
+            for(int i = 2; i &lt; A; i++)
+            {
+                for (int j = 1; j &lt; i; j++)
+                {
+                    if (i % j == 0) //A 자신을 제외한 약수들의 합
+                    {
+                        ASum += j; 
+                    }
+                }
+                B = ASum;
+
+                for (int j = 1; j &lt; B; j++) //ASum이 B가 되어야 하므로
+                {
+                    if (B % j == 0) //B 자신을 제외한 약수들의 합
+                    {
+                        BSum += j;
+                    }
+                }
+                //Console.WriteLine(A + &quot; &quot; + B);
+
+                if (i != B &amp;&amp; ASum == B &amp;&amp; i == BSum) //A이하의 수
+                {
+                    Console.WriteLine(i + &quot; &quot; + B); //출력해보기
+                    count++;
+                }
+
+                ASum = 0;
+                BSum = 0;
+            }
+            Console.WriteLine(count / 2); //중복된 수 제외
+        }
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/24 11:28</p>
+                                <p class="static-profile" style="margin:0;padding:0;">와디더</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9214"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def divisors(num):
+    res = []
+    for i in range(1, num//2+1):
+        if not num % i:
+            res.append(i)
+    return res
+
+
+def findFriends(num):
+    men = [i for i in range(4, num+1)]
+    res = 0
+    man1 = men.pop()
+    while len(men):
+        man2 = sum(divisors(man1))
+        if man2 in men:
+            if man1 == sum(divisors(man2)):
+                res += 1
+            man1 = men.pop(men.index(man2))
+        else:
+            man1 = men.pop()
+    return res
+
+print(findFriends(20000))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/11/08 16:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">songci</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9745"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def f(n):
+    return [*(x for x in range(1, n//2+1) if n%x == 0)]
+
+def calc(n):
+    pool = []
+    pairs = []
+    for i in range(1, n+1):
+        s = sum(f(i))
+        if s &lt; n and i not in pool and \
+           i == sum(f(s)) and i != s:
+            pool += [i, s]
+            pairs += [(i, s)]
+    return pairs
+
+while __name__ == '__main__':
+    print(calc(int(input('&gt;&gt;&gt;'))))
+</code></pre>
+
+<p>파이썬에서는 좀 느리긴 한데 어차피 다른 언어에서는 똑같은 알고리즘으로 하면 거의 즉시 나올거기 때문에 그냥 올립니다.</p>
+<p>20000개 기준 Cpython에서는 15.3초, 리눅스 서브시스템 PyPy3에서는 4.7초 걸립니다.</p>
+<p>파이썬 3.6.2 64</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/12/20 17:53</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Flair Sizz</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10249"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3.6</p>
+<pre><code class="python">def fnum(a):
+    a_factor = [i for i in range(1,a+1) if a%i == 0 and i != a ]
+    b = sum(a_factor)
+    b_factor = [h for h in range(1,b+1) if b%h == 0 and h != b ]
+    if a == sum(b_factor) and b == sum(a_factor) and a != b and b &lt;= A: return a,b
+
+if __name__ == &quot;__main__&quot;:   
+    fnumlist = []
+    A = int(input(&quot;A = &quot;))
+    for a in range(1,A+1):
+        if fnum(a) and sorted(fnum(a)) not in fnumlist :
+            fnumlist.append(sorted(fnum(a)))
+    print(&quot;친화수의 쌍 :&quot;,fnumlist)
+    print(&quot;친화수 쌍은 %d개&quot;%len(fnumlist))
+</code></pre>
+
+<ul>
+<li>결과값</li>
+</ul>
+<pre><code class="python">A = 300
+친화수의 쌍 : [[220, 284]]
+친화수 쌍은 1개
+
+A = 10000
+친화수의 쌍 : [[220, 284], [1184, 1210], [2620, 2924], [5020, 5564], [6232, 6368]]
+친화수 쌍은 5개
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/01/21 15:11</p>
+                                <p class="static-profile" style="margin:0;padding:0;">justbegin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10451"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># 파이썬
+
+#   어떤 수들의 약수를 구하는게 아니라 약수들을 약수들의 배수에 위치한 인덱스 값에 더해줍니다.
+#   l1 원소의 값은 l1 인덱스의 약수들 중 자기 자신을 제외한 것의 총 합. ex) l1[12] = 1+2+3+4+6 = 16
+#   l1 = [1, 1, 1, 1, 3, 1, 6, 1, 7, 4, 8, 1, 16, 1, 10, 9, 15, 1, 21, 1, 22, 11, 14, 1, 36, 6, 16, 13, 28, ...
+
+
+def amicable_numbers(i):
+    l1 = [1 for _ in range(i+2)]
+    for m in range(2, int(i/2)+1):
+        for n in range(m*2, i+2, m): 
+            l1[n] += m
+    r = []
+    for t, u in enumerate(l1):
+        if u &lt; t:  # u 가 리스트의 인덱스 안이어야하고, t와 u가 달라야 한다.
+            if l1[u] == t: 
+                r.append((t, u))
+    return r
+
+
+print(amicable_numbers(30000))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/02 10:55</p>
+                                <p class="static-profile" style="margin:0;padding:0;">olclocr</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10706"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import math
+def amicable(m):
+    l = list()
+    def sigma(n):
+        result = 0
+        if math.sqrt(n).is_integer():
+            result += math.sqrt(n)
+            for i in range(1, int(math.sqrt(n))):
+                if n % i == 0:
+                    result += i + n / i
+        else:
+            for i in range(1, int(math.sqrt(n)) + 1):
+                if n % i == 0:
+                    result += i + n / i
+        return int(result)-n
+    for i in range(1,m+1):
+        if sigma(i) &gt; i and sigma(sigma(i)) == i:
+            l.append((i, sigma(i)))
+    return l
+
+
+print(amicable(int(input())))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/14 16:09</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김동하</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11978"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>public class Main2 {</p>
+<pre><code>public static void main(String[] args) throws Exception { 
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    Map&lt;Integer, Integer&gt; friends = new HashMap&lt;&gt;();
+    int n = Integer.parseInt(br.readLine());
+
+    for (int i=1; i&lt;=n; i++) {
+        int sum = 0; // 친화수 후보
+        int sum2 = 0;
+        for (int j=1; j&lt;i; j++) {
+            if (i%j == 0)
+                sum += j; 
+        }
+        for (int j=1; j&lt;sum; j++) {
+            if(sum%j == 0) 
+                sum2 += j;
+        }
+        if (i == sum2) {
+            friends.put(i, sum);
+        }
+    }
+    System.out.println(friends.size());
+}
+</code></pre>
+<p>}```{.java}</p>
+<p>```</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/02 22:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">정몽준</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12995"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python</p>
+<pre><code class="python">A = 10000
+tmp_ans = []
+for i in range(1, A+1):
+    tmp_sum = 0
+    for j in range(1, i):
+        if i % j == 0:
+            tmp_sum += j
+    tmp_ans.append([i, tmp_sum])
+for a, b in tmp_ans:
+    tmp_sum = 0
+    for j in range(1, b):
+        if b%j == 0:
+            tmp_sum += j
+    if tmp_sum == a and a &lt; b:
+        print(a, b)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/15 16:03</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Taesoo Kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13744"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">sumdivisor = lambda n: sum(sum({i,n//i}) for i in range(2,int(n**0.5)+1) if not n%i) + 1
+def examicable(n):
+    tmp = sumdivisor(n)
+    return tmp if tmp != n and sumdivisor(tmp) == n else 0
+
+A = int(input())
+r = set()
+for i in range(A):
+    tmp = examicable(i)
+    if 0&lt; tmp &lt;= A : r.add(tuple(sorted((i,tmp))))
+print(len(r))
+print(r)
+</code></pre>
+
+<pre><code>100000
+13
+{(10744, 10856), (17296, 18416), (1184, 1210), (63020, 76084), (66928, 66992), (220, 284), (5020, 5564), (67095, 71145), (79750, 88730), (6232, 6368), (12285, 14595), (2620, 2924), (69615, 87633)}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/24 23:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14260"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># 필요한 것,
+# 약수의 합을 출력하는 함수
+# 입력 받은 값 이하에서 친화수 탐색 알고리즘
+
+# 다른 문제를 풀면서 만든 제곱근 함수를 가져왔습니다. # 이땐, 제곱근의 소숫자리 개수는 영향이 없습니다.
+
+def sqrt(a):
+    ip = 0
+    deci_len = 2
+
+    while (ip + 1) ** 2 &lt;= a:
+        ip = ip + 1
+
+    deci_list = list()
+    i = 1
+    approx = ip
+
+    while i &lt;= deci_len:
+        deci_dyn = 0
+        stck = 0.1 ** i
+        while (approx + stck) ** 2 &lt;= a:
+            deci_dyn = deci_dyn + stck
+            approx = approx + stck
+        deci_list.append(deci_dyn)
+        i = i + 1
+
+    approx_list = ip
+    for j in deci_list:
+        approx_list = approx_list + j
+
+    return approx_list
+
+
+def sum_divisor(a):
+    summ = 0
+    half = int(sqrt(a))
+    for i in range(1, half + 1):
+        if a % i == 0:
+            summ = summ + i + (a/i)
+    if half ** 2 == a:
+        summ = summ - half
+    summ = summ - a
+
+    return summ
+
+A = int(input(&quot;put number&quot;))
+
+lst_sd = [-1]  # index와 수를 맞추기 위함.
+pair = 0
+for i in range(1, A+1):
+    lst_sd.append(int(sum_divisor(i)))
+
+for i in range(1, A):
+    for k in range(i+1, A+1):
+        if i == lst_sd[k] and k == lst_sd[i]:
+            pair = pair + 1
+
+if A == lst_sd[A]:
+    pair = pair + 1
+
+print(pair)
+
+</code></pre>
+
+<p>저는 python을 사용하였습니다.
+약수를 판별할 때에는 제곱근 이하의 수만을 살폈습니다.
+위와같이 index와 수를 맞춰 줌으로써 인덱싱을 함수처럼 사용하였고,
+계단식으로 탐색을 하였습니다.(무슨 알고리즘 이름이 있는게 아니라, 과정이 계단처럼 생겨서 그래요 ^^)</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/23 12:25</p>
+                                <p class="static-profile" style="margin:0;padding:0;">aa</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14339"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package test;
+
+public class test {
+    public static void main(String[] args) {
+        int n = 100000;
+        for (int i = 1; i &lt; n + 1; i++) {
+            int a = divisor(i);
+            if (i == divisor(a) &amp;&amp; i != a &amp;&amp; i &gt; a)
+                System.out.println(a + &quot; &quot; + i);
+        }
+    }
+
+    private static int divisor(int n) {
+        int sum = 0;
+        for (int i = 1; i &lt; n / 2 + 1; i++)
+            if (n % i == 0)
+                sum += i;
+        return sum;
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/26 16:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김지훈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14344"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">int n = 100000;
+
+        for (int k = 1; k &lt; n; k++) {
+            int sum = 0;
+            int sum1 = 0;
+            for (int i = 1; i &lt; k / 2 + 1; i++) {
+                if (k % i == 0) {
+                    sum += i;
+                }
+            }
+            for (int j = 1; j &lt; sum / 2 + 1; j++) {
+                if (sum % j == 0) {
+                    sum1 += j;
+                }
+            }
+            if (k == sum1 &amp;&amp; sum != sum1 &amp;&amp; sum &gt; sum1) {
+                System.out.println(k + &quot; &quot; + sum);
+            }
+        }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/26 19:11</p>
+                                <p class="static-profile" style="margin:0;padding:0;">채규빈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15106"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import math
+
+#약수 구하는 함수
+def divisor(n):
+    result=[]
+    for i in range (1, int(math.sqrt(n))+1) :
+        if (n%i==0) :
+            result.append(i)
+            result.append(int(n/i))
+            continue
+    return list(set(result))
+
+#친화수 구하는 함수
+def amicable_number(n):
+    standard_num=[i for i in range (1, n+1)]
+    check_num=[]
+    for i in standard_num :
+        if i in check_num :
+            continue
+        else :
+            sum_i=sum(divisor(i))-i
+            sum_j=sum(divisor(sum_i))-sum_i
+            #서로 다른 자연수가 친화수일 경우, 
+            if i==sum_j and i!=sum_i:
+                check_num.append(i)
+                check_num.append(sum_i)
+                continue
+    return int(len(check_num)/2)
+
+
+test1=290
+test2=500
+test3=1500
+
+print(amicable_number(test1))
+print(amicable_number(test2))
+print(amicable_number(test3))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/11/05 22:58</p>
+                                <p class="static-profile" style="margin:0;padding:0;">쨔이</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16187"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def fnum(a):
+    i = 0
+    for x in range(1,a+1):
+        if x == div(div(x)):
+            i += 1
+    return i
+
+def div(x):
+    return sum(list(i+x%i for i in range(1,int(x/2)+1) if x%i == 0))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/01/23 13:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김영성</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16532"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def divisor_sum(n):
+    result =[]
+    for i in range(1, n):
+        if n % i == 0:
+            result.append(i)
+    return sum(result)
+
+limit = int(input())
+count = 0
+
+for i in range(1, limit + 1):
+    if divisor_sum(i) &lt; limit + 1 and divisor_sum(i) != i:
+        temp = divisor_sum(divisor_sum(i))
+        if temp == i:
+            count += 1
+print(count//2)
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/02/08 14:41</p>
+                                <p class="static-profile" style="margin:0;padding:0;">D.H.</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17863"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n = int(input());summ=[0]*(n+1);ans=[]
+
+for i in range(1, n+1):
+    for j in range(2*i, n+1, i):  
+        summ[j] += i
+
+for a in range(1,n+1):
+    try:
+        if a ==summ[summ[a]] and a !=summ[a]:
+            ans.append((a,summ[a]));summ[a]=-99
+    except IndexError:
+        pass
+
+print(len(ans),ans)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/14 21:41</p>
+                                <p class="static-profile" style="margin:0;padding:0;">암살자까마귀</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20090"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>100000을 넣으니 오래걸립니다.....</p>
+<pre><code class="java">public class 친화수 {
+
+    public static void main(String[] args) {
+
+        Scanner scan = new Scanner(System.in);
+        int A = scan.nextInt();
+
+        ArrayList list = new ArrayList&lt;Integer&gt;();
+
+        for(int i=2; i&lt;=A; i++) {
+            int sum = 0;
+            for(int j=1; j&lt;i; j++) {
+                if(i%j==0) {
+                    sum+=j;
+                }
+            }
+            int sum2 = 0;
+            for(int k=1; k&lt;sum; k++) {
+                if(sum%k==0) {
+                    sum2+=k;
+                }
+            }
+            if(sum2==i&amp;&amp;sum!=i) {
+                list.add(i);
+            }
+        }
+        System.out.println(&quot;친화수 쌍의 개수 : &quot;+list.size()/2);
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/11/29 17:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">big Ko</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20709"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">A=int(input(&quot;&quot;&quot;A이하의 친화수 쌍의 개수를 출력합니다.
+자연수 A를 입력하십시오: &quot;&quot;&quot;))
+
+def AN(n): #n의 약수를 찾고 n을 제외한 약수들의 합을 구하는 함수
+    elst=[]
+    for i in range(1,int(n**(1/2))+1):
+        if n%i==0:
+            elst.append(i)
+            if n//i!=i: #9의 경우에 [1,9,3]이 아니라 [1,9,3,3]처럼 3이 중복으로 담기는 경우를 제외
+                elst.append(n//i)             
+    sum=0
+    elst.remove(n) #약수의 리스트에서 n을 제거
+    for num in elst:
+        sum+=num
+    return sum #n을 제외한 약수의 합 반환
+
+count=0 #쌍의 개수
+for n in range(2,A+1):
+    sum=AN(n) #AN에 n을 넣었을 때 sum이 나오고, 그 sum을 다시 AN에 넣었을 때 n이 나온다면 친화수임.
+    if AN(sum)==n and AN(n)==sum and sum&lt;n: #A에 220을 넣었을 때 284가 나오지 않게 하기 위해 sum&lt;n 제한을 둠. 
+        count+=1
+        print(sum,n)
+print(&quot;친화수의 쌍:&quot;,count)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/23 22:11</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박시원</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20786"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">
+num = int(input(&quot;자연수 입력 : &quot;))
+sum_list =[]
+value_list = []
+count = 0
+def measure(value):
+    sum = 0
+    for i in range(1,value):
+        if value % i == 0:
+            sum += i
+    return sum
+
+value = 0
+for a in range(1,num+1):
+
+    temp = measure(a)
+    b = measure(temp)
+    if a == b and temp != b and a != value:
+        value = temp
+        count +=1
+        print(a,temp)
+print(count)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/30 22:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">semipooh</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_21405"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def yaksuhap(x):
+    i=0
+    sum=0
+    while (i&lt;x-1):
+        i=i+1
+        if x%i==0:
+            sum=sum+i
+    return (sum)
+
+num=0
+a=int(input())
+for i in range (1,a+1):     
+    if (i==yaksuhap(yaksuhap(i))):
+        num=num+1
+
+print(num)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/03/15 12:37</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Buckshot</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22152"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def AN(n):
+    a = []
+    for j in range(1, int(n**.5)+1):
+        if n % j == 0:
+            a.append(j)
+            if n//j != j:
+                a.append(n//j)
+        a.sort()
+    return a
+
+if __name__ == '__main__':
+    in1, in2 = 220, 284
+    if (sum(AN(in1)[:-1]) == in2) and (sum(AN(in2)[:-1]) == in1):
+        print('({}, {})'.format(in1, in2))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/07 13:58</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hwaseong Nam</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22382"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">A = int(input())
+friendnumber = []
+sumyaksu = []
+
+for i in range(2,A+1):
+    yaksu = []
+    for k in range(1,i):
+        if i%k == 0:
+            yaksu.append(k)
+        else:
+            continue
+    sumyaksu.append(sum(yaksu))
+
+for i in range(2,len(sumyaksu)+1):
+    for k in range(0,len(sumyaksu)+2):
+        try:
+            if i == sumyaksu[k] and k+2 == sumyaksu[i-2] and i!=k+2:
+                friendnumber.append(i)
+        except IndexError:
+            pass
+print(friendnumber)
+
+</code></pre>
+
+<p>두개씩 묶어서 보시면 될 듯 합니다</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/20 16:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Money_Coding</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23837"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def getDivisor(n):
+    result = []
+    for i in range(1, n):
+        if n % i == 0:
+            result.append(i)
+    return sum(result)
+
+
+def affinity(n):
+    count = 0
+    for i in range(1,n):
+        for k in range(1,n):
+            if i == getDivisor(k) and k == getDivisor(i):
+                count += 1
+    print(count)
+
+
+affinity(1000)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/11/30 17:36</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김우석</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24259"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>def find_number(number):</p>
+<pre><code>  for_return=[]
+
+  for i in range(1,number,1):
+
+    if number%i==0:
+
+      for_return.append(i)
+
+  return sum(for_return)
+
+def friendly_number(number):
+
+  for_answer=[]
+
+  for i in range(2,number+1,1):
+
+    if find_number(i)!=i:
+
+      if find_number(find_number(i))==i and find_number(i)&lt;=number:
+
+         for_answer.append([i,find_number(i)])
+
+
+  return (len(for_answer)/2)
+
+def main():
+
+  number=int(input("write number :"))
+
+  print(friendly_number(number))
+
+main()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/01/08 18:00</p>
+                                <p class="static-profile" style="margin:0;padding:0;">전준혁</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25179"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def yaksu(num):
+    n = int(num)
+    result = []
+    for i in range(1, n):
+        if n % i == 0:
+            result.append(i)
+    return result
+
+def main(A):
+    a = int(A)
+    result = []
+    for i in range(2, a+1):
+        if sum(yaksu(sum(yaksu(i)))) == i and i != sum(yaksu(i)):
+            # print(i, sum(yaksu(i)), yaksu(i), yaksu(sum(yaksu(i))))
+            if sorted([i, sum(yaksu(i))]) not in result:
+                result.append([i, sum(yaksu(i))])
+    print(result, len(result))
+# print(yaksu(284))
+main(30000)    
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/04/13 08:34</p>
+                                <p class="static-profile" style="margin:0;padding:0;">DSHIN</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25506"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def measure(a):
+    return [i for i in range(1,a+1) if a%i==0]
+
+def friend(r):
+    n = sum(measure(r))-r
+    N = sum(measure(n))-n
+    if N==r :
+        return print(f'{n},{N}')
+
+A = int(input('range :'))
+
+for i in range(A): friend(i)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/06/04 11:43</p>
+                                <p class="static-profile" style="margin:0;padding:0;">약사의혼자말</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26164"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#codingdojing_friendNum_re  
+
+def sum_divisor(num: int):
+    num_set = {1,} #set, 1은 포함하고 시작
+
+    for i in range(2, int(num**0.5)+1):
+        if num%i == 0: #약수면
+            num_set.update({i, num//i})
+
+    return sum(num_set)
+
+result_set = set()
+N = eval(input('N: '))
+
+for num1 in range(2,N+1):
+    num2 = sum_divisor(num1)
+
+    if num1 &lt; num2 and num1 == sum_divisor(num2):   #num2 에 대한 약수검사
+        result_set.add((num1, num2))
+
+print(result_set, len(result_set))
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/08/25 17:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jaeman Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26984"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def Fun1 (a):
+    sum = 0
+    for i in range(1,a):
+        if a%i ==0:
+            sum +=i
+    return sum
+
+a= int(input(&quot;자연수를 입력하시오&quot;))
+cnt = 0
+for i in range(1,a+1):
+    b = Fun1(i)
+    if i == Fun1(b) and i !=b:
+        cnt+=1
+        print(i,b,Fun1(b))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/08 16:08</p>
+                                <p class="static-profile" style="margin:0;padding:0;">양캠부부</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27162"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>// Rust</p>
+<p>// 타 답변을 참조, 모든 수에 대해 약수의 합을 HashMap에 저장 후 참조하는 방법입니다</p>
+<p>use std::collections::HashMap;
+fn range_amicable_number(n: u32) -&gt; HashMap<u32, u32> {</p>
+<pre><code>let mut map_sum = HashMap::new();
+for i in 2..=n {
+    let s = divisors(i).iter().sum::&lt;u32&gt;() - i;
+    if s&gt;=2 &amp;&amp; s&lt;=n { map_sum.insert(i, s);}
+}
+
+let mut map = HashMap::new();
+for (a, b) in &amp;map_sum {
+    if *b &gt; *a { 
+        if let Some(v) = map_sum.get(b) {
+            if v == a {
+                map.insert(*a, *b);
+                map.insert(*b, *a);
+            }
+        }
+    }
+}
+map
+</code></pre>
+<p>}</p>
+<p>fn divisors(n: u32) -&gt; HashSet::<u32> {</p>
+<pre><code>let mut set = HashSet::&lt;u32&gt;::new();
+set.insert(1);
+set.insert(n);
+for i in 2..n {                         //1, 자신 제외 약수
+   if n % i == 0 {
+       if !set.insert(i) { break; } } }
+set
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/28 15:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">JW KIM</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27359"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n = 10000
+def dv_sum(n):
+    dl = divisor_list =  [x for x in range(1,n) if n%x == 0]
+    return  sum(dl)
+
+print(len([(x,dv_sum(x)) for x in range(1,n) if x == dv_sum(dv_sum(x)) and x &lt; dv_sum(x)]))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/02/17 13:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">로만가</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27417"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬3입니다. 10_0000 기준으로 4.37초 정도 걸리네용.</p>
+<pre><code class="python">def sum_of_divisors(n: int) -&gt; int:
+  s, i = 1, 2
+  l = int(n ** 0.5 + 1.5)
+  while i &lt; l:
+    if n % i == 0:
+      s += ( i + n // i)
+    i += 1
+  if i * i == n:
+    s -= i
+  return s
+
+def test(x):
+  s = sum_of_divisors(x)
+  if x != s and sum_of_divisors(s) == x:
+    return s
+  return None
+
+def solve(n: int) -&gt; int:
+  s = set()
+  for i in range(n):
+    x = i + 1
+    if x not in s:
+      m = test(x)
+      if m:
+        s.add(m)
+        s.add(x)
+  return len(s) // 2
+
+print(solve(int(input())))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/02/21 12:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">룰루랄라</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27469"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">public class test {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ArrayList&lt;Integer&gt; arr = new ArrayList&lt;Integer&gt;();
+        ArrayList&lt;Integer&gt; ass = new ArrayList&lt;Integer&gt;();
+        ArrayList&lt;Integer&gt; bss = new ArrayList&lt;Integer&gt;();
+        int count=0;
+        int point =sc.nextInt();
+        System.out.print(&quot;친화수의 쌍: &quot;);
+        for(int i=1; i&lt;=point; i++) {
+        int num= i;
+        int asum=0;
+        int bsum=0;
+        for(int j=1; j&lt;num; j++) {
+            if(num%j==0) {
+            asum+=j;    
+            }
+            }
+        for(int j=1; j&lt;asum; j++) {
+            if(asum%j==0) {
+                bsum+=j;
+            }
+        }
+        if(num!=asum) {
+        if(num==bsum) {
+            ass.add(num);
+            bss.add(asum);
+            if(ass.contains(asum)==false &amp;&amp; bss.contains(num)==false) {
+            count++;
+            System.out.print(&quot;[&quot; + num + &quot; &quot; + asum + &quot;]&quot;);
+            }
+            }
+        }
+        }
+        System.out.println(&quot;\n&quot; + &quot;친화수 쌍은: &quot; + count +&quot;개 입니다.&quot;);
+    }   
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/02/24 15:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Kkubuck</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29706"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">using System;
+
+namespace solution
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.Write(&quot;\n 자연수 A를 입력: &quot;);
+            int A = int.Parse(Console.ReadLine());
+            var ans = affinityNumber(A);
+            Console.WriteLine(&quot;친화수의 쌍의 개수: {0}&quot;, ans);
+        }
+
+        private static int affinityNumber(int A)
+        {  // 위에서 python으로 푼것을 따라해 보얐어요..
+            int[] arr = new int[A + 1];
+            for (int i = 1; i &lt; A; i++)
+            {
+                for (int k = i*2; k &lt; A+1; k+= i)
+                    arr[k] += i;
+            }
+
+            int cnt = 0;
+            for (int i = 1; i &lt; A; i++)
+            {
+                if(arr[i] != i &amp;&amp; arr[i] &lt; A &amp;&amp; arr[arr[i]] == i)
+                {
+                    Console.WriteLine(&quot;{0} &lt;=&gt; {1}&quot;,i, arr[i]);
+                    arr[i] = -1;
+                    cnt++;
+                }
+            }
+            return cnt;
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/10/16 21:14</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

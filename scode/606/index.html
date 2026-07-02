@@ -1,0 +1,1004 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="```{.no-highlight}
+rikudo라는 게임입니다.
+1부터 36까지 순서대로 이어지도록 숫자를 채우세요.
+
+input:
+------24--00--00--00------
+----00--00--26--36--00----
+--0...">
+    <title>rikudo게임 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">rikudo게임</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">6</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 4</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <pre><code class="no-highlight">rikudo라는 게임입니다.
+1부터 36까지 순서대로 이어지도록 숫자를 채우세요.
+
+input:
+------24--00--00--00------
+----00--00--26--36--00----
+--00--21--00--00--28--32--
+18--00--15------00--00--00
+--00--00--00--08--01--00--
+----00--10--00--00--03----
+------12--00--00--05------
+
+output:
+------24--25--35--34------
+----20--23--26--36--33----
+--19--21--22--27--28--32--
+18--16--15------29--30--31
+--17--14--09--08--01--02--
+----13--10--07--04--03----
+------12--11--06--05------
+</code></pre>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">재귀</span>
+                
+                    <span class="label label-tag label-xs">트랙백</span>
+                
+                    <span class="label label-tag label-xs">미로</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2018/07/27 16:36</p>
+                    <p class="static-profile" style="margin:0;padding:0;">박범수</p>
+                </div>
+            </div>
+
+            
+                <a name="comment_2307"></a>
+                <div class="comment_line comment-content">
+                    
+                        <span style="color:orangered;">+1</span>
+                    
+                    <span style="white-space:pre-wrap;"><a href="http://www.rikudo-puzzle.com/" rel="nofollow">http://www.rikudo-puzzle.com/</a></span>
+                    -
+                    <span style="font-size:11px;">
+                        Noname,
+                        2018/07/28 19:23
+                    </span>
+                </div>
+            
+                <a name="comment_2308"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">링크 감사합니다:)</span>
+                    -
+                    <span style="font-size:11px;">
+                        박범수,
+                        2018/07/30 08:02
+                    </span>
+                </div>
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>7개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_13815"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">class rikudo:
+    def __init__(self,data):
+        self.board = [ [ int(i[j:j+2]) if i[j:j+2].isdigit() else i[j:j+2] for j,k in enumerate(i) if not j&amp;1 ] for i in data.split('\n') ]
+        self.row, self.clm = len(self.board), len(self.board[0])
+        self.nums = { self.board[i][j]:(i,j) for i in range(self.row)
+                                             for j in range(self.clm) if self.board[i][j] not in (0,'--') }
+
+    def answer(self):
+        flag = False
+        stc,stc2,cun = [self.nums[1]],[0],1
+
+        nib = ( (0,2),(1,1),(1,-1),(0,-2),(-1,-1),(-1,1) )
+
+        while cun &lt; 36:
+            if cun+1 in self.nums:
+                if (self.nums[cun+1][0]-stc[-1][0], self.nums[cun+1][1]-stc[-1][1]) in nib:
+                    stc.append(self.nums[cun+1])
+                    stc2.append(0)
+                    cun += 1
+                    continue
+                else: stc.pop(); stc2.pop(); cun -= 1; continue
+
+            while 1:
+                if stc2[-1] == 6: flag = True; break
+                dx,dy = nib[stc2[-1]]
+                stc2[-1] += 1
+                if 0&lt;=stc[-1][0]+dx&lt;self.row and 0&lt;=stc[-1][1]+dy&lt;self.clm and self.board[stc[-1][0]+dx][stc[-1][1]+dy] == 0 and (stc[-1][0]+dx,stc[-1][1]+dy) not in stc: break
+
+            if flag: flag=False; stc.pop(); stc2.pop(); cun -= 1; continue
+
+            stc.append((stc[-1][0]+dx,stc[-1][1]+dy))
+            stc2.append(0)
+            cun += 1
+        return stc
+
+    def print_ans(self):
+        for i,j in enumerate(self.answer()): self.board[j[0]][j[1]] = i+1
+        for i in range(self.row):
+            for j in range(self.clm):
+                print('{:0&gt;2}'.format(self.board[i][j]),end='')
+            print()
+
+
+sample = '''\
+------24--00--00--00------
+----00--00--26--36--00----
+--00--21--00--00--28--32--
+18--00--15------00--00--00
+--00--00--00--08--01--00--
+----00--10--00--00--03----
+------12--00--00--05------'''
+
+x = rikudo(sample)
+x.print_ans()
+
+</code></pre>
+
+<pre><code>------24--25--35--34------
+----20--23--26--36--33----
+--19--21--22--27--28--32--
+18--16--15------29--30--31
+--17--14--09--08--01--02--
+----13--10--07--04--03----
+------12--11--06--05------
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/28 01:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13819"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python</p>
+<p>1) 주어진 예에서 처음에 보드에 적혀 있는 수들을 정렬하면 [1, 3, 5, 8, 10, 12, 15, 18, 21, 24, 26, 28, 32, 36] 인데, </p>
+<p>여기서 가장 차이가 작은 수 두 개를 찾습니다: closest_nums()</p>
+<p>그래서 제일 먼저 찾는 게 [1, 3], 즉 1과 3이 가장 가까우니 먼저 연결해 보겠다는 뜻.
+(이 과정에서, 이미 앞뒤로 연결된 수는 볼 필요가 없으므로 제외합니다).</p>
+<p>2) 가장 가까운 두 수 [1, 3]을 찾았으니 이제 1~~&gt;3 경로들을 찾습니다: find_paths() =&gt; [경로1, 경로2, ...]</p>
+<p>1~~&gt;3은 2개의 경로가 존재하는데, 찾은 경로들을 각각 그려본 후(draw()) 백트래킹을 사용하면서(erase()) 1)과 2)를 반복합니다.</p>
+<p>1~~&gt;3 다음에는</p>
+<p>[<strong>1, 2, 3</strong>, 5, 8, 10, 12, 15, 18, 21, 24, 26, 28, 32, 36]</p>
+<p>이렇게 되니까 3~~&gt;5, 8~~&gt;10, 10~~&gt;12, 24~~&gt;26, 26~~&gt;28 순서로 찾게 됩니다.</p>
+<pre><code class="python">class Rikudo:
+    brd, inv_brd, size = {}, {}, 0
+
+    def __init__(self, data):
+        # arr &lt;- 2차원 배열(data)
+        arr = [[int(s) for s in row.split('-') if s.isdigit()] for row in data.split('\n')]
+        arr[len(arr) // 2].insert(len(arr) // 2, -1)  # 가운데 안 쓰는 한 칸
+        self.size = len(arr)
+
+        # self.brd &lt;- {(i, j):숫자, ... }
+        for i in range(len(arr)):
+            for j in range(len(arr[i])):
+                if arr[i][j] &gt;= 0:
+                    self.brd[(i, j)] = arr[i][j]
+
+        # inv_brd &lt;- {숫자:(i, j), ... }, brd 와 inv_brd는 동기화되어야 함
+        self.inv_brd = {v : k for k, v in self.brd.items() if v &gt; 0}
+
+    def closest_nums(self):
+        nums = sorted(self.inv_brd.keys())  # 현재 보드에 적힌 숫자들을 정렬
+        return min(
+                    [[ x[0], x[1], x[1] - x[0] ] for x in zip(nums[:-1], nums[1:]) if x[1] - x[0] &gt; 1],
+                    key = lambda x:x[2]
+                )[:2]   # 연속하지 않으면서 간격이 최소인 [nums[i], nums[i+1]을 리턴
+
+    # 좌표 cbase와 인접하면서 유효한 좌표들을 리턴
+    def adjacent(self, cbase, dest):
+        def writable(c): return c == dest or c in self.brd.keys() and self.brd[c] == 0
+        x, y = cbase
+        if x &lt; self.size // 2:    result = {(x, y-1), (x, y+1), (x-1, y-1), (x-1, y), (x+1, y), (x+1, y+1)}
+        elif x &gt; self.size // 2:  result = {(x, y-1), (x, y+1), (x-1, y), (x-1, y+1), (x+1, y-1), (x+1, y)}
+        else:                      result = {(x, y-1), (x, y+1), (x-1, y-1), (x-1, y), (x+1, y-1), (x+1, y)}
+
+        return {c for c in result if writable(c)}
+
+    # path[-1]에서 dest에 이르는 길이 plen인 경로를 찾는다.(recursion)
+    def find_paths(self, path, plen, dest):
+        if plen == 0:
+            return [path] if (path[-1] == dest) else []
+        else:
+            result = []
+            for c in self.adjacent(path[-1], dest) - set(path):  # 지나온 경로 제외
+                result += self.find_paths(path + [c], plen - 1, dest)
+
+            return result
+
+    def draw(self, path):
+        n = self.brd[path[0]]
+        for c in path[1:-1]:
+            n += 1
+            self.brd[c] = n
+            self.inv_brd[n] = c
+
+    def erase(self, path):
+        n = self.brd[path[0]]
+        for c in path[1:-1]:
+            n += 1
+            self.brd[c] = 0
+            del self.inv_brd[n]
+
+    def print_n_exit(self):
+        arr = [['--' for y in range(self.size)] for x in range(self.size)]
+        for x, y in self.brd.keys():
+            arr[x][y] = &quot;%02d--&quot; % self.brd[(x, y)]
+
+        output = ''
+        for x in range(self.size):
+            if x == self.size // 2:
+                tmp = ''.join(arr[x])[:-2]
+                output += tmp[:self.size * 2] + '--' + tmp[self.size * 2:]  + '\n'
+            else:
+                output += '--' * arr[x].count('--') + ''.join(arr[x][:-1]) + '\n'
+        print(output)
+        exit()
+
+    def solve(self):
+        if 0 not in self.brd.values():
+            self.print_n_exit()
+        else:
+            n1, n2 = self.closest_nums()
+            paths = self.find_paths([self.inv_brd[n1]], n2 - n1, self.inv_brd[n2])
+            for path in paths:
+                self.draw(path)
+                self.solve()
+                self.erase(path)
+
+data = &quot;------24--00--00--00------\n----00--00--26--36--00----\n--00--21--00--00--28--32--\n18--00--15------00--00--00\n--00--00--00--08--01--00--\n----00--10--00--00--03----\n------12--00--00--05------&quot;
+game = Rikudo(data)
+game.solve()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/29 04:45</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13870"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import string
+import re
+import random
+inputdata='''------24--00--00--00------
+----00--00--26--36--00----
+--00--21--00--00--28--32--
+18--00--15------00--00--00
+--00--00--00--08--01--00--
+----00--10--00--00--03----
+------12--00--00--05------'''
+
+MAX=36
+OUTnumbers=list(range(1,MAX+1))
+INnumbers=[]
+row=re.split('\n',inputdata)
+datalen=len(row)
+
+data=[]
+lenlist=[]
+for i in range(datalen):
+    temp=[int(x) for x in re.split('[\-]+',row[i]) if x] #split rowdata
+    data.append(temp)
+    lenlist.append(len(data[i])) #datalength vector
+
+##insert 'c' at enter
+mid=int(datalen/2)
+data[mid].insert(mid,0)
+lenlist[mid]=lenlist[mid]+1
+
+##make Axial coordinates
+##https://www.redblobgames.com/grids/hexagons/
+xy_to_axial={}
+axial_to_xy={}
+numbers_dic={}
+for i in range(datalen):
+    for j in range(lenlist[i]):
+        xy_to_axial[(i,j)]=(-min(i,3)+j,i-mid)
+        axial_to_xy[(-min(i,3)+j,i-mid)]=(i,j)
+        if data[i][j]!=0:
+            OUTnumbers.remove(data[i][j])
+            INnumbers.append(data[i][j])
+            numbers_dic[data[i][j]]=(i,j)
+INnumbers.sort()
+
+def nearindex(index,dest):
+    # input : axial_coord output :  axial_coord
+    # 빈칸이나 dest의 인덱스를 반환합니다.
+    _near_indice=[]
+    (q,r)=index
+    for offset_q,offset_r in [(0,1),(1,0),(1,-1),(0,-1),(-1,0),(-1,1)]:
+        index_new=(q+offset_q,r+offset_r)
+        if (index_new in axial_to_xy) and (index_new!=(0,0)):
+            _i,_j=axial_to_xy[index_new]
+            if ((data[_i][_j]==0) or (index_new==dest)):
+                _near_indice.append((q+offset_q,r+offset_r))
+    return _near_indice
+
+
+def location(num):
+    #return xy cord
+    index=()
+    for i in range(datalen):
+        if num in data[i]:
+            index=(i,data[i].index(num))
+    try:
+        return xy_to_axial[index]
+    except:
+        return ()
+
+def find_routes(route,plen,dest):
+    if plen == 0:
+        return [route] if (route[-1] == dest) else []
+    else:
+        result = []
+        for c in set(nearindex(route[-1],dest)):
+            result += find_routes(route + [c], plen - 1, dest)
+        return result
+
+
+def draw(route):
+    (i,j)=axial_to_xy[route[0]]
+    n=data[i][j]
+    for c in route[1:-1]:
+        n += 1
+        (i,j)=axial_to_xy[c]
+        if (not data[i][j]) and (location(n)==()):
+            data[i][j] = n
+def erase(route):
+    (_i,_j)=axial_to_xy[route[0]]
+    for c in route[1:-1]:
+        (_i,_j)=axial_to_xy[c]
+        if (data[_i][_j]) and (data[_i][_j] not in INnumbers):
+            data[_i][_j] = 0
+def check():
+    data[mid][mid]='c'
+    result=True
+    for i in range(datalen):
+        if 0 in data[i]:
+            result=False
+    return result
+
+def printdata():
+    result=''
+    for i in data:
+        result+='-'*(14-2*len(i))
+        for j in i:
+            temp = str(j)
+            if len(temp)==1:
+                temp='0'+temp
+            if (i.index(j)==0):
+                result=result+temp
+            else:
+                result=result+'-'*2+temp
+        result+='-'*(14-2*len(i))
+        result+='\n'
+    print(result)
+
+def solve(i):
+        if (check()):
+            print(&quot;hooray!&quot;,data)
+            printdata()
+            exit()
+        else:
+            if (i&lt;13):
+                n1=INnumbers[i]
+                n2=INnumbers[i+1]
+            else:
+                n1=INnumbers[12]
+                n2=INnumbers[13]
+
+            routes = find_routes([location(n1)], n2 - n1, location(n2))
+            for route in routes:
+                erase(route)
+                draw(route)
+                solve(i+1)
+                erase(route)
+
+solve(0)
+</code></pre>
+
+<p>hooray! [[24, 25, 35, 34], [20, 23, 26, 36, 33], [19, 21, 22, 27, 28, 32], [18, 16, 15, 'c', 29, 30, 31], [17, 14, 9, 8, 1, 2], [13, 10, 7, 4, 3], [12, 11, 6, 5]]
+------24--25--35--34------
+----20--23--26--36--33----
+--19--21--22--27--28--32--
+18--16--15--0c--29--30--31
+--17--14--09--08--01--02--
+----13--10--07--04--03----
+------12--11--06--05------</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/01 02:36</p>
+                                <p class="static-profile" style="margin:0;padding:0;">hyun soo kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13872"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>트랙백으로 풀었습니다.
+01에서 여섯 방향으로 가능한 곳에 02를 넣어보고.. 
+36까지 계속 반복..</p>
+<pre><code class="python">
+class rikudo:
+    def __init__(self, s):
+        self.solved = False
+        self.board = [[i[j:j + 2] for j, k in enumerate(i) if j % 2 == 0] for i in s.split('\n')]
+        self.rows = len(self.board)
+        self.cols = len(self.board[0])
+
+    def solve(self):
+        # 01 번에서 시작
+        for i in range(self.rows):
+            for j in range(self.cols):
+                if '01' == self.board[i][j]:
+                    self.next(i, j, '01')
+                    break
+
+    def next(self, y, x, n):
+        if n == '36':
+            self.solved = True
+            return
+
+        # 1, 3, 5, 7, 9, 11시 방향
+        direction = ((1, 1), (0, 2), (-1, 1), (-1, -1), (0, -2), (1, -1))
+        for d in direction:
+            # 다음좌표
+            ny = y + d[0]
+            nx = x + d[1]
+
+            # 가능 범위
+            if ny &gt;= 0 and ny &lt; self.rows and nx &gt;= 0 and nx &lt; self.cols:
+                # 다음수
+                next_n = self.next_num(n)
+
+                # 00 이거나 다음수이면,
+                if self.board[ny][nx] == '00' or self.board[ny][nx] == next_n:
+                    self.board[ny][nx] = next_n
+                    org_n = self.board[ny][nx]
+                    # 계속해서 다음로...
+                    self.next(ny, nx, next_n)
+
+                    if self.solved:
+                        return
+
+                    # 롤백
+                    self.board[ny][nx] = org_n
+
+    # 다음 수 : 09 -&gt; 10
+    def next_num(self, n):
+        if n[0] == '0':
+            n = n[1]
+        n = str(int(n) + 1)
+        return n.zfill(2)
+
+    def __str__(self):
+        s = ''
+        for i in self.board:
+            s += ''.join(i) + '\n'
+        return s
+
+
+s = '''
+------24--00--00--00------
+----00--00--26--36--00----
+--00--21--00--00--28--32--
+18--00--15------00--00--00
+--00--00--00--08--01--00--
+----00--10--00--00--03----
+------12--00--00--05------
+'''
+r = rikudo(s=s.strip())
+print(r)
+r.solve()
+print(r)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/01 11:03</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박범수</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17607"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import copy
+
+direc = ((2,0), (-2,0), (1,1), (1,-1), (-1,1), (-1,-1))
+
+# steps = []
+def search(numbers, step, n = 0):
+    def display(ns):        
+        for y in range(7):
+            _str = ''
+            for x in range(13):
+                if ns[(x,y)] == -1: _str = _str + '--'
+                elif 0 &lt;= ns[(x,y)] &lt; 10: _str = _str + '0' + str(ns[(x,y)])
+                elif ns[(x,y)] &gt;= 10: _str = _str + str(ns[(x,y)])
+            print(_str)
+        print('')
+
+    if n == 36:
+        display(numbers)
+        raise NotImplementedError
+        #for i, step in enumerate(steps):
+
+
+    def find_start(numbers):  # 시작점 찾기
+        for key, value in numbers.items():
+            if value == 1:
+                return key
+        print('start point not found')
+        raise NotImplementedError
+
+    if n == 0:  # 처음이라면 시작점에서 스타트
+        search(numbers, find_start(numbers), 1)
+        return
+
+    _x, _y = step
+    for dx, dy in direc: # 주변에 다음번호가 있다면 바로 건너가기
+        x = _x + dx
+        y = _y + dy
+        if 0 &lt;= x &lt;= 12 and 0 &lt;= y &lt;= 6: # 범위를 벗어나지 않을떄
+            if numbers[(x,y)] == n+1:
+                temp = copy.deepcopy(numbers)
+                temp[(x,y)] = n+1
+                search(temp, (x,y), n+1)
+                return
+
+    for dx, dy in direc: # 0인 부분으로 건너가서 탐색(가지치기)
+        x = _x + dx
+        y = _y + dy
+        if 0 &lt;= x &lt;= 12 and 0 &lt;= y &lt;= 6: # 범위를 벗어나지 않을떄
+            if numbers[(x,y)] == 0:
+                temp = copy.deepcopy(numbers)
+                temp[(x,y)] = n+1
+                search(temp, (x,y), n+1)
+
+    # if no way
+    return
+
+print('문제를 입력하세요')
+inputs = []
+for i in range(7):
+    inputs.append(input())
+
+numbers = {}
+for k, s in enumerate(inputs):
+    for i in range(0, len(s), 2):
+        if s[i:i+2]!='--': numbers[(i//2, k)] = int(s[i:i+2])
+        else: numbers[(i//2, k)] = -1
+
+try:
+    print('')
+    search(numbers, (0,0), 0)
+    print('정답을 찾지 못했습니다.')
+except NotImplementedError:
+    print('탐색을 종료합니다.')
+
+</code></pre>
+
+<pre><code>문제를 입력하세요
+------24--00--00--35------
+----00--00--00--00--00----
+--00--21--00--00--28--32--
+00--00--15------00--00--00
+--17--00--00--08--01--00--
+----00--10--00--00--00----
+------12--00--00--05------
+
+------24--25--36--35------
+----20--23--26--34--33----
+--19--21--22--27--28--32--
+18--16--15------29--30--31
+--17--14--09--08--01--02--
+----13--10--07--04--03----
+------12--11--06--05------
+
+탐색을 종료합니다.
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/04/26 03:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">messi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23107"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">inp=&quot;&quot;&quot;------24--00--00--00------
+----00--00--26--36--00----
+--00--21--00--00--28--32--
+18--00--15------00--00--00
+--00--00--00--08--01--00--
+----00--10--00--00--03----
+------12--00--00--05------&quot;&quot;&quot;
+numlst=[&quot;0&quot;+str(num) if len(str(num))==1 else str(num) for num in range(1,37)]
+lst=[]
+for ln in inp.split(&quot;\n&quot;):
+    elst=[&quot;&quot;]*13
+    for n in range(13):
+        elst[n]=ln[n*2]+ln[n*2+1]
+    lst.append(elst)
+for ln in lst:
+    for cmp in ln:
+        print(&quot;%1s&quot;%cmp, end=&quot;&quot;)
+    print()
+
+def findone(): #맨처음 &quot;01&quot;을 찾을 때 쓴 함수
+    for y in range(len(lst)):
+        for x in range(len(lst[0])):
+            if lst[y][x]==&quot;01&quot;:
+                return x,y
+x,y=findone()
+
+n=1
+maxX,maxY=len(lst[0]),len(lst)
+def solve(y,x):
+    global n
+    if n==36:
+        for ln in lst:
+            for cmp in ln:
+                print(&quot;%1s&quot;%cmp, end=&quot;&quot;)
+            print()
+    else:
+        for dx, dy in [(-1,-1),(1,-1),(2,0),(1,1),(-1,1),(-2,0)]:
+            nx,ny=x+dx,y+dy
+            if 0&lt;=nx&lt;maxX and 0&lt;=ny&lt;maxY and lst[ny][nx]!=&quot;--&quot;:
+                if lst[ny][nx]==&quot;00&quot; or int(lst[ny][nx])==int(lst[y][x])+1:
+                    on=lst[ny][nx]
+                    lst[ny][nx]=numlst[n]
+                    n+=1
+                    solve(ny,nx)
+                    lst[ny][nx]=on
+                    n-=1
+solve(4,9)
+</code></pre>
+
+<p>결과</p>
+<pre><code>------24--25--35--34------
+----20--23--26--36--33----
+--19--21--22--27--28--32--
+18--16--15------29--30--31
+--17--14--09--08--01--02--
+----13--10--07--04--03----
+------12--11--06--05------
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/09/05 23:37</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박시원</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29637"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">using System;
+using System.Collections.Generic;
+
+namespace solution
+{
+    class Program
+    {
+        public static int[,] board;
+        static void Main(string[] args)
+        {
+            string[] sample = { &quot;------24--00--00--00------&quot;,
+                                &quot;----00--00--26--36--00----&quot;,
+                                &quot;--00--21--00--00--28--32--&quot;,
+                                &quot;18--00--15------00--00--00&quot;,
+                                &quot;--00--00--00--08--01--00--&quot;,
+                                &quot;----00--10--00--00--03----&quot;,
+                                &quot;------12--00--00--05------&quot;};
+
+            ricudo(sample);
+            Console.WriteLine(&quot;&quot;);
+        }
+
+        private static void ricudo(string[] sample)
+        {
+            int row = sample.Length;
+            int col = sample[0].Length / 2;
+            board = new int[row, col];
+            Dictionary&lt;int, int&gt; dic = new Dictionary&lt;int, int&gt;();
+            for (int r = 0; r &lt; row; r++)
+            {
+                string curr = &quot;&quot;;
+                for (int c = 0; c &lt; col; c++)
+                {
+                    curr = sample[r][c * 2].ToString() + sample[r][c * 2 + 1];
+                    if (curr == &quot;--&quot;)
+                        board[r, c] = -1;
+                    else
+                    {
+                        board[r, c] = int.Parse(curr);
+                        dic[board[r, c]] = r * col + c;
+                    }
+                }
+            }
+            printBoard(row, col, &quot;input&quot;);
+
+            List&lt;int&gt; nums = new List&lt;int&gt;() { 1 };
+            List&lt;int&gt; points = new List&lt;int&gt;() { dic[1] };
+            List&lt;int&gt; d = new List&lt;int&gt;() { 0 };
+            int[] dR = { 0, 1, 1, 0, -1, -1 };
+            int[] dC = { 2, 1, -1, -2, -1, 1 };
+
+            while(nums.Count &lt; 36)
+            {
+                int n = nums.Count - 1;
+                if (d[n] == 6)
+                {                    
+                    nums.RemoveAt(n);
+                    points.RemoveAt(n);
+                    d.RemoveAt(n);
+                }
+                n = nums.Count - 1;
+                int next = nums[n] + 1;
+                if (dic.ContainsKey(next))
+                {
+                    bool ok = false;
+                    int r = points[n] / col, c = points[n] % col;
+                    for (int i = 0; i &lt; 6; i++)
+                    {
+                        int R = r + dR[i], C = c + dC[i];
+                        if(0 &lt;= R &amp;&amp; R &lt; row &amp;&amp; 0 &lt;= C &amp;&amp; C &lt; col &amp;&amp; board[R,C] == next)
+                        {
+                            nums.Add(next);
+                            points.Add(R * col + C);
+                            d[n]++;
+                            d.Add(0);
+                            ok = true;
+                            break;
+                        }
+                    }
+                    if (ok == false)
+                    {
+                        nums.RemoveAt(n);
+                        points.RemoveAt(n);
+                        d.RemoveAt(n);
+                    }
+                }
+                else
+                {
+                    int R = points[n] / col + dR[d[n]];
+                    int C = points[n] % col + dC[d[n]];
+                    d[n]++;
+                    if(0&lt;=R &amp;&amp; R &lt; row &amp;&amp; 0&lt;=C &amp;&amp; C&lt;col &amp;&amp; !points.Contains(R*col + C) &amp;&amp; board[R,C] == 0)
+                    {
+                        nums.Add(next);
+                        points.Add(R * col + C);
+                        d.Add(0);
+                    }
+                }
+            }
+
+            fillNums(row, col, nums, points);
+            printBoard(row, col, &quot;output&quot;);
+        }
+
+        private static void fillNums(int row, int col, List&lt;int&gt; nums, List&lt;int&gt; points)
+        {
+            for (int i = 0; i &lt; nums.Count; i++)
+            {
+                int r = points[i] / col, c = points[i] % col;
+                board[r, c] = nums[i];
+            }
+        }
+
+        private static void printBoard(int row, int col, string str)
+        {
+            Console.WriteLine(&quot;\n {0}&quot;, str);
+            for (int r = 0; r &lt; row; r++)
+            {
+                for (int c = 0; c &lt; col; c++)
+                {
+                    if(board[r,c] == -1)
+                        Console.Write(&quot;--&quot;);
+                    else
+                        Console.Write(&quot;{0:00}&quot;,board[r,c]);
+                }
+                Console.WriteLine();
+            }
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/09/16 20:24</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

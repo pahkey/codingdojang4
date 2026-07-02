@@ -1,0 +1,1567 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="출처: &lt;프로젝트 오일러 49번 문제&gt;
+
+1487, 4817, 8147은 3330씩 증가하는 등차수열(arithmetic sequence)이다.
+이 세 개의 수는 특이한 점이 있는데, 셋 다 소수이면서, 셋은 서로 자리에 있는 숫자만 바꾼 ...">
+    <title>특이한 소수를 연결하여 만들 수 있는 12자리 수는? - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">특이한 소수를 연결하여 만들 수 있는 12자리 수는?</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">3</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 2</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>출처: &lt;프로젝트 오일러 49번 문제&gt;</p>
+<p>1487, 4817, 8147은 3330씩 증가하는 등차수열(arithmetic sequence)이다.
+이 세 개의 수는 특이한 점이 있는데, 셋 다 소수이면서, 셋은 서로 자리에 있는 숫자만 바꾼 수들이라는 것이다.</p>
+<p>이러한 특성(+-3330 등차수열, 소수, 자리만 바꾼 수)을 보이는 한 자리, 두 자리, 세 자리인 소수는 없다.
+그러나 네 자리 숫자 중 이러한 특성을 보이는 숫자들이 한 세트 더 있다.</p>
+<p>이 숫자들을 작은 것부터 순서대로 연결하여 만들 수 있는 12자리 숫자는 무엇인가?
+예) 1487, 4817, 8147 -&gt; 148748178147</p>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2020/05/24 19:32</p>
+                    <p class="static-profile" style="margin:0;padding:0;">박시원</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>23개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_22413"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">lst=list(range(1000,10000)) #4자리 소수를 찾아야 하므로 1000이상 10000미만의 숫자 리스트 생성
+for n in range(1000,10000):
+    for k in range(2,int(n**(1/2))+1):
+        if n%k==0:
+            lst.remove(n)
+            break
+for num in lst:
+    if num+3330 in lst and num+6660 in lst:
+        s1,s2,s3=set(str(num)),set(str(num+3330)),set(str(num+6660))
+        if s1==s2 and s1==s3 and s2==s3 and num!=1487: #서로 자리만 바꾼 수이면서 예시와 다른 숫자 세트일 경우
+            print(str(num)+str(num+3330)+str(num+6660)) #296962999629 (2969, 6299, 9629)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/24 20:09</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박시원</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22445"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#파이썬
+#소수, 자리만 바꾼수 조건은 동일하며,
+#+-3330 등차수열 대신 모든 가능한 등차수열을 출력해보았습니다.
+#단, 3330에는 * 표시가 되도록 하였습니다
+
+def sosu_check(x):      #소수이면 True 반환
+    i=2
+    while(i&lt;=x):        
+        if x%i==0:
+            result=False
+            break
+        else:
+            i+=1
+    if i==x:
+        result=True
+    return result
+
+def check_num(a,b):     #두번째 입력값이 첫번째 입력값의 각 숫자로만 구성되어 있으면 True 반환
+    a,b,a_num,b_num,num=str(a),str(b),[],[],0
+    for i in range (len(a)):
+        a_num.append(int(a[i]))
+        b_num.append(int(b[i]))
+    for i in range (len(a)):
+        if b_num[i] in a_num:
+            num+=1
+    if num==4:
+        return (True)
+
+sosu_group=[]
+for i in range (1000,10000):
+    if sosu_check(i)==True:
+        sosu_group.append(i)
+
+for i in range (len(sosu_group)-2):
+    for j in range (i+1,len(sosu_group)-2):
+        if check_num(sosu_group[i],sosu_group[j])==True:
+            inc=sosu_group[j]-sosu_group[i]
+            if sosu_group[j]+inc in sosu_group:
+                if check_num(sosu_group[i],sosu_group[j]+inc)==True:
+                    if inc==3330:
+                        print (sosu_group[i],sosu_group[j],sosu_group[j]+inc,'*')
+                    else:
+                        print (sosu_group[i],sosu_group[j],sosu_group[j]+inc)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/28 12:29</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Buckshot</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2752"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">1049 1499 1949
+1063 3613 6163
+1259 2129 2999
+1279 1999 2719
+1321 2221 3121
+1427 2777 4127
+1439 3191 4943
+1453 3433 5413
+1471 4441 7411
+1487 4817 8147 *
+2063 2633 3203
+2131 2221 2311
+2243 2333 2423
+2417 2447 2477
+2467 4447 6427
+2473 3373 4273
+2543 3533 4523
+2609 6269 9929
+2647 4447 6247
+2969 6299 9629 *
+3169 3391 3613
+3457 4447 5437
+3469 4969 6469
+3547 4447 5347
+3659 6599 9539
+3691 6661 9631
+3697 3733 3769
+3697 6733 9769
+3769 6733 9697
+3947 4373 4799
+3967 6967 9967
+4021 4111 4201
+4057 5557 7057
+4261 4441 4621
+4549 4999 5449
+4567 5557 6547
+4861 6661 8461
+5197 7177 9157
+5281 5581 5881
+5641 6151 6661
+5821 5851 5881
+5897 7877 9857
+5927 7577 9227
+6037 6337 6637
+6053 6353 6653
+6073 6373 6673
+6073 6703 7333
+6203 6263 6323
+6359 6659 6959
+6379 6673 6967
+6481 6661 6841
+6703 6733 6763
+6793 7393 7993
+6803 6833 6863
+6827 7727 8627
+7481 8111 8741
+7639 7669 7699
+8147 8447 8747
+8369 8669 8969
+8467 8677 8887
+9041 9491 9941</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Buckshot,
+                                    2020/05/28 12:29
+                                </span>
+                            </div>
+                        
+                            <a name="comment_2753"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">또다른 숫자 세트 : 2969 6299 9629</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Buckshot,
+                                    2020/05/28 12:30
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22452"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">prime = []
+for i in range(1000, 10000):
+    b = False
+    for j in range(2, int(i**.5)+1):
+        if i % j == 0:
+            b = True
+            break
+    if b == 0: prime.append(i)
+
+seq = [[j if j in prime else 0 for j in range(i, prime[-1], 3330)] for i in prime]
+for s in seq:
+    if len(s) == 3:
+        a, b, c = set(str(s[0])), set(str(s[1])), set(str(s[2]))
+        if (a == b) and (b == c) and (c == a) and s[0] != 1487:
+            print('{} -&gt; {}'.format(s, str(s[0])+str(s[1])+str(s[2])))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/29 17:37</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hwaseong Nam</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22480"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>#소수찾기
+prime = [i for i in range(1000,10000) if all(i%j != 0 for j in range(2,i))]
+#등차수열 찾기
+equi_dist=[[str(prime[j]), str(prime[i]),str(2*prime[i]-prime[j])] for i in range(1,len(prime)) for j in range(i) if (2*prime[i]-prime[j]) in prime]
+#자리만 바꾼수 찾기
+sequence = [i for i in equi_dist if sorted(i[0]) == sorted(i[1]) == sorted(i[2])]
+#연결해서 출력하기        
+print([i[0]+i[1]+i[2] for i in sequence])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/06/03 13:31</p>
+                                <p class="static-profile" style="margin:0;padding:0;">aryagaon</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22503"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">L=list(range(1000, 10000))
+for x in range(1000,10000):
+    for k in range(2, x):
+        if x%k==0:
+            L.remove(x)
+            break
+M=[x for x in L if all((x+3330 in L, x+6660 in L))]
+N=[x for x in M if all((set(str(x))==set(str(x+3330)),
+                       set(str(x))==set(str(x+6660)), 
+                       set(str(x+6660))==set(str(x+3330)), x!=1487))]
+s=str(N[0])+str(N[0]+3330)+str(N[0]+6660)
+print(s)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/06/05 21:02</p>
+                                <p class="static-profile" style="margin:0;padding:0;">권태률</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22517"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import math
+
+def isPrime(number):
+    base = int(math.sqrt(number))
+
+    for i in range(2, base + 1):
+        if number % i == 0:
+            return False
+    return True
+
+def makeBase(number):
+    if number &lt; 9999:
+        list_digit = list()
+        num_to_str = str(number)
+
+        for ch in num_to_str:
+            list_digit.append(int(ch))
+        return list_digit
+
+def checkBase(base_list, target):
+    for digit in str(target):
+        if int(digit) not in base_list:
+            return False
+
+    return True
+
+
+def check():
+    for number in range(1000, 9999):
+        if isPrime(number):
+            base_list = makeBase(number)
+
+            if isPrime(number+3330):
+                if checkBase(base_list, number + 3330):
+                    if isPrime(number+6660):
+                        if checkBase(base_list, number + 6660):
+                            print(number, number+3330, number+6660)
+
+if __name__ == &quot;__main__&quot;:
+    check()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/06/07 16:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박규남</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22629"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C#</p>
+<pre><code class="cs">using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace CD250
+{
+    class Program
+    {
+        static void Main()
+        {
+            List&lt;int&gt; primeNumbers = Utils.GetPrimeNumbers(1_000, 9_999); // 소수 리스트
+            // 소수 리스트 내에서 (1) 등차 수열이 구성되고 (2) 순열관계를 만족하는지 검사
+            for (int idx = 1; idx &lt; primeNumbers.Count - 1; idx++)
+            {
+                int middleValue = primeNumbers[idx];
+                for (int smallerIdx = 0; smallerIdx &lt; idx; smallerIdx++)
+                {
+                    int leftValue = primeNumbers[smallerIdx];
+                    int diff = middleValue - leftValue;
+                    int rightValue = middleValue + diff;
+
+                    if (primeNumbers.Contains(rightValue) &amp;&amp; Utils.IsPermutated(leftValue, middleValue, rightValue))
+                    {
+                        string result = $&quot;{leftValue}{middleValue}{rightValue}&quot;;
+                        Console.WriteLine(result);
+                    }
+                }
+            }
+        }
+    }
+
+    class Utils
+    {
+        // 특정 범위의 소수 리스트를 반환
+        public static List&lt;int&gt; GetPrimeNumbers(int lowerLimit, int upperLimit)
+        {
+            List&lt;int&gt; primeNumbers = new List&lt;int&gt; { 2 };
+            for (int checkVal = 3; checkVal &lt;= upperLimit; checkVal++)
+            {
+                if (primeNumbers.All(i =&gt; checkVal % i != 0))
+                {
+                    primeNumbers.Add(checkVal);
+                }
+            }
+            return primeNumbers.Where(i =&gt; i &gt;= lowerLimit).Select(i =&gt; i).ToList();
+        }
+
+        // 세 정수가 순열관계인지 확인
+        public static bool IsPermutated(int lVal, int mVal, int rVal)
+        {
+            Func&lt;int, string&gt; sortedStr = (i) =&gt; new string(i.ToString().OrderBy(e =&gt; e).ToArray());
+            string lValSorted = sortedStr(lVal);
+            string mValSorted = sortedStr(mVal);
+            string rValSorted = sortedStr(rVal);
+            return lValSorted == mValSorted &amp;&amp; mValSorted == rValSorted;
+        }
+    }
+}
+// 148748178147
+// 296962999629
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/06/23 22:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22687"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3.8
+Lambda function과 list/set comprehension을 이용하여 한 줄로 풀어보았습니다.</p>
+<pre><code class="python">print('\n'.join(sorted((lambda primeset: [''.join(sorted([str(i), str(i + 3330), str(i + 6660)])) for i in list(primeset) if (i + 6660) &lt; 10000 if (set(str(i)) == set(str(i + 3330)) == set(str(i + 6660))) if {i, i + 3330, i + 6660}.issubset(primeset)])({n for n in range(1000, 10000) if (lambda n: {1} == {i if n % i == 0 else 1 for i in range(1, n)})(n)}))))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/07/06 01:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">구루마</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22688"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#3330 등차수열, 소수, 자리만 바꾼 수
+c=[]
+for i in range(1,10000):
+    b=[]
+    for j in range(2,10000):
+        if i&gt;=j and i%j==0:
+            b.append(j)
+            if int(b[0])==i and i&gt;1000:
+                c.append(i)
+d=[]
+for k in range(1000,4500):
+    for l in c:
+        if int(l)+k in c and int(l)+2*k in c and set(list(str(l)))==set(list(str(int(l)+k)))==set(list(str(int(l)+k+k))):
+            d.append((int(l), int(l)+k, int(l)+k+k))
+print(str(d[0][0])+str(d[0][1])+str(d[0][2]))            
+print(str(d[1][0])+str(d[1][1])+str(d[1][2]))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/07/06 03:53</p>
+                                <p class="static-profile" style="margin:0;padding:0;">SREBP1c</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22726"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="swift">/*
+
+ http://codingdojang.com/scode/691?answer_mode=hide
+
+ 출처: &lt;프로젝트 오일러 49번 문제&gt;
+
+ 1487, 4817, 8147은 3330씩 증가하는 등차수열(arithmetic sequence)이다. 이 세 개의 수는 특이한 점이 있는데, 셋 다 소수이면서, 셋은 서로 자리에 있는 숫자만 바꾼 수들이라는 것이다.
+
+ 이러한 특성(+-3330 등차수열, 소수, 자리만 바꾼 수)을 보이는 한 자리, 두 자리, 세 자리인 소수는 없다. 그러나 네 자리 숫자 중 이러한 특성을 보이는 숫자들이 한 세트 더 있다.
+
+ 이 숫자들을 작은 것부터 순서대로 연결하여 만들 수 있는 12자리 숫자는 무엇인가? 예) 1487, 4817, 8147 -&gt; 148748178147
+
+ */
+
+import UIKit
+
+var str = &quot;Hello, playground&quot;
+
+func solution() -&gt; CLongLong {
+
+    for i in 1000..&lt;3341 {
+        var combinationCheckDic:Dictionary = [Character:Int]()
+        if i == 1487 {
+            continue
+        }
+        if checkPrimeNumver(input: i) {
+            let tmpArr1:Array = Array(String(i))
+            for i in 0..&lt;tmpArr1.count {
+                if combinationCheckDic[tmpArr1[i]] == nil {
+                    combinationCheckDic[tmpArr1[i]] = 1
+                }
+                else {
+                    combinationCheckDic[tmpArr1[i]]! += 1
+                }
+            }
+            if checkPrimeNumver(input: i+3330) {
+                let tmpArr2:Array = Array(String(i+3330))
+                var copyDic = combinationCheckDic
+                for i in 0..&lt;tmpArr2.count {
+                    if copyDic[tmpArr2[i]] == nil {
+                        break
+                    }
+                    else {
+                        copyDic[tmpArr2[i]]! -= 1
+                        if copyDic[tmpArr2[i]]! == 0 {
+                            copyDic[tmpArr2[i]] = nil
+                        }
+                    }
+                }
+                if copyDic.count &gt; 0 {
+                    continue
+                }
+                if checkPrimeNumver(input: i+6660) {
+                    let tmpArr3:Array = Array(String(i+6660))
+                    for i in 0..&lt;tmpArr3.count {
+                        if copyDic[tmpArr3[i]] == nil {
+                            break
+                        }
+                        else {
+                            copyDic[tmpArr3[i]]! -= 1
+                            if copyDic[tmpArr3[i]]! == 0 {
+                                copyDic[tmpArr3[i]] = nil
+                            }
+                        }
+                    }
+                    if copyDic.count &gt; 0 {
+                        continue
+                    }
+                    return CLongLong(String(&quot;\(i)&quot;+&quot;\(i+3330)&quot;+&quot;\(i+6660)&quot;)) ?? -1
+                }
+            }
+        }
+    }
+    return -1
+}
+
+func checkPrimeNumver(input:Int) -&gt; Bool {
+    var isPrimeNumber:Bool = true
+    if input &gt; 2 {
+        for i in 2..&lt;input {
+            if input%i == 0 {
+                isPrimeNumber = false
+                break
+            }
+        }
+    }
+    return isPrimeNumber
+}
+
+print(&quot;solution:\(solution())&quot;)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/07/13 21:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이한위</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22727"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from collections import deque
+
+
+pmap, plst = [True] * 10000, deque()
+for i in range(2, 10000):
+    if pmap[i]:
+        if i &gt;= 1000:
+            plst.append(i)
+
+        for j in range(i + i, 10000, i):
+            pmap[j] = False
+
+
+while plst:
+    p = plst.popleft()
+    for q in plst:
+        r = q + (q - p)
+        if r &lt; 10000 and pmap[r] and sorted(str(p)) == sorted(str(q)) == sorted(str(r)):
+            print(''.join(map(str, sorted([p, q, r]))))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/07/14 01:14</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23145"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from itertools import combinations
+
+# Find all primes between 1000, 10000.
+primes = []
+for n in range(1000, 10000):
+    divisors = [d for d in range(2, n) if n % d == 0]
+    if len(divisors) == 0:
+        primes.append(n)
+
+# Find all isometric sequences.
+isometric_seq = []
+for pair in combinations(primes, 3):
+    if pair[0] &lt; pair[1] &lt; pair[2] and pair[1] - pair[0] == pair[2] - pair[1]:
+        isometric_seq.append(pair)
+
+# Find all sequences that consist of same numbers.
+result = []
+
+for pair in isometric_seq:
+    int2str = list(map(str, pair))
+
+    s1 = {int2str[0][0], int2str[0][1], int2str[0][2], int2str[0][3]}
+    s2 = {int2str[1][0], int2str[1][1], int2str[1][2], int2str[1][3]}
+    s3 = {int2str[2][0], int2str[2][1], int2str[2][2], int2str[2][3]}
+
+    if s1 == s2 == s3:
+        result.append(int2str)
+
+# Print results        
+for r in result:
+    print(r[0] + r[1] + r[2])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/09/11 12:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">돈 벌면 뭐하노</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23753"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import math
+
+def prime_list(n):
+    sieve = [True] * (n+1) # true: prime, false: not prime. default: true
+
+    for i in range(2, int(math.sqrt(n))+1):
+        if sieve[i] == True:
+            for j in range(i+i, n+1, i):
+                sieve[j] = False
+    return [i for i in range(2,n+1) if sieve[i] == True]
+
+def pandigital_3(num1,num2,num3):
+    str_1 = str(num1)
+    str_2 = str(num2)
+    str_3 = str(num3)
+    list_1 = []
+    list_2 = []
+    list_3 = []
+    for i in range(0,len(str_1)):
+        list_1.append(int(str_1[i]))
+        list_2.append(int(str_2[i]))
+        list_3.append(int(str_3[i]))
+        set1 = set(list_1)
+        set2 = set(list_2)
+        set3 = set(list_3)
+    if set1 == set2:
+        if set1 == set3:
+            return True
+        else:
+            return False
+    else:
+        return False
+
+list1 = prime_list(10000)
+list1 = list1[168:]
+list_temp = []
+set1 = set(list1)
+
+for i in list1:
+    for j in list1:
+        if j &gt; i:
+            temp1 = j - i
+            temp2 = j + temp1
+            set2 = set([temp2])
+            if set1 &amp; set2 != set():
+                if pandigital_3(i,j,temp2) == True:
+                    list_temp.append(i)
+                    list_temp.append(j)
+                    list_temp.append(temp2)
+
+print(list_temp[0:10])
+</code></pre>
+
+<p>파이썬3
+세 개의 수가 같은 숫자들로 이루어져 있는지 확인하는 함수를 만들고 소수들을 for문 두 개를 써서 등차수열인지 확인하고 등차수열이면서 같은 숫자들로 이루어져 있으면 정답에 추가.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/11/23 17:32</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이제동</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23907"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>정답은 296962999629 입니다.</p>
+<pre><code class="python">def isPrime(n:int):
+    half = int(n/2)
+    for x in range(2,half):
+        if ((n%x)==0):
+            return False
+    return True
+
+i = 1111-2
+j = i+3330
+k = j+3330
+
+while k&lt;10000:
+    i = i+2
+    j = j+2
+    k = k+2
+
+    if (not isPrime(i)) or (not isPrime(j)) or (not isPrime(k)):
+        continue;
+
+    si = set(str(int(i/1000)))
+    si.add(str(int((i%1000)/100)))
+    si.add(str(int((i%100)/10)))
+    si.add(str(i%10))
+
+    sj = set(str(int(j/1000)))
+    sj.add(str(int((j%1000)/100)))
+    sj.add(str(int((j%100)/10)))
+    sj.add(str(j%10))
+    if (si!=sj):
+        continue
+
+    sk = set(str(int(k/1000)))
+    sk.add(str(int((k%1000)/100)))
+    sk.add(str(int((k%100)/10)))
+    sk.add(str(k%10))
+    if (si!=sk or sj!=sk):
+        continue
+
+    res = k+10000*(j+10000*i)
+    if (res!=148748178147):
+        print(res)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/12/08 15:55</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김준우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24463"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def findprime(num):#소수 찾기 함수
+    str = [2, 3]
+    c = 5
+    while c &lt; num:
+        for i in range(0, len(str)):
+            if c % str[i] == 0:
+                c += 2
+                break
+            elif int(c ** 0.5) &lt; str[i]:
+                str.append(c)
+                c += 2
+                break
+    return str
+def listnum(a):#리스트 내부의 숫자를 각 자릿수로 분해해주는 함수
+    list = []
+    while a != 0:
+        list.append(a % 10)
+        a = a // 10
+    list.sort()
+    return list
+def delete(you):#바로 앞 함수를 통해 얻은 자릿수들이 얼마나 중복되는지 확인해 3개를 넘는 경우만 리스트로 받아 넘겨줌
+    n = 0
+    temp = []
+    while n &lt; len(you):
+        if you.count(you[n]) &gt;= 3:
+            temp.append(you[n])
+        n += you.count(you[n])
+    return temp
+def isometric(enum):#리스트 내부에 등차수열을 만족하는 3개의 수가 있을 경우 그 수를 모두 받아 리스트로 넘겨줌 받은 리스트들을 리스트로 묶어 반환
+    temp = []
+    temp2 = []
+    enum.sort()
+    for i in range(0, len(enum) - 2):
+        for j in range(i + 2, len(enum)):
+            if int((enum[i] + enum[j]) / 2) in enum:
+                temp.append(enum[i])
+                temp.append(int((enum[i] + enum[j]) / 2))
+                temp.append(enum[j])
+                temp2.append(temp)
+                temp = []
+    return temp2
+def findset(num1, num2, num3):
+    temp2 = []
+    for i, v in enumerate(num3):
+        temp = []
+        for j in range(0, len(num1)):
+            if v == num1[j]:
+                temp.append(num2[j])
+        temp2.append(temp)
+    return(temp2)
+
+prime1 = findprime(1000)
+prime2 = findprime(10000)
+prime2 = list(set(prime2).difference(set(prime1)))
+prime2.sort()
+prime1 = list(map(listnum, prime2))
+temp = sorted(prime1)
+prime3 = delete(temp)
+prime4 = findset(prime1, prime2, prime3)
+prime5 = []
+for i, v in enumerate(prime4):
+    prime5.extend(isometric(v))
+for i in range(0, len(prime5)):
+    if prime5[i][0] != 1487:
+        print(str(prime5[i][0])+str(prime5[i][1])+str(prime5[i][2]))
+</code></pre>
+
+<p>3330 차이가 난다는걸 못봐서 코드가 길어졌습니다...</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/01/22 22:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김민수</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26900"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def function(data):
+    result = []
+    for i in range(2,data) :        
+        if data % i == 0 :
+            result.append(i)        
+    if not result:
+        return data
+    else :
+        False
+
+result=[]
+for i in range(1000,10000):
+    if function(i):
+        result.append(i)
+
+final_result = []
+value = 0
+for x in result :
+
+    if function(x+3330) and function(x+6660) and function(x+6660) &lt;10000 :
+        if set(str(x)) == set(str(x+3330)) == set(str(x+6660)) != 1487:
+            value = x
+
+final_result.append(value)
+for k in range(2):
+    value += 3330
+    final_result.append(value)
+
+value = &quot;&quot;
+for l in final_result:
+    value += str(l)
+print(value)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/12/28 15:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">semipooh</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27168"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from math import *
+
+def fun1 (a):
+    arr=[]
+    for i in range(2,int(sqrt(a))+1):
+        if a%i==0:
+            arr.append(i)
+            break
+    if len(arr)==0:
+        return True
+    else:
+        return False
+
+arr=[]
+for k in range(1000,10000):
+    if fun1(k) :
+        arr.append(k)
+
+f_arr=[]
+for i in arr:
+    i1=i+3330
+    i2=i+6660
+    if i1 in arr and i2 in arr and (set(str(i1))==set(str(i2))) and i!=1487 :
+        f_arr.append(i)
+        f_arr.append(i1)
+        f_arr.append(i2)
+
+for j in f_arr:
+    print(j,end='')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/28 18:16</p>
+                                <p class="static-profile" style="margin:0;padding:0;">양캠부부</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27196"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>// Rust</p>
+<p>// 1000~9999 사이의 소수를 에라토스테네스의 체로 우선 구하고,</p>
+<p>// 그 중 p1 &lt; p2인 두 소수로 p3가 소수이며, 조건을 만족하는지 검사</p>
+<p>fn special_prime() {</p>
+<pre><code>let primes = sieve(9999);
+let mut result = vec![];
+for p1 in &amp;primes {
+    for p2 in &amp;primes {
+        if p2 &lt;= p1 { continue;}    // p2 &gt; p1
+        let p3 = 2 * p2 - p1;
+        if p3 &gt; *p2 &amp;&amp; primes.contains(&amp;p3) {
+            let a: HashSet&lt;char&gt; = p1.to_string().chars().collect();
+            let b: HashSet&lt;char&gt; = p2.to_string().chars().collect();
+            let c: HashSet&lt;char&gt; = p3.to_string().chars().collect();
+            if a==b &amp;&amp; b==c {result.push((p1, p2, p3));}
+        }
+    }
+}
+println!("{:?}", result);
+</code></pre>
+<p>}
+use std::collections::HashSet;
+fn sieve(limit: u128) -&gt; HashSet<u128> {</p>
+<pre><code>let mut set = HashSet::new();
+for i in [2, 3, 5, 7] { set.insert(i);}
+let mut n = 9;
+while n &lt;= limit {
+    n += 2; // n이 소수인가? 끝자리 1
+    if set.iter().all(|p| n % p !=0) { set.insert(n);}
+    n += 2; // n이 소수인가? 끝자리 3
+    if set.iter().all(|p| n % p !=0) { set.insert(n);} 
+    n += 4; // n이 소수인가? 끝자리 7
+    if set.iter().all(|p| n % p !=0) { set.insert(n);} 
+    n += 2; // n이 소수인가? 끝자리 9
+    if set.iter().all(|p| n % p !=0) { set.insert(n);} 
+}
+set.retain(|&amp;k| k &lt;= limit);
+set.retain(|&amp;k| k &gt;= 1000);
+set
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/30 19:12</p>
+                                <p class="static-profile" style="margin:0;padding:0;">JW KIM</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27432"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n = 10000
+ps = prime_seq = [2]
+
+def prime(n):
+
+    for x in range(3,n):
+        if min([x%y for y in ps]) &gt; 0:
+            ps.append(x)
+
+    return ps
+
+prime(n)
+
+def over1000(li):
+    return [x for x in li if x &gt; 1000]
+
+pl = prime_list = over1000(prime(n))
+
+for num in pl:
+    if pl.count(num+3330)*pl.count(num+3330*2):
+        a,b,c = num, num+3330, num+3330*2
+        if set(str(a)) == set(str(b)) == set(str(c)):
+            print(str(a)+str(b)+str(c))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/02/22 11:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">로만가</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29444"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def prime(x):
+  count=0
+  for i in range(2,x):
+    if x%i == 0:
+      count+=1
+  if count!=0:
+    return False
+  else:
+    return True
+
+count=0
+for i in range(1000,10000):
+  j, k = i+3330, i+3330*2
+  if set(str(i)) == set(str(j)) and set(str(j)) == set(str(k)):
+    if prime(i) and prime(j) and prime(k) and i!=1487:
+      print(str(i)+str(j)+str(k))     
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/07/17 20:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">스탠리</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29460"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">using System;
+using System.Collections.Generic;
+
+namespace solution
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Dictionary&lt;string, List&lt;int&gt;&gt; dic = new Dictionary&lt;string, List&lt;int&gt;&gt;();
+            string str = &quot;&quot;;
+
+            for (int i = 1000; i &lt; 10000; i++)
+            {
+                if (isPrimeNum(i))
+                {
+                    str = makeOrder(i.ToString());
+                    if (!dic.ContainsKey(str))
+                        dic[str] = new List&lt;int&gt;();
+                    dic[str].Add(i);
+                }
+            }
+
+            foreach (var k in dic.Keys)
+            {
+                if(dic[k].Count &gt; 2)
+                {
+                    checkOrder(dic[k]);
+                }
+            }
+        }
+
+        private static void checkOrder(List&lt;int&gt; list)
+        {
+            int mSu = 0;
+            int N = list.Count;
+            for (int i = 0; i &lt; N-2; i++)
+            {
+                for (int j = i+2; j &lt; N; j++)
+                {
+                    mSu = list[i] + list[j];
+                    if(mSu % 2==0 &amp;&amp; list.Contains(mSu/2))
+                        Console.WriteLine(&quot;\n12자리 숫자: {0}{1}{2}&quot;, list[i], mSu/2, list[j]);
+                }
+            }
+        }
+
+        private static string makeOrder(string num)
+        {
+            char[] c = num.ToCharArray();
+            Array.Sort(c);
+
+            return string.Join(&quot;&quot;, c);
+        }
+
+        private static bool isPrimeNum(int num)
+        {
+            for (int i = 2; i &lt; num/2; i++)
+            {
+                if (num % i == 0)
+                    return false;
+            }
+            return true;
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/07/19 19:58</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29461"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def isPrime(num):
+    for i in range(2, num//2):
+        if num % i == 0:
+            return False
+    return True
+
+
+def ordered(sus):
+    N = len(sus)
+    for i in range(0, N-2):
+        for j in range(i+1, N):
+            mid = sus[i] + sus[j]
+            if mid % 2 == 0 and mid // 2 in sus:
+                print('{0}{1}{2}'.format(sus[i], mid//2, sus[j]))
+
+
+dic = {}
+for i in range(1000, 10000):
+    if isPrime(i):
+        s = sorted(str(i))
+        ss = ''.join(s)
+        if  ss not in dic.keys():
+            dic[ss] = []
+        dic[ss].append(i)
+
+for k in dic.keys():
+    if len(dic[k]) &gt; 2:
+        ordered(dic[k])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/07/19 22:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29875"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#1000-9999 까지 소수를 찾기#
+#먼저 100까지의 소수를 찾기#
+for i in range(10,100):
+    if i%2 and i%3 and i%5 and i%7:
+        prime100.append(i)
+prime1000_9999=[]
+#1000-9999 까지 소수 찾기#
+n=len(prime100)
+k=0
+for i in range(1000,10000):
+    for j in range(n):
+        if i%int(prime100[j])==0:
+            k=k+1
+    if k==0:
+        prime1000_9999.append(i)
+    k=0
+#3330 등차수열 찾기#
+prime3330=[]
+for i in prime1000_9999:
+    if int(i)+3330 in prime1000_9999 and int(i)+3330+3330 in prime1000_9999:
+        prime3330.append(i)
+        prime3330.append(i+3330)
+        prime3330.append(i+3330+3330)
+#같은 문자열 찾기#
+count=len(prime3330)
+for i in range(0,int(count),3):
+    primesyn0=set(str(prime3330[i]))
+    primesyn1=set(str(prime3330[i+1]))
+    primesyn2=set(str(prime3330[i+2]))
+    if primesyn0==primesyn1 and primesyn0==primesyn2:
+        print(str(prime3330[i])+str(prime3330[i]+3330)+str(prime3330[i]+6660))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2024/02/09 23:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Dr.Choi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

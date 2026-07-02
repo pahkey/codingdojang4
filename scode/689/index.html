@@ -1,0 +1,1536 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="비트맵 코드를 입력받으면
+비트맵 그림을 출력해주는 프린터를 작성합니다.
+먼저 해상도(세로크기 및 가로크기)를 입력받은 후,
+비트맵 코드를 입력받으면 
+각 라인당 홀수번째 수만큼 흰색 픽셀&#39;□&#39;을 출력, 짝수번째 수만큼 검은색 픽셀&#39;■&#39;을 ...">
+    <title>비트맵 출력기 (Bitmap Printer) - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">비트맵 출력기 (Bitmap Printer)</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">5</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 2</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>비트맵 코드를 입력받으면
+비트맵 그림을 출력해주는 프린터를 작성합니다.
+먼저 해상도(세로크기 및 가로크기)를 입력받은 후,
+비트맵 코드를 입력받으면 
+각 라인당 홀수번째 수만큼 흰색 픽셀'□'을 출력, 짝수번째 수만큼 검은색 픽셀'■'을 문자로 출력합니다.
+(코드의 첫 숫자는 항상 흰색 픽셀의 숫자를 의미하므로, 라인의 첫번째 픽셀이 검은색일 경우 그 라인의 코드는 0으로 시작합니다.)</p>
+<pre><code>#Input1
+height&amp;width: 6 6
+1 3 1
+4 1
+1 4
+0 1 3 1
+0 1 3 1
+1 4
+
+#Output1
+□ ■ ■ ■ □ 
+□ □ □ □ ■ 
+□ ■ ■ ■ ■ 
+■ □ □ □ ■ 
+■ □ □ □ ■ 
+□ ■ ■ ■ ■ 
+</code></pre>
+
+<pre><code>#Input2
+height&amp;width: 9 18
+4 11
+4 9 2 1
+4 9 2 1
+4 11
+4 9
+4 9
+5 7
+0 17
+1 15
+
+#Output2
+□ □ □ □ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ 
+□ □ □ □ ■ ■ ■ ■ ■ ■ ■ ■ ■ □ □ ■ 
+□ □ □ □ ■ ■ ■ ■ ■ ■ ■ ■ ■ □ □ ■ 
+□ □ □ □ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ 
+□ □ □ □ ■ ■ ■ ■ ■ ■ ■ ■ ■ 
+□ □ □ □ ■ ■ ■ ■ ■ ■ ■ ■ ■ 
+□ □ □ □ □ ■ ■ ■ ■ ■ ■ ■ 
+■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ 
+□ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ 
+</code></pre>
+
+<pre><code>#Input3
+height&amp;width: 13 18
+6 5 2 3
+4 2 5 2 3 1
+3 1 9 1 2 1 
+3 1 9 1 1 1
+2 1 11 1
+2 1 10 2
+2 1 9 1 1 1
+2 1 8 1 2 1
+2 1 7 1 3 1
+1 1 1 1 4 2 3 1
+0 1 2 1 2 2 5 1
+0 1 3 2 5 2
+1 3 2 5
+</code></pre>
+
+<pre><code>#Input 4
+height&amp;width: 17 18
+6 2 2 2
+5 1 2 2 2 1
+6 6
+4 2 6 2
+3 1 10 1
+2 1 12 1
+2 1 3 1 4 1 3 1
+1 2 12 2
+0 1 16 1
+0 1 6 1 2 1 6 1
+0 1 7 2 7 1
+1 1 14 1
+2 1 12 1
+2 1 5 2 5 1
+3 1 10 1
+4 2 6 2
+6 6
+</code></pre>
+
+<pre><code>#Input5
+height&amp;width: 15 15
+4 7 4
+2 3 5 3 2
+1 2 9 2 1
+1 1 11 1 1
+0 2 11 2
+0 1 3 2 3 2 3 1
+0 1 3 2 3 2 3 1
+0 1 13 1
+0 1 2 1 7 1 2 1
+0 1 2 2 5 2 2 1
+0 2 2 2 3 2 2 2
+1 1 3 5 3 1 1
+1 2 9 2 1
+2 3 5 3 2
+4 7 4
+</code></pre>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2020/05/22 20:47</p>
+                    <p class="static-profile" style="margin:0;padding:0;">Katherine</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>20개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_22655"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3</p>
+<pre><code class="python">def main():
+    bp = BitmapPrinter()
+    print(bp)
+
+
+class BitmapPrinter:
+    def __init__(self):
+        self._reader()
+
+    def _reader(self):
+        (self.height, self.width) = (int(s) for s in input(&quot;Height &amp; Width: &quot;).strip().split())
+        self.matrix = []
+
+        for h in range(self.height):
+            lineinput = (int(s) for s in input().strip().split())
+            newstr = [(&quot;□&quot; if i % 2 == 0 else &quot;■&quot;) * v for i, v in enumerate(lineinput)]
+            self.matrix.append(&quot; &quot;.join(&quot;&quot;.join(newstr)))
+
+    def __str__(self):
+        return &quot;\n&quot;.join(self.matrix)
+
+
+if __name__ == '__main__':
+    main()
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/06/30 14:55</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22405"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package bitmap_printer;
+import java.util.Scanner;
+public class BitmapPrinter {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int i, j, k;
+        boolean color;
+
+        /*해상도 입력*/
+        System.out.println(&quot;How many height and width:&quot;);
+        int input_height = in.nextInt();
+        int input_width = in.nextInt();
+
+        String[] input_raw = new String[input_height]; //날 것 그대로 입력
+        int[][] input = new int[input_height][input_width+1]; //입력 값을 배열에 정리
+        int[] input_length = new int[input_height]; //입력 값 길이
+
+        /*값 입력*/
+        String dummy = in.nextLine();
+        for(i=0; i&lt;input_height; i++) {
+            input_raw[i] = in.nextLine();
+        }
+
+        /*입력 값을 배열에 정리*/
+        for(i=0; i&lt;input_height; i++) {
+            for(j=0, k=0; j&lt;input_raw[i].length(); j++){
+                if(input_raw[i].charAt(j)&gt;=48 &amp;&amp; input_raw[i].charAt(j)&lt;=57)
+                    input[i][k]=input[i][k]*10+(input_raw[i].charAt(j)-48);
+                else if(input_raw[i].charAt(j)==' ') {
+                    k++;
+                    input_length[i]++;
+                }
+            }
+            input_length[i]++;
+        }
+
+        /*출력*/
+        for(i=0; i&lt;input_height; i++) {
+            color=false;
+            for(j=0; j&lt;input_length[i]; j++) {
+                for(k=0; k&lt;input[i][j]; k++) {
+                    if(color==true) System.out.print(&quot;■&quot;);
+                    else System.out.print(&quot;□&quot;);
+                    System.out.print(&quot; &quot;);
+                }
+                color=!color;
+            }
+            System.out.println();
+        }
+    }
+}
+
+</code></pre>
+
+<pre><code>#Output3
+□ □ □ □ □ □ ■ ■ ■ ■ ■ □ □ ■ ■ ■ 
+□ □ □ □ ■ ■ □ □ □ □ □ ■ ■ □ □ □ ■ 
+□ □ □ ■ □ □ □ □ □ □ □ □ □ ■ □ □ ■ 
+□ □ □ ■ □ □ □ □ □ □ □ □ □ ■ □ ■ 
+□ □ ■ □ □ □ □ □ □ □ □ □ □ □ ■ 
+□ □ ■ □ □ □ □ □ □ □ □ □ □ ■ ■ 
+□ □ ■ □ □ □ □ □ □ □ □ □ ■ □ ■ 
+□ □ ■ □ □ □ □ □ □ □ □ ■ □ □ ■ 
+□ □ ■ □ □ □ □ □ □ □ ■ □ □ □ ■ 
+□ ■ □ ■ □ □ □ □ ■ ■ □ □ □ ■ 
+■ □ □ ■ □ □ ■ ■ □ □ □ □ □ ■ 
+■ □ □ □ ■ ■ □ □ □ □ □ ■ ■ 
+□ ■ ■ ■ □ □ ■ ■ ■ ■ ■ 
+</code></pre>
+
+<pre><code>#Output4
+□ □ □ □ □ □ ■ ■ □ □ ■ ■ 
+□ □ □ □ □ ■ □ □ ■ ■ □ □ ■ 
+□ □ □ □ □ □ ■ ■ ■ ■ ■ ■ 
+□ □ □ □ ■ ■ □ □ □ □ □ □ ■ ■ 
+□ □ □ ■ □ □ □ □ □ □ □ □ □ □ ■ 
+□ □ ■ □ □ □ □ □ □ □ □ □ □ □ □ ■ 
+□ □ ■ □ □ □ ■ □ □ □ □ ■ □ □ □ ■ 
+□ ■ ■ □ □ □ □ □ □ □ □ □ □ □ □ ■ ■ 
+■ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ ■ 
+■ □ □ □ □ □ □ ■ □ □ ■ □ □ □ □ □ □ ■ 
+■ □ □ □ □ □ □ □ ■ ■ □ □ □ □ □ □ □ ■ 
+□ ■ □ □ □ □ □ □ □ □ □ □ □ □ □ □ ■ 
+□ □ ■ □ □ □ □ □ □ □ □ □ □ □ □ ■ 
+□ □ ■ □ □ □ □ □ ■ ■ □ □ □ □ □ ■ 
+□ □ □ ■ □ □ □ □ □ □ □ □ □ □ ■ 
+□ □ □ □ ■ ■ □ □ □ □ □ □ ■ ■ 
+□ □ □ □ □ □ ■ ■ ■ ■ ■ ■ 
+</code></pre>
+
+<pre><code>#Output5
+□ □ □ □ ■ ■ ■ ■ ■ ■ ■ □ □ □ □ 
+□ □ ■ ■ ■ □ □ □ □ □ ■ ■ ■ □ □ 
+□ ■ ■ □ □ □ □ □ □ □ □ □ ■ ■ □ 
+□ ■ □ □ □ □ □ □ □ □ □ □ □ ■ □ 
+■ ■ □ □ □ □ □ □ □ □ □ □ □ ■ ■ 
+■ □ □ □ ■ ■ □ □ □ ■ ■ □ □ □ ■ 
+■ □ □ □ ■ ■ □ □ □ ■ ■ □ □ □ ■ 
+■ □ □ □ □ □ □ □ □ □ □ □ □ □ ■ 
+■ □ □ ■ □ □ □ □ □ □ □ ■ □ □ ■ 
+■ □ □ ■ ■ □ □ □ □ □ ■ ■ □ □ ■ 
+■ ■ □ □ ■ ■ □ □ □ ■ ■ □ □ ■ ■ 
+□ ■ □ □ □ ■ ■ ■ ■ ■ □ □ □ ■ □ 
+□ ■ ■ □ □ □ □ □ □ □ □ □ ■ ■ □ 
+□ □ ■ ■ ■ □ □ □ □ □ ■ ■ ■ □ □ 
+□ □ □ □ ■ ■ ■ ■ ■ ■ ■ □ □ □ □ 
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/22 20:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Katherine</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22417"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#파이썬
+#저는 가로세로 길이 없이도 문제가 풀려버립니다.
+
+def bitmap_printer(x):
+    for i in range (len(x)):
+        x[i]=x[i].split(' ')
+        if '' in x[i]:
+            x[i].remove('')
+
+        if int(x[i][0])!=0:       #첫 숫자가 0이 아닐경우,
+            for j in range (len(x[i])):
+                if j%2==0: #짝수번째 □
+                    for k in range (0,int(x[i][j])):
+                        print ('□',end=' ')
+                else:
+                    for k in range (0,int(x[i][j])):
+                        print ('■', end=' ')
+
+        elif int(x[i][0])==0:       #첫 숫자가 0일 경우,
+            for j in range (1,len(x[i])):
+                if j%2==0: #짝수번째 □
+                    for k in range (0,int(x[i][j])):
+                     print ('□',end=' ')
+                else:
+                    for k in range (0,int(x[i][j])):
+                        print ('■', end=' ')
+
+        print ()
+
+
+inp1='''1 3 1
+4 1
+1 4
+0 1 3 1
+0 1 3 1
+1 4'''.split('\n')
+bitmap_printer(inp1)
+
+print ()
+inp2='''4 11
+4 9 2 1
+4 9 2 1
+4 11
+4 9
+4 9
+5 7
+0 17
+1 15'''.split('\n')
+bitmap_printer(inp2)
+
+print ()
+inp3='''6 5 2 3
+4 2 5 2 3 1
+3 1 9 1 2 1 
+3 1 9 1 1 1
+2 1 11 1
+2 1 10 2
+2 1 9 1 1 1
+2 1 8 1 2 1
+2 1 7 1 3 1
+1 1 1 1 4 2 3 1
+0 1 2 1 2 2 5 1
+0 1 3 2 5 2
+1 3 2 5'''.split('\n')
+bitmap_printer(inp3)
+
+print ()
+inp4='''6 2 2 2
+5 1 2 2 2 1
+6 6
+4 2 6 2
+3 1 10 1
+2 1 12 1
+2 1 3 1 4 1 3 1
+1 2 12 2
+0 1 16 1
+0 1 6 1 2 1 6 1
+0 1 7 2 7 1
+1 1 14 1
+2 1 12 1
+2 1 5 2 5 1
+3 1 10 1
+4 2 6 2
+6 6'''.split('\n')
+bitmap_printer(inp4)
+
+print ()
+inp5='''4 7 4
+2 3 5 3 2
+1 2 9 2 1
+1 1 11 1 1
+0 2 11 2
+0 1 3 2 3 2 3 1
+0 1 3 2 3 2 3 1
+0 1 13 1
+0 1 2 1 7 1 2 1
+0 1 2 2 5 2 2 1
+0 2 2 2 3 2 2 2
+1 1 3 5 3 1 1
+1 2 9 2 1
+2 3 5 3 2
+4 7 4'''.split('\n')
+bitmap_printer(inp5)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/25 14:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Buckshot</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2749"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">□ ■ ■ ■ □ 
+□ □ □ □ ■ 
+□ ■ ■ ■ ■ 
+■ □ □ □ ■ 
+■ □ □ □ ■ 
+□ ■ ■ ■ ■ 
+
+□ □ □ □ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■     
+□ □ □ □ ■ ■ ■ ■ ■ ■ ■ ■ ■ □ □ ■   
+□ □ □ □ ■ ■ ■ ■ ■ ■ ■ ■ ■ □ □ ■   
+□ □ □ □ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■     
+□ □ □ □ ■ ■ ■ ■ ■ ■ ■ ■ ■         
+□ □ □ □ ■ ■ ■ ■ ■ ■ ■ ■ ■         
+□ □ □ □ □ ■ ■ ■ ■ ■ ■ ■ 
+■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ 
+□ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■   
+
+□ □ □ □ □ □ ■ ■ ■ ■ ■ □ □ ■ ■ ■   
+□ □ □ □ ■ ■ □ □ □ □ □ ■ ■ □ □ □ ■
+□ □ □ ■ □ □ □ □ □ □ □ □ □ ■ □ □ ■
+□ □ □ ■ □ □ □ □ □ □ □ □ □ ■ □ ■
+□ □ ■ □ □ □ □ □ □ □ □ □ □ □ ■
+□ □ ■ □ □ □ □ □ □ □ □ □ □ ■ ■ 
+□ □ ■ □ □ □ □ □ □ □ □ □ ■ □ ■ 
+□ □ ■ □ □ □ □ □ □ □ □ ■ □ □ ■
+□ □ ■ □ □ □ □ □ □ □ ■ □ □ □ ■ 
+□ ■ □ ■ □ □ □ □ ■ ■ □ □ □ ■ 
+■ □ □ ■ □ □ ■ ■ □ □ □ □ □ ■
+■ □ □ □ ■ ■ □ □ □ □ □ ■ ■ 
+□ ■ ■ ■ □ □ ■ ■ ■ ■ ■ 
+
+□ □ □ □ □ □ ■ ■ □ □ ■ ■
+□ □ □ □ □ ■ □ □ ■ ■ □ □ ■
+□ □ □ □ □ □ ■ ■ ■ ■ ■ ■
+□ □ □ □ ■ ■ □ □ □ □ □ □ ■ ■
+□ □ □ ■ □ □ □ □ □ □ □ □ □ □ ■
+□ □ ■ □ □ □ □ □ □ □ □ □ □ □ □ ■
+□ □ ■ □ □ □ ■ □ □ □ □ ■ □ □ □ ■
+□ ■ ■ □ □ □ □ □ □ □ □ □ □ □ □ ■ ■
+■ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ ■
+■ □ □ □ □ □ □ ■ □ □ ■ □ □ □ □ □ □ ■
+■ □ □ □ □ □ □ □ ■ ■ □ □ □ □ □ □ □ ■
+□ ■ □ □ □ □ □ □ □ □ □ □ □ □ □ □ ■
+□ □ ■ □ □ □ □ □ □ □ □ □ □ □ □ ■
+□ □ ■ □ □ □ □ □ ■ ■ □ □ □ □ □ ■
+□ □ □ ■ □ □ □ □ □ □ □ □ □ □ ■
+□ □ □ □ ■ ■ □ □ □ □ □ □ ■ ■
+□ □ □ □ □ □ ■ ■ ■ ■ ■ ■
+
+□ □ □ □ ■ ■ ■ ■ ■ ■ ■ □ □ □ □
+□ □ ■ ■ ■ □ □ □ □ □ ■ ■ ■ □ □
+□ ■ ■ □ □ □ □ □ □ □ □ □ ■ ■ □
+□ ■ □ □ □ □ □ □ □ □ □ □ □ ■ □
+■ ■ □ □ □ □ □ □ □ □ □ □ □ ■ ■
+■ □ □ □ ■ ■ □ □ □ ■ ■ □ □ □ ■
+■ □ □ □ ■ ■ □ □ □ ■ ■ □ □ □ ■
+■ □ □ □ □ □ □ □ □ □ □ □ □ □ ■
+■ □ □ ■ □ □ □ □ □ □ □ ■ □ □ ■
+■ □ □ ■ ■ □ □ □ □ □ ■ ■ □ □ ■
+■ ■ □ □ ■ ■ □ □ □ ■ ■ □ □ ■ ■
+□ ■ □ □ □ ■ ■ ■ ■ ■ □ □ □ ■ □
+□ ■ ■ □ □ □ □ □ □ □ □ □ ■ ■ □
+□ □ ■ ■ ■ □ □ □ □ □ ■ ■ ■ □ □
+□ □ □ □ ■ ■ ■ ■ ■ ■ ■ □ □ □ □</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Buckshot,
+                                    2020/05/25 14:31
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22439"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># ■□
+def bitmap(data):
+    for e, pixel in enumerate(data):
+        print('#Output{}'.format(e+1))
+        for i in range(2, len(pixel)):
+            num = pixel[i].split()
+            p = ['□'*int(j) if (n+1) % 2 != 0 else '■'*int(j) for n, j in enumerate(num)]
+            # 굳이 0으로 시작하는지 않하는지 판별할 필요가 없습니다.
+            print('{}'.format(''.join(p)))
+
+if __name__ == '__main__':
+    in_txt = open('./bitmap input.txt', 'r').read().split('\n\n')   #txt 입력 5개를 5개의 문자열로(줄바꿈) 구분
+    data = [line.split('\n') for line in in_txt]    # 각 예제 별 픽셀 수를 분리
+    bitmap(data)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/27 15:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hwaseong Nam</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22460"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>#input1
+#bitmap = [[1,3,1],[4,1],[1,4],[0,1,3,1],[0,1,3,1],[1,4]]
+
+#input2
+#bitmap = [[4,11],[4,9,2,1],[4,9,2,1],[4,11],[4,9],[4,9],[5,7],[0,17],[1,15]]
+
+#input3
+#bitmap = [[6,5,2,3],[4,2,5,2,3,1],[3,1,9,1,2,1],[3,1,9,1,2,1],[2,1,11,1],[2,1,10,2],[2,1,9,1,1,1],[2,1,8,1,2,1],[2,1,7,1,3,1],[1,1,1,1,4,2,3,1],[0,1,2,1,2,2,5,1],[0,1,3,2,5,2],[1,3,2,5]]
+
+#input4
+bitmap = [[6,2,2,2],[4,2,5,2,3,1],[3,1,9,1,2,1],[3,1,9,1,2,1],[2,1,11,1],[2,1,10,2],[2,1,9,1,1,1],[2,1,8,1,2,1],[2,1,7,1,3,1],[1,1,1,1,4,2,3,1],[0,1,2,1,2,2,5,1],[0,1,3,2,5,2],[1,3,2,5]]
+
+for i in range(len(bitmap)):
+    for j in range(len(bitmap[i])):
+        if j%2 == 0:
+            print('□ '*bitmap[i][j], end = '')
+        elif j%2 == 1:
+            print('■ '*bitmap[i][j], end = '')
+    print()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/06/01 09:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">aryagaon</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22561"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">while(1):
+    print('#Input' + str(rep))
+    line = input('height&amp;width: ')
+    height, width = line.split(' ')
+    height = int(height)
+
+    lines = []
+    for i in range(height):
+        my_input = input('')
+        lines.append(my_input.split(' '))
+
+    for line in lines:
+        if line[0] != '0':
+            cnt = 1
+            for b in line:
+                if cnt % 2 == 1:
+                    print('□'*int(b),end='')
+                    cnt = cnt + 1
+                else:
+                    print('■' * int(b),end='')
+                    cnt = cnt + 1
+            print('')
+        elif line[0] == '0':
+            cnt = 0
+            for b in line:
+                if cnt == 0:
+                    cnt = cnt + 1
+                    pass
+                if cnt == 1:
+                    print('■'*int(b),end='')
+                    cnt = cnt + 1
+                else:
+                    if cnt % 2 == 1:
+                        print('□' * int(b),end='')
+                        cnt = cnt + 1
+                    else:
+                        print('■' * int(b),end='')
+                        cnt = cnt + 1
+            print('')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/06/13 23:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박규남</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22577"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def sol() :
+    height_width, inp_map, inp_list = list(map(int, input(&quot;height, width&quot;).split())), ['□', '■'], []
+
+    for col in range(0, height_width[0]) :
+        inp_list.append(list(map(int, input(&quot;INPUT : &quot;).split())))
+    for col in inp_list :
+        print(&quot; &quot;.join(&quot;&quot;.join([inp_map[j%2]*col[j] for j in range(0, len(col))])))
+
+if __name__ == &quot;__main__&quot; :
+    sol()
+</code></pre>
+
+<p>결과</p>
+<pre><code>INPUT 3
+
+height, width13 18
+INPUT : 6 5 2 3
+INPUT : 4 2 5 2 3 1
+INPUT : 3 1 9 1 2 1
+INPUT : 3 1 9 1 1 1
+INPUT : 2 1 11 1
+INPUT : 2 1 10 2
+INPUT : 2 1 9 1 1 1
+INPUT : 2 1 8 1 2 1
+INPUT : 2 1 7 1 3 1
+INPUT : 1 1 1 1 4 2 3 1
+INPUT : 0 1 2 1 2 2 5 1
+INPUT : 0 1 3 2 5 2
+INPUT : 1 3 2 5
+□ □ □ □ □ □ ■ ■ ■ ■ ■ □ □ ■ ■ ■
+□ □ □ □ ■ ■ □ □ □ □ □ ■ ■ □ □ □ ■
+□ □ □ ■ □ □ □ □ □ □ □ □ □ ■ □ □ ■
+□ □ □ ■ □ □ □ □ □ □ □ □ □ ■ □ ■
+□ □ ■ □ □ □ □ □ □ □ □ □ □ □ ■
+□ □ ■ □ □ □ □ □ □ □ □ □ □ ■ ■
+□ □ ■ □ □ □ □ □ □ □ □ □ ■ □ ■
+□ □ ■ □ □ □ □ □ □ □ □ ■ □ □ ■
+□ □ ■ □ □ □ □ □ □ □ ■ □ □ □ ■
+□ ■ □ ■ □ □ □ □ ■ ■ □ □ □ ■
+■ □ □ ■ □ □ ■ ■ □ □ □ □ □ ■
+■ □ □ □ ■ ■ □ □ □ □ □ ■ ■
+□ ■ ■ ■ □ □ ■ ■ ■ ■ ■
+
+INPUT 4
+
+height, width17 18
+INPUT : 6 2 2 2
+INPUT : 5 1 2 2 2 1
+INPUT : 6 6
+INPUT : 4 2 6 2
+INPUT : 3 1 10 1
+INPUT : 2 1 12 1
+INPUT : 2 1 3 1 4 1 3 1
+INPUT : 1 2 12 2
+INPUT : 0 1 16 1
+INPUT : 0 1 6 1 2 1 6 1
+INPUT : 0 1 7 2 7 1
+INPUT : 1 1 14 1
+INPUT : 2 1 12 1
+INPUT : 2 1 5 2 5 1
+INPUT : 3 1 10 1
+INPUT : 4 2 6 2
+INPUT : 6 6
+□ □ □ □ □ □ ■ ■ □ □ ■ ■
+□ □ □ □ □ ■ □ □ ■ ■ □ □ ■
+□ □ □ □ □ □ ■ ■ ■ ■ ■ ■
+□ □ □ □ ■ ■ □ □ □ □ □ □ ■ ■
+□ □ □ ■ □ □ □ □ □ □ □ □ □ □ ■
+□ □ ■ □ □ □ □ □ □ □ □ □ □ □ □ ■
+□ □ ■ □ □ □ ■ □ □ □ □ ■ □ □ □ ■
+□ ■ ■ □ □ □ □ □ □ □ □ □ □ □ □ ■ ■
+■ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ □ ■
+■ □ □ □ □ □ □ ■ □ □ ■ □ □ □ □ □ □ ■
+■ □ □ □ □ □ □ □ ■ ■ □ □ □ □ □ □ □ ■
+□ ■ □ □ □ □ □ □ □ □ □ □ □ □ □ □ ■
+□ □ ■ □ □ □ □ □ □ □ □ □ □ □ □ ■
+□ □ ■ □ □ □ □ □ ■ ■ □ □ □ □ □ ■
+□ □ □ ■ □ □ □ □ □ □ □ □ □ □ ■
+□ □ □ □ ■ ■ □ □ □ □ □ □ ■ ■
+□ □ □ □ □ □ ■ ■ ■ ■ ■ ■
+
+
+
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/06/16 16:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GG</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22723"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="perl">H = int(input('height&amp;width: ').split()[0])
+
+bitmap = ''
+for _ in range(H):
+    white = True
+    for x in map(int, input().split()):
+        bitmap += ('□ ' if white else '■ ') * x
+        white = not white
+
+    bitmap += '\n'
+
+print(bitmap)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/07/13 13:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22743"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">w, h = 6, 6
+
+pixels = '''
+1 3 1
+4 1
+1 4
+0 1 3 1
+0 1 3 1
+1 4
+'''
+lPixels = pixels.split('\n')
+
+for line in lPixels:
+    if line == '':
+        continue
+    else:
+        px = line.split(' ')
+        i = 0
+        bFirstBlack = False
+        for p in px:
+            output = ''
+            # print(p)
+            p = int(p)
+            if True == bFirstBlack:
+                bFirstBlack = False
+                output = '■ ' * p
+            else:
+                if i == 0 and p == 0:
+                    bFirstBlack = True
+                    i = i + 1
+                    continue
+                elif (i + 1) % 2 == 0:
+                    output = '■ ' * p
+                else:
+                    output = '□ ' * p
+            print(output , end='')
+            i = i + 1
+        print('\n')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/07/15 16:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Chang-Hoon Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22882"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3.8</p>
+<pre><code class="go">print('\n'.join([''.join([('□ ' if index % 2 == 0 else '■ ') * int(value) for index, value in enumerate(input().strip().split())]) for i in range(int(input('Height: ').strip()))]))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/08/04 21:53</p>
+                                <p class="static-profile" style="margin:0;padding:0;">구루마</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23003"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">hw=input('height&amp;width: ')
+h= int(hw.split()[0])
+w= int(hw.split()[1])
+L=[]
+while len(L)!=h:
+    a=input('&gt; ')
+    L.append(a)
+L=[L[i] for i in range(len(L))]
+L=[i.split() for i in L]
+for i in range(len(L)):
+    L[i]=[int(j) for j in L[i]]
+
+def bit2(L1):
+    printlist=[]
+    for i in range(len(L1)):
+        if i%2!=0:
+            printlist.append(L1[i]*'■')
+        else:
+            printlist.append(L1[i]*'□')
+    for p in printlist:
+        print(p, end='')
+    print(&quot;&quot;)
+
+def bit1(L1):
+    printlist=[]
+    for i in range(len(L1)):
+        if i%2==0:
+            printlist.append(L1[i]*'□')
+        else:
+            printlist.append(L1[i]*'■')
+    for p in printlist:
+        print(p, end='')
+    print(&quot;&quot;)
+
+for i in L:
+    if i[0]!=0:
+        bit1(i)
+    else:
+        bit2(i)
+
+</code></pre>
+
+<p>푸는 동안 정말 즐거웠습니다 좋은 문제 감사합니다!</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/08/21 21:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김병관</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23178"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">height = input('Enter an height: ')
+width = input('Enter an width: ')
+
+arrays = []
+for n in range(0, int(height)):
+    arr = input(&quot;Enter an integer array with ' ': &quot;).split(' ')
+    arr = list(map(int, arr))
+    assert sum(arr) &lt;= int(width), 'The sum of array can not be greater than {}'.format(width)
+    arrays.append(arr)
+
+for arr in arrays:
+    arr2bit = []
+    for i, n in enumerate(arr):
+        if i == 0 and n == 0:
+            pass
+        else:
+            if i % 2 == 0:
+                arr2bit.append(n * '□')
+            else:
+                arr2bit.append(n * '■')
+
+    m = ''
+    for b in arr2bit:
+        m += b
+    print(m)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/09/15 11:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">돈 벌면 뭐하노</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23503"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="javascript">function bitmapPrint(matrix, inputString) {
+    let result = '';
+    const rows = inputString.split('\n');
+    rows.forEach( (element, i) =&gt; {
+        let inputCol = 0;
+        element.split(' ').forEach( (e, j) =&gt; {
+            for(let k=0; e&gt;k; k++) {
+                result = result + ((j % 2) === 0 ? '□' : '■'); // matrix[i][inputCol++] = ((j % 2) === 0 ? '□' : '■');
+            }
+        })
+        result = result + '\n';
+    });
+    console.log(result); // console.log(matrix);
+}
+
+function matrix(rows, cols, defaultValue){
+    var arr = [];
+    for(let i=0; i &lt; rows; i++){
+        arr.push([]);
+        arr[i].push( new Array(cols));
+        for(let j=0; j &lt; cols; j++){
+            arr[i][j] = defaultValue;
+        }
+    }
+    return arr;
+}
+
+bitmapPrint(matrix(6,6), `1 3 1
+4 1
+1 4
+0 1 3 1
+0 1 3 1
+1 4`);
+
+bitmapPrint(matrix(9,18), `4 11
+4 9 2 1
+4 9 2 1
+4 11
+4 9
+4 9
+5 7
+0 17
+1 15`);
+
+bitmapPrint(matrix(13,18), `6 5 2 3
+4 2 5 2 3 1
+3 1 9 1 2 1 
+3 1 9 1 1 1
+2 1 11 1
+2 1 10 2
+2 1 9 1 1 1
+2 1 8 1 2 1
+2 1 7 1 3 1
+1 1 1 1 4 2 3 1
+0 1 2 1 2 2 5 1
+0 1 3 2 5 2
+1 3 2 5`);
+
+bitmapPrint(matrix(17,18), `6 2 2 2
+5 1 2 2 2 1
+6 6
+4 2 6 2
+3 1 10 1
+2 1 12 1
+2 1 3 1 4 1 3 1
+1 2 12 2
+0 1 16 1
+0 1 6 1 2 1 6 1
+0 1 7 2 7 1
+1 1 14 1
+2 1 12 1
+2 1 5 2 5 1
+3 1 10 1
+4 2 6 2
+6 6`);
+
+bitmapPrint(matrix(15,15), `4 7 4
+2 3 5 3 2
+1 2 9 2 1
+1 1 11 1 1
+0 2 11 2
+0 1 3 2 3 2 3 1
+0 1 3 2 3 2 3 1
+0 1 13 1
+0 1 2 1 7 1 2 1
+0 1 2 2 5 2 2 1
+0 2 2 2 3 2 2 2
+1 1 3 5 3 1 1
+1 2 9 2 1
+2 3 5 3 2
+4 7 4`);
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/10/20 16:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">sacru2red</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23896"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">x = input(&quot;height &amp; width: &quot;).split(&quot; &quot;)
+result = &quot;&quot;
+for i in range(int(x[0])):
+    temp = input().split(&quot; &quot;)
+    for k in range(len(temp)):
+        if k % 2 == 0:
+            result += &quot;□ &quot; * int(temp[k])
+        else:
+            result += &quot;■ &quot; * int(temp[k])
+    result += &quot;\n&quot;
+
+print(result)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/12/07 17:16</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김우석</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25605"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import random
+#h = height  w = weigth
+h,w = map(int,input('높이 넓이 : ').split())
+dot = ''
+for x in range(h):
+    l = []
+    while 1:
+        l.append(random.randint(0,w))
+        if sum(l)&gt;w :
+            l.pop()
+            break
+
+        for i in range(len(l)):
+            if i%2==1 : dot += ('□'*l[i])
+            else : dot += ('■'*l[i])
+        dot += '\n'
+print(dot)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/06/23 13:17</p>
+                                <p class="static-profile" style="margin:0;padding:0;">약사의혼자말</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26317"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">input1 = '''1 3 1
+4 1
+1 4
+0 1 3 1
+0 1 3 1
+1 4'''.split('\n')
+
+for i in range(len(input1)):
+    input1[i] = input1[i].split(' ')
+    if int(input1[i][0]) != 0:
+        for j in range(len(input1[i])):
+            if j % 2 == 0:
+                print('□'*int(input1[i][j]), end='')
+            else:
+                print('■'*int(input1[i][j]), end='')
+    else:
+        for j in range(1,len(input1[i])):
+            if j % 2 == 0:
+                print('□'*int(input1[i][j]),end='')
+            else:
+                print('■'*int(input1[i][j]), end='')
+    print()
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/09/18 13:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">한고선</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27136"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">a = input(&quot;height&amp;width:&quot;)
+h = int(a[0])
+w = int(a[2])
+
+codearr=[]
+for i in range(h):
+    while True:
+        print(i+1,'번째',end=' ')
+        b = list(map(int,input('비트맵 코드 입력: ').split(&quot; &quot;)))
+        if sum(b) &lt;= w:
+            codearr.append(b)
+            break
+
+for i in codearr:
+    for k in range(len(i)) :
+        if k%2==0:
+            print('□ '*i[k],end='')
+        else:
+            print('■ '*i[k],end='')
+    print('')
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/27 00:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">양캠부부</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27431"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">inp = '''9 18
+4 11
+4 9 2 1
+4 9 2 1
+4 11
+4 9
+4 9
+5 7
+0 17
+1 15'''
+res, *data = inp.splitlines()
+
+for datum in data:
+    line=''
+
+    for i,d in enumerate(datum.split(' ')):
+        if i%2 == 0:
+            line = line + '□ '*int(d)
+        else:
+            line = line + '■ '*int(d)
+    print(line)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/02/22 10:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">로만가</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29471"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def bitmapPrinter(h, map):
+    for r in range(h):
+        for c in range(len(map[r])):
+            if c % 2 == 0:
+                munja = '□'
+            else:
+                munja = '■'
+            for x in range(map[r][c]):
+                print(munja, end=' ')
+        print()
+
+
+height, width = 6, 6
+map = [[1, 3, 1], [4, 1], [1, 4], [0, 1, 3, 1], [0, 1, 3, 1], [1, 4]]
+bitmapPrinter(height, map)
+print(' =' * 10)
+
+height, width = 9, 10
+map = [[4, 11], [4, 9, 2, 1], [4, 9, 2, 1], [4, 11],
+       [4, 9], [4, 9], [5, 7], [0, 17], [1, 15]]
+bitmapPrinter(height, map)
+print(' =' * 10)
+
+### 입력 반을 때
+# map = []
+# (height, width) = (int(x) for x in input('height와 width 입력하세요.: ').split())
+# for h in range(height):
+#     inputSu = list(int(x) for x in input('Bitmap의 {0}번째 라인수 입력: \n'.format(h+1)).split())
+#     map.append(inputSu)
+# bitmapPrinter(height, map)
+# print(' =' * 10)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/07/21 20:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29513"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">h, w = map(int, input().split())
+inpt = [list(map(int, input().split())) for _ in range(h)]
+for i in inpt:
+    for j in range(len(i)):
+        if j%2 == 0:
+            print('□ '*i[j], end = '')
+        else:
+            print('■ '*i[j], end='')
+    print()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/08/01 19:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hawk Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

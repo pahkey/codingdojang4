@@ -1,0 +1,1935 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="당신은 A 인터넷 카페 운영자이다.
+
+당신의 인터넷 카페에는 휴대폰 번호 게시가 금지되어 있다.
+
+하지만 일부 회원들이 편법을 동원하여 휴대폰 번호를 게시 후 불법 거래를 시도한다.
+
+이를 체크하여 자동 삭제를 할 수 있도록 휴대폰 번...">
+    <title>폰번 게시글 검사 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">폰번 게시글 검사</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">1</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 2</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>당신은 A 인터넷 카페 운영자이다.</p>
+<p>당신의 인터넷 카페에는 휴대폰 번호 게시가 금지되어 있다.</p>
+<p>하지만 일부 회원들이 편법을 동원하여 휴대폰 번호를 게시 후 불법 거래를 시도한다.</p>
+<p>이를 체크하여 자동 삭제를 할 수 있도록 휴대폰 번호 검사 알고리즘을 작성하시오.</p>
+<p>(011~019 는 10자리여도 휴대폰 번호이다. 010은 11자리여야만 한다.)</p>
+<p><strong>Input</strong></p>
+<pre><code class="cpp">영일영-구구칠8-일구팔사
+0일영.칠칠칠팔.이삼사
+영 일 칠 삼 칠 오 팔 이 팔 이
+영일일 34구구 4 오 9 이
+</code></pre>
+
+<p><strong>Output</strong></p>
+<pre><code class="cpp">01099781984 true
+0107778234 false
+0173758282 true
+01134994592 true
+</code></pre>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2018/08/31 22:01</p>
+                    <p class="static-profile" style="margin:0;padding:0;">김지훈</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>33개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_14469"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def checknum(string):
+    result = ''
+    exc = {'영':0, '일':1, '이':2, '삼':3, '사':4, '오':5, '육':6, '칠':7, '팔':8, '구':9}
+    for a in string:
+        if a in exc: result += str(exc[a])
+        elif a in '0123456789': result += a
+    if result[:3] == '010':
+        if len(result) == 11: return True
+        else: return False
+    elif result[:3] in ['0' + str(x) for x in range(11, 20)] and len(result) &lt;= 11 and len(result) &gt;= 10: return True
+    else: return False
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/01 16:11</p>
+                                <p class="static-profile" style="margin:0;padding:0;">myyh2357</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14479"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def phonenumber_validator(v):
+  t = {'일':1, '이':2, '삼':3, '사':4, '오':5, '육':6, '칠':7, '팔':8, '구':9, '영':0}
+  num = ''.join(i if i.isdigit() else str(t.get(i,'')) for i in v)
+  return num, (num[:3] == '010' and len(num) == 11) or \
+              (num[:3] != '010' and num[:2] == '01' and len(num) in [10,11])
+
+sample = '''\
+영일영-구구칠8-일구팔사
+0일영.칠칠칠팔.이삼사
+영 일 칠 삼 칠 오 팔 이 팔 이
+영일일 34구구 4 오 9 이'''
+
+for i in sample.splitlines(): print(phonenumber_validator(i))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/02 02:29</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14508"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">input_str = '''영일영-구구칠8-일구팔사
+0일영.칠칠칠팔.이삼사
+영 일 칠 삼 칠 오 팔 이 팔 이
+영일일 34구구 4 오 9 이'''
+
+dic = dict(zip('0123456789영일이삼사오육칠팔구공륙', '0123456789012345678906'))
+for string in input_str.split('\n'):
+    numbers = ''.join([dic[c] for c in string if c in dic])
+    is_valid = len(numbers) == 11 and numbers[:3] == '010' or \
+               len(numbers) &gt;= 10 and numbers[:3] in ['01' + n for n in '123456789']
+
+    print(numbers, is_valid)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/04 15:17</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14536"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <blockquote>
+<p>var myString = prompt('', ''); </p>
+<p>var CheckNum = '0123456789'; </p>
+<p>var myMobileNum = ''; var myResult;</p>
+<p>for(i=0; i&lt;myString.length;i++) </p>
+<p>{</p>
+<p>var myNum = myString[i]; </p>
+<p>switch(myString[i]) </p>
+<p>{</p>
+<p>case '영': </p>
+<p>myNum = 0; </p>
+<p>break; </p>
+<p>case '일': </p>
+<p>myNum = 1; </p>
+<p>break; </p>
+<p>case '이': </p>
+<p>myNum = 2; </p>
+<p>break; </p>
+<p>case '삼': </p>
+<p>myNum = 3; </p>
+<p>break; </p>
+<p>case '사': </p>
+<p>myNum = 4; </p>
+<p>break; </p>
+<p>case '오': </p>
+<p>myNum = 5; </p>
+<p>break; </p>
+<p>case '육': </p>
+<p>myNum = 6; </p>
+<p>break; </p>
+<p>case '칠': </p>
+<p>myNum = 7; </p>
+<p>break; </p>
+<p>case '팔': </p>
+<p>myNum = 8; </p>
+<p>break; </p>
+<p>case '구': </p>
+<p>myNum = 9; </p>
+<p>break; </p>
+<p>}</p>
+<p>if(CheckNum.indexOf(myNum) &gt; -1) </p>
+<p>{ </p>
+<p>myMobileNum += myNum.toString(); </p>
+<p>}</p>
+<p>}</p>
+<p>if(myMobileNum.substring (0, 3) == '010' &amp;&amp; myMobileNum.length == 11) </p>
+<p>{ </p>
+<p>myResult = true;</p>
+<p>} </p>
+<p>else if(myMobileNum.substring (0, 2) == '01' &amp;&amp; CheckNum.indexOf(myMobileNum[2]) &gt; 0 
+  &amp;&amp; myMobileNum.length == 10 || myMobileNum.length == 11) </p>
+<p>{</p>
+<p>myResult = true; </p>
+<p>} </p>
+<p>else </p>
+<p>{ </p>
+<p>myResult = false; </p>
+<p>}</p>
+<p>alert(myResult);</p>
+</blockquote>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/06 16:00</p>
+                                <p class="static-profile" style="margin:0;padding:0;">jey0109</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14537"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>python2.7</strong></p>
+<pre><code class="python">def phone(x):
+    a = x.split(&quot;\n&quot;)
+    text = [&quot;영&quot;,&quot;일&quot;,&quot;이&quot;,&quot;삼&quot;,&quot;사&quot;,&quot;오&quot;,&quot;육&quot;,&quot;칠&quot;,&quot;팔&quot;,&quot;구&quot;]
+    number = [&quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;,&quot;6&quot;,&quot;7&quot;,&quot;8&quot;,&quot;9&quot;]
+    for i in range(len(a)-2):
+        b = a[i+1]
+        for y in [&quot;-&quot;,&quot;.&quot;,&quot; &quot;]:
+            while y in b:
+                b = b[:b.index(y)] + b[(b.index(y)+1):]
+        for i in range(len(text)):
+            while text[i] in b:
+                b = b[:b.index(text[i])] + number[i] + b[(b.index(text[i])+3):]
+        print(b),; print(b[:1]==&quot;01&quot;&amp;((b[2]==&quot;0&quot;&amp;len(b)==11)|(b[2]!=&quot;0&quot;&amp;len(b)in[10,11]))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/06 16:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">tarte24</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14561"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">
+
+def korToNum(strVal):
+    if strVal == &quot;영&quot; or strVal == &quot;공&quot; or strVal == &quot;땡&quot; or strVal == &quot;0&quot;:
+        return &quot;0&quot;
+    elif strVal == &quot;일&quot; or strVal == &quot;1&quot;:
+        return &quot;1&quot;
+    elif strVal == &quot;이&quot; or strVal == &quot;둘&quot; or strVal == &quot;2&quot;:
+        return &quot;2&quot;
+    elif strVal == &quot;삼&quot; or strVal == &quot;셋&quot; or strVal == &quot;3&quot;:
+        return &quot;3&quot;
+    elif strVal == &quot;사&quot; or strVal == &quot;넷&quot; or strVal == &quot;4&quot;:
+        return &quot;4&quot;
+    elif strVal == &quot;오&quot; or strVal == &quot;5&quot;:
+        return &quot;5&quot;
+    elif strVal == &quot;육&quot; or strVal == &quot;6&quot;:
+        return &quot;6&quot;
+    elif strVal == &quot;칠&quot; or strVal == &quot;7&quot;:
+        return &quot;7&quot;
+    elif strVal == &quot;팔&quot; or strVal == &quot;8&quot;:
+        return &quot;8&quot;
+    elif strVal == &quot;구&quot; or strVal == &quot;9&quot;:
+        return &quot;9&quot;
+    else:  # 인식할 수 없는 수의 표현 또는 수가 아닌 표현
+        return &quot;&quot;
+    # else:
+    #     print(&quot;잘못된 입력 : &quot; + strVal)
+
+def isValidPhnum(phoneNum):
+    if phoneNum[:2] != &quot;01&quot;: #01로 시작해야함
+        return False
+    elif phoneNum[2:3] == &quot;0&quot; and len(phoneNum) != 11: #010이면 11자리
+        return False
+    elif len(phoneNum) != 11 and len(phoneNum) != 10: #01x이면 10,11자리
+        return False
+    else:
+        return True
+
+getVal = input()
+
+numVal = &quot;&quot;
+for chr_i in getVal:
+    numVal = numVal + korToNum(chr_i)
+
+print(numVal + &quot; &quot; + str(isValidPhnum(numVal)))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/07 18:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">셈우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14614"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C#</p>
+<pre><code class="cs">using System;
+using System.Text;
+
+namespace CD195
+{
+    class Program
+    {
+        enum Digits { 영, 일, 이, 삼, 사, 오, 육, 칠, 팔, 구 }; // 영 = 0, 일 = 1, ...
+
+        static void Main(string[] args)
+        {
+            bool result = Str2Num(Console.ReadLine(), out string converted);
+            Console.WriteLine($&quot;{converted} {result}&quot;);
+        }
+
+        static bool Str2Num(string aString, out string result)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var s in aString)
+            {
+                // 숫자:그대로, Enum에 정의된 경우: 문자=&gt;Enum.문자값
+                if (Char.IsDigit(s)) sb.Append(s);
+                else if (Enum.IsDefined(typeof(Digits), s.ToString()))
+                {
+                    sb.Append((int)Enum.Parse(typeof(Digits), s.ToString()));
+                }
+            }
+            result = sb.ToString();
+            // 길이 유효성 체크
+            if (sb[2] == '0') return sb.Length == 11;
+            else return sb.Length == 10 || sb.Length == 11;
+        }
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/12 11:26</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14660"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">// =============================================
+    private static String phoneCheck(String phone) {
+        String temp;
+        temp = phone.replaceAll(&quot;[^\uAC00-\uD7A3xfe0-9a-zA-Z]&quot;, &quot;&quot;)
+                .replaceAll(&quot;영&quot;, &quot;0&quot;).replaceAll(&quot;일&quot;, &quot;1&quot;).replaceAll(&quot;이&quot;, &quot;2&quot;).replaceAll(&quot;삼&quot;, &quot;3&quot;)
+                .replaceAll(&quot;사&quot;, &quot;4&quot;).replaceAll(&quot;오&quot;, &quot;5&quot;).replaceAll(&quot;육&quot;, &quot;6&quot;).replaceAll(&quot;칠&quot;, &quot;7&quot;)
+                .replaceAll(&quot;팔&quot;, &quot;8&quot;).replaceAll(&quot;구&quot;, &quot;9&quot;);
+        if (temp.matches(&quot;^010(?:\\d{4})\\d{4}$&quot;)) {
+            return temp + &quot; &quot; + true;
+        }
+        if (temp.matches(&quot;^01(?:1|[6-9])(?:\\d{3}|\\d{4})\\d{4}$&quot;)) {
+            return temp + &quot; &quot; + true;
+        }
+        return temp + &quot; &quot; + false;
+    }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/17 17:09</p>
+                                <p class="static-profile" style="margin:0;padding:0;">채규빈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14670"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">'''
+당신은 A 인터넷 카페 운영자이다.
+당신의 인터넷 카페에는 휴대폰 번호 게시가 금지되어 있다.
+하지만 일부 회원들이 편법을 동원하여 휴대폰 번호를 게시 후 불법 거래를 시도한다.
+이를 체크하여 자동 삭제를 할 수 있도록 휴대폰 번호 검사 알고리즘을 작성하시오.
+(011~019 는 10자리여도 휴대폰 번호이다. 010은 11자리여야만 한다.)
+'''
+
+test_input = &quot;&quot;&quot;영일영-구구칠8-일구팔사
+0일영.칠칠칠팔.이삼사
+영 일 칠 삼 칠 오 팔 이 팔 이
+영일일 34구구 4 오 9 이&quot;&quot;&quot;
+test_output = &quot;&quot;&quot;01099781984 true
+0107778234 false
+0173758282 true
+01134994592 true&quot;&quot;&quot;
+
+numbers = &quot;0123456789영일이삼사오육칠팔구&quot;
+kor = &quot;01234567890123456789&quot;
+kor_numbers = dict(zip(numbers, kor))
+print (kor_numbers)
+
+def FindFakePhoneNumber(input):
+    #print(input)
+    output_numbers = ''.join([kor_numbers[ch] for ch in input if ch in kor_numbers])
+    print(output_numbers)
+
+    local_code = output_numbers[:3]
+    #print(local_code)
+
+    if local_code == &quot;010&quot; and len(output_numbers)==11:        
+        return output_numbers + &quot; true&quot;
+    if 11 &lt;= int(local_code) and int(local_code) &lt;= 19:
+        if len(output_numbers) == 10 or len(output_numbers) == 11:
+            #print(output_numbers + &quot; true&quot;)
+            return output_numbers + &quot; true&quot;
+
+    return output_numbers + &quot; false&quot;
+
+
+
+test_input_list = test_input.split(&quot;\n&quot;)
+test_output_list = test_output.split(&quot;\n&quot;)
+for i in range(len(test_input_list)):
+    assert FindFakePhoneNumber(test_input_list[i]) == test_output_list[i]
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/17 22:25</p>
+                                <p class="static-profile" style="margin:0;padding:0;">phg98</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14797"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def cp(sen):
+    l = []
+    for x in list(sen):
+        if x in '영일이삼사오육칠팔구' or x.isdigit():
+            l.append(x if x.isdigit() else str('영일이삼사오육칠팔구'.index(x)))
+    print(''.join(l),'true' if l[0] == '0' and len(l) == (11 if l[2] == '0' else 10) else 'false')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/10/01 20:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김영성</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15092"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def Chk_PhoneNumber(a) :
+    #dictionary 생성
+    num=&quot;영일이삼사오육칠팔구&quot;
+    dic_num={'공': '0' }
+    for n in range(0, 10) :
+        dic_num[num[n]]= str(n)
+    #불필요한 문자 제거, 문자를 숫자로 치환
+    phone_num =&quot;&quot;
+    for n in a :
+        for k, v in dic_num.items() :
+            if str(n) in (k, v) :
+                if str(n) in (k) :
+                    phone_num+=dic_num[n]
+                else :
+                    phone_num+=n
+                break
+    #휴대폰 번호 점검  
+    if phone_num[0:2]=='01' :
+        if phone_num[2]=='0' and len(phone_num)!=11 :
+            return print(phone_num + &quot;: false&quot;)
+        else :
+            if len(phone_num)==10 or len(phone_num)==11 :
+                return print(phone_num + &quot;: true&quot;)
+    else : 
+        return print(phone_num+ &quot;: false&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/11/05 22:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">쨔이</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15216"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">raw = str()
+for i in input():
+    if i in &quot;0123456789영일이삼사오육칠팔구&quot;:
+        raw += i
+
+produce = (raw.replace(&quot;영&quot;,&quot;0&quot;).replace(&quot;일&quot;,&quot;1&quot;).replace(&quot;이&quot;,&quot;2&quot;).replace(&quot;삼&quot;,&quot;3&quot;)
+           .replace(&quot;사&quot;,&quot;4&quot;).replace(&quot;오&quot;,&quot;5&quot;).replace(&quot;육&quot;,&quot;6&quot;).replace(&quot;칠&quot;,&quot;7&quot;)
+           .replace(&quot;팔&quot;,&quot;8&quot;).replace(&quot;구&quot;,&quot;9&quot;))
+
+if produce[0] == &quot;0&quot; and produce[1] == &quot;1&quot;:
+    if produce[2] == &quot;0&quot;:
+        if len(produce) == 11:
+            print(&quot;True&quot;)
+        else:
+            print(&quot;False&quot;)
+    else:
+        if len(produce) == 10 or len(produce) == 11:
+            print(&quot;True&quot;)
+        else:
+            print(&quot;False&quot;)
+else:
+    print(&quot;False&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/11/13 22:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">그사람 남한 볼 수 있어요</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15319"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">public class Solution {
+
+    public static void main(String[] args) {
+//      System.out.println(&quot;9&quot;.charAt(0) + 0);
+        String[] arr = {&quot;영일영-구구칠8-일구팔사&quot;, &quot;0일영.칠칠칠팔.이삼사&quot;, &quot;영 일 칠 삼 칠 오 팔 이 팔 이&quot;, &quot;영일일 34구구 4 오 9 이&quot;};
+        boolean[] arr_bol = new boolean[4];
+        for(int i = 0; i &lt; arr.length; i++) {
+            arr[i] = arr[i].replaceAll(&quot;[^\uAC00-\uD7A3xfe0-9a-zA-Z\\s]| &quot;, &quot;&quot;)
+                    .replaceAll(&quot;영&quot;, &quot;0&quot;).replaceAll(&quot;일&quot;, &quot;1&quot;).replaceAll(&quot;이&quot;, &quot;2&quot;).replaceAll(&quot;삼&quot;, &quot;3&quot;)
+                    .replaceAll(&quot;사&quot;, &quot;4&quot;).replaceAll(&quot;오&quot;, &quot;5&quot;).replaceAll(&quot;육&quot;, &quot;6&quot;).replaceAll(&quot;칠&quot;, &quot;7&quot;)
+                    .replaceAll(&quot;팔&quot;, &quot;8&quot;).replaceAll(&quot;구&quot;, &quot;9&quot;);
+            if(arr[i].substring(0, 2).equals(&quot;01&quot;)) {
+                if(arr[i].substring(2, 3).equals(&quot;0&quot;) &amp;&amp; arr[i].length() == 11) {
+                    arr_bol[i] = true;
+                }else if(arr[i].substring(2, 3).charAt(0) &gt;= 49 &amp;&amp; arr[i].substring(2, 3).charAt(0) &lt;= 57 
+                        &amp;&amp; (arr[i].length() == 10 || arr[i].length() == 11)) {
+                    arr_bol[i] = true;
+                }
+            }
+            System.out.println(arr[i] + &quot; &quot; + arr_bol[i]);
+        }
+    }
+
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/11/26 14:06</p>
+                                <p class="static-profile" style="margin:0;padding:0;">윤태준</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15371"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#폰번 게시글 검사
+
+Data = {'영':'0','일':'1','이':'2','삼':'3','사':'4','오':'5','육':'6','칠':'7','팔':'8','구':'9'}
+
+D = '''\
+영일영-구구칠8-일구팔사
+0일영.칠칠칠팔.이삼사
+영 일 칠 삼 칠 오 팔 이 팔 이
+영일일 34구구 4 오 9 이
+'''
+for j in range(len(D.splitlines())):
+    result=[]
+    check=''
+    for i in range(len(D.splitlines()[j])):
+        if D.splitlines()[j][i] in Data.keys():
+            result.append(Data[D.splitlines()[j][i]])
+        elif D.splitlines()[j][i] in Data.values():
+            result.append(D.splitlines()[j][i])
+
+    for k in range(0,3):
+        check += result[k]
+    if check =='010' and len(result)==11:
+        print('True')
+    elif check !='010':
+        if len(result) == 10 or len(result) ==11:
+            print('True')
+        else:
+            print('false')
+    else:
+        print('false')    
+    print(result)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/12/01 14:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">S.H</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16176"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">ph = list(input())
+x = {'영':0, '일':1, '이':2, '삼':3, '사':4, '오':5, '육':6, '칠':7, '팔':8, '구':9}
+def ph_to_num(ph):
+    result = []
+    for i in ph:
+        if i.isdigit():
+            result.append(i)
+        else:
+            a = str(x.get(i,10))
+            if a == '10':
+                continue
+            else:
+                result.append(a)
+    if len(result) == 11 and result[2] == 0:
+        return ''.join(result), True
+    elif (len(result) == 10 or len(result) == 11) and result[2] != 0:
+        return ''.join(result), True
+    else:
+        return ''.join(result), False
+
+print(ph_to_num(ph))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/01/23 10:26</p>
+                                <p class="static-profile" style="margin:0;padding:0;">D.H.</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16971"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def check_phone(str):
+    dict = {'영':'0', '일':'1', '이':'2', '삼':'3', '사':'4', '오':'5', '육':'6', '칠':'7', '팔':'8', '구':'9'}
+    lis = list(str)
+    conv = []
+    for i in lis:
+        if i in dict.keys():
+            conv.append(dict[i])
+        elif i in dict.values():
+            conv.append(i)
+
+    print(&quot;&quot;.join(conv), end=' ' )
+    if len(conv) == 11  and conv[0]+conv[1] == '01' and conv[2] in dict.values():
+        return True
+    return False
+
+
+print(check_phone(&quot;영일영-구구칠8-일구팔사&quot;))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/03/02 13:38</p>
+                                <p class="static-profile" style="margin:0;padding:0;">얀차</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17346"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">namespace codingdojang__
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Number(&quot;영일영 - 구구칠8 - 일구팔사&quot;);
+            Number(&quot;0일영.칠칠칠팔.이삼사&quot;);
+            Number(&quot;영 일 칠 삼 칠 오 팔 이 팔 이&quot;);
+            Number(&quot;영일일 34구구 4 오 9 이&quot;);
+        }
+
+        static void Number(string n)
+        {
+            n = n.Replace(&quot; &quot;, &quot;&quot;);
+            n = n.Replace(&quot;-&quot;, &quot;&quot;);
+            n = n.Replace(&quot;.&quot;, &quot;&quot;);
+            string number = &quot;&quot;;
+            string temp = &quot;&quot;;
+            Dictionary&lt;string, string&gt; convert = new Dictionary&lt;string, string&gt; { { &quot;영&quot;, &quot;0&quot; }, { &quot;일&quot;, &quot;1&quot; }, { &quot;이&quot;, &quot;2&quot; }, { &quot;삼&quot;, &quot;3&quot; },
+                { &quot;사&quot;, &quot;4&quot; }, { &quot;오&quot;, &quot;5&quot; }, { &quot;육&quot;, &quot;6&quot; }, { &quot;칠&quot;, &quot;7&quot; }, { &quot;팔&quot;, &quot;8&quot; }, { &quot;구&quot;, &quot;9&quot; } };
+            for (int i = 0; i &lt; n.Length; i++)
+            {
+                try
+                {
+                    int.Parse(n[i].ToString());
+                    temp = n[i].ToString();
+                }
+                catch
+                {
+                    temp = convert[n[i].ToString()];
+                }
+                number += temp;
+            }
+            Console.WriteLine(number);
+            string length = number[0].ToString() + number[1].ToString() + number[2].ToString();
+            if (length == &quot;010&quot; &amp;&amp; number.Length == 11)
+            {
+                Console.WriteLine(true);
+            }
+            else if (int.Parse(length) &lt; 020 &amp;&amp; int.Parse(length) &gt; 010)
+            {
+                if(number.Length == 11 || number.Length == 10)
+                {
+                    Console.WriteLine(true);
+                }
+            }
+            else
+            {
+                Console.WriteLine(false);
+            }
+        }
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/03/31 13:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">bat</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20234"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">public class 폰번게시글검사 {
+
+    public static void main(String[] args) {
+
+        Scanner scan = new Scanner(System.in);
+        String str = scan.nextLine();
+        String[] nums = str.split(&quot;&quot;);
+        ArrayList&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;();
+
+        for(int i=0; i&lt;nums.length; i++) {
+            switch(nums[i]) {
+            case &quot;영&quot;:
+            case &quot;0&quot;:
+                list.add(0);
+                break;
+            case &quot;1&quot;:   
+            case &quot;일&quot;:
+                list.add(1);
+                break;
+            case &quot;이&quot;:
+            case &quot;2&quot;:
+                list.add(2);
+                break;
+            case &quot;삼&quot;:
+            case &quot;3&quot;:
+                list.add(3);
+                break;
+            case &quot;사&quot;:
+            case &quot;4&quot;:
+                list.add(4);
+                break;
+            case &quot;오&quot;:
+            case &quot;5&quot;:
+                list.add(5);
+                break;
+            case &quot;육&quot;:
+            case &quot;6&quot;:
+                list.add(6);
+                break;
+            case &quot;칠&quot;:
+            case &quot;7&quot;:
+                list.add(7);
+                break;
+            case &quot;팔&quot;:
+            case &quot;8&quot;:
+                list.add(8);
+                break;
+            case &quot;구&quot;:
+            case &quot;9&quot;:
+                list.add(9);
+                break;
+            default:
+            }
+        }
+        String number = list.stream().map(Object::toString).collect(Collectors.joining(&quot;&quot;));
+        if(list.get(2)==0) {
+            if(list.size()==11) {
+                System.out.print(number+&quot; &quot;);
+                System.out.println(true);
+            }
+            else {
+                System.out.print(number+&quot; &quot;);
+                System.out.println(false);
+            }
+        }
+        else {
+            if(list.size()==10||list.size()==11) {
+                System.out.print(number+&quot; &quot;);
+                System.out.println(true);
+            }
+            else {
+                System.out.print(number+&quot; &quot;);
+                System.out.println(false);
+            }
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/12/19 17:41</p>
+                                <p class="static-profile" style="margin:0;padding:0;">big Ko</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20603"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">dict={&quot;공&quot;:0,&quot;영&quot;:0,&quot;일&quot;:1,&quot;이&quot;:2,&quot;삼&quot;:3,&quot;사&quot;:4,&quot;오&quot;:5,&quot;육&quot;:6,&quot;칠&quot;:7,&quot;팔&quot;:8,&quot;구&quot;:9,
+&quot;하나&quot;:1,&quot;둘&quot;:2,&quot;셋&quot;:3,&quot;넷&quot;:4,&quot;다섯&quot;:5,&quot;여섯&quot;:6,&quot;일곱&quot;:7,&quot;여덟&quot;:8,&quot;아홉&quot;:9}
+lst=list(map(str,input(&quot;문자 및 숫자를 입력하십시오: &quot;)))
+elst=[]
+for n in lst:
+    if n in dict:
+        elst.append(dict.get(n))
+    try:
+        elst.append(int(n))
+    except:
+        continue
+pn=&quot;&quot;.join(list(map(str,elst)))
+if pn[:2]!=&quot;01&quot;:
+    print(pn,&quot;False&quot;)
+elif len(pn)!=10 and len(pn)!=11:
+    print(pn,&quot;False&quot;)
+elif pn[:3]==&quot;010&quot; and len(pn)!=11:
+    print(pn,&quot;False&quot;)
+else:
+    print(pn,&quot;True&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/17 16:29</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박시원</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20669"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">num = &quot;영일이삼사오육칠팔구&quot;
+dic_num = {'공': '0'}
+for n in range(0, 10):
+    dic_num[num[n]] = str(n)
+
+def Check(a) :
+    phone_num =&quot;&quot;
+    for n in a :
+        for k, v in dic_num.items() :
+            if str(n) in (k, v) :
+                if str(n) in (k) :
+                    phone_num+=dic_num[n]
+                else :
+                    phone_num+=n
+                break
+
+    if phone_num[0:2] == '01':
+        if phone_num[2] == '0' and len(phone_num) != 11:
+            return print(phone_num + &quot;: false&quot;)
+        else:
+            if len(phone_num) == 10 or len(phone_num) == 11:
+                return print(phone_num + &quot;: true&quot;)
+            else:
+                return print(phone_num + &quot;: false&quot;)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/21 19:08</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김민규</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_21579"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">N = list(input())
+checklist = ['영','일','이','삼','사','오','육','칠','팔','구','십']
+final = list()
+for i in range(len(N)):
+    m = 0
+    try:
+        m = int(N[i])
+        final.append(m)
+    except ValueError:
+        check = -1
+        for j in range(len(checklist)):
+            if checklist[j] == N[i]:
+                check = j
+        if check != -1:
+            final.append(check)
+        elif check == -1:
+            pass
+for i in final:
+    print(i,end = &quot;&quot;)
+print(&quot; &quot;,end=&quot;&quot;)
+if str(final[0]) + str(final[1]) + str(final[2]) == &quot;010&quot;:
+    if len(final) == 11:
+        print(&quot;true&quot;)
+    else:
+        print(&quot;false&quot;)
+else:
+    if len(final) == 11 or len(final) == 10:
+        print(&quot;true&quot;)
+    else:
+        print(&quot;false&quot;)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/03/30 00:56</p>
+                                <p class="static-profile" style="margin:0;padding:0;">BlakeLee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22050"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def check_num(x):
+    num,z='영일이삼사오육칠팔구',[]
+    for i in range (len(x)):
+        if ord(x[i])&gt;=48 and ord(x[i])&lt;=57:
+            z.append(x[i])
+        else:
+            for j in range(len(num)):
+                if num[j]==x[i]:
+                    z.append(str(j))
+    z=''.join(z)
+    print (z,end=' ')
+    if (z[:2]=='01' and z[2]=='0') and (len(z)==11):
+        print (True)
+    elif (z[:2]=='01' and z[2]!='0') and (len(z)==11 or len(z)==10):
+        print (True)
+    else:
+        print (False)
+
+check_num('영일영-구구칠8-일구팔사')
+check_num('0일영.칠칠칠팔.이삼사')
+check_num('영 일 칠 삼 칠 오 팔 이 팔 이')
+check_num('영일일 34구구 4 오 9 이')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/03 08:13</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Buckshot</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2708"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">&lt;결과&gt;
+
+01099781984 True
+0107778234 False
+0173758282 True
+01134994592 True</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Buckshot,
+                                    2020/05/03 08:13
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22329"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">input_str = '''영일영-구구칠8-일구팔사
+0일영.칠칠칠팔.이삼사
+영 일 칠 삼 칠 오 팔 이 팔 이
+영일일 34구구 4 오 9 이'''
+import re
+def conv(inp):
+    num = {'영':0, '일':1, '이':2, '삼':3, '사':4, '오':5, '육':6, '칠':7, '팔':8, '구':9}
+    c1 = [re.sub('[가-힣]', lambda m: str(num[m.group()]), s) for s in inp]
+    for p in [re.sub('[-. ]', '', s) for s in c1]:
+        if (p[2] == '0') and (len(p) != 11):
+            print(p, 'false')
+        else: print(p, 'true')
+
+if __name__ == '__main__':
+    inp = input_str.splitlines()
+    conv(inp)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/14 11:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hwaseong Nam</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2730"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">정규식 sub함수로 연습</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Hwaseong Nam,
+                                    2020/05/14 11:04
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22667"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">num = list(input())
+real_num = []
+for i in num:
+    if i == '0' or i == '영':
+        real_num.append('0')
+    elif i == '1' or i =='일':
+        real_num.append('1')
+    elif i == '2' or i == '이':
+        real_num.append('2')
+    elif i == '3' or i == '삼':
+        real_num.append('3')
+    elif i == '4' or i == '사':
+        real_num.append('4')
+    elif i == '5' or i == '오':
+        real_num.append('5')
+    elif i == '6' or i == '육':
+        real_num.append('6')
+    elif i == '7' or i == '칠':
+        real_num.append('7')
+    elif i == '8' or i == '팔':
+        real_num.append('8')
+    elif i == '9' or i == '구':
+        real_num.append('9')
+    else:
+        continue
+if len(real_num) != 11:
+    print(real_num, 'False')
+else:
+    print(real_num, &quot;True&quot;)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/07/02 13:39</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Money_Coding</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23853"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def phoneN(s):
+    han = [&quot;영&quot;, &quot;일&quot;, &quot;이&quot;, &quot;삼&quot;, &quot;사&quot;, &quot;오&quot;, &quot;육&quot;, &quot;칠&quot;, &quot;팔&quot;, &quot;구&quot;]
+    num = [str(i) for i in range(10)]
+    s = s.replace('-', '').replace('.', '').replace(' ', '')
+    for k in range(10):
+        s = s.replace(han[k], num[k])
+    if s[0:3] == &quot;010&quot; and len(s) != 11:
+        print(s, False)
+    else:
+        print(s, True)
+
+
+phoneN(&quot;영일영-구구칠8-일구팔사&quot;)
+phoneN(&quot;0일영.칠칠칠팔.이삼사&quot;)
+phoneN(&quot;영 일 칠 삼 칠 오 팔 이 팔 이&quot;)
+phoneN(&quot;영일일 34구구 4 오 9 이&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/12/02 15:26</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김우석</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24705"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="javascript">const input=prompt('입력','').trim();
+    const trimInput=input.split('')
+    let tfCheck=false;
+
+    const check=/[0-9,가-힣]/;
+    const numCheck=/[0-9]/;
+
+    const phNum=trimInput.filter((el)=&gt;check.test(el));
+
+    const numberStr=phNum.map((el)=&gt;{
+        el=(numCheck.test(el))?el:change(el)
+
+        return el;
+    })
+    console.log(numberStr)
+
+    let result=numberStr.join('');
+
+    if(result.substring(0,3)=='011'||result.substring(0,3)=='012'||result.substring(0,3)=='013'||result.substring(0,3)=='014'||result.substring(0,3)=='015'||result.substring(0,3)=='016'||result.substring(0,3)=='017'||result.substring(0,3)=='018'||result.substring(0,3)=='019'){
+        if(result.length==10){
+            tfCheck=true;       
+        }
+    }
+    else{
+        if(result.length==11){
+            tfCheck=true;
+        }
+    }
+
+    console.log(tfCheck)
+function change(el){
+    const korean=['영','일','이','삼','사','오','육','칠','팔','구'];
+
+    for (let i =0; i &lt; 10; i++) {
+        if(el==korean[i]){
+            el=String(i)
+            break;
+        }   
+    }
+    (numCheck.test(el))?el:'';
+    return el;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/02/10 11:27</p>
+                                <p class="static-profile" style="margin:0;padding:0;">wldus</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26510"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#codingdojing_phone number check
+
+korean = '영일이삼사오육칠팔구'
+num_str = '0123456789'
+old_num = ['0' + str(x) for x in range(11,20)]
+
+def phone_num(num: str):
+
+    new_n = ''
+    flag = True
+
+    for s in num:
+        if s in korean:
+            new_n += str(korean.find(s))
+        elif s in num_str:
+            new_n += str(num_str.find(s))
+        else:
+            new_n += ''
+
+    if new_n[:3] == '010' and len(new_n) == 11:
+        flag = True
+    elif new_n[:3] in old_num and len(new_n) in [10, 11]:
+        flag = True
+    else:
+        flag = False
+
+    print(new_n, flag)
+
+phone_num('영일영-구구칠8-일구팔사')
+phone_num('0일영.칠칠칠팔.이삼사')
+phone_num('영 일 칠 삼 칠 오 팔 이 팔 이')
+phone_num('영일일 34구구 4 오 9 이')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/10/20 11:24</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jaeman Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26624"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def check_phone_number(a):
+    e = {'영':'0', '일':'1', '이':'2', '삼':'3', '사':'4', '오':'5', '육':'6', '칠':'7', '팔':'8', '구':'9'}
+    c = []
+    for i in a:
+        if i in e.keys():
+            c.append(e[i])
+        elif i in e.values():
+            c.append(i)
+    print(&quot; &quot;.join(c),end=' ')
+    if len(c) == 11 and c[0]+c[1] == '01' and c[2] in e.values():
+        return True
+    elif len(c) == 10 and c[0]+c[1] == '01' and c[2] in e.values():
+        return True
+    return False
+
+a = &quot;영일일 34구구 4 오 9 이&quot;
+print(check_phone_number(list(a)))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/11/09 19:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">서현준</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26881"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">
+# 폰번 게시글 검사
+
+def Change(data):
+    strings_dic = dict(zip('영일이삼사오육칠팔구','0123456789')) 
+    result =&quot;&quot;
+    for i in data: 
+        if i in strings_dic.keys():
+            result = result + strings_dic[i]
+        else:
+            result = result + i
+    return result
+
+def PhoneNumber(data):
+    value = &quot; &quot;
+    value = Change(data)
+    if value[:3] in ['0'+ str(i) for i in range(11,20)] and len(data) &gt;= 10 and len(data) &lt;=11 :
+        print(value)
+    elif value[:3] == '010' and len(data) == 11:
+        print(value)
+    else:
+        print(&quot;오류&quot;)
+        False 
+
+
+PhoneNumber(&quot;영1일일팔구이팔90&quot;)
+PhoneNumber(&quot;영1영영일팔구이팔90&quot;)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/12/25 12:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">semipooh</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27027"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">a =input(&quot;휴대폰 번호 입력&quot;)
+
+dic={'영':0,'일':1,'이':2,'삼':3,'사':4,'오':5,'육':6,'칠':7,'팔':8,'구':9}
+
+arr = []
+for i in a :   
+    try :
+        arr.append(dic[i])
+    except KeyError:
+        try :
+            arr.append(int(i))
+        except ValueError:
+            pass
+print(&quot;&quot;.join(list(map(str,arr))),end =&quot; &quot;)
+if arr[2]==0 : 
+    if len(arr)==11:
+        print(&quot;True&quot;)
+    else: 
+        print(&quot;False&quot;)
+else :
+    if len(arr)==10 or len(arr)==11:
+        print(&quot;True&quot;)
+    else: 
+        print(&quot;False&quot;)
+</code></pre>
+
+<h1 id="1">1.특수기호 제외</h1>
+<h1 id="2">2.모두 숫자화</h1>
+<h1 id="3-010">3. 010 구분하여 번호검사 알고리즘 분리</h1>
+<p>이 순서로 짜봤어요~ 
+1번 2번은 예외처리 함수를 활용했어요( 숫자를 제외한 문자를 int화 시켰을떄 Err가 나는걸 이용)</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/18 02:16</p>
+                                <p class="static-profile" style="margin:0;padding:0;">양캠부부</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27386"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">inp = '''영일영-구구칠8-일구팔사
+0일영.칠칠칠팔.이삼사
+영 일 칠 삼 칠 오 팔 이 팔 이
+영일일 34구구 4 오 9 이'''
+
+kor ='영일이삼사오육칠팔구'
+
+def convert(nl): #en: extract number
+    nl_pre = list(nl.replace(' ','').replace('.','').replace('-',''))
+    for i,alp in enumerate(nl_pre):
+        if alp in kor:
+            nl_pre[i] = str(kor.index(alp))
+    return ''.join(nl_pre)
+
+def judge(n):
+    if len(n) == 11 and n[:3] == '010': return True
+    elif len(n) == 10 and n[:2] == '01': return True
+    else : return False
+
+nls = number_lists = inp.splitlines()
+for nl in nls:
+    print(convert(nl), judge(convert(nl)))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/02/19 13:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">로만가</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27460"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package org.javaturotials.ex;
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class test {
+    public static void main(String[] args) {
+        Scanner sc =new Scanner(System.in);
+        String first =&quot;&quot;;
+        int count=0;
+        String phone = sc.nextLine();
+        String re = phone.replaceAll(&quot;[.]&quot;, &quot;&quot;).replaceAll(&quot;[-]&quot;, &quot;&quot;).replaceAll(&quot; &quot;, &quot;&quot;).replaceAll(&quot;영&quot;, &quot;0&quot;).replaceAll(&quot;일&quot;, &quot;1&quot;).replaceAll(&quot;이&quot;, &quot;2&quot;).replaceAll(&quot;삼&quot;, &quot;3&quot;).replaceAll(&quot;사&quot;, &quot;4&quot;).replaceAll(&quot;오&quot;, &quot;5&quot;).replaceAll(&quot;육&quot;, &quot;6&quot;).replaceAll(&quot;칠&quot;, &quot;7&quot;).replaceAll(&quot;팔&quot;, &quot;8&quot;).replaceAll(&quot;구&quot;, &quot;9&quot;);
+        for(int j=0; j&lt;3; j++) {
+         first+=re.charAt(j);
+    }
+        if((first.equals(&quot;010&quot;) &amp;&amp; re.length()==11)||((first.equals(&quot;011&quot;)||first.equals(&quot;012&quot;)||first.equals(&quot;013&quot;)||first.equals(&quot;014&quot;)||first.equals(&quot;015&quot;)||first.equals(&quot;016&quot;)||first.equals(&quot;017&quot;)||first.equals(&quot;018&quot;)||first.equals(&quot;019&quot;))&amp;&amp;(re.length()==10 || re.length()==11))){
+            System.out.println(&quot;true&quot;);
+        }
+        else {
+            System.out.println(&quot;false&quot;);
+        }
+    }
+    }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/02/23 16:15</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Kkubuck</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29596"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">using System;
+using System.Collections.Generic;
+
+namespace solution
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string input = &quot;영일영-구구칠8-일구팔사&quot;;
+
+            Console.WriteLine(&quot; :  {0}&quot;, isPhoneNumber(input));
+            Console.WriteLine(&quot; :  {0}&quot;, isPhoneNumber(&quot;0일영.칠칠칠팔.이삼사&quot;));
+            Console.WriteLine(&quot; :  {0}&quot;, isPhoneNumber(&quot;영 일 칠 삼 칠 오 팔 이 팔 이&quot;));
+            Console.WriteLine(&quot; :  {0}&quot;, isPhoneNumber(&quot;영일일 34구구 4 오 9 이&quot;));
+        }
+
+        private static bool isPhoneNumber(string input)
+        {
+            Dictionary&lt;string, string&gt; dic = new Dictionary&lt;string, string&gt;()
+            {
+                { &quot;영&quot;, &quot;0&quot; }, {&quot;일&quot;, &quot;1&quot; }, {&quot;이&quot;, &quot;2&quot; }, {&quot;삼&quot;, &quot;3&quot; }, {&quot;사&quot;, &quot;4&quot; }, {&quot;오&quot;, &quot;5&quot; },
+                { &quot;육&quot;, &quot;6&quot; }, {&quot;칠&quot;, &quot;7&quot; }, {&quot;팔&quot;, &quot;8&quot; }, {&quot;구&quot;, &quot;9&quot;}
+            };
+
+            string pNum = &quot;&quot;;
+            for (int i = 0; i &lt; input.Length; i++)
+            {
+                if (dic.ContainsKey(input[i].ToString()))
+                    pNum += dic[input[i].ToString()];
+                else if (char.IsDigit(input[i]))
+                    pNum += input[i];
+            }
+            Console.Write(&quot;  {0,11}&quot;,pNum);
+
+            int aCode = int.Parse(pNum.Substring(0, 3));
+            if (aCode == 10 &amp;&amp; pNum.Length == 11)
+                return true;
+            else if (11 &lt;= aCode &amp;&amp; aCode &lt;= 19 &amp;&amp; (pNum.Length == 10 || pNum.Length == 11))
+                return true;
+            else
+                return false;
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/08/29 20:28</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

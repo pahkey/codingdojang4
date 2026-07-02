@@ -1,0 +1,443 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="게임룰:
+
+1. 게임 참가자 수를 스스로 입력, 이름을 스스로 입력. 순서는 랜덤으로 지정된다.
+
+2. 처음 참가자들은 10점씩 점수를 가지고 시작한다. 두개의 주사위를 던지는데 무조건 큰수가 십의 자리이고, 작은 수는 일의 자리이다. 3...">
+    <title>파쉬게임 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">파쉬게임</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">2</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 4</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>게임룰:</p>
+<ol>
+<li>
+<p>게임 참가자 수를 스스로 입력, 이름을 스스로 입력. 순서는 랜덤으로 지정된다.</p>
+</li>
+<li>
+<p>처음 참가자들은 10점씩 점수를 가지고 시작한다. 두개의 주사위를 던지는데 무조건 큰수가 십의 자리이고, 작은 수는 일의 자리이다. 3,4 이렇게 나왔어도 값은 43이다.</p>
+</li>
+<li>
+<p>11,22,33,44,55,66 은 파쉬라고 하고, 다른 주사위들 수보다 값이 크다. 예를 들면 65도 11보다는 작다.</p>
+</li>
+<li>
+<p>하지만 21은 파쉬보다 크다.</p>
+</li>
+<li>
+<p>42는 21보다 크다. 따라서 결과는 42 &gt; 21 &gt; 파쉬 &gt; 그 이외의 수.</p>
+</li>
+<li>
+<p>첫번째 참가자가 주사위를 던지면 다른 사람들은 볼수가 없다는 가정하에, 값을 콘솔에 입력하게 하는데, 진짜 값을 넣을 수도 있고 거짓말을 할 수도 있다. 두번째 참가자는 첫번째 참가자의 말을 믿을지, 안믿고 주사위를 까볼지 결정할 수 있다. 만약 믿을 경우에는 거짓말 한 수보다 무조건 큰 수가 나와야 게임이 진행되고, 만약 더 작은 수가 나올경우 점수가 깎인다. 안믿을 경우 주사위를 볼수 있는데, 첫번째 참가자가 거짓말로 큰수를 입력했을 때에는 첫번째 참가자가 점수가 깎이고, 진짜 나왔던 값을 입력했을 경우나 더 적게 입력했을 경우에는 두번째 참가자의 점수가 깎인다.</p>
+</li>
+<li>
+<p>그 점수가 42면 경우에 따라 참가자의 점수가 3점이 깎인다. / 21은 2점이고 나머지는 1점씩이다.</p>
+</li>
+<li>
+<p>예를 들면 첫번째 참가자가 22가 나왔고, 21이 나왔다고 거짓말을 쳤으면 진짜 값보다 더 큰 수를 말한 셈이다. 이때 두번째 참가자가 안 믿을 경우 첫번째 참가자는 1점이 깎인다.(22가 나왔기 때문.) 그리고 두번째 참가자가 그 1점을 가져간다.</p>
+</li>
+<li>
+<p>이렇게 게임을 진행하다가 참가자 중 한명이라도 2점 미만의 수를 갖게 되면 게임은 끝이난다.</p>
+</li>
+</ol>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">원 값에 +100</span>
+                
+                    <span class="label label-tag label-xs">+200 함으로서 파쉬</span>
+                
+                    <span class="label label-tag label-xs">(42</span>
+                
+                    <span class="label label-tag label-xs">21) 의 순서를 위로 정할수 있음.</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2021/02/01 11:08</p>
+                    <p class="static-profile" style="margin:0;padding:0;">이이충학</p>
+                </div>
+            </div>
+
+            
+                <a name="comment_2824"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">음.재미있는 문제입니다.근데 잘 이해는 안됩니다.(제가 이상한 건가요?)</span>
+                    -
+                    <span style="font-size:11px;">
+                        고태욱,
+                        2021/03/02 22:12
+                    </span>
+                </div>
+            
+                <a name="comment_2831"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">문제가 이상해요</span>
+                    -
+                    <span style="font-size:11px;">
+                        코린이 15세,
+                        2021/04/01 21:21
+                    </span>
+                </div>
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>2개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_24655"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import random as r
+
+def run_dice(man): #주사위를 굴려서 2자리를 만드는 함수
+    input(name[man]+'님은 주사위를 굴리세요.')
+    a=r.randint(1,6)
+    b=r.randint(1,6)
+    if a&gt;b:
+        num=a*10+b
+    else:
+        num=b*10+a
+    return num
+
+def Hscore(num): #순위를 위한 점수설정 및 감점폭 결정
+    global rs
+    if num==42 or num== 21:
+        rnum=200+num
+        rs=3
+    elif num//10 == num%10: #각 자릿수가 같으면
+        rnum=100+num
+        rs=2
+    else:
+        rnum=num
+        rs=1
+    return rnum
+
+def rescore(man1,man2,rs): #점수 감점
+    global e_con
+    print(str(name[man1])+'님의 점수를 '+str(rs)+'점 감점')
+    print(str(name[man2])+'님의 점수를 '+str(rs)+'점 가점')
+
+    score[man1] -= rs
+    score[man2] += rs
+    if score[man1]&lt;2:
+        e_con=True
+    print(name[man1],score[man1],'    ',name[man2],score[man2])
+    print()
+
+# 초기치
+name=[]
+score=[]
+rs=0 #감점할 점수
+n=int(input('참가지수: '))
+for i in range(n):
+    name.append(input(str(i+1)+'번째 첨가지 이름: '))
+    score.append(10) #점수 초기치
+r.shuffle(name) #플레이 순서 랜덤
+
+e_con=False #score가 1이하인 사람이 생기면 True로 변경
+
+#실행
+fman=0  #주사위를 굴릴 사람:첫사람
+sman=1  #대응할 사람:두번재사람
+while not e_con:
+    num=run_dice(fman) #첫사람 주사위 굴리기
+    print('결과:',num,'   이제 이줄을 포스트잇으로 가려 주세요.')
+    print()
+    print()
+    fnum=int(input(name[fman]+'님은 결과를 입력 하세요: '))
+
+    yon=input(name[sman]+'님은 '+str(fnum)+'을 믿으세요?(y/n): ')
+    if yon=='y':
+        snum=run_dice(sman) #두번째 사람 주사위 굴리기
+        print('결과:',snum)
+        fjum=Hscore(fnum) #첫사람 제시 점수
+        frs=rs
+        sjum=Hscore(snum) #두번째사람 결과 점수
+        if rs&lt;frs:
+            rs=frs  #두사람 결과중 큰 점수폭으로 감점
+
+        if fjum &gt; sjum:
+            rescore(sman,fman,rs)
+        elif fjum &lt; sjum:
+            rescore(fman,sman,rs)
+        else:
+            print('비겼습니다')
+    else:
+        Hscore(num)
+        frs=rs
+        Hscore(fnum)
+        if rs&lt;frs:
+            rs=frs  #실제점수와 제시 점수중 큰 쪽으로 감점
+
+        print('원래 결과는 '+str(num)+'점 입니다.')
+        if fnum &lt;= num:
+            rescore(sman,fman,rs)
+        else:
+            rescore(fman,sman,rs)
+    fman=sman #경기 사람 바꾸기
+    sman+=1
+    if sman&gt;=n:
+        sman=0
+
+#최종 결과
+print('최종결과')
+for i in range(n):
+    print('%10s: %2d'%(name[i],score[i]))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/02/06 09:26</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이이충학</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2825"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">오,파이썬으로 만드셨네요.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    고태욱,
+                                    2021/03/02 22:13
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29394"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">System;
+using System.Linq;
+
+namespace solution
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Random random = new Random();
+            Console.Write(&quot;\n  게임 참가자 수?: &quot;);
+            int np = int.Parse(Console.ReadLine());
+            string[] paticipants = new string[np];
+            int[] score = new int[np];
+            int[] gameOrder = new int[np];
+            for (int i = 0; i &lt; np; i++)
+            {
+                Console.Write(&quot;\n  {0}번 게임 참가자 이름을 입력하세요: &quot;, i+1);
+                paticipants[i] = Console.ReadLine();
+                score[i] = 10;
+                gameOrder[i] = i;
+            }
+            gameOrder = gameOrder.OrderBy(x =&gt; random.Next()).ToArray();
+
+            Console.WriteLine(&quot;\n\n게임을 시작합니다.&quot;);
+            Console.WriteLine(&quot;참가자 중 한명이라도 2점 미만의 수를 갖게 되면 게임은 끝이납니다.&quot;);
+
+            printScore(gameOrder, paticipants, score);
+            playGame(np, gameOrder, paticipants, score);
+        }
+
+        private static void playGame(int np, int[] gameOrder, string[] paticipants, int[] score)
+        {
+            int fnum = 0;
+            int inputNum = 0;
+            int nNum = 0;
+            string ans = &quot;&quot;;
+            bool isContinue = true;
+            while (isContinue)
+            {
+                for (int i = 0; i &lt; np; i++)
+                {
+                    Console.WriteLine(&quot;\n 선공 {0}님, 후공 {1}님 입니다.&quot;, paticipants[gameOrder[i]], paticipants[gameOrder[(i + 1) % np]]);
+                    Console.Write(&quot;\n\t\t{0}님 주사위를 던지세요(Enter 키를 누르세요): &quot;, paticipants[gameOrder[i]]);
+                    fnum = throwDice(0);
+                    Console.WriteLine(fnum);
+                    Console.Write(&quot;\t\t{0}님: 값을 콘솔에 입력하세요:\t    &quot;, paticipants[gameOrder[i]]);
+                    inputNum = throwDice(int.Parse(Console.ReadLine()));
+
+                    Console.Write(&quot;후공: {0}님은 {1}이 진짜 값을 입력했다고 생각합니까?(y or n): &quot;, paticipants[gameOrder[(i + 1) % np]], paticipants[gameOrder[i]]);
+                    ans = Console.ReadLine();
+                    if (ans == &quot;y&quot;)
+                    {
+                        Console.Write(&quot;\t\t{0}님 주사위를 던지세요(Enter 키를 누르세요): &quot;, paticipants[gameOrder[(i + 1) % np]]);
+                        Console.ReadLine();
+                        nNum = throwDice(0);
+
+                        int s = Math.Abs(inputNum / 100 - nNum / 100);
+                        if (s == 0) s = 1;
+                        if (inputNum &gt; nNum)
+                            score[gameOrder[(i + 1) % np]] -= s;
+                        else if (inputNum &lt; nNum)
+                            score[gameOrder[i]] -= s;
+                        Console.WriteLine(&quot;\n\t\t\t  결과: {0}님: {1},  {2}님: {3}&quot;,
+                            paticipants[gameOrder[i]], inputNum % 100, paticipants[gameOrder[(i + 1) % np]], nNum % 100);
+                    }
+                    else
+                    {
+                        if (fnum == inputNum)
+                            score[gameOrder[(i + 1) % np]] -= ((fnum / 100 - inputNum / 100) == 0 ? 1 : (fnum / 100 - inputNum / 100));
+                        else
+                        {
+                            if (fnum &gt; inputNum)
+                                score[gameOrder[(i + 1) % np]] -= ((fnum / 100 - inputNum / 100) == 0 ? 1 : (fnum / 100 - inputNum / 100));
+                            else
+                                score[gameOrder[i]] -= ((-fnum / 100 + inputNum / 100) == 0 ? 1 : (-fnum / 100 + inputNum / 100));
+                        }
+                        Console.WriteLine(&quot;\t\t\t진짜 값: {0},  입력 값: {1}&quot;, fnum % 100, inputNum % 100);
+                    }
+                    if (score[i] &lt; 2 || score[(i + 1) % np] &lt; 2)
+                    {
+                        Console.WriteLine(&quot;\t\t\t게임 끝!!&quot;);
+                        isContinue = false;
+                        break;
+                    }
+                }
+                printScore(gameOrder, paticipants, score);
+            }
+        }
+
+        private static int throwDice(int Num)
+        {
+            Random rnd = new Random();
+            int a = rnd.Next(1, 6);
+            int b = rnd.Next(1, 6);
+
+            int res = (a &gt; b) ? a * 10 + b : b * 10 + a;
+            if (Num != 0)
+                res = Num;
+
+            if (res == 42)
+                res += 300;
+            else if (res == 21)
+                res += 200;
+            else if (a == b)
+                res += 100;
+            else
+                res += 100;
+
+            return (a &gt; b) ? a * 10 + b : b * 10 + a;
+        }
+
+        private static void printScore(int[] gameOrder, string[] paticipants, int[] score)
+        {
+            int len = gameOrder.Length;
+            Console.Write(&quot;\n\n  참가자: &quot;);
+            for (int i = 0; i &lt; len; i++)
+                Console.Write(&quot;{0,8}&quot;,paticipants[gameOrder[i]]);
+
+            Console.Write(&quot;\n\n   score: &quot;);
+            for (int i = 0; i &lt; len; i++)
+                Console.Write(&quot;{0,8}&quot;, score[gameOrder[i]]);
+            Console.WriteLine(&quot;\n\n&quot;);
+        }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/07/09 21:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

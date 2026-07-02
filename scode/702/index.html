@@ -1,0 +1,1561 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="항상 ***일정한*** 속도로 달리는 기계가 있다고 합시다.
+이 기계의 100m 달리기 기록(초)을 입력받으면 마라톤에서의 기록(시:분:초)을 구하시면 됩니다.
+마라톤 경기에서 달리는 거리는 42.195km입니다.
+100m 달리기와 마라톤의...">
+    <title>기계의 마라톤 기록 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">기계의 마라톤 기록</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">3</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 1</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>항상 <strong><em>일정한</em></strong> 속도로 달리는 기계가 있다고 합시다.
+이 기계의 100m 달리기 기록(초)을 입력받으면 마라톤에서의 기록(시:분:초)을 구하시면 됩니다.
+마라톤 경기에서 달리는 거리는 42.195km입니다.
+100m 달리기와 마라톤의 코스는 모두 직선이라고 합니다(회전 시 걸리는 시간을 고려하지 않습니다).
+기계의 파손 및 배터리 방전 시간도 고려하지 않습니다.</p>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">거리와 속도와 시간의 관계</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2021/01/11 12:38</p>
+                    <p class="static-profile" style="margin:0;padding:0;">이준우</p>
+                </div>
+            </div>
+
+            
+                <a name="comment_2912"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">입력과 출력의 좀 더 명확한 표현이 있으면 좋겠네요. 예를 들면 100m 달리기 기록은 속도(m/s) 인가요? 아니면 시간(s) 인가요? 통상적으로 시간으로 표현하니 시간이라고 하면, 마라톤에서의 기록은 시간(ss or hh:mm:ss)인가요? 단위의 명확한 설명이 있으면 좋겠네요.</span>
+                    -
+                    <span style="font-size:11px;">
+                        Charles,
+                        2022/03/24 22:20
+                    </span>
+                </div>
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>39개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_24428"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">record = float(input('enter your record: '))
+time = record * 42195 / 100
+marathon_record = []
+marathon_record.append(int(time) // 3600)
+marathon_record.append((int(time) - marathon_record[0] * 3600) // 60)
+marathon_record.append((int(time) - marathon_record[0] * 3600 - marathon_record[1] * 60))
+marathon_record.append(int(round(time - int(time), 2) * 100))
+print('The marathon record is: {}h {}m {}s {:0&lt;}'.format(marathon_record[0], marathon_record[1], marathon_record[2], marathon_record[3]))
+</code></pre>
+
+<p>시간을 초로 받으면 몇시간 몇분 몇초인지 기록을 알려주고 소수점 둘째 자리까지 알려줍니다...
+다 쓰고 나니까 %연산자가 생각나네요,,,</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/01/20 19:27</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김민수</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24476"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">namespace KangMinSeung
+{
+    static class Program
+    {
+        static void Main(string[] args)
+        {
+            //공용변수 [나머지, 시간 , 분 , 초 , 밀리초]
+            double Remainder, Hour, Min, Second, MiliSecond;
+
+            //입력 받기
+            Console.Write(&quot;100M 걸리는 시간을 입력해주세요 : &quot;);
+            string Time = Console.ReadLine();
+            Console.Write(&quot;거리를 m단위로 입력해주세요. : &quot;);
+            string Distance = Console.ReadLine();
+
+            //입력 받은 값 초단위로 변환
+            double Total = int.Parse(Distance) / 100.0 * int.Parse(Time);
+
+            //시간 구하기
+            Hour = Total / 3600;                        //걸리는 시간 추출
+            Remainder = Hour - (int)Hour;               //소수점 시간 추출
+
+            Min = Remainder * 60;                       //소수점 시간 -&gt; 분으로 변환
+            Remainder = Min - (int)Min;                 //소수점 분 추출
+
+            Second = Remainder * 60;                    //소수점 분 -&gt; 초로 변환
+            MiliSecond = (Second - (int)Second) * 1000; //소수점 초 -&gt; 밀리세컨드 변환
+
+            Console.WriteLine($&quot;{Distance}m 기준 소요시간은 {(int)Hour}시간 {(int)Min}분 {(int)Second}초 {Math.Floor(MiliSecond)} 입니다.&quot;);
+        }
+    }
+}
+</code></pre>
+
+<p>걸리는 시간 : 42195m 기준 소요시간은 1시간 10분 19초 500 입니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/01/23 21:38</p>
+                                <p class="static-profile" style="margin:0;padding:0;">MinSeung Kang</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26399"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬입니다.</p>
+<pre><code class="python">def main():
+    r = float(input(&quot;100미터를 몇 초에 뛸 수 있나요?: &quot;))
+    d = 421.95
+    t = r * d
+    h, m, s = 0, 0, 0.0
+    h, t = divmod(t, 3600)
+    m, s = divmod(t, 60)
+    print(f&quot;마라톤 기록: {h:.0f}시간 {m:.0f}분 {s:.2f}초&quot;)
+
+
+if __name__ == '__main__':
+    main()
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/09/27 17:43</p>
+                                <p class="static-profile" style="margin:0;padding:0;">룰루랄라</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2886"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">multiple input 이 저는 아직 어색한데 룰루님 divmod 사용하신 방법이 멋지네요.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    로만가,
+                                    2022/01/26 16:18
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24290"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def Maraton(a):
+    k = 42195*(a/100)
+    if k &gt; 60:
+        min = k//60
+        sec = k%60
+    else:
+        min = 0
+        sec = k
+    print('총 %d분 %f초가 걸립니다.'% (min,sec))
+
+a = int(input('100미터 달리기에 몇초가 걸리는지 입력:'))
+Maraton(a)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/01/11 20:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hyungseok</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24296"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3</p>
+<pre><code class="python">import datetime
+
+record: float = 42.195 * 10 ** 3 / (100 / float(input('100m 기록(sec): ')))
+print(f&quot;마라톤 기록(h:m:s): {str(datetime.timedelta(seconds=record))}&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/01/12 18:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24353"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int h,m,s;
+    printf(&quot;100m 달리기의 기록(초):&quot;);
+    scanf(&quot;%d&quot;,&amp;h);
+
+    s=42195/100*h;
+
+    printf(&quot;%d\n&quot;,s);
+
+    h=s/3600;
+    m=(s%3600)/60;
+    s=s%60;
+
+    printf(&quot;%d:%d:%d&quot;,h,m,s);
+
+    getch();
+    return 0;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/01/15 23:08</p>
+                                <p class="static-profile" style="margin:0;padding:0;">June</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24478"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3.8.5입니다</p>
+<blockquote>
+<p>def marathon_record(sec):
+    import numpy as np</p>
+<h3 id="_1">초 기준</h3>
+<pre><code>record = 42.195e3 / 100 * sec
+</code></pre>
+<h3 id="_2">분 기준</h3>
+<pre><code>record = record / 60
+return np.round(record, 3)
+</code></pre>
+<p>print(marathon_record(12))</p>
+</blockquote>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/01/24 00:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">형제는못말려</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24526"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.Scanner;
+
+public class MyClass{
+
+    public static void main(String []args) {
+        Scanner s = new Scanner(System.in);
+        double t = s.nextFloat();
+        double mt = 421.95*t;
+
+        System.out.printf(&quot;마라톤 기록 : %d시간 %d분 %d초&quot;, (int)(mt/3600), (int)((mt%3600)/60),(int)(mt%60));
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/01/29 19:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김용현</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24738"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">x = float(input())
+y = 42195 * x / 100
+print(f'{y}sec')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/02/13 12:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">asdfa</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24971"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">x=float(input('기록'))
+
+time=42195/100
+
+hour=(x*time)//(60*60)
+minute=((x*time)%(60*60))//60
+second=((x*time)%(60*60))%60
+
+print('{}시간 {}분 {}초'.format(int(hour), int(minute), second))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/03/13 10:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">최우진</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25067"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def record_marathon(sec):
+    &quot;&quot;&quot;100m 기록으로 마라톤 42.195km 기록을 구합니다.
+    sec: 100m 기록, 단위 초&quot;&quot;&quot;
+    return 42.195 * sec / 0.1
+
+# example
+record_marathon(12)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/03/28 22:12</p>
+                                <p class="static-profile" style="margin:0;padding:0;">돈 벌면 뭐하노</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25412"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">m = 42195
+bak = int(input())
+record = (m/100)*bak
+if record//60 &gt;= 60:
+    print(record//3600,&quot;시간&quot;,record//60-60,&quot;분&quot;,record%60,&quot;초&quot;)
+else: print(record//60,&quot;분&quot;,record%60,&quot;초&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/05/23 15:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">ss2663</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25627"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>python 3.9.5입니다.
+세 줄로 작성해 보았으며, 시간, 분, 초 단위로 나타냅니다.</p>
+<pre><code class="python">short_record = int(input('100m 기록을 초 단위로 숫자만 입력하세요. '))
+time = short_record * 421.95
+print(f'{int(time//3600)}시간 {int((time%3600)//60)}분 {int(((time%3600)%60))}초')
+</code></pre>
+
+<p>실행 결과입니다.</p>
+<pre><code class="python">100m 기록을 초 단위로 숫자만 입력하세요. 20
+2시간 20분 39초
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/06/25 10:25</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이준우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25784"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#codingdojing_marathon
+
+s = eval(input(&quot;100m record(s): &quot;))
+
+m_s = 100 / s
+marathon_record_s = 42195/m_s # second
+re1 = round(marathon_record_s // 3600)
+re2 = round((marathon_record_s % 3600) // 60)
+re3 = round((marathon_record_s % 3600) % 60)
+
+print(f'marathon expected record: {re1}:{re2}:{re3}' )
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/07/15 16:28</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jaeman Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25986"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>일 시 분 초 단위입니다.</p>
+<pre><code class="python">S = float(input(&quot;초 : &quot;)) * 421.95
+while 1:
+    D = int(S // 86400)
+    S -= D * 86400
+    H = int(S // 3600)
+    S -= H * 3600
+    M = int(S // 60)
+    S -= M * 60
+    break
+
+print(&quot;완주까지 {}일 {}시 {}분 {}초 걸립니다.&quot;.format(D, H, M, S))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/08/10 05:31</p>
+                                <p class="static-profile" style="margin:0;padding:0;">[w]*눈꽃*</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26083"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">(lambda x: print(f'{int(x//3600)} : {int((x%3600)//60)} : {int(x%60)}'))(float(input())/100*42195)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/08/18 14:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">BlakeLee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26260"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">t = int(input(&quot;로봇의 100m 기록을 입력하시오(s):&quot;))
+
+def record(time):
+    a = 42.195 * 1000 #Km를 m로 환산합니다.
+    c = 100/t # 로봇의 속력을 구합니다.(m/s)
+    b = a/c # 시간 = 거리 / 속력
+    print(&quot;42.195km 예상기록은 {}초({}분) 입니다.&quot;.format(b,b/60)) # 마라톤 기록을 print
+
+record(t)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/09/08 08:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박대선</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26302"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def compute_record(record):
+    time = record * 42195 / 100
+    ss = time% 60
+    temp = time // 60
+    mm = int(temp % 60)
+    hh = int(temp // 60)
+    print('{0}시간 {1}분 {2}초'.format(hh,mm,ss))
+
+if __name__ == '__main__':
+    record = int(input()) # 초로 입력을 받는다
+    compute_record(record)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/09/16 17:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">서현준</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26343"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">print('%0.2f초'% (float(input('100m 기록(초) : ')) / 100 * 42195))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/09/20 15:27</p>
+                                <p class="static-profile" style="margin:0;padding:0;">ninanino</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26344"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">sec= float(input('100m 기록(초) : ')) / 100 * 42195
+hour=0;min=0;second=0
+if sec // 3600 &gt;= 1:
+    hour= sec // 3600
+    sec -= hour*3600
+if sec//60&gt;=1:
+    min= sec//60
+    sec-= min*60
+second=sec
+print('%d시간 %d분 %0.2f초'%(hour,min,second))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/09/20 15:34</p>
+                                <p class="static-profile" style="margin:0;padding:0;">ninanino</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26379"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>a=(float(input('기록을 입력하시오(초)'))
+속력=100/a
+마라톤 기록_초=속력*42195
+마라톤 기록_시간=마라톤 기록_초/3600
+print('기계의 마라톤 기록은 %d시간 입니다'마라톤 기록_시간)</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/09/24 10:31</p>
+                                <p class="static-profile" style="margin:0;padding:0;">ᄋᄋᄋ</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26530"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">double ma = 42.195;
+
+        Scanner s = new Scanner(System.in);
+
+        System.out.println(&quot;100m 달리기 기록을 입력하세요.&quot;);
+        int n = s.nextInt();
+
+        double time = ma*10*n;
+        System.out.printf(&quot;%d : %d : %d&quot;, (int)time/3600, (int)time%3600/60, (int)time%3600%60);
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/10/23 22:26</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박대현</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26631"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>코린이입니다. 꾸벅</p>
+<pre><code class="python">a = float(input(&quot;기계의 100m 달리기 기록을 입력하세요.&quot;))
+tt = a*421.95      #마라톤 전체 기록(초)
+h = tt//3600       #마라톤 시간
+m = (tt//60)%60    #마라톤 분
+s = tt%60          #마라톤 초
+print(&quot;기계의 마라톤 달리기 기록은 %d시간 &quot; % h + &quot;%d분 &quot; % m + &quot;%.2f초 입니다&quot; % s)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/11/11 11:28</p>
+                                <p class="static-profile" style="margin:0;padding:0;">최승철</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26839"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">a= int(input(&quot;100m 달리기 몇초:&quot;))
+v = 100/a
+
+time = 42195/v
+print(&quot;마라톤 기록은&quot;,time//3600,&quot;시간&quot;,time%3600//60,&quot;분&quot;,time%3600%60,&quot;초&quot;)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/12/19 00:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">양캠부부</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26855"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import datetime
+l = 42.195 * 1000 #미터로 환산
+sec = int(input(&quot;100m 초를 입력하세요 : &quot;))
+m = 100/sec  #초당 움직인 거리
+record = l/m # 42.195km 달리는데 걸린 시간(초)
+print(f&quot;{(datetime.timedelta(seconds=record))}&quot;) #시:분:초 로 표시
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/12/21 23:03</p>
+                                <p class="static-profile" style="margin:0;padding:0;">semipooh</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27122"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">a = input('이 기계는 100m를 몇초에 지나가나요?')
+b = 42.195*10*float(a)
+h = b//3600
+m = (b%3600)//60
+s = b%60
+print(f'이 이계는 42.195km를 {b}초에 지나갑니다.')
+print(f'이 이계는 42.195km를 {h}시간, {m}분, {s}초에 지나갑니다.')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/26 16:13</p>
+                                <p class="static-profile" style="margin:0;padding:0;">로만가</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27397"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package org.javaturotials.ex;
+import java.util.*;
+
+public class test {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        double hun = sc.nextDouble();
+        double mil = hun*10; //1km 뛰는데 걸리는 시간
+        double mara = mil *42.195;
+        int hour= (int)mara/3600;
+        int min = (int)(mara - (3600*hour))/60;
+        int sec = (int)(mara - 3600*hour-min*60);
+        System.out.println(hour + &quot;시간 &quot; + min + &quot;분 &quot; + sec + &quot;초&quot;);
+    }
+    }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/02/19 19:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Kkubuck</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27920"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">speed=int(input(&quot;m/s&quot;))
+print(42195/speed)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/05/10 17:43</p>
+                                <p class="static-profile" style="margin:0;padding:0;">yunjae</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27926"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>#include &lt;stdio.h&gt;
+#define MARATON 42195
+
+int main(int argc, char *argv[])
+{
+    double record;
+    double sec_result;
+
+    printf(&quot;100m 달리기 기록 입력(sec):&quot;);
+    scanf(&quot;%lf&quot;, &amp;record);
+
+    result = record * MARATON / 100;
+
+    printf(&quot;마라톤에서 기록 환산: %lf초\n&quot;, result);
+
+    return 0;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/05/10 19:58</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김병권</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27936"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package com.algorithm.algorithmpractice.dojang;
+
+public class Marathon {
+    private static double takeTime(int input){
+        final int length = 42195;
+        double times = length / 100.0;
+        return input * times;
+    }
+    public static void main(String[] args) {
+        System.out.println(takeTime(5));
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/05/12 07:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">inkuk ju</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28537"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">dst=42195
+unit_dst=100
+
+unit_rec=float(input('100미터기록 (초)?'))
+rec_sec=dst/unit_dst*unit_rec
+
+h=rec_sec//3600
+rec_sec=rec_sec%3600
+m=rec_sec//60
+rec_sec=rec_sec%60
+s=rec_sec
+
+print ('%02d:%02d:%02d' %(h,m,s))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/09/09 02:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Buckshot</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2932"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">&lt;결과&gt;
+100미터기록 (초)?17.3
+02:01:39
+
+100m를 17.3초에 통과하면, 마라톤 세계 신기록인 2시간 01분 39초가 나옵니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Buckshot,
+                                    2022/09/09 02:05
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28718"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python. 과제 자체보다는 '시/분/초'로 표기하는 것이 더 어려웠네요.</p>
+<pre><code class="python">sec=int(input('100m 달리기 기록(초)을 입력하시오. : '))
+sec_2=sec/100 #100미터 기록을 1미터당 기록으로 변경
+S=sec_2*42195 #마라톤 코스 길이 곱하기
+D, H, M = 0, 0, 0 #여기서부터는 최종 마라톤 기록인 '초'를 '일/시/분/초'로 나타내기 위한 것
+while S &gt; 86400: #60*60*24 / 하루를 초로 나눈 것
+    S -= 86400
+    D += 1
+while S &gt; 3600: #60*60
+    S -=3600
+    H += 1
+while S &gt; 60:
+    S -= 60
+    M += 1
+print('해당 기계의 마라톤 예상 완주 기록은 {0}일 {1}시간 {2}분 {3:0.2f}초입니다.'.format(D, H, M, S)) #소수점 이하 2자리까지만 표시
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/10/31 13:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Frye &#39;de Bacon</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28918"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>dart</p>
+<pre><code>import 'dart:math';
+
+marathonRecord(num sec100m) {
+  int rec = (sec100m * 42195 / 100).truncate();     // 소수점 이하 버림
+  print(&quot;${sec100m}sec/100m =&gt; ${rec ~/ 3600}:${rec ~/ 60}:${rec % 60}&quot;);
+}
+
+void main() {
+  marathonRecord(2.1);
+  marathonRecord(7.25);
+  marathonRecord(11);
+  marathonRecord(186);
+}
+</code></pre>
+
+<pre><code>2.1sec/100m =&gt; 0:14:46
+7.25sec/100m =&gt; 0:50:59
+11sec/100m =&gt; 1:77:21
+186sec/100m =&gt; 21:1308:2
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/01/07 15:25</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29223"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">max_len = 42.195 * 1000 / 100    #마라톤 거리 * M변환 / 기준거리(100m)
+
+input_val = input(&quot;100M 기록 입력 : &quot;)
+total = max_len * float(input_val) #초 기록
+
+min = total // 60
+sec = total % 60
+hour = int(min // 60)
+min = int(min % 60)
+
+print(&quot;{}시간 {}분 {}초&quot;.format(hour, min, sec))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/04/04 10:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">HoHyeon Kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29391"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">num = int(input(&quot;Enter 100m/s:&quot;))
+hour = int(num/3600)
+minute = int((num%3600)/60)
+second = int((num%3600)%60)
+print(hour,&quot;H&quot;,minute,&quot;M&quot;,second,&quot;S&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/07/06 17:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">siu yoon</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29420"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">rec = int(input('100m 달리기 기록(초)을 입력하세요: '))
+list = [42195 * rec / 100]
+for i in range(2):
+    list.append(int(list[i]//60))
+    list[i] %= 60
+
+print('42.195km 마라톤에서의 소요시간: {}시 {}분 {:.2f}초'.format(list[2], list[1],list[0]))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/07/13 21:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29495"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def marathon_cal(your_record):
+
+    distance = 42195
+    record = float(your_record)
+
+    h = 0
+    m = 0
+    s = 0
+
+    seconds = record / 100 * distance
+    h = (seconds // 60) // 60
+    m = (seconds // 60) % 60
+    s = seconds % 60
+
+    print (&quot;당신은 42.195Km를 달리면 {}시간 {}분 {}초가 걸립니다&quot;.format(h,m,s))
+
+your_record = input (&quot;100m를 몇초에 뛸수 있나요?: &quot;)
+marathon_cal (your_record)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/07/27 15:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">RMichael</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29522"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">### 100m t100sec, 42195m t42sec
+### t42 = (42195 * t100) / 100
+t100 = int(input(&quot;Record for 100: &quot;))
+t42 = (42196 * t100) // 100
+hr42, hrRe = (t42 // 3600), (t42 % 3600)
+min42, minRe = (hrRe // 60), (hrRe % 60)
+sec42 = minRe
+print(f&quot;{hr42}시간 {min42}분 {sec42}초 소요됨&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/08/05 15:56</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hawk Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_30217"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">t = float(input(&quot;100m 달리기 시간: &quot;))
+marat = t * 421.95
+h = marat // 3600
+m = (marat -(h*3600)) // 60
+s = (marat-(h*3600)-(m*60))
+print(f&quot;마라톤 시간: {h:.0f}시간 {m:.0f}분 {s:.2f} 입니다&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2025/02/25 15:58</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Dasol Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

@@ -1,0 +1,2820 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="출처: [http://www.careercup.com/question?id=6287528252407808](http://www.careercup.com/question?id=6287528252407808)
+
+페이스북 필기 문제 중 하나.
+...">
+    <title>k-palindrome - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">k-palindrome</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">5</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 5</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>출처: <a href="http://www.careercup.com/question?id=6287528252407808">http://www.careercup.com/question?id=6287528252407808</a></p>
+<p>페이스북 필기 문제 중 하나.</p>
+<hr />
+<p>k-palindrome 은 문자열에서 최대 k개의 문자를 제거했을 때 palindrome이 되는 문자열을 말한다.</p>
+<p>문자열 S와 정수값 K가 주어질 때 주어진 문자열이 k-palindrome일 경우 "YES", 아닐경우에는 "NO"를 출력하시오.
+(단, S의 최대길이는 20,000, K의 범위는 0&lt;=K&lt;=30)</p>
+<blockquote>
+<p>※ <strong>팔린드롬(palindrome)</strong> - 바로 읽든 거꾸로 읽든 결과가 같아지는 단어, 문구, 숫자를 말한다. (예: 'eye', 'Madam', '아들딸들아')</p>
+</blockquote>
+<p><strong> 샘플 예:</strong></p>
+<pre><code class="no-highlight">Input - abxa 1 
+Output - YES 
+
+Input - abdxa 1 
+Output - No
+</code></pre>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">palindrome</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2014/03/03 12:49</p>
+                    <p class="static-profile" style="margin:0;padding:0;">pahkey</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>38개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_378"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">3</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>k가 30밖에 안 되니까 그냥 하면 됩니다. k가 더 커진다면 memoization 정도는 필요하겠죠.</p>
+<pre><code class="cpp">#include&lt;iostream&gt;
+#include&lt;string&gt;
+using namespace std;
+
+
+
+bool is_k_palin(string &amp;s, int k, int first_index, int last_index)
+{       
+    if (k &lt; 0) return false;
+    if (first_index &gt;= last_index) return true;
+
+    bool result = false;
+    if (s[first_index] == s[last_index]){
+        result = is_k_palin(s, k, first_index + 1, last_index - 1);
+    }
+    else
+    {
+        result = is_k_palin(s, k - 1, first_index + 1, last_index) 
+                 || is_k_palin(s, k - 1, first_index, last_index - 1);
+    }
+    return result;
+}
+
+int main(){
+    string s;
+
+    int k;
+    while (true){
+        cout &lt;&lt; &quot;Input - &quot;;
+        if (!(cin &gt;&gt; s &gt;&gt; k))
+            break;
+        cout &lt;&lt; &quot;Output - &quot;;
+        if (is_k_palin(s, k, 0, s.length() - 1))
+            cout &lt;&lt; &quot;YES\n&quot;;
+        else
+            cout &lt;&lt; &quot;NO\n&quot;;
+    }
+    return 0;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/03/05 19:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Kim Jaeju</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1892"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">S길이 때문에 stackoverflow 되지 않나요?</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Han Jooyung,
+                                    2016/11/05 22:20
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1894"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">오~ 저는 Java/JS를 주로 쓰다보니 10000 정도의 재귀는 늘 스택오버플로에 걸렸거든요. C++에서는 이정도는 문제 없네요!</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Han Jooyung,
+                                    2016/11/05 22:31
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3312"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">2</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>k의 최대값이 30이라는 게 함정인듯합니다. 이게 얼마안된다고 재귀로 들어갔다가는 문자열의 길이가 길어지면 대책없이 오래 걸려서 몇일 고민했네요.... </p>
+<p><code>acxa</code> 가 k-palindrome 이 되는지 보려면 k 번 삭제하기 전에 회문이 됩니다. 이를 뒤집어서 생각해보면
+뒤집은 문자열 <code>axca</code> 로부터 삽입이나 삭제를 k * 2 번 해서 원래의 문자열을 만들 수 있으면 됩니다. </p>
+<p>이는 편집거리 문제가 돼서 DP로 풀 수 있습니다. </p>
+<pre><code>#   #   a   x   c   a
+#   0   1   2   3   4
+a   1   0   1   2   3
+c   2   1   2   1   2
+x   3   2   2   2   3
+a   4   2   3   3   2
+</code></pre>
+
+<p>이 경우의 최소 편집거리는 2이며 이는 1 * 2 이므로 1-회문이 된다고 판단합니다. </p>
+<pre><code class="python">def f(s1):
+    l = len(s1)
+    s2 = s1[::-1]
+    pdata = list(range(l + 1))
+    for _row, c1 in enumerate(s1):
+        row = _row + 1
+        cdata = [row] + [0] * l
+        for _col, c2 in enumerate(s2):
+            col = _col + 1
+            ins = cdata[col-1] + 1
+            dls = pdata[col] + 1
+            subs = pdata[col - 1] + (2 if c1 != c2 else 0)
+            cdata[col] = min(ins, dls, subs)
+        pdata = cdata
+    return cdata[-1]
+
+def do(s, k):
+    x = f(s)
+    result = &quot;YES&quot; if x &lt;= k * 2 else &quot;NO&quot;
+    print(result, x)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/03/30 19:15</p>
+                                <p class="static-profile" style="margin:0;padding:0;">룰루랄라</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_361"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="lisp">(defn k-palindrome? [s k]
+  (let [half (quot (count s) 2)
+        palindrome? (fn [s] (= (take half s)
+                               (reverse (drop (dec half) s))))
+        combos (clojure.math.combinatorics/combinations s (- (count s) k))]
+    (true? (some palindrome? combos))))
+</code></pre>
+
+<p>Clojure 코드입니다.</p>
+<hr />
+<h4 id="ps">P.S.</h4>
+<p>문제를 풀고나서 더 효과적인 방법이 없을까 생각해보니 이런 아이디어가 떠올랐네요.</p>
+<p><code>문자열에 나타난 고유한 문자의 개수 &lt;= (문자열의 길이 / 2)</code></p>
+<p>위 식이 회문을 판정하는 알고리즘이 될 수 있을 것 같습니다. (증명은 못했는데 손으로 몇 개 해보니 일단 맞네요...)
+그렇다고 한다면 이 문제를 푸는 식은 다음 식이 되겠죠.</p>
+<p><code>(문자열에 나타난 고유한 문자의 개수 - k) &lt;= (문자열의 길이 / 2)</code></p>
+<p>아래 코드는 위 알고리즘에 따라 새로 짠 코드입니다.</p>
+<pre><code class="lisp">(defn k-palindrome?2 [s k]
+  (&lt;= (- (count (distinct s)) k)
+      (quot (count s) 2)))
+</code></pre>
+
+<p>이렇게 하면 계산량 증가도가 O(n)이어서(문자 중복 제거 + 문자열 길이 세는 연산) 문자 조합을 생성하는 위의 코드보다 효율적입니다. 위 알고리즘이 유효하다면 말이죠...^^</p>
+<hr />
+<h4 id="ps-2">P.S. 2</h4>
+<p>생각해보니 위 알고리즘은 k개의 문자열을 제거한 후, 문자열을 임의로 재배열했을 때만 올바르므로 잘못됐네요.</p>
+<p>따라서, <code>case = "abbc"</code> 라고 할 때,</p>
+<pre><code>(palindrome? &quot;abbc&quot; 1)  ; =&gt; false (올바른 결과)
+(palindrome?2 &quot;abbc&quot; 1) ; =&gt; true  (잘못된 결과)
+</code></pre>
+
+<p>이렇게 되므로, 제가 처음 작성한 코드만 올바르네요.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/03/03 16:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박연오</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1291"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">S의 길이가 최대 2만 자인데, 입력으로 2만 자 문자열을 집어 넣으면 답이 나오기까지 몇 분 정도 걸리나요?</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Kim Jaeju,
+                                    2014/03/06 10:51
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1297"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">좋은 지적이네요 그렇게 되면 조합을 생성하는 계산량이 매우 많을 것 같네요 다른 방법을 생각해봐야겠어요</span>
+                                -
+                                <span style="font-size:11px;">
+                                    박연오,
+                                    2014/03/06 18:18
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1858"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">당장 &#39;aba&#39; 만 봐도, 고유 문자 개수는 a,b 2개인데
+문자열 길이/2 = 1.5 이므로 
+첫번째 PS의 식은 맞지 않습니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Jung Seung-yong,
+                                    2016/09/23 12:03
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2870"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>재귀로 풀었습니다.
+단어의 양끝 문자가 같을 경우 잘라내버리고 함수에 넣습니다.
+단어의 양끝 문자가 다를 경우 앞뒤 하나씩 잘라서 함수에 넣고 두개의 리턴값중 작은 값에 1을 더해서 리턴합니다.</p>
+<p>저보다 위에 김정래님 코드가 더 효율적이네요.
+저는 팰린드롬 만들때까지 돌아가고,
+위의 김정래님 코드는 k값까지만 돌려보고 안되면 false리턴하는 방법입니다.</p>
+<pre><code class="python">def kpalin(s):
+    if s==reduce(lambda x,y:y+x,s) : return 0
+    if s[0]==s[-1] : return kpalin(s[1:-1])
+    else : return 1 + min( kpalin(s[1:]), kpalin(s[:-1]))
+
+while 1:
+    word, k = raw_input().split();k = int(k)
+    print 'YES' if kpalin(word) &lt;= k else 'NO'
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/01/23 21:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">상파</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1734"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">뜬금없지만 어떻게 공부하시나요? 풀이법을 보면 거의 재귀나 함수형 문법을 많이 푸시는거 같은데,
+간결하고 어떻게 이렇게 풀지? 되묻곤 하네요ㅎ 정말 부럽습니다^^</span>
+                                -
+                                <span style="font-size:11px;">
+                                    디디,
+                                    2016/03/24 23:13
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1749"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">프로젝트 오일러 문제 풀어보고, 답들 보면 외국애들 풀은 코드 볼 수 있는데, 정말 뒷통수 맞은 듯한 코드 많이 있습니다. 참고해보시면 도움되실듯 합니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    상파,
+                                    2016/04/20 00:16
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5198"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><code>main()</code> 부터...</p>
+<pre><code class="c">int main(int argc, const char * argv[]) {
+    printf(&quot;%d\n&quot;, kpalindrome(&quot;aba&quot;, 0));
+    printf(&quot;%d\n&quot;, kpalindrome(&quot;abxa&quot;, 1));
+    printf(&quot;%d\n&quot;, kpalindrome(&quot;abdxa&quot;, 1));
+    return 0;
+}
+</code></pre>
+
+<p>우선은 쉬운 그냥 팔린드롬만 구현해보자.</p>
+<pre><code class="c">int kpalindrome(char *s, size_t k) {
+    // 팔린드롬은 양쪽끝에서부터 가운데쪽으로 값을 비교해서 모두 같은지 확인
+    size_t i = 0, j = strlen(s) - 1;
+    while (i &lt; j) {
+        if (s[i] != s[j]) return 0;
+        i++;
+        j--;
+    }
+    return 1;
+}
+</code></pre>
+
+<p>이제, <code>s[i] != s[j]</code>에서 <code>k</code>번의 기회를 가질 수 있다. 즉 달라도 하나 건너뛸수 있는데.. (버리고)
+i를 버릴지 j를 버릴지...
+두 경우를 다 봐야 한다.
+이것도 depth first search로 보자.
+그러자면 들어갔다가 다시 되돌아올 수 있어야 한다.
+이 경우는 루프를 돌다가 되돌아와야 한다.
+...</p>
+<p>i, j, k를 묶어서 스택에 넣고, 루프에서 스택이 빌때까지 처리하면 된다.
+분기해야 하는 상태 (<code>s[i] != s[j]</code>)를 만나면 스택에 두 경우를 모두 쌓는 식이다.
+팔린드롬이 안되는 경우는 분기 상황에서 남은 기회(k)가 이미 소진된 경우!</p>
+<p>먼저 상태를 저장할 구조체를 만들고..</p>
+<pre><code class="c">typedef struct state {
+    size_t i, j, k;
+} state;
+
+state makeState(size_t i, size_t j, size_t k) {
+    state s = {i, j, k};
+    return s;
+}
+</code></pre>
+
+<p>스택을 만든다음 스택이 빌 때까지 루프!</p>
+<pre><code class="c">    stack* stack = newStack();
+    Stack_push(stack, makeState(0, strlen(s) - 1, k)); // 현 상태 i, j, k 를 스택에 추가
+
+    while(stack-&gt;count) {
+      ...
+    }
+
+    Stack_free(stack);
+    return 0;
+</code></pre>
+
+<p>이 경우는 depth first로 검색해서 팔린드롬이 되는 경우를 찾으면 바로 통과다. 그래서 루프가 그냥 끝나면 실패를 의미한다.
+i와 j가 역전되면 성공적으로 팔린드롬인걸 확인한 경우다.</p>
+<pre><code class="c">    while (stack-&gt;count) {
+        state state = Stack_pop(stack);
+        size_t i = state.i, j = state.j;
+        k = state.k;
+
+        if (i &gt;= j) {
+            Stack_free(stack);
+            return 1;
+        }
+
+        ...
+    }
+</code></pre>
+
+<p>i,j위치의 값이 다르면 k를 봐서 기회가 없다면 그대로 이 경우는 버리고
+기회가 있다면 가지치기(i를 건너뛰거나 j를 건너뛰는 ..)한다.
+값이 같다면 그대로 다음 상태로 나아간다.</p>
+<pre><code class="c">        if (s[i] != s[j]) {
+            if (k == 0)  // no more chance, discard
+                continue;
+            else {
+                Stack_push(stack, makeState(i+1, j, k-1)); // skip i
+                Stack_push(stack, makeState(i, j-1, k-1)); // skip j
+            }
+        } else {
+            Stack_push(stack, makeState(i+1, j-1, k)); // next state
+        }
+</code></pre>
+
+<p>끝!</p>
+<p>-- update --</p>
+<p>다른 분의 풀이를 보니 그냥 재귀로 풀어도 되는군요.
+저는 Java/JavaScript를 주로 하다보니 콜스택 오버플로때문에 안될거라고 보고 지레 스택을 만들어서 했는데 ㅎㅎ</p>
+<p>Java의 경우는..</p>
+<pre><code class="java">  System.out.println(kpalin(s, 1));
+
+  private static boolean kpalin(char[] s, int k) {
+    return kpalin_(s, 0, s.length - 1, k);  // dfs 재귀
+  }
+
+  private static boolean kpalin_(char[] s, int i, int j, int k) {
+    if (i &gt;= j) return true;  // 끝!
+    if (s[i] == s[j]) return kpalin_(s, i+1, j-1, k); // keep going!
+    if (k == 0) return false; // failed
+    return kpalin_(s, i+1, j, k-1) || kpalin_(s, i, j-1, k-1); // use k!
+  }
+</code></pre>
+
+<p>이 풀이는 입력의 길이가 20000인 경우 콜스택 오버플로를 만납니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/11/05 22:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Han Jooyung</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_362"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">// SP_k-palindrome.cpp : 콘솔 응용 프로그램에 대한 진입점을 정의합니다.
+//
+
+#include &quot;stdafx.h&quot;
+#include &lt;string.h&gt;
+bool IsPalindrome(char* p,int nK,int nEndIndex)
+{
+    int nFindEndIndex = nEndIndex -1;
+    bool bResult = false;
+    for(int iter = 0 ; iter &lt;= nK; iter ++)
+    {   
+        if(nEndIndex &lt;= 1)
+            return true;
+        if(*p == p[nFindEndIndex - iter])
+        {
+            bResult |= IsPalindrome(&amp;p[1], nK - iter,nFindEndIndex - iter-1);
+        }
+        if(p[iter] == p[nFindEndIndex])
+        {
+            bResult |= IsPalindrome(&amp;p[iter+1], nK - iter,nFindEndIndex - iter-1);
+        }
+        if(nK &gt;= (iter) * 2)
+        {
+            if(p[iter] == p[nFindEndIndex-iter])
+                bResult |= IsPalindrome(&amp;p[iter+1], nK - (iter+1)*2,nFindEndIndex-iter-1);
+
+        }
+    }
+
+    bResult |= nFindEndIndex &lt;= nK;
+    return bResult;
+}
+int _tmain(int argc, _TCHAR* argv[])
+{
+    while(1)
+    {
+        char chInput[20001];
+        int nK = 0;
+        printf(&quot;?&quot;);
+        scanf(&quot;%s %d&quot;,chInput,&amp;nK);
+        if(nK ==0)
+            break;
+        printf(&quot; Output = %s\n&quot;,IsPalindrome(chInput,nK,strlen(chInput)) == true ?  &quot;YES&quot;:&quot;NO&quot;);
+
+    }
+    return 0;
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/03/03 16:43</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김 영남</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_388"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">#include &lt;iostream&gt;
+#include &lt;string.h&gt;
+using namespace std;
+
+int main(void)
+{
+    bool CheckFlag = false;
+    int i;
+    char str[20000] ={0};
+    int k;
+
+    cout &lt;&lt; &quot;Input - &quot;;
+    cin &gt;&gt; str &gt;&gt; k;
+
+
+    int len = strlen(str);
+    for( i = 0 ; i &lt;= len - k ; ++i )
+    {
+        char SearchCarr[20000] = {0};
+        char ReverseCarr[20000]= {0};
+        if( i == 0 )
+        {
+            strncpy( SearchCarr, &amp;str[k], sizeof(char) * (len - k) );
+        }
+        else
+        {
+            int NextIndex = i + k;
+
+            strncpy( SearchCarr, &amp;str[0], sizeof(char) * i );
+            strncpy( &amp;SearchCarr[i], &amp;str[NextIndex], sizeof(char)* ( len - NextIndex ) );
+        }
+
+        //뒤집는다.
+        strcpy( ReverseCarr, SearchCarr );
+        //뒤집었을때와 문자가 똑같은게있으면 true 출력하고 종료.
+        if( strcmp( SearchCarr, strrev(ReverseCarr) ) == 0 )
+        {
+            CheckFlag = true;
+            break;
+        }
+    }
+
+    cout &lt;&lt; ( CheckFlag ? &quot;Yes&quot; : &quot;No&quot; ) &lt;&lt; endl;
+    return 0;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/03/06 19:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김경주</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1299"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">틀린부분있으면 따끔하게 지적해주세요 ㅋㅋ;</span>
+                                -
+                                <span style="font-size:11px;">
+                                    김경주,
+                                    2014/03/06 19:31
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_661"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>python.</p>
+<pre><code class="python"># k-palin
+
+def is_palin(s):
+    size = len(s) / 2
+    for i in range(size):
+        if s[i] != s[-(i+1)]: return False
+    return True
+
+
+def chk_palin(s, max_k, k=0):
+    if k &gt; max_k:
+        return False
+
+    if is_palin(s):
+        return True
+
+    size = len(s) / 2
+    for i in range(size):
+        if s[i] != s[-(i+1)]:
+            #
+            # remove leftmost
+            #
+            left_s = s[:i]+s[i+1:]
+
+            #
+            # remove rightmost
+            #
+            if i == 0:
+                right_s = s[:-(i+1)]
+            else:
+                right_s = s[:-(i+1)]+s[-i:]
+
+            return chk_palin(left_s, max_k, k+1) \
+                or chk_palin(right_s, max_k, k+1)
+
+
+print chk_palin(&quot;abxa&quot;, 1)
+print chk_palin(&quot;abdxa&quot;, 1)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/05/07 18:13</p>
+                                <p class="static-profile" style="margin:0;padding:0;">pahkey</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_1604"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>coding by python beginner</p>
+<pre><code class="python">def chk_palindrome(s):
+    return True if s.lower() == s[::-1].lower() else False
+
+def chk_k_palindrome(s, k, loop=0, originLen=None):
+    if len(s) &gt; 20000 or 0 &gt; k or k &gt; 30 or k &lt; 0: return
+    if not originLen: originLen = len(s)
+
+    if loop &lt; k:
+        for i in range(len(s)):
+            if chk_palindrome(s[:i] + s[i+1:]):
+                print('YES')
+                return True
+            elif chk_k_palindrome(s[:i] + s[i+1:], k, loop+1):
+                return True
+            elif i == originLen-1 and loop == 0:
+                print('NO')
+                return False
+    else:
+        return False
+
+
+chk_k_palindrome('xkxacbcakz', 2)
+chk_k_palindrome('abxa', 1)
+chk_k_palindrome('abdxa', 1)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/01/28 16:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">vegan</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2019"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="vbnet">        Dim input As String = Console.ReadLine
+
+        Dim s As String = Split(input, &quot; &quot;).First
+        Dim k As Integer = CInt(Split(input, &quot; &quot;).Last)
+
+        Dim uniqChars() As Char = s.Distinct.ToArray
+        Dim uniqCharCnts(uniqChars.Length - 1) As Integer
+        Dim oddCnt As Integer = 0
+
+        For i As Integer = 0 To uniqChars.Length - 1
+            Dim c As Char = uniqChars(i)
+            uniqCharCnts(i) = s.Where(Function(d As String) d = c).Count
+            If uniqCharCnts(i) Mod 2 = 1 Then oddCnt += 1
+
+            Console.WriteLine(uniqCharCnts(i) &amp; &quot; : &quot; &amp; uniqChars(i))
+        Next
+
+        Dim f As Boolean = False
+
+        If oddCnt - k &lt;= 1 Then
+            f = IsPalindrome(s, k, 0, s.Length - 1)
+        End If
+
+        Console.WriteLine(IIf(f, &quot;YES&quot;, &quot;NO&quot;))
+
+        Console.ReadLine()
+    End Sub
+
+    Function IsPalindrome(p As String, k As Integer, fidx As Integer, lidx As Integer) As Boolean
+        If k &lt; 0 Then Return False
+        If fidx &gt;= lidx Then Return True
+
+        Dim result As Boolean = False
+
+        If p(fidx) = p(lidx) Then
+            result = IsPalindrome(p, k, fidx + 1, lidx - 1)
+        Else
+            result = IsPalindrome(p, k - 1, fidx + 1, lidx) Or IsPalindrome(p, k - 1, fidx, lidx - 1)
+        End If
+
+        Return result
+    End Function
+</code></pre>
+
+<p>Palindrome이 아닌 수를 먼저 판별합니다.
+고유문자 개수가 홀수인문자 - k &lt;= 1 일경우 참일 가능성을 가집니다.
+아닐경우는 바로 NO를 출력합니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/06/13 11:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Steal</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2146"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>풀고보니 저만 엄청 복잡하게 푼것 같네요.
+알고리즘은 주석에 달았습니다.</p>
+<pre><code class="cpp">#include &lt;algorithm&gt;
+#include &lt;cmath&gt;
+#include &lt;clocale&gt;
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+/**
+@  author   : Dong-hee, Na (corona10@gmail.com)
+@  title    : K-Palindrome
+@  풀이내용 :
+    1. 우선 Palindrome의 여부를 체크한다.
+    2. 만약 Palindrome이라면 문자열 길이보다 작은 어떠한 K값이 오더라도 항상
+       Palindrome이 성립한다.
+    3. 만약 Palindrome이 아니라면 최소의 K값에 해당하는 Palindrome의 길이를 구한다.
+       다만 isKPalindrome 함수에서 가장 긴 Palindrome을 검출하는게 오래걸린다.
+       현재는 O(N^3)인데 가장 길다고 추정되는 문자열 다음부터 다시 검색을 하면 시간은 매우 감소 할 것으로 보인다..
+    4. 만약 K값이 최소의 K값보다 크거나 같다면 Palindrome이 성립한다.
+    5. 코드가 매우 더럽다.
+
+    P.S 제대로 풀었는지는 모르겠는데.. 우선은 풀어봤습니다.
+**/
+
+bool isPalindrome(const char* str, const int&amp; size);
+bool isKPalindrome(const char* str, const int&amp; size, const int&amp; k);
+
+int main()
+{
+    while(true)
+    {
+        std::string str;
+        std::cin &gt;&gt; str;
+        std::transform(str.begin(), str.end(), str.begin(), tolower); //소문자로 모두 변환
+
+        int k;
+        std::cin &gt;&gt; k;
+
+        if(isKPalindrome(str.c_str(), str.length(), k))
+        {
+            std::cout&lt;&lt;&quot;YES&quot;&lt;&lt;std::endl;
+        }else{
+            std::cout&lt;&lt;&quot;NO&quot;&lt;&lt;std::endl;
+        }
+    }
+    return 0;
+}
+
+/**
+Palindrome 여부를 확인하는 함수
+**/
+bool isPalindrome(const char* str, const int&amp; size)
+{
+    for(int i = 0 ; i &lt; size/2; i++)
+    {
+        if(str[i] != str[size - i - 1])
+           return false;
+    }
+
+    return true;
+}
+
+/**
+K-Palindrome 여부를 확인하는 함수
+**/
+bool isKPalindrome(const char* str, const int&amp; size, const int&amp; k)
+{
+    if( k &lt; size-1)
+    {
+        if(isPalindrome(str, size))
+        {
+           return true;
+        } else {
+
+            int pal_max_length = 0;
+            int last_r  = 0;
+            int last_l  = 0;
+
+            for(int x = 0; x &lt; size; x++)
+            {
+                int pal_max_rpos = size-1;
+                int pal_max_lpos = x;
+                int pal_length = 0;
+
+                for(int i = pal_max_lpos; i &lt; size; i++)
+                {
+                    for(int j = pal_max_rpos; j &gt; i; j--)
+                    {
+                        if(str[i] == str[j])
+                        {
+                            last_r = i;
+                            last_l = j;
+
+                            pal_max_rpos = j;
+                            pal_max_lpos = i;
+                            pal_length += 2;
+                            i++;
+                        }
+                    }
+                    pal_max_rpos--;
+
+                 }
+
+                if(abs(last_r -last_l ) &gt; 1)
+                   pal_length +=1;
+
+                if(pal_max_length &lt; pal_length)
+                   pal_max_length = pal_length;
+
+                 pal_length = 0;
+               }
+
+               if(pal_max_length  &gt;= size - k)
+                  return true;
+            }            
+    }
+    return false;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/07/13 18:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Dong-hee, Na</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2201"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>적절한 예제가 없어서 이게 맞는지 틀리는지 모르겠네요.
+ 좀 문자열 길이가 길어야 맞는지 알텐데요</p>
+<pre><code class="python">def Palind2 ( a , k ) :
+
+  #print a, k
+  if len(a) &lt;= 1 : return True
+
+  if len(a) &gt; 1 and k &lt; 1 : return False
+
+  if a[0] == a[-1] : return Palind2( a[1:-1] , k ) 
+
+  if ( Palind2( a[1:len(a)], k-1) ) : return True
+  else : return Palind2( a[0:-1], k-1 ) 
+
+print Palind2( &quot;abxa&quot;, 1 )
+print Palind2( &quot;abdxa&quot;, 1 )  
+print Palind2( &quot;ababdsfsdafadfasfasdfasdfasfsadfasfsafsdfasagfgagasgasdgasgdsfsdxa&quot;, 30 )
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/08/03 14:43</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Kim JungRae</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3148"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from itertools import *
+import re
+
+if __name__ == '__main__':
+    a = input('입력: ').split();sample = a[0]
+    b=int(a[1]);a=sorted(a[0])
+    tmp = []
+    for x in a:
+        if a.count(x)%2 == 0 and a.count(x) != 0:
+            for i in range(int(a.count(x)/2)):
+                a.pop(a.index(x))
+                tmp.append(a.pop(a.index(x)))
+    if len(tmp)*2+1&lt;len(sample)-b:
+        print(False)
+        exit()
+    d = permutations(range(len(tmp)))
+    e = []
+    for x in d:
+        e.append(list(reversed(list(tmp[y] for y in x)))+list(tmp[y] for y in x))
+    for x in e:
+        if e.count(x)&gt;1:
+            for x in range(e.count(x)-1):e.remove(e.index(x))
+    for x in e:
+        for y in a:
+            z = x[:]
+            L = int(len(z)/2)
+            z[L-1:L] = [z[L-1],y]
+            r = re.search('.*'+'.*'.join(z)+'.*',sample)
+            try:
+                r.group()
+                print (True)
+                exit()
+            except:continue
+    print (False)
+</code></pre>
+
+<p>순열을 최대한 안쓰려다 쓰게돼서 어정쩡한 코드가 나왔네요... 파이썬 3.5.1</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/03/14 23:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Flair Sizz</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3289"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<pre><code class="ruby">chk = -&gt;s,k { s[0]==s[-1]? pal[s[1..-2],k] : pal[s[1..-1],k-1] || pal[s[0..-2],k-1]}
+pal = -&gt;s,k { k &lt; 0? &quot;NO&quot; : s.size &lt; 2? &quot;YES&quot; : chk[s,k] }
+</code></pre>
+
+<p>or</p>
+<pre><code class="ruby">pal = -&gt;s,k { k&lt;0? &quot;NO&quot; : s[1]? s[0]==s[-1]? pal[s[1..-2],k] : 
+                                pal[s[1..-1],k-1] || pal[s[0..-2],k-1] : &quot;YES&quot; }
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby">expect(pal[&quot;ab&quot;,1]).to eq &quot;YES&quot;
+expect(pal[&quot;abc&quot;,1]).to eq &quot;NO&quot;
+expect(pal[&quot;abxa&quot;,1]).to eq &quot;YES&quot;
+expect(pal[&quot;abdxa&quot;,1]).to eq &quot;NO&quot;
+expect(pal[&quot;asfsdfasdfsdfsadfasfadfasdfadfadfadfdf&quot;,15]).to eq &quot;NO&quot;
+expect(pal[&quot;asfsdfasdfsdfsadfasfadfasdfadfadfadfdf&quot;,30]).to eq &quot;YES&quot;
+</code></pre>
+
+<p><strong>Performance</strong></p>
+<pre><code class="ruby">require 'benchmark'
+
+3.times do |_|
+  make_long_str = -&gt;n { (1..n).map { ('a'..'z').to_a[rand(26)] }.join }
+  long_str1 = make_long_str[10**4]
+  long_str2 = make_long_str[10**7]
+  Benchmark.bm(16) do |x|
+    x.report(&quot;[1st case] 10**4 : &quot;) { print pal[long_str1, 30] }
+    x.report(&quot;[2nd case] 10**7 : &quot;) { print pal[long_str2, 30] }
+  end
+end
+
+#=&gt; output
+                       user     system      total        real
+[1st case] 10**4 : NO  0.000000   0.000000   0.000000 (  0.000116)
+[2nd case] 10**7 : NO  0.094000   0.000000   0.094000 (  0.105701)
+                       user     system      total        real
+[1st case] 10**4 : NO  0.000000   0.000000   0.000000 (  0.000078)
+[2nd case] 10**7 : NO  0.000000   0.000000   0.000000 (  0.000074)
+                       user     system      total        real
+[1st case] 10**4 : NO  0.000000   0.000000   0.000000 (  0.000072)
+[2nd case] 10**7 : NO  0.000000   0.000000   0.000000 (  0.000064)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/03/26 16:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3773"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">        public bool IsParlindrome(string input)
+        {
+            var min = 0;
+            var max = input.Length - 1;
+            while (true)
+            {
+                if (min &gt; max) return true;
+                var first = input[min].ToString();
+                var last = input[max].ToString();
+                if (first.ToLower() != last.ToLower()) return false;
+                min++;
+                max--;
+            }
+        }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/05/27 09:32</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Straß Böhm Jäger</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3869"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p> 일단 바로 떠오르는 방법은 s와 s를 뒤집은 문자열의 최장 공통 부분열의 길이를 찾고 (s의 길이 - 최장공통부분열의 길이) <= k를 만족하는 판별하는 것인데 이 방법은 시간복잡도 O(n^2) 이므로 시간이 꽤나 걸릴듯 합니다. 시간복잡도를 줄일 수 있는 방법을 생각해봐야겠어요. </p>
+
+<pre><code class="cpp">#include &lt;iostream&gt; 
+#include &lt;cstdio&gt; 
+#include &lt;cstdlib&gt; 
+#include &lt;algorithm&gt; 
+#include &lt;string&gt; 
+using namespace std;  
+
+#define MAXN 20001
+
+int LCS[MAXN][MAXN]; 
+
+int main(){
+    string s;  
+    int k; 
+    cin &gt;&gt; s &gt;&gt; k;  
+    string t = s; 
+    reverse(t.begin(),t.end());     
+    // 이제 s와 t의 lcs의 길이를 찾는다.  
+    for (int i = 0; i &lt;= s.size(); i++){
+        for (int j = 0; j &lt;= t.size(); j++){
+            if (i == 0 || j == 0) LCS[i][j] = 0; 
+            else if (s[i-1] == t[j-1]) LCS[i][j] = LCS[i-1][j-1]+1; 
+            else if (s[i-1] != t[j-1]) LCS[i][j] = max(LCS[i-1][j],LCS[i][j-1]); 
+        }
+    }
+    int slen = s.size(), tlen = t.size();  
+    cout &lt;&lt; (slen-LCS[slen][tlen] &lt;= k ? &quot;YES&quot; : &quot;NO&quot;) &lt;&lt; endl; 
+    return 0; 
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/06/04 20:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">iljimae</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4124"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Delphi 2010 재귀함수 사용</p>
+<pre><code class="delphi">var
+  DelCnt: Integer = 0;
+  C_palindrome: boolean = False;
+
+function palindrome(s: string; cnt: Integer): boolean;
+  function ispalindrome(str: string): boolean;
+  var
+    P, P2: PChar;
+    i: Integer;
+  begin
+    P := PChar(s);
+    P2 := P + Length(str)-1;
+    result := true;
+    for i := 1 to Length(str) div 2 do
+    begin
+      if P^ &lt;&gt; P2^ then
+        exit(False);
+      Inc(P);
+      dec(P2);
+    end;
+  end;
+
+var
+  i, Cnt2: Integer;
+  s2: string;
+begin
+  if C_palindrome then
+    exit(true);
+
+  if (cnt &gt; DelCnt) then
+    exit(False);
+
+  if ispalindrome(s) then
+  begin
+    C_palindrome := true;
+    exit(true);
+  end;
+
+  if cnt &lt; DelCnt then
+  begin
+    Cnt2 := cnt + 1;
+    for i := 1 to Length(s) do
+    begin
+      s2 := s;
+      System.Delete(s2, i, 1);
+      if palindrome(s2, Cnt2) then
+        exit
+    end;
+  end;
+end;
+
+function fnpalindrome(s: string; k: Integer): boolean;
+begin
+  C_palindrome := False;
+  DelCnt := k;
+  palindrome(s, 0);
+  result := C_palindrome;
+end;
+
+procedure TForm4.btnkpalindromeClick(Sender: TObject);
+  function BoolYesNo(b: boolean): string;
+  begin
+    if b then
+      result := 'Yes'
+    else
+      result := 'No'
+  end;
+
+begin
+  Memo1.Lines.Add('abxa 1' + ' =&gt; Output ' + BoolYesNo(fnpalindrome('abxa', 1)));
+  Memo1.Lines.Add('abdxa 2' + ' =&gt; Output ' + BoolYesNo(fnpalindrome('abdxa', 2)));
+  Memo1.Lines.Add('agbkcdxa 1' + ' =&gt; Output ' + BoolYesNo(fnpalindrome('agbkcdxa', 5)));
+  Memo1.Lines.Add('agbakcdxa 1' + ' =&gt; Output ' + BoolYesNo(fnpalindrome('agbakcdxa', 5)));
+end;
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/07/10 20:16</p>
+                                <p class="static-profile" style="margin:0;padding:0;">강 경수</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4315"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>KPalindromeCache 없이 돌리면 최악의 경우 시간복잡도가 O(2^N), N = k 이지만,
+중간 결과를 저장하여 (dynamic programming) 연산량을 줄였습니다.</p>
+<pre><code class="cpp">class KPalindromeChecker {
+public:
+    KPalindromeChecker(const std::string&amp; str, int k)
+    : str_(str), k_(k), is_k_palindrome_(false) {
+        if (!breif_check_can_be_palindrome(k)) {
+            is_k_palindrome_ = false;
+            return;
+        }
+
+        if (str_.size() &gt; 20000) {
+            is_k_palindrome_ = false;
+            return;
+        }
+
+        if (k &gt; 30) {
+            is_k_palindrome_ = false;
+            return;
+        }
+
+        is_k_palindrome_ = is_k_palindrome(k, 0, (int)str_.size() - 1);
+    }
+
+    bool is_k_palindrome() const {
+        return is_k_palindrome_;
+    }
+
+private:
+    class KPalindromeCache {
+    public:
+        enum ResultType {
+            NO_DATA,
+            IS_PALINDROME,
+            NOT_PALINDROME
+        };
+
+        ResultType Cache(int s, int e) const {
+            auto it = cache_.find(std::make_pair(s, e));
+            if (it != cache_.end()) {
+                if (it-&gt;second)
+                    return IS_PALINDROME;
+                else
+                    return NOT_PALINDROME;
+            }
+
+            return NO_DATA;
+        }
+
+        void SetCache(int s, int e, bool is_palindrome) {
+            cache_.insert(std::make_pair(std::make_pair(s, e), is_palindrome));
+        }
+
+    private:
+        using IsPalindromeMap = std::map&lt;std::pair&lt;int, int&gt;, bool&gt;;
+        IsPalindromeMap cache_;
+    };
+
+    // s: 시작 인덱스
+    // e: 마지막 인덱스 (null terminating 빼고)
+    bool is_k_palindrome(int k, int s, int e) {
+        // DFS 방식이지만, queue 를 이용하여 BFS 방식으로 변경해 볼 수 있을 듯.
+        // 그런데 BFS 방식이 더 효율적인걸까??
+
+        if (k &lt; 0)
+            return false;
+
+        if (s &gt;= e)
+            return false;
+
+        switch (cache_.Cache(s, e)) {
+            case KPalindromeCache::IS_PALINDROME:
+                return true;
+            case KPalindromeCache::NOT_PALINDROME:
+                return false;
+            case KPalindromeCache::NO_DATA:
+                break;
+        }
+
+        const char* const c_str = str_.c_str();
+        while (c_str[s] == c_str[e]) {
+            ++s;
+            --e;
+            if (s &gt;= e) {
+                cache_.SetCache(s, e, true);
+                return true;
+            }
+        }
+
+        if(is_k_palindrome(k - 1, s + 1, e)) {
+            cache_.SetCache(s, e, true);
+            return true;
+        }
+
+        auto result = is_k_palindrome(k - 1, s, e - 1);
+        cache_.SetCache(s, e, result);
+        return result;
+    }
+
+    // 미리 한 번 글자 수로 조건 체크.
+    bool breif_check_can_be_palindrome(int k) const {
+        std::array&lt;int, 256&gt; counts{0,};
+
+        const char* const c_str = str_.c_str();
+        for (int i = 0; i &lt; str_.size(); ++i) {
+            ++counts[c_str[i]];
+        }
+
+        int count_odd = 0;
+        for (int i = 0; i &lt; 256; ++i) {
+            if (counts[i] &amp; 0x01)
+                ++count_odd;
+        }
+
+        if (count_odd &gt; k) {
+            return false;
+        }
+
+        return true;
+    }
+
+    const std::string&amp; str_;
+    const int k_{0};
+    bool is_k_palindrome_{false};
+    KPalindromeCache cache_;
+};
+
+static inline void run_k_palindrome_check(const std::string&amp; str, int k) {
+    std::cout &lt;&lt; str.c_str() &lt;&lt; &quot;, &quot; &lt;&lt; k &lt;&lt; &quot;: &quot;;
+
+    KPalindromeChecker checker(str, k);
+    if (checker.is_k_palindrome())
+        std::cout &lt;&lt; &quot;true\n&quot;;
+    else
+        std::cout &lt;&lt; &quot;false\n&quot;;
+}
+
+int main() {
+    run_k_palindrome_check(&quot;abxa&quot;, 1);
+    run_k_palindrome_check(&quot;0123456789012345678 abaabaabaabaabaabaabaabaabaabaabaabaabaabaabaaba 0123456789012345678&quot;, 30);
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/08/04 20:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">acoross</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4316"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <h1 id="include">include<stdio.h></h1>
+<h1 id="include_1">include<string.h></h1>
+<p>int main(void){</p>
+<pre><code>char s[2000], q[2000];
+int i, k;
+int t = 0;
+int num;
+printf("입력하세요: ");
+gets(s);
+k = strlen(s);
+printf("숫자를 입력하세요: ");
+scanf("%d", &amp;num);
+for (i = k - 1; i &gt;= 0; i--){
+    q[i] = s[k - 1 - i];
+}
+for (i = 0; i &lt; k; i++){
+    if (s[i] != q[i])
+    {
+        s[i] = 0;
+        q[i] = 0;
+        t++;
+        i = 0;
+    }
+    if (s[i] == 0)
+        i++;
+    if (q[i] == 0)
+        i++;
+
+}
+if (t &lt;= num) printf("yes\n");
+else printf("no\n");
+return 0;
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/08/04 23:33</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Soohyun-Yum</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4941"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>import java.util.Scanner;
+import java.util.StringTokenizer;
+
+public class palindrome {
+    public static void main(String args[]) {
+        Scanner scan = new Scanner(System.in); 
+        String input = null;
+        int k = 0;
+
+        System.out.print(&quot;Input - &quot;);
+
+        input = scan.nextLine();
+        StringTokenizer s = new StringTokenizer(input,&quot; &quot;);
+        String token = s.nextToken();
+        char[] c = token.toCharArray();
+        token = s.nextToken();
+        k = Integer.parseInt(token);
+
+        if(true==kpalindrome(c, k))
+            System.out.print(&quot;Output - YES&quot;);
+        else
+            System.out.print(&quot;Output - NO&quot;);
+
+    }   
+    public static boolean kpalindrome(char[] c, int k) { 
+        int size = c.length;
+        int count = 0;
+        int j = size;
+        for(int i = 0; i &lt; size/2; i++) {
+            j--;
+            while(c[i]!=c[j]) {
+                j--;
+                k--;
+            }
+            if(c[i] == c[j]) {
+                count++;
+                if(count == size/2 &amp;&amp; k &gt;= 0)
+                    return true;
+            }
+        }
+
+        return false;
+    }
+}
+
+</code></pre>
+
+<p><img alt="결과" src="http://postfiles4.naver.net/20161012_227/wooyeonb_1476262984709NTkwo_PNG/11.png?type=w580" /></p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/12 18:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">코딩초보</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4983"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3.5</p>
+<pre><code class="python">pal = lambda n: str(n)[::-1] == str(n)
+
+def combi(iterable, r):
+    '기존 itertools.combinations을 문자열로 리턴하도록 수정'
+
+    pool = tuple(iterable)
+    n = len(pool)
+    if r &gt; n:
+        return
+    indices = list(range(r))
+    yield ''.join(str(pool[i]) for i in indices)
+    while True:
+        for i in reversed(range(r)):
+            if indices[i] != i + n - r:
+                break
+        else:
+            return
+        indices[i] += 1
+        for j in range(i+1, r):
+            indices[j] = indices[j-1] + 1
+        yield ''.join(str(pool[i]) for i in indices)
+
+def f(s, n):
+
+    for s in combi(s, len(s)-n):
+        if pal(s):
+            return True
+
+    return False
+
+
+a = 'abxa', 1
+b = 'abdxa', 1
+c = 'abdxa', 2
+d = 'abdxa', 3
+e = 'asfsdfasdfsdfsadfasfadfasdfadfadfadfdf', 30
+g = 'asfsdfasdfsdfsadfasfadfasdfadfadfadfdf', 15
+
+print(f(*a), f(*b), f(*c), f(*d), f(*e))
+# (True, False, True, True, True)
+
+# f(*g) 같은 경우 너무 많은 시간이 걸린다.
+# 모든 경우의 수를 찾기 때문에 느리다.
+# 실패라고 봐야 함.
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/17 16:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">디디</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5284"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">static void Palindrome(string str, int removeCnt)
+        {
+            Console.WriteLine(&quot;Input :&quot; + str +&quot; &quot;+ removeCnt);
+
+            if (ReversEqules(str))
+            {
+                Console.WriteLine(&quot;Output : Yes&quot;);
+            }
+            else
+            {
+                if (Sample1Function(str, removeCnt))
+                {
+                    Console.WriteLine(&quot;Output : Yes&quot;);
+                }
+                else
+                {
+                    Console.WriteLine(&quot;Output : No&quot;);
+                }
+            }
+
+            Console.ReadLine();
+        }
+
+        //처음 시작되는 문자가 뒤에 있는가?
+        static bool Sample1Function(string str, int removeCnt)
+        {
+            for (int j = 0; j &lt; str.Length; j++)
+            {
+                //삭제 가능 개수안에 반복되는 문자가 발견되지 않았으면 실패
+                if (j &gt; removeCnt)
+                {
+                    return false;
+                }
+
+                //비교할 문자
+                char ch_2 = str[j];
+
+                for (int i = str.Length - 1; i &gt; j; i--)
+                {
+                    //마지막 문자
+                    char ch_1 = str[i];
+                    if (ch_1 == ch_2)
+                    {
+                        //현재 삭제된 개수
+                        int curRemveCnt = j + (str.Length - (i + 1));
+
+                        //반복되는 문자가 삭제 가능한 문자 이후에 발견 되면 실패
+                        if (curRemveCnt &gt; removeCnt)
+                        {
+                            return false;
+                        }
+                        else
+                        {
+                            string str_reulst = str.Substring(j, i - j + 1);
+                            //삭제 가능한 개 수를 가지고 Palindrome이 되는지 체크
+                            if (RemoveStr(str_reulst, removeCnt - curRemveCnt))
+                            {
+                                return true;
+                            }
+                        }
+
+                        break;
+                    }
+                    else
+                    {
+                        //반복되는 문자가 삭제가능한 개수 이후에 발견되지 않으면 실패
+                        if (str.Length - i &gt; removeCnt)
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            return false;
+        }
+
+
+        //문자를 삭제 하면서  Palindrome 체크
+        static bool RemoveStr(string str, int cnt)
+        {
+            try
+            {
+                bool isResult = false;
+                string result = &quot;&quot;;
+
+                for (int i = 0; i &lt; str.Length; i++)
+                {
+                    result = str.Remove(i, 1);
+                    if (ReversEqules(result))
+                    {
+                        isResult = true;
+                        break;
+                    }
+                    else
+                    {
+                        if (cnt &gt;= 2)
+                        {
+                            if (RemoveStr(result, cnt - 1))
+                            {
+                                isResult = true;
+                                break;
+                            }
+                        }
+                    }
+
+                }
+
+                return isResult;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        // Palindrome 체크
+        static bool ReversEqules(string str)
+        {
+            bool result = false;
+
+            char[] ch_str = str.ToCharArray();
+            char[] reverse_str = str.Reverse().ToArray();
+            string ch_str1 = new string(ch_str);
+            string reverse_str1 = new string(reverse_str);
+
+            if (ch_str1.Equals(reverse_str1))
+            {
+                result = true;
+            }
+
+            return result;
+        }
+</code></pre>
+
+<p>
+
+</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/11/16 17:53</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Lee kail</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7575"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">
+def check_palindrome(string,num):
+    front_string=list(string)
+    back_string=front_string[:]
+    back_string.reverse()
+    not_same=0
+    #길이가 짝수일떄 
+    if len(front_string)%2==0:
+        for i in range(len(front_string)):
+            if back_string[i] != front_string[i] :
+                not_same+=1
+        not_same-=1
+    else:
+         for i in range(len(front_string)):
+            if back_string[i] != front_string[i] :
+                not_same+=1
+
+    if not_same&lt;=num:
+        print(&quot;true&quot;)
+    else:
+        print(&quot;false&quot;)
+
+string=&quot;abdxa&quot;
+check_palindrome(string,1)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/19 13:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">나후승</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7593"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>javascript</strong></p>
+<pre><code class="javascript">var compare = function(pal, k) {
+    if (pal.length &lt;= 1) return true;
+
+    if (pal[0] === pal.slice(-1)) {
+        return compare(pal.slice(1, -1), k);
+    } else {
+        return k &gt;= 1 &amp;&amp; (compare(pal.slice(1), k - 1) || compare(pal.slice(0, -1), k - 1));
+    }
+};
+
+console.log(compare(&quot;abxa&quot;, 1) ? &quot;YES&quot; : &quot;NO&quot;); // YES - aba : x
+console.log(compare(&quot;abdxa&quot;, 1) ? &quot;YES&quot; : &quot;NO&quot;); // NO
+console.log(compare(&quot;abcydedzcbxa&quot;, 3) ? &quot;YES&quot; : &quot;NO&quot;); // YES - abcdedcba : y z x
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/20 12:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">funnystyle</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8083"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python3</p>
+<pre><code class="python">def k_palindrome(s, k):
+    if k &lt; 0:
+        return 'NO'
+
+    p = 0
+    q = len(s) - 1
+    while p &lt; q:
+        if s[p] != s[q]:
+            return k_palindrome(s[p:q], k-1) or k_palindrome(s[p+1:q+1], k-1)
+        p += 1
+        q -= 1
+
+    return 'YES'
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/07/30 23:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8323"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>[Python 3.6]</p>
+<pre><code class="python">def isKPalindrome(inputStr, kNum):
+    minDropCnt = len(inputStr)
+
+    def findKPalindrome(inputList, dropCnt):
+        nonlocal minDropCnt, kNum
+        if dropCnt &gt; kNum: return
+        if len(inputList) &lt;= 1:
+            if dropCnt &lt; minDropCnt: minDropCnt = dropCnt
+            return
+
+        dropACnt = dropBCnt = dropCnt
+        selStr = inputList.pop(0)
+        dropACnt += 1
+        findKPalindrome(inputList[:], dropACnt)
+        if selStr in inputList:
+            while selStr != inputList.pop(-1):
+                dropBCnt += 1
+            findKPalindrome(inputList[:], dropBCnt)
+
+    findKPalindrome(list(inputStr), 0)
+    return &quot;YES&quot; if minDropCnt &lt;= kNum else &quot;NO&quot;
+
+print(isKPalindrome(&quot;abxa&quot;, 1))
+print(isKPalindrome(&quot;abdxa&quot;, 1))
+print(isKPalindrome(&quot;aabcxcb&quot;, 2))
+print(isKPalindrome(&quot;aabcxcbdd&quot;, 4))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/11 21:16</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Eliya</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11255"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.Scanner;
+
+public class Kpalindrome {
+
+    public static boolean execute(String input, int k, int left, int right){
+
+        if(k &lt; 0){
+            return false;
+        }
+
+        if( left &gt;= right){
+            return true;
+        }
+
+        boolean result = false;
+
+        if(input.charAt(left) == input.charAt(right)){
+            result = execute(input, k, left+1, right-1);
+        }else{
+
+            result = execute(input, k-1, left+1, right) || execute(input, k-1, left , right-1);
+        }
+
+        return result;
+
+    }
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        Scanner sc = new Scanner(System.in);
+
+        String input = sc.next();
+        int k = sc.nextInt();
+
+        System.out.println(execute(input, k, 0 , input.length()-1) ? &quot;YES&quot; : &quot;NO&quot;);
+    }
+
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/03/20 23:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김태훈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11583"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3</p>
+<pre><code class="python">def kpalin(string, n):
+    if n == 0:
+        if string == string[::-1]: return 'YES'
+        else: return 'NO'
+    else:
+        for e, i in enumerate(string):
+            if e == 0:
+                if kpalin(string[1:], n-1) == 'YES':
+                    return 'YES'
+            else:
+                if kpalin(string[:e] + string[e+1:], n-1) == 'YES':
+                    return 'YES'
+        return 'NO'
+enter = input().split()
+a, b = enter
+print(kpalin(a, int(b)))
+</code></pre>
+
+<p>문자열 길이 늘어나면 대책없이 느려지네요</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/04/08 00:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">myyh2357</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11584"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">    class Program
+    {
+        static void Main()
+        {
+            Console.WriteLine(&quot;입력 예시 : abxa 1&quot;);
+            string[] array = Console.ReadLine().Split(' ');
+            Console.WriteLine(&quot;{0} = {1}&quot;, array[0], IsPalindrome(array[0], int.Parse(array[1])));
+        }
+
+        public static bool IsPalindrome(string value, int nRemove)
+        {
+            int min = 0;
+            int max = value.Length - 1;
+            while (true)
+            {
+                if (min &gt; max)
+                {
+                    return true;
+                }
+                char a = value[min];
+                char b = value[max];
+                if (char.ToLower(a) != char.ToLower(b))
+                {
+                    b = value[max - nRemove];
+                    if (char.ToLower(a) != char.ToLower(b))
+                        return false;
+                }
+                min++;
+                max--;
+            }
+        }
+    }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/04/08 00:14</p>
+                                <p class="static-profile" style="margin:0;padding:0;">정태식</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13313"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>
+public class kpalindrome {
+    public static void main(String[] args) {
+        String input = &quot;abxa&quot;;
+        int k = 1;
+        System.out.println(palindrom(input, k));
+    }
+
+    private static boolean palindrom(String input, int k) {
+        return input.length() &gt; 1 ? k &lt; 0 ? false
+                : input.substring(0, 1).equals(input.substring(input.length() - 1, input.length()))
+                        ? palindrom(input.substring(1, input.length() - 1), k)
+                        : palindrom(input.substring(1, input.length()), k - 1) ? true
+                                : palindrom(input.substring(0, input.length() - 1), k - 1)
+                : true;
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/03 17:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김지훈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13608"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def k_palindrome(s,k):
+    stack = [[s,k,1]]
+
+    while 1:
+        if stack == []: return False
+        s,k = stack[-1][0],stack[-1][1]
+        if s == s[::-1]: return True
+        if s[0] == s[-1]:
+            s, k = s[1:-1], k
+            stack[-1][0] = s
+            continue
+        else:
+            if stack[-1][2] == 1:
+                stack[-1][2] = -1
+                s,k = stack[-1][0][1:],stack[-1][1]-1
+                stack.append([s,k,1])
+            elif stack[-1][2] == -1:
+                stack[-1][2] = 0
+                s,k = stack[-1][0][:-1],stack[-1][1]-1
+                stack.append([s,k,1])
+            else: del stack[-1]; continue
+
+        if k == 0 and s == s[::-1]: return True
+        elif k == 0: del stack[-1]
+
+print(k_palindrome('abxcxdefxgfedcbax', 3))
+print(k_palindrome('abxcxdefxgfedcbax', 4))
+</code></pre>
+
+<p>처음에는 재귀로 만들었다가 2만자 k=30 테스트하니 recursion 에러가....반복문으로 다시 짰습니다</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/16 21:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14855"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from sys import exit
+
+
+co = 0
+n = int(input())
+def p(s):
+    global co,n
+    co += 1
+    s = list(s)
+    for x in range(len(s)):
+        c = s.copy()
+        del c[x]
+        if c == list(reversed(c)):
+            print('YES')
+            exit()
+    if co &lt;= n:
+        for x in range(len(s)):
+            c = s.copy()
+            del c[x]
+            p(c)
+    else:
+        print('NO')
+        exit()
+</code></pre>
+
+<p>아직은 난잡하네요 나중에 고치겠습니다</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/10/08 19:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김영성</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15221"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="r">x &lt;- readline()
+n &lt;- readline()
+pld &lt;- str_split(x, '')[[1]]
+check_cd &lt;- 0
+
+for (i in 1:n){
+  remove_set &lt;- combn(length(pld), i)
+
+  for (j in 1:ncol(remove_set)){
+    temp_pld &lt;- pld[-remove_set[, j]]
+    if (check_cd == 0){
+      if (all(temp_pld[1:length(temp_pld)] == temp_pld[length(temp_pld):1])){
+        print('yes')
+        check_cd &lt;- 1
+      } else {}
+    } else {
+      break()
+    }
+  }
+  if (i == n &amp; check_cd == 0){
+    print('no')
+  }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/11/14 14:32</p>
+                                <p class="static-profile" style="margin:0;padding:0;">physche</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17556"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Edit-Distance 알고리즘이 많이 도움이 되었습니다.</p>
+<pre><code class="python">def palindrome(string,l):
+    if l == 1:
+        return 0
+    elif l == 2:
+        if string[0]==string[1]:
+            return 0
+        else:
+            return 1
+
+    if string[0]==string[-1]:
+        return palindrome(string[1:-1],l-2)
+    else:
+        return 1+min(palindrome(string[1:],l-1),palindrome(string[0:-1],l-1))
+
+
+def palindrome_check(string,num):
+    if palindrome(string,len(string)) &lt;= num:
+        return True
+    return False
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/04/18 19:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Wonjin Park</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17728"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def search(s, k, depth=0):
+    if depth &gt; k:
+        return
+    if len(s) == 1:
+        print('YES')
+        raise NotImplementedError
+        return
+    if s == s[::-1]:
+        print(depth)
+        return
+    if s[0] == s[-1]:
+        search(s[1:-1], k, depth)
+    else:
+        search(s[:-1], k, depth+1)
+        search(s[1:], k, depth+1)
+
+
+def is_k_pldrm(s, k):
+    try:
+        search(s, k)
+        print('No')
+    except NotImplementedError:
+        pass
+
+
+s, k = input().split()
+k = int(k)
+
+is_k_pldrm(s, k)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/03 23:17</p>
+                                <p class="static-profile" style="margin:0;padding:0;">messi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25141"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">a = input(&quot;입력 : &quot;) 
+a = list(a)
+b = int(input(&quot;제외할 숫자 입력 : &quot;))
+c = list(combinations(a,len(a)-b))
+count=0
+t = 0 
+for i in c:
+    count=0
+    for j in range(len(i)//2):
+        if i[j]!=i[-j-1]:
+            pass
+        else:
+            count+=1
+    if count==(len(i)//2):
+        print(&quot;Yes&quot;)
+        t+=1
+        break
+if t&lt;1:
+    print(&quot;No&quot;)
+</code></pre>
+
+<p>k범위가 안되네요.. 좀 더 고쳐볼게요</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/04/09 21:13</p>
+                                <p class="static-profile" style="margin:0;padding:0;">fox.j</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29850"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">numOfDel = 0
+
+def k_palin(cnt, k, w):
+    global numOfDel
+    if len(w)&lt;=1:
+        if (k-cnt)%2==0:
+            numOfDel = 1
+        return
+    if cnt&gt;k or numOfDel==1:
+        return
+    if w[0]==w[-1]:
+        k_palin(cnt, k, w[1:-1])
+    else:
+        k_palin(cnt+1, k, w[1:])
+        k_palin(cnt+1, k, w[:-1])
+
+word = input('&gt;&gt;&gt;').split()
+k = int(word[1])
+k_palin(0, k, word[0])
+
+if numOfDel==1:
+    print('YES')
+else:
+    print('No')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2024/01/30 19:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_30169"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>JAVA입니다.</p>
+<pre><code class="java">package question2.k_palindrome;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Combination {
+    //조합 생성
+
+    List&lt;List&lt;Integer&gt;&gt; combinations;
+
+    public Combination() {
+        combinations = new ArrayList&lt;List&lt;Integer&gt;&gt;();
+    }
+
+    void getCombination(int n, int r, List&lt;Integer&gt; combination) {
+        //조합 생성 재귀함수
+        //n, r 입력 시 0부터 n-1까지의 정수 중 r개를 택한 모든 경우를 combinations에 추가
+        int last = (combination.size() == 0) ?
+                -1 : combination.get(combination.size() - 1);
+        for (int i = last + 1; i &lt; n; i++) {
+            List&lt;Integer&gt; newCombination = new ArrayList&lt;Integer&gt;();
+            newCombination.addAll(combination);
+            newCombination.add(i);
+
+            if(newCombination.size() == r) {
+                //재귀 종료
+                combinations.add(newCombination);
+            }
+            else {
+                getCombination(n, r, newCombination);
+            }
+        }
+    }
+    void getCombination(int n, int r) {
+        getCombination(n, r, new ArrayList&lt;Integer&gt;());
+    }
+}
+</code></pre>
+
+<hr />
+<pre><code class="java">package question2.k_palindrome;
+
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+        String s = input.split(&quot; &quot;)[0];
+        int k = Integer.parseInt(input.split(&quot; &quot;)[1]);
+
+        System.out.println((isKPalindrome(s, k)) ? &quot;YES&quot; : &quot;NO&quot;);
+
+        sc.close();
+    }
+
+    static boolean isKPalindrome(String s, int k) {
+        //k-팔린드롬 여부 확인
+        if(k == 0) {
+            StringBuffer sb = new StringBuffer(s);
+            StringBuffer rev = new StringBuffer();
+            rev.append(sb);
+            rev.reverse();
+            //rev: sb를 뒤집은 StringBuffer
+
+            if(sb.toString().equals(rev.toString())) {
+                return true;
+            }
+            return false;
+        }
+
+        for (int i = 1; i &lt;= k; i++) {
+            Combination comb = new Combination();
+            comb.getCombination(s.length(), i);
+            List&lt;List&lt;Integer&gt;&gt; combinations = comb.combinations;
+
+            for (List&lt;Integer&gt; list : combinations) {
+                StringBuffer sb = new StringBuffer();
+                for (int j = 0; j &lt; s.length(); j++) {
+                    if(!list.contains(j)) {
+                        //combinations는 제외할 문자 인덱스의 집합 반환
+                        sb.append(s.toCharArray()[j]);
+                    }
+                }
+
+                StringBuffer rev = new StringBuffer();
+                rev.append(sb);
+                rev.reverse();
+                //rev: sb를 뒤집은 StringBuffer
+
+                if(sb.toString().equals(rev.toString())) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2025/01/23 21:53</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박준우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

@@ -1,0 +1,2698 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="골드바흐의 추측(Goldbach&#39;s conjecture)은 오래전부터 알려진 정수론의 미해결 문제로, 2보다 큰 모든 짝수는 두 개의 소수(Prime number)의 합으로 표시할 수 있다는 것이다. 이때 하나의 소수를 두 번 사용하는 것은 허용...">
+    <title>골드바흐의 추측(Goldbach&#39;s conjecture) - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">골드바흐의 추측(Goldbach&#39;s conjecture)</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">7</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 2</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>골드바흐의 추측(Goldbach's conjecture)은 오래전부터 알려진 정수론의 미해결 문제로, 2보다 큰 모든 짝수는 두 개의 소수(Prime number)의 합으로 표시할 수 있다는 것이다. 이때 하나의 소수를 두 번 사용하는 것은 허용한다.</p>
+<p>2보다 큰 짝수 n을 입력 받으면, n=p1+p2 를 만족하는 소수 p1,p2의 페어를 모두 출력하는 프로그램을 작성하시오.</p>
+<p>입력예1:
+n=26</p>
+<p>출력예1:
+[[3, 23], [7, 19], [13, 13]]</p>
+<p>입력예2:
+n=48</p>
+<p>출력예2
+[[5, 43], [7, 41], [11, 37], [17, 31], [19, 29]]</p>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2019/06/07 00:53</p>
+                    <p class="static-profile" style="margin:0;padding:0;">왕초보</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>50개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_18170"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">2</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3.7</p>
+<pre><code class="python">def get_primes(n: int):
+    primelst = []
+    pool = list(range(2, n + 1))
+    while pool:
+        newprime = pool[0]
+        primelst.append(newprime)
+        pool = [x for x in pool if x % newprime != 0]
+    return primelst
+
+
+def main():
+    n = int(input('n=? '))
+    if n % 2 != 0 or n &lt;= 2: return
+    primes = get_primes(n)
+    rst_set = set((min(prime, n - prime), max(prime, n - prime)) for prime in primes if (n - prime) in primes)
+    print(sorted(rst_set))
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/06/07 12:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18300"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">2</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">num = int(input('Enter an even number larger than 2: ')) # 숫자 입력받기
+
+if num % 2 != 0 or num == 2:
+    print('Enter an even number larger than 2!')         # 2 이상의 짝수가 아니면, 알려주고 종료
+else:
+    primeList = [2]  # 입력 받은 수 미만의 소수 (리스트)
+    for i in range(2, num):   # 입력 받은 수 미만의 소수 구하기  
+        for j in primeList:   
+            if i % j == 0:           # 소수 리스트 내의 수로 나누어지면, 
+                break                # 더 진행할 필요 없으므로 반복문 종료
+            if primeList.index(j)+1 == len(primeList): # 마지막 인덱스 값이면     
+                primeList.append(i)  # 소수 리스트 내의 모든 수로 나누어지지 않았으므로, 소수로 등록함
+
+    # result = []     # 결과 (리스트)
+    # for k in primeList:     # 결과 구하기
+    #     pair = num - k          # pair 값 계산
+    #     if pair in primeList:   # pair 값이 소수 리스트 안에 들어 있으면 결과 리스트에 등록
+    #         result.append([k, pair]) 
+    #     result = [if pair in primList [k, pair]]
+    #     if k &gt; num/2:
+    #         break               # 입력한 수의 절반보다 크면 종료
+    result = [[k,num-k] for k in primeList if num-k in primeList and k &lt; num/2 + 1] #결과 구하기 부분 1줄로 변경
+    print(result)  # 결과 출력
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/06/23 18:36</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hyebin Oh</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18176"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <blockquote>
+<p>에라토스테네스의 체로 대상 범위의 소수리스트를 구하고, 두 개의 소수의 합이 입력값과 동일한 순서를 무시한 조합을 구함</p>
+</blockquote>
+<pre><code>def get_primes(n):
+    primes=[]
+    a = [False,False] + [True]*(n-1)
+
+    for i in range(2,n+1):
+        if a[i]:
+            primes.append(i)
+        for j in range(2*i, n+1, i):
+            a[j] = False
+    return primes
+
+even = int(input(&quot;2보다 큰 짝수를 입력하세요.&quot;))
+if even &lt;= 2 or even % 2 != 0: 
+    print (&quot;2보다 큰 짝수가 아닙니다.&quot;)
+else:
+    primes = get_primes(even)
+    result = []
+    for i in range(0,len(primes)):
+        for j in range(i,len(primes)):
+            if primes[i] + primes[j] == even:
+                result.append([primes[i], primes[j]])
+
+    print(result)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/06/07 16:14</p>
+                                <p class="static-profile" style="margin:0;padding:0;">ppurego</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18180"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>def pri_n: 소수 리스트</p>
+<pre><code class="python">def pri_n(n): # pri_n&lt;n
+    lis = []
+    for p in range(2, n):
+        cnt = 0
+        for i in range(1, p):
+            if p % i == 0: cnt += 1
+        if cnt == 1: lis += [p]
+    return lis
+
+def gb_conjecture(n): # n&gt;2, n%2=0
+    pairs = []
+    for p1 in pri_n(n):
+        for p2 in pri_n(n):
+            if n == p1+p2 and p1 &lt;= p2: pairs += [[p1, p2]]
+    return pairs
+</code></pre>
+
+<p>and p1&lt;=p2 를 넣지 않고 풀고 싶었는데.. 어떻게 해야할지 모르겠네요..</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/06/08 14:03</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이진형</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2545"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">저 같은 경우는 소수리스트에서 n/2보다 작거나 같은 범위에서만 p를 골라서 n-p가 소수리스트안에 있는지 검사하는식으로 반복문을 짰습니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    왕초보,
+                                    2019/06/08 16:43
+                                </span>
+                            </div>
+                        
+                            <a name="comment_2547"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">오.. 감사합니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    이진형,
+                                    2019/06/09 12:18
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18187"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def find_pair(n):
+    list_of_piar = []
+    for i in range(2, n-2):
+        if(is_prime(i) and is_prime(n-i)):
+            list_of_pair.append((i, n-i))
+
+    return list_of_pair
+
+def is_prime(n):
+    if (n &lt;= 0) return False
+    if (n is 1) return False
+    if (n % 2 == 0) return False
+    for i in range(2, sqrt(n)):
+        if (n%i==0) return False
+    return True
+
+if __name__ == &quot;__main__&quot;:
+    n = int(input())
+    if(n&lt;=2) exit()
+    find_pair(n)
+    print(n)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/06/08 22:41</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Sangwoon Park</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18202"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def isprime(n):
+    if n==1:
+        return False
+    for i in range(2,int(n**0.5)+1):
+        if n%i==0:
+            return False
+    return True
+
+while True:
+    user=eval(input(&quot;Input an even number: &quot;))
+    if user%2!=0:
+        print(&quot;The input must be an even number.&quot;)
+        print()
+        continue
+    else:
+        outputlist=[]
+        for i in range(2,user//2+1):
+            if isprime(i) and isprime(user-i):
+                outputlist.append([i,user-i])
+        print(outputlist)
+    print()
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/06/10 10:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">ykleeac</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18265"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.Scanner;
+
+public class GoldBach {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int num;
+        while(true) {
+            System.out.println(&quot;2보다 큰 짝수를 입력하세요&quot;);
+            num = sc.nextInt();
+            if(num&gt;2&amp;&amp;num%2==0){
+                break;
+            }
+        }
+        int j=num-3;
+        for(int i=3; i&lt;=num/2 ; i++){
+            boolean i_check = false, j_check = false;
+            for(int ii = 2; ii&lt;i; ii++) {
+                if (i % ii == 0) {
+                    i_check = true;
+                    break;
+                }
+            }
+            for(int jj = 2; jj&lt;j; jj++) {
+                if (j % jj == 0) {
+                    j_check = true;
+                    break;
+                }
+            }
+            if(!(i_check)&amp;&amp;!(j_check)){
+                System.out.print(&quot;[ &quot;+i+&quot;, &quot;+j+&quot; ]&quot;);
+                j--;
+            }else
+                j--;
+
+        }
+    }
+}
+
+</code></pre>
+
+<p>java</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/06/19 18:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">용 빈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18274"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package Project;
+
+import java.util.Scanner;
+
+public class GoldBach {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println(&quot;2보다 큰 짝수를 입력하시오&quot;);
+        int i, j = 0;
+        int Jsu = 0;
+        int count1 = 0;
+        int count2 = 0;
+
+        while (true) {
+
+            Jsu = sc.nextInt();
+
+            if (Jsu % 2 != 0 || Jsu &lt; 2) {
+                System.out.println(&quot;짝수가 아닙니다 다시입력해 주세요&quot;);
+
+            }
+            else
+                break;
+        }
+
+        for (i = 3; i &lt; Jsu; i++) {
+
+
+            for (j = 3; j &lt; Jsu; j++) {
+                count1 = 0;
+                count2 = 0;
+                if (i + j == Jsu) {
+                    for (int z = 2; z &lt; Jsu; z++) {
+                        if (i % z == 0) {
+                            count1++;
+
+                        }
+                        if (j % z == 0) {
+                            count2++;
+                        }
+
+                    }
+                    if (count1 == 1 &amp;&amp; count2 == 1) {
+                        System.out.println(&quot;[&quot; + i + &quot;,&quot; + j + &quot;]&quot;);
+
+                    }
+
+                }
+                if (i == j)
+                    break;
+
+            }
+        }
+
+    }
+
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/06/20 09:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">wldus</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18282"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.Scanner;
+
+public class Goldbach {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        int input, i, j;
+
+        while(true) {
+            System.out.println(&quot;2보다 큰 짝수 입력 : &quot;);
+            input = sc.nextInt();
+            if(input &gt; 2 &amp;&amp; input % 2 == 0) {
+                break;
+            }
+        }
+
+        System.out.println(&quot;입력 : &quot; + input);
+
+        for(i = 1 ; i &lt;= input/2 ; i++) {
+            for(j = 1 ; j &lt; input ; j++) {
+                if(input == i + j &amp;&amp; i % 2 == 1) {
+                    System.out.print(&quot;[&quot; + i + &quot;, &quot; + j + &quot;]&quot;);
+                }
+            }
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/06/21 11:34</p>
+                                <p class="static-profile" style="margin:0;padding:0;">걸음마 Java</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18317"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.Scanner;
+
+public class MainClass {
+
+    public static void main(String[] args) {
+
+        /*  문제) 골드바흐의 추측은 오래전부터 알려진 정수론의 미해결 문제로,
+         *      2보다 큰 모든 짝수는 두 개의 소수의 합으로 표시할 수 있다는 것이다.
+         *      이때, 하나의 소수를 두 번 사용하는 것은 허용한다.
+         * 
+         *      2보다 큰 짝수 n을 입력 받으면, n = p1 + p2를 만족하는 소수 p1, p2를 모두 출력하시오.
+         */
+
+        @SuppressWarnings(&quot;resource&quot;)
+        Scanner sc = new Scanner(System.in);
+        int input = 0;
+        int p1Value = 0;
+        int p2Value = 0;
+        int p2 = 0;
+        int p1Remainder = 0;
+        int p2Remainder = 0;
+
+        // 숫자 입력 받기
+        System.out.println(&quot;2보다 큰 짝수를 입력하시오.&quot;);
+        input = sc.nextInt();
+
+        // 짝수가 아닐경우
+        while((input % 2) != 0) {           // 짝수가 나올때까지 반복 실행
+            System.out.println(&quot;짝수가 아닙니다. 다시 입력해주십시오.&quot;);
+            input = sc.nextInt();
+        }
+
+        for (int p1 = 2; p1 &lt;= (input / 2); p1++) {
+
+            // p2의 값 구하기
+            p2 = input - p1;
+
+            for (int j = 2; j &lt; p2; j++) {
+                p2Remainder = p2 % j;       // p2의 나머지가 있는지 확인.
+
+                if (p2Remainder == 0) {     // p2Remainder에서 0이 나올 경우
+                    p2Value = 0;            // 소수가 아니므로 p2Value를 0으로하고 빠져나온다.
+                    break;
+                } else {                    // p2Remainder에서 0이 나오지 않을 경우
+                    p2Value = 1;            // 소수이므로 p2Value를 1로 한다.
+                }
+            }
+
+            if(p1 == 2) {                   // p1이 2일 경우
+                if(p2Value == 1) System.out.println(&quot;[&quot; + p1 + &quot;, &quot; + p2 + &quot;]&quot;);
+                // p2Value가 1. 즉, 소수일 경우
+            }
+
+            // p1이 2가 아닐 경우
+            for (int i = 2; i &lt; p1; i++) {
+                p1Remainder = p1 % i;       // p1의 나머지가 있는지 확인.
+
+                if (p1Remainder == 0) {     // p1Remainder에서 0이 나올경우
+                    p1Value = 0;            // 소수가 아니므로 p1Value를 0으로하고 빠져나온다.
+                    break;
+                } else {                    // p1Remainder에서 0이 나오지 않을 경우
+                    p1Value = 1;            // 소수이므로 p1Value를 1로 한다.
+                }
+            }
+            if(p1Value == 1) {              // p1이 소수일 경우
+                if(p2Value == 1) System.out.println(&quot;[&quot; + p1 + &quot;, &quot; + p2 + &quot;]&quot;);
+                // p2Value가 1. 즉, 소수일 경우
+            }
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/06/25 21:02</p>
+                                <p class="static-profile" style="margin:0;padding:0;">55 HyunJaK</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18344"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+#pragma warning (disable:4996)
+
+int isPrime(int number) {    // 에라토스테네스의 체 함수 : 소수를 인자로 받으면 1출력 아니면 0출력
+    int index;
+    for (index = 2; index &lt;= sqrt(number); index++) {
+        if (number % index == 0) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+void main() {
+
+    int integer;
+    int denom;
+
+    do {
+        printf(&quot;n = &quot;);
+        scanf(&quot;%d&quot;, &amp;integer);
+    } while (integer % 2 != 0);  // 짝수를 입력할 때까지 반복
+
+    fputs(&quot;[&quot;,stdout);
+
+    for (denom = 2; denom &lt; integer/2; denom++) {  // 더하는 두 수 모두 소수이면 순서쌍 출력
+        if (isPrime(denom)) {
+            if (isPrime(integer - denom)) {
+                printf(&quot;[%d, %d],&quot;, denom, (integer - denom));
+            }
+        }
+    }
+    puts(&quot;\b]&quot;);
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/06/28 14:56</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Wonsang Kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18490"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n = int(input('n = '))
+assert n % 2 == 0 and n &gt; 2, 'n must be an even number greater than 2'
+
+#에라토스테네스의 체
+primes = set(range(2, n-1))
+for i in range(2, n-1):
+    if i in primes:
+        primes = primes - set(range(i*2, n-1, i))
+
+while primes:
+    p1 = primes.pop()
+    p2 = n - p1
+
+    if p2 in primes:
+        primes.remove(p2)
+        print(p1, p2)
+    elif p1 == p2:
+        print(p1, p2)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/07/08 16:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18499"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">a=int(input(''))
+lst=[]
+dic={}
+lstt=[]
+lsttt=[]
+for i in range(0,a):
+    if i%2 !=0 and i&gt;2:
+        dic[i]=0
+        lst.append(i)
+for i in range(2,a):
+    for e in lst:
+        if e%i==0:
+            dic[e]+=1
+for i,e in dic.items():
+    if e==1:
+        lstt.append(i)
+for i in lstt:
+    for e in lstt:
+        if i+e ==a and i&lt;=e:
+            lsttt+=[[i,e]]
+print(lsttt)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/07/09 09:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">유선종</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18510"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def prime_number(n):
+    N=[]
+    for i in range(2,n+1):
+        cnt = 0
+        for j in range(2,n+1):
+            if i%j==0:
+                cnt+=1
+        if cnt==1:
+            N.append(i)
+    return N
+
+number=int(input('정수입력: '))
+
+primeN=prime_number(number)
+
+for i in range(int(len(primeN)/2)+2):
+    if number-primeN[i] in primeN:
+        print('(%d,%d) '%(primeN[i],number-primeN[i]))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/07/10 16:41</p>
+                                <p class="static-profile" style="margin:0;padding:0;">정환용</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18553"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def solution(n):
+    t = []
+    for i in range(2,n):
+        c = True
+        for j in range(2,i):
+            if i % j == 0:
+                c = False
+                break
+        if c:
+            t.append(i)
+
+    result = []
+    for i in range(len(t)):
+        if n - t[i] in t:
+            result.append([t[i],n-t[i]])
+
+    return result[:len(result)//2]
+
+print(solution(26))
+print(solution(48))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/07/12 10:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">최은미</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18630"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.Scanner;
+
+class primeTool 
+{
+    boolean isPrime(int num) {
+        boolean isprime = true;
+
+        for(int i=2; i&lt;=Math.sqrt(num); i++) {
+            if(num % i == 0) {
+                return false;
+            }           
+        }
+        return true;
+    }
+}
+
+class Tuto1
+{
+    public static void main(String[] args)  {
+
+        int num = 0, numHalf = 0, count = 0;
+
+        primeTool pt = new primeTool();
+
+        Scanner sc = new Scanner(System.in);        
+
+        while (true) {
+            try {
+                num = sc.nextInt(); 
+            }catch(Exception e) {
+                System.out.println(&quot;잘못입력하셨습니다.&quot;);
+                throw e;
+            }
+
+
+            if(num&gt;2 &amp;&amp; num%2==0) break;
+            System.out.println(&quot;2보다 큰 짝수를 입력하세요.&quot;);             
+        }
+
+
+        System.out.println(&quot;입력하신 숫자는 &quot; + num + &quot;입니다.&quot;);
+
+        numHalf = num/2;
+
+        System.out.print(&quot;[&quot;);
+        for (int i=2; i&lt;=numHalf; i++) {            
+
+            if (pt.isPrime(i) &amp;&amp; pt.isPrime(num-i)) {
+                if(count!=0) { 
+                    System.out.print(&quot;,&quot;);
+                }
+                System.out.print(&quot;[&quot; + i + &quot;, &quot; + (num-i) + &quot;]&quot;);
+                count++;
+            }
+        }       
+        System.out.print(&quot;]&quot;);
+    }   
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/07/22 01:13</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김준성</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18651"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def prime_num(n):
+    p_count = 0
+    for i in range(2,int(n)+1):
+        if int(n) % i ==0:
+            p_count +=1
+        else:
+            pass
+    if p_count &gt; 1:
+        return False
+    else:
+        return True
+
+def prime_list(n):
+    s = []
+    for i in range(2, int(n)+1):
+        if prime_num(i) is True:
+            s.append(int(i))
+    return s
+
+def gold_bach(n):
+    g = []
+    for i in prime_list(n):
+        if int(n)-int(i) in prime_list(n):
+            g.append([int(i),int(n)-int(i)])
+            if int(i) &gt; int(n) - int(i):
+                del(g[-1])
+                break
+    return g
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/07/23 16:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">내박자</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18789"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>python</p>
+<pre><code class="python">n = int(input('2보다 큰 임의의 짝수를 입력하세요&gt;'))
+def prime(a):  # 입력한 수가 소수인지 판별하는 함수
+    if a == 1:
+        return False
+    if a == 2:
+        return True
+    if a &gt; 2:
+        div = []
+        for i in range(2, a):
+            if a % i == 0:
+                div.append(i)
+        if len(div) &gt;= 1:
+            return False
+        else:
+            return True
+def goldbach(b): # 입력된 수를 2개의 소수의 합으로 표현하는 함수
+    res = []
+    for i in range(1, b // 2 + 1):
+        p1 = i
+        p2 = b - i
+        ans1 = prime(p1)
+        ans2 = prime(p2)
+        if ans1 == True and ans2 == True:
+            res.append([p1, p2])
+    print(res)
+goldbach(n)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/08/04 19:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">apriori</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18827"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#골드바흐
+
+def sosu(k):
+    for i in range(2,k):
+        if k%i==0:
+            return 0
+    return k
+
+n=int(input('짝수를 입력하시오: '))
+answer=[]
+if n%2==0 and n&gt;2:
+    for i in range(2,int(n/2)):
+        for j in range(2,n):
+            if sosu(i)+sosu(j)==n:
+                answer.append([i,j])
+            else:
+                continue
+    print(answer)
+else:
+    print(&quot;짝수를 입력하세요.&quot;)
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/08/06 12:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이성표</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18878"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n=int(input(&quot;2보다 큰 짝수 입력: &quot;))
+p=[]
+result=[]
+a=[]
+
+for i in range(2,n+1,1):
+    a.clear()
+    for j in range(1,i+1,1):
+        if i%j==0:
+            a.append(j)
+    if len(a)==2:
+        p.append(i)
+for i in p:
+    if n-i in p:
+        temp=[i,n-i]
+        if [min(temp),max(temp)] not in result:
+            result.append([min(temp),max(temp)])
+print(result)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/08/09 00:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박재욱</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18931"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="matlab">function gb(N)
+for ii=primes(N/2)
+    if isprime(N-ii)
+        disp([ii,N-ii])
+    end
+end
+</code></pre>
+
+<p>MATLAB으로 했습니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/08/13 18:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Joshua Zeu Y.</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18944"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3.7</p>
+<pre><code class="python">num = int(input())
+anum = [0, 0] + [1] * (num - 1)
+for i in range(2, int(num**0.5) + 1):
+    if anum[i]:
+        anum[i*i::i] = [0] * ((num - i*(i - 1))//i)
+prime = [i for i, a in enumerate(anum) if a]
+alist = []
+for i in prime:
+    if i*2 &gt; num:
+        break
+    elif num - i in prime:
+        alist.append([i, num - i])
+print(alist)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/08/14 16:25</p>
+                                <p class="static-profile" style="margin:0;padding:0;">AY</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19019"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def check_prime(num): #소수인지 확인하는 함수
+    for i in range(2, num):
+        if(num % i == 0):
+            return 0
+    return 1
+
+answer = []
+n = int(input())
+if n &gt;= 4 and n % 2 == 0 : #두 소수의 합의 최소 = 4
+    for i in range(2, int(n/2) + 1):
+        if check_prime(i) == 1 and check_prime(n - i) == 1 :
+            answer += [[i, n - i]]
+print(answer)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/08/23 02:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">손진우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19183"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="go">package main
+
+import &quot;fmt&quot;
+
+func main() {
+    fmt.Println(goldbachConjecture(26))
+    fmt.Println(goldbachConjecture(48))
+}
+func goldbachConjecture(n uint) [][2]uint {
+    res := make([][2]uint, 0, 4)
+    pn := PrimeNumber{}
+    pn.init(n)
+    for i := uint(2); i &lt;= n/2; i++ {
+        if pn.isPrime(i) &amp;&amp; pn.isPrime(n-i) {
+            res = append(res, [2]uint{i, n - i})
+        }
+    }
+    return res
+}
+
+type PrimeNumber struct {
+    list []bool
+    end  uint
+}
+
+func (o *PrimeNumber) init(n uint) {
+    o.list = make([]bool, n+1)
+    o.list[0] = true
+    o.list[1] = true
+    o.end = n
+    for i := uint(2); i*i &lt;= n; i++ {
+        if !o.list[i] {
+            for j := i + i; j &lt;= n; j += i {
+                o.list[j] = true
+            }
+        }
+    }
+}
+func (o *PrimeNumber) isPrime(n uint) bool {
+    return !o.list[n]
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/09/07 18:00</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19419"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">i = int(input(&quot;input :&quot;))
+i_list = []   #소수 리스트 선언. i보다 작고 2 이상인 소수를 모두 이 리스트에 추가한다.
+for k in range(2, i) : #k를 range(2, i)의 범위에서 반복
+    k_list = [k%kk for kk in range(2, k)] #k는 소수인가?
+    if not 0 in k_list :
+        i_list.append(k)  #2이상 k미만의 수 중에서 나누어 떨어지는 수가 하나도 없다면 소수리스트에 추가한다.
+
+result = []
+for m in i_list :
+    if i-m in i_list : # 합이 i가 되는 수가 있으면 result에 추가한다.
+        result.append([m, i-m])
+        i_list.remove(m)  #중복을 피하기 위해서 result에 추가된 요소는 삭제
+print(result)
+</code></pre>
+
+<p>결과</p>
+<p>input :48
+[[5, 43], [11, 37], [17, 31], [29, 19], [41, 7]]</p>
+<p>input :26
+[[3, 23], [7, 19], [13, 13]]</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/09/25 11:33</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GG</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19550"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">num = int(input('2보다 큰 짝수를 입력해주세요 : '))
+ans = []
+
+def chk(n): #소수구하는 함수
+    for i in range(2,n):
+        if n%i==0: #2부터 n-1까지 나누어지는 수가 있다면
+            break #break
+    if i==(n-1): #위의 break에 걸리지 않았다면 소수
+        return n #n을 리턴
+    else:
+        return False #아니라면 False
+
+for j in range(3, num//2+1): # 3부터 입력받은 수의 절반까지 for문
+    if chk(j): # 만약 j가 소수라면
+        if chk(num-j): # 입력받은 수 - j가 소수라면
+            ans.append([j, num-j]) # 답 집어넣기
+
+print(ans)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/10/06 14:41</p>
+                                <p class="static-profile" style="margin:0;padding:0;">후눈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20313"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">public class 골드바흐의추측 {
+
+    public static void main(String[] args) {
+
+        Scanner scan = new Scanner(System.in);
+        int n = scan.nextInt();
+        ArrayList&lt;Integer&gt; nums = new ArrayList&lt;Integer&gt;(); //p1, p2를 담기위한 리스트
+
+        System.out.print(&quot;[&quot;);
+        for(int i=1; i&lt;=n/2; i++) {
+            ArrayList&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;(); //p1값이 소수라면 담을 리스트
+            for(int j=1; j&lt;=i; j++) {
+                if(i%j==0) {
+                    list.add(j);
+                }
+            }
+            if(list.size()==2) {
+                ArrayList&lt;Integer&gt; list2 = new ArrayList&lt;Integer&gt;(); //p2값이 소수라면 담을 리스트
+                for(int k=1; k&lt;=n-i; k++) {
+                    if((n-i)%k==0) {
+                        list2.add(k);
+                    }
+                }
+                if(list.get(1)+list2.get(1)==n) { //리스트에 있는 p1 + p2 가 입력값이랑 같은지 확인
+                    nums.add(list.get(1)); //맞다면 p1, p2를 처음 리스트에 담는다.
+                    nums.add(list2.get(1));
+                }
+            }
+        }
+        for(int i=0; i&lt;nums.size()-2; i=i+2) {
+            System.out.print(&quot;[&quot; + nums.get(i) + &quot;, &quot; + nums.get(i+1) + &quot;], &quot;);
+        }
+        System.out.println(&quot;[&quot; + nums.get(nums.size()-2) + &quot;, &quot; + nums.get(nums.size()-1) + &quot;]]&quot;);
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/12/23 16:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">big Ko</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20436"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def test_prime(n):
+    if (n==1):
+        return False
+    elif (n==2):
+        return True
+    else:
+        for x in range(2,n):
+            if(n % x==0):
+                return False
+        return True     # 소수테스트기 함수입니다.
+
+
+list1 = [i for i in range(0, 100) if test_prime(i) is True]  #여기선 100까지 범위를 뒀지만, 100부분은 변할수있습니다. 범위에 따라..
+
+list2 = []
+
+for j in list1:
+    for k in list1:
+        if j + k == 66:    #이 부분에 원하는 짝수를 넣으면 됩니다.
+            list2.append(j)
+            list2.append(k)   #list2 에선 만들수 있는 짝수합의 리스트를 중복해서 만들어줍니다(앞뒤를 바꾼)
+
+list3 = []
+
+for l in range(0, len(list2)//2):
+    list3.append(list2[l])  #list2 를 반으로 잘라줍니다.
+
+list4 = [list3[m:m+2] for m in range(0, len(list3),2)]  #리스트 안의 sub리스트를 만들어줍니다. 2개간격으로요.
+
+print(list4)
+
+
+</code></pre>
+
+<p>함수형태가 아니고 손수 입력하는 형태라... 아쉽군요! 좀 더 배우고 완벽하게 만들도록하겠습니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/02 15:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Seong Gyu Kwon</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20626"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">while(True):
+    N = int(input(&quot;n = &quot;))
+    if N != 2 and N%2 == 0:
+        break
+chk = True
+Nlist = list()
+def Main(chk, N):
+    test = list()
+    if N != 1 and N != 2:
+        for i in range(1, N+1):
+            if N % i == 0:
+                chk = False
+                test.append(i)
+        if len(test) == 2 and i != 1:
+            return True
+    if N == 2:
+        return True
+
+for i in range(N):
+    for j in range(N):
+        if i + j == N:
+            if Main(chk, i) == True and Main(chk, j) == True:
+                Nlist.append([i, j])
+for i in range(int(len(Nlist)/2)):
+    for j in range(int(len(Nlist)/2), len(Nlist)):
+        if i != j:
+
+            if Nlist[i][0] == Nlist[j][1] and Nlist[i][1] == Nlist[j][0]:
+                Nlist.pop(j)
+
+print(Nlist)
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/19 14:32</p>
+                                <p class="static-profile" style="margin:0;padding:0;">BlakeLee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20666"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n=int(input(&quot;1보다 큰 양의 정수 n을 입력하십시오: &quot;))
+lst=list(range(2,n+1))
+for num in sorted(lst): #n이하의 소수로만 이루어진 리스트 생성
+    for k in range(2,int(num**(1/2))+1):
+        if num%k==0:
+            lst.remove(num)
+            break
+elst=[] #정답을 담기 위한 리스트 빈 리스트 생성
+for n1 in lst:
+    for n2 in lst:
+        if n1+n2==n and n1&lt;=n/2: #두 소수의 합이 n과 같으면서 페어가 중복되지 않으면 빈 리스트에 추가.
+            elst.append([n1,n2])
+print(elst)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/21 15:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박시원</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20707"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n=int(input(&quot;n = &quot;))
+a=[2]
+for i in range(2,int(n)):
+    b=0
+    for j in a:
+        if i%j==0:
+            b=1
+            break
+    if b==0:
+        a.append(i)
+c=[]
+for i in a:
+    if n-i in a:
+        if n-i&lt;i:
+            break
+        c.append([i,n-i])
+print(c)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/23 17:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">허지원</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_21584"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n=int(input('Input a number...'))
+sosu=[]
+
+for i in range (2,n+1):
+    j=2
+    while (j&lt;=i):
+        if i%j==0:
+            if i==j:
+                sosu.append(j)
+            else:
+                break
+        j+=1
+
+result=[]
+for n1 in range(2,int(n/2)+1):
+    temp=[]
+    if n1 in sosu:
+        n2=n-n1
+        if n2 in sosu:
+            temp.append(n1)
+            temp.append(n2)
+            result.append(temp)
+
+print (result)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/03/30 12:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Buckshot</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2640"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">&lt;결과&gt;
+
+Input a number...100
+[[3, 97], [11, 89], [17, 83], [29, 71], [41, 59], [47, 53]]
+
+Input a number...26
+[[3, 23], [7, 19], [13, 13]]
+
+Input a number...48
+[[5, 43], [7, 41], [11, 37], [17, 31], [19, 29]]
+
+Input a number...1000
+[[3, 997], [17, 983], [23, 977], [29, 971], [47, 953], [53, 947], [59, 941], [71, 929], [89, 911], [113, 887], [137, 863], [173, 827], [179, 821], [191, 809], [227, 773], [239, 761], [257, 743], [281, 719], [317, 683], [347, 
+653], [353, 647], [359, 641], [383, 617], [401, 599], [431, 569], [443, 557], [479, 521], [491, 509]]</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Buckshot,
+                                    2020/03/30 12:48
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22381"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def gold(n):
+    a = [False, False] + [True]*(n-1)
+    for i in range(2, int(n**.5)+1):
+        if a[i]:
+            for j in range(2*i, n+1, i):
+                a[j] = False
+    primes = [i for i in range(2, n) if a[i]]
+    output = [[p, n-p] for p in primes if n-p in primes and p &lt;= (n/2)+1]
+    print(output)
+
+if __name__ == '__main__':
+    n = 26
+    gold(n)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/20 13:16</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hwaseong Nam</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22677"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import random
+def Goldbach(a):
+    sosu = []
+    for i in range(2,a):
+        yaksu = []
+        for k in range(1,i):
+            if i%k == 0:
+                yaksu.append(k)
+                k += 1
+            else:
+                k += 1
+        if len(yaksu) == 1:
+            sosu.append(i)
+            i += 1
+    b,c = random.sample(sosu, 2)
+    while b+c != a:
+        b,c = random.sample(sosu, 2)
+    return b,c
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/07/05 10:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Money_Coding</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23110"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+        System.out.print(&quot;2보다큰 짝수입력&gt;&quot;);
+        int input=Integer.parseInt(br.readLine());
+        if(input&lt;2||input%2!=0) {
+            System.out.println(&quot;다시 입력해주세요&quot;);    
+            System.exit(0);
+        }
+        int sosu[]=new int[100];
+
+        for(int i=0;i&lt;sosu.length;i++) {
+            sosu[i]=i;
+            for(int j=2;j&lt;sosu[i];j++) {
+                if(sosu[i]%j==0) {
+                    sosu[i]=0;              
+                }
+            }
+        }//100까지의 소수모음
+
+        for(int i=0;i&lt;sosu.length;i++) {
+            for(int j=i;j&lt;sosu.length;j++) {
+                if(sosu[i]+sosu[j]==input) {
+
+                    System.out.println(&quot;[&quot;+sosu[i]+&quot;, &quot;+sosu[j]+&quot;]&quot;);
+                }
+
+            }
+            }
+    }
+
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/09/06 19:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">뚜떱 sooyeon_surf</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23744"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">
+import java.math.BigInteger;
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class GoldBach {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        int input = sc.nextInt();
+
+        int m = input;
+        int n = 0;
+
+        while (true) {
+            if(new BigInteger(&quot;&quot;+n).isProbablePrime(1)&amp;&amp;new BigInteger(&quot;&quot;+m).isProbablePrime(1)) {
+                System.out.println(n+&quot;,&quot;+m);
+            }
+            --m;
+            ++n;
+            if(n&gt;m) {break;}
+        }
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/11/23 14:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">권태욱</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23861"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def getPrimeNum(n):
+    pn = []
+    for k in range(1,n+1):
+        x = [i for i in range(1, k + 1) if k % i == 0]
+        if len(x)==2:
+            pn.append(x[1])
+    result = []
+    for i in pn:
+        for k in pn:
+            if i + k == n:
+                result.append((i,k))
+    if len(result) %2 == 1:
+        del result[int(len(result)/2)+1:]
+    else:
+        del result[int(len(result) / 2):]
+    print(result)
+
+
+getPrimeNum(26)
+getPrimeNum(48)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/12/03 15:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김우석</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24873"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def primelst(n):
+    lst = list(range(2, n+1))
+    for i in range(2, n+1):
+        for j in range(2, n+1):
+            try:
+                lst.remove(i*j)
+            except:
+                pass
+    return lst
+
+n = int(input(&quot;&gt; &quot;))
+lst = primelst(n)
+output = []
+for i in range(len(lst)):
+    if lst[i] &lt;= n/2:
+        for j in range(i, len(lst)):
+            if lst[i] + lst[j] == n:
+                output.append([lst[i], lst[j]])
+    else:
+        break
+
+print(output)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/02/25 02:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">asdfa</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25114"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def num(n):
+    a = [2] # n보다 작은 소수들의 리스트
+    for i in range(3,n+1):    # 그 수의 소수를 구하는 과정
+        count=0
+        for j in range(1,n+1):
+            if i%j==0:
+                count+=1
+        if count==2:
+            a.append(i)
+    return a
+
+def gold():
+    b=[]
+    n = int(input(&quot;2보다 큰 짝수를 입력하세요 : &quot;))
+    for i in num(n//2):
+        for j in num(n):
+            if i+j==n:
+                b.append([i,j])
+    print(b)
+
+gold()   
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/04/04 20:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">fox.j</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25572"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">a = int(input('n을 입력 : '))
+so = []
+for i in range(1,a+1):
+    l=[]
+    for j in range(1,i+1):
+        if i%j==0: l.append(i)
+    if len(l)==2:
+        so.append(i)
+
+gold = []
+for i in so:
+    for j in so:
+        if i+j==a and i&lt;=j:
+            gold.append((i,j))
+print(gold)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/06/21 11:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">약사의혼자말</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25573"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n = int(input('2보다 큰 짝수 ? '))
+
+prime_pool = set(range(2,n-1))
+primes = set()
+while len(prime_pool)&gt;0:
+    d = min(prime_pool)
+    prime_pool -= set(range(d,n-1,d))
+    primes.add(d)
+
+print([(a,n-a) for a in primes if ((n-a) in primes) and a&lt;=(n-a)])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/06/21 13:27</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김준우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26488"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n = 48
+def isPrime(a):
+    if(a &lt; 3):
+        return False
+    for i in range(2, a):
+        if(a % i == 0):
+            return False
+    return True
+
+sosu = []
+jung = []
+for i in range(n+1):
+    if(isPrime(i)):
+        sosu.append(i)
+for i in range(len(sosu)):
+    for j in range(i,len(sosu)):
+        if sosu[i]+sosu[j] == n:
+            jung.append([sosu[i],sosu[j]])
+print(jung)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/10/16 15:25</p>
+                                <p class="static-profile" style="margin:0;padding:0;">한고선</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26576"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#codingdojing_goldbach's_conjecture
+
+#1. 소수를 구한다. 
+#2. 덧셈합의 숫자 두개가 모두 소수인지 확인한다.
+#3. 에라토스테니스의 체 활용
+
+def goldbach(n: int):
+
+    # find prime number
+
+    prime_list = [0, 0] + [1]*(n-1) #list size n+1, [0, 0, 1, 1,... Nth index]
+    for i in range(2, int(n**0.5)+1):
+        if prime_list[i]: #i가 소수이면
+            prime_list[i*2::i] = [0]*((n-i)//i) # 그 배수들은 소수x
+
+    prime_num = [i for i, x in enumerate(prime_list) if x == 1] #[(0,0), (1,0), (2,1), ...] 
+
+    #check goldbach's number
+    #n should be even.
+    result = []
+    for i in range(n//2 + 1):
+        if i in prime_num and n-i in prime_num:
+            result.append((i, n-i))
+
+    print(result)
+
+goldbach(26)
+goldbach(48)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/10/24 19:31</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jaeman Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26655"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">G = int(input(&quot;2보다 큰 짝수를 입력: &quot;))
+count = []
+for i in range(2,G+1):
+    cnt = []
+    for  c in range(1,i+1):
+        if i%c == 0:
+            cnt.append(i)
+    if len(cnt) == 2:
+        count.append(i)
+
+goldbach = []
+for s in count:
+    for x in count:
+        if s+x == G and s &lt;= x:
+            goldbach.append((s,x))
+
+print(goldbach)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/11/16 19:31</p>
+                                <p class="static-profile" style="margin:0;padding:0;">서현준</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26929"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def prime_number(data):
+    for i in range(2,data):
+        if data % i == 0:
+            return False
+    else :        
+        return data
+
+
+def Goldbach(data):
+    final = []
+    for i in range(2,int(data/2)+1):
+        result = []        
+        if prime_number(i)  and prime_number(data-i):                                    
+            result.append(i)
+            result.append(data-i)
+            final.append(result)    
+    return final
+
+num = int(input(&quot;짝수를 입력 하세요 :&quot;))
+print(Goldbach(num))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/02 11:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">semipooh</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27062"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">while True:
+    n = int(input(&quot;2보다 큰 짝수를 입력하시오&quot;))
+    if n&gt;2 and n%2==0:
+        break
+
+def prime(a):
+    for k in range(2,a):
+        if a%k ==0 :
+            return False
+            break
+    return True
+
+arr = []
+for k in range(1,int(n/2+1)):
+    if prime(k) and prime(n-k):
+        arr.append([k,n-k])
+
+print(arr)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/22 00:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">양캠부부</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27191"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>// Rust</p>
+<p>fn goldbach() {</p>
+<pre><code>let nums = [26, 48];
+for num in nums {
+    assert!(num &gt;= 4 &amp;&amp; num%2==0);
+    let primes = sieve(num);
+    let mut result = vec![];
+    for p in &amp;primes {
+        if *p &lt;= num-p &amp;&amp; primes.contains(&amp;(num - p)) { 
+            result.push((p, num-p));}
+    }
+    println!("{} {:?}", num, result);
+}
+</code></pre>
+<p>}
+use std::collections::HashSet;
+fn sieve(limit: u128) -&gt; HashSet<u128> {</p>
+<pre><code>let mut set = HashSet::new();
+for i in [2, 3, 5, 7] { set.insert(i);}
+let mut n = 9;
+while n &lt;= limit {
+    n += 2; // n이 소수인가? 끝자리 1
+    if set.iter().all(|p| n % p !=0) { set.insert(n);}
+    n += 2; // n이 소수인가? 끝자리 3
+    if set.iter().all(|p| n % p !=0) { set.insert(n);} 
+    n += 4; // n이 소수인가? 끝자리 7
+    if set.iter().all(|p| n % p !=0) { set.insert(n);} 
+    n += 2; // n이 소수인가? 끝자리 9
+    if set.iter().all(|p| n % p !=0) { set.insert(n);} 
+}
+set.retain(|&amp;k| k &lt;= limit);
+set
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/30 15:16</p>
+                                <p class="static-profile" style="margin:0;padding:0;">JW KIM</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27424"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n = 48
+
+def primes(n):
+    primes = [2]
+    for i in range(3, n, 2):
+        if min([i%prime for prime in primes]) &gt; 0:
+            primes.append(i)
+    return primes
+
+def find_sum(seq):
+    pair=[]
+    for i, x in enumerate(seq):
+        for y in seq[i:]:
+            if x+y == n:
+                pair.append([x,y])
+    return pair     
+
+find_sum(primes(n))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/02/21 16:58</p>
+                                <p class="static-profile" style="margin:0;padding:0;">로만가</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27468"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">public class test {
+    public static void main(String[] args) {
+        Scanner sc =new Scanner(System.in);
+        int num =sc.nextInt();
+        ArrayList&lt;Integer&gt; ay = new ArrayList&lt;Integer&gt;();
+        ArrayList&lt;Integer&gt; by = new ArrayList&lt;Integer&gt;();
+        ArrayList&lt;Integer&gt; arr = new ArrayList&lt;Integer&gt;();
+        for(int i=1; i&lt;=num; i++) {
+            int count=0;
+            for(int j=1; j&lt;=i; j++) {
+                if(i%j==0) {
+                    count++;
+                }
+            }   
+            if(count==2) {
+                arr.add(i);
+            }
+        }
+        for(int i=0; i&lt;arr.size(); i++) {
+            for(int j=0; j&lt;arr.size(); j++) {
+                if(num==(arr.get(i)+arr.get(j))) {
+                    ay.add(arr.get(i));
+                    by.add(arr.get(j));
+                    if(arr.get(i)!=arr.get(j)) {
+                        if(ay.contains(arr.get(j))==false&amp;&amp;by.contains(arr.get(i))==false)
+                    System.out.print(&quot;[&quot; + arr.get(i)+ &quot;, &quot; + arr.get(j) + &quot;]&quot; + &quot; &quot;);
+                }else {
+                    System.out.print(&quot;[&quot; + arr.get(i)+ &quot;, &quot; + arr.get(j) + &quot;]&quot; + &quot; &quot;);
+                }   
+                    }
+            }
+        }
+    }
+    }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/02/24 14:43</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Kkubuck</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29515"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def isPrimeNum(num):
+    for i in range(2, int(sqrt(num))+1):
+        if num % i == 0:
+            return False
+    return True
+
+
+n = int(input('n을 입력하세요: '))
+plist = []
+for a in range(2, n//2 + 1):
+    if isPrimeNum(a)==True and isPrimeNum(n-a)==True:
+        plist.append([a, n-a])
+
+print(plist)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/08/02 12:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

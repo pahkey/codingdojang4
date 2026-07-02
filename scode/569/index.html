@@ -1,0 +1,1575 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="연관문제: [Four Boxes](http://codingdojang.com/scode/396)
+
+각 변이 x, y축과 평행한 직사각형들이 주어질 때, 좌표평면에서 이 직사각형들이 차지하는 넓이를 구하시오. 
+
+(겹치는 부분은 한 번만 계...">
+    <title>사각형 넓이 구하기2 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">사각형 넓이 구하기2</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">7</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 2</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>연관문제: <a href="http://codingdojang.com/scode/396">Four Boxes</a></p>
+<p>각 변이 x, y축과 평행한 직사각형들이 주어질 때, 좌표평면에서 이 직사각형들이 차지하는 넓이를 구하시오. </p>
+<p>(겹치는 부분은 한 번만 계산할 것)</p>
+<p>입력으로 사각형 하나당 한 줄씩, 왼쪽 아래 꼭지점(x1, y1)과 오른쪽 위 꼭지점(x2, y2) 좌표가 주어진다.</p>
+<p>단, 모든 좌표는 0 이상의 <strong>실수</strong>이다.</p>
+<p>출력은 소수점 둘째 자리까지 출력한다.</p>
+<p>입력:</p>
+<pre><code>0.0 0.0 4.0 4.0
+1.0 1.0 3.0 3.0
+</code></pre>
+<p>출력:</p>
+<pre><code>16.00
+</code></pre>
+<p>입력:</p>
+<pre><code>1.0 0.0 5.0 2.0
+2.0 0.0 4.0 5.0
+0.0 1.0 6.0 3.0
+10.0 10.0 12.0 12.0
+</code></pre>
+<p>출력:</p>
+<pre><code>24.00
+</code></pre>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">plane sweeping</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2017/09/04 19:20</p>
+                    <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                </div>
+            </div>
+
+            
+                <a name="comment_2108"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">나중에 테스트 케이스 몇 가지 만들어서 수정하겠습니다.</span>
+                    -
+                    <span style="font-size:11px;">
+                        Noname,
+                        2017/09/04 19:21
+                    </span>
+                </div>
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>21개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_8881"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">2</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import re
+
+
+# resolution = 0.01
+RESOLUTION = 100
+
+class Square:
+    def __init__(self, x1, y1, x2, y2):
+        self.x1 = min(x1, x2)
+        self.y1 = min(y1, y2)
+        self.x2 = max(x1, x2)
+        self.y2 = max(y1, y2)
+
+    def getPixels(self):
+        pix = []
+        xs = list(range(int(self.x1 * RESOLUTION), int(self.x2 * RESOLUTION)))
+        ys = list(range(int(self.y1 * RESOLUTION), int(self.y2 * RESOLUTION)))
+        for x in xs:
+            for y in ys:
+                pix.append((x, y))
+        return pix
+
+
+def readSquares():
+    print('input squares (x1, y1, x2, y2)\n')
+    sqs = []
+    while 1:
+        inp = input()
+        if not re.match(r'^[0-9.]+ [0-9.]+ [0-9.]+ [0-9.]+$', inp):
+            break
+        x1, y1, x2, y2 = inp.split()
+        sq = Square(float(x1), float(y1), float(x2), float(y2))
+        sqs.append(sq)
+    return sqs
+
+
+sqs = readSquares()
+
+unions = set([])
+for sq in sqs:
+    unions = unions | set(sq.getPixels())
+
+print(len(unions)/RESOLUTION/RESOLUTION)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/09/25 11:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">songci</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8714"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import numpy as np
+point=[]
+while True:
+    temp=input(&quot;Input two points:&quot;)
+    if not temp:
+        break
+    else: point.extend(list(map(float,temp.split())))
+num=len(point)//4
+point=np.array(point).reshape(num,4)*100
+point=point.astype(int)
+field=np.zeros((int(max(point[:,2])),int(max(point[:,3]))))
+for i in range(num):
+    field[point[i,0]:point[i,2],point[i,1]:point[i,3]]=1
+print(&quot;면적:%0.2f&quot; %(field.sum()/10000))
+
+</code></pre>
+
+<p>기본적인 틀은 1번 문제와 같고, 1번 문제의 아이디어를 사용하면서 실수에 적용하기 위해 field 크기를 가로,세로 각각 100배로 늘려줍니다.
+마지막에 면적을 얻기 위해 다시 10000을 나눕니다, 간단하지만 단점은 입력 값에 소수점 아래 세자리 수가 들어가기 시작하면 정확도가 떨어집니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/09/04 22:28</p>
+                                <p class="static-profile" style="margin:0;padding:0;">민훈</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2112"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">기출문제인 걸 모르고 작성해서 1번 문제를 삭제했습니다. 풀이가 없어져서 죄송합니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Noname,
+                                    2017/09/06 15:04
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8754"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">public class Calculate {
+
+    public static void main(String[] args) {
+        //String [] s = {&quot;0.0 0.0 4.0 4.0&quot;, &quot;1.0 1.0 3.0 3.0&quot;};
+        String [] s = {&quot;1.0 0.0 5.0 2.0&quot;, &quot;2.0 0.0 4.0 5.0&quot;, &quot;0.0 1.0 6.0 3.0&quot;, &quot;10.0 10.0 12.0 12.0&quot;};
+
+        Float [] xPositions = new Float[2*s.length];
+        Float [] yPositions = new Float[2*s.length];
+
+        Float tmp    = 0.0f;
+        Float result = 0.0f;
+
+        //입력된 위치정보를 x, y 배열로 각각 등록
+        for(int i=0 ; i&lt;s.length ; i++) {
+            xPositions[2*i]   = Float.parseFloat(s[i].split(&quot; &quot;)[0]);
+            yPositions[2*i]   = Float.parseFloat(s[i].split(&quot; &quot;)[1]);
+            xPositions[2*i+1] = Float.parseFloat(s[i].split(&quot; &quot;)[2]);
+            yPositions[2*i+1] = Float.parseFloat(s[i].split(&quot; &quot;)[3]);
+        }
+        //나중 넓이 계산을 위해 x, y 좌표를 복사
+        Float [] xPositionsInput = xPositions.clone();
+        Float [] yPositionsInput = yPositions.clone();
+
+        //x배열을 오름차순으로 정렬
+        for(int i=0 ; i&lt;xPositions.length ; i++){
+            for( int j=i ; j&lt;xPositions.length ; j++){
+                if(xPositions[i] &gt; xPositions[j]){
+                    tmp = xPositions[i];
+                    xPositions[i] = xPositions[j];
+                    xPositions[j] = tmp;
+                }
+            }
+        }
+        //y배열을 오름차순으로 정렬
+        for(int i=0 ; i&lt;yPositions.length ; i++){
+            for( int j=i ; j&lt;yPositions.length ; j++){
+                if(yPositions[i] &gt; yPositions[j]){
+                    tmp = yPositions[i];
+                    yPositions[i] = yPositions[j];
+                    yPositions[j] = tmp;
+                }
+            }
+        }
+
+        // 정렬된 x, y 배열은 입력된 사각형들을 겹치는 위치를 기준으로 모두 쪼개서 각각의 위치정보를 저장하고 있음
+        // 이 각각의 조각들이 입력된 사각형들중 하나에라도 포함된다면 넓이에 합하면 됨
+        // 위에서 복사해둔 PositionsInput 배열로 입력된 사각형 위치정보 확인
+        for(int x=0 ; x&lt;xPositions.length-1 ; x++){
+            for(int y=0 ; y&lt;yPositions.length-1 ; y++){
+                for(int cnt=0 ; cnt&lt;s.length ; cnt++){
+
+                    //System.out.println(&quot;위치 = x : &quot;+x+&quot; y : &quot;+y);
+                    //System.out.println(&quot;시작점 = &quot;+ xPositions[x]+&quot;, &quot;+yPositions[y]);
+                    //System.out.println(&quot;끝점 =   &quot;+ xPositions[x+1]+&quot;, &quot;+yPositions[y+1]);
+
+                    if( xPositions[x] &gt;= xPositionsInput[2*cnt] &amp;&amp; xPositions[x+1] &lt;= xPositionsInput[2*cnt+1] &amp;&amp;
+                        yPositions[y] &gt;= yPositionsInput[2*cnt] &amp;&amp; yPositions[y+1] &lt;= yPositionsInput[2*cnt+1]) {
+                        result += (xPositions[x+1] - xPositions[x]) * (yPositions[y+1] - yPositions[y]);
+                        break;
+                    }
+                }
+            }
+        }
+        System.out.println(result);
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/09/08 15:41</p>
+                                <p class="static-profile" style="margin:0;padding:0;">SH</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8933"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package 생성자;
+
+import java.util.Scanner;
+import java.util.jar.Attributes.Name;
+
+/*
+ * 클래스 멤버 실행 초기화 순위가 1순위이다.
+ * main메서드 보다도 먼저
+ * 1)클래스 멤버를 초기화를 하여 올려 놓은다. 
+ * 2)클래스 초기화 블럭으로 가서 수행문을 한다.
+ * 3)그 다음에는 main메서드가 호출된다.
+ * 
+ * ===========================
+ * 인스턴스 생성시
+ *1)클래스 멤버과 위와 같이 작업이 된다. (3번을 빼고)
+ * 2)인스턴스 멤버과 초기화 되어 메모리 위에 올라간다.
+ * 3)참조변수에 주소가 저장된다.
+ */
+class Zombie{
+    static int Hp;
+    static {
+        Hp = 1000;
+    }
+    //static
+
+    String User;
+    {
+        User = &quot;Anonymous&quot;;
+    }
+    public Zombie(String name) {
+        User = name;
+    }
+    public Zombie(int damage) {
+        Hp-=damage;
+        System.out.println(&quot;Name : &quot;+User+&quot;\nHp :&quot;+Hp);
+    }
+}
+
+class Attack extends Zombie{
+    public Attack(int damage) {
+        super(damage);
+        Hp -= damage;
+    }
+}
+public class Damage {
+    public static void main(String[] args) {
+        System.out.println(&quot;Input you character name&quot;);
+        Zombie zombie = new Zombie(new Scanner(System.in).nextLine());
+        System.out.println(&quot;Input Damage you want&quot;);
+        Attack attack = new Attack(new Scanner(System.in).nextInt());
+    }
+}
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/01 18:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">최민준</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8952"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <h1 id="3">파이썬 3으로 만들었습니다.</h1>
+<h1 id="_1">신발끈 공식을 사용했습니다.</h1>
+<p>list_xy = []</p>
+<p>for i in range (1, 5):
+    list_comp = []
+    x = input("Point %s's X: " % i)
+    list_comp.append(float(x))
+    y = input("Point %s's Y: " % i)
+    list_comp.append(float(y))
+    list_xy.append(list_comp)</p>
+<p>print (list_xy)</p>
+<p>squr_k = float(0)</p>
+<p>for i in range(3):
+    squr_k = squr_k + (list_xy[i][0] * list_xy[i+1][1])
+    squr_k = squr_k - (list_xy[i+1][0] * list_xy[i][1])</p>
+<p>squr_K = squr_k + (list_xy[3][0] * list_xy[0][1]) - (list_xy[0][0] * list_xy[3][1])
+squr_k = abs(squr_k) * 1/2</p>
+<p>print (round(squr_k, 2))</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/06 01:15</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Yungbin Kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9175"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># 한글 처리 in Atom 1.21.1 + Anaconda(Python 3.6.3)
+import sys
+import io
+
+sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding='utf-8')
+sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding='utf-8')
+
+# 각 변이 x, y축과 평행한 직사각형들이 주어질 때, 좌표평면에서 이 직사각형들이 차지하는 넓이를 구하시오.
+# (겹치는 부분은 한 번만 계산할 것)
+# 입력으로 사각형 하나당 한 줄씩, 왼쪽 아래 꼭지점(x1, y1)과 오른쪽 위 꼭지점(x2, y2) 좌표가 주어진다.
+# 단, 모든 좌표는 0 이상의 실수이다.
+# 출력은 소수점 둘째 자리까지 출력한다.
+
+squares = []
+while True:
+    square = input(&quot;직사각형 (x1,y1)~(x2,y2)를 입력하세요(입력이 끝났으면 end) : &quot;)
+    if square == &quot;end&quot;:
+        break
+    square_point = square.split()
+    squares += [[float(square_point[i]) for i in range(4)]]
+
+x = set([])
+y = set([])
+for i in range(len(squares)):
+    x.add(squares[i][0])
+    x.add(squares[i][2])
+    y.add(squares[i][1])
+    y.add(squares[i][3])
+x = sorted(list(x))
+y = sorted(list(y))
+
+size = 0
+for x_point in range(len(x) - 1):
+    for y_point in range(len(y) - 1):
+        for x1, y1, x2, y2 in squares:
+            if x[x_point] &gt;= min(x1, x2) and x[x_point + 1] &lt;= max(x1, x2) and y[y_point] &gt;= min(y1, y2) and y[y_point + 1] &lt;= max(y1, y2):
+                size += (x[x_point + 1] - x[x_point]) * (y[y_point + 1] - y[y_point])
+                break
+
+print(&quot;총 면적 : %0.2f&quot; % size)
+
+</code></pre>
+
+<p>입력에서 생기는 에러에 대항 처리는 안했습니다. 저한텐 문제풀이보다 그게 더 어렵네요;</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/11/04 22:14</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jace Alan</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9417"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">q = 0
+n = int(input(&quot;총 사각형의 갯수는 몇 개인가요?&quot;))
+data = []
+while q &lt; n :
+    s = str(input(&quot;좌표를 입력하세요.  x1 y1 x2 y2 : &quot;))
+    s = s.split(' ')
+
+    x1 = int(s[0])
+    y1 = int(s[1])
+    x2 = int(s[2])
+    y2 = int(s[3])
+
+    for i in range (x1, x2) :
+     for j in range (y1, y2) :
+          x = (i+1, j+1)
+          data.append(x)
+    # print(data)
+    q += 1
+
+data2 = set(data)
+area = len(data2)
+print(area)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/11/28 18:14</p>
+                                <p class="static-profile" style="margin:0;padding:0;">킴</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9424"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+#include &lt;memory.h&gt;
+
+struct SquareInfo
+{
+    float x1, y1;
+    float x2, y2;
+
+    float GetWidth() { return x2 - x1; }
+    float GetHeight() { return y2 - y1; }
+    float GetArea() { return GetWidth() * GetHeight(); }
+
+    bool CheckSquareInside(SquareInfo&amp; CheckSquare)
+    {
+        return (x1 &lt;= CheckSquare.x1) &amp;&amp; (y1 &lt;= CheckSquare.y1)
+            &amp;&amp; (CheckSquare.x2 &lt;= x2) &amp;&amp; (CheckSquare.y2 &lt;= y2);
+    }
+};
+
+#define EMPTY_SPACE 0xFFFFFFFF  
+
+class CDojo150_SquareArea
+{
+public:
+    CDojo150_SquareArea() {};
+    ~CDojo150_SquareArea() {};
+
+    float Solve(const float* inputVal, const int numOfSquare);
+
+private:
+    bool CheckExistNum(float* ScaleList, int ScalListNum, float Val);
+    void SortScaleList(float* ScaleList, int ScaleListSize);
+};
+
+float CDojo150_SquareArea::Solve(const float* inputVal, const int numOfSquare)
+{
+    float retVal = 0.0f;
+
+    float* xScaleList = new float[numOfSquare * 2];
+    memset(xScaleList, EMPTY_SPACE, sizeof(float) * (numOfSquare * 2));
+
+    float* yScaleList = new float[numOfSquare * 2];
+    memset(yScaleList, EMPTY_SPACE, sizeof(float) * (numOfSquare * 2));
+
+    int xScaleListNum = 0;
+    int yScaleListNum = 0;
+
+    SquareInfo* SquareList = new SquareInfo[numOfSquare];
+    for (int i = 0; i &lt; numOfSquare; i++)
+    {
+        SquareList[i].x1 = inputVal[4 * i];
+        SquareList[i].y1 = inputVal[(4 * i + 1)];
+        SquareList[i].x2 = inputVal[(4 * i + 2)];
+        SquareList[i].y2 = inputVal[(4 * i + 3)];
+
+        if (CheckExistNum(xScaleList, xScaleListNum, SquareList[i].x1) == false)
+            xScaleList[xScaleListNum++] = SquareList[i].x1;
+
+        if (CheckExistNum(xScaleList, xScaleListNum, SquareList[i].x2) == false)
+            xScaleList[xScaleListNum++] = SquareList[i].x2;
+
+        if (CheckExistNum(yScaleList, yScaleListNum, SquareList[i].y1) == false)
+            yScaleList[yScaleListNum++] = SquareList[i].y1;
+
+        if (CheckExistNum(yScaleList, yScaleListNum, SquareList[i].y2) == false)
+            yScaleList[yScaleListNum++] = SquareList[i].y2;
+    }
+
+    SortScaleList(xScaleList, xScaleListNum);
+    SortScaleList(yScaleList, yScaleListNum);
+
+    for (int yScaleIdx = 0; yScaleIdx &lt; yScaleListNum - 1; yScaleIdx++)
+    {
+        for (int xScaleIdx = 0; xScaleIdx &lt; xScaleListNum - 1; xScaleIdx++)
+        {
+            SquareInfo checkSquare;
+            checkSquare.x1 = xScaleList[xScaleIdx];
+            checkSquare.y1 = yScaleList[yScaleIdx];
+            checkSquare.x2 = xScaleList[xScaleIdx + 1];
+            checkSquare.y2 = yScaleList[yScaleIdx + 1];
+
+            for (int squareIdx = 0; squareIdx &lt; numOfSquare; squareIdx++)
+            {
+                if (SquareList[squareIdx].CheckSquareInside(checkSquare))
+                {
+                    retVal += checkSquare.GetArea();
+                    break;
+                }
+            }
+        }
+    }
+
+    delete[] xScaleList;
+    delete[] yScaleList;
+    delete[] SquareList;
+
+    return retVal;
+}
+
+bool CDojo150_SquareArea::CheckExistNum(float* ScaleList, int ScalListNum, float Val)
+{
+    for (int i = 0; i &lt; ScalListNum; i++)
+    {
+        if (ScaleList[i] != EMPTY_SPACE)
+            continue;
+
+        if (ScaleList[i] == Val)
+            return true;
+    }
+
+    return false;
+}
+
+void CDojo150_SquareArea::SortScaleList(float* ScaleList, int ScaleListSize)
+{
+    for (int i = 0; i &lt; ScaleListSize; i++)
+    {
+        for (int j = i; j &lt; ScaleListSize; j++)
+        {
+            if (ScaleList[j] &lt; ScaleList[i])
+            {
+                float temp = ScaleList[i];
+                ScaleList[i] = ScaleList[j];
+                ScaleList[j] = temp;
+            }
+        }
+    }
+}
+
+int main()
+{
+    CDojo150_SquareArea exam;
+
+    float SquareInfo[] = {
+        1.0, 0.0, 5.0, 2.0,
+        2.0, 0.0, 4.0, 5.0,
+        0.0, 1.0, 6.0, 3.0,
+        10.0, 10.0, 12.0, 12.0
+    };
+
+    printf(&quot;%.2f\n&quot;, exam.Solve(SquareInfo, 4));
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/11/29 15:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">서상혁</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10270"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3.6</p>
+<pre><code class="python">data =&quot;&quot;&quot;1.0 0.0 5.0 2.0
+2.0 0.0 4.0 5.0
+0.0 1.0 6.0 3.0
+10.0 10.0 12.0 12.0&quot;&quot;&quot;
+
+def squarearea(square):
+    area = (float(square[2]) - float(square[0])) * (float(square[3]) - float(square[1]))
+    return area
+
+def main(squarelist):
+    arealist,shade,shadelist,shadearea,n = [],[],[],[],0
+    for i, square in enumerate(squarelist):
+        arealist.append(squarearea(square))
+# 겹치는 부분을 찾아 면적을 구한다.
+# 자신 이외의 모든 사각형에 대해 겹치는 부분을 찾는다.
+        if len(arealist) &gt; 1:
+            while n &lt; i:
+                if (float(squarelist[n][2]) &lt;= float(square[0]) and float(squarelist[n][3]) &lt;= float(square[1])) or (float(squarelist[n][0]) &gt;= float(square[2]) and float(squarelist[n][1]) &gt;= float(square[3])):
+                    n += 1
+                else:
+                    shade = [max(squarelist[n][0],square[0]),max(squarelist[n][1],square[1]),min(squarelist[n][2],square[2]),min(squarelist[n][3],square[3])]
+                    shadearea.append(squarearea(shade))
+                    shadelist.append(shade)
+                    n += 1
+            n = 0
+# 겹치는 부분이 2개 이상일때, 중복되어 겹치는 부분을 찾는다.
+# 이부분은 겹치는 부분 면적에서 제외한다.
+            if len(shadelist) &gt; 1:
+                while n &lt; len(shadelist)-1:
+                    if (float(shadelist[n][2]) &lt;= float(shadelist[len(shadelist)-1][0]) and float(shadelist[n][3]) &lt;= float(shadelist[len(shadelist)-1][1])) or (float(shadelist[n][0]) &gt;= float(shadelist[len(shadelist)-1][2]) and float(shadelist[n][1]) &gt;= float(shadelist[len(shadelist)-1][3])):
+                        n += 1
+                    else:
+                        shade = [max(shadelist[n][0],shadelist[len(shadelist)-1][0]),max(shadelist[n][1],shadelist[len(shadelist)-1][1]),min(shadelist[n][2],shadelist[len(shadelist)-1][2]),min(shadelist[n][3],shadelist[len(shadelist)-1][3])]
+                        shadearea.append(float('-'+str(squarearea(shade))))
+                        n += 1
+                n = 0
+            shadelist = []
+    print(&quot;☞직사각형들의 면적 = %.2f &quot;%(sum(arealist)-sum(shadearea)))
+
+if __name__ == &quot;__main__&quot;:
+    squarelist = [i.split(' ') for i in data.split(&quot;\n&quot;)]
+    print(&quot;▶직사각형 좌표&quot;)
+    for square in squarelist:
+        print(&quot;(%s,%s) (%s,%s)&quot;%(square[0],square[1],square[2],square[3]))
+    print(&quot;\n&quot;)
+    main(squarelist)
+</code></pre>
+
+<ul>
+<li>결과값</li>
+</ul>
+<pre><code class="python">▶직사각형 좌표
+(0.0,0.0) (4.0,4.0)
+(1.0,1.0) (3.0,3.0)
+
+
+☞직사각형들의 면적 = 16.00
+
+▶직사각형 좌표
+(1.0,0.0) (5.0,2.0)
+(2.0,0.0) (4.0,5.0)
+(0.0,1.0) (6.0,3.0)
+(10.0,10.0) (12.0,12.0)
+
+
+☞직사각형들의 면적 = 24.00
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/01/23 16:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">justbegin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10728"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def area(a):
+    result = 0
+    xcoordinate = list()
+    ycoordinate = list()
+    for i in a:
+        xcoordinate.append(i[0])
+        xcoordinate.append(i[2])
+        ycoordinate.append(i[1])
+        ycoordinate.append(i[3])
+    xcoordinate = sorted(list(set(xcoordinate)))
+    ycoordinate = sorted(list(set(ycoordinate)))
+    for i in range(len(xcoordinate)-1):
+        for j in range(len(ycoordinate)-1):
+            if any([all([k[0] &lt;= xcoordinate[i], k[1] &lt;= ycoordinate[j], k[2] &gt;= xcoordinate[i+1], k[3] &gt;= ycoordinate[j+1]]) for k in a]):
+                result += (xcoordinate[i+1]-xcoordinate[i]) * (ycoordinate[j+1]-ycoordinate[j])
+    return &quot;{0:0.2f}&quot;.format(result)
+
+
+l = list()
+while 1:
+    n = input(&quot;좌표를 입력하시오 :&quot;)
+    if n == '':
+        break
+    else:
+        l.append(list(map(float, n.split(' '))))
+print(area(l))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/15 10:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김동하</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11671"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n = int(input(&quot;꼭짓점 개수: &quot;))
+a = [input().split() for i in range(n)]
+for i in range(n):
+    a[i] = list(map(float,a[i]))
+
+s = 0
+
+for i in range(n):
+    x_min = int(min([a[i][0] for i in range(n)]))
+    x_max = int(max([a[i][2] for i in range(n)]))
+    y_min = int(min([a[i][1] for i in range(n)]))
+    y_max = int(max([a[i][3] for i in range(n)]))
+for x in range(x_min, x_max):
+    for y in range(y_min, y_max):
+        k = 0
+        for i in range(n):
+            if a[i][0] &lt;= x &lt;a[i][2] and a[i][1] &lt;= y &lt;a[i][3]:
+                k = 1
+        if k == 1:
+            s += 1
+print(s)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/04/12 00:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">정익수</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13237"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>비트 연산으로 풀어 봤습니다  넓이는 소수점 2자리까지 구합니다</p>
+<pre><code class="python">from functools import reduce
+
+coord = []
+while 1:
+    coord.append( tuple(float(t) for t in input('좌표 입력(입력 종료는 엔터): ').split()) )
+    if coord[-1] == ():
+        del coord[-1]
+        break
+x1,x2,y1,y2 = [],[],[],[]
+for i in coord:
+    x1 += [int(i[0]*10)]
+    y1 += [int(i[1]*10)]
+    x2 += [int(i[2]*10)]
+    y2 += [int(i[3]*10)]
+grid = [['' for _ in range(max(y2))] for _ in range(len(coord))]
+for i in range(len(coord)):
+    for y in range(max(y2)):
+        for x in range(max(x2)):
+            if x1[i] &lt;= x &lt; x2[i] and y1[i] &lt;= y &lt; y2[i]:
+                grid[i][y] += '1'
+            else: grid[i][y] += '0'
+
+result = reduce(lambda t1,t2: [str(bin(int(t1[i],2) | int(t2[i],2))[2:]).zfill(len(t1[0])) for i in range(len(t1))],grid)
+for i in reversed(range(len(result))):
+    print(result[i].replace('0','○ ').replace('1','● '))
+
+print('\n넓이: {:0.2f}'.format(sum(sum(int(j) for j in i) for i in result)/100))
+</code></pre>
+
+<pre><code>좌표 입력(입력 종료는 엔터): 1.0 0.0 5.0 2.0
+좌표 입력(입력 종료는 엔터): 2 0 4 5.0
+좌표 입력(입력 종료는 엔터): 0 1.0 6 3
+좌표 입력(입력 종료는 엔터): 10.0 10 12 12.0
+좌표 입력(입력 종료는 엔터):
+...
+넓이: 24.00
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/29 23:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17067"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">class Square:
+    def __init__(self, x1, y1, x2, y2):
+        self.x1 = x1
+        self.y1 = y1
+        self.x2 = x2
+        self.y2 = y2
+
+    def pixel(self):
+        pix = []
+        xscale = list(range(int(self.x1 * 100), int(self.x2 * 100)))
+        yscale = list(range(int(self.y1 * 100), int(self.y2 * 100)))
+
+        for i in xscale:
+            for j in yscale:
+                pix.append((i,j))
+
+        return pix
+
+
+def make_squares():
+    squares = []
+    while 1:
+        x1, y1, x2, y2 = input().split()
+        if x1 == '0' and y1 == '0' and x2 == '0' and y2 == '0':
+            break
+        square = Square(float(x1), float(y1), float(x2), float(y2))
+        squares.append(square)
+
+    return squares
+
+squares = make_squares()
+
+unions = set([])
+for square in squares:
+    unions = set.union(unions, set(square.pixel()))
+
+print(len(unions)/10000)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/03/11 10:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">D.H.</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17166"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3.7<br />
+- 집합 자료형-합집합을 이용하여 도형의 겹침을 해결했습니다. <br />
+-  <code>10**소수점 자리수(prec)</code> 만큼 좌표를 배율하여 접근했습니다.<br />
+- 코드에서 정확도 변수 <code>prec</code>를 0으로 두면, 문제에서 언급하신 Four Boxes 문제에도 적용 가능합니다.  </p>
+<pre><code class="python">prec = 2  # 숫점 이하 자리수(정확도)
+
+
+def update_grid(posx1, posy1, posx2, posy2):
+    new_grid = set()
+    for y in range(int(posy1 * 10 ** prec), int(posy2 * 10 ** prec)):
+        for x in range(int(posx1 * 10 ** prec), int(posx2 * 10 ** prec)):
+            new_grid.add((x, y))
+    return new_grid
+
+
+def print_area(istr):
+    grid = set()
+    lines = istr.split('\n')
+    for line in lines:
+        grid |= update_grid(*map(float, line.split()))  # 좌표의 합집합
+    print(f&quot;{len(grid) / (10 ** (2 * prec)):.2f}&quot;)
+
+
+# --- test cases ---
+
+test_case = &quot;&quot;&quot;0.0 0.0 4.0 4.0
+1.0 1.0 3.0 3.0&quot;&quot;&quot;
+print_area(test_case)  # 16.00
+
+test_case = &quot;&quot;&quot;1.0 0.0 5.0 2.0
+2.0 0.0 4.0 5.0
+0.0 1.0 6.0 3.0
+10.0 10.0 12.0 12.0&quot;&quot;&quot;
+print_area(test_case)  # 24.00
+
+test_case = &quot;&quot;&quot;1 2 4 4 
+2 3 5 7 
+3 1 6 5 
+7 3 8 6&quot;&quot;&quot;  # Four Boxes 문제
+print_area(test_case)  # 26.00
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/03/18 10:31</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20116"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>무식하게 풀었습니다...가독성이 떨어집니다..
+저는 X좌표를 기준으로 첫번째 예제의 경우 X좌표가 (0~4)와 (1~3)이 있으면 더 넓은 범위의 (0~4)를 기준으로 1씩증가하면서 그에 해당하는 넓이를 구했습니다.
+X가 0~1일때 Y의 넓이는 4, X가 1~2일대 첫번째 사각형은 넓이가 4, 2번째 사각형은 넓이가 2입니다. 그래서 0~1의 범위의 Y값은 4+2-2(공통부분)이므로 4입니다.
+마찬가지로 다른 범위도 이런식으로 해서 풀었습니다...</p>
+<pre><code class="java">    public static void main(String[] args) {
+
+        Scanner scan = new Scanner(System.in);
+        System.out.println(&quot;How many rectangle : &quot;);
+        int N = scan.nextInt();
+        Scanner scan2 = new Scanner(System.in);
+
+        ArrayList&lt;Double&gt; X = new ArrayList&lt;Double&gt;();
+        ArrayList&lt;Double&gt; Y = new ArrayList&lt;Double&gt;();
+        ArrayList&lt;Double&gt; A = new ArrayList&lt;Double&gt;();
+
+        for(int i=0; i&lt;N; i++) {
+            String[] str = scan2.nextLine().split(&quot; &quot;);
+            for(int j=0; j&lt;4; j++) {
+                if(j==1||j==3) {
+                    Y.add(Double.parseDouble(str[j]));
+                }
+                else{
+                    X.add(Double.parseDouble(str[j]));
+                }
+            }
+        }
+        Double small = X.get(0);
+        Double large = 0.0;
+        for(int i=0; i&lt;X.size(); i++) {
+            if(X.get(i)&gt;large) {
+                large = X.get(i);
+            }
+            else if(X.get(i)&lt;small) {
+                small = X.get(i);
+            }
+        }
+        Double 넓이 = 0.0;
+        for(Double i = small; i&lt;large; i++) {
+            int count = 0;
+            for(int j=0; j&lt;X.size(); j=j+2) {
+                if(X.get(j)&lt;=i&amp;&amp;X.get(j+1)&gt;=i+1) {
+                    넓이=넓이 + (Y.get(j+1)-Y.get(j));
+                    count++;
+                    for(Double l=Y.get(j); l&lt;=Y.get(j+1); l++) {
+                        A.add(l);
+                    }
+                }
+            }
+            if(count&gt;1) {
+                int count2 = 0;
+                for(int s =0; s&lt;A.size()-1; s++) {
+                    for(int a=s+1; a&lt;A.size(); a++) {
+                        if(A.get(s).compareTo(A.get(a))==0) {
+                            A.remove(a);
+                            count2++;
+                        }
+                    }
+                }
+                넓이 = 넓이-(count2-(count-1));
+            }
+            A.clear();
+        }
+    System.out.println(넓이); 
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/12/03 19:39</p>
+                                <p class="static-profile" style="margin:0;padding:0;">big Ko</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22259"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">
+for _ in range(4):
+    x1, y1, x2, y2 = map(int, input('input: ').split())
+
+    for i in range(x1, x2):
+        for j in range(y1, y2):
+            demention[i][j] = 1
+
+area = 0
+for row in demention:
+    area += sum(row)
+print('Area: {0:.2f}'.format(area))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/10 18:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hwaseong Nam</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25673"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def background(x, y):
+    x_max = x*100
+    y_max = y*100
+    column = []
+    for i in range(x_max):
+        row = []
+        for j in range(y_max):
+            row.append(0)
+        column.append(row)
+
+    return column
+
+def extract(_list):
+    cnt = 0 
+    for member in _list:
+        cnt += member.count(1)
+
+    return cnt
+
+if __name__ == '__main__':
+    array = background(10, 10)
+    input_1 = input('INPUT NUMBER : ')
+    input_list = []
+    for i in range(int(input_1)):
+        input_list.append(input('TYPE COORDINATION : '))
+
+    for member in input_list:
+        x1 = int(float(member.split(' ')[0]))*10
+        y1 = int(float(member.split(' ')[1]))*10
+        x2 = int(float(member.split(' ')[2]))*10
+        y2 = int(float(member.split(' ')[3]))*10
+
+        for i in range(x1, x2):
+            for j in range(y1, y2):
+                if array[i][j] != 1:
+                    array[i][j] = 1
+
+    print('AREA : {:0.2f}'.format(extract(array)/100))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/07/02 07:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">DSHIN</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26485"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#codingdojing_area_of_square_re
+
+#input이 소수 둘째짜리까지 있다고 가정한다. 1.12 1.22 2.34 2.1
+#풀이 아이디어 참고, 100배 늘려서 정수형태로 만든다. 
+
+square_list = list()
+area_set = set()
+resolution = 100
+
+while True:
+    square_coordinate = list(map(lambda x:int(float(x)*resolution),input().split()))
+    if square_coordinate:
+        square_list.append(square_coordinate)
+    else:
+        break
+
+for square in square_list: #square = [x1, y1, x2, y2]
+    for x in range(square[0], square[2]):
+        for y in range(square[1], square[3]):
+            area_set.add((x,y))     # 크기가 1인 단위사각형의 왼쪽아래 좌표를 저장. 중복 제거.
+
+print(round(len(area_set)/resolution**2, 2))
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/10/15 17:27</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jaeman Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27179"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>// Rust</p>
+<p>pub struct Rectangle {</p>
+<pre><code>pub xrange: (u32, u32),
+pub yrange: (u32, u32),
+</code></pre>
+<p>}
+fn rectangle() -&gt; u32 {</p>
+<pre><code>// let rectangles = vec![  Rectangle{ xrange: (0, 4), yrange: (0, 4)}, 
+//                         Rectangle{ xrange: (1, 3), yrange: (1, 3)},];
+let rectangles = vec![  Rectangle{ xrange: (1, 5), yrange: (0, 2)}, 
+                        Rectangle{ xrange: (2, 4), yrange: (0, 5)},
+                        Rectangle{ xrange: (0, 6), yrange: (1, 3)},
+                        Rectangle{ xrange: (10, 12), yrange: (10, 12)}];
+
+let mut xintervals = vec![];
+for rect in &amp;rectangles {
+    xintervals.push(rect.xrange);
+}
+xintervals = tidy_interval(xintervals);
+
+let mut area = 0;
+for xinterval in xintervals {
+    for x in xinterval.0..xinterval.1 {
+        let mut yinterval = vec![];
+        for rect in &amp;rectangles {
+            if rect.xrange.0 &lt;= x &amp;&amp; x &lt; rect.xrange.1 {
+                yinterval.push(rect.yrange);
+            }
+        }
+        area += len(tidy_interval(yinterval));
+    }
+}
+area
+</code></pre>
+<p>}</p>
+<p>fn tidy_interval(intervals_: Vec&lt;(u32, u32)&gt;) -&gt; Vec&lt;(u32, u32)&gt; {</p>
+<pre><code>let mut intervals = intervals_;
+intervals.sort_by_key(|w| w.0);
+
+let mut i = 1;
+while i &lt; intervals.len() {
+    if intervals[i].0 &lt;= intervals[i-1].1 {
+        if intervals[i].1 &gt;= intervals[i-1].1 {//앞으로merge, i그대로
+            intervals[i-1].1 = intervals[i].1;
+            intervals.remove(i);
+            continue;
+        } 
+        else {// delete, i 그대로
+            intervals.remove(i);
+            continue;
+        } 
+    } //else {} //continue, i증가
+    i += 1;
+}
+intervals
+</code></pre>
+<p>}</p>
+<p>fn len(intervals: Vec&lt;(u32, u32)&gt;) -&gt; u32 {</p>
+<pre><code>let mut len = 0;
+for interval in &amp;intervals {
+    len += interval.1 - interval.0;
+}
+len
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/29 21:27</p>
+                                <p class="static-profile" style="margin:0;padding:0;">JW KIM</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27363"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">a='''1.0 0.0 5.0 2.0
+2.0 0.0 4.0 5.0
+0.0 1.0 6.0 3.0
+10.0 10.0 12.0 12.0'''
+
+import random
+
+x_min, x_max, y_min, y_max = 0,0,0,0
+
+for i in range(len(a.split('\n'))):
+    x1, y1, x2, y2 = map(float,a.split('\n')[i].split(' '))
+    x_min, x_max = min(x_min, x1, x2), max(x_max, x1, x2)
+    y_min, y_max = min(y_min, y1, y2), max(y_max, y1, y2)
+
+t = 1000000
+p = 0
+
+for i in range(t):
+    cnt = 0
+    x = random.uniform(x_min,x_max)
+    y = random.uniform(y_min,y_max)
+    for i in range(len(a.split('\n'))):
+        x1, y1, x2, y2 = map(float,a.split('\n')[i].split(' '))
+        if x1&lt;= x &lt;=x2 and y1&lt;= y &lt;=y2:
+            cnt += 1
+    if cnt &gt; 0:
+            p += 1
+
+print(round((p/t)*(x_max-x_min)*(y_max-y_min),2))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/02/17 16:41</p>
+                                <p class="static-profile" style="margin:0;padding:0;">로만가</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29684"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#coordinates = [[0.0, 0.0, 4.0, 4.0], [1.0, 1.0, 3.0, 3.0]]
+coordinates = [[0.0, 1.0, 6.0, 3.0], [1.0, 0.0, 5.0, 2.0],
+              [2.0, 0.0, 4.0, 5.0], [10.0, 10.0, 12.0, 12.0]]
+
+area = [[0 for _ in range(1000)] for _ in range(1000)]
+cnt = 0
+for p in coordinates:
+    for r in range(int(p[1]*10), int(p[3]*10)):
+        for c in range(int(p[0]*10), int(p[2]*10)):
+            if area[r][c] == 0:
+                area[r][c] = 1
+                cnt += 1
+
+print(cnt / 100)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/10/05 19:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

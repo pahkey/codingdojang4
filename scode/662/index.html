@@ -1,0 +1,1002 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="좌표평면상에서 x좌표와 y좌표가 모두 정수인 점들을 격자점이라고 하자.
+이 때, 2개의 서로 다른 격자점의 좌표를 입력받아 
+그 두 점을 잇는 선분이 지나는 격자점을 모두 출력하는 프로그램을 작성하시오.
+입력방식은 자유로이 설정한다.
+
+...">
+    <title>두 격자점 사이의 격자점 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">두 격자점 사이의 격자점</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">2</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 2</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>좌표평면상에서 x좌표와 y좌표가 모두 정수인 점들을 격자점이라고 하자.
+이 때, 2개의 서로 다른 격자점의 좌표를 입력받아 
+그 두 점을 잇는 선분이 지나는 격자점을 모두 출력하는 프로그램을 작성하시오.
+입력방식은 자유로이 설정한다.</p>
+<pre><code class="python">입력예1
+[-2, 0],[0,2]
+출력예1
+[-1,1]
+
+입력예2
+[0,0],[0,3]
+출력예2
+[0,1], [0,2]
+
+입력예3
+[0,0],[1,-2]
+출력예3
+None
+
+</code></pre>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2019/06/08 16:54</p>
+                    <p class="static-profile" style="margin:0;padding:0;">왕초보</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>16개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_18191"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def get_lattice_point(p1, p2):
+    p = []
+    a = (-1, 1)[p1[0] &lt; p2[0]]
+    b = (-1, 1)[p1[1] &lt; p2[1]]
+
+    if p1[0]-p2[0] == 0:
+        for y in range(p1[1], p2[1]+b, b):
+            p.append([0, y])
+
+    else:
+        m = (p1[1]-p2[1])/(p1[0]-p2[0])
+        n = p1[1] - (m * p1[0])
+
+        for x in range(p1[0], p2[0]+a, a):
+            for y in range(p1[1], p2[1]+b, b):
+                if y == m*x + n: p.append([x, y])
+
+    return p[1:-1]
+</code></pre>
+
+<p>머리가 빙글빙글</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/06/09 13:36</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이진형</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18201"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3.7</p>
+<pre><code class="python">def main():
+    p0, p1 = eval(input())
+    xmin, xmax = min(p0[0], p1[0]), max(p0[0], p1[0])
+    ymin, ymax = min(p0[1], p1[1]), max(p0[1], p1[1])
+    rst = []
+    if xmin != xmax:
+        for x in range(xmin + 1, xmax):
+            y = (p1[1] - p0[1]) / (p1[0] - p0[0]) * (x - p0[0]) + p0[1]
+            if y == int(y):
+                rst.append(str([x, int(y)]))
+    else:  # y = const 직선인 경우
+        for y in range(ymin + 1, ymax):
+            rst.append(str([xmin, y]))
+
+    print(&quot;, &quot;.join(rst) if rst else None)
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/06/10 10:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18460"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from collections import namedtuple
+
+P = namedtuple('P', 'x y')
+grd = lambda n, m: str((n.y - m.y) / (n.x - m.x)) if n.x - m.x else 'inf'
+ans = []
+A, B = P(-2, 0), P(0, 2)
+
+for x in range(min(A.x, B.x), max(A.x, B.x)+1):
+    for y in range(min(A.y, B.y), max(A.y, B.y)+1):
+        C = P(x, y)
+        if C not in (A, B) and  grd(A, C) == grd(C, B):
+            ans.append(tuple(C))
+
+print(*ans if ans else None)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/07/05 19:11</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18497"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def gcd(n,m):
+    if m&gt;n:
+        n,m=m,n
+    if m==0:
+        return n
+    n=n%m
+    return gcd(m,n)
+
+
+
+
+a=input('a 좌표입력(x,y): ').split(',')
+b=input('b 좌표입력(x,y): ').split(',')
+a=list(map(int,a))
+b=list(map(int,b))
+
+dx=b[0]-a[0]
+dy=b[1]-a[1]
+
+ddx=dx/gcd(abs(dx),abs(dy))
+ddy=dy/gcd(abs(dx),abs(dy))
+a[0]=a[0]+ddx
+a[1]=a[1]+ddy
+while a!=b:
+    print('%d,%d'%(a[0],a[1]))
+    a[0]=a[0]+ddx
+    a[1]=a[1]+ddy
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/07/09 00:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">정환용</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18788"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3.7  사용</p>
+<pre><code class="python">from math import gcd
+
+p1 = [-2,0]
+p2 = [0,2]
+
+p3=[0,0]
+p4=[0,3]
+
+p5=[0,0]
+p6 = [1,-2]
+
+
+def slope(point1, point2):  # computes the privitive directional vector with its multiplicity
+    direc = [point1[0]-point2[0], point1[1]-point2[1]]
+     m = gcd(direc[0],direc[1]) # multiplicity of the slope
+    return [int(direc[0]/m), int(direc[1]/m), m]
+
+
+def lattice(point1,point2): # computes lattice pts betw point1 and point2
+    lpoints_bet = []  # placeholder list of lattice vectors bet point1 and point2
+    s = slope(point1,point2)
+    if s[2] != 1:  # if the multiplicity is greater than 1
+        for i in range(1,s[2]):
+            lpoints_bet += [[point2[0]+ i* s[0],point2[1]+i*s[1]]]
+        return lpoints_bet
+    else:
+        return &quot;None&quot;
+
+
+print(lattice(p1,p2))
+print(lattice(p3,p4))
+print(lattice(p5,p6))
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/08/04 19:45</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Sechi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19165"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="go">package main
+
+import &quot;fmt&quot;
+
+type DoubleCoord struct {
+    c [2][2]int
+    d [2]int
+}
+
+func newDoubleCoord(a, b [2]int) DoubleCoord {
+    obj := DoubleCoord{}
+    obj.c[0] = a
+    obj.c[1] = b
+    obj.reduction()
+    return obj
+}
+func (obj *DoubleCoord) reduction() {
+    for i := 0; i &lt; 2; i++ {
+        obj.d[i] = obj.c[1][i] - obj.c[0][i]
+    }
+    t := gcd(abs(obj.d[0]), abs(obj.d[1]))
+    for i := 0; i &lt; 2; i++ {
+        obj.d[i] /= t
+    }
+}
+func (obj *DoubleCoord) solve() (res [][2]int) {
+    tmp := obj.c[0]
+    for {
+        tmp[0] += obj.d[0]
+        tmp[1] += obj.d[1]
+        if ((tmp[0]-obj.c[0][0])*(tmp[0]-obj.c[1][0]) &gt; 0) || ((tmp[1]-obj.c[0][1])*(tmp[1]-obj.c[1][1]) &gt; 0) || tmp == obj.c[1] {
+            break
+        } else {
+            res = append(res, tmp)
+        }
+    }
+    fmt.Println(res)
+    return res
+}
+func abs(x int) int {
+    if x &gt; 0 {
+        return x
+    }
+    return -x
+}
+func gcd(a, b int) int {
+    for b != 0 {
+        r := a % b
+        a, b = b, r
+    }
+    return a
+}
+func main() {
+    x := newDoubleCoord([2]int{-2, 0}, [2]int{0, 2})
+    x.solve()
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/09/05 19:58</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19186"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<p>fn(x) = [x, x * 기울기], (x1+1...x2)구간에서 fn(x)가 정수인 걸 출력. 입력된 두 점의 x값이 같으면 fn(y)로 계산</p>
+<pre><code class="ruby">KEY_IN = -&gt; { gets.split.map(&amp;:to_i) }
+
+def find_crossed_in_segment(from: KEY_IN.call, to: KEY_IN.call)
+  x1, x2, y1, y2 = *from.zip(to).sum([], &amp;:minmax)
+  fn = -&gt;x1,x2,y1,y2 { (x1+1...x2).map { |x| [x, x * (y2-y1)/(x2-x1).to_f] } }
+  crossed = y1 == y2 ? fn[x1,x2, y1,y2] : fn[y1,y2, x1,x2].map(&amp;:rotate)
+
+  grid    = -&gt;point { (point.first % 1 + point.last % 1) == 0 }
+  result  = crossed.select(&amp;grid).map { |point| point.map(&amp;:to_i) }
+  puts result.size, (result.empty? ? 'None' : result.map(&amp;:inspect).join(', '))
+end
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby"># from stdin case
+$stdin = StringIO.new(&quot;-2 0\n0 2&quot;)
+expect { find_crossed_in_segment }.to output(&quot;1\n[1, 1]\n&quot;).to_stdout
+
+# cases : sloped, x axis, none, y axis
+expect { find_crossed_in_segment from: [-2, 0], to: [0,  2] }
+  .to output(&quot;1\n[1, 1]\n&quot;).to_stdout
+expect { find_crossed_in_segment from: [0,  0], to: [0,  3] }
+  .to output(&quot;2\n[0, 1], [0, 2]\n&quot;).to_stdout
+expect { find_crossed_in_segment from: [0,  0], to: [1, -2] }
+  .to output(&quot;0\nNone\n&quot;).to_stdout
+expect { find_crossed_in_segment from: [4,  0], to: [-2, 0] }
+  .to output(&quot;5\n[-1, 0], [0, 0], [1, 0], [2, 0], [3, 0]\n&quot;).to_stdout
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/09/08 09:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20316"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from sympy import *
+import re
+
+num_com, points, result = re.compile(&quot;[-]?\d*\.?\d+&quot;), [], []
+
+points.append(num_com.findall(input(&quot;p1 : &quot;)))
+points.append(num_com.findall(input(&quot;p2 : &quot;)))
+
+if points[0][0] == points[1][0] :
+    for i in range(min(int(points[0][1])+1, int(points[1][1])), max(int(points[0][1]), int(points[1][1]))) :
+        result.append([int(points[0][0]), i])
+    print(result)
+else : 
+    fn = ((int(points[0][1])-int(points[1][1]))/(int(points[0][0])-int(points[1][0])))*(x-int(points[0][0]))+int(points[0][1])
+    for m in range(min(int(points[0][0])+1, int(points[1][0])), max(int(points[0][0]), int(points[1][0]))) :
+        if fn.subs(x, m) % 1 == 0 :
+            result.append([m, int(fn.subs(x, m))])
+    print(result)
+</code></pre>
+
+<p>결과</p>
+<pre><code>p1 : -1 0
+p2 : 4 0
+[[0, 0], [1, 0], [2, 0], [3, 0]]
+
+p1 : 0 0
+p2 : 8, 4
+[[2, 1], [4, 2], [6, 3]]
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/12/23 17:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GG</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20748"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n1=list(map(int,input(&quot;첫번째 좌표를 입력하십시오: &quot;).split(&quot;,&quot;)))
+n2=list(map(int,input(&quot;두번째 좌표를 입력하십시오: &quot;).split(&quot;,&quot;)))
+try:
+    an=(n2[1]-n1[1])/(n2[0]-n1[0]) #n1과 n2를 직선으로 이었을 때의 기울기
+except:
+    an=0 #x좌표가 둘 다 0이거나 둘 다 같거나 할 시 나눠지지 않으므로 an=0이라 지정
+#어느 한 점에서 다른 한 점으로의 기울기가 같다면 그 선분위에 있는 점이다.
+xlst=[] #정수 x좌표를 받기 위한 빈 리스트
+if n1[0]==n2[0]: #n1과 n2의 x좌표가 같다면 xlst는 n1[0](또는 n2[0]) 하나를 가짐
+    xlst.append(n1[0])
+ylst=[] #정수 y좌표를 받기 위한 빈 리스트
+if n1[1]==n2[1]: #n1과 n2의 y좌표가 같다면 ylst는 n1[1](또는 n2[1]) 하나를 가짐
+    ylst.append(n1[1])
+elst=[] #좌표[x,y]를 받기 위한 빈 리스트
+for x in range(min(n1[0],n2[0])+1,max(n1[0],n2[0])): #n1과 n2의 x좌표 중 작은 것부터 큰 것까지 범위를 지정
+    xlst.append(x)
+for y in range(min(n1[1],n2[1])+1,max(n1[1],n2[1])): #n1과 n2의 y좌표 중 작은 것부터 큰 것까지 범위를 지정
+    ylst.append(y)
+for xnum in xlst:
+    for ynum in ylst:
+        try:
+            if (n2[1]-ynum)/(n2[0]-xnum)==an: #[xnum,ynum]에서 n1(또는 n2)까지의 기울기(n2와 n1)가 같으면 elst에 추가
+                elst.append([xnum,ynum])
+        except:
+            elst.append([xnum,ynum]) #n1, n2 둘 다 x축, 또는 y축으로 평행하면 기울기가 의미가 없으므로 그냥 추가
+if len(elst)==0: #elst의 길이가 0이면(elst에 정수 좌표가 담기지 않으면) None을 출력
+    print(&quot;None&quot;)
+else:
+    print(elst)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/27 11:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박시원</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_21846"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">x=str(input('x1 y1 x2 y2....')).split(' ')
+x1,y1,x2,y2=int(x[0]),int(x[1]),int(x[2]),int(x[3])
+print('(',x1,',',y1,')','(',x2,',',y2,')')
+
+n=0
+if not x2==x1:
+    a=(y2-y1)/(x2-x1)
+    b=y1-(a*x1)
+
+    for i in range (x1+1,x2):
+        if int(a*i+b)==a*i+b:
+            print ('(',i,',',int(a*i+b),')',end='')
+            n+=1
+
+else:
+    for i in range (y1+1,y2):
+        print ('(',x1,',',i,')',end='')
+        n+=1
+
+if n==0:
+    print('None')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/04/21 01:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Buckshot</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2694"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">&lt;결과&gt;
+x1 y1 x2 y2....-2 0 0 2
+( -2 , 0 ) ( 0 , 2 )
+( -1 , 1 )
+
+
+
+x1 y1 x2 y2....0 0 0 3
+( 0 , 0 ) ( 0 , 3 )
+( 0 , 1 )( 0 , 2 )
+
+
+x1 y1 x2 y2....0 0 1 -2
+( 0 , 0 ) ( 1 , -2 )
+None
+
+
+x1 y1 x2 y2....1 5 7 5
+( 1 , 5 ) ( 7 , 5 )
+( 2 , 5 )( 3 , 5 )( 4 , 5 )( 5 , 5 )( 6 , 5 )
+
+
+x1 y1 x2 y2....0 0 12 3
+( 0 , 0 ) ( 12 , 3 )
+( 4 , 1 )( 8 , 2 )</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Buckshot,
+                                    2020/04/21 01:46
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22394"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def grid(inp):
+    x_var = inp[1][0] - inp[0][0]
+    y_var = inp[1][1] - inp[0][1]
+    if x_var == 1 or y_var == 1:
+        print('None')
+    elif x_var == 0:
+        for i in range(inp[0][1]+1, inp[1][1]):
+            print('[{}, {}]'.format(inp[0][0], i), end=' ')
+    elif y_var == 0:
+        for i in range(inp[0][0]+1, inp[1][0]):
+            print('[{}, {}]'.format(inp[0][1], i), end=' ')
+    else:
+        intercept = inp[0][1] - ((y_var/x_var)*inp[0][0])
+        for x in range(inp[0][0]+1, inp[1][0]):
+            y = (y_var/x_var)*x + intercept
+            print('[{}, {}]'.format(x, int(y)))
+
+if __name__ == '__main__':
+    inp = [[0,0],[1,-2]]
+    grid(inp)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/21 14:06</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hwaseong Nam</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24901"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">p1 = list(map(int, input(&quot;p1 : &quot;).split(', ')))
+p2 = list(map(int, input(&quot;p2 : &quot;).split(', ')))
+output = []
+
+if p1[0] == p2[0]:
+    for j in range(p1[1]+1, p2[1]):
+        output.append([p1[0], j])
+else:
+    if p1[0] &gt; p2[0]:
+        p1, p2 = p2, p1
+    y_spd = (p2[1]-p1[1]) / (p2[0]-p1[0])
+    for i in range(1, p2[0]-p1[0]):
+        if y_spd*i == int(y_spd*i):
+            x = int(p1[0] + i)
+            y = int(p1[1] + y_spd* i)
+            output.append([x, y])
+
+if len(output) == 0:
+    print(&quot;none&quot;)
+else:
+    print(output)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/02/27 13:02</p>
+                                <p class="static-profile" style="margin:0;padding:0;">asdfa</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27063"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">a1 = input(&quot;첫번쨰 격자점은?&quot;).split(',')
+a2 = input(&quot;두번쨰 격자점은?&quot;).split(',')
+
+x1 = int(a1[0])
+y1 = int(a1[1])
+x2 = int(a2[0])
+y2 = int(a2[1])
+
+arr=[]
+if x2==x1:
+    for k in range(y1+1,y2):
+        arr.append([x1,k])
+elif y2==y1:
+    for k in range(x1+1,x2):
+        arr.append([k,y2])
+else:
+    slope = (y2-y1)/(x2-x1)
+    x_inter = y2-slope*x2
+    for k in range(x1+1,x2):
+        if slope*k+x_inter == int(slope*k+x_inter):
+            arr.append([k,int(slope*k+x_inter)])
+if len(arr)==0:
+    print(&quot;None&quot;)
+else:
+    for i in arr:
+        print(i,end=', ')
+</code></pre>
+
+<p>기울기가 0일떄/ 기울기가 무한대일때/그외일떄
+이렇게 3가지 경우로 나눠서 코드를 짰고, 1차 함수를 이용했어요
+입력값 범위내에서 정수 x를 대입했을떄 y도 정수로 나오는 쌍을 arr 리스트화 했습니다</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/22 02:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">양캠부부</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27194"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>// Rust</p>
+<p>// 두 point 간 가로, 세로 이동 거리의 gcd를 구해, 이동 시 정수 격자가 나올 수 있는 unit 이동 벡터를 구합니다</p>
+<p>fn grid_point() {</p>
+<pre><code>let inputs = [((-2, 0), (0, 2)),
+                ((0, 0), (0, 3)),
+                ((0, 0), (1, -2))];
+for input in inputs {
+    println!("\n{:?}", input);
+    // 첫번재 격자점을 원점으로 생각할 때, 두 번째 격자점 위치 (a, b)
+    let a: i32 = input.1.0-input.0.0;
+    let b: i32 = input.1.1-input.0.1;
+    // 정수 격자점을 지나기 위한 최소 이동 unit
+    let g = gcd(a.abs() as u128, b.abs() as u128) as i32;
+    let unit = (a / g, b / g);
+    // 다음 정수 격자점
+    let mut next: (i32, i32) = (0, 0);
+    while next.0.abs() &lt; (a-unit.0).abs() || next.1.abs() &lt; (b-unit.1).abs() {
+        next = (next.0 + unit.0, next.1 + unit.1);
+        println!("   {:?}", (next.0 + input.0.0, next.1 + input.0.1));
+    }
+}
+</code></pre>
+<p>}
+fn gcd(a_: u128, b_: u128) -&gt; u128 {</p>
+<pre><code>let mut a = a_;
+let mut b = b_;
+if a &lt; b {  let t = b;
+            b = a;
+            a = t;}
+while b != 0 {  let t = a;
+                a = b;
+                b = t % b;}
+a
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/30 16:11</p>
+                                <p class="static-profile" style="margin:0;padding:0;">JW KIM</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27426"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">[x1,y1], [x2, y2] =[0,0],[1,-2]
+
+
+if x1 == x2:
+    sign = int((y2-y1)/abs(y2-y1))
+    for y in range(y1+sign, y2, sign):
+        dots.append([x1, y])
+
+elif x2 &gt; x1:
+    slope = (y2-y1)/(x2-x1)
+    for x in range(x1+1, x2):
+        y = y1+(x-x1)*slope
+        if y == int(y):
+            dots.append([ x, int(y)])
+
+
+elif x2 &lt; x1:
+    slope = (y2-y1)/(x2-x1)
+    for x in range(x1-1, x2,-1):
+        y = y1+(x-x1)*slope
+        if y == int(y):
+            dots.append([ x, int(y)])
+
+if len(dots) &gt; 0:
+    print(dots)
+
+else:
+    print('None')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/02/21 17:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">로만가</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29514"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def coordinates(p1, p2):
+    dx, dy = p1[0] - p2[0], p1[1]-p2[1]
+    lx = min(p1[0], p2[0])
+    ly = min(p1[1], p2[1])
+    p = []
+    for x in range(lx, p1[0]+p2[0]-lx+1):
+        for y in range(ly+1, p1[1]+p2[1]-ly):
+            if (x-p1[0])*dy - (y-p1[1])*dx == 0:
+                p.append([x,y])
+    print(p)
+
+
+coordinates([-2, 0], [0, 2])
+coordinates([0, 0], [0, 3])
+coordinates([0, 0], [1, -2])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/08/01 22:02</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

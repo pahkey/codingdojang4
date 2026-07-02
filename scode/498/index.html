@@ -1,0 +1,2239 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="```
+주식차트는 분,초,시,일 등의 가격 데이터를 O(open), H(high), L(low), C(close)를 가지고 봉 형태로 표시해 줍니다. 이를 candlesticks chart라고 합니다.
+
+그러면, 주식의 거래데이터가 아래와 ...">
+    <title>주식차트를 위한 ohlc 데이터 만들기 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">주식차트를 위한 ohlc 데이터 만들기</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">3</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 2</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <pre><code>주식차트는 분,초,시,일 등의 가격 데이터를 O(open), H(high), L(low), C(close)를 가지고 봉 형태로 표시해 줍니다. 이를 candlesticks chart라고 합니다.
+
+그러면, 주식의 거래데이터가 아래와 가티 주어질 때 ohlc를 만듭니다.
+
+### 
+실제 상황과 비슷하게 하기 위해서 아래 예제를 조금 바꾸어보았습니다. 조건이 바뀌기 전에 답을 주신 '상파'님의 양해를 먼저 구합니다.
+###
+
+예) 1분마다 open, high, low, close를 만듭니다.
+분:초, 거래가격
+1:02, 1100
+1:20, 1170
+1:59, 1090
+2:30, 1030
+2:31, 1110
+2:42, 1150
+2:55, 1210
+2:56, 1190
+3:02, 1120
+3:09, 1100
+4:15, 1090
+4:20, 1080
+4:55, 1050
+4:56, 1020
+4:57, 1000
+
+[조건] 실제 주식 거래의 경우,, 분당 거래 회수가 10번, 100번, 1000번 등일 수 있으므로, high, low를 찾을 때 되도록 전체 데이터에서 찾지 않고,, 앞뒤 데이터를 비교하여 찾아주십시오.. 
+
+답: 
+open = [1100, 1030, 1120, 1090]
+high = [1170, 1210, 1120, 1090]
+low = [1090, 1030, 1100, 1000]
+close = [1090, 1190, 1100, 1000]
+</code></pre>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">ohlc</span>
+                
+                    <span class="label label-tag label-xs">candlestick</span>
+                
+                    <span class="label label-tag label-xs">finance chart</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2016/01/25 16:41</p>
+                    <p class="static-profile" style="margin:0;padding:0;">hana11</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>28개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_7227"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">2</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3.4.2</p>
+<ol>
+<li>
+<p>단위시간의 거래는 log 파일로 떨어지며 'trade.log' 라는 파일에 쌓이는 것은 전제로 함. 따라서 문제에 주어진 기록을 trade.log 라는 텍스트파일에 저장하여 line 단위로 읽어들임.</p>
+</li>
+<li>
+<p>봉차트는 단위시간당 open, high, low, close 를 나타내므로 결과는 주어진 답변과 달리 분단위 표시하는 것이 좋음</p>
+</li>
+<li>
+<p>거래시간당 시가, 고가, 저가, 종가를 바로 찾을 수 있게 dictionary 로 구현</p>
+</li>
+<li>
+<p>단위시간이 늘어나면 KeyError exception 처리를 하여 log 가 늘어나더라도 처리할 수 있도록 함. 따라서 분단위가 올라가는 첫시점에는 시가가 고가, 저가, 종가를 모두 기록하게 됨</p>
+</li>
+</ol>
+<pre><code class="python">import re, os
+
+log = open(os.path.join(os.getcwd(), 'trade.log'))
+lines = log.readlines()
+ohlc = {}
+
+for line in lines:
+    line_list = re.split(&quot;[:,]&quot;, line)
+    line_time = int(line_list[0])
+    line_price = int(line_list[2])
+    try:
+        ohlc[line_time]['close'] = line_price
+        if line_price &gt; ohlc[line_time]['high']:
+            ohlc[line_time]['high'] = line_price
+        elif line_price &lt; ohlc[line_time]['low']:
+            ohlc[line_time]['low'] = line_price
+    except KeyError: # 분단위 첫 거래의 log 등록
+        ohlc[line_time] = {'open': line_price, 'high': line_price, 'low': line_price, 'close': line_price}
+
+print(ohlc)
+</code></pre>
+
+<p>결과</p>
+<pre><code class="python">&gt;&gt;&gt; print(ohlc)
+{1: {'close': 1090, 'high': 1170, 'low': 1090, 'open': 1100}, 2: {'close': 1190, 'high': 1210, 'low': 1030, 'open': 1030}, 3: {'close': 1100, 'high': 1120, 'low': 1100, 'open': 1120}, 4: {'close': 1000, 'high': 1090, 'low': 1000, 'open': 1090}}
+&gt;&gt;&gt; print(ohlc[2]['high']) # 2분대거래의 고가?
+1210
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/05/23 04:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">예강효빠</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2896"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>요즘 들어 Queue를 자주 쓰네요 샘플 데이터를 만든 후에 차례로 처리했습니다. 처리 부분보다 초기화, 출력 코딩이 대부분이네요<br></p>
+<p>그런데 비교 함수를 쓴다고 메모리 문제가 발생한다는 게 조금 의아합니다<br>
+메모리에 올라간 데이터들은 어차피 참조 방식으로 비교할 테고, 몇몇 Sort 알고리즘처럼 추가적인 메모리가 필요하지 않거든요<br></p>
+<p>어쨋든, 500개의 데이타 샘플을 출력해봤습니다. 랜덤으로 초를 증가시키고, 가격도 1000을 기준으로 +- 250을 랜덤으로 주었습니다<br></p>
+<pre><code class="cs">struct Data
+{
+    public DateTime Time;
+    public int Price;
+}
+static void Main()
+{
+    const int SAMPLE = 500;
+    int time = 0, price = 0, minute = -1;
+    Random rnd = new Random();
+
+    Queue&lt;Data&gt; dataList = new Queue&lt;Data&gt;();
+    List&lt;int&gt; open = new List&lt;int&gt;();
+    List&lt;int&gt; high = new List&lt;int&gt;();
+    List&lt;int&gt; low = new List&lt;int&gt;();
+    List&lt;int&gt; close = new List&lt;int&gt;();
+    List&lt;int&gt; count = new List&lt;int&gt;();
+
+    for (int i = 0; i &lt; SAMPLE; i++)
+    {
+        time += rnd.Next(0, 6);
+        price = 1000 + rnd.Next(-250, 250);
+        dataList.Enqueue(new Data() { Time = new DateTime().AddSeconds(time), Price = price });
+    }
+
+    while (dataList.Count &gt; 0)
+    {
+        var data = dataList.Dequeue();
+        if (minute &lt; data.Time.Minute)
+        {
+            minute = data.Time.Minute;
+            open.Add(data.Price);
+            high.Add(data.Price);
+            low.Add(data.Price);
+            close.Add(data.Price);
+            count.Add(1);
+        }
+        else
+        {
+            if (high[minute] &lt; data.Price) high[minute] = data.Price;
+            if (low[minute] &gt; data.Price) low[minute] = data.Price;
+            close[minute] = data.Price;
+            count[minute]++;
+        }
+    }
+
+    Console.Write(&quot;{0,15}{1,6}{2,6}{3,6}{4,6}{5,6}&quot;, &quot;minute&quot;, &quot;open&quot;, &quot;high&quot;, &quot;low&quot;, &quot;close&quot;, &quot;nData&quot;);
+    Console.WriteLine();
+
+    for (int i = 0; i &lt; minute + 1; i++)
+    {
+        Console.Write(&quot;{0,15}&quot;, string.Format(&quot;{0:00}:00 ~ {1:00}:00&quot;, i, i + 1));
+        Console.Write(&quot;{0,6}&quot;, open[i]);
+        Console.Write(&quot;{0,6}&quot;, high[i]);
+        Console.Write(&quot;{0,6}&quot;, low[i]);
+        Console.Write(&quot;{0,6}&quot;, close[i]);
+        Console.Write(&quot;{0,6}&quot;, count[i]);
+        Console.WriteLine();
+    }
+}
+</code></pre>
+
+<h3 id="_1">결과</h3>
+<pre><code class="no-highlight">         minute  open  high   low close nData
+  00:00 ~ 01:00   850  1183   750  1183    23
+  01:00 ~ 02:00  1125  1222   798   911    24
+  02:00 ~ 03:00   992  1237   768   884    25
+  03:00 ~ 04:00   862  1166   777  1161    23
+  04:00 ~ 05:00  1137  1216   755   755    28
+  05:00 ~ 06:00   961  1238   766   970    31
+  06:00 ~ 07:00  1010  1245   763  1147    24
+  07:00 ~ 08:00   995  1169   769   819    21
+  08:00 ~ 09:00   853  1246   754   774    22
+  09:00 ~ 10:00  1228  1232   788   798    26
+  10:00 ~ 11:00   791  1222   771   912    23
+  11:00 ~ 12:00  1027  1232   774   815    25
+  12:00 ~ 13:00   886  1239   758   910    23
+  13:00 ~ 14:00   837  1182   756  1095    21
+  14:00 ~ 15:00   811  1206   769  1048    26
+  15:00 ~ 16:00  1201  1235   752  1112    21
+  16:00 ~ 17:00  1188  1236   777   938    19
+  17:00 ~ 18:00  1148  1234   767  1078    19
+  18:00 ~ 19:00  1025  1247   854  1048    24
+  19:00 ~ 20:00  1150  1225   784  1199    23
+  20:00 ~ 21:00   854  1246   754   885    27
+  21:00 ~ 22:00   932  1147   932  1147     2
+계속하려면 아무 키나 누르십시오 . . .
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/01/26 00:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이 우람</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2899"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>제가 출제하신분의 의도를 알아채지못하고 엉뚱한 코드를 작성하는 바람에 <br>
+문제를 수정하는 수고로움을 끼쳐드렸네요. 죄송합니다.^^;;<br>
+일단 자료를 화일로 저장해서 한줄씩 읽어서 처리했구요,<br>
+지정한 4개의 리스트외에는 리스트를 사용하지 않았습니다.<br>
+메모리는 최소한도로 사용했습니다.<br>
+<br>
+이번 풀이는 hana11님의 의도에 맞는거죠? ㅎㅎ<br></p>
+<pre><code class="python">open=[];high=[];low=[];close=[]
+prev_t=''
+for line in file('s498.txt'):
+    t,p=line.split(', ');p=int(p)
+    if not prev_t or prev_t[:-3]!=t[:-3]:
+            open.append(p)
+            high.append(p)
+            low.append(p)
+            close.append(p)
+    if p&gt;high[-1] : high[-1] = p
+    if p&lt;low[-1] : low[-1] = p
+    close[-1]=p
+    prev_t = t
+
+print open
+print high
+print low
+print close
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/01/26 14:13</p>
+                                <p class="static-profile" style="margin:0;padding:0;">상파</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1653"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">문제 출제자가 잘 못낸 것이지요.. &lt;감사&gt;</span>
+                                -
+                                <span style="font-size:11px;">
+                                    hana11,
+                                    2016/01/27 19:37
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2894"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 2.7.6입니다.</p>
+<pre><code class="python">data='''\
+1, 1100
+2, 1170
+3, 1090
+4, 1030
+5, 1110
+
+6, 1150
+7, 1210
+8, 1190
+9, 1120
+10, 1100
+
+11, 1090
+12, 1080
+13, 1050
+14, 1020
+15, 1000'''
+
+d = [int(x.split()[1]) for x in data.split('\n') if x] #if x 는 빈줄때문에 삽입
+open=[];high=[];low=[];close=[]
+while d:
+    i=0
+    tmp=[]
+    while d and i&lt;5:tmp.append(d.pop(0));i+=1#5개씩 가져와서 tmp에 넣음
+    open.append(tmp[0])
+    high.append(max(tmp))
+    low.append(min(tmp))
+    close.append(tmp[-1])
+
+print 'open=',open
+print 'high=',high
+print 'low=',low
+print 'close=',close
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/01/25 17:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">상파</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3057"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>var open : Dictionary<String, String> = Dictionary<String, String>()
+        var close : Dictionary<String, String> = Dictionary<String, String>()
+        var high : Dictionary<String, String> = Dictionary<String, String>()
+        var low : Dictionary<String, String> = Dictionary<String, String>()</p>
+<pre><code>    let componentSepa = input.componentsSeparatedByString("\n")
+
+    for line in componentSepa {
+        let componentHour = line.componentsSeparatedByString(":").first
+        let componentValue = line.componentsSeparatedByString(", ").last
+
+        if(componentHour == "") {
+            continue
+        }
+
+        //open.
+        if nil == open[componentHour!] {
+            open[componentHour!] = componentValue
+
+            low[componentHour!] = componentValue
+            high[componentHour!] = componentValue
+        }
+
+        //close
+        close[componentHour!] = componentValue
+
+        //low
+        if low[componentHour!] &gt; componentValue {
+            low[componentHour!] = componentValue
+        }
+
+        //high
+        if high[componentHour!] &lt; componentValue {
+            high[componentHour!] = componentValue
+        }
+    }
+
+
+    let sortOpen = open.sort { (obj1, obj2) -&gt; Bool in
+        return obj1.0 &lt; obj2.0
+    }
+
+    let sortClose = close.sort { (obj1, obj2) -&gt; Bool in
+        return obj1.0 &lt; obj2.0
+    }
+
+    let sortHigh = high.sort { (obj1, obj2) -&gt; Bool in
+        return obj1.0 &lt; obj2.0
+    }
+
+    let sortLow = low.sort { (obj1, obj2) -&gt; Bool in
+        return obj1.0 &lt; obj2.0
+    }
+
+    //output
+    for seq in sortOpen.enumerate() {
+        print("open hour(\(seq.element.0)) : \(seq.element.1)")
+    }
+    for seq in sortClose.enumerate() {
+        print("close hour(\(seq.element.0)) : \(seq.element.1)")
+    }
+    for seq in sortHigh.enumerate() {
+        print("high hour(\(seq.element.0)) : \(seq.element.1)")
+    }
+    for seq in sortLow.enumerate() {
+        print("low hour(\(seq.element.0)) : \(seq.element.1)")
+    }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/02/27 22:24</p>
+                                <p class="static-profile" style="margin:0;padding:0;">준</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3198"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<p>거래값 1개를 받으면 {분=&gt;[o,l,h,c]} 해쉬를 생성. 분에 해당하는 해쉬가 있으면 lhc값 업데이트.
+가장 윗줄 enq[해쉬,분,가격]이 로직. 나머지는 입출력. </p>
+<pre><code class="ruby">enq = -&gt;q,m,v { q[m]? q[m][1,3]=[*[*q[m][1,2],v].minmax,v] : q[m]=[*[v]*4]; q }
+olhc = -&gt;s { s.reduce({}) {|q,e| min,_,price=e.scan(/\w+/); enq[q,min,price.to_i] } }
+agg_olhc = -&gt;stocks { %w(open low high close).zip(olhc[stocks].values.transpose) }
+out_olhc = -&gt;str { agg_olhc[str].each {|tag,prices| puts &quot;#{tag} = #{prices}&quot; } }
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby">stocks_str = [&quot;1:02, 1100&quot;, &quot;1:20, 1170&quot;, &quot;1:59, 1090&quot;, &quot;2:30, 1030&quot;, &quot;2:31, 1110&quot;, &quot;2:42, 1150&quot;, &quot;2:55, 1210&quot;, &quot;2:56, 1190&quot;, &quot;3:02, 1120&quot;, &quot;3:09, 1100&quot;, &quot;4:15, 1090&quot;, &quot;4:20, 1080&quot;, &quot;4:55, 1050&quot;, &quot;4:56, 1020&quot;, &quot;4:57, 1000&quot;]
+tagged_olhc = [[&quot;open&quot;, [1100, 1030, 1120, 1090]], [&quot;low&quot;, [1090, 1030, 1100, 1000]], [&quot;high&quot;, [1170, 1210, 1120, 1090]], [&quot;close&quot;, [1090, 1190, 1100, 1000]]]
+expect(agg_olhc[stocks_str]).to eq tagged_olhc
+</code></pre>
+
+<p><strong>Output</strong></p>
+<pre><code class="ruby">#=&gt; out_olhc[stocks_str]
+open = [1100, 1030, 1120, 1090]
+low = [1090, 1030, 1100, 1000]
+high = [1170, 1210, 1120, 1090]
+close = [1090, 1190, 1100, 1000]
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/03/18 23:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3486"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>open=[];high=[];low=[];close=[]
+prev_t=''
+for line in file('s498.txt'):
+    t,p=line.split(', ');p=int(p)
+    if not prev_t or prev_t[:-3]!=t[:-3]:
+            open.append(p)
+            high.append(p)
+            low.append(p)
+            close.append(p)
+    if p&gt;high[-1] : high[-1] = p
+    if p&lt;low[-1] : low[-1] = p
+    close[-1]=p
+    prev_t = t</p>
+<p>print open
+print high
+print low
+print close</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/04/22 15:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김수현</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5081"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>입력을 파싱하는 부분,</p>
+<p>파싱된 정보를 각 분 단위로 비교/업데이트하는 부분</p>
+<p>분단위로 생성된 결과를 수집하는 부분</p>
+<p>최종 결과를 출력하는 부분을 각각 코루틴으로 만들어서</p>
+<p>쓸데없이 길게 구현해보았습니다. </p>
+<p>파이썬 3.5 입니다.</p>
+<pre><code class="python">import re
+
+
+def coroutine(fn):
+    def inner(*a, **b):
+        r = fn(*a, **b)
+        next(r)
+        return r
+    return inner
+
+
+@coroutine
+def printer():
+    while True:
+        data = (yield)
+        if data:
+            for k, v in data.items():
+                print(&quot;{} = {}&quot;.format(k, v[1:]))
+
+
+@coroutine
+def acc(target=None):
+    data = dict(open=[], close=[], high=[], low=[])
+    while True:
+        input_ = (yield)
+        if not input_:
+            break
+        vopen, vclose, vhigh, vlow = input_
+        data['open'].append(vopen)
+        data['close'].append(vclose)
+        data['high'].append(vhigh)
+        data['low'].append(vlow)
+    if target:
+        target.send(data)
+
+
+@coroutine
+def updater(target=None):
+    current_min = -1
+    vhigh, vlow, vopen, vclose = 0, 0, 0, 0
+    continue_ = True
+    while continue_:
+        input_ = (yield)
+        if input_ is None:
+            continue_ = False
+        else:
+            minute, _, value = input_
+            print(minute, current_min, continue_)
+        if continue_ is False or minute != current_min:
+            if target:
+                target.send((vopen, vclose, vhigh, vlow))
+            vopen, vclose, vhigh, vlow = value, value, value, value
+            current_min = minute
+        else:
+            vhigh = value if value &gt; vhigh else vhigh
+            vlow = value if value &lt; vlow else vlow
+            vclose = value
+    if target:
+        target.send(None)
+
+
+@coroutine
+def parser(target=None):
+    pat = re.compile(r'(\d{1,2}):(\d{1,2}), (\d+)')
+    while True:
+        data = (yield)
+        m = pat.match(data)
+        result = [int(x) for x in m.groups()] if m is not None else None
+        if target:
+            target.send(result)
+        if not result:
+            break
+
+
+def main():
+    process = parser(updater(acc(printer())))
+    try:
+        while True:
+            line = input()
+            process.send(line)
+            if not line:
+                break
+    except:
+        pass
+
+main()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/27 16:09</p>
+                                <p class="static-profile" style="margin:0;padding:0;">룰루랄라</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5408"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">data=[
+'1:02, 1100',
+'1:20, 1170',
+'1:59, 1090',
+'2:30, 1030',
+'2:31, 1110',
+'2:42, 1150',
+'2:55, 1210',
+'2:56, 1190',
+'3:02, 1120',
+'3:09, 1100',
+'4:15, 1090',
+'4:20, 1080',
+'4:55, 1050',
+'4:56, 1020',
+'4:57, 1000',
+]
+o=[]
+h=[]
+l=[]
+c=[]
+wm=-1;
+for d in data:
+    dl = d.split(',')
+    v = int(dl[1].strip())
+    m = int(dl[0].split(&quot;:&quot;)[0].strip())
+    if wm != m:
+        o.append(v)
+        h.append(v)
+        l.append(v)
+        c.append(v)
+        wm = m
+    if h[-1] &lt; v:
+        h[-1] = v
+    if l[-1] &gt; v:
+        l[-1] = v
+    c[-1] = v
+print(&quot;open = {}&quot;.format(o))
+print(&quot;higt = {}&quot;.format(h))
+print(&quot;low = {}&quot;.format(l))
+print(&quot;close = {}&quot;.format(c))
+
+</code></pre>
+
+<p>Python 3.5.2에서 작성하였습니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/11/25 16:36</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Yeo HyungGoo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6012"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">tmp = '''1:02, 1100
+1:20, 1170
+1:59, 1090
+2:30, 1030
+2:31, 1110
+2:42, 1150
+2:55, 1210
+2:56, 1190
+3:02, 1120
+3:09, 1100
+4:15, 1090
+4:20, 1080
+4:55, 1050
+4:56, 1020
+4:57, 1000'''.split('\n')
+o,h,l,c = list(),list(),list(),list()
+high_1, low_1, step = 0,0,0
+value = [x.split(', ')[1] for x in tmp]
+m = [x.split(':')[0] for x in tmp]
+for x in range(len(m)):
+    if step != int(m[x]):
+        step = int(m[x])
+        high_1 = value[x]
+        low_1 = value[x]
+        o.append(value[x])
+    elif high_1 &lt; value[x]:
+        high_1 = value[x]
+    elif low_1 &gt;= value[x]:
+        low_1 = value[x]
+    if len(m)-1 == x or step != int(m[x+1]):
+        h.append(high_1)
+        l.append(low_1)
+        c.append(value[x])
+print('open =',o)
+print('high =',h)
+print('low =',l)
+print('close =',c)
+
+#### 2017.01.24 D-394 ####
+</code></pre>
+
+<p>앞뒤 비교해서 풀으라는게 무슨말인지 이해못해서 그냥 풀었습니다 허허헣...</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/01/24 22:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GunBang</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6376"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>분, 초, 가격의 데이터 array와 각 분마다 어디까지 위치하는지 알려주는 int[] index를 만들어 open,close는 맨 앞과 뒤, high와low는 첫번째부터 시작해서 다음것을 비교해가며 구하도록 만들었습니다.</p>
+<pre><code class="java">package sss;
+
+import java.util.ArrayList;
+
+public class Candlestick {
+    class Data{
+        int minute, second, price;
+        public Data(int minute, int second, int price){
+            this.minute=minute;
+            this.second=second;
+            this.price=price;
+        }
+    }
+    ArrayList&lt;Data&gt; data = new ArrayList&lt;Data&gt;();
+    int index[];
+    public Candlestick(){
+        data.add(new Data(1,2,1100));data.add(new Data(1,20,1170));data.add(new Data(1,59,1090));
+        data.add(new Data(2,30,1030));data.add(new Data(2,31,1110));data.add(new Data(2,42,1150));
+        data.add(new Data(2,55,1210));data.add(new Data(2,56,1190));data.add(new Data(3,2,1120));
+        data.add(new Data(3,9,1100));data.add(new Data(4,15,1090));data.add(new Data(4,20,1080));
+        data.add(new Data(4,55,1050));data.add(new Data(4,56,1020));data.add(new Data(4,57,1000));
+    }
+
+    void set_index(){
+        index = new int[data.get(data.size()-1).minute];
+        for(int i=0;i&lt;data.size();i++)
+            index[data.get(i).minute-1]++;
+        for(int i=0;i&lt;index.length-1;i++)
+            index[i+1]+=index[i];
+    }
+    void ohlc_open(){
+        int open=0;
+
+        System.out.print(&quot;[&quot;);
+        for(int i=0,open_index=0;i&lt;index.length;open_index=index[i++]){
+            open = data.get(open_index).price;
+            System.out.print(open + &quot; &quot;);
+        }
+        System.out.print(&quot;]&quot;);
+    }
+    void ohlc_high(){
+        int high=0;
+        System.out.print(&quot;[&quot;);
+        for(int i = 0, first=0,last=0; i &lt; index.length;i++){
+            first=last; last=index[i];
+            while(first &lt; last){
+                if(high &lt; data.get(first).price)
+                    high = data.get(first).price;
+                first
+                ++;
+            }
+            System.out.print(high + &quot; &quot;);
+            high = 0;
+        }
+        System.out.print(&quot;]&quot;);
+    }
+    void ohlc_low(){
+        int low=data.get(0).price;
+        System.out.print(&quot;[&quot;);
+        for(int i = 0, first=0,last=0; i &lt; index.length;i++){
+            first=last; last=index[i];
+            while(first &lt; last){
+                if(low &gt; data.get(first).price)
+                    low = data.get(first).price;
+                first++;
+            }
+            System.out.print(low + &quot; &quot;);
+            low=999999999;
+        }
+        System.out.print(&quot;]&quot;);
+    }
+    void ohlc_close(){
+        int close=0;
+        System.out.print(&quot;[&quot;);
+        for(int i=0,close_index=0; i&lt;index.length; i++){
+            close_index = index[i]-1;
+            close = data.get(close_index).price;
+            System.out.print(close+&quot; &quot;);
+        }
+        System.out.print(&quot;]&quot;);
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/02/27 20:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">KimSeonbin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8667"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>문제가 이해 안 가서 한참 들여다봤네요.</p>
+<pre><code class="python">open, high, low, close = [], [], [], []
+M = 0
+pp = 0
+for line in data.split('\n'):
+    t, p = line.split(',')
+    m, p = t.split(':')[0], int(p)
+
+    if M != m:
+        if pp: close.append(pp)
+        open.append(p)
+        high.append(p)        
+        low.append(p)
+        M = m
+    else:
+        high[-1] = max(high[-1], p)
+        low[-1] = min(low[-1], p)
+
+    pp = p
+
+close.append(pp)
+
+print(open)
+print(high)
+print(low)
+print(close)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/09/01 04:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9693"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def ohlc(d):
+    tmp=d
+    start=int(tmp[0].split(':')[0])
+    o=[]
+    h=[]
+    l=[]
+    c=[]
+    def inner(s, t, o0, h0, l0, c0):
+        tmpp=[]
+        while int(t[0].split(':')[0])==s:
+            tmpp.append(t.pop(0).split(', ')[1])
+            if not t: break
+        if tmpp:
+            o0.append(tmpp[0])
+            h0.append(max(tmpp))
+            l0.append(min(tmpp))
+            c0.append(tmpp[-1])
+        else: 
+            o0.append('-')
+            h0.append('-')
+            l0.append('-')
+            c0.append('-')
+        if not t: return({'open':o0, 'high':h0, 'low':l0, 'close':c0})
+        else: return(inner(s+1, t, o0, h0, l0, c0))
+    return(inner(start, tmp, o, h, l, c))
+
+data=[
+        '1:02, 1100',
+        '1:20, 1170',
+        '1:59, 1090',
+        '2:30, 1030',
+        '2:31, 1110',
+        '2:42, 1150',
+        '2:55, 1210',
+        '2:56, 1190',
+        '3:02, 1120',
+        '3:09, 1100',
+        '4:15, 1090',
+        '4:20, 1080',
+        '4:55, 1050',
+        '4:56, 1020',
+        '4:57, 1000']
+
+sol=ohlc(data)
+print('''
+        open    =   {}
+        high    =   {}
+        low     =   {}
+        close   =   {}'''.format(sol['open'],sol['high'],sol['low'],sol['close']))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/12/17 19:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">빗나감</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10179"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3.6</p>
+<pre><code class="python">data = [['1:02', '1100'],['1:20', '1170'],['1:59', '1090'],['2:30', '1030'],['2:31', '1110'],['2:42', '1150'],['2:55', '1210'],['2:56', '1190'],['3:02', '1120'],['3:09', '1100'],['4:15', '1090'],['4:20', '1080'],['4:55', '1050'],['4:56', '1020'],['4:57', '1000']]
+
+Open,High,Low,Close,time,timelist = [],[],[],[],[],[]
+
+for i,value in enumerate(data):
+    time = value[0].split(':')
+    timelist.append(time)
+    if i == 0:
+        Open.append(int(value[1]))
+        High.append(int(value[1]))
+        Low.append(int(value[1]))
+        Close.append(int(value[1]))
+    elif timelist[i-1][0] == timelist[i][0]:
+        if value[1] &gt; data[i-1][1]:
+            High[-1] = int(value[1])
+        elif value[1] &lt; data[i-1][1]:
+            Low[-1] = int(value[1])
+        if i == len(data)-1:
+            Close[-1] = int(value[1])    
+    else:
+        Open.append(int(value[1]))
+        High.append(int(value[1]))
+        Low.append(int(value[1]))
+        Close.append(int(value[1]))
+        Close[-2] = int(data[i-1][1])
+
+print(&quot;open =&quot;,Open)
+print(&quot;high =&quot;,High)
+print(&quot;low =&quot;,Low)
+print(&quot;close =&quot;,Close)
+</code></pre>
+
+<ul>
+<li>결과값</li>
+</ul>
+<pre><code class="python">open = [1100, 1030, 1120, 1090]
+high = [1170, 1210, 1120, 1090]
+low = [1090, 1190, 1100, 1000]
+close = [1090, 1190, 1100, 1000]
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/01/16 11:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">justbegin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10410"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>앞뒤 비교하지 말라는 말은 메모리를 아낄 수 있도록 min/max를 쓰지 말라는 거죠?</p>
+<pre><code class="python"># 파이썬
+
+input_sample = [
+    '1:02, 1100',
+    '1:20, 1170',
+    '1:59, 1090',
+    '2:30, 1030',
+    '2:31, 1110',
+    '2:42, 1150',
+    '2:55, 1210',
+    '2:56, 1190',
+    '3:02, 1120',
+    '3:09, 1100',
+    '4:15, 1090',
+    '4:20, 1080',
+    '4:55, 1050',
+    '4:56, 1020',
+    '4:57, 1000',
+    ]
+
+
+def ohlc(data, n=1, pre_min=0, pre_price=65536, o=[], h=[], l=[], c=[]):
+    min = int(data[n][0])
+    price = int(data[n].split()[1])
+    if pre_min &lt; min:
+        o.append(price)
+        h.append(price)
+        l.append(price)
+        if pre_price != 65536:
+            c.append(pre_price)
+    else:
+        if price &gt; h[-1]:
+            h[-1] = price
+        if price &lt; l[-1]:
+            l[-1] = price
+    n += 1
+    if n == len(data):
+        c.append(price)
+        return o, h, l, c
+    pre_min = min
+    pre_price = price
+    return ohlc(data, n, pre_min, pre_price, o, h, l, c)
+
+
+print(ohlc(input_sample))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/01/31 15:14</p>
+                                <p class="static-profile" style="margin:0;padding:0;">olclocr</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10687"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def ohlc(a):
+    index_open = [0]
+    index_close = [len(a)-1]
+    for i in range(len(a)-1):
+        if a[i][0][0] &lt; a[i+1][0][0]:
+            index_open.append(i+1)
+            index_close.append(i)
+    index_open.sort()
+    open = [a[i][1] for i in index_open]
+    index_close.sort()
+    close = [a[i][1] for i in index_close]
+    high = list()
+    low = list()
+    for i in range(len(index_open)):
+        b = sorted(a[index_open[i]:index_close[i]+1], key = lambda x: x[1])
+        low.append(b[0][1])
+        high.append(b[-1][1])
+    return open, high, low, close
+
+
+l = list()
+while 1:
+    n = input()
+    if n == '':
+        break
+    m = int(input())
+    l.append([n,m])
+print(ohlc(l))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/14 08:55</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김동하</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10980"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">trade_info=&quot;&quot;&quot;1:02, 1100
+1:20, 1170
+1:59, 1090
+2:30, 1030
+2:31, 1110
+2:42, 1150
+2:55, 1210
+2:56, 1190
+3:02, 1120
+3:09, 1100
+4:15, 1090
+4:20, 1080
+4:55, 1050
+4:56, 1020
+4:57, 1000&quot;&quot;&quot;
+open=[]
+high=[]
+low=[]
+close=[]
+trade_info_list=trade_info.split('\n')
+
+for k in range(24):
+    info_list=[]
+    info_value=[]
+    for info in trade_info_list:
+        num=''
+        for character in info:
+            if character==':':
+                break
+            num+=character
+        if str(k)==num:
+            info_list.append(info)
+        elif str(k)!=num:
+            continue
+    if len(info_list)!=0:
+        for info in info_list:
+            location=info.index(',')
+            info_value.append(info[location+2:])
+        open.append(info_value[0])
+        close.append(info_value[-1])
+        high.append(max(info_value))
+        low.append(min(info_value))
+
+
+print(open)
+print(high)
+print(low)
+print(close)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/03/03 21:14</p>
+                                <p class="static-profile" style="margin:0;padding:0;">D B</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12952"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python</p>
+<pre><code class="python">n = 15
+open = list()
+high = list()
+low = list()
+close = list()
+tmp_list = list()
+info = dict()
+min_minute = max_minute = 0
+for i in range(n):
+    time, price = input().split(&quot;, &quot;)
+    minute = int(time.split(&quot;:&quot;)[0])
+    info[time] = price
+    if i == 0:
+        min_minute = minute
+        max_minute = minute
+    else:
+        min_minute = min(min_minute, minute)
+        max_minute = max(max_minute, minute)
+c_info = [[] for i in range(max_minute-min_minute+1)]
+for t in info.keys():
+    c_info[int(t.split(&quot;:&quot;)[0])-min_minute].append(info[t])
+#print(c_info)
+for i in c_info:
+    print(i)
+    print(i[0])
+    open.append(i[0])
+    high.append(max(i))
+    low.append(min(i))
+    close.append(i[-1])
+print(open)
+print(high)
+print(low)
+print(close)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/11 17:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Taesoo Kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13720"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">sample = ['1:02', 1100,'1:20', 1170,'1:59', 1090,'2:30', 1030,'2:31', 1110,'2:42', 1150,'2:55', 1210,'2:56', 1190,'3:02', 1120,'3:09', 1100,'4:15', 1090,'4:20', 1080,'4:55', 1050,'4:56', 1020,'4:57', 1000]
+
+oldtime,tmp = '0',[]
+o,h,l,c = [],[],[],[]
+for i in range(len(sample)):
+    if not i&amp;1:
+        time = sample[i].split(':')[0]
+        if tmp and (time &gt; oldtime or i == len(sample)-2):
+            if i == len(sample)-2: tmp.append(sample[i+1])
+            o.append(tmp[0])
+            h.append(max(tmp))
+            l.append(min(tmp))
+            c.append(tmp[-1])
+            tmp.clear()
+        oldtime = time
+        tmp.append(sample[i+1])
+print('open = {}\nhigh = {}\nlow = {}\nclose = {}'.format(o,h,l,c))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/24 16:34</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16222"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C#<br />
+LINQ - GroupBy (key = 분)</p>
+<pre><code class="cs">using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace CD100
+{
+    class Program
+    {
+        static void Main()
+        {
+            // 입력 자료 구성
+            StockValue[] sampleData = 
+            {
+                new StockValue(&quot;1:02, 1100&quot;), new StockValue(&quot;1:20, 1170&quot;), new StockValue(&quot;1:59, 1090&quot;),
+                new StockValue(&quot;2:30, 1030&quot;), new StockValue(&quot;2:31, 1110&quot;), new StockValue(&quot;2:42, 1150&quot;),
+                new StockValue(&quot;2:55, 1210&quot;), new StockValue(&quot;2:56, 1190&quot;), new StockValue(&quot;3:02, 1120&quot;),
+                new StockValue(&quot;3:09, 1100&quot;), new StockValue(&quot;4:15, 1090&quot;), new StockValue(&quot;4:20, 1080&quot;),
+                new StockValue(&quot;4:55, 1050&quot;), new StockValue(&quot;4:56, 1020&quot;), new StockValue(&quot;4:57, 1000&quot;)
+            };
+
+            // 입력 자료 정렬 후, 분에 따라 데이터 그룹화: (key = 분, 해당 분에 속하는 StockValue 인스턴스들)
+            var filterByMin = sampleData.OrderBy(sv =&gt; sv.Minute).ThenBy(sv =&gt; sv.Second)
+                .GroupBy(grp =&gt; grp.Minute);
+
+            var open = new List&lt;int&gt;();
+            var high = new List&lt;int&gt;();
+            var low = new List&lt;int&gt;();
+            var close = new List&lt;int&gt;();
+            foreach (var record in filterByMin) // 각 key(분) 별로
+            {
+                open.Add(record.First().Price); // 인스턴스 첫 값의 가격
+                high.Add(record.Select(sv =&gt; sv.Price).Max()); // 인스턴스 가격 컬렉션의 최대값
+                low.Add(record.Select(sv =&gt; sv.Price).Min()); // 인스턴스 가격 컬렉션의 최소값
+                close.Add(record.Last().Price); // 인스턴스 마지막 값의 가격
+            }
+
+            // 결과 출력
+            Console.WriteLine($&quot;open = [{string.Join(&quot;, &quot;, open)}]&quot;);
+            Console.WriteLine($&quot;high = [{string.Join(&quot;, &quot;, high)}]&quot;);
+            Console.WriteLine($&quot;low = [{string.Join(&quot;, &quot;, low)}]&quot;);
+            Console.WriteLine($&quot;close = [{string.Join(&quot;, &quot;, close)}]&quot;);
+        }
+    }
+
+    class StockValue
+    {
+        public int Minute { get; } = 0;
+        public int Second { get; } = 0;
+        public int Price { get; } = 0;
+
+        public StockValue(string aRecord) // &quot;분:초, 가격&quot; 문자열로부터 인스턴스 생성
+        {
+            string[] splitedRecord = aRecord.Split(',');
+            Price = int.Parse(splitedRecord[1]);
+            int[] recordTime = splitedRecord[0].Split(':').Select(s =&gt; int.Parse(s)).ToArray();
+            Minute = recordTime[0];
+            Second = recordTime[1];
+        }
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/01/24 20:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16653"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">chart = dict()
+with open ('ohlc.txt', 'r') as file:
+    lines = file.readlines()
+    for i in lines:
+        x, y = tuple(i.split(', '))
+        chart.setdefault(x, int(y.strip('\n')))
+
+def to_second(time):
+    mi, se = map(int, time.split(':'))
+    second = mi * 60 + se
+    return second
+
+def open_p(chart):
+    seq = 1
+    result = []
+    for i in chart.keys():
+        if to_second(i) // 60 == seq:
+            seq += 1
+            result.append(chart.get(i))
+
+    return result
+
+def high_p(chart):
+    seq = 1
+    result = []
+    temp = 0
+    for i in chart.keys():
+        if to_second(i) // 60 == seq:
+            if temp &lt; chart.get(i):
+                temp = chart.get(i)
+        else:
+            result.append(temp)
+            temp = chart.get(i)
+            seq += 1
+    result.append(temp)
+
+    return result
+
+def low_p(chart):
+    seq = 1
+    result = []
+    temp = 0 
+    for i in chart.keys():
+        if to_second(i) // 60 == seq:
+            if temp == 0:
+                temp = chart.get(i)
+            elif temp &gt; chart.get(i):
+                temp = chart.get(i)
+        else:
+            result.append(temp)
+            temp = chart.get(i)
+            seq += 1
+    result.append(temp)
+
+    return result
+
+def close_p(chart):
+    temp = []
+    seq = 1
+    result = []
+    for i in chart.keys():
+        if to_second(i) // 60 == seq:
+            temp.append(chart.get(i))
+        elif to_second(i) // 60 != seq:
+            seq += 1
+            result.append(temp[-1])
+            temp.clear()
+    result.append(temp[-1])
+
+    return result
+
+print(open_p(chart))
+print(high_p(chart))
+print(low_p(chart))
+print(close_p(chart))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/02/14 12:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">D.H.</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20069"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.ArrayList;
+
+public class 주식차트를위한ohlc데이터만들기 {
+
+    public static void main(String[] args) {
+
+        String[] times = {&quot;1:02&quot;,&quot;1:20&quot;,&quot;1:59&quot;,&quot;2:30&quot;,&quot;2:31&quot;,&quot;2:42&quot;,&quot;2:55&quot;,
+                &quot;2:56&quot;,&quot;3:02&quot;,&quot;3:09&quot;,&quot;4:15&quot;,&quot;4:20&quot;,&quot;4:55&quot;,&quot;4:56&quot;,&quot;4:57&quot;};
+
+        int[] tradingPrice = {1100,1170,1090,1030,1110,1150,1210,1190,1120,
+                1100,1090,1080,1050,1020,1000};
+
+        ArrayList&lt;Integer&gt; open = new ArrayList&lt;Integer&gt;();
+        ArrayList&lt;Integer&gt; high = new ArrayList&lt;Integer&gt;();
+        ArrayList&lt;Integer&gt; low = new ArrayList&lt;Integer&gt;();
+        ArrayList&lt;Integer&gt; close = new ArrayList&lt;Integer&gt;();   //리스트 4개 생성
+
+        ArrayList&lt;Integer&gt; minute = new ArrayList&lt;Integer&gt;(); //times에 있는 시간들을 분만 따로 모을 리스트 생성
+        for(int i=0; i&lt;times.length; i++) {
+            String[] str = times[i].split(&quot;:&quot;);
+            minute.add(Integer.parseInt(str[0]));
+        }
+
+        open.add(tradingPrice[0]);
+        int biggest = tradingPrice[0];
+        int lowest = tradingPrice[0];
+        for(int i = 0; i&lt;minute.size()-1; i++) {
+            if(minute.get(i)==minute.get(i+1)) {
+                if(tradingPrice[i+1]&gt;=biggest) {
+                    biggest = tradingPrice[i+1];
+                }
+                if(tradingPrice[i+1]&lt;=lowest) {
+                    lowest = tradingPrice[i+1];
+                }
+            }
+            else {
+                high.add(biggest);
+                low.add(lowest);
+                close.add(tradingPrice[i]);
+                open.add(tradingPrice[i+1]);
+                biggest = tradingPrice[i+1];
+                lowest = tradingPrice[i+1];
+            }
+        }
+        high.add(biggest);
+        low.add(lowest);
+        close.add(tradingPrice[times.length-1]);
+
+        System.out.println(open);
+        System.out.println(high);
+        System.out.println(low);
+        System.out.println(close);
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/11/26 19:08</p>
+                                <p class="static-profile" style="margin:0;padding:0;">big Ko</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20696"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">
+data = ['1:02, 1100',
+'1:20, 1170',
+'1:59, 1090',
+'2:30, 1030',
+'2:31, 1110',
+'2:42, 1150',
+'2:55, 1210',
+'2:56, 1190',
+'3:02, 1120',
+'3:09, 1100',
+'4:15, 1090',
+'4:20, 1080',
+'4:55, 1050',
+'4:56, 1020',
+'4:57, 1000']
+
+init_time = 1
+value_list =[]
+o = []
+h = []
+l = []
+c = []
+
+
+for i in range(len(data)):
+    split_data = data[i].split(&quot;,&quot;)
+    split_time = split_data[0].split(&quot;:&quot;)
+    min = int(split_time[0])
+    value = int(split_data[1])
+   # print(min,value)
+
+    if min == init_time:
+        value_list.append(value)
+
+
+    else :
+
+        o.append(value_list[0])
+        c.append(value_list[-1])
+        value_list.sort()
+        h.append(value_list[-1])
+        l.append(value_list[0])
+
+        del value_list[:]
+        init_time = min
+        value_list.append(value)
+
+
+o.append(value_list[0])
+c.append(value_list[-1])
+value_list.sort()
+h.append(value_list[-1])
+l.append(value_list[0])
+
+
+
+print(&quot;Open  : &quot;,o)
+print(&quot;High  : &quot;,h)
+print(&quot;Low   : &quot;,l)
+print(&quot;Close : &quot;,c)
+
+
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/22 22:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">semipooh</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22066"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from _collections import defaultdict
+
+re_data = defaultdict(list)
+for d in data:
+    temp = d.split(':')
+    re_data[temp[0]].append(d.split(', ')[1])
+
+open = []
+high = []
+low = []
+close = []
+
+for price in re_data.values():
+    open.append(price[0])
+    high.append(max(price))
+    low.append(min(price))
+    close.append(price[-1])
+
+print('open = {}\nhigh = {}\nlow = {}\nclose = {}'.format(open, high, low, close))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/04 15:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hwaseong Nam</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2712"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">data=[
+&#39;1:02, 1100&#39;,
+&#39;1:20, 1170&#39;,
+&#39;1:59, 1090&#39;,
+&#39;2:30, 1030&#39;,
+&#39;2:31, 1110&#39;,
+&#39;2:42, 1150&#39;,
+&#39;2:55, 1210&#39;,
+&#39;2:56, 1190&#39;,
+&#39;3:02, 1120&#39;,
+&#39;3:09, 1100&#39;,
+&#39;4:15, 1090&#39;,
+&#39;4:20, 1080&#39;,
+&#39;4:55, 1050&#39;,
+&#39;4:56, 1020&#39;,
+&#39;4:57, 1000&#39;,
+]</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Hwaseong Nam,
+                                    2020/05/04 15:46
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25016"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">o = []
+h = []
+l = []
+c = []
+_high = 0
+_low = 0
+_starter = 0
+
+f = open('_79.txt', 'r')
+lines = f.readlines()
+for line in lines:
+    t = line.split(',')[0]
+    p = line.split(',')[1].strip()
+
+    _min = t.split(':')[0]
+    if lines.index(line) == 0 :
+        _min_before = _min
+        o.append(int(p))
+        _high = int(p)
+        _low = int(p)
+    else:
+        _min_before = lines[lines.index(line) - 1].split(',')[0].split(':')[0]
+    _sec = t.split(':')[1]
+
+    if _min == _min_before:
+        if int(p) &gt; _high: _high = int(p)    
+        if int(p) &lt; _low: _low = int(p)
+    else:
+        o.append(int(p))
+        c.append(int(lines[lines.index(line) - 1].split(',')[1].strip()))
+        h.append(_high)
+        _high = int(p)
+        l.append(_low)
+        _low = int(p)
+
+    if lines.index(line) == (len(lines) - 1) :
+        c.append(int(p))
+        h.append(_high)
+        l.append(_low)
+
+f.close()
+
+print(o,h,l,c)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/03/23 07:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">DSHIN</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25495"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">date = '''1:02, 1100
+1:20, 1170
+1:59, 1090
+2:30, 1030
+2:31, 1110
+2:42, 1150
+2:55, 1210
+2:56, 1190
+3:02, 1120
+3:09, 1100
+4:15, 1090
+4:20, 1080
+4:55, 1050
+4:56, 1020
+4:57, 1000'''.splitlines()
+list = []
+open = []
+high = []
+low  = []
+close= []
+
+for i in date:
+    x,y = ''.join(i[:1].split(':')),i.split(',')[1]
+    list.append(f'{x}{y}')
+c = 1
+while c&lt;int(x)+1:
+    l= []
+    for i in list:
+        if i[0] == str(c) : l.append(i)
+    open.append(l[0][-4:])
+    high.append(max(l)[-4:])
+    low.append(min(l)[-4:])
+    close.append(l[-1][-4:])
+    c+=1
+
+print(open)
+print(high)
+print(low)
+print(close)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/06/03 10:53</p>
+                                <p class="static-profile" style="margin:0;padding:0;">약사의혼자말</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26075"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#codingdojing_ohlc_stock
+
+'''
+분:초, 거래가격
+1:02, 1100
+1:20, 1170
+1:59, 1090
+2:30, 1030
+2:31, 1110
+2:42, 1150
+2:55, 1210
+2:56, 1190
+3:02, 1120
+3:09, 1100
+4:15, 1090
+4:20, 1080
+4:55, 1050
+4:56, 1020
+4:57, 1000
+'''
+
+#1분 단위로 잘라보자.
+
+open_list = []
+high_list = []
+low_list = []
+close_list = []
+
+io = True
+_min = ''
+high = ''
+low = ''
+
+while io:
+    io = input()
+    if io: 
+        time, value = io.split(',')
+    else:                           #last 
+        high_list.append(high)
+        low_list.append(low)
+        close_list.append(close)
+
+    #같은 거래시각
+    if _min == '':           #첫 시작
+        _min = time.split(':')[0]
+        high = eval(value)
+        low = eval(value)
+        close = eval(value)
+        open_list.append(eval(value))
+    elif _min == time.split(':')[0]: #still same minute
+        high = max(high, eval(value))
+        low = min(low, eval(value))
+        close = eval(value)
+    else:                           #next minute
+        _min = time.split(':')[0]
+
+        high_list.append(high)
+        low_list.append(low)
+        close_list.append(close)
+        open_list.append(eval(value))
+
+        high = eval(value)
+        low = eval(value)
+
+
+print(f'''open = {open_list}
+high = {high_list}
+low = {low_list}
+close = {close_list}''')
+</code></pre>
+
+<p>앞 뒤 데이터를 비교하다.. 지져분 해졌네요.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/08/17 15:53</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jaeman Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_28124"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">data=[
+('1:02', 1100),
+('1:20', 1170),
+('1:59', 1090),
+('2:30', 1030),
+('2:31', 1110),
+('2:42', 1150),
+('2:55', 1210),
+('2:56', 1190),
+('3:02', 1120),
+('3:09', 1100),
+('4:15', 1090),
+('4:20', 1080),
+('4:55', 1050),
+('4:56', 1020),
+('4:57', 1000),]
+
+open = []
+high = []
+low = []
+close = []
+
+nowminute = 0
+nowhigh = 0
+nowlow = 0
+now = 0
+
+for i in data:
+    if int(i[0].split(':')[0]) &gt; nowminute:
+        open.append(i[1])
+        high.append(nowhigh)
+        low.append(nowlow)
+        close.append(now)
+        nowminute = int(i[0].split(':')[0])
+        nowhigh = i[1]
+        nowlow = i[1]
+    elif int(i[0].split(':')[0]) == nowminute:
+        if i[1] &gt; nowhigh:
+            nowhigh = i[1]
+        elif i[1] &lt; nowlow:
+            nowlow = i[1]
+    now = i[1]
+
+high.append(nowhigh)
+low.append(nowlow)
+close.append(now)
+
+del high[0]
+del low[0]
+del close[0]
+
+print('open =',open)
+print('high =',high)
+print('low =',low)
+print('close =',close)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/06/24 16:17</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김시영</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

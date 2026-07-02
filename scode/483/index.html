@@ -1,0 +1,2208 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="당신은 그림판의 &#39;색 채우기&#39; 기능을 구현하려한다.
+
+이미지 크기는 제한이 없다. (처리속도 &lt; 3s)
+
+**입력 설명**
+```
+가로 세로
+색을 채우기 시작할 점 과 색
+이미지의 색상 데이터
+```
+
+**입력 예시**
+``...">
+    <title>그림판 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">그림판</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">4</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 3</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>당신은 그림판의 '색 채우기' 기능을 구현하려한다.</p>
+<p>이미지 크기는 제한이 없다. (처리속도 &lt; 3s)</p>
+<p><strong>입력 설명</strong></p>
+<pre><code>가로 세로
+색을 채우기 시작할 점 과 색
+이미지의 색상 데이터
+</code></pre>
+
+<p><strong>입력 예시</strong></p>
+<pre><code>10 10
+5 5 3
+0000000000
+0000001000
+0000110100
+0011000010
+0100000010
+0100000010
+0100000100
+0010001000
+0001011000
+0000100000
+</code></pre>
+
+<p><strong>출력 예시</strong></p>
+<pre><code>0000000000
+0000001000
+0000113100
+0011333310
+0133333310
+0133333310
+0133333100
+0013331000
+0001331000
+0000100000
+</code></pre>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2015/06/14 21:55</p>
+                    <p class="static-profile" style="margin:0;padding:0;">Steal</p>
+                </div>
+            </div>
+
+            
+                <a name="comment_2906"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">출력에서 아래서 2번쨰줄이 잘못된거같아요
+0001331000 ---&gt; 0001311000  이 맞는거 같은데 맞죠?~</span>
+                    -
+                    <span style="font-size:11px;">
+                        양캠부부,
+                        2022/03/01 22:15
+                    </span>
+                </div>
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>28개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_2048"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">static void Main(string[] args)
+        {
+            int x = 5, y = 5, color = 3;
+            int[,] Map = new int[10, 10]
+            {
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,1,0,0,0},
+                {0,0,0,0,1,1,0,1,0,0},
+                {0,0,1,1,0,0,0,0,1,0},
+                {0,1,0,0,0,0,0,0,1,0},
+                {0,1,0,0,0,0,0,0,1,0},
+                {0,1,0,0,0,0,0,1,0,0},
+                {0,0,1,0,0,0,1,0,0,0},
+                {0,0,0,1,0,1,1,0,0,0},
+                {0,0,0,0,1,0,0,0,0,0}
+            };
+
+
+            DFS(new Point(x, y), ref Map,3);
+
+            ShowMap(Map);
+
+
+        }
+
+        private static void ShowMap(int[,] map)
+        {
+            for (int x = 0; x &lt; map.GetLength(0); x++)
+            {
+                for (int y = 0; y &lt; map.GetLength(1); y++)
+                {
+                    Console.Write(&quot;{0}\t&quot;, map[x, y]);
+                }
+                Console.WriteLine();
+            }
+        }
+
+        private static void DFS(Point pt, ref int[,] map,int colr)
+        {
+            int XMax = map.GetLength(0) - 1;
+            int YMax = map.GetLength(1) - 1;
+
+            map[pt.X, pt.Y] = colr;
+
+            if (pt.X &gt; 0 &amp;&amp; map[pt.X - 1, pt.Y] == 0)
+            {
+                DFS(new Point(pt.X - 1, pt.Y), ref map,colr);
+            }
+
+            if (pt.X &lt; XMax &amp;&amp; map[pt.X + 1, pt.Y] == 0)
+            {
+                DFS(new Point(pt.X + 1, pt.Y), ref map, colr);
+            }
+
+            if (pt.Y &gt; 0 &amp;&amp; map[pt.X, pt.Y - 1] == 0)
+            {
+                DFS(new Point(pt.X, pt.Y - 1), ref map, colr);
+            }
+
+            if (pt.Y &lt; YMax &amp;&amp; map[pt.X, pt.Y + 1] == 0)
+            {
+                DFS(new Point(pt.X, pt.Y + 1), ref map, colr);
+            }
+        }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/06/14 22:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">허 빈</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1596"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">DFS는 깊이 우선탐색이기때문에, 이미지가 커질경우 재귀함수가 여러번 호출되어 스택 오버플로우가 발생합니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Steal,
+                                    2015/06/14 22:54
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1597"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">헉, 다음 부터는 이런 문제에서는 BFS 를 사용하도록 하겠습니다 (_ _)</span>
+                                -
+                                <span style="font-size:11px;">
+                                    허 빈,
+                                    2015/06/14 23:00
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2179"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>BFS로 구현했습니다.</p>
+<p>python:</p>
+<pre><code class="python">width, height = 10, 10
+row, col, color = 5, 5, 3
+map_ = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0],
+        [0, 0, 1, 1, 0, 0, 0, 0, 1, 0],
+        [0, 1, 0, 0, 0, 0, 0, 0, 1, 0],
+        [0, 1, 0, 0, 0, 0, 0, 0, 1, 0],
+        [0, 1, 0, 0, 0, 0, 0, 1, 0, 0],
+        [0, 0, 1, 0, 0, 0, 1, 0, 0, 0],
+        [0, 0, 0, 1, 0, 1, 1, 0, 0, 0],
+        [0, 0, 0, 0, 1, 0, 0, 0, 0, 0]]
+queue = []
+
+
+def bfs(coord, color):
+    global map_, queue
+    queue.append(coord)
+    map_[coord[0]][coord[1]] = color
+    while len(queue) != 0:
+        front = queue.pop(0)
+        for (drow, dcol) in ((1, 0), (0, 1), (-1, 0), (0, -1)):
+            if (0 &lt;= front[0]+drow &lt; height and 0 &lt;= front[1]+dcol &lt; width) and map_[front[0]+drow][front[1]+dcol] == 0:
+                queue.append((front[0]+drow, front[1]+dcol))
+                map_[front[0]+drow][front[1]+dcol] = color
+
+
+bfs((row, col), color)
+
+for i in range(height):
+    for j in range(width):
+        print(map_[i][j], end='')
+    print('')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/07/23 01:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김 정우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2231"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">void fill(int x,int y,int color,int target, char ***img)
+{
+    if (((*img)[y][x] - '0') == target)
+    {
+        (*img)[y][x] = color + '0';
+
+        fill(x + 1, y, color, target, img);
+        if (x &gt; 0)
+            fill(x -1, y, color, target, img);
+        fill(x, y+1, color, target, img);
+        if (y &gt; 0)
+            fill(x, y-1, color, target, img);
+    }
+}
+
+void exce89()
+{
+    int x, y;
+    int start[2];
+    int color,target=0;
+    char **img;
+    char flush;
+
+
+    FILE *f;
+    fopen_s(&amp;f, &quot;input89.dat&quot;, &quot;r&quot;);
+
+    fscanf_s(f, &quot;%d %d&quot;, &amp;x,&amp;y);
+    fscanf_s(f, &quot;%d %d %d&quot;, &amp;start[0], &amp;start[1], &amp;color);
+
+    img = (char **)malloc(sizeof(char) * y);
+    fscanf_s(f, &quot;%c&quot;, &amp;flush);
+
+    for (int i = 0; i &lt; y; i++)
+    {
+        img[i] = (char *)malloc(sizeof(char) * (2 * x));
+        fgets(img[i], 2 * x, f);
+    }
+    target = (img[start[1]][start[0]] - '0');
+
+    fill(start[0], start[1], color, target, &amp;img);
+
+    for (int i = 0; i &lt; y; i++)
+    {
+        printf(&quot;%s&quot;, img[i]);
+    }
+
+    fclose(f);
+
+}
+</code></pre>
+
+<p>C로 작성해봤습니다. 입력은 커맨드 창에서 하기엔 양이 너무 많아서
+파일 입력으로 처리했습니다.
+근데 예제문제에 밑에 구멍이 하나 있네요...자꾸 새어나가서 어디서 에러났나 한참 찾았네요.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/08/12 11:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">조서현</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2272"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>자바로 작성해봤습니다.</p>
+<pre><code class="java">package codingDoJang;
+
+public class DrawingBoard {
+
+    public static void main(String[] args) {
+
+        // board 
+        int board[][] = 
+            {  
+                    {0,0,0,0,0,0,0,0,0,0},
+                    {0,0,0,0,0,0,1,0,0,0},
+                    {0,0,0,0,1,1,0,1,0,0},
+                    {0,0,1,1,0,0,0,0,1,0},
+                    {0,1,0,0,0,0,0,0,1,0},
+                    {0,1,0,0,0,0,0,0,1,0},
+                    {0,1,0,0,0,0,0,1,0,0},
+                    {0,0,1,0,0,0,1,0,0,0},
+                    {0,0,0,1,0,1,1,0,0,0},
+                    {0,0,0,0,0,0,0,0,0,0} 
+            };
+
+        // start point
+        int x = 5, y = 5;
+
+        // color
+        int changeColor = 3;
+        int beforeColor = board[x][y];
+
+        fill(board, x, y, beforeColor, changeColor);
+
+        print(board);
+    }
+
+    private static void fill(int board[][], int x, int y, int beforeColor, int changeColor) {
+
+        // 기저사례
+
+        if (board[x][y] == beforeColor) 
+            board[x][y] = changeColor;
+        else return;
+
+        if (x-1 != -1)  fill(board, x-1, y, beforeColor, changeColor);
+        if (x+1 != board.length) fill(board, x+1, y, beforeColor, changeColor);
+        if (y-1 != -1) fill(board, x, y-1, beforeColor, changeColor);
+        if (y+1 != board.length) fill(board, x, y+1, beforeColor, changeColor);
+    }
+
+    private static void print(int board[][]) {
+
+        // 정사각형이라 가정
+        int width = board.length, height = board.length;
+
+        for (int x = 0 ; x &lt; width ; x++) {
+            for (int y = 0 ; y &lt; height ; y++)
+                System.out.print(board[x][y]);
+            System.out.println();
+        }
+
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/08/25 16:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이 준균</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2322"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">        public static void Answer()
+        {
+
+            var x = 5;
+            var y = 5;
+            var color = 3;
+            int[,] board = new int[10, 10]
+            {
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,1,0,0,0},
+                {0,0,0,0,1,1,0,1,0,0},
+                {0,0,1,1,0,0,0,0,1,0},
+                {0,1,0,0,0,0,0,0,1,0},
+                {0,1,0,0,0,0,0,0,1,0},
+                {0,1,0,0,0,0,0,1,0,0},
+                {0,0,1,0,0,0,1,0,0,0},
+                {0,0,0,1,0,1,1,0,0,0},
+                {0,0,0,0,1,0,0,0,0,0}
+            };
+
+            Search(board, x, y, board[x, y], color);
+            Display(board);
+
+        }
+
+        private static void Search(int[,] board, int x, int y, int prev, int color)
+        {
+            if (board[x, y] == prev) board[x, y] = color;
+            else return;
+
+            if (x - 1 &gt;= 0) Search(board, x - 1, y, prev, color);
+            if (x + 1 &lt; board.Length) Search(board, x + 1, y, prev, color);
+            if (y - 1 &gt;= 0) Search(board, x, y - 1, prev, color);
+            if (y + 1 &lt; board.Length) Search(board, x, y + 1, prev, color);
+        }
+
+        private static void Display(int[,] board)
+        {
+            for (int x = 0; x &lt; board.GetLength(0); x++)
+            {
+                for (int y = 0; y &lt; board.GetLength(1); y++)
+                    Console.Write(&quot;{0}\t&quot;, board[x, y]);
+                Console.WriteLine();
+            }
+        }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/09/15 00:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Straß Böhm Jäger</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2330"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def paint(map,from_x,from_y,prev=0):
+    if prev==0:
+        if map[from_x][from_y]==0:
+            map[from_x][from_y]=3
+            paint(map,from_x-1  ,from_y     ,1)
+            paint(map,from_x    ,from_y-1   ,2)
+            paint(map,from_x+1  ,from_y     ,3)
+            paint(map,from_x    ,from_y+1   ,4)
+
+    elif prev==1:
+        if map[from_x][from_y]==0:
+            map[from_x][from_y]=3
+            paint(map,from_x-1  ,from_y     ,1)
+            paint(map,from_x    ,from_y-1   ,2)
+            paint(map,from_x    ,from_y+1   ,4)
+
+    elif prev==2:
+        if map[from_x][from_y]==0:
+            map[from_x][from_y]=3
+            paint(map,from_x-1  ,from_y     ,1)
+            paint(map,from_x    ,from_y-1   ,2)
+            paint(map,from_x+1  ,from_y     ,3)
+
+    elif prev==3:
+        if map[from_x][from_y]==0:
+            map[from_x][from_y]=3
+            paint(map,from_x    ,from_y-1   ,2)
+            paint(map,from_x+1  ,from_y     ,3)
+            paint(map,from_x    ,from_y+1   ,4)
+
+    elif prev==4:
+        if map[from_x][from_y]==0:
+            map[from_x][from_y]=3
+            paint(map,from_x-1  ,from_y     ,1)
+            paint(map,from_x+1  ,from_y     ,3)
+            paint(map,from_x    ,from_y+1   ,4)
+</code></pre>
+
+<p>주석은 없어서 말로 풀이합니다.
+prev는 이전 좌표 이동을 나타내는 겁니다. 따로 값을 안주면 0이 되도록 설정되 있습니다. 1은 좌,2는 상,3은 우,4는 하 이런식으로 지난 번 함수가 현재 좌표(from_x,from_y)가 어디에서 온 것인지 알기 위한 것입니다.
+prev는 없어도 되지만 약간이나마 재귀를 줄여보고자 사용되었습니다.
+한번 재귀를 할때마다 처음을 제외라곤 상,좌,우 ,하 방향중 3개를 선택해 이동해서 만약 그곳에 0이 있다면 3으로 바꾸는 방법을 사용했습니다.</p>
+<p>재귀로 사실 prev도 필요없고 함수안에 밑에 것만 있어도 작동하지만 그래도 약간이나마 중복을 줄여보고자 했습니다.</p>
+<pre><code class="python">paint(map,from_x-1  ,from_y     ,1)
+paint(map,from_x    ,from_y-1   ,2)
+paint(map,from_x+1  ,from_y     ,3)
+paint(map,from_x    ,from_y+1   ,4)
+</code></pre>
+
+<p>다 풀고 보니 색상도 선택 가능해야 하군요;; 그건 간단한 편이니 패스</p>
+<p>ps.8:8 맵에 6.818771362304688e-05걸렸습니다 약 0.00006초</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/09/16 22:45</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Graed</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2725"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="php">$board = array(
+        array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+        array(0, 0, 0, 0, 0, 0, 1, 0, 0, 0),
+        array(0, 0, 0, 0, 1, 1, 0, 1, 0, 0),
+        array(0, 0, 1, 1, 0, 0, 0, 0, 1, 0),
+        array(0, 1, 0, 0, 0, 0, 0, 0, 1, 0),
+        array(0, 1, 0, 0, 0, 0, 0, 0, 1, 0),
+        array(0, 1, 0, 0, 0, 0, 0, 1, 0, 0),
+        array(0, 0, 1, 0, 0, 0, 1, 0, 0, 0),
+        array(0, 0, 0, 1, 0, 1, 1, 0, 0, 0),
+        array(0, 0, 0, 0, 1, 0, 0, 0, 0, 0));
+$x = 5;
+$y = 5;
+$color = 3;
+$pre_color = $board[$x][$y];
+
+echo &quot;* Org img &lt;br&gt;&quot;;
+draw($board);
+
+// fill Color
+fill($board, $x, $y, $color, $pre_color);
+
+echo &quot;&lt;br&gt;* Filled img &lt;br&gt;&quot;;
+draw($board);
+
+function fill(&amp;$canv, $x, $y, $color, $pre_color) {
+    if ($canv[$x][$y] == $pre_color) {
+        $canv[$x][$y] = $color;
+    } else {
+        return;
+    }
+    if ($x - 1 &gt; 0) fill($canv, $x - 1, $y, $color, $pre_color);
+    if ($x + 1 &gt; 0) fill($canv, $x + 1, $y, $color, $pre_color);
+    if ($y - 1 &gt; 0) fill($canv, $x, $y - 1, $color, $pre_color);
+    if ($y + 1 &gt; 0) fill($canv, $x, $y + 1, $color, $pre_color);
+}
+function draw($img) {
+    foreach ($img as $arr) {
+        foreach ($arr as $v) {
+            echo $v;
+        }
+        echo &quot;&lt;br/&gt;&quot;;
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/01/08 10:58</p>
+                                <p class="static-profile" style="margin:0;padding:0;">물빛미르</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2900"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>큐를 이용했습니다.
+큐에서 점 하나 꺼내서 색칠하고 그 점 주변에 칠해야 되는 점 찾아서 큐에 넣는 과정을 큐가 빌때까지 반복합니다.</p>
+<pre><code class="python">col,row =map(int, raw_input().split())
+x,y,c = map(int, raw_input().split())
+p = [map(int, list(raw_input())) for i in range(row)]
+
+def paint(p,x,y,c):
+    prev_c = p[y][x]
+    q = [(y,x)]
+    while q:
+        yy,xx=q.pop(0)
+        p[yy][xx]=c
+        for dy,dx in [(-1,0),(1,0),(0,-1),(0,+1)]:
+            if yy+dy in range(len(p)) and xx+dx in range(len(p[0])) and\
+                p[yy+dy][xx+dx]==prev_c:
+                q.append((yy+dy, xx+dx))
+def display(p):
+    for line in p: print ''.join(str(x) for x in line)
+
+paint(p,x,y,c)
+print
+display(p)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/01/26 16:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">상파</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3571"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬입니다. BFS로 풀었습니다.</p>
+<pre><code class="python">def do(s, x, y, c):
+    def offsets(p):
+        x, y = p
+        result = [(x+a, y+b) for (a, b) in [(-1, 0), (1, 0), (0, -1), (0, 1)]
+                   if (0 &lt;= (x+a) &lt; w) and (0 &lt;= y + b &lt; h)]
+        return result
+
+    data = list(s.replace('\n', ''))
+    c = str(c)
+    if data[x + y * w] == '0':
+        temp = [(x, y)]
+        while temp:
+            a, b = temp.pop()
+            if data[a + b * w] == '0':
+                data[a + b * w] = c
+                for i, j in offsets((a, b)):
+                    if data[i + j * w] == '0':
+                        temp.append((i, j))
+    result = '\n'.join(''.join(data[x*w:(x+1)*w]) for x in range(h))
+    print(result)
+
+
+sample = &quot;&quot;&quot;\
+0000000000
+0000001000
+0000110100
+0011000010
+0100000010
+0100000010
+0100000100
+0010001000
+0001001000
+0000110000&quot;&quot;&quot;
+x, y, c = 5, 5, 3
+do(sample, x-1, y-1, c)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/05/03 14:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">룰루랄라</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3991"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">data = list(list(int(j) for j in i) for i in '''0000000000
+0000001000
+0000110100
+0011000010
+0100000010
+0100000010
+0100000100
+0010001000
+0001011000
+0000100000'''.split('\n'))
+class area:
+    def __init__(self, target):
+        self.target, self.color_from, self.dic = (target, 0, {})
+    def infest(self, x, y):
+        if self.dic == {}:
+            self.color_from = self.target[y][x]
+        self.dic[(x, y)] = True
+        temp = []
+        for dx, dy in [(1, 0),(-1, 0),(0, 1),(0, -1)]:
+            i, j = x+dx, y+dy
+            if all((0 &lt;= i &lt; len(self.target[0]),
+             0 &lt;= j &lt; len(self.target),
+             (i, j) not in self.dic,
+             self.target[j][i] == self.color_from)):
+                temp.append((x+dx, y+dy))
+        pr = []
+        if temp:
+            for i, j in temp:
+                if  self.target[j][i] == self.color_from:
+                    self.infest(i, j)
+
+def fill(li, x, y, color):
+    a = area(li)
+    a.infest(x, y)
+    for i, j in a.dic.keys():
+        li[j][i] = color
+
+while __name__ == '__main__':
+#    length, height = list(map(int, input('&gt;&gt;&gt;').split()))
+    x, y, color = list(map(int, input('&gt;&gt;&gt;').split()))
+#    data = list(list(int(numchar) for numchar in input('&gt;&gt;&gt;&gt;&gt;&gt;')) for h in range(height))
+    fill(data, x, y, color)
+    for i in data:
+        print(''.join(str(j) for j in i))
+</code></pre>
+
+<p>재귀함수 이용하였습니다. 파이썬 3.5.1</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/06/25 10:24</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Flair Sizz</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4197"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<p>BFS로 풀었습니다.</p>
+<pre><code class="ruby">paint_image = proc do
+  xy, start = (1..2).map { gets.split.map(&amp;:to_i) } 
+  image = Matrix[*(1..xy[0]).map { gets.chars[0, xy[1]] }]
+  q, find_color, paint = [start[0,2]], image[*start[0,2]].to_s, start[2].to_s
+
+  cell = -&gt;x,y { x&gt;=0 &amp;&amp; y&gt;=0 &amp;&amp; image[x,y] == find_color }
+  next_of = -&gt;x,y { [[1,0],[-1,0],[0,-1],[0,1]].map {|r,c| [x+r,y+c] }.select &amp;cell }
+  nexts = -&gt;x,y { image.send(:[]=, x, y, paint); next_of[x,y] }
+  q += nexts[*q.shift] until !q[0]
+  puts image.to_a.map(&amp;:join)
+end
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby">$stdin = StringIO.new(&quot;10 10\n&quot; +
+                      &quot;5 5 3\n&quot; +
+                      &quot;0000000000\n&quot; +
+                      &quot;0000001000\n&quot; +
+                      &quot;0000110100\n&quot; +
+                      &quot;0011000010\n&quot; +
+                      &quot;0100000010\n&quot; +
+                      &quot;0100000010\n&quot; +
+                      &quot;0100000100\n&quot; +
+                      &quot;0010001000\n&quot; +
+                      &quot;0001011000\n&quot; +
+                      &quot;0000100000\n&quot;)
+expect { paint_image[] }.to output(&quot;0000000000\n&quot; +
+                                   &quot;0000001000\n&quot; +
+                                   &quot;0000113100\n&quot; +
+                                   &quot;0011333310\n&quot; +
+                                   &quot;0133333310\n&quot; +
+                                   &quot;0133333310\n&quot; +
+                                   &quot;0133333100\n&quot; +
+                                   &quot;0013331000\n&quot; +
+                                   &quot;0001311000\n&quot; +
+                                   &quot;0000100000\n&quot;).to_stdout
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/07/23 08:53</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7445"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>메소드 순환 호출을 이용해 작성했습니다.</p>
+<pre><code class="cs">// 그림판 - C#
+using System;
+
+namespace Ppaint
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine(&quot;캔버스 크기를 입력하세요.&quot;);
+            string select = Console.ReadLine();
+            int x = int.Parse(select.Split(' ')[0]);
+            int y = int.Parse(select.Split(' ')[1]);
+            Console.WriteLine(&quot;색을 채우기 위해 찍을 점과 색을 입력하세요.&quot;);
+            select = Console.ReadLine();
+            int ptnx = int.Parse(select.Split(' ')[0]);
+            int ptny = int.Parse(select.Split(' ')[1]);
+            int color = int.Parse(select.Split(' ')[2]);
+            Console.WriteLine(&quot;현재 캔버스 상태를 그려주세요.&quot;);
+            int[,] canvas = new int[y, x];
+            for (int i = 0; i &lt; y; i++)
+            {
+                for (int j = 0; j &lt; x; j++)
+                    canvas[i, j] = int.Parse(char.ToString(Console.ReadKey().KeyChar));
+                Console.WriteLine();
+            }
+            Console.WriteLine(&quot;결과는 다음과 같습니다.&quot;);
+            int temp = canvas[ptny, ptnx];
+            Pill(ptnx, ptny, canvas, canvas[ptny, ptnx], color);
+            for (int i = 0; i &lt; y; i++)
+            {
+                for (int j = 0; j &lt; x; j++)
+                    Console.Write(canvas[i, j]);
+                Console.WriteLine();
+            }
+        }
+        static void Pill(int x, int y, int[,] canvas, int temp, int color)
+        {
+            try
+            {
+                if (canvas[y, x] != temp)
+                    return;
+            }
+            catch { return; }
+            canvas[y, x] = color;
+            Pill(x + 1, y, canvas, temp, color);
+            Pill(x, y + 1, canvas, temp, color);
+            Pill(x - 1, y, canvas, temp, color);
+            Pill(x, y - 1, canvas, temp, color);
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/12 23:32</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jeong Hoon Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7449"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">// 술취한 바퀴벌레(Random walk) - C#
+using System;
+
+namespace DrunkRoach
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine(&quot;격자의 가로, 세로, 바퀴벌레의 초기 위치를 입력하세요.&quot;);
+            string select = Console.ReadLine();
+            int x = int.Parse(select.Split(' ')[0]);
+            int y = int.Parse(select.Split(' ')[1]);
+            int defx = int.Parse(select.Split(' ')[2]) - 1;
+            int defy = int.Parse(select.Split(' ')[3]) - 1;
+            int counter = 0; int[,] board = new int[y, x];
+            Random r = new Random();
+            for (int i = 0; i &lt; y; i++)
+                for (int j = 0; j &lt; x; j++)
+                    board[i, j] = 0;
+            NO:
+            int addx = 0, addy = 0;
+            try
+            {
+                addx = r.Next(-1, 2);
+                addy = r.Next(-1, 2);
+                defx += addx; defy += addy;
+                board[defy, defx]++;
+            }
+            catch { defx -= addx; defy -= addy; goto NO; }
+            counter++;
+            for (int i = 0; i &lt; y; i++)
+                for (int j = 0; j &lt; x; j++)
+                    if (board[i, j] == 0)
+                        goto NO;
+            Console.WriteLine(&quot;결과:&quot;);
+            for (int i = 0; i &lt; y; i++)
+            {
+                for (int j = 0; j &lt; x; j++)
+                    Console.Write(&quot;{0} &quot;, board[i, j]);
+                Console.WriteLine();
+            }
+            Console.WriteLine(&quot;총 이동 횟수: {0}&quot;, counter);
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/13 08:28</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jeong Hoon Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7599"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>javascript</strong></p>
+<p>BFS 로 구현하였습니다.</p>
+<p>visited 배열을 따로 만들어서 큐에 넣기 전 이미 큐에 들어간 좌표인지를 검사합니다.</p>
+<p>무조건 큐에 넣고 색칠하기 전 색칠했는지/안했는지를 검사할 수도 있으나 </p>
+<p>그렇게 하면 필요없는 데이타가 큐에 들어가기 때문입니다.</p>
+<pre><code class="javascript">var paint = function(canvas, x, y, c) {
+    var queue = [];
+    var visited = Array.from(Array(canvas.length), v =&gt; Array.from(Array(canvas[0].length), () =&gt; 0));
+
+    enqueue(queue, [x, y, c], canvas, visited);
+
+    while (queue.length &gt; 0) {
+        var [row, col, color] = queue.shift();
+        canvas[row][col] = color;
+
+        enqueue(queue, [row - 1, col, c], canvas, visited);
+        enqueue(queue, [row + 1, col, c], canvas, visited);
+        enqueue(queue, [row, col + 1, c], canvas, visited);
+        enqueue(queue, [row, col - 1, c], canvas, visited);
+    }
+};
+
+var enqueue = function(queue, [row, col, color], canvas, visited) {
+    if (canvas[row] &amp;&amp; canvas[row][col] === 0 &amp;&amp; visited[row][col] !== 1) {
+        queue.push([row, col, color]);
+        visited[row][col] = 1;
+    }
+};
+
+var print = function(canvas) {
+    console.log(canvas.map(v =&gt; v.join(&quot;&quot;)).join(&quot;\n&quot;));
+};
+
+
+var input=
+`10 10
+5 5 3
+0000000000
+0000001000
+0000110100
+0011000010
+0100000010
+0100000010
+0100000100
+0010001000
+0001011000
+0000100000`;
+
+var lines = input.split(&quot;\n&quot;);
+var [m, n] = lines[0].split(&quot; &quot;);
+var [x0, y0, c0] = lines[1].split(&quot; &quot;).map(v =&gt; parseInt(v));
+var map = lines.slice(2).map(v =&gt; v.split(&quot;&quot;).map(v =&gt; parseInt(v)));
+
+paint(map, x0, y0, c0);
+print(map);
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/21 04:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">funnystyle</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8017"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C#: BFS</p>
+<p>외벽(-1)을 두르고 시작합니다. 초기화 코드는 귀찮아서 생략..</p>
+<pre><code class="cs">class Location
+{
+    public int x { get; set; }
+    public int y { get; set; }
+    public Location(int x, int y)
+    {
+        this.x = x;
+        this.y = y;
+    }
+
+    public Location[] neighbors()
+    {
+        return new Location[4]
+        {
+            new Location(x-1, y),
+            new Location(x+1, y),
+            new Location(x, y-1),
+            new Location(x, y+1)
+        };
+    } 
+}
+
+class ContactList
+{
+    static void Main(string[] args)
+    {
+        int color = 3;
+        int[,] image = new int[12, 12]
+        {
+                {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+                {-1, 0,0,0,0,0,0,0,0,0,0, -1},
+                {-1, 0,0,0,0,0,0,1,0,0,0, -1},
+                {-1, 0,0,0,0,1,1,0,1,0,0, -1},
+                {-1, 0,0,1,1,0,0,0,0,1,0, -1},
+                {-1, 0,1,0,0,0,0,0,0,1,0, -1},
+                {-1, 0,1,0,0,0,0,0,0,1,0, -1},
+                {-1, 0,1,0,0,0,0,0,1,0,0, -1},
+                {-1, 0,0,1,0,0,0,1,0,0,0, -1},
+                {-1, 0,0,0,1,0,1,1,0,0,0, -1},
+                {-1, 0,0,0,0,1,0,0,0,0,0, -1},
+                {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}
+        };
+
+        Queue&lt;Location&gt; que = new Queue&lt;Location&gt;();
+        que.Enqueue(new Location(5, 5));
+        while (que.Count &gt; 0)
+        {
+            Location cur = que.Dequeue();
+            foreach (var loc in cur.neighbors())
+            {
+                if (image[loc.x, loc.y] == 0)
+                {
+                    image[loc.x, loc.y] = color;
+                    que.Enqueue(loc);
+                }
+            }
+        }
+
+        for (int i = 1; i &lt;= 10; i++)
+        {
+            for (int j = 1; j &lt;= 10; j++)
+            {
+                Write(image[i, j]);
+            }
+            WriteLine();
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/07/26 20:24</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10621"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3.6</p>
+<pre><code class="python">&quot;&quot;&quot;
+아이디어&gt;
+ 1) 시작점을 기준으로 주변에 색이 채워지지 않은 테두리 범위를 찾고,
+ 2) 시작점이 테두리 안에 있으면 테두리 안으로,시작점이 테두리 밖에 있으면 테두리 밖으로 색이 없는 위치에 지정된 색 데이터를 채웁니다.
+&quot;&quot;&quot;
+
+def inputdata():
+    size = input('').split()
+    info = input('').split()
+    image = [list(input('')) for i in range(int(size[0]))]
+    data = [size,info,image]
+    return data
+
+def painting(data):
+    outline_start,tmp,border = [],[],[]
+    for i,value_i in enumerate(data[2]):
+        for h,value_h in enumerate(value_i):
+            if value_h == '1':
+                outline_start.extend([i,h])
+# 시작할 점이 테두리 안
+    if outline_start[0] &lt; int(data[1][0]) and data[2][int(data[1][0])].index('1') &lt; int(data[1][1]):
+        for i in data[2]:
+            if i.count('1') &gt;= 2:
+                for g,p in enumerate(i):
+                    if p == '1':
+                        tmp.append(g)
+                border = [min(tmp),max(tmp)]
+                for j in range(border[0],border[1]+1):
+                    if i[j] != '1':
+                        i[j] = data[1][2]
+                tmp = []
+# 시작할 점이 테두리 밖
+    else:
+        for i in data[2]:
+            if i.count('1') &lt;= 1:
+                for g,p in enumerate(i):
+                    if p != '1':
+                        i[g] = data[1][2]
+            if i.count('1') &gt;= 2:
+                for g,p in enumerate(i):
+                    if p == '1':
+                        tmp.append(g)
+                border = [min(tmp),max(tmp)]
+                for j in range(border[0]):
+                    i[j] = data[1][2]
+                for j in range(border[1]+1,len(i)):
+                    i[j] = data[1][2]                    
+                tmp = []
+    print(&quot;\n&quot;)
+    for i in data[2]:
+        print(''.join(i))
+
+if __name__ == &quot;__main__&quot;:
+    data = inputdata()
+    painting(data)
+</code></pre>
+
+<p>*결과값</p>
+<pre><code class="python">10 10
+5 5 3
+0000000000
+0000001000
+0000110100
+0011000010
+0100000010
+0100000010
+0100000100
+0010001000
+0001011000
+0000100000
+
+
+0000000000
+0000001000
+0000113100
+0011333310
+0133333310
+0133333310
+0133333100
+0013331000
+0001311000
+0000100000
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/09 12:02</p>
+                                <p class="static-profile" style="margin:0;padding:0;">justbegin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10835"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>1로 구성된 테두리가 오목도형을 이루는 경우와, 테두리가 중간에 열려있는경우 바깥도 칠해지게 만들어보았습니다.</p>
+<pre><code class="python">import copy
+def paint(a, m, k):
+    def xexpand(a, m):
+        result = set()
+        i = 0
+        while i &lt;= m[1]:
+            if a[m[0]][m[1]-i]:
+                break
+            result.add((m[0], m[1]-i))
+            i += 1
+        i = 0
+        while m[1]+i &lt;= len(a[0])-1:
+            if a[m[0]][m[1]+i]:
+                break
+            result.add((m[0], m[1]+i))
+            i += 1
+        return result
+    def yexpand(a, m):
+        if not(a[m[0]][m[1]]):
+            result = {(m[0], m[1])}
+            if m[0]:
+                if not(a[m[0]-1][m[1]]):
+                    result.add((m[0]-1, m[1]))
+            if len(a) - m[0]-1:
+                if not(a[m[0]+1][m[1]]):
+                    result.add((m[0]+1, m[1]))
+            return result
+        else:
+            return set()
+    def connected(a, m):
+        result = {(m[0], m[1])}
+        last = {(m[0], m[1])}
+        record = [set(), {(m[0], m[1])}]
+        while 1:
+            for i in last:
+                result.update(xexpand(a, i))
+            record.append(copy.deepcopy(result))
+            last = record[-1] - record[-3]
+            for i in last:
+                result.update(yexpand(a, i))
+            record.append(copy.deepcopy(result))
+            last = record[-1] - record[-3]
+            if record[-1] == record[-3]:
+                break
+        return result
+    for i in connected(a, m):
+        a[i[0]][i[1]] = k
+    return a
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/20 23:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김동하</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11869"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Swift입니다.</p>
+<p>재귀호출로 풀었습니다.</p>
+<pre><code class="no-highlight">import Foundation
+
+var testPicture = [
+[0,0,0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,1,0,0,0],
+[0,0,0,0,1,1,0,1,0,0],
+[0,0,1,1,0,0,0,0,1,0],
+[0,1,0,0,0,0,0,0,1,0],
+[0,1,0,0,0,0,0,0,1,0],
+[0,1,0,0,0,0,0,1,0,0],
+[0,0,1,0,0,0,1,0,0,0],
+[0,0,0,1,0,1,1,0,0,0],
+[0,0,0,0,1,0,0,0,0,0]]
+
+func printBoard(_ board:[[Int]]) {
+    for line in board {
+        print(line.reduce(&quot;&quot;, {$0 + String($1) + &quot; &quot;}))
+    }
+}
+
+func fillColor(_ givenBoard: [[Int]], _ x: Int, _ y: Int, _ color: Int) -&gt; [[Int]] {
+    var board = givenBoard
+    let targetColor = board[y][x]
+
+    board[y][x] = color
+    if x &gt; 0 &amp;&amp; board[y][x-1] == targetColor {
+        board = fillColor(board, x - 1, y, color)
+    }
+
+    if x &lt; (board[y].count - 1) &amp;&amp; board[y][x + 1] == targetColor {
+        board = fillColor(board, x + 1, y, color)
+    }
+
+    if y &gt; 0 &amp;&amp; board[y - 1][x] == targetColor {
+        board = fillColor(board, x, y - 1, color)
+    }
+
+    if y &lt; (board[y].count - 1) &amp;&amp; board[y + 1][x] == targetColor {
+        board = fillColor(board, x, y + 1, color)
+    }
+
+    return board
+}
+
+printBoard( fillColor(testPicture, 5, 5, 3) )
+
+</code></pre>
+
+<p>결과는...</p>
+<pre><code class="no-highlight">0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 1 0 0 0
+0 0 0 0 1 1 3 1 0 0
+0 0 1 1 3 3 3 3 1 0
+0 1 3 3 3 3 3 3 1 0
+0 1 3 3 3 3 3 3 1 0
+0 1 3 3 3 3 3 1 0 0
+0 0 1 3 3 3 1 0 0 0
+0 0 0 1 3 1 1 0 0 0
+0 0 0 0 1 0 0 0 0 0
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/04/26 00:58</p>
+                                <p class="static-profile" style="margin:0;padding:0;">졸린하마</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12220"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="scala">    val arr = Array(
+        &quot;0000000000&quot;.toCharArray,
+        &quot;0000001000&quot;.toCharArray,
+        &quot;0000110100&quot;.toCharArray,
+        &quot;0011000010&quot;.toCharArray,
+        &quot;0100000010&quot;.toCharArray,
+        &quot;0100000010&quot;.toCharArray,
+        &quot;0100000100&quot;.toCharArray,
+        &quot;0010001000&quot;.toCharArray,
+        &quot;0001011000&quot;.toCharArray,
+        &quot;0000100000&quot;.toCharArray
+        )
+    val (x, y) = (5, 3)
+    val fromColor = arr(x)(y)
+    val toColor = '3'
+    val direction = List((1, 0), (0 ,1), (-1, 0), (0, -1))
+
+    def fillColor(N:Int, M:Int){
+        println(N, M)
+        if(N &lt; 0 || N &gt;= 10 || M &lt; 0 || M &gt;= 10 || arr(N)(M) != fromColor) ()
+        else{
+            arr(N)(M) = toColor
+            for((a, b) &lt;- direction){
+                fillColor(N + a, M + b) 
+            }
+        }
+    }
+    fillColor(5, 3)
+    arr.map(_.toList).toList.foreach(v =&gt; println(v.mkString(&quot; &quot;)))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/12 12:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">한강희</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12466"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">board = [[int(q) for q in p] for p in '''0000000000
+0000001000
+0000110100
+0011000010
+0100000010
+0100000010
+0100000100
+0010001000
+0001011000
+0000100000'''.split('\n')]
+orgcolor = ''
+def coloring(x, y, color):
+    global orgcolor, board
+    if orgcolor == '': orgcolor = board[y - 1][x - 1]
+    if board[y - 1][x - 1] == orgcolor:
+        board[y - 1][x - 1] = color
+        coloring(x, y + 1, color)
+        coloring(x, y - 1, color)
+        coloring(x + 1, y, color)
+        coloring(x - 1, y, color)
+coloring(5, 5, 3)
+for mainprt in board:
+    for prt in mainprt:
+        print(prt, end='')
+    print()
+</code></pre>
+
+<p>Python 3입니다</p>
+<p>자신을 색칠한 뒤 재귀함수를 이용하여 자신의 상하좌우에 있는 숫자를 변경하는 방식입니다</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/23 21:00</p>
+                                <p class="static-profile" style="margin:0;padding:0;">myyh2357</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12886"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>위의 입력 예시 그대로 복붙하면 출력 예시와 동일하게 출력됩니다. 숫자 바꿔도 잘 됩니다. 재귀함수로 풀었습니다.</p>
+<pre><code class="java">import java.util.Scanner;
+
+public class PaintFill {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int[][] data = new int[sc.nextInt()][sc.nextInt()];
+        int xpos = sc.nextInt(), ypos = sc.nextInt(), color = Integer.valueOf(sc.nextLine().trim());
+        for (int i = 0; i &lt; data.length; i++) {
+            String[] temp = sc.nextLine().split(&quot;&quot;);
+            for (int j = 0; j &lt; data[0].length; j++)
+                data[i][j] = Integer.valueOf(temp[j]);
+        }
+        FillColor(data, xpos, ypos, color, data[xpos][ypos]);
+        for (int i = 0; i &lt; 10; i++) {
+            for (int j = 0; j &lt; 10; j++)
+                System.out.print(data[i][j]);
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    private static void FillColor(int[][] data, int xpos, int ypos, int color, int OldColor) {
+        if (data[xpos][ypos] == OldColor)
+            data[xpos][ypos] = color;
+        if (xpos - 1 &gt; -1 &amp;&amp; data[xpos - 1][ypos] == OldColor)
+            FillColor(data, xpos - 1, ypos, color, OldColor);
+        if (xpos + 1 &lt; data.length &amp;&amp; data[xpos + 1][ypos] == OldColor)
+            FillColor(data, xpos + 1, ypos, color, OldColor);
+        if (ypos - 1 &gt; -1 &amp;&amp; data[xpos][ypos - 1] == OldColor)
+            FillColor(data, xpos, ypos - 1, color, OldColor);
+        if (ypos + 1 &lt; data[0].length &amp;&amp; data[xpos][ypos + 1] == OldColor)
+            FillColor(data, xpos, ypos + 1, color, OldColor);
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/07 20:12</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김지훈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13770"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def paint(mat,x,y,color):
+    dr = ((1,0),(0,1),(-1,0),(0,-1))
+    qu = [(x,y)]
+    oc = mat[x][y]
+    if oc == color: return
+
+    mat[x][y] = color
+    while qu:
+        i,j = qu.pop(0)
+        for dx,dy in dr:
+            if 0&lt;=i+dx&lt;len(mat) and 0&lt;=j+dy&lt;len(mat[0]) and mat[i+dx][j+dy] == oc:
+
+                mat[i+dx][j+dy] = color
+                qu.append((i+dx,j+dy))
+
+    return
+
+sample = '''\
+0000000000
+0000001000
+0000110100
+0011000010
+0100000010
+0100000010
+0100000100
+0010001000
+0001011000
+0000100000'''
+sp = [[int(j) for j in i] for i in sample.split('\n')]
+
+val = [int(i) for i in input('x y clolr: ').split()]
+paint(sp,*val)
+
+for i in range(10):
+    for j in range(10):
+        print(sp[i][j],end='')
+    print()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/25 19:56</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14921"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">_board=[[0,0,0,0,0,0,0,0,0,0],
+   [0,0,0,0,0,1,1,0,0,0],
+   [0,0,0,1,1,0,1,1,0,0],
+   [0,0,1,1,0,0,0,0,1,0],
+   [0,0,1,0,0,0,0,0,1,0],
+   [0,1,0,0,0,0,0,1,0,0],
+   [0,0,1,0,0,0,0,1,0,0],
+   [0,0,0,1,1,0,0,1,0,0],
+   [0,0,0,0,0,1,1,0,0,0],
+   [0,0,0,0,0,0,0,0,0,0]]
+
+def drawColor(row,col,color,tboard):
+    if row&lt;0 or col&lt;0:
+        return
+    elif tboard[col][row] != 0:
+        #이미 색이 칠해진 공간은 패스하기 위해 0이 아닌 조건으로 설정.
+        return
+    else:
+        tboard[col][row] = color
+        drawColor(row-1,col,color,tboard)
+        drawColor(row+1,col,color,tboard)
+        drawColor(row,col-1,color,tboard)
+        drawColor(row,col+1,color,tboard)
+
+drawColor(5,5,3,_board)
+for i in _board:
+    print(i)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/10/18 14:32</p>
+                                <p class="static-profile" style="margin:0;padding:0;">JaehakChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15194"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">width, height = map(int, input().split())
+px, py, color = map(int, input().split())
+l = [None]
+
+for y in range(1, height+1):
+    s = input()
+    l.append([None])
+
+    for i in s:
+        l[y].append(i)
+
+def inRange(x, y):
+    global width, height
+
+    return 1&lt;=x&lt;=width and 1&lt;=y&lt;=height
+
+def dfs(x, y):
+    global l, color
+
+    if inRange(x, y) and l[y][x] == '0':
+        l[y][x] = str(color)
+
+        dfs(x+1, y)
+        dfs(x-1, y)
+        dfs(x, y+1)
+        dfs(x, y-1)
+
+dfs(px, py)
+
+for y in range(1, height+1):
+    for x in range(1, width+1):
+        print(end=l[y][x])
+
+    print()
+</code></pre>
+
+<p>Python3입니다.
+DFS로 색을 채웠습니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/11/13 03:31</p>
+                                <p class="static-profile" style="margin:0;padding:0;">MiniCube</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18724"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>/*
+INPUT
+10 10
+5 5 3
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 1 0 0 0
+0 0 0 0 1 1 0 1 0 0
+0 0 1 1 0 0 0 0 1 0
+0 1 0 0 0 0 0 0 1 0
+0 1 0 0 0 0 0 0 1 0
+0 1 0 0 0 0 0 1 0 0
+0 0 1 0 0 0 1 0 0 0
+0 0 0 1 0 1 1 0 0 0
+0 0 0 0 1 0 0 0 0 0</p>
+<p>OUTPUT
+0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 1 0 0 0 
+0 0 0 0 1 1 3 1 0 0 
+0 0 1 1 3 3 3 3 1 0 
+0 1 3 3 3 3 3 3 1 0 
+0 1 3 3 3 3 3 3 1 0 
+0 1 3 3 3 3 3 1 0 0 
+0 0 1 3 3 3 1 0 0 0 
+0 0 0 1 3 1 1 0 0 0 
+0 0 0 0 1 0 0 0 0 0 
+ */
+import java.util.Scanner;</p>
+<p>public class sol089 {</p>
+<pre><code>static int x;
+static int y;
+
+static int box[][];
+
+public static void paint(int cur_x, int cur_y, int color) {
+
+    box[cur_x][cur_y] = color;
+
+    if(cur_x &lt; box.length-1 &amp;&amp; box[cur_x+1][cur_y] == 0) paint(cur_x+1, cur_y, color);
+    if(cur_x &gt; 0 &amp;&amp; box[cur_x-1][cur_y] == 0) paint(cur_x-1, cur_y, color);
+    if(cur_y &lt; box.length-1 &amp;&amp; box[cur_x][cur_y+1] == 0) paint(cur_x, cur_y+1, color);
+    if(cur_y &gt; 0 &amp;&amp; box[cur_x][cur_y-1] == 0) paint(cur_x, cur_y-1, color);
+}
+
+public static void main(String[] args) throws Exception {
+
+    Scanner sc = new Scanner(System.in);
+
+    x = sc.nextInt();
+    y = sc.nextInt();
+
+    box = new int[x][y];
+
+    int st_x = sc.nextInt();
+    int st_y = sc.nextInt();
+
+    int color = sc.nextInt();
+
+    for(int i=0; i&lt;box.length; i++) {
+        for(int j=0; j&lt;box[i].length; j++) {
+            box[i][j] = sc.nextInt();
+        }
+    }
+
+    paint(st_x, st_y, color);
+
+    for(int i=0; i&lt;box.length; i++) {
+        for(int j=0; j&lt;box[i].length; j++) {
+            System.out.print(box[i][j] + " ");
+        }
+        System.out.println();
+    }
+}
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/07/29 17:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이병호</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_21057"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from copy import deepcopy
+
+r_data = '''0000000000
+0000001000
+0000110100
+0011000010
+0100000011
+0100000000
+0100000111
+0010001000
+0001011000
+0000100000'''
+
+data = [list(i) for i in  r_data.split()]
+
+class painter :
+    def BFS(self, map_, x, y) :
+        queue = [[x, y]]
+        dx_dy = [(1, 0), (0, 1), (-1, 0), (0, -1)]
+
+        while len(queue) != 0 :
+            pop_data = deepcopy(queue.pop(0))
+            for cond in dx_dy :
+                copy_data = deepcopy(pop_data)
+                try :
+                    if (map_[copy_data[1]+cond[1]][copy_data[0]+cond[0]]) == '0' :
+                        map_[copy_data[1]+cond[1]][copy_data[0]+cond[0]] = '3'
+                        queue.append([copy_data[0]+cond[0], copy_data[1]+cond[1]])
+                except :
+                    pass
+        return self.printOut(map_)
+
+    def printOut(self, map__) :
+        for line in map__ :
+            print(&quot;&quot;.join(line))
+
+if __name__ == '__main__' :
+    a = painter()
+    a.BFS(data, 5, 5)
+</code></pre>
+
+<p>BFS로 풀었고 좌표가 배열의 범위를 벗어나는 경우에 대해서는 예외처리했습니다.
+배워도 배워도 끝이 없네요~</p>
+<p>결과</p>
+<pre><code>0000000000
+0000001000
+0000113100
+0011333310
+0133333311
+0133333333
+0133333111
+0013331000
+0001311000
+0000100000
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/02/21 17:11</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GG</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23104"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">canvas=&quot;&quot;&quot;0000000000
+0000001000
+0000110100
+0011000010
+0100000010
+0100000010
+0100000100
+0010001000
+0001011000
+0000100000&quot;&quot;&quot;
+lst=[list(ln) for ln in canvas.split(&quot;\n&quot;)]
+maxX,maxY=len(lst[0]),len(lst)
+
+def solve(y,x,fill):
+    if lst[y][x]==&quot;0&quot; and lst[y][x]!=&quot;1&quot;:
+        lst[y][x]=str(fill)
+    for dx, dy in [(1,0),(0,1),(-1,0),(0,-1)]:
+        nx,ny=x+dx,y+dy
+        if 0&lt;=nx&lt;maxX and 0&lt;=ny&lt;maxY and lst[ny][nx]==&quot;1&quot;:
+            continue
+        elif 0&lt;=nx&lt;maxX and 0&lt;=ny&lt;maxY and lst[ny][nx]==&quot;0&quot;:
+            lst[ny][nx]=str(fill)
+            solve(ny,nx,fill)
+    return lst
+
+solve(5,5,3)
+for ln in lst:
+    for cmp in ln:
+        print(&quot;%1s&quot;%cmp, end=&quot;&quot;)
+    print()
+</code></pre>
+
+<p>결과</p>
+<pre><code>0000000000
+0000001000
+0000113100
+0011333310
+0133333310
+0133333310
+0133333100
+0013331000
+0001311000
+0000100000
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/09/05 18:31</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박시원</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29767"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">width, height = 10, 10
+row, col, color = 5, 5, 3
+map_ = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0],
+        [0, 0, 1, 1, 0, 0, 0, 0, 1, 0],
+        [0, 1, 0, 0, 0, 0, 0, 0, 1, 0],
+        [0, 1, 0, 0, 0, 0, 0, 0, 1, 0],
+        [0, 1, 0, 0, 0, 0, 0, 1, 0, 0],
+        [0, 0, 1, 0, 0, 0, 1, 0, 0, 0],
+        [0, 0, 0, 1, 0, 1, 1, 0, 0, 0],
+        [0, 0, 0, 0, 1, 0, 0, 0, 0, 0]]
+
+def bfs(r,c):
+    global map_, color, width, height
+    for (dr,dc) in ((1,0),(0,1),(-1,0),(0,-1)):
+        y, x = r+dr, c+dc
+        if 0&lt;=y&lt;height and 0&lt;=x&lt;width and map_[y][x] == 0:
+            map_[y][x] = color
+            bfs(y, x)
+
+bfs(row, col)
+for r in range(width):
+    for c in range(height):
+        print(map_[r][c], end=&quot; &quot;)
+    print()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/11/24 11:55</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

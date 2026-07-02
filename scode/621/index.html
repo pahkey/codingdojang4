@@ -1,0 +1,1081 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="간단한 수식을 입력 받아 계산하는 프로그램을 작성한다.
+
+(시작한지 얼마안 된 학생들 프로젝트로 뭘 시켜볼까 하다가 한 번 만들어 봤습니다.)
+
+연관 문제: [이상한 계산기](http://codingdojang.com/scode/590) ...">
+    <title>수식 계산기 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">수식 계산기</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">2</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 3</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>간단한 수식을 입력 받아 계산하는 프로그램을 작성한다.</p>
+<p>(시작한지 얼마안 된 학생들 프로젝트로 뭘 시켜볼까 하다가 한 번 만들어 봤습니다.)</p>
+<p>연관 문제: <a href="http://codingdojang.com/scode/590">이상한 계산기</a> , <a href="http://codingdojang.com/scode/616">순서대로 계산기</a></p>
+<h1 id="1">수식 계산기1</h1>
+<hr />
+<p>수식 계산기는 다음을 반복한다(편의상 1 라운드라고 부르자).</p>
+<ol>
+<li>현재 저장된 <strong>수식</strong>을 출력한다.</li>
+<li>"&gt;&gt;&gt; " 프롬프트로 입력을 받는다.</li>
+<li>입력받은 값을 처리한다.</li>
+</ol>
+<h2 id="_1">입력값의 종류</h2>
+<p>입력은 숫자, 연산자 또는 명령어이다.</p>
+<h3 id="_2">숫자</h3>
+<p>숫자는 실수 범위에서 입력 받는다.</p>
+<p>정수와 실수를 굳이 구분하지 않고 소숫점 이하 2~3자리까지 출력한다.</p>
+<p>예를 들어, 정수 7을 7.0이나 7.00으로 출력해도 무방하다.  소숫점 이하의 오차는 크게 신경쓰지 않고 코딩한다.</p>
+<h3 id="_3">연산자</h3>
+<p>덧셈, 뺄셈, 곱셈, 나눗셈, 나머지의 5가지 연산을 할 수 있다.</p>
+<p>해당 연산자는 각각 "+", "-", "*", "/", "%" 이며 모두 2항 연산자이다.</p>
+<p>우선순위는 곱셈 = 나눗셈 = 나머지 &gt; 덧셈 = 뺄셈 이다.</p>
+<h3 id="_4">명령어</h3>
+<p>"<strong>C</strong>" (Clear): 저장된 수식을 0 으로 초기화한다.</p>
+<p>"<strong>U</strong>" (Undo): 수식을 1 라운드 전으로 되돌린다(정확한(?) 명칭은 CE, Clear Error 입니다).</p>
+<p>수식이 숫자 하나로 이루어져 있을 때 Undo를 하면 0 이 된다. </p>
+<p>수식이 0일 때는 Undo를 해도 이전으로 돌아갈 수 없다.</p>
+<p>"<strong>X</strong>" (eXit): 프로그램을 종료한다.</p>
+<p>"<strong>=</strong>" (evaluate): 수식의 값을 계산한다(연산자로 처리해도 무방함).</p>
+<p>evaluate 명령을 실행하면 다음 라운드에는 계산 결과로서 숫자 하나로 이루어진 수식을 출력한다.</p>
+<p><strong>eval() 종류의 함수는 쓰지 말 것</strong></p>
+<h3 id="_5">그 외의 입력</h3>
+<p>유효하지 않은 입력은 없다고 가정하되, 가능하면 무시한다(다음 라운드에도 똑같은 상태를 유지):</p>
+<p>소문자 명령어, 숫자와 문자가 뒤섞임, 앞뒤의 공백 등등.</p>
+<p>입력은 연산자/숫자/명령어 <strong>하나</strong>이다. 예를 들어, "* 3" 과 같은 입력은 처리하지 않는다. </p>
+<h2 id="_6">수식의 처리</h2>
+<p>초기값은 0이다.</p>
+<p>수식은 입력값들을 공백 하나를 사이에 두고 이어 붙이다가, Clear, Undo, evaluate 명령을 실행했을 때 줄어든다.  </p>
+<p>기본적으로 숫자 뒤에는 연산자, 연산자 뒤에는 숫자가 와야 한다. 그렇지 않으면 무시한다.</p>
+<p>예외1) 수식의 마지막이 연산자일 때 연산자를 입력하면 마지막 연산자가 입력한 연산자로 바뀐다.  </p>
+<p>예외2) 수식의 값이 0 일 때 숫자를 입력하면 수식은 입력한 숫자로 바뀐다.</p>
+<h2 id="_7">실행 예</h2>
+<pre><code>0
+&gt;&gt;&gt; 3
+3
+&gt;&gt;&gt; +
+3 +
+&gt;&gt;&gt; -
+3 -
+&gt;&gt;&gt; 4
+3 - 4
+&gt;&gt;&gt; *
+3 - 4 *
+&gt;&gt;&gt; 2
+3 - 4 * 2
+&gt;&gt;&gt; U
+3 - 4 *
+&gt;&gt;&gt; 5
+3 - 4 * 5
+&gt;&gt;&gt; =
+-17.0
+&gt;&gt;&gt; U
+0
+&gt;&gt;&gt; 6
+6
+&gt;&gt;&gt; C
+0
+&gt;&gt;&gt; X
+</code></pre>
+
+<h1 id="2">수식 계산기2</h1>
+<hr />
+<h2 id="_8">괄호 처리</h2>
+<p>수식이 괄호 "(", ")" 를 포함해서 처리되도록 한다.</p>
+<p>코딩할 떄처럼 소괄호만 사용한다.</p>
+<h2 id="_9">변수(메모리) 추가</h2>
+<p>최초 실행 시, "tmp" 변수에 값 0을 저장해둔다.</p>
+<p>매 라운드에, 수식과 함께 현재 메모리 상태를 출력한다.</p>
+<p>메모리는 Undo, Clear 명령의 영향을 받지 않는다.</p>
+<p>다음 명령어들을 추가한다.</p>
+<p>"<strong>S변수명</strong>" (Save): 현재 수식의 값을 "변수명" 변수에 저장한다.</p>
+<p>변수명이 주어지지 않으면 "tmp" 변수에 저장한다.</p>
+<p>변수명은 공백 없는 알파벳 소문자로만 이루어진다.</p>
+<p>숫자 하나로 이루어진 수식만 저장할 수 있다. 수식이 evaluate 되지 않았으면 무시한다.</p>
+<p>"<strong>L변수명</strong>" (Load): "변수명" 변수에 저장된 값을 불러온다.</p>
+<p>불러온 값은 "&gt;&gt;&gt; " 프롬프트로 입력한 값과 똑같이 처리한다.</p>
+<p>변수명이 주어지지 않으면 "tmp" 변수값을 불러온다.</p>
+<p>없는 변수면 무시한다.</p>
+<p>"<strong>R</strong>" (Reset): 메모리를 초기화한다.</p>
+<h2 id="_10">실행 예</h2>
+<pre><code>tmp = 0
+0
+&gt;&gt;&gt; 12
+tmp = 0
+12
+&gt;&gt;&gt; S
+tmp = 12
+12
+&gt;&gt;&gt; C
+tmp = 12
+0
+&gt;&gt;&gt; L
+tmp = 12
+12
+&gt;&gt;&gt; +
+tmp = 12
+12 +
+&gt;&gt;&gt; 3
+tmp = 12
+12 + 3
+&gt;&gt;&gt; -
+tmp = 12
+12 + 3 -
+&gt;&gt;&gt; L
+tmp = 12
+12 + 3 - 12
+&gt;&gt;&gt; S
+tmp = 12
+12 + 3 - 12
+&gt;&gt;&gt; =
+tmp = 12
+3.0
+&gt;&gt;&gt; Sx
+tmp = 12
+x = 3.0
+3.0
+&gt;&gt;&gt; X
+</code></pre>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2018/08/28 20:13</p>
+                    <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                </div>
+            </div>
+
+            
+                <a name="comment_2347"></a>
+                <div class="comment_line comment-content">
+                    
+                        <span style="color:orangered;">+1</span>
+                    
+                    <span style="white-space:pre-wrap;">참고: 정석(?)적인 계산법입니다.
+
+<a href="https://wayhome25.github.io/cs/2017/04/18/cs-22/" rel="nofollow">https://wayhome25.github.io/cs/2017/04/18/cs-22/</a>
+<a href="http://home.zany.kr:9003/board/bView.asp?bCode=10&amp;aCode=1777&amp;cBlock=0&amp;cPageNo=1&amp;sType=0&amp;sString=" rel="nofollow">http://home.zany.kr:9003/board/bView.asp?bCode=10&amp;aCode=1777&amp;cBlock=0&amp;cPageNo=1&amp;sType=0&amp;sString=</a></span>
+                    -
+                    <span style="font-size:11px;">
+                        Noname,
+                        2018/08/29 00:16
+                    </span>
+                </div>
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>5개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_14400"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>내가 만들고 내가 풀기!</p>
+<p>괄호 빼고 했습니다.</p>
+<pre><code class="python">
+# ===================== Main Functions =============================
+def view_stat(exp, vars):
+    header = '''
+=============================== Calculator ==============================
+================================ Commands ===============================
+|  C(Clear) |  X(eXit)  |  U(Undo)  |  S(Save)  |  L(Load)  |  R(Reset) |
+================================ Operators ==============================
+|     *     |     /     |     %     |     +     |     -     |     =     |
+=============================== Variables ==============================='''
+    eline = '============================== Expression ==============================='
+    vline = len(header.split('\n')[1]) * '='
+
+    print(header)
+
+    for var_name in vars:
+        print(var_name + ' = ' + vars[var_name])
+
+    print(eline)
+    print(' '.join(exp))
+    print(vline)
+
+
+def do_cmd(cmd, exp, vars):
+    if cmd == 'C':
+        reset_exp()
+    elif cmd == 'U':
+        exp.pop()
+        if not exp:
+            reset_exp()
+    elif cmd == 'R':
+        reset_vars()
+    elif cmd[0] == 'S':
+        var_name = inp[1:] if inp[1:] else 'tmp'
+        if len(exp) == 1 and ' ' not in var_name and var_name.islower():
+            vars[var_name] = exp[0]
+    elif cmd[0] == 'L':
+            var_name = inp[1:] if inp[1:] else 'tmp'
+            if var_name in vars:
+                proc_num(vars[var_name], exp)
+    elif cmd == 'X':
+        exit()
+
+
+def eval_exp(exp):
+    exp1 = exp[:]
+    if is_op(exp1[-1]):
+        exp1.pop()
+
+    # exp2 &lt;- exp1 에서 *, /, % 부터 계산
+    exp2 = []
+    while exp1:
+        t = exp1.pop(0)
+        if t in ['*', '/', '%']:
+            opr1, op, opr2 = float(exp2[-1]), t, float(exp1.pop(0))
+            if op == '*':   exp2[-1] = opr1 * opr2
+            elif op == '/': exp2[-1] = opr1 / opr2
+            elif op == '%': exp2[-1] = opr1 % opr2
+        else:
+            exp2.append(t)
+
+    # opr1 &lt;- exp2 에서 +, - 계산
+    opr1 = float(exp2.pop(0))
+    while exp2:
+        op, opr2 = exp2.pop(0), float(exp2.pop(0))
+        if op == '*':   opr1 *= opr2
+        elif op == '/': opr1 /= opr2
+        elif op == '%': opr1 %= opr2
+        elif op == '+': opr1 += opr2
+        elif op == '-': opr1 -= opr2
+
+    reset_exp(num_str(opr1))
+
+
+def proc_op(inp_op, exp):
+    if inp_op == '=':
+        eval_exp(exp)
+    elif is_op(exp[-1]):
+        exp[-1] = inp_op
+    else:
+        exp.append(inp_op)
+
+
+def proc_num(inp_num, exp):
+    if exp == ['0']:
+        reset_exp(inp_num)
+    elif is_op(exp[-1]):
+        exp.append(inp_num)
+
+
+# ========================== Sub Functions ============================
+def reset_exp(val = '0'):
+    global exp
+    exp = [val]
+
+
+def reset_vars():
+    global vars
+    vars = {'tmp':'0'}
+
+
+def num_str(num):
+    return str(round(num, 2))
+
+
+def is_op(inp):
+    return inp in list('*/%+-=')
+
+
+def is_cmd(inp):
+    return inp[0] in list('CXURSL')
+
+
+exp, vars = [], dict()
+reset_exp()
+reset_vars()
+while True:
+    view_stat(exp, vars)
+    inp = input('&gt;&gt;&gt; ')
+
+    if is_cmd(inp):
+        do_cmd(inp, exp, vars)
+    elif is_op(inp):
+        proc_op(inp, exp)
+    else:
+        try:
+            float(inp)
+            proc_num(inp, exp)
+        except ValueError:
+            pass
+</code></pre>
+
+<p>객체지향... 이라기엔 좀 대충 만든 버전</p>
+<pre><code class="python">class Environment():
+    def __init__(self):
+        self.vars = VariableDict()
+        self.exp = Expression()
+
+    def clear(self):
+        self.exp.clear()
+        self.vars.clear()
+
+
+#class Expression(list):
+class Expression():
+    def __init__(self):
+        self.clear()
+
+    def clear(self, token = '0'):
+        self.token_lst = [token]
+
+    def __str__(self):
+        return ' '.join(self.token_lst)
+
+    def is_value(self, value = None):
+        if value:
+            return self.token_lst == [value]
+        else:
+            return len(self.token_lst) == 1
+
+    def value(self):
+        return self.token_lst[0] if self.is_value() else None
+
+    def pop(self):
+        self.token_lst.pop()
+        if not self.token_lst:
+            self.token_lst = ['0']
+
+    def append(self, token):
+        if Operator.is_op(token):
+            if token == '=':
+                self.eval() #eval_exp(exp)
+            elif Operator.is_op(self.token_lst[-1]):
+                self.token_lst[-1] = token
+            else:
+                self.token_lst.append(token)
+        elif Number.is_num(token):
+            if self.is_value('0'):
+                self.clear(token)
+            elif Operator.is_op(self.token_lst[-1]):
+                self.token_lst.append(token)
+
+    def eval(self):
+        exp1 = self.token_lst[:]
+        if Operator.is_op(exp1[-1]):
+            exp1.pop()
+
+        # exp2 &lt;- exp1 에서 *, /, % 부터 계산
+        exp2 = []
+        while exp1:
+            token = exp1.pop(0)
+            if token in ['*', '/', '%']:
+                exp2[-1] = Operator.calc(exp2[-1], token, exp1.pop(0))
+            else:
+                exp2.append(token)
+
+        # opr1 &lt;- exp2 에서 +, - 계산
+        opr1 = exp2.pop(0)
+        while exp2:
+            opr1 = Operator.calc(opr1, exp2.pop(0), exp2.pop(0))
+
+        self.clear(opr1)
+
+
+#class VariableDict(dict):
+class VariableDict():
+    def __init__(self):
+        self.var_dict = {'tmp':'0'}
+
+    def clear(self):
+        self.var_dict = {'tmp': '0'}
+
+    def __contains__(self, var_name):
+        return var_name in self.var_dict
+
+    def __setitem__(self, var_name, var_value):
+        if ' ' not in var_name and var_name.islower():
+            self.var_dict[var_name] = var_value
+
+    def __getitem__(self, var_name):
+        return self.var_dict[var_name]
+
+    def __str__(self):
+        string = ''
+        for var_name, var_value in self.var_dict.items():
+            string += var_name + ' = ' + var_value + '\n'
+
+        return string[:-1]
+
+
+class Command():
+    cmd_lst = list('CXURSL')
+
+    @classmethod
+    def is_cmd(cls, inp):
+        return inp[0] in cls.cmd_lst
+
+    @classmethod
+    def do_cmd(cls, cmd, env):
+        if cmd == 'C':
+            env.exp.clear()
+        elif cmd == 'U':
+            env.exp.pop()
+        elif cmd == 'R':
+            env.vars.clear()
+        elif cmd[0] == 'S':
+            var_name = inp[1:] if inp[1:] else 'tmp'
+            if env.exp.is_value():
+                env.vars[var_name] = env.exp.value()
+        elif cmd[0] == 'L':
+            var_name = inp[1:] if inp[1:] else 'tmp'
+            if var_name in env.vars:
+                env.exp.append(env.vars[var_name])
+        elif cmd == 'X':
+            exit()
+
+
+class Number:
+    @classmethod
+    def value(cls, num):
+        return round(float(num), 2)
+
+    @classmethod
+    def str(cls, num):
+        return str(round(num, 2))
+
+    @classmethod
+    def is_num(cls, string):
+        try:
+            float(string)
+            return True
+        except ValueError:
+            return False
+
+
+class Operator:
+    @classmethod
+    def is_op(cls, string):
+        return string in list('*/%+-=')
+
+    @classmethod
+    def calc(cls, opr1, op, opr2):
+        opr1, opr2 = Number.value(opr1), Number.value(opr2)
+        result = 0
+        if op == '*':
+            result = opr1 * opr2
+        elif op == '/':
+            result = opr1 / opr2
+        elif op == '%':
+            result = opr1 % opr2
+        elif op == '+':
+            result = opr1 + opr2
+        elif op == '-':
+            result = opr1 - opr2
+
+        return Number.str(result)
+
+
+class Viewer:
+    @classmethod
+    def view_stat(cls, env):
+        header = '''
+=============================== Calculator ==============================
+================================ Commands ===============================
+|  C(Clear) |  X(eXit)  |  U(Undo)  |  S(Save)  |  L(Load)  |  R(Reset) |
+================================ Operators ==============================
+|     *     |     /     |     %     |     +     |     -     |     =     |
+=============================== Variables ==============================='''
+        eline = '============================== Expression ==============================='
+        vline = len(header.split('\n')[1]) * '='
+
+        print(header)
+        print(env.vars)
+        print(eline)
+        print(env.exp)
+        print(vline)
+
+
+env = Environment()
+while True:
+    Viewer.view_stat(env)
+    inp = input('&gt;&gt;&gt; ')
+    if Command.is_cmd(inp):
+        Command.do_cmd(inp, env)
+    else:
+        env.exp.append(inp)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/28 20:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2350"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">이쁘다 ㄷ</span>
+                                -
+                                <span style="font-size:11px;">
+                                    leak,
+                                    2018/08/30 13:33
+                                </span>
+                            </div>
+                        
+                            <a name="comment_2351"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">감사합니다</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Noname,
+                                    2018/08/30 15:15
+                                </span>
+                            </div>
+                        
+                            <a name="comment_2512"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">와우...........감탄하고갑니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Hyuk,
+                                    2019/04/16 17:39
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14454"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>수식계산기 1</strong></p>
+<pre><code class="python">class calc:
+  def __init__(self):
+    self.eq = [0]
+    self._func = {None: self._print_err, 'C': self.clear, 'U': self.undo, 'X': quit, '=': self.eval}
+    self._opr = ['*', '/', '%', '+', '-']
+
+  def input(self):
+    self._val = self._conv_value(input('&gt;&gt;&gt; '))
+    self._func.get(self._val, self._eq_append)()
+
+  def _eq_append(self):
+    if self._val in self._opr:
+      if self.eq[-1] in self._opr: self.eq[-1] = self._val
+      else                       : self.eq.append(self._val)
+    else:
+      if self.eq[-1] in self._opr: self.eq.append(self._val)
+      elif self.eq == [0]        : self.eq[0] = self._val
+      else                       : self._print_err()
+
+  @staticmethod
+  def _print_err(): print('잘못된 입력입니다.\n')
+
+  def _conv_value(self, v):
+    try: return int(v)
+    except:
+      try   : return float(v)
+      except: return v if v in (*self._opr, *self._func) else None
+
+  def __str__(self):
+    return ' '.join(map(lambda x: f'{x:.2f}' if isinstance(x, float) else str(x), self.eq))
+
+  def clear(self):
+    self.eq.clear()
+    self.eq.append(0)
+
+  def undo(self):
+    self.eq.pop()
+    if not self.eq: self.eq.append(0)
+
+  def eval(self):
+    idx = 0
+    while idx &lt; len(self.eq):
+      if self.eq[idx] in self._opr[:3]: self.eq[idx-1: idx+2] = [self.solver(*self.eq[idx-1:idx+2])]
+      else                            : idx += 1
+    while len(self.eq) &gt; 1:
+      self.eq[:3] = [self.solver(*self.eq[:3])]
+
+  @staticmethod
+  def solver(v1, opr, v2):
+    return v1+v2 if opr=='+' else v1-v2 if opr=='-' else v1*v2 if opr=='*' else v1/v2 if opr=='/' else v1%v2 if opr=='%' else None
+
+
+
+if __name__ == '__main__':
+  ex_calc = calc()
+  while True:
+    print(ex_calc)
+    ex_calc.input()
+</code></pre>
+
+<p><strong>수식계산기 2</strong></p>
+<pre><code class="python">class calc2(calc):
+  def __init__(self):
+    super().__init__()
+    self._func['S'] = self.save
+    self._func['L'] = self.load
+    self._func['R'] = self.reset
+    self.memo = {'tmp': 0}
+
+  def _eq_append(self):
+    if self._val == '(' and self._bracket_count() &gt;= 0:
+      if isinstance(self.eq[-1], str): self.eq.append(self._val); return
+      elif self.eq == [0]            : self.eq[0] = self._val; return
+    elif self._val == ')' and self._bracket_count() &gt; 0:
+      if self.eq[-1].__class__.__name__ in 'intfloat': self.eq.append(self._val); return
+    if self._val.__class__.__name__ in 'intfloat' and self.eq[-1] == '(': self.eq.append(self._val); return
+    super()._eq_append()
+
+  def _bracket_count(self):
+    return sum(1 if i=='(' else -1 if i==')' else 0 for i in self.eq)
+
+  def _conv_value(self, v):
+    if v[:1] in ('S', 'L', 'R'):
+      self.var = self._isvar(v[1:])
+      return v[:1]
+    if v in ['(', ')']: return v
+    return super()._conv_value(v)
+
+  @staticmethod
+  def _isvar(v):
+    return 'tmp' if v == '' else v if all(i.islower() for i in v) else None
+
+  def save(self):
+    if self.var is None   : print('잘못된 변수명 입니다.\n')
+    elif len(self.eq) == 1: self.memo[self.var] = self.eq[0]
+    else                  : print('계산한 후 저장하세요.\n')
+
+  def load(self):
+    if self.var not in self.memo:
+      print('존재하지 않는 변수입니다.\n')
+    else:
+      self._val = self.memo[self.var]
+      self._eq_append()
+
+  def reset(self):
+    self.memo.clear()
+    self.memo['tmp'] = 0
+
+  def eval(self):
+    if self._bracket_count() != 0: return print('괄호 쌍이 맞지 않습니다.\n')
+    self._bracket_eval()
+    super().eval()
+
+  def _bracket_eval(self):
+    while '(' in self.eq:
+      end = self.eq.index(')')
+      start = end - (self.eq[: end][::-1].index('(') + 1)
+      self.eq[start: end+1] = self._bracket_solver(self.eq[start+1: end])
+
+  def _bracket_solver(self, v):
+    if v == []: return [0]
+    idx = 0
+    while idx &lt; len(v):
+      if v[idx] in self._opr[:3]: v[idx-1: idx+2] = [self.solver(*v[idx-1:idx+2])]
+      else                      : idx += 1
+    while len(v) &gt; 1:
+      v[:3] = [self.solver(*v[:3])]
+    return v
+
+  def print_var(self):
+    print(str(self.memo)[1:-1].replace(', ', '\n').replace(':', ' =').replace(&quot;'&quot;, ''))
+
+
+
+if __name__ == '__main__':
+  ex_calc = calc2()
+  while True:
+    ex_calc.print_var()
+    print(ex_calc)
+    ex_calc.input()
+</code></pre>
+
+<p>상속으로 풀어봤습니다</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/31 20:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16211"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">eq,lq,sg = ' ',' ',['+','-','*','/','%']
+
+
+def cal(eq):
+
+    eq,i = eq.split(),0
+
+    while len(eq) != 1:
+        if eq[i] in sg:
+            if eq[i] not in sg[:2] or (eq.count('*')+eq.count('/')+eq.count('%')) == 0:
+
+                s,a,b = eq[i],float(eq[i-1]),float(eq[i+1])
+
+                del eq[i-1:i+2]
+
+                if s in sg[2:]:
+                    eq.insert(i-1,str(((a*b,a/b)[s == '/'],a%b)[s == '%']))
+
+                else:
+                    eq.insert(i-1,str((a+b,a-b)[s == '-']))
+
+                i = 0
+                continue
+        i += 1
+
+    return str(eq[0])
+
+
+
+while True:
+    inp = input('&gt;&gt;&gt; ')
+    if inp in ['C','U']:
+        eq = (' ' if inp == 'C' else lq)
+    elif inp == 'X':
+        break
+    elif inp == '=':
+        eq = cal(eq)
+    elif inp.isdigit() or inp in sg:
+        lq = eq
+        if eq[-1] in sg and inp in sg:
+            eq = eq[:-1] + inp
+        else:
+            eq += (' ' if inp in sg  or eq[-1] in sg else '') +inp
+    print(eq)
+</code></pre>
+
+<p>계산 부분이 많이 난잡하네요;;.........</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/01/24 15:06</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김영성</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17870"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>수식 계산기 1</p>
+<pre><code class="python">import sys
+
+class Expression:
+    def __init__(self):
+        self.L = [0]
+
+    def _eval(self, s, a, b):
+        if s == '+': ans = a + b
+        elif s == '-': ans = a - b
+        elif s == '*': ans = a * b
+        elif s == '/': ans = a / b
+        elif s == '%': ans = a % b
+        return ans
+
+    def _eval_opr(self, s):
+        while s in self.L:
+            idx = self.L.index(s)
+            ans = self._eval(s, self.L[idx-1], self.L[idx+1])
+            self.L = self.L[:idx-1] + [ans] + self.L[idx+2:]
+
+    def evaluate(self):
+        self._eval_opr('*')
+        self._eval_opr('/')
+        self._eval_opr('%')
+        self._eval_opr('+')
+        self._eval_opr('-')
+
+    def put(self, s):
+        if s == 'C': self.L = [0]
+        elif s == 'U': self.L.pop(-1)
+        elif s == 'X': sys.exit()
+        elif s == '=': self.evaluate()
+        else:
+            try:
+                if self.L == [0]: self.L = [float(s)]
+                else: self.L.append(float(s))
+            except:
+                self.L.append(s)
+        self.display()
+
+    def display(self):
+        print(' '.join(map(str, self.L)))
+
+
+A = Expression()
+A.display()
+while True:
+    A.put(input('&gt;&gt;&gt; '))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/15 15:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">messi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29599"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">using System;
+using System.Collections.Generic;
+
+namespace solution
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine(&quot;\n \t수식 계산기1&quot;);
+            string op = &quot;&quot;;
+
+            List&lt;string&gt; command = new List&lt;string&gt;{ &quot;C&quot;, &quot;U&quot;, &quot;X&quot;, &quot;=&quot; };
+            List&lt;string&gt; oplist = new List&lt;string&gt; { &quot;+&quot;, &quot;-&quot;, &quot;*&quot;, &quot;%&quot;, &quot;/&quot; };
+            List&lt;string&gt; list = new List&lt;string&gt;();
+            while(op != &quot;X&quot;)
+            {
+                int cnt = list.Count;
+                if (cnt % 2 == 0)
+                {
+                    printlist(list);
+                    Console.Write(&quot;&gt;&gt;&gt; &quot;);
+                    string input = Console.ReadLine();
+                    if (char.IsDigit(input[0]) &amp;&amp; char.IsDigit(input[input.Length-1]))
+                        list.Add(input);
+                }
+                else if(cnt % 2 == 1)
+                {
+                    //Console.WriteLine(&quot;\n\n명령어: C(Clear), U(Undo), X(eXit), =(evaluate)&quot;);
+                    //Console.WriteLine(&quot;+, -, *, /, %  중 하나를 입력하세요, &quot;);
+                    printlist(list);
+                    Console.Write(&quot;&gt;&gt;&gt; &quot;);
+                    string com = Console.ReadLine();
+                    if (command.Contains(com))
+                    {
+                        if (com == &quot;X&quot;)
+                            op = &quot;X&quot;;
+                        else if (com == &quot;C&quot;)
+                        {
+                            list.Clear();
+                        }
+                        else if (com == &quot;U&quot;)
+                            list.RemoveAt(list.Count - 1);
+                        else if (com == &quot;=&quot;)
+                        {
+                            calclist(list);
+                        }
+                    }
+                    else if(oplist.Contains(com))
+                        list.Add(com);
+                }                
+            }
+            Console.WriteLine(&quot;수고!!&quot;);
+        }
+
+        private static void calclist(List&lt;string&gt; list)
+        {
+            Queue&lt;int&gt; que = new Queue&lt;int&gt;();
+            Queue&lt;string&gt; opQ = new Queue&lt;string&gt;();
+            string op = &quot;&quot;;
+            int fSu = 0;
+            for (int i = 0; i &lt; list.Count; i++)
+            {
+                if (char.IsDigit(list[i][0]))
+                {
+                    if (op == &quot;*&quot;)
+                        fSu *= int.Parse(list[i]);
+                    else if (op == &quot;/&quot;)
+                        fSu /= int.Parse(list[i]);
+                    else if (op == &quot;%&quot;)
+                        fSu = fSu % int.Parse(list[i]);
+                    else
+                        fSu = int.Parse(list[i]);
+                    op = &quot;&quot;;
+                }
+                else
+                {
+                    if (list[i] == &quot;+&quot; || list[i] == &quot;-&quot;)
+                    {
+                        que.Enqueue(fSu);
+                        opQ.Enqueue(list[i]);
+                        op = &quot;&quot;;
+                    }
+                    else
+                        op = list[i];
+                }
+            }
+            que.Enqueue(fSu);
+            fSu = que.Dequeue();
+            while (opQ.Count &gt; 0)
+            {
+                op = opQ.Dequeue();
+                if (op == &quot;+&quot;)
+                    fSu += que.Dequeue();
+                else if(op == &quot;-&quot;)
+                    fSu -= que.Dequeue();
+            }
+            list.Clear();
+            list.Add(fSu.ToString());
+        }
+
+        private static void printlist(List&lt;string&gt; list)
+        {
+            foreach (var item in list)
+                Console.Write(&quot;{0} &quot;, item);
+            Console.WriteLine();
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/08/30 16:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

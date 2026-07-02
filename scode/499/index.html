@@ -1,0 +1,1664 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="출처 : http://www.programcreek.com/2014/06/leetcode-word-ladder-ii-java/
+
+시작단어와 목표단어가 주어집니다. 시작단어에서 한글자씩 임의로 바꿀 수 있습니다. 단, 그 단어는 주어진 사전에 ...">
+    <title>Word Ladder - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">Word Ladder</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">4</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 3</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>출처 : <a href="http://www.programcreek.com/2014/06/leetcode-word-ladder-ii-java/">http://www.programcreek.com/2014/06/leetcode-word-ladder-ii-java/</a></p>
+<p>시작단어와 목표단어가 주어집니다. 시작단어에서 한글자씩 임의로 바꿀 수 있습니다. 단, 그 단어는 주어진 사전에 있어야 하는 단어입니다.</p>
+<p>가장 짧은 경로를 찾았을 때 거쳐간 단어수를 출력하세요</p>
+<p>아래 예에서 가장 짧은 경로는 "hit" -&gt; "hot" -&gt; "dot" -&gt; "dog" -&gt; "cog" 이므로 프로그램은 시작부터 목표까지 총 거쳐간 단어수 '5'를 출력해야합니다.</p>
+<p>다음을 프로그램내에서 정의하시고</p>
+<pre><code class="no-highlight">start = &quot;hit&quot;
+end = &quot;cog&quot;
+dict = [&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;lot&quot;,&quot;log&quot;]
+</code></pre>
+
+<p>출력은</p>
+<pre><code class="no-highlight">5
+</code></pre>
+
+<p>도전과제 : 최단거리와 같은 모든 경로를 출력하시오</p>
+<pre><code class="no-highlight">hit hot dot dog cog
+hit hot lot log cog
+</code></pre>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">queue</span>
+                
+                    <span class="label label-tag label-xs">BFS</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2016/02/01 20:13</p>
+                    <p class="static-profile" style="margin:0;padding:0;">상파</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>17개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_3296"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>평범하게(?) 그래프를 이용해서 풀어보았습니다. </p>
+<pre><code class="python">dic = ['hot', 'dot', 'dog', 'lot', 'log', 'cog', 'hit', 'hog']
+
+class Node:
+    def __init__(self, word):
+        self.word = word
+        self.neighbors = []
+        self.keys = set()
+        self.color = 'white'
+        self.totalDist = -1
+        self.successor = None
+        self.precedessor = None
+        for i in range(len(word)):
+            key = word[:i] + '_' + word[i+1:]
+            self.keys.add(key)
+
+    def addNeighbor(self, node):
+        if self.keys.intersection(node.keys):
+            self.neighbors.append(node)
+
+    def __repr__(self):
+        return self.word
+
+
+class Graph:
+    def __init__(self, words=None):
+        self.vertices = []
+        if words:
+            self.build(words)
+
+    def build(self, words):
+        for word in words:
+            aNode = Node(word)
+            self.vertices.append(aNode)
+        for a in self.vertices:
+            for b in self.vertices:
+                if a is not b:
+                    a.addNeighbor(b)
+                    b.addNeighbor(a)
+
+    def run(self, startWord):
+        sNode = self.find(startWord)
+        if sNode:
+            sNode.totalDist = 1
+            return self.runHelper(sNode)
+        return -1
+
+    def find(self, word):
+        sNodes = [x for x in self.vertices if x.word == word]
+        if sNodes:
+            return sNodes[0]
+        print('there is no &quot;%s&quot;' % word)
+        return None
+
+    def runHelper(self, cn):
+        minDist = cn.totalDist
+        cn.color = 'black'
+        for n in [x for x in cn.neighbors]:
+            if n.totalDist == -1 or cn.totalDist + 1 &lt; n.totalDist:
+                n.precedessor = cn
+                cn.successor = n
+                n.totalDist = cn.totalDist + 1
+                self.runHelper(n)
+        return minDist
+
+
+g = Graph(dic)
+print(g.vertices)
+g.run('hit')
+dest = g.find('cog')
+print(dest.totalDist)
+start = g.find('hit')
+while True:
+    print(start)
+    if start is dest:
+        break
+    start = start.successor
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/03/29 13:11</p>
+                                <p class="static-profile" style="margin:0;padding:0;">룰루랄라</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2975"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#-*- coding: utf-8 -*-
+#http://www.programcreek.com/2014/06/leetcode-word-ladder-ii-java/
+
+start = &quot;hit&quot;
+end = &quot;cog&quot;
+dic = [&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;lot&quot;,&quot;log&quot;]
+
+def isOneLetterDifferent(a,b):#한글자만 다른지 검사함
+    if len(a)!=len(b) or len(a)*len(b)==0 or a==b: return False
+    while a[0]==b[0]: a=a[1:];b=b[1:] #앞쪽 글자가 같으면 다 잘라냄
+    while a[-1]==b[-1]: a=a[:-1];b=b[:-1] #뒤쪽 글자가 같으면 다 잘라냄
+    if len(a)==len(b)==1 : return True #잘라내고 남은 글자수가 둘다1글자면 '그래'출력'
+    else : return False #'아냐' 출력
+def wordLadder(start,end,dic):
+    q=[[start]] #큐에는 단어가 변해갈때 그 경로가 모두 리스트로 저장
+    res=[]
+    shortest_length = len(dic)+2
+    while q:
+        w = q.pop(0) 
+        if len(w)+1&gt; shortest_length :continue #최단 코스보다 긴것들은 걸러냄. +1은 
+                                                #end를 더했을경우를 상정
+        for word in [end]+dic:
+            if isOneLetterDifferent(word,w[-1]):
+                if word == end :
+                    if len(w)+1 &lt;= shortest_length:
+                        shortest_length = len(w)+1
+                        res.append(w+[end])
+                elif not word in w : q.append(w+[word]) #반복되는 경로는 제외
+    return res,shortest_length
+
+print wordLadder(start,end,dic)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/02/05 19:28</p>
+                                <p class="static-profile" style="margin:0;padding:0;">상파</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3405"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">start = &quot;hit&quot;
+end = &quot;cog&quot;
+dictionary = [&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;lot&quot;,&quot;log&quot;]
+def onechanged(A, B):
+    changed = 0
+    for x, y in zip(A, B):
+        if x != y:
+            changed+=1
+    if changed == 1:
+        return True
+    else:
+        return False
+
+def find(previous = start, history = [start], depth = 0):
+    if depth == 3:
+        if end not in history and onechanged(end, previous):
+            print(history+[end])
+    else:
+        for x in (list(set(dictionary)-set(history))):
+            if onechanged(x, previous):
+                find(x, history+[x], depth+1)
+
+if __name__ == '__main__':
+    find()
+</code></pre>
+
+<p>파이썬 3.5.1</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/04/14 11:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Flair Sizz</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3671"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>PHP로 한번 만들어 봤습니다.</p>
+<ol>
+<li>마지막이 cog가 되는 전체의 경우의 수를 배열로 저장</li>
+<li>계산 하기 쉽게 배열 재정의</li>
+<li>최단 거리만 남겨두고 나머진 다 삭제</li>
+<li>출력</li>
+</ol>
+<pre><code class="php">&lt;?php
+$start = &quot;hit&quot;;
+$end = &quot;cog&quot;;
+$dict = [&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;lot&quot;,&quot;log&quot;];
+
+$graph_arr[$start] = graphArr($start,$end,$dict);
+$dot = dot($graph_arr);
+$list = del($dot);
+
+foreach ($list as $key =&gt; $val) {
+    echo $val.&quot;\n&quot;;
+}
+
+#최단거리 아닌얘들 삭제
+function del($array)
+{
+    $tmp = array();
+    foreach ($array as $key =&gt; $val) {
+        $len = strlen($val);
+        $tmp[$len][] = $val;
+    }
+
+    ksort($tmp);
+
+    $mins = array();
+    foreach ($tmp as $key =&gt; $val) {
+        $mins = $val;
+        break;
+    }
+    return $mins;
+}
+
+#dot찍기
+function dot($array, $prepend = '')
+{
+    $results = [];
+    foreach ($array as $key =&gt; $value) {
+        if (is_array($value) &amp;&amp; ! empty($value)) {
+            $results = array_merge($results, dot($value, $prepend.$key.'.'));
+        } else {
+            $results[] = $prepend.$key.'.'.$value;
+        }
+    }
+    return $results;
+}
+
+#graph생성
+function graphArr($start,$end,$dict)
+{
+    $start_arr = strArr($start);
+    $end_arr = strArr($end);
+
+    $arr = array();
+    foreach ($dict as $key =&gt; $val) {
+        $tmp_dict = $dict;
+        $val_arr = strArr($val);
+
+        if(strTwoCheck($start_arr,$val_arr)){
+            unset($tmp_dict[$key]);
+            $arr[$val] = graphArr($val,$end,$tmp_dict);
+            if(strTwoCheck($end_arr,$val_arr)){
+                $arr[$val] = $end;
+                break;
+            }
+        }
+    }
+
+    return $arr;
+}
+
+exit;
+</code></pre>
+
+<p>결과</p>
+<pre><code>hit.hot.dot.dog.cog
+hit.hot.lot.log.cog
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/05/13 14:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Lee Sangjun</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3754"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<p>두 가지 풀이.</p>
+<pre><code class="ruby">nexts = -&gt;word,dict { dict.select {|w| (word.chars-w.chars).size==1 } }
+laddr = -&gt;dict,word,path { path[-1] == dest ? {path*' ' =&gt; path.size} :
+                           nexts[word,dict].map {|e| laddr[dict-[e],e,path+[e]] } }
+w_laddr = -&gt;s,d,dict { v = laddr[dict&lt;&lt;d,s,[s]].flatten.reduce :merge
+                       min = v.values.min; [min, v.select{|_,v|v==min}.keys] }
+</code></pre>
+
+<p>or</p>
+<pre><code class="ruby">s_path = Hash.new{|hsh,key| hsh[key] = [] }
+nexts = -&gt;word,dict { dict.select {|w| (word.chars-w.chars).size==1 } }
+laddr = -&gt;dict,word,path { path[-1] == dest ? s_path[path.size].push(path*' ') :
+                           nexts[word,dict].each {|e| laddr[dict-[e],e,path+[e]] } }
+w_laddr = -&gt;s,d,dict { laddr[dict&lt;&lt;d,s,[s]]; s_path.min }
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby">start, dest = %w(hit cog); dict = %w(hot dot dog lot log)
+expect(w_laddr[start, dest, dict]).to eq [5, [&quot;hit hot dot dog cog&quot;,
+                                              &quot;hit hot lot log cog&quot;]]
+</code></pre>
+
+<p><strong>Output</strong></p>
+<pre><code class="ruby">#=&gt; puts w_laddr[start, dest, dict]
+5
+hit hot dot dog cog
+hit hot lot log cog
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/05/24 11:16</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3884"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p> C++입니다. bfs로 가장 짧은 경로의 길이를 출력합니다. </p>
+
+<pre><code class="cpp">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;  
+#include &lt;cstdlib&gt;
+#include &lt;string&gt; 
+#include &lt;algorithm&gt; 
+#include &lt;vector&gt; 
+#include &lt;map&gt; 
+#include &lt;set&gt; 
+#include &lt;queue&gt; 
+using namespace std; 
+
+typedef pair&lt;string,int&gt; P; 
+
+int main(){
+    vector&lt;string&gt; dict; 
+    dict.push_back(&quot;hot&quot;);  
+    dict.push_back(&quot;dot&quot;); 
+    dict.push_back(&quot;dog&quot;); 
+    dict.push_back(&quot;lot&quot;); 
+    dict.push_back(&quot;log&quot;);  
+    string start = &quot;hit&quot;,end = &quot;cog&quot;; 
+    dict.push_back(end); 
+    queue&lt;P&gt; que; 
+    que.push(P(start,1));   
+    map&lt;string,bool&gt; visited; // 도착했는지 확인여부. 
+    visited[start] = true; 
+    while (!que.empty()){
+        P p = que.front(); que.pop(); 
+        string word = p.first; 
+        int step = p.second; 
+        if (word == end){
+            cout &lt;&lt; step &lt;&lt; endl; 
+            break; 
+        }
+        for (int i = 0; i &lt; word.size(); i++){
+            for (char c = 'a'; c &lt;= 'z'; c++){
+                char temp = word[i]; 
+                string orig = word;  
+                if (word[i] != c) word[i] = c; 
+                if (find(dict.begin(),dict.end(),word) != dict.end() &amp;&amp; !visited[word]){
+                    visited[word] = true;  
+                    que.push(P(word,step+1));  
+                }
+                word[i] = temp; 
+            }
+        }
+    }
+    return 0;  
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/06/06 02:56</p>
+                                <p class="static-profile" style="margin:0;padding:0;">iljimae</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6050"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import random
+
+_dict = ['hot','dot','dog','lot','log']
+result_list = list()
+for z in range(len(_dict)*len(_dict)-1):
+    start,end,x = 'hit','cog',0
+    result = [start]
+    a = list()
+    while start != end:
+        if not x in a:
+            tmp = list(start)
+            tmp[x] = chr(random.randint(97,122))
+            tmp = ''.join(tmp)
+            if tmp in _dict and not tmp in result or tmp == end:
+                start = tmp
+                result.append(tmp)
+                if tmp[x] == end[x]:
+                    a.append(x)
+        if x == len(tmp)-1:
+            x = 0
+        else:
+            x += 1
+    if not result in result_list:
+        result_list.append(result)
+result_list = sorted(result_list)
+length = len(result_list[0])
+for z in result_list:
+    if len(z) == length:
+        print(z)
+
+#### 2017.01.28 D-390 ####
+</code></pre>
+
+<p>다른분들에 비해 좀 어설퍼보입니다..
+그냥 풀어버린다!! 이런마음이 강하네요 ㅠ</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/01/28 23:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GunBang</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7898"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python: Dijkstra</p>
+<pre><code class="python">def onestep(word1, word2): # 한 글자만 다르니?
+    return sum([c1 != c2 for (c1, c2) in zip(word1, word2)]) == 1
+
+
+start, end, M = &quot;hit&quot;, &quot;cog&quot;, 1000000 # M은 엄청 큰 숫자
+V = {&quot;hit&quot;:1, &quot;hot&quot;:M, &quot;dot&quot;:M, &quot;dog&quot;:M, &quot;lot&quot;:M, &quot;log&quot;:M, &quot;cog&quot;:M}  # 방문하지 않은 단어들
+
+while V:
+    v, dist = min(V.items(), key=lambda x: x[1])
+    V.pop(v)
+    if v == end:
+        print(dist)
+        break
+
+    for word in V:
+        if onestep(v, word) and dist+1 &lt; V[word]:
+            V[word] = dist + 1
+</code></pre>
+
+<p>.</p>
+<p>모든 경로 출력(BFS):</p>
+<pre><code class="python">def onestep(word1, word2):
+    return sum([c1 != c2 for (c1, c2) in zip(word1, word2)]) == 1
+
+
+start, end = &quot;hit&quot;, &quot;cog&quot;
+dic = [&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;lot&quot;,&quot;log&quot;, end]
+
+# Q:경로들을 저장, S:현재까지 최단경로들
+Q, S = [[start]], []
+
+while Q:
+    path = Q.pop(0)
+    if path[-1] == end:
+        if not S or len(path) &lt; len(S[0]):
+            S = [path]
+        elif len(path) == len(S[0]):
+            S += [path]
+    else:
+        for word in dic:
+            if word not in path and onestep(path[-1], word):
+                Q.append(path + [word])
+
+for path in S:
+    print('-&gt;'.join(path))
+</code></pre>
+
+<p>.</p>
+<p>그리고 난잡한 C# 코드:</p>
+<p>시험삼아 여러가지로 삽질해 보다가 그냥 그래프로 작성했는데 나중에 보면 고칠 데가 많을 거 같습니다.</p>
+<pre><code class="cs">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using static System.Console;
+
+class Vertex : IComparable&lt;Vertex&gt;
+{
+    public string name { get; set; }
+    public int distance { get; set; }
+
+    public Vertex(string name, int distance)
+    {
+        this.name = name;
+        this.distance = distance;
+    }
+
+    public int CompareTo(Vertex v)
+    {
+        return this.distance - v.distance;
+    }
+
+    public bool AdjacentTo(Vertex other)
+    {
+        int d = 0;
+        for (int i = 0; i &lt; this.name.Length; i++)
+        {
+            if (this.name[i] != other.name[i])
+            {
+                d++;
+            }
+        }
+        return d == 1;
+    }
+}
+
+class UndirectedEdge : IEquatable&lt;UndirectedEdge&gt;
+{
+    public Vertex u { get; set;}
+    public Vertex v { get; set; }
+
+    public UndirectedEdge(Vertex u, Vertex v)
+    {
+        this.u = u;
+        this.v = v;
+    }
+
+    public bool Equals(UndirectedEdge other)
+    {
+        return this.u.name == other.u.name &amp;&amp; this.v.name == other.v.name ||
+            this.u.name == other.v.name &amp;&amp; this.v.name == other.u.name;
+    }
+}
+
+class UndirectedGraph
+{
+    public List&lt;Vertex&gt; V { get; set; }
+    public List&lt;UndirectedEdge&gt; E { get; set; }
+
+    public UndirectedGraph()
+    {
+        this.V = new List&lt;Vertex&gt;();
+        this.E = new List&lt;UndirectedEdge&gt;();
+    }
+}
+
+class WordLadder
+{
+    static void Main(string[] args)
+    {
+        string start = &quot;hit&quot;, end = &quot;cog&quot;;
+        string[] dict = { &quot;hit&quot;, &quot;hot&quot;, &quot;dot&quot;, &quot;dog&quot;, &quot;log&quot;, &quot;log&quot;, &quot;cog&quot; };
+
+        // setup
+        UndirectedGraph G = new UndirectedGraph();
+        foreach (string word in dict)
+        {
+            G.V.Add(new Vertex(word, word == start ? 1 : 1000000));
+        }
+        foreach (var u in G.V)
+        {
+            /*
+             from ~ in ~ where ~ select 순서 정확해야 해서 불편함. 근데 왜 안되는지 모르겠네-_-;
+            G.E = (from v in G.V
+                   where u.AdjacentTo(v)
+                   select new UndirectedEdge(u, v)
+                   ).ToList&lt;UndirectedEdge&gt;();
+            */
+            foreach (var v in G.V)
+            {
+                if (u.AdjacentTo(v))
+                {
+                    G.E.Add(new UndirectedEdge(u, v));
+                }
+            }
+        }
+
+        // Dijkstra
+        List&lt;Vertex&gt; notVisited = G.V.ToList&lt;Vertex&gt;();
+
+        while (notVisited.Count &gt; 0)
+        {
+            Vertex u = notVisited.Min();
+            notVisited.Remove(u);
+
+            if (u.name == end)
+            {
+                WriteLine(u.distance);
+                break;
+            }
+
+            foreach (var v in notVisited)
+            {
+                if (G.E.Exists(e =&gt; e.Equals(new UndirectedEdge(u, v))) &amp;&amp;
+                    u.distance + 1 &lt; v.distance)
+                {
+                    v.distance = u.distance + 1;
+                }
+            }
+        }
+    }
+}
+
+</code></pre>
+
+<p>.</p>
+<p>Java</p>
+<pre><code class="java">package org.opentutorials.eclipse;
+
+import java.util.*;
+
+public class Javatutorial {
+    public static boolean adjacent(String word1, String word2) {
+        char[] charArray1 = word1.toCharArray();
+        char[] charArray2 = word2.toCharArray();
+
+        int diff = 0;
+        for (int i = 0; i &lt; word1.length(); i++) {
+            if (charArray1[i] != charArray2[i]) {
+                diff++;
+            }
+        }
+
+        return diff == 1;
+    }
+
+    public static void main(String[] args) {
+        String startString = &quot;hit&quot;, endString = &quot;cog&quot;;
+        String[] dictionary = {&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;lot&quot;,&quot;log&quot;, endString};
+
+        Queue&lt;List&lt;String&gt;&gt; Q = new LinkedList&lt;List&lt;String&gt;&gt;();
+        Queue&lt;List&lt;String&gt;&gt; S = new LinkedList&lt;List&lt;String&gt;&gt;();
+        Q.add(new ArrayList&lt;String&gt;(Arrays.asList(startString)));
+
+        while (!Q.isEmpty() ) {
+            List&lt;String&gt; path = Q.remove();
+            if (path.get(path.size() - 1).equals(endString)) {
+                if (S.isEmpty() || path.size() &lt; S.peek().size()) {
+                    S = new LinkedList&lt;List&lt;String&gt;&gt;();
+                    S.add(path);
+                } else {
+                    if (path.size() == S.peek().size()) {
+                        S.add(path);
+                    }                   
+                }
+            } else {
+                for (String word : dictionary) {
+                    if (!path.contains(word) &amp;&amp; adjacent(path.get(path.size() - 1), word)) {
+                        List&lt;String&gt; newPath = new ArrayList(path);
+                        newPath.add(word);
+                        Q.add(newPath);
+                    }
+                }
+            }
+        }
+
+        while (!S.isEmpty()) {
+            System.out.println(String.join(&quot;-&gt;&quot;,  S.poll()));
+        }           
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/07/17 23:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10632"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3.6</p>
+<pre><code class="python">start = &quot;hit&quot;
+end = &quot;cog&quot;
+dic = [&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;lot&quot;,&quot;log&quot;]
+word,steps,bridge,count =[],[],[],0
+
+# 시작단어와 목표단어와의 비교를 위해 같은 순서의 글짜끼리 짝을 짖습니다.
+def makeword(start,end):
+    word =[]
+    for i in zip(list(start),list(end)):
+        word.append(i)
+    return word
+
+# 시작 단어와 목표단어의 비교를 통해 중간단계가 될 수 있는 단어를 dic에서 찾아내고 해당 단어는 dic에서 제거합니다.(중복 선택 방지)
+def findstep(word):
+    bridge = []
+    if word[0][0] != word[0][1] and word[1][0] != word[1][1] and word[2][0] != word[2][1]:
+        for h in dic:
+            if h[0] == word[0][0]:
+                if h[1] == word[1][1] or h[2] == word[2][1]:
+                    bridge.append(h)
+                    dic.remove(h)
+    elif word[0][0] == word[0][1] and word[1][0] != word[1][1] and word[2][0] != word[2][1]:
+        for h in dic:
+            if h[0] == word[0][1]:
+                if h[1] ==  word[1][1] or h[2] == word[2][1]:
+                    bridge.append(h)
+                    dic.remove(h)
+    elif  word[0][0] != word[0][1] and word[1][0] == word[1][1] and word[2][0] != word[2][1]:
+        for h in dic:
+            if h[1] == word[1][1] and h[0] != word[0][1] and h[2] != word[2][1]:
+                bridge.append(h)
+                dic.remove(h)
+            if h[1] == word[1][1] and h[0] != word[0][1] and h[2] == word[2][1]:
+                bridge.append(h)
+                dic.remove(h)                
+    elif word[0][0] != word[0][1] and word[1][0] != word[1][1] and word[2][0] == word[2][1]:
+        for h in dic:
+            if h[1] == word[1][1]:
+                bridge.append(h)
+                dic.remove(h)
+    return bridge
+
+def main(start,end):
+    word,bridge,tmp,answers,t,count = [],[],[],[],0,0
+    while dic:
+        if len(bridge) &gt; 1:
+# 중간 단계 단어가 한개보다 많은 경우 각 단어별로 다음 중간 단계 단어를 찾아냅니다.
+            for i in bridge:
+                t = len(steps)
+                start = i
+                word = makeword(start,end)
+                bridge = findstep(word)
+                steps.extend([start,bridge[0]])
+# 한번의 단어 선택이 완료되면, 해당 단어가 마지막 단계인지를 확인하기 위해 목표단어와의 유사성을 검증합니다.
+                for i in zip(end,steps[-1]):
+                    if i[0] == i[1]:
+                        count += 1
+# 찾은 단어의 문자 중 한개를 제외한 모든 문자가 목표단어와 같은 경우 이제까지 찾은 중간 단계 단어 리스트에 목표 단어를 추가하여 답안(tmp)을 완성합니다.
+# 완성된 답안(tmp)은 답안 리스트(answers)에 담습니다.
+                if count == 2:
+                    steps.append(end)
+                    tmp.extend(steps)
+                    answers.append([tmp,len(tmp)])
+                    steps[t:],tmp = [],[]
+                count = 0                                    
+        else:
+# 중간 단계 단어가 한개이하일 경우바로 다음 중간 단계 단어를 찾아내고, 목표단어와 비교 후 조건에 맞는 경우 답안(tmp)을 완성하여 답안 리스트에 담습니다.
+            t = len(steps)
+            word = makeword(start,end)
+            bridge = findstep(word)
+            if len(bridge) &lt;= 1:
+                steps.extend([start,bridge[0]])
+            start = bridge[0]            
+            for i in zip(end,steps[-1]):
+                if i[0] == i[1]:
+                    count += 1
+            if count == 2:
+                steps.append(end)
+                tmp.extend(steps)
+                answers.append([tmp,len(tmp)])
+                steps[t:],tmp = [],[]
+            count = 0
+# 찾아낸 답안중에서 최소단계를 찾아 결과를 출력합니다.
+    min_steps = min([len(i[0]) for i in answers])
+    print(&quot;minimum steps = %d&quot;%min_steps)
+    for i in answers:
+        if i[1] == min_steps:
+            print(' '.join(i[0]))
+    word,bridge,tmp,answers,t,count = [],[],[],[],0,0
+
+if __name__ == &quot;__main__&quot;:
+    main(start,end)
+</code></pre>
+
+<p>*결과값</p>
+<pre><code class="python">minimum steps = 5
+hit hot dot dog cog
+hit hot lot log cog
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/10 13:24</p>
+                                <p class="static-profile" style="margin:0;padding:0;">justbegin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10840"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import copy
+def adjacent(m, c):
+    result = list()
+    for i in m:
+        for j in c:
+            if j != i and (j[0:2] == i[0:2] or j[1:] == i[1:] or (j[0] == i[0] and j[2] == i[2])):
+                result.append(j)
+    return list(set(result))
+def shortpath(a, b, c):
+    path = [[a]]
+    last = [a]
+    c.append(b)
+    while 1:
+        path.append(adjacent(last, c))
+        if b in path[-1]:
+            break
+        last = adjacent(last, c)
+        if not(last):
+            return &quot;no path exist&quot;
+        for i in last:
+            c.remove(i)
+    return len(path), path
+def path(a, b, c):
+    reesult = list()
+    d = copy.deepcopy(c)
+    p, q = shortpath(a, b, c)
+    q[p-1] = [b]
+    result = [q]
+    index = [i for i in range(p) if len(q[i]) != 1]
+    for k in index:
+        result = [i[:k]+[[i[k][j]]]+i[k+1:] for j in range(len(q[k])) for i in result]
+    eraseindex = list()
+    for i in result:
+        if not(all([i[j][0] in adjacent(i[j+1], d) for j in index])):
+            eraseindex.append(result.index(i))
+    for i in range(len(result)):
+        if not(i in eraseindex):
+            reesult.append(result[i])
+    return reesult
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/21 18:38</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김동하</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11088"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def check(fir_wor, sec_wor):
+    return sum([1 for i in range(len(fir_wor)) if fir_wor[i]!=sec_wor[i]])==1 and 1 or 0
+
+start=&quot;hit&quot;
+end=&quot;cog&quot;
+dict=[&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;lot&quot;,&quot;log&quot;]
+
+re=[[start, 0]]
+stop=0
+while stop==0:
+    stop=1
+    for seq in re: 
+        if seq[-1]==0:
+            seq[-1]=1
+            for word in dict:
+                new_seq=[]
+                for i in range(len(seq)):
+                    new_seq.append(seq[i])
+                if (word not in new_seq) and (check(word, new_seq[-2])==1) :
+                    new_seq[-1]=word
+                    new_seq.append(0)
+                    re.append(new_seq)
+                    stop*=new_seq[-1]
+        stop*=seq[-1]
+
+resul =[seq for seq in re if check(seq[-2],end)==1]
+max_len=min([len(seq) for seq in resul])
+resul2 = [seq for seq in resul if len(seq)==max_len]
+for seq in resul2:
+    seq[-1]=end
+    print(seq)
+
+
+
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/03/13 09:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김자현</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11095"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">#define _CRT_SECURE_NO_WARNINGS
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+struct Seq {
+    int length, sp;
+    char word[7][4];
+
+
+};
+
+int check(char fir_wor[4], char sec_wor[4]) {
+    int err = 0;
+    int len;
+
+    len = 3;
+    for (int i = 0; i &lt; len; i++) {
+        err += (fir_wor[i] != sec_wor[i]);
+    }
+    return err == 1 ? 1 : 0;
+}
+
+int main() {
+    char start[4] = &quot;hit&quot;, end[4] = &quot;cog&quot;;
+    char dict[5][4] = { &quot;hot&quot;, &quot;dot&quot;, &quot;dog&quot;, &quot;lot&quot;, &quot;log&quot; };
+    struct Seq re[120];
+    for (int i = 0; i &lt; 4; i++) {
+        re[0].word[0][i] = start[i];
+    }
+
+    re[0].length = 1;
+    re[0].sp = 0;
+    int stop = 0, store = 0;
+
+    while (stop == 0) {
+        stop = 1;
+        for (int i = 0; i &lt;= store; i++) {
+            if (re[i].sp==0){
+
+
+
+
+                for (int k = 0; k &lt; 5; k++) {
+                    struct Seq new_seq;
+                    new_seq.sp = 0;
+                    new_seq.length = re[i].length;
+                    re[i].sp = 1;
+                    for (int j = 0; j &lt; re[i].length; j++) {
+                        for (int k = 0; k &lt; 4; k++) {
+                            new_seq.word[j][k] = re[i].word[j][k];
+                        }
+
+                    }
+                    int eq = 0;
+                    for (int l = 0; l &lt; new_seq.length; l++) {
+                        int mut = 1;
+                        for (int u = 0; u &lt; 3; u++) {
+                            mut *= new_seq.word[l][u] == dict[k][u];
+                        }
+                        eq += mut;
+
+                    }
+
+                /*  printf(&quot;%d - &quot;, eq);
+                    for (int l = 0; l &lt; new_seq.length; l++) {
+                        printf(&quot;%s, &quot;,  new_seq.word[l]);
+                    }
+                    printf(&quot;[%s] : &quot;, dict[k]);
+
+                    printf(&quot; %d, \n&quot;, check(new_seq.word[new_seq.length - 1], dict[k]));
+
+    */
+                    if ((eq == 0)*(check(new_seq.word[new_seq.length - 1], dict[k]))) { 
+
+                        new_seq.length++;
+                        for (int t = 0; t &lt; 4; t++) {
+                            new_seq.word[new_seq.length - 1][t] = dict[k][t];
+                        }
+                        store++;
+                        for (int j = 0; j &lt; new_seq.length; j++) {
+                            for (int t = 0; t &lt; 4; t++) {
+                                re[store].word[j][t] = new_seq.word[j][t];
+                            }
+
+                        }
+                        re[store].sp = 0;
+                        re[store].length= new_seq.length;
+                        stop *= new_seq.sp;
+                    }
+                }
+
+                stop *= re[i].sp;
+            }
+        }
+
+    }
+
+
+
+
+    for (int i = 0; i &lt;= store; i++) {
+        if (check(end, re[i].word[re[i].length-1])==1) {
+            re[i].length++;
+            strcpy(re[i].word[re[i].length - 1], end);
+        }
+        else {
+            re[i].sp = 0;
+        }
+    }
+    int min = 7;
+    for (int i = 0; i &lt;= store; i++) {
+        if (re[i].sp == 1) {
+            min = min &lt; re[i].length ? min : re[i].length;
+        }
+    }
+    printf(&quot;최소 길이 : %d\n&quot;, min);
+    for (int i = 0; i &lt;= store; i++) {
+        if ((re[i].length == min)*(re[i].sp==1)) {
+            for (int j = 0; j &lt; min; j++) {
+                printf(&quot;%s, &quot;, re[i].word[j]);
+            }
+            printf(&quot;\n&quot;);
+
+
+        }
+
+    }
+
+    return 0;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/03/13 13:00</p>
+                                <p class="static-profile" style="margin:0;padding:0;">탁성하</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13324"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def nm(v1,v2):
+    return True if len([i for i in v1 if i in v2]) == 2 else False
+
+def ans(s,e,d):
+    tmp = {3:[]}
+    count = 3
+    flag = False
+    result = []
+
+    while 1:
+        for i in d:
+            if count == 3 and nm(s,i):
+                tmp[count].append([s,i])
+            elif count != 3:
+                for j in tmp[count-1]:
+                    if nm(j[-1],i):
+                        tmp[count].append(j+[i])
+        for i in tmp[count]:
+            if nm(i[-1],e):
+                flag = True
+                result.append(i+[e])
+        if flag: break
+        count+=1
+        tmp[count] = []
+    return  count, result
+
+start = &quot;hit&quot;
+end = &quot;cog&quot;
+dic = [&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;lot&quot;,&quot;log&quot;]
+print(ans(start,end,dic))
+</code></pre>
+
+<pre><code>(5, [['hit', 'hot', 'dot', 'dog', 'cog'], ['hit', 'hot', 'lot', 'log', 'cog']])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/04 03:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18731"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;</p>
+<p>public class sol101 {</p>
+<pre><code>static String dict[] = {"hot","dot","dog","lot","log"};
+static boolean used[] = new boolean[dict.length];
+</code></pre>
+<p>//  static List<List<String>&gt; patterns = new ArrayList&lt;&gt;(); // 답에 도달한 모든 패턴</p>
+<pre><code>static List&lt;String&gt; min_pattern = new ArrayList&lt;&gt;(); // 최소 패턴
+
+static int min = 999999;
+
+public static void findMinDict(String start, String end, int turn, List&lt;String&gt; pattern) {
+
+    int find = 0;
+    for(int i=0; i&lt;start.length(); i++) {
+        if(start.charAt(i) == end.charAt(i)) find++;
+    }
+
+    if(find == start.length()-1) {
+
+        if(min &gt; turn+1) {
+            min = turn+1;
+            pattern.add(end);
+            min_pattern = new ArrayList&lt;&gt;(pattern); // min을 갱신했을때 바꿔끼기
+        }
+
+        // 배열 이상부터는 java에서는 주소로 사용되니 아예 new로 새로운 것을 생성해야함
+</code></pre>
+<p>//          patterns.add(new ArrayList&lt;&gt;(pattern));
+            return;
+        }
+        if(find == start.length()) {</p>
+<pre><code>        if(min &gt; turn) {
+            min = turn;
+            min_pattern = new ArrayList&lt;&gt;(pattern); // min을 갱신했을때 바꿔끼기
+        }
+</code></pre>
+<p>//          patterns.add(new ArrayList&lt;&gt;(pattern));
+            return;
+        }</p>
+<pre><code>    for(int i=0; i&lt;dict.length; i++) {
+
+        if(used[i]) continue;
+
+        int count = 0;
+
+        for(int j=0; j&lt;dict[i].length(); j++) {
+            if(dict[i].charAt(j) == start.charAt(j)) count++;
+        }
+
+        if(count == start.length()-1) {
+
+            used[i] = true;
+            pattern.add(dict[i]);
+            findMinDict(dict[i], end, turn+1, pattern);
+
+            used[i] = false;
+            pattern.remove(pattern.size()-1);
+        }
+    }
+}
+
+
+public static void main(String[] args) throws Exception {
+
+    Scanner sc = new Scanner(System.in);
+
+    String start = "hit";
+    String end = "cog";
+
+
+    findMinDict(start,end, 1, new ArrayList&lt;String&gt;());
+
+
+
+    System.out.println("############### 사전 찾기 최소 ##################");
+    System.out.println(min);
+
+    for(int i=0; i&lt;min_pattern.size(); i++) {
+        System.out.print(min_pattern.get(i) + " ");
+    }
+    System.out.println();
+}
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/07/30 10:38</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이병호</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22969"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">start=&quot;hit&quot;
+end=&quot;cog&quot;
+dict=[&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;lot&quot;,&quot;log&quot;]
+n,slst=0,[&quot;hit&quot;]
+def smlr(string1,string2):
+    lst1,lst2,c=list(string1),list(string2),0
+    for i in range(min(len(lst1),len(lst2))):
+        if lst1[i]==lst2[i]:
+            c+=1
+        if c&gt;=min(len(lst1),len(lst2))-1:
+            string1=string2
+    return string1
+
+while True:
+    if n&gt;=len(dict):
+        break
+    start=smlr(start,dict[n])
+    slst.append(start)
+    if smlr(start,&quot;cog&quot;)==&quot;cog&quot;:
+        slst.append(&quot;cog&quot;)
+        print(str(slst)+&quot;,&quot;+str(len(slst)))
+        break
+    n+=1
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/08/19 19:16</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박시원</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27213"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>// Rust</p>
+<p>// 한 캐릭터씩 바꿔 각 path를 벡터에 저장해, target에 도달하는 path가 있으면 출력하고 끝내는 루프입니다.</p>
+<p>fn word_ladder() {</p>
+<pre><code>let (start, end) = ("hit", "cog");
+let mut dict = vec!["hot", "dot", "dog", "lot", "log"];
+dict.push(end);
+let mut cont = true;
+
+let mut next = vec![vec![start]];
+'outer: loop {
+    let input = next;
+    next = vec![];
+    for path in input {
+        for w in &amp;dict {
+            if path.contains(w) { continue;}
+            let v1 = path[path.len()-1].chars().collect::&lt;Vec&lt;char&gt;&gt;();
+            let v2 = w.chars().collect::&lt;Vec&lt;char&gt;&gt;();
+            if (v1[0], v1[1]) == (v2[0], v2[1]) ||
+                (v1[0], v1[2]) == (v2[0], v2[2]) ||
+                (v1[1], v1[2]) == (v2[1], v2[2]) {
+                    let mut tmp = path.clone();
+                    tmp.push(*w);
+                    next.push(tmp);
+                    if *w == end { cont = false; }
+            }
+        }
+    }
+    if !cont { break 'outer;}
+}
+for path in &amp;next {
+    if path.contains(&amp;end) {
+        println!("{:?} {}", path, path.len());
+    }
+}
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/02/01 01:17</p>
+                                <p class="static-profile" style="margin:0;padding:0;">JW KIM</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29750"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Word_Ladder
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            string start = &quot;hit&quot;;
+            string end = &quot;cog&quot;;
+            string[] dict = { &quot;hot&quot;, &quot;dot&quot;, &quot;dog&quot;, &quot;lot&quot;, &quot;log&quot; };
+            minStep = dict.Length;
+            nextOneChangedWord(new List&lt;string&gt; { start}, 0, end, dict);
+            Console.WriteLine( minStep);
+            Console.ReadKey();
+        }
+        static int minStep = 0;
+        private static void nextOneChangedWord(List&lt;string&gt; list, int idx, string end, string[] dict)
+        {
+            if (list[idx] == end)
+            {
+                minStep = Math.Min(minStep, idx+1);
+                //Console.WriteLine( string.Join(&quot;-&gt;&quot;, list));
+                return;
+            }
+
+            for (int i = 0; i &lt; dict.Length; i++) 
+            {
+                if (list.Contains(dict[i]))
+                    continue;
+                else
+                {
+                    int n = 0, en = 0;
+                    for (int j = 0; j &lt; dict[i].Length; j++) 
+                    {
+                        if (dict[i][j] == list[idx][j]) n++;
+                        if (list[idx][j] == end[j]) en++;
+                    }
+                    if (en == 2)
+                    {
+                        list.Add(end);
+                        nextOneChangedWord(list, idx + 1, end, dict);
+                        list.RemoveAt(list.Count - 1);
+                    }
+                    else if(n == 2)
+                    {
+                        list.Add(dict[i]);
+                        nextOneChangedWord(list, idx + 1, end, dict);
+                        list.RemoveAt(list.Count-1);
+                    }
+                }
+            }
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/11/11 19:43</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

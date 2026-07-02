@@ -1,0 +1,3143 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="출처 : [http://tech.kakao.com/2017/09/27/kakao-blind-recruitment-round-1/](http://tech.kakao.com/2017/09/27/kakao-blind-recruitment-round-1...">
+    <title>다트 게임 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">다트 게임</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">5</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 3</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>출처 : <a href="http://tech.kakao.com/2017/09/27/kakao-blind-recruitment-round-1/">http://tech.kakao.com/2017/09/27/kakao-blind-recruitment-round-1/</a></p>
+<p>2018년 카카오 신입 공채 1차 코딩 테스트 문제입니다.</p>
+<hr />
+<p>카카오톡 게임별의 하반기 신규 서비스로 다트 게임을 출시하기로 했다. 다트 게임은 다트판에 다트를 세 차례 던져 그 점수의 합계로 실력을 겨루는 게임으로, 모두가 간단히 즐길 수 있다.
+갓 입사한 무지는 코딩 실력을 인정받아 게임의 핵심 부분인 점수 계산 로직을 맡게 되었다. 다트 게임의 점수 계산 로직은 아래와 같다.</p>
+<ol>
+<li>다트 게임은 총 3번의 기회로 구성된다.</li>
+<li>각 기회마다 얻을 수 있는 점수는 0점에서 10점까지이다.</li>
+<li>점수와 함께 Single(S), Double(D), Triple(T) 영역이 존재하고 각 영역 당첨 시 점수에서 1제곱, 2제곱, 3제곱 (점수^1 , 점수^2 , 점수^3 )으로 계산된다.</li>
+<li>옵션으로 스타상(<code>*</code>) , 아차상(#)이 존재하며 스타상(<code>*</code>) 당첨 시 해당 점수와 바로 전에 얻은 점수를 각 2배로 만든다. 아차상(#) 당첨 시 해당 점수는 마이너스된다.</li>
+<li>스타상(<code>*</code>)은 첫 번째 기회에서도 나올 수 있다. 이 경우 첫 번째 스타상(<code>*</code>)의 점수만 2배가 된다. (예제 4번 참고)</li>
+<li>스타상(<code>*</code>)의 효과는 다른 스타상(<code>*</code>)의 효과와 중첩될 수 있다. 이 경우 중첩된 스타상(<code>*</code>) 점수는 4배가 된다. (예제 4번 참고)</li>
+<li>스타상(<code>*</code>)의 효과는 아차상(#)의 효과와 중첩될 수 있다. 이 경우 중첩된 아차상(#)의 점수는 -2배가 된다. (예제 5번 참고)</li>
+<li>Single(S), Double(D), Triple(T)은 점수마다 하나씩 존재한다.</li>
+<li>스타상(<code>*</code>), 아차상(#)은 점수마다 둘 중 하나만 존재할 수 있으며, 존재하지 않을 수도 있다.</li>
+</ol>
+<p>0~10의 정수와 문자 S, D, T, *, #로 구성된 문자열이 입력될 시 총점수를 반환하는 함수를 작성하라.</p>
+<p><strong>입력 형식</strong></p>
+<p>“점수|보너스|[옵션]”으로 이루어진 문자열 3세트.</p>
+<pre><code>예) 1S2D*3T
+</code></pre>
+
+<ul>
+<li>점수는 0에서 10 사이의 정수이다.</li>
+<li>보너스는 S, D, T 중 하나이다.</li>
+<li>옵선은 *이나 # 중 하나이며, 없을 수도 있다.</li>
+</ul>
+<p><strong>출력 형식</strong></p>
+<p>3번의 기회에서 얻은 점수 합계에 해당하는 정수값을 출력한다.</p>
+<pre><code>예) 37
+</code></pre>
+
+<p><strong>입출력 예제</strong></p>
+<table>
+<thead>
+<tr>
+<th>예제</th>
+<th>dartResult</th>
+<th>answer</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1S2D*3T</td>
+<td>37</td>
+<td>1^1 * 2 + 2^2 * 2 + 3^3</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1D2S#10S</td>
+<td>9</td>
+<td>1^2 + 2^1 * (-1) + 10^1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1D2S0T</td>
+<td>3</td>
+<td>1^2 + 2^1 + 0^3</td>
+</tr>
+<tr>
+<td>4</td>
+<td>1S*2T*3S</td>
+<td>23</td>
+<td>1^1 * 2 * 2 + 2^3 * 2 + 3^1</td>
+</tr>
+<tr>
+<td>5</td>
+<td>1D#2S*3S</td>
+<td>5</td>
+<td>1^2 * (-1) * 2 + 2^1 * 2 + 3^1</td>
+</tr>
+<tr>
+<td>6</td>
+<td>1T2D3D#</td>
+<td>-4</td>
+<td>1^3 + 2^2 + 3^2 * (-1)</td>
+</tr>
+<tr>
+<td>7</td>
+<td>1D2S3T*</td>
+<td>59</td>
+<td>1^2 + 2^1 * 2 + 3^3 * 2</td>
+</tr>
+</tbody>
+</table>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">입사문제</span>
+                
+                    <span class="label label-tag label-xs">카카오</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2017/10/07 16:13</p>
+                    <p class="static-profile" style="margin:0;padding:0;">pahkey</p>
+                </div>
+            </div>
+
+            
+                <a name="comment_2119"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">입출력 예제에서 4번 1S2T3S의 answer가 23이 되는 이유가 궁금합니다.
+본 예제는 스타상 아차상이 존재하지 않으므로 * 2 가 붙을 이유가 없습니다.</span>
+                    -
+                    <span style="font-size:11px;">
+                        kihyun lee,
+                        2017/10/08 03:41
+                    </span>
+                </div>
+            
+                <a name="comment_2121"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">문제 입력오타가 있었습니다. 알려주셔서 감사합니다.</span>
+                    -
+                    <span style="font-size:11px;">
+                        pahkey,
+                        2017/10/08 16:38
+                    </span>
+                </div>
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>38개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_8994"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">4</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import re
+
+
+def dart(inp):
+    shot = re.findall(r'\d{1,2}[SDT][*#]?', inp)
+
+    opt = [1,1,1]
+    for i, s in enumerate(shot):
+        if s[-1] == '#':
+            opt[i] *= -1
+            shot[i] = shot[i][:-1]
+        elif s[-1] == '*':
+            opt[i] *= 2
+            shot[i] = shot[i][:-1]
+            if i:
+                opt[i-1] *= 2
+
+    point = [(int(s[:-1]) ** '0SDT'.find(s[-1]) * o) for s, o in zip(shot, opt)]
+
+    return sum(point)
+
+
+print(dart('1S2D*3T'))
+print(dart('1D2S#10S'))
+print(dart('1D2S0T'))
+print(dart('1S*2T*3S'))
+print(dart('1D#2S*3S'))
+print(dart('1T2D3D#'))
+print(dart('1D2S3T*'))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/11 17:08</p>
+                                <p class="static-profile" style="margin:0;padding:0;">songci</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8963"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">2</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println(&quot;입력&quot;);
+        int cnt=0;
+        String input = sc.next();
+        char [] inputC = input.toCharArray();
+
+        for(char a : inputC)    //항의 갯수
+            if(a=='S' || a=='D' || a=='T')
+                cnt++;
+
+        int [] answer_arr = new int[cnt];
+
+        for(int i=1,j=0;i&lt;inputC.length;i++){
+            if(inputC[i]=='S' || inputC[i]=='D' || inputC[i]=='T'){
+                if(inputC[i]=='S'){
+                    if(inputC[i-1]=='0' &amp;&amp; inputC[i-2]=='1'){
+                        answer_arr[j]=10;
+                    }else{
+                        Character a1 = new Character(inputC[i-1]);
+                        answer_arr[j] = Integer.parseInt(a1.toString());
+                    }
+                }else if(inputC[i]=='D'){
+                    if(inputC[i-1]=='0' &amp;&amp; inputC[i-2]=='1'){
+                        answer_arr[j]=10;
+                    }else{
+                    Character a1 = new Character(inputC[i-1]);
+                    answer_arr[j] = (int)Math.pow(Integer.parseInt(a1.toString()), 2);  
+                    }
+                }else if(inputC[i]=='T'){
+                    if(inputC[i-1]=='0' &amp;&amp; inputC[i-2]=='1'){
+                        answer_arr[j]=10;
+                    }else{
+                    Character a1 = new Character(inputC[i-1]);
+                    answer_arr[j] = (int)Math.pow(Integer.parseInt(a1.toString()), 3);
+                    }
+                }
+                j++;
+            }
+            if(inputC[i]=='*'){
+                if(j==1){
+                    answer_arr[0]*=2;
+                }else{
+                    for(int k=j;k&gt;j-2;k--){
+                        answer_arr[k-1]*=2;
+                    }
+                }           
+            }
+            if(inputC[i]=='#'){
+                    answer_arr[j-1] = answer_arr[j-1]*-1;
+            }
+        }
+
+        int sum = 0;
+        for(int a : answer_arr){
+            sum+=a;
+        }
+        System.out.println(sum);
+    }
+
+</code></pre>
+
+<p>맞는지 틀린지를 잘 모르겠네요 또 맞다고해도 더 깔끔하게 짜는 방법이 있을 것 같습니다.
+고수님들의 지적을 기다립니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/08 03:43</p>
+                                <p class="static-profile" style="margin:0;padding:0;">kihyun lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19617"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import re
+inp, result = input(&quot;input : &quot;), []
+p = re.compile(&quot;\d+[SDT][*#]?&quot;)
+lst = p.findall(inp)                         #정규표현식으로 각 시행 결과를 리스트로 나눕니다
+for i in range(0, 3) :
+    if lst[i][-1] == '*' :                   #먼저 *를 처리합니다(SDT를 먼저 처리하면 그 결과에 *가 포함되므로)
+        lst[i] = lst[i].replace('*', '*2')
+        if i != 0 :
+            lst[i-1] += '*2'
+    lst[i] = lst[i].replace('S', '**1').replace('D', '**2').replace('T', '**3').replace('#', '*(-1)')
+    #SDT 및 #를 수식과 바꿉니다
+print(&quot;+&quot;.join(lst),'=', eval(&quot;+&quot;.join(lst))) #바꾼 문자열을 계산합니다
+</code></pre>
+
+<p>결과</p>
+<p>input : 1D#2S*3S</p>
+<p>1<strong>2<em>(-1)</em>2+2</strong>1<em>2+3</em>*1 = 5</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/10/11 14:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GG</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8966"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<p>토큰화, 룰적용, eval.</p>
+<pre><code class="ruby">def play_dart(str)
+  op = &quot;SDT*#&quot;.chars.zip(%w(**1 **2 **3 *2 *-1)).to_h
+  rule = -&gt;s,e { e[0] != &quot;*&quot; ? s&lt;&lt;e : (t = s.pop(e[-1].to_i).map{|_|_+e}; s+t) }
+  tokens = str.chars.sum(&quot;&quot;) {|c| op.has_key?(c) ? op[c]+&quot; &quot; : c}.split
+  eval tokens.reduce([], &amp;rule).join(&quot;+&quot;)
+end
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby">cases = %w(1S2D*3T 1D2S#10S 1D2S0T 1S*2T*3S 1D#2S*3S 1T2D3D# 1D2S3T*)
+expect( cases.map {|e| play_dart(*e) } ).to eq [37, 9, 3, 23, 5, -4, 59]
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/08 13:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8990"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>입출력 예제의 테스트케이스대로 나오긴 하네여.
+수정,보완 조언좀 부탁드려요.</p>
+<pre><code class="java">public class dart {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        int point;
+        String bonus;
+        String option;
+        int answer=0;
+        int firstpoint=0;
+        int secondpoint=0;
+        int thirdpoint=0;
+        StringBuffer dartResult = new StringBuffer();
+        for(int i=0;i&lt;3;i++){
+
+            switch (i) {
+
+                case 0 :
+                    while(true){
+                        System.out.println(&quot;점수 입력 : &quot;);
+                        point = sc.nextInt();
+                        if(!(point&gt;=0 &amp;&amp; point&lt;=10)){
+                            System.out.println(&quot;점수는 0에서 10점 사이의 정수 입니다.&quot;);
+                        }else{
+                            break;
+                        }
+                    }
+                    sc.nextLine();
+                    while(true){
+                        System.out.println(&quot;보너스 입력(보너스는 S,D,T 중 하나) : &quot;);
+                         bonus = sc.nextLine();
+                        if(!(bonus.equals(&quot;S&quot;) || bonus.equals(&quot;D&quot;) || bonus.equals(&quot;T&quot;))){
+                            System.out.println(&quot;S나 D나 T입력해주셈&quot;);
+                        }else{
+                            break;
+                        }
+                    }
+                    if(bonus.equals(&quot;S&quot;)){
+                        firstpoint = point;
+                    }else if(bonus.equals(&quot;D&quot;)){
+                        firstpoint= point*point;
+                    }else{
+                        firstpoint =point*point*point;
+                    }
+                    System.out.println(&quot;옵션입력 : &quot;);
+
+                    option = sc.nextLine();
+                    if(option.equals(&quot;*&quot;)){
+                        firstpoint = firstpoint*2;
+                    }else if(option.equals(&quot;#&quot;)){
+                        firstpoint = firstpoint*-1;
+                    }
+                    dartResult.append(String.valueOf(point)+bonus+option);
+                    break;
+                case 1 :
+                    while(true){
+                        System.out.println(&quot;점수 입력 : &quot;);
+                        point = sc.nextInt();
+                        if(!(point&gt;=0 &amp;&amp; point&lt;=10)){
+                            System.out.println(&quot;점수는 0에서 10점 사이의 정수 입니다.&quot;);
+                        }else{
+                            break;
+                        }
+                    }
+                    sc.nextLine();
+                    while(true){
+                        System.out.println(&quot;보너스 입력(보너스는 S,D,T 중 하나) : &quot;);
+                         bonus = sc.nextLine();
+                        if(!(bonus.equals(&quot;S&quot;) || bonus.equals(&quot;D&quot;) || bonus.equals(&quot;T&quot;))){
+                            System.out.println(&quot;S나 D나 T입력해주셈&quot;);
+                        }else{
+                            break;
+                        }
+                    }
+                    if(bonus.equals(&quot;S&quot;)){
+                        secondpoint = point;
+                    }else if(bonus.equals(&quot;D&quot;)){
+                        secondpoint= point*point;
+                    }else{
+                        secondpoint =point*point*point;
+                    }
+                    System.out.println(&quot;옵션입력 : &quot;);
+
+                    option = sc.nextLine();
+                    if(option.equals(&quot;*&quot;)){
+                        secondpoint = secondpoint*2;
+                        firstpoint = firstpoint*2;
+                    }else if(option.equals(&quot;#&quot;)){
+                        secondpoint = secondpoint*-1;
+                    }
+                    dartResult.append(String.valueOf(point)+bonus+option);
+                    break;
+                case 2 :
+                    while(true){
+                        System.out.println(&quot;점수 입력 : &quot;);
+                        point = sc.nextInt();
+                        if(!(point&gt;=0 &amp;&amp; point&lt;=10)){
+                            System.out.println(&quot;점수는 0에서 10점 사이의 정수 입니다.&quot;);
+                        }else{
+                            break;
+                        }
+                    }
+                    sc.nextLine();
+                    while(true){
+                        System.out.println(&quot;보너스 입력(보너스는 S,D,T 중 하나) : &quot;);
+                         bonus = sc.nextLine();
+                        if(!(bonus.equals(&quot;S&quot;) || bonus.equals(&quot;D&quot;) || bonus.equals(&quot;T&quot;))){
+                            System.out.println(&quot;S나 D나 T입력해주셈&quot;);
+                        }else{
+                            break;
+                        }
+                    }
+                    if(bonus.equals(&quot;S&quot;)){
+                        thirdpoint = point;
+                    }else if(bonus.equals(&quot;D&quot;)){
+                        thirdpoint= point*point;
+                    }else{
+                        thirdpoint =point*point*point;
+                    }
+                    System.out.println(&quot;옵션입력 : &quot;);
+
+                    option = sc.nextLine();
+                    if(option.equals(&quot;*&quot;)){
+                        thirdpoint = thirdpoint*2;
+                        secondpoint = secondpoint*2;
+                    }else if(option.equals(&quot;#&quot;)){
+                        thirdpoint = thirdpoint*-1;
+                    }
+                    dartResult.append(String.valueOf(point)+bonus+option);
+                    break;
+            }
+
+        }
+        answer = firstpoint+secondpoint+thirdpoint;
+        System.out.println(dartResult+&quot;   &quot; +answer);
+    }
+
+
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/11 13:39</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김문수</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9017"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C++풀이입니다.</p>
+<p>180907 수정해보았습니다.</p>
+<pre><code class="cpp">#include&lt;iostream&gt;
+#include&lt;string&gt;
+using namespace std;
+
+int main()
+{
+    string str;
+    cin &gt;&gt; str;
+
+    //S D제곱 T 세제곱
+    //*을 만나면 이전에 받은 스코어 두배 # -1곱합
+    //점수는 0~10
+
+    int answer = 0;
+    int score = 0;
+
+    for (int i = 0; i &lt; str.length(); i++)
+    {
+        //숫자
+        if (str.substr(i, 1) &gt;= &quot;0&quot; &amp;&amp; str.substr(i, 1) &lt;= &quot;9&quot;)
+        {
+            //cout &lt;&lt; str.substr(i, 1);
+            //10인경우
+            if (str.substr(i, 2) == &quot;10&quot;)
+            {
+                i++;
+                score = 10;
+            }
+            else
+            {
+                score = atoi(str.substr(i, 1).c_str());
+            }
+        }
+        else //스코어곱, 보너스 문자
+        {
+            if (str.substr(i, 1) == &quot;S&quot;)
+            {
+                if (str.substr(i + 1, 1) == &quot;*&quot;)
+                {
+                    i++;
+                    score *= 2;
+                }
+                else if (str.substr(i + 1, 1) == &quot;#&quot;)
+                {
+                    i++;
+                    score *= -1;
+                }
+            }
+            else if (str.substr(i, 1) == &quot;D&quot;)
+            {
+                score *= score;
+
+                if (str.substr(i+1, 1) == &quot;*&quot;)
+                {
+                    i++;
+                    score *= 2;
+                }
+                else if (str.substr(i+1, 1) == &quot;#&quot;)
+                {
+                    i++;
+                    score *= -1;
+                }
+            }
+            else if (str.substr(i, 1) == &quot;T&quot;)
+            {
+                int temp = score;
+                score *= temp;
+                score *= temp;
+
+                if (str.substr(i + 1, 1) == &quot;*&quot;)
+                {
+                    i++;
+                    score *= 2;
+                }
+                else if (str.substr(i + 1, 1) == &quot;#&quot;)
+                {
+                    i++;
+                    score *= -1;
+                }
+            }
+            answer += score;
+        }
+        cout &lt;&lt; str.substr(i, 1) &lt;&lt; endl;
+        cout &lt;&lt; &quot;answer&quot; &lt;&lt; answer &lt;&lt; endl;
+    }
+    cout &lt;&lt; answer;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/15 18:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">와디더</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9029"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">
+def dart(s):
+    score = []
+    n = ''
+    for c in s:
+        if c.isnumeric():
+            n += c
+        elif c == 'S':
+            score.append(int(n) ** 1)
+            n = ''
+        elif c == 'D':
+            score.append(int(n) ** 2)
+            n = ''
+        elif c == 'T':
+            score.append(int(n) ** 3)
+            n = ''
+        elif c == '*':
+            if len(score) &gt; 1:
+                score[-2] *= 2
+            score[-1] *= 2
+        elif c == '#':
+            score[-1] *= -1
+        # print(c, score)
+    print(s, sum(score))
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/16 13:34</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박범수</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9080"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="ruby">POINTS = (&quot;0&quot;..&quot;10&quot;).to_a
+ZONES = [&quot;S&quot;, &quot;D&quot;, &quot;T&quot;]
+AWARDS = [&quot;*&quot;, &quot;#&quot;]
+
+class String
+  def point?
+    POINTS.each { |p| return true if p == self }
+    false
+  end
+
+  def zone?
+    ZONES.each { |p| return true if p == self }
+    false
+  end
+
+  def award?
+    AWARDS.each { |p| return true if p == self }
+    false
+  end
+end
+
+class DartGame
+
+  def initialize(games)
+    @games = games.split('')
+    @zones = ZONES.each_with_index.to_h
+  end
+
+  def calculate
+    results = []
+    starting = 0
+    @games.each_with_index do |s, i|
+      next unless s.zone?
+
+      point = 0
+      if i - starting == 1
+        point = @games[i-1].to_i
+      elsif i - starting == 2
+        point = (@games[i-2] + @games[i-1]).to_i
+      end
+
+      point_zone = 1
+      (@zones[s]+1).times do
+        point_zone *= point
+      end
+      results &lt;&lt; point_zone
+
+      break if @games[i+1].nil?
+
+      if @games[i+1].award?
+        len = results.length
+        case @games[i+1]
+          when '*'
+            results = results.each_with_index.map { |r, k| r * 2 if k &gt; len - 3 }
+            starting = i + 2
+          when '#'
+            results[len - 1] = results.last * -1
+            starting = i + 2
+          else
+            starting = i + 1
+        end
+      else
+        starting = i + 1
+      end
+    end
+    puts results.inject(:+)
+  end
+
+end
+
+game = DartGame.new(gets.chomp)
+game.calculate
+</code></pre>
+
+<p>영역의 경우는 항상 1자리이고, 반드시 거치므로 영역을 기준으로 계산하면서 시작점을 바꿔가는 방식을 취했습니다. 너무 길긴하네요.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/21 22:00</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이한결</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9091"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬3.6입니다. 정규식으로 입력을 분해해서 규칙에 따라 계산합니다. </p>
+<pre><code class="python">def dart(s):
+    pat = re.compile(r'([0-9]|10)([SDT])([\*#]?)')
+    temp = []
+    proc = {'S': lambda x: x, 'D': lambda x: x*x, 'T': lambda x: x**3}
+    for n, t, b in pat.findall(s):
+        p = proc[t](int(n))
+        if b == '#':
+            p *= -1
+        elif b == '*':
+            p *= 2
+            if temp:
+                temp[-1] *= 2
+        temp.append(p)
+    return sum(temp)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/24 13:16</p>
+                                <p class="static-profile" style="margin:0;padding:0;">룰루랄라</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9101"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.Stack;
+import java.math.*;
+
+    public static int calGrade(String exp)
+    {
+        char[] exps = exp.toCharArray();
+        Stack&lt;Integer&gt; stack = new Stack&lt;Integer&gt;();
+        for(char e : exps)
+        {
+            try{
+                switch(e)
+                {
+                case '*':
+                    int popResult = stack.pop() * 2;
+                    if(stack.size() != 0)
+                        stack.push(stack.pop() * 2);
+                    stack.push(popResult);
+                    break;
+                case '#':
+                    stack.push(stack.pop() * -1);
+                    break;
+                case 'S':
+                    stack.push((int)Math.pow(stack.pop(), 1));
+                    break;
+                case 'D':
+                    stack.push((int)Math.pow(stack.pop(), 2));
+                    break;
+                case 'T':
+                    stack.push((int)Math.pow(stack.pop(), 3));
+                    break;
+                case '0':
+                    if(stack.peek() == 1)
+                    {
+                        stack.pop();
+                        stack.push(10);
+                    } else 
+                        stack.push(0);
+                    break;
+                default:                
+                    String s = String.valueOf(e);
+                    stack.push(Integer.parseInt(s));
+                    break;
+                }
+            }           
+            catch(NumberFormatException exception){
+                System.out.println(exp +&quot;는 정확한 입력값이 아닙니다. 올바른 값을 넣어주세요.&quot;);
+                System.exit(0);
+            }
+        }
+
+        int result = 0;
+        while(!stack.isEmpty())
+            result += stack.pop();
+        return result;  
+    }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/25 11:45</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김홍규</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9373"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def dart(char):
+    char = list(char)
+    count =[]
+    grade=0
+    for i in range(len(char)):
+        if char[i].isdigit() :
+            if char[i]=='1' and char[i+1] =='0': char[i]='10'
+            if char[i]=='0' and char[i-1] == '1' : continue
+            count = count + [grade]
+            grade = int(char[i])
+        elif char[i] == 'S' : grade = grade
+        elif char[i] == 'D' : grade = grade**2
+        elif char[i] == 'T' : grade = grade**3
+        elif char[i] == '*' : 
+            grade = 2*grade
+            count[len(count)-1] = count[len(count)-1]*2
+        elif char[i] == '#' : grade = grade*-1
+    count += [grade]
+    return(sum(count))
+
+dart('1D2S0T'), dart('1S*2T*3S'), dart('1D#2S*3S'), dart('1T2D3D#'), dart('1D2S3T*')
+</code></pre>
+
+<p>python 3.52 입니다</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/11/24 19:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Seohyun Choi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9445"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.*;
+import java.util.regex.*;
+
+public class dart {
+    static int[] totalScore = new int[3];
+    public int calcScore_num(String score) {
+        int totalScore = 0;
+        Pattern p = Pattern.compile(&quot;([0-9]+)([D,S,T])&quot;);
+        Matcher m = p.matcher(score);
+        while(m.find()) {
+            if(m.group(2).matches(&quot;S&quot;)) {
+                totalScore = Integer.parseInt(m.group(1));
+            } else if(m.group(2).matches(&quot;D&quot;)) {
+                totalScore = Integer.parseInt(m.group(1)) * Integer.parseInt(m.group(1));
+            } else if (m.group(2).matches(&quot;T&quot;)) {
+                totalScore = Integer.parseInt(m.group(1)) * Integer.parseInt(m.group(1)) * Integer.parseInt(m.group(1));
+            }
+        }
+        return totalScore;
+    }
+
+    public void calcScore_star(int i) {
+        for(int j = 0; j &lt;= 1; j++) {
+            totalScore[i] = totalScore[i]*2;
+            if(i==0) {
+                break;
+            }
+            i = i-1;
+        }
+    }
+
+    public void calcScore_sharp(int i) {
+            totalScore[i] = totalScore[i]*(-1);
+    }
+
+    public void calcScore(String score) {
+        Pattern p = Pattern.compile(&quot;([0-9]+[D,S,T])([*,#]*)&quot;);
+        Matcher m = p.matcher(score);
+
+        int i = 0;
+        while(m.find()) {
+            totalScore[i] = this.calcScore_num(m.group(1));
+            if(m.group(2).matches(&quot;\\*&quot;)) {
+                this.calcScore_star(i);
+            }
+            if(m.group(2).matches(&quot;#&quot;)) {
+                this.calcScore_sharp(i);
+            }   
+            i++;
+        }
+        System.out.println(totalScore[0]+totalScore[1]+totalScore[2]);
+    }
+
+    public static void main(String[] args) {
+        dart d = new dart();
+        String score = &quot;1S2D*3T&quot;;
+        d.calcScore(score);
+        String score2 = &quot;1D2S#10S&quot;;
+        d.calcScore(score2);
+        String score3 = &quot;1D2S0T&quot;;
+        d.calcScore(score3);
+        String score4 = &quot;1S*2T*3S&quot;;
+        d.calcScore(score4);
+        String score5 = &quot;1D#2S*3S&quot;;
+        d.calcScore(score5);
+        String score6 = &quot;1T2D3D#&quot;;
+        d.calcScore(score6);
+        String score7 = &quot;1D2S3T*&quot;;
+        d.calcScore(score7);
+    }
+
+}
+
+</code></pre>
+
+<p>고수님들 피드백 부탁드립니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/12/01 15:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">연지민</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9524"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 버전 3.6입니다.</p>
+<pre><code class="python">import re
+def CalScore(dartstr) :
+    # 게임별, 정보별 그룹핑
+    p = re.compile('(\d+)([SDT])([*#]?)')
+    m = p.findall(dartstr)
+
+    dic_bonus = {'S':1, 'D':2, 'T':3}  # 문자별 Bonus 승수 Dictionary
+    dic_prize = {'*':2, '#':-1}        # 문자별 Prize 배수 Dictionary
+    game_score = []
+    game_no = 0
+
+    # 입력 정보의 정합성 체크는 생략
+
+    while game_no &lt; len(m) : # game별 Loop
+        # 게임별 점수 셋팅
+        game_score.append(int(m[game_no][0]) ** dic_bonus[m[game_no][1]])
+
+        if(m[game_no][2] != &quot;&quot;) : # 3번째 정보(상/벌)가 유입된 경우
+            if game_no &gt;= 1 : # 두번 째 게임 이상 인 경우
+                if m[game_no][2] == '*' : # 상일 경우 이전 점수에도 반영
+                    game_score[game_no-1] = game_score[game_no-1] * dic_prize[m[game_no][2]] # 이전 점수 변경
+            game_score[game_no] = game_score[game_no] * dic_prize[m[game_no][2]] # 현재 점수 변경
+        game_no += 1
+    return sum(game_score)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/12/05 13:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Young</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9841"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import re
+point=input()
+p=re.compile(&quot;[0-9]+[SDT*#]+&quot;)
+result=p.findall(point)
+sum=0
+def calcul(n):
+    result=0
+    command=&quot;&quot;
+    if &quot;10&quot; in n:
+        command=n[2:]
+        result=10
+    else:
+        command=n[1:]
+        result=int(n[0])
+    for i in command:
+        if i==&quot;S&quot;:
+            result=result**1
+        if i==&quot;D&quot;:
+            result=result**2
+        if i==&quot;T&quot;:
+            result=result*result*result
+        if i==&quot;*&quot; and &quot;#&quot; not in command:
+            result=result*2
+        if i==&quot;#&quot; and &quot;*&quot; not in command:
+            result=result*-1
+        if i==&quot;*&quot; and &quot;#&quot; in command:
+            result=result*-2
+        if i==&quot;#&quot; and &quot;*&quot; in command:
+            result=result*-2
+    return result
+for i in result:
+    sum=sum+calcul(i)
+if &quot;*&quot; in result[1]:
+    sum=sum+calcul(result[0])
+if &quot;*&quot; in result[2]:
+    sum=sum+calcul(result[1])
+
+
+print(sum)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/12/25 19:31</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Dr.Choi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9899"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">#include&lt;stdio.h&gt;
+
+
+int main(void)
+{
+    char ACG = '1';
+    int grade[3], count = 0, i;
+
+    while(ACG != '\n')
+    {   
+        scanf(&quot;%c&quot;, &amp;ACG) ;
+        if(ACG == 'S')
+            {
+                grade[count-1] = grade[count-1];
+                i = 0;}
+        else if(ACG == 'D')
+        {grade[count-1] *=grade[count-1];i = 0;}
+        else if(ACG == 'T')
+        {grade[count-1] = grade[count-1]*grade[count-1]*grade[count-1];i = 0;}
+        else if(ACG == '*')
+        {i = 0;
+            if(count == 1 )
+            {
+                grade[count-1] *=2;
+            }
+            else
+                for(i = count-2 ;i &lt; count; i++)
+                    grade[i] *= 2;
+        }
+
+        else if(ACG == '#')
+
+        {grade[count-1] *= -1;i = 0;}
+
+        else if( ACG != '\n')
+        {
+            if(ACG-'0' == 1)
+                {
+                    i = 1;
+                }
+
+            if( i == 1 &amp;&amp;ACG == '0')
+            {
+                grade[count-1] = 10;
+
+                continue;
+            }
+
+            count ++;
+            grade[count -1] = ACG-'0';
+        }
+
+    }
+
+    printf(&quot;%d&quot;,grade[0]+grade[1]+grade[2]);
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/12/28 22:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">CodingMan</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10737"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3.6</p>
+<pre><code class="python">def dartgame(data):
+    tmp,games,play,score,score_list = [],[],[],0,[]
+    for index,i in enumerate(data): # 입력받은 게임정보를 각 게임별로 구분
+        if index != 0 and i.isdigit() and data[index-1].isdigit() is not True:
+            games.append(''.join(tmp))
+            tmp = []
+            tmp.append(i)
+        else:
+            tmp.append(i)
+    games.append(''.join(tmp))
+    tmp = []
+    for game in games: # 각 게임을 [점수,보너스,옵션] 으로 세분화
+        for i in game:
+            if not i.isdigit():
+                play.append(''.join(tmp))
+                tmp = []
+                tmp.append(i)
+            else:
+                tmp.append(i)
+        play.append(''.join(tmp))
+        tmp = []
+        if play[1] == 'D': # 각 게임의 스코어 계산
+            score += int(play[0])*int(play[0])
+        elif play[1] == 'T':
+            score += int(play[0])*int(play[0])*int(play[0])
+        else:
+            score += int(play[0])
+        if len(play) == 3:
+            if play[2] == '*':
+                score *= 2
+                if score_list:
+                    score_list[-1] = score_list[-1]*2
+            elif play[2] == '#':
+                score = sum(score_list)-score
+                score_list = []
+        score_list.append(score)
+        play,score = [],0
+    print(data,sum(score_list))
+
+if __name__ == &quot;__main__&quot;:
+    dataset = ['1S2D*3T','1D2S#10S','1D2S0T','1S*2T*3S','1D#2S*3S','1T2D3D#','1D2S3T*']
+    for data in dataset:
+        dartgame(data)
+</code></pre>
+
+<ul>
+<li>결과값</li>
+</ul>
+<pre><code class="python">1S2D*3T 37
+1D2S#10S 9
+1D2S0T 3
+1S*2T*3S 23
+1D#2S*3S 5
+1T2D3D# -4
+1D2S3T* 59
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/15 17:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">justbegin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10809"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>package solr.example.solr.example;</p>
+<p>public class Dart {</p>
+<pre><code>public static void main(String[]args) {
+    final int CHANCE = 3;
+    final int SCORE = 11;
+    String [] score = new String[CHANCE];
+    String [] bonus = {"S","D","T"};
+    String [] option = {"*","#",""};
+
+    for(int i=0;i&lt;CHANCE;i++) {
+        String tried = "";
+        tried += String.valueOf((int)(Math.random()*SCORE));
+        tried += bonus[(int)(Math.random()*CHANCE)];
+        tried += option[(int)(Math.random()*CHANCE)];
+        score[i]=tried;
+    }
+    int [] scores = new int [CHANCE];
+    int last = 0;
+
+    for(int i=0;i&lt;score.length;i++) {
+        int real = 0;
+        int sut = (int)score[i].charAt(0)-48;
+
+        if(score[i].contains("S")) {
+            real += Math.pow(sut,1);
+        }
+        if(score[i].contains("D")) {
+            real += Math.pow(sut,2);
+        }
+        if(score[i].contains("T")) {
+            real += Math.pow(sut,3);
+        }
+        scores[i]=real;
+
+        if(score[i].contains("*")) {
+            if(i == 0) {
+                scores[i]*=2;
+            }else {                 
+                if(score[i-1].contains("*")) {
+                    scores[i]*=4;
+                    scores[i-1]*=4;
+                }else {
+                    scores[i]*=2;
+                    scores[i-1]*=2;
+                }
+            }
+        }
+        if(score[i].contains("#")) {    
+            if(i ==0) {
+                scores[i]=-scores[i];
+            }else {
+                if(score[i-1].contains("*")) {
+                    scores[i]=-scores[i]*2;                 
+                }else {
+                    scores[i]=-scores[i];
+                }   
+            }
+        }           
+    }//end for
+    for(int s:scores) {
+        System.out.print(s+" ");
+        last+=s;
+    }
+    System.out.println();
+    System.out.println("점수="+last);
+}
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/19 17:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">윤재욱</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10876"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def dart(a):
+    num_index = list()
+    for i in range(2,len(a)):
+        if not(a[i-1] in '0123456789') and a[i] in '0123456789':
+            num_index.append(i)
+    b = [a[:num_index[0]], a[num_index[0]:num_index[1]], a[num_index[1]:]]
+    c = list()
+    option_index = list()
+    ten_index = list()
+    for i in range(3):
+        if (b[i][1] != '0' and len(b[i]) == 3) or len(b[i]) == 4:
+            option_index.append(i)
+        if b[i][1] == '0':
+            ten_index.append(i)
+    for i in range(3):
+        if i in ten_index:
+            if 'S' in b[i]:
+                c.append(10)
+            elif 'D' in b[i]:
+                c.append(100)
+            else:
+                c.append(1000)
+        else:
+            if 'S' in b[i]:
+                c.append(int(b[i][0]))
+            elif 'D' in b[i]:
+                c.append(int(b[i][0]) ** 2)
+            else:
+                c.append(int(b[i][0]) ** 3)
+    for j in option_index:
+        if b[j][len(b[j])-1] == '#':
+            c[j] = -1*c[j]
+    for j in option_index:
+        if b[j][len(b[j])-1] == '*':
+            if j == 0:
+                c[j] = 2 * c[j]
+            else:
+                (c[j-1], c[j]) = (2*c[j-1], 2*c[j])
+    return sum(c)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/23 10:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김동하</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11035"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬입니다. 한글자씩 끊어서 받았는데 숫자 10 때문에 8줄을 더 썼네요.
+불만스러운데 줄일 방법을 모르겠네요.</p>
+<pre><code class="python">def dart(x):
+    grade = list()
+    i=-1
+    a=0
+    xev = [1, 1, 1]
+
+    for c in x: 
+        if c == '#':
+            xev[i] *= -1
+        elif c == '*':
+            if i == 0:
+                xev[0] *= 2
+            else:
+                xev[i-1] *= 2
+                xev[i] *= 2
+        else:
+            if c == 'S':
+                grade.append(1)
+                a=0
+            elif c == 'D':
+                grade.append(2)
+                a=0
+            elif c == 'T':
+                grade.append(3)
+                a=0
+            else: 
+                if a == 1 :
+                    grade.pop()
+                    grade.append(10)
+                else :
+                    grade.append(int(c))
+                a += 1
+                i += 1
+    return (grade[0]**grade[1]*xev[0] + grade[2]**grade[3]*xev[1] + grade[4]**grade[5]*xev[2])
+
+print(dart(&quot;1S2D*3T&quot;))
+print(dart(&quot;1D2S#10S&quot;))
+print(dart(&quot;1S*2T*3S&quot;))
+print(dart(&quot;1D#2S*3S&quot;))
+print(dart(&quot;1T2D3D#&quot;))
+print(dart(&quot;1D2S3T*&quot;))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/03/08 00:02</p>
+                                <p class="static-profile" style="margin:0;padding:0;">노간</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11323"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">public int GetScore(string text)
+    {
+        char[] chararr = text.ToCharArray(); //string을 char 배열로 변경
+
+        int[] scores = new int[3]; // 점수가 3번 들어가므로 각 점수를 계산할 배열 생성
+        int arridx = 0; // 점수가 계산되는 배열인덱스
+        try
+        {
+            for (int i = 0; i &lt; chararr.Length; ++i)
+            {
+                if (char.IsNumber(chararr[i]))
+                {
+                    scores[arridx++] = Convert.ToInt32(chararr[i].ToString());
+                    if(chararr[i]== '1' &amp;&amp; chararr[i + 1] == '0')
+                    {
+                        i++;
+                        scores[arridx - 1] = 10;
+                    }
+
+                }
+                else
+                {
+                    switch (chararr[i])
+                    {
+                        case 'S':
+                            scores[arridx - 1] *= 1;
+                            break;
+                        case 'D':
+                            scores[arridx - 1] *= scores[arridx - 1];
+                            break;
+                        case 'T':
+                            scores[arridx - 1] *= (scores[arridx - 1] * scores[arridx - 1]);
+                            break;
+                        case '*':
+                            scores[arridx - 1] *= 2;
+                            if (arridx - 2 &gt;= 0)
+                            {
+                                scores[arridx - 2] *= 2;
+                            }
+                            break;
+                        case '#':
+                            scores[arridx - 1] *= -1;
+                            break;
+                    }
+                }
+
+
+            }
+        }
+        catch(IndexOutOfRangeException)
+        {
+            Debug.Log(arridx);
+            return 0;
+        }
+        catch
+        {
+            return 0;
+        }
+
+        if (arridx &lt; 2)
+        {
+            Debug.Log(&quot;Input Error&quot;);
+            return 0;
+        }
+
+        int sumscore = 0;
+        for (int i = 0; i &lt; scores.Length; ++i)
+        {
+            sumscore += scores[i];
+        }
+
+
+
+        Debug.Log(text + &quot; / &quot; + scores[0] + &quot; / &quot; + scores[1] + &quot; / &quot; + scores[2] + &quot; / &quot; + sumscore);
+
+        return sumscore;
+    }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/03/24 17:34</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jaewoo Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11587"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.regex.*;
+
+public class test4 {
+    public static void main(String[] args) {
+        String[] in_val = new String[] {&quot;1S2D*3T&quot;,&quot;1D2S#10S&quot;,&quot;1D2S0T&quot;,&quot;1S*2T*3S&quot;,&quot;1D#2S*3S&quot;,&quot;1T2D3D#&quot;,&quot;1D2S3T*&quot;};
+        Pattern p1 = Pattern.compile(&quot;[0-9]&quot;);      // 숫자패턴
+        Pattern p2 = Pattern.compile(&quot;[S,D,T]&quot;);    // 배점패턴
+        Pattern p3 = Pattern.compile(&quot;[*,#]&quot;);      // 옵션패턴
+
+        for (int x=0; x&lt;in_val.length; x++) {
+            String s_num = &quot;&quot;;
+            int cursor = 0;
+            int[] num = new int[] {0,0,0};  // 숫자와 배점을 계산한 값
+            int[] calc = new int[] {1,1,1}; // 옵션을 계산한 값
+            int result = 0;
+
+            for (int y = 0; y &lt; in_val[x].length(); y++) {
+                String v = String.valueOf(in_val[x].charAt(y));
+
+                if (p1.matcher(v).find()) {
+                    // 숫자 계산
+                    if (&quot;&quot;.equals(s_num)) {
+                        s_num = v;
+                    } else {
+                        s_num += v;
+                    }
+                } else if (p2.matcher(v).find()) {
+                    // 배점 계산
+                    int square = (&quot;S&quot;.equals(v)) ? 1 : (&quot;D&quot;.equals(v)) ? 2 : 3;
+                    num[cursor] = (int)Math.pow(Double.parseDouble(s_num), square);
+                    s_num = &quot;&quot;;
+                    cursor++;
+                } else if (p3.matcher(v).find()) {
+                    // 옵션 계산
+                    if (&quot;*&quot;.equals(v)) {
+                        int start = (cursor - 2 &lt; 0) ? 0 : cursor - 2;
+                        int end = cursor - 1;
+                        for (int z = start; z &lt;= end; z++) {
+                            calc[z] *= 2;
+                        }
+                    } else if (&quot;#&quot;.equals(v)) {
+                        calc[cursor - 1] *= -1;
+                    }
+                }
+            }
+
+            // 결과값 계산
+            for (int y = 0; y &lt; num.length; y++) {
+                result += num[y] * calc[y];
+            }
+            System.out.println(&quot;dartResult : &quot; + in_val[x] + &quot;,   answer : &quot; + result);
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/04/08 01:27</p>
+                                <p class="static-profile" style="margin:0;padding:0;">홍성욱</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11805"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="scala">object Main extends App {
+    def dartGame(s:String):Int = {
+        var ans = Array.fill(3)(0)
+        def loop(str:String, step:Int):Unit = {
+            println(ans.toList)
+            if(str.isEmpty)()
+            else{
+            str.head match {
+                case '*' =&gt; {
+                    if(step - 1 &gt;= 0) ans(step - 1) *=  2
+                    ans(step) *= 2
+                    loop(str.tail, step)
+                } 
+                case '#' =&gt;{
+                    ans(step) *= -1
+                    loop(str.tail, step)
+
+                }
+                case 'S' =&gt; loop(str.tail, step)
+
+                case 'D' =&gt; {
+                    ans(step) = Math.pow(ans(step), 2).toInt
+                    loop(str.tail, step)
+                }
+                case 'T' =&gt; {
+                    ans(step) = Math.pow(ans(step), 3).toInt
+                    loop(str.tail, step)
+                }
+
+                case '1' =&gt; if(str.length &gt;=2 &amp;&amp; str(1) == '0'){
+                        ans(step+1) = 10
+                        loop(str.drop(2), step+1)
+                    }
+                    else{
+                        ans(step+1) = 1
+                        loop(str.tail, step+1)
+                    }
+
+                case x if(str.head &gt;= '0' || str.head &lt;= '9') =&gt; {
+                        ans(step+1) = str.head.toInt - 48
+                        loop(str.tail, step+1)
+                    }
+            }}
+
+        }
+        loop(s, -1)
+        ans.sum
+    }
+    println(dartGame(&quot;1S*2T*3S&quot;))
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/04/17 22:09</p>
+                                <p class="static-profile" style="margin:0;padding:0;">한강희</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11814"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package codingdojang;
+
+import java.util.Scanner;
+
+public class ex152 {
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        Scanner sc = new Scanner(System.in);
+
+        String n = sc.nextLine();
+        int count = 0;
+
+
+        int point[] = new int[n.length()];
+
+        for(int i=0; i&lt;n.length(); i++) {
+            if(n.charAt(i) == 'S') {
+                if(n.charAt(i-1) == '0' &amp;&amp; n.charAt(i-2) == '1') {
+                    point[count++] = 10;
+                }
+                else {
+                    point[count++] = n.charAt(i-1)-48;
+                }
+            }
+
+            if(n.charAt(i) == 'D') {
+                if(n.charAt(i-1) == '0' &amp;&amp; n.charAt(i-2) == '1') {
+                    point[count++] = 20;
+                }
+                else {
+                    point[count++] = (n.charAt(i-1)-48)*(n.charAt(i-1)-48);
+                }
+            }
+
+            if(n.charAt(i) == 'T') {
+                if(n.charAt(i-1) == '0' &amp;&amp; n.charAt(i-2) == '1') {
+                    point[count++] = 30;
+                }
+                else {
+                    point[count++] = (n.charAt(i-1)-48)*(n.charAt(i-1)-48)*(n.charAt(i-1)-48);
+                }
+            }
+
+            if(n.charAt(i) == '*') {
+                if(count == 1) {
+                    point[count-1] *= 2;
+                }
+                else {
+                    point[count-1] *= 2;
+                    point[count-2] *= 2;
+                }
+            }
+
+            if(n.charAt(i) == '#') {
+                point[count-1] *= -1;
+            }
+        }
+
+        int sum = 0;
+
+        for(int i=0; i&lt;point.length; i++) {
+            sum += point[i];
+        }
+
+        System.out.println(sum);
+
+    }
+
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/04/18 16:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이병호</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11879"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>여러 코드를 보며 공부하는 중입니다.</p>
+<pre><code class="cs">static void Main(string[] args)
+        {
+            const int DartCnt = 3;
+            Random random = new Random();
+            int[] iScore = new int[11] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+            string[] sBonus = new string[3] { &quot;S&quot;, &quot;D&quot;, &quot;T&quot; };
+            string[] sOption = new string[3] { &quot;*&quot;, &quot;#&quot;, &quot;&quot; };
+            string sGamerScoer = &quot;&quot;;
+
+            // 점수 취득
+            for (int i = 0; i &lt; DartCnt; i++)
+            {
+                sGamerScoer += iScore[random.Next(iScore.Length)].ToString();
+                sGamerScoer += sBonus[random.Next(sBonus.Length)];
+                sGamerScoer += sOption[random.Next(sOption.Length)];
+            }
+
+            int iLength = sGamerScoer.Length;   // 게임 횟수에 따른 점수의 총 자릿수 [ex 1S2D*3T# = 8]
+            int iFlag = 1;  // 각 점수의 스텝 별 처리 [ex 1:점수 / 2:보너스 / 3:옵션 / 한게임당 자릿수는 2~4자리]
+            int iStrPos = 0;    // 총 자릿수에서 현재 처리할 자릿수의 위치 [ex 0=1]
+            int iScorePos = 0;  // 총 3개의 점수 중 보너스 처리를 위한 점수의 위치 [ex : 0=1S / 1=2D* / 2=3T#]
+            int[] iSumScore = new int[DartCnt]; // 최종 점수 [0:1게임 / 1:2게임 / 2:3게임]
+
+            // 1. 총 점수의 길이 만큼 반복
+            while (iStrPos &lt; iLength)
+            {
+                string sTarget = sGamerScoer.Substring(iStrPos, 1);
+
+                if (iFlag == 1)
+                {
+                    try
+                    {
+                        // 1.1 첫번째 자리 점수 처리 [0~10]
+                        iSumScore[iScorePos] = int.Parse(sTarget);
+                        iFlag++;
+                    }
+                    catch (Exception ex)
+                    {
+                        // 1.3 옵션 처리
+                        if (&quot;*&quot;.Equals(sTarget))
+                        {
+                            iSumScore[iScorePos - 1] = iSumScore[iScorePos - 1] * 2;    // 해당 점수의 두배처리
+                            if (iScorePos &gt; 1) { iSumScore[iScorePos - 2] = iSumScore[iScorePos - 2] * 2; } // 첫번째 점수가 아닌 점수에서 옵션일 경우 이전 점수들도 두배처리
+                        }
+                        else if (&quot;#&quot;.Equals(sTarget)) // 현재 점수의 -처리
+                        {
+                            iSumScore[iScorePos - 1] = iSumScore[iScorePos - 1] * (-1);
+                        }
+                        else { Console.WriteLine(&quot;입력점수 이상&quot;); }
+                    }
+                }
+                else if (iFlag == 2)
+                {
+                    // 1.2 보너스 처리 또는 두번째 자릿수 처리
+                    if (&quot;S&quot;.Equals(sTarget)) { iSumScore[iScorePos] = (int)Math.Pow(iSumScore[iScorePos], 1); } // 1제곱
+                    else if (&quot;D&quot;.Equals(sTarget)) { iSumScore[iScorePos] = (int)Math.Pow(iSumScore[iScorePos], 2); } // 2제곱
+                    else if (&quot;T&quot;.Equals(sTarget)) { iSumScore[iScorePos] = (int)Math.Pow(iSumScore[iScorePos], 3); } // 3제곱
+                    else if (&quot;0&quot;.Equals(sTarget))
+                    {
+                        if (iSumScore[iScorePos] == 1)
+                        {
+                            iSumScore[iScorePos] = 10; // 점수가 2자리인 경우 그 점수는 10
+                            iScorePos--;    // 보너스 처리를 다시해야하기 때문에 점수의 위치 되돌림
+                            iFlag++;    // 보너스 처리할 옵션이 있는지 재처리
+                        }
+                    }
+                    else { Console.WriteLine(&quot;입력점수 이상&quot;); }
+
+                    // 다음 점수 처리를 위한 Flag 변경
+                    iScorePos++;
+                    iFlag--;
+                }
+                iStrPos++; // 해당 점수의 다음 문자 처리
+            }
+            Console.WriteLine(&quot;Dart Score {0} : {1}&quot;, sGamerScoer, iSumScore[0] + iSumScore[1] + iSumScore[2]);
+
+            Console.ReadKey();
+        }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/04/26 16:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">비트에이스</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12323"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">#include&lt;iostream&gt;
+#include&lt;cmath&gt;
+#include&lt;string&gt;
+using namespace std;
+
+void extract_num(const string str,int&amp; branch, int &amp;num,int sp,bool &amp;prize_star,bool &amp;prize_sharp)
+{
+    char copy[10];
+    for (int i=branch; i &lt; str.size(); i++)
+    {
+        if (str[i] == 'S'|| str[i] == 'D'|| str[i] == 'T')
+        {
+            int j = 0;
+            for (int j = 0; j &lt; i-sp; j++)
+                copy[j] = str[branch++];
+            num=atoi(copy);
+            if (str[i] == 'D')
+                num=pow(num, 2);
+            else if (str[i] == 'T')
+                num=pow(num, 3);
+            if (str[i + 1] == '*')
+                prize_star = true,branch++;
+            else if (str[i + 1] == '#')
+                prize_sharp = true,branch++;
+            branch++;
+            break;
+        }
+    }
+}
+int main()
+{
+    string str;
+    int score[3], branch = 0;
+    cout &lt;&lt; &quot;Input:&quot;;
+    cin &gt;&gt; str;
+    cout &lt;&lt; &quot;result&quot;;
+    for (int i = 0; i &lt; 3; i++)
+    {
+        bool prize_star = false, prize_sharp = false;
+        extract_num(str, branch, score[i], branch, prize_star, prize_sharp);
+        if (prize_star)
+        {
+            if (i == 0)
+                score[i] *= 2;
+            else
+                score[i - 1] *= 2, score[i] *= 2;
+        }
+        if (prize_sharp)
+            score[i] = -score[i];
+    }
+    int result = score[0] + score[1] + score[2];
+    cout &lt;&lt; result;
+
+}
+</code></pre>
+
+<p>//더러운 코드 죄송합니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/14 21:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hujinsu</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13041"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def Glosbe(a):
+     domain = {'S' : 1, 'D' : 2, 'T' : 3}
+     option = {'*' : 2, '#' : -1}
+     Score,z,y = [],0,0
+     for x in a:
+          if x in domain:
+               Score.append(int(a[z:y]) ** domain[x])
+               z = y + 1
+          elif x in option:
+               b = len(Score)-1
+               if x == '*' and b &gt; 0:
+                    Score[b-1] *= option[x]
+                    Score[b] *= option[x]
+               else:
+                    Score[b] *= option[x]
+               z = y + 1
+          y += 1
+     print(sum(i for i in Score))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/19 21:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김영성</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13326"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def ans(d):
+    v1 = {'S':'**1','D':'**2','T':'**3'}
+    flag = 0
+    tmp = []
+    for i in range(len(d)):
+        if d[i] in v1:
+            tmp.append('+'+d[flag:i]+v1[d[i]])
+            flag = i+1
+        elif d[i] == '*':
+            tmp[-1] += '*2'
+            if len(tmp) &gt; 1: tmp[-2] += '*2'
+            flag = i+1
+        elif d[i] == '#':
+            tmp[-1] += '*(-1)'
+            flag = i+1
+
+    return eval(''.join(tmp))
+
+dartResult = ['1S2D*3T','1D2S#10S','1D2S0T','1S*2T*3S','1D#2S*3S','1T2D3D#','1D2S3T*']
+print(list(map(ans,dartResult)))
+
+</code></pre>
+
+<pre><code>[37, 9, 3, 23, 5, -4, 59]
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/04 06:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13549"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.StringTokenizer;
+
+public class Javatutorial {
+    public static int eval(String s) {
+        StringTokenizer st = new StringTokenizer(s, &quot;SDT*#&quot;, true);
+        int[] arr = new int[s.length() / 2];
+        int l = 0;
+
+        while (st.hasMoreTokens()) {
+            String tk = st.nextToken();
+            switch (tk) {
+            case &quot;S&quot;:
+                break;
+
+            case &quot;D&quot;:
+                arr[l - 1] = arr[l - 1] * arr[l - 1];
+                break;
+
+            case &quot;T&quot;:
+                arr[l - 1] = arr[l - 1] * arr[l - 1] * arr[l - 1];
+                break;
+
+            case &quot;*&quot;:
+                arr[l - 1] *= 2;
+                if (l &gt;= 2) 
+                    arr[l - 2] *= 2;
+                break;
+
+            case &quot;#&quot;:
+                arr[l - 1] *= -1;
+                break;
+
+            default:
+                arr[l] = Integer.parseInt(tk);
+                l++;
+            }
+        }
+
+        int sum = 0;
+        for (int i = 0; i &lt; l; i++) {
+            sum += arr[i];
+        }
+
+        return sum;
+    }
+
+    public static void main(String[] args) {
+        String[] inputStr = {&quot;1S2D*3T&quot;, &quot;1D2S#10S&quot;, &quot;1D2S0T&quot;, &quot;1S*2T*3S&quot;, &quot;1D#2S*3S&quot;, &quot;1T2D3D#&quot;, &quot;1D2S3T*&quot;};
+
+        for (String str : inputStr) {
+            System.out.println(eval(str));
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/13 02:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15530"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Swift 입니다. 더 좋은 방법이 있다면 말씀 해주세요.</p>
+<pre><code class="swift">class Question2 {
+// 2. 다트 게임(난이도: 하)
+
+  static func execute(_ param: String ) -&gt; Int {
+    let count = 3
+
+    let numbers = param.components(separatedBy: CharacterSet.decimalDigits.inverted).filter{$0 != &quot;&quot;}.map{ Int($0)! }
+
+    let operators = param.components(separatedBy: CharacterSet.decimalDigits).filter{$0 != &quot;&quot;}
+
+    var result = [Int]()
+    for i in 0..&lt;count {
+      let opt = operators[i].lowercased()
+
+      switch opt {
+      case _ where opt.contains(&quot;s&quot;):
+        let data = numbers[i]
+        result.append(data)
+      case _ where opt.contains(&quot;d&quot;):
+        let data = numbers[i] * numbers[i]
+        result.append(data)
+      case _ where opt.contains(&quot;t&quot;):
+        let data = numbers[i] * numbers[i] * numbers[i]
+        result.append(data)
+
+      default:
+        print(result)
+      }
+
+      if opt.contains(&quot;*&quot;){
+        if i != 0 {
+          result[i] = 2 * result[i]
+          result[i-1] = 2 * result[i-1]
+        } else {
+          result[i] = 2 * result[i]
+        }
+      } else if opt.contains(&quot;#&quot;){
+        result[i] = -1 * result[i]
+      }
+    }
+    return result.reduce(0){$0 + $1}
+  }
+
+  static func test01() -&gt; Bool{
+     return execute(&quot;1s2d*3t&quot;) == 37
+  }
+
+  static func test02() -&gt; Bool{
+    return execute(&quot;1d2s#10s&quot;) == 9
+  }
+
+  static func test03() -&gt; Bool{
+    return execute(&quot;1d2s0t&quot;) == 3
+  }
+
+  static func test04() -&gt; Bool{
+    return execute(&quot;1s*2t*3s&quot;) == 23
+  }
+
+  static func test05() -&gt; Bool{
+    return execute(&quot;1d#2s*3s&quot;) == 5
+  }
+
+  static func test06() -&gt; Bool{
+    return  execute(&quot;1t2d3d#&quot;) == -4
+  }
+
+  static func test07() -&gt; Bool{
+    return  execute(&quot;1d2s3t*&quot;) == 59
+  }
+
+  static func testAll() -&gt; Bool{
+    return test01() &amp;&amp;
+      test02() &amp;&amp;
+      test03() &amp;&amp;
+      test04() &amp;&amp;
+      test05() &amp;&amp;
+      test06() &amp;&amp;
+      test07()
+  }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/12/13 15:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">InKwon Kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16066"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;string&gt;
+
+
+using namespace std;
+
+
+
+int main(void){
+    int total = 0;
+    vector&lt;int&gt; iv;
+    string sentence;
+    getline(cin, sentence);
+    for (int i = 0; i &lt; sentence.length(); i++)
+    {
+        if (sentence[i] == 'S')
+        {
+            int num;
+            if (i &gt; 1 &amp;&amp; sentence[i - 2] &gt; '0'&amp;&amp;sentence[i - 2] &lt; '9') {
+
+                 num = (sentence[i - 2] - 48) * 10 + (sentence[i - 1]-48);
+            }
+            else
+            {
+                num = sentence[i - 1] - 48;
+            }
+            iv.push_back(num);
+
+        }
+        if (sentence[i] == 'D')
+        {
+            int num;
+            if (i &gt; 1 &amp;&amp; sentence[i - 2] &gt; '0'&amp;&amp;sentence[i - 2] &lt; '9') {
+
+                num = (sentence[i - 2] - 48) * 10 + (sentence[i - 1] - 48);
+            }
+            else
+            {
+                num = sentence[i - 1] - 48;
+            }
+            iv.push_back(num*num);
+        }
+        if (sentence[i] == 'T')
+        {
+            int num;
+            if (i&gt;1&amp;&amp;sentence[i - 2] &gt; '0'&amp;&amp;sentence[i - 2] &lt; '9') {
+                num = (sentence[i - 2] - 48) * 10 + (sentence[i - 1] - 48);
+            }
+            else
+            {
+                num = sentence[i - 1] - 48;
+            }
+            iv.push_back(num*num*num);
+        }
+        if (sentence[i] == '*')
+        {
+            for (vector&lt;int&gt;::iterator itr = iv.begin(); itr &lt; iv.end(); itr++)
+            {
+                *itr = *itr * 2;
+
+            }
+
+        }
+        if (sentence[i] == '#')
+        {
+            iv[iv.size() - 1] = -iv[iv.size() - 1];
+
+            }
+        }
+
+    for (vector&lt;int&gt;::iterator itr = iv.begin(); itr &lt; iv.end(); itr++)
+    {
+        total += *itr;
+    }
+    cout &lt;&lt; total &lt;&lt; endl;
+
+
+
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/01/18 20:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김상범</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17977"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import re
+
+def dart(s):
+    d = {'S' : 1, 'D' : 2, 'T' : 3}
+    shots = re.findall('(\d{1,2})([SDT])([*#]?)', s)
+    ans = []
+    for p, b, o in shots:
+        ans.append(int(p) ** d[b])
+        if o == '*':
+            ans[-1] *= 2
+            if i: ans[-2] *= 2
+        elif o == '#':
+            ans[-1] *= -1
+
+    print(sum(ans))
+
+s = input()
+dart(s)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/22 00:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">messi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18215"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">dart_result = input('Dart result : ')
+
+bonus_type = ['S', 'D', 'T']
+option_type = ['*', '#']
+
+answer_arr = []
+idx = 0
+
+bonus = ''
+option = ''
+base_score = None
+predecimal = False
+for c in dart_result:
+    if c.isdecimal():
+        if not predecimal and base_score is not None:
+            answer_arr.append(base_score)
+            idx += 1
+        if predecimal:
+            base_score = base_score * 10 + int(c)
+        else:
+            base_score = int(c)
+            predecimal = True
+    else:
+        predecimal = False
+        if c in bonus_type:
+            if c == 'S':
+                base_score = base_score ** 1
+            elif c == 'D':
+                base_score = base_score ** 2
+            elif c == 'T':
+                base_score = base_score ** 3
+        elif c in option_type:
+            if c == '*':
+                base_score = base_score * 2
+                if idx &gt; 0:
+                    answer_arr[idx - 1] *= 2
+            elif c == '#':
+                base_score = base_score * -1
+
+answer_arr.append(base_score)
+print(sum(answer_arr))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/06/11 14:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">임성민</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19859"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package CodingDojang;
+import java.util.Scanner;
+public class DartGameQuiz { 
+    static int ten_check(String ans, int count, int i, int[] ans_arr) {
+        if(ans.charAt(i - 1) == '0' &amp;&amp; i - 1 &gt; 0) {
+            if(ans.charAt(i - 2) == '1') {
+                return ans_arr[count] = 10;
+            }
+            else return ans_arr[count] = (int)ans.charAt(i-1) % 48;
+        }
+        else return ans_arr[count] = (int)ans.charAt(i-1) % 48;
+    }
+
+    static int award_check(String ans, int count, int i, int[] ans_arr) {
+        if(i + 1 &lt; ans.length()) {
+            if(count == 0) {
+                if(ans.charAt(i + 1) == '*') {
+                    return ans_arr[count] *= 2;
+                }
+                else if(ans.charAt(i + 1) == '#') {
+                    return ans_arr[count] *= -1;
+                }
+                else return ans_arr[count];
+            }
+
+            else if(count &gt; 0){
+                if(ans.charAt(i + 1) == '*') {
+                    ans_arr[count - 1] *= 2;
+                    ans_arr[count] *= 2;
+                    return ans_arr[count];
+                }
+                else if(ans.charAt(i + 1) == '#') {
+                    return ans_arr[count] *= -1;
+                }
+                else return ans_arr[count];
+            }           
+        }
+        else return ans_arr[count];
+        return ans_arr[count];
+    }   
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String ans  = scanner.nextLine();
+        int[] ans_arr = new int[3];
+        int result = 0, count = 0;      
+
+        for(int i = 0; i &lt; ans.length(); i++) {
+            if(ans.charAt(i) == 'S') {
+                ten_check(ans, count, i, ans_arr);              
+                result = (int)Math.pow(ans_arr[count], 1);
+                ans_arr[count] = result;
+                award_check(ans, count, i, ans_arr);
+                count++;
+            }
+
+            else if(ans.charAt(i) == 'D') {
+                ten_check(ans, count, i, ans_arr);      
+                result = (int)Math.pow(ans_arr[count], 2);
+                ans_arr[count] = result;
+                award_check(ans, count, i, ans_arr);
+                count++;
+            }
+
+            else if(ans.charAt(i) == 'T') {
+                ten_check(ans, count, i, ans_arr);              
+                result = (int)Math.pow(ans_arr[count], 3);
+                ans_arr[count] = result;
+                award_check(ans, count, i, ans_arr);
+                count++;
+            }       
+        }   
+        System.out.println(ans_arr[0]+ans_arr[1]+ans_arr[2]);
+    }
+}
+</code></pre>
+
+<p>노가다성 함수를 만들어 선언하여 보았습니다 ㅇㅅㅇ...</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/11/07 22:08</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이유환</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20979"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">score=input(&quot;0~10의 정수와 문자 S, D, T, *, #로 구성된 문자열을 입력하십시오: &quot;)
+lst=[]
+str=&quot;&quot;
+for letter in score:
+    if letter.isdigit() is True:
+        str+=letter
+    elif letter==&quot;S&quot;:
+        lst.append(int(str)**1)
+        str=&quot;&quot;
+    elif letter==&quot;D&quot;:
+        lst.append(int(str)**2)
+        str=&quot;&quot;
+    elif letter==&quot;T&quot;:
+        lst.append(int(str)**3)
+        str=&quot;&quot;
+    elif letter==&quot;*&quot;:
+        lst[-1]=lst[-1]*2
+        if len(lst)&gt;1:
+            lst[-2]=lst[-2]*2
+    elif letter==&quot;#&quot;:
+        lst[-1]=lst[-1]*(-1)
+print(sum(lst))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/02/14 17:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박시원</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_21570"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 입니다.</p>
+<pre><code class="python">ui_list = ['1S2D*3T','1D2S#10S','1D2S0T','1S*2T*3S','1D#2S*3S','1T2D3D#','1D2S3T*']
+
+
+def get_qq(t):
+    if t == 'S':
+        return 1
+    elif t == 'D':
+        return 2
+    elif t == 'T':
+        return 3
+    return 0
+
+for ui in ui_list:
+    ll = list(ui)
+    sl = []
+    sl_idx = -1
+    tmp_num = 0
+
+    for i in ll:
+        if i.isdigit():
+            if tmp_num != -1:
+                tmp_num = tmp_num * 10 + int(i)
+            else:
+                tmp_num = int(i)
+        elif i.isalpha():
+            sl_idx += 1
+            sl.append(tmp_num ** get_qq(i))
+            tmp_num = -1
+        elif i == '*':
+            if sl_idx == 0:
+                sl[sl_idx] = sl[sl_idx] * 2
+            else:
+                sl[sl_idx - 1] = sl[sl_idx - 1] * 2
+                sl[sl_idx] = sl[sl_idx] * 2
+        elif i == '#':
+            sl[sl_idx] = sl[sl_idx] * -1
+
+    print(ui + ' : ' + str(sum(sl)))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/03/29 01:15</p>
+                                <p class="static-profile" style="margin:0;padding:0;">뤼크</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24532"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬입니다.</p>
+<p>세번 이상 또는 이하로 던지더라도 계산할 수 있도록 짜보았습니다.</p>
+<pre><code class="python">def dart(x):
+  left, number, power, option = x, [],[],[]
+  while len(left)&gt;0:
+    num, po, op, left = analysis(left)
+    number.append(num)
+    power.append(po)
+    option.append(op)
+  print(scoreboard(number, power, option))
+
+def analysis(x):
+  import re
+  p = re.compile('(\d+)([SDT])([*#]?)(.*)')
+  lookup = p.findall(x)
+  return int(lookup[0][0]),{'S': 1, 'D': 2, 'T': 3}[lookup[0][1]], {'*': 2, '#': -1}.get(lookup[0][2], 1), lookup[0][3]
+
+def scoreboard(a, b, c): #number, power, option
+  n, result=len(a), 0
+  for i in range(0, n):
+    try: 
+      if c[i+1]==2: Retroact=2    
+      else: Retroact=1
+    except: Retroact=1
+    result += (a[i]**b[i])*c[i]*Retroact
+  return result
+
+
+dart('1S2D*3T')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/01/30 22:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박영빈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25138"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def Dart(): 
+    a=input(&quot;다트결과 입력 : &quot;)
+    a=list(a)   
+    for j in range(len(a)):
+        if a[j]=='S' or a[j]=='D' or a[j]=='T' or a[j]=='#' or a[j]=='*':
+            pass
+        elif a[j]=='1' and a[j+1]=='0':
+            a[j]='10'
+            a[j+1]='1'
+    dic = {'S':1, 'D':2, 'T':3, '#':-1,'*':2}
+    total = 1
+    n=[]
+    p=[]
+    for i in range(len(a)):
+        if a[i]=='S' or a[i]=='D' or a[i]=='T':
+            total**=dic[a[i]]
+            if i&lt;=len(a)-2 and a[i+1]=='#' :
+                total*=-1
+                n.append(total)
+                total=1
+            else:
+                n.append(total)
+                total=1
+        elif a[i]=='#':
+            pass
+        elif a[i]!='*':           # 문자열로 된 숫자면 가능
+            total*=int(a[i])
+        elif a[i]==&quot;*&quot;:
+            t = a.index(a[i])
+            a[i]=1
+            p.append(t)
+    if len(p)==3:
+        n[0]*=4
+        n[1]*=4
+        n[2]*=2
+    elif len(p)==2:
+        if p[0]==2 and p[1]==5:
+            n[0]*=4
+            n[1]*=2
+        elif p[0]==2 and p[1]==7:
+            n[0]*=2
+            n[1]*=2
+            n[2]*=2
+        elif p[0]==4 and p[1]==7:
+            n[0]*=2
+            n[1]*=4
+            n[2]*=2
+    elif len(p)==1:
+        if p[0]==2:
+            n[0]*=2
+        elif p[0]==4 or p[0]==5:
+            n[0]*=2
+            n[1]*=2
+        elif p[0]==6 or p[0]==7:
+            n[1]*=2
+            n[2]*=2
+    print(sum(n))
+
+Dart()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/04/08 18:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">fox.j</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_26763"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>def dart_game(a):
+    a = a.replace('10','x')
+
+    list = [i for i in a]
+
+    list[a.find('x')] = '10'
+
+
+    score = []
+    for i in range(len(list)):              
+        if a[i] == 'S':
+            score.append(int(list[i-1]))
+
+        if a[i] == 'D':
+            score.append(int(list[i-1])**2)
+
+        if a[i] =='T':
+            score.append(int(list[i-1])**3)
+
+        if a[i] =='#':
+            if i == 2:
+                score[0] = score[0] * -1
+            elif i == 4 or i ==5 :
+                score[1] = score[1] * -1
+            elif i == 6 or i ==7 or i ==8 :
+                score[2] = score[2] * -1
+
+
+        if a[i] =='*':
+            if i == 5 :
+                if list[2] == '#':
+                    score[0] = score[0] * 2
+                    score[1] = score[1] * 2 
+                else:
+                    score[0] = score[0] * 4
+                    score[1] = score[1] * 2 
+
+            elif i == 6:
+                score[1] = score[1] * 2
+                score[2] = score[2] * 2 
+
+            elif i == 7:
+                if list[2] =='#':
+                    score[1] = score[1] * 2
+                    score[2] = score[2] * 2
+                elif list[4] =='#':
+                    score[1] = score[1] * 2
+                    score[2] = score[2] * 2
+                elif list[2] == '*':
+                    score[0] = score[0] * 2
+                    score[1] = score[1] * 2
+                    score[2] = score[2] * 2
+                elif list[4] == '*':
+                    score[0] = score[0] * 2
+                    score[1] = score[1] * 4
+                    score[2] = score[2] * 2               
+
+            elif i == 4:
+                score[0] = score[0] * 2
+                score[1] = score[1] * 2
+
+
+
+            elif i == 8:
+                score[0] = score[0] * 2 * 2
+                score[1] = score[1] * 2 * 2
+                score[2] = score[2] * 2 
+    return sum(score) 
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/12/11 16:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">황성민</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

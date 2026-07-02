@@ -1,0 +1,561 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="다음과 같은 조건을 갖는 상황에서 n개의 계단을 오르는 경우의 수와 각 경우의 내용을 구하는 알고리즘을 C로 프로그램하시오. 순환문을 사용하여 해결하시오.
+
+⑴ 입력 : 임의의 자연수 n
+
+⑵ 조건 : 계단을 오르는 사람이 오른발을 다쳐서...">
+    <title>경우의 수 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">경우의 수</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">2</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 4</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>다음과 같은 조건을 갖는 상황에서 n개의 계단을 오르는 경우의 수와 각 경우의 내용을 구하는 알고리즘을 C로 프로그램하시오. 순환문을 사용하여 해결하시오.</p>
+<p>⑴ 입력 : 임의의 자연수 n</p>
+<p>⑵ 조건 : 계단을 오르는 사람이 오른발을 다쳐서 다음과 같은 제한이 있음</p>
+<ul>
+<li>
+<p>왼발은 한번에 1개, 2개, 3개의 계단까지 오를 수 있음.</p>
+</li>
+<li>
+<p>오른발은 한번에 0개, 1개의 계단까지밖에 오를 수 없음.</p>
+</li>
+<li>
+<p>연달아서 같은 발을 사용할 수 없음.</p>
+</li>
+</ul>
+<p>⑶ 출력 : 경우의 수와 계단 갯수 순서</p>
+<p>n이 2라면</p>
+<ul>
+<li>
+<p>2(왼),</p>
+</li>
+<li>
+<p>1(왼), 1(오),</p>
+</li>
+<li>
+<p>1(왼), 0(오), 1(왼),</p>
+</li>
+<li>
+<p>1(오), 1(왼),</p>
+</li>
+<li>
+<p>0(오), 2(왼),</p>
+</li>
+<li>
+<p>0(오), 1(왼), 1(오),</p>
+</li>
+<li>
+<p>0(오), 1(왼), 0(오), 1(왼),</p>
+</li>
+</ul>
+<p>총 7가지 경우</p>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">피보나치 수열</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2019/09/25 15:45</p>
+                    <p class="static-profile" style="margin:0;padding:0;">eunhyu tb</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>7개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_19444"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">2</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>d[i] = i번째 계단을 왼발로 밟아서 끝나는 경우의 수
+i번째 계단을 오른발로 밟고 끝나는 경우의 수는 d[i-1]이므로 d[i]만 계산해놓으면 됩니다.</p>
+<p>d[i] = d[i-1] (오른발0칸 + 왼발1칸) + d[i-2] (오른발0칸 + 왼발2칸) + d[i-3] (오른발0칸 + 왼발3칸)
+      +d[i-2] (오른발1칸 + 왼발1칸) + d[i-3] (오른발1칸 + 왼발2칸) + d[i-4] (오른발1칸 + 왼발3칸)</p>
+<p>이므로, 이 점화식을 잘 계산하면 됩니다.
+답은 d[n] + d[n-1]이 됩니다.</p>
+<p>C++은 긴자리수에 대한 표현이 영 안좋아서 n=52일 때에 대한 답을 구하는게 최선인데
+만약 긴자리수를 아주 편하게 쓸 수 있는 python이나 JAVA같은 친구들을 사용하면
+n=50,000 정도까지는 의미있는 시간 내에 계산할 수 있지 않을까 싶습니다.
+물론 아래 코드로 구현한 O(n)짜리 보통의 방법으론 안되고 행렬의 제곱으로 푸는 O(log n)짜리를 사용해서 겨우겨우...</p>
+<pre><code class="cpp">#include&lt;stdio.h&gt;
+int n;
+unsigned long long int d[1009];
+int main()
+{
+    int i, j, k;
+    scanf(&quot;%d&quot;, &amp;n);
+    if (n&gt;52) { printf(&quot;Too Big!\n&quot;); }
+    d[0] = 1;
+    d[1] = 2;
+    d[2] = 5;
+    d[3] = 12;
+    for (i = 4; i &lt;= n; i++) {
+        d[i] = d[i - 1] + 2 * d[i - 2] + 2 * d[i - 3] + d[i - 4];
+    }
+    printf(&quot;%llu\n&quot;, d[n] + d[n-1]);
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/09/26 23:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">pichulia</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19512"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">2</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <h4 id="python-37">Python 3.7</h4>
+<p><a href="http://codingdojang.com/profile/answer/11953">pichulia</a>님 코드를 참고해서 python으로 구현했습니다.</p>
+<pre><code class="python">def sta(n):
+    a = [1, 2, 5, 12] + [0]*(n-3)
+    i = 4
+    while i &lt;= n:
+        a[i] = a[i-1] + 2*a[i-2] + 2*a[i-3] + a[i-4]
+        a[i-4] = 0
+        i += 1
+    return a[n]+a[n-1]
+</code></pre>
+
+<p>a[i-4] = 0 부분은 큰 수 계산을 위해서 넣었습니다. 넣지 않았을 경우 sta(200000)을 계산할 때 메모리를 3기가 먹습니다. 공간복잡도 O(n<sup>2</sup>)</p>
+<p>아래는 리스트 대신 변수를 사용한 식입니다.</p>
+<pre><code class="python">def sta(n):
+    if n &lt; 4:
+        a = [1, 2, 5, 12]
+        return a[n]+a[n-1]
+    a, b, c, d = 12, 5, 2, 1
+    i = 4
+    while i &lt;= n:
+        a, b, c, d = a + 2*b + 2*c + d, a, b, c
+        i += 1
+    return a + b
+</code></pre>
+
+<p>계산은 sta(100000) = 1.3초, sta(200000) = 5.5초, sta(400000) = 22초 정도 걸립니다.(cpu 성능에 따라 다릅니다.)</p>
+<p>이 코드들은 루프가 1개라서 O(n)처럼 보이지만, n이 2배 증가할 때 연산값의 자릿수(log)가 2배씩 증가하여 실제 시간복잡도는 O(n<sup>2</sup>)이 됩니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/10/02 16:12</p>
+                                <p class="static-profile" style="margin:0;padding:0;">AY</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19438"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def stair(n):
+    START, LEFT, RIGHT = 'Start', 'Left', 'Right'
+    que = [[(0, START, 0)]]
+    cnt = 0
+
+    while que:
+        seq = que.pop(0)
+        stride, foot, pos = seq[-1] # last step
+
+        if n &lt; pos:
+            continue
+
+        if n == pos:
+            print([step[:2] for step in seq[1:]])
+            cnt += 1
+            continue
+
+        if foot in (START, LEFT):
+            que.append(seq + [(0, RIGHT, pos + 0)])
+            que.append(seq + [(1, RIGHT, pos + 1)])
+
+        if foot in (START, RIGHT):
+            que.append(seq + [(1, LEFT, pos + 1)])
+            que.append(seq + [(2, LEFT, pos + 2)])
+            que.append(seq + [(2, LEFT, pos + 3)])
+
+    print(cnt)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/09/26 15:06</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22744"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C
+재귀함수를 이용하여 작성해보았습니다.</p>
+<pre><code class="cpp">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;stdbool.h&gt;
+
+unsigned long long int advance(int n, int curr, bool leftFoot);
+
+int main() {
+    int n;
+
+    printf(&quot;n을 입력하세요: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    printf(&quot;경우의 수: %llu&quot;, advance(n, 0, true) + advance(n, 0, false));
+
+    return 0;
+}
+
+unsigned long long int advance(int n, int curr, bool leftFoot) {
+    // 맨 밑일 때 curr == 0, 도착하는 순간 curr == n
+
+    // 현재 위치가 n보다 큰 경우 유효하지 않은 움직임
+    if (curr &gt; n) {
+        return 0;
+    }
+
+    // 현재 위치가 n과 같은 경우 성공적인 경우의 수 중 하나
+    if (curr == n) {
+        return 1;
+    }
+
+    unsigned long long int result = 0; // 최종 return되는 경우의 수
+
+    if (leftFoot == true) {
+        // 왼발로 오름
+        result += advance(n, curr + 1, false);
+        result += advance(n, curr + 2, false);
+        result += advance(n, curr + 3, false);
+    }
+    else {
+        // 오른발로 오름
+        result += advance(n, curr, true);
+        result += advance(n, curr + 1, true);
+    }
+
+    return result;
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/07/15 18:28</p>
+                                <p class="static-profile" style="margin:0;padding:0;">구루마</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23912"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>ㅎㅎ 재미있네요. 요구사항대로 그냥 C 언어입니다.</p>
+<pre><code class="cs">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+int     N_Case=0;
+
+void limp(char *sSteps, char cLastStep, int n_todo) {
+int     i;
+char    *sNextSteps;
+        if (n_todo==0) {
+                printf(&quot;%s\n&quot;, sSteps);
+                ++N_Case;
+        }
+        if (n_todo&lt;=0)
+                return;
+        sNextSteps = (char*)malloc(strlen(sSteps)+3);
+        if (cLastStep!='L')
+                for (i=1; i&lt;=3; i++) {
+                        sprintf(sNextSteps,&quot;%s L%d&quot;, sSteps, i);
+                        limp(sNextSteps, 'L', n_todo-i);
+                }
+        if (cLastStep!='R')
+                for (i=0; i&lt;=1; i++) {
+                        sprintf(sNextSteps,&quot;%s R%d&quot;, sSteps, i);
+                        limp(sNextSteps, 'R', n_todo-i);
+                }
+        free(sNextSteps);
+}
+
+int main() {
+int     n;
+        printf(&quot;Number (&gt;0) ? &quot;);
+        scanf(&quot;%d&quot;, &amp;n);
+        limp(&quot;&quot;, ' ', n);
+        printf(&quot;%d cases.\n&quot;, N_Case);
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/12/08 17:06</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김준우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23913"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬으로도 해보았습니다..</p>
+<pre><code class="python">def Limp(steps, laststep, n_todo):
+    global Case
+    if (n_todo==0):
+        print(steps)
+        Case = Case+1
+    if (n_todo&lt;=0):
+        return
+    if (laststep!='왼'):
+        for left in range(1,4):
+            next_steps = steps.copy()
+            next_steps.append('왼'+str(left))
+            Limp(next_steps, '왼', n_todo-left)
+    if (laststep!='오'):
+        for right in range(0,2):
+            next_steps = steps.copy()
+            next_steps.append('오'+str(right))
+            Limp(next_steps, '오', n_todo-right)
+
+N = int(input('자연수: '))
+Case = 0
+Limp([],' ',N)
+print(&quot;총&quot;, Case, &quot;경우&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/12/08 17:16</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김준우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29490"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">using System;
+using System.Collections.Generic;
+
+namespace solution2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.Write(&quot;\n  임의의 자연수 n을 입력하세요: &quot;);
+            int n = int.Parse(Console.ReadLine());
+            List&lt;string&gt; caselist = new List&lt;string&gt;();
+            numOfCases(0, &quot;right&quot;, n, &quot;&quot;, caselist);
+            numOfCases(0, &quot;left&quot;, n, &quot;&quot;, caselist);
+
+            foreach (var c in caselist)
+            {
+                Console.WriteLine(c);
+            }
+            Console.WriteLine(&quot;\n  {0}&quot;, caselist.Count);
+        }
+
+        private static void numOfCases(int s, string foot, int n, string step, List&lt;string&gt; caselist)
+        {
+            if (s == n)
+            {
+                caselist.Add(step);
+                return;
+            }
+
+            if (s &gt; n)
+                return;
+
+            if (foot == &quot;right&quot;)
+            {
+                for (int i = 0; i &lt;= 1; i++)
+                    numOfCases(s + i, &quot;left&quot;, n, step+i+&quot;(오)&quot; + &quot;,&quot;, caselist);
+            }
+            else
+            {
+                for (int i = 1; i &lt;= 3; i++)
+                    numOfCases(s + i, &quot;right&quot;, n, step +i + &quot;(왼)&quot; + &quot;,&quot;, caselist);
+            }
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/07/25 20:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

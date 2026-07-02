@@ -1,0 +1,314 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="1. 임의의 수 x를 입력으로 받고, sin x + cos x를 출력하는 프로그램을 만드시오.
+2. 단, sin x와 cos x를 구하는 함수를 직접 만들어야 합니다.
+3. sin x = x  -  x^3 / 3!  +  x^5 / 5!  -...">
+    <title>삼각함수 계산 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">삼각함수 계산</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">0</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 4</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <ol>
+<li>임의의 수 x를 입력으로 받고, sin x + cos x를 출력하는 프로그램을 만드시오.</li>
+<li>단, sin x와 cos x를 구하는 함수를 직접 만들어야 합니다.</li>
+<li>sin x = x  -  x^3 / 3!  +  x^5 / 5!  - x^7 / 7! + ...입니다.</li>
+<li>cos x = 1  -  x^2 / 2!  +  x^4 / 4!  - x^6 / 6! + ...입니다.</li>
+<li>삼각함수 연산은 호도법을 이용합니다.</li>
+<li>p.s. 정밀한 계산을 원할 경우 오버플로 문제를 해결하는 법도 찾아야 하겠네요. (팩토리얼 연산 이용하기 때문)
+예시 입력: 0
+예시 출력: 1</li>
+</ol>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">테일러 급수</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2021/04/30 14:28</p>
+                    <p class="static-profile" style="margin:0;padding:0;">이준우</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>4개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_25303"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import math
+
+def calculate_trigonometric_function(x: float) -&gt; float:
+
+    &quot;&quot;&quot;This function refers to Taylor's theorm.
+    A remainder for cos or sin at x follows Cauchy's remainder.
+    The function has 2 steps. Step1 gets a degree of
+    Taylor polynomial function at x. Step 2 calculates sin and cos at x
+    and returns two values
+    &quot;&quot;&quot;
+
+    # Step1: get a degree of Taylor polynomial function at x
+    degree = 0
+    error = 5 * 1e-6
+    while True:
+        # Upper limit of Cauchy's remainder for sin or cos at x
+        upper_limit = x**degree / math.factorial(degree)
+        if upper_limit &lt; error:
+            break
+        else:
+            degree += 1
+
+    # Step2: Calculate sin, cos at x
+    sin = 0
+    cos = 0
+    for i in range(degree):
+        sin += (-1)**i * x**((2 * i) + 1) / math.factorial(2 * i + 1)
+        cos += (-1)**i * x**(2 * i) / math.factorial(2 * i)
+
+    return sin + cos
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/05/02 03:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">돈 벌면 뭐하노</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25448"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">nfact = {1:1, 2:2}
+accuracy = 10
+
+def fact(n):
+    global nfact
+    if n in nfact:
+        return nfact[n]
+    else:
+        ans = n*fact(n-1)
+        nfact[n] = ans
+        return ans
+
+def sin(n):
+    ans = 0
+    for i in range(1, accuracy, 2):
+        ans += (n ** i) / fact(i) * (-1) ** (i // 2)
+    return ans
+
+def cos(n):
+    ans = 1
+    for i in range(2, accuracy, 2):
+        ans += (n ** i) / fact(i) * (-1) ** (i//2)
+    return ans
+
+
+x = float(input('input number: '))
+print('result: ', sin(x) + cos(x))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/05/26 15:25</p>
+                                <p class="static-profile" style="margin:0;padding:0;">songci</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29374"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import math
+
+def calSin(x):
+    range = 0.1**10
+    x = x * math.pi / 180
+    sin = x
+    i = 1
+    while x &gt; range :
+        x = x**(2*i + 1) / math.factorial(2*i + 1)
+        sin += (-1)**(2*i + 1) * x
+        i += 1
+    return sin
+
+def calCos(x):
+    range = 0.1**8
+    x = x * math.pi / 180
+    cos = 1
+    i = 1
+    while x &gt; range :
+        x = x**(2*i) / math.factorial(2*i)
+        cos += ((-1)**i) * x
+        i += 1
+    return cos
+
+
+q = int(input('육십분법의 각을 입력하세요(예: 0 ~ 360) : '))
+print('\nsin{0} + cos{0} = {1}'.format(q, calSin(q)+calCos(q)))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/07/02 23:33</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29412"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import math
+
+def factorial(n):
+    ret = 1
+    for i in range(1, n+1):
+        ret *= i
+    return ret
+
+x = float(input())
+sinx = x; cosx = 1
+for n in range(1,11):
+  sinx+=math.pow(x,2)/factorial(2*n+1)*math.pow(-1,n)
+  cosx+=math.pow(x,2)/factorial(2*n)*math.pow(-1,n)
+
+print(sinx+cosx)  
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/07/13 12:39</p>
+                                <p class="static-profile" style="margin:0;padding:0;">스탠리</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

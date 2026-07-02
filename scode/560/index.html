@@ -1,0 +1,512 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="(프로젝트 오일러 109번 문제입니다)
+
+다트 게임은 1부터 20까지 숫자가 적힌 20개의 균일한 부채꼴이 그려진 원형판 위에 참가자당 3개의 다트를 던지는 놀이입니다.
+
+경기 점수는 다트가 어디에 꽂혔는지 보고 결정합니다. 맨 바깥쪽 적...">
+    <title>다트 문제 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">다트 문제</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">2</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 3</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>(프로젝트 오일러 109번 문제입니다)</p>
+<p>다트 게임은 1부터 20까지 숫자가 적힌 20개의 균일한 부채꼴이 그려진 원형판 위에 참가자당 3개의 다트를 던지는 놀이입니다.</p>
+<p>경기 점수는 다트가 어디에 꽂혔는지 보고 결정합니다. 맨 바깥쪽 적/녹색 테두리 밖에 맞은 다트는 0점으로 기록됩니다. 부채꼴 모양에 맞은 다트는 테두리에 적혀져 있는 숫자가 점수가 되지만, 적/녹색 테두리 안에 들어가면 바깥쪽은 2배, 안쪽은 3배를 곱하여 계산합니다.</p>
+<p>불스아이(Bulls-eye)라고도 부르는 중심영역은 25점입니다. 그 중에서도 붉은 색으로 표시된 맨 가운데 영역은 두 배인 50점을 받습니다.</p>
+<p>다트 경기를 즐기는 방법은 많지만 그 중에서도 가장 인기있는 규칙은 각 플레이어가 301점이나 501점을 가지고 게임을 시작하는 것입니다. 다트를 던져 나온만큼 점수를 차감해 0에 도달하면 이기게 되는데, 여기에 "더블 아웃"이란 특별한 규칙이 하나 더 있습니다. 자세히 설명하자면, 점수를 0으로 만드려면 반드시 더블 영역(바깥쪽 적/녹 테두리 또는 불스아이의 50점짜리 영역)에 맞아야 한다는 것입니다. 만일 점수가 1점이 남아 더블을 할 수 없거나, 더블이 아닌 영역을 맞추어 0점을 만들기, 또는 점수가 0점 밑으로 내려가게 된 경우는 '버스트'가 됩니다.</p>
+<p>(역자 주 : 버스트가 되면 해당 라운드에 딴 점수는 모두 무효가 됩니다. 예를 들어 5점이 남은 상태에서 시작을 했는데, 2 더블을 맞추어 1점이 남는다면 남은 다트와 상관없이 버스트가 되고, 다음 라운드는 5점으로 다시 시작해야 합니다. 원문에 없는 내용이지만 한국내 다트 동호인이 많지 않아, 501 룰에 대한 이해 수준이 다르다는 점을 감안해 따로 적어둡니다)</p>
+<p>만약 이번 라운드에서 게임을 끝낼 수 있는 조건이 되면 이를 '체크아웃'이라 합니다. 남은 점수가 가장 높은 체크아웃 상황은 170(20트리플/20트리플/25더블 = 60 + 60 + 50)점입니다.</p>
+<p>6점이 남았을 때는 다음 11가지 체크아웃 시나리오가 있습니다.</p>
+<p>3더블</p>
+<p>1더블 2더블  </p>
+<p>2싱글 2더블  </p>
+<p>2더블 1더블 </p>
+<p>4싱글 1더블  </p>
+<p>1싱글 1싱글 2더블</p>
+<p>1싱글 1트리플    1더블</p>
+<p>1싱글 3싱글 1더블</p>
+<p>1더블 1더블 1더블</p>
+<p>1더블 2싱글 1더블</p>
+<p>2싱글 2싱글 1더블</p>
+<p>위 도표에서 1더블-2더블이 2더블-1더블은 '더블 아웃'이 다르므로 다른 경우의 수로 간주하는 점에 주의하십시오. 하지만 더블 아웃이 동일한 1싱글-1트리플-1더블과 1트리플-1싱글-1더블은 같은 경우로 봅니다.</p>
+<p>그밖에 과녁 밖을 맞추어 0점을 받은 것은 던지지 않은 경우와 동일하게 간주하겠습니다(0-3더블이나 0-0-3더블 역시 3더블과 같이 취급한다는 의미).</p>
+<p>이런 식으로 체크아웃 경우의 수를 모두 세어 보면 총 42336가지 체크아웃 상황이 발생합니다.</p>
+<p>이 중 남은 점수가 100 미만일 때의 체크아웃 수는 총 몇가지일까요?</p>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2017/08/02 13:19</p>
+                    <p class="static-profile" style="margin:0;padding:0;">P.Y.Thon</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>6개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_8189"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>꽤 어렵네요. 문제 이해하는 것부터 장난 아니고...</p>
+<p>리스트 내포를 써 봤는데 더 지저분해져서 for문으로 다시 바꿨습니다.</p>
+<p>2점짜리 싱글과 2점짜리 더블(1더블)이 점수는 같아도 다르게 취급해야 하기 때문에 주의를 요합니다.</p>
+<pre><code class="python">singleshots = [x for x in range(1, 21)] + [25]
+doubleshots = [x*2 for x in singleshots]
+tripleshots = [x*3 for x in singleshots[:-1]]
+allshots = singleshots + doubleshots + tripleshots
+
+def count_checkout(score):    
+    # double-out by 1 shot
+    cnt = doubleshots.count(score)
+
+    # double-out by 2 shots
+    for firstshot in allshots:
+        for lastshot in doubleshots:
+            cnt += firstshot + lastshot is score
+
+    # double-out by 3 shots
+    for i in range(len(allshots)):
+        for j in range(i, len(allshots)):
+                for lastshot in doubleshots:
+                    cnt += allshots[i] + allshots[j] + lastshot is score
+
+    return cnt
+
+print(count_checkout(6)) # 11
+print(count_checkout(170)) # 1
+print(sum([count_checkout(score) for score in range(0, 171)])) # 42336
+</code></pre>
+
+<p>.</p>
+<p>정렬하고 시작하면 시간을 좀 줄일 수도 있습니다.</p>
+<pre><code class="python">singleshots = [x for x in range(1, 21)] + [25]
+doubleshots = [x*2 for x in singleshots]
+tripleshots = [x*3 for x in singleshots[:-1]]
+allshots = sorted(singleshots + doubleshots + tripleshots)
+
+def count_checkout(score):
+    # double-out by 1 shot
+    cnt = doubleshots.count(score)
+
+    # double-out by 2 shots
+    for firstshot in allshots:
+        if firstshot &gt;= score: break
+        for lastshot in doubleshots:
+            cnt += firstshot + lastshot is score
+            if firstshot + lastshot &gt;= score: break
+
+    # double-out by 3 shots
+    for i in range(len(allshots)):
+        if allshots[i] &gt;= score: break
+        for j in range(i, len(allshots)):
+                if allshots[i] + allshots[j] &gt;= score: break
+                for lastshot in doubleshots:
+                    cnt += allshots[i] + allshots[j] + lastshot is score
+                    if allshots[i] + allshots[j] + lastshot &gt;= score: break
+
+    return cnt
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/04 03:53</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14362"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">score = (0, *range(1,21), 25, *range(2,41,2) ,50, *range(3,61,3))
+print(sum(1 for i in (*range(2,41,2), 50)
+            for j in range(len(score))
+            for k in range(j, len(score)) if i+score[j]+score[k] &lt; 100))
+# 38182
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/26 23:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8837"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">score1 = [i for i in range(21)] + [25]
+score2 = [i * 2 for i in range(1, 21)] + [50]
+score3 = [i * 3 for i in range(1, 21)]
+scores = score1 + score2 + score3
+
+def count_checkout(score):
+    cnt = 0
+    for i, s1 in enumerate(scores):
+        for j, s2 in enumerate(scores):
+            if i &lt;= j: # 중복제거
+                for s3 in score2:
+                    s = s1 + s2 + s3
+                    if score == s:
+                        cnt += 1
+    return cnt
+
+print(sum([count_checkout(i) for i in range(100)]))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/09/18 18:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박범수</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11567"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Swift입니다.</p>
+<p>3개의 다트로 100 미만의 점수를 만드는 문제로 이해했습니다.
+조합은 아래의 3가지가 있습니다.</p>
+<ol>
+<li>Double + Miss + Miss</li>
+<li>Double + Hit + Miss</li>
+<li>Double + Hit + Hit</li>
+</ol>
+<p>모든 조합은 루프를 통해서 간단하게 계산이 되는데, 중복 제거를 해야 하네요.
+Swift의 Set을 이용을 했고, 마지막 Double을 제외한 앞의 2가지 점수를 소팅해서 Set에 넣고,
+계산이 끝난 후 Set의 Count를 출력하게 했습니다.</p>
+<pre><code class="no-highlight">// 다트 문제
+import Foundation
+
+let doubleScores = Array(stride(from:2, to:42, by: 2)) + [50]
+let singleScores = Array(1...20) + [25]
+let trippleScores = Array(stride(from:3, to:63, by: 3))
+
+// Set for having unique items
+var trippleHitSet = Set&lt;String&gt;() 
+var otherSet = Set&lt;String&gt;()
+
+// Mark for Double, Tripple
+func getScoreMark(_ divider: Int) -&gt; String {
+    return divider == 3 ? &quot;T&quot; : (divider == 2 ? &quot;D&quot; : &quot;&quot;)
+}
+func check2Arrays(_ target: Int, _ initValue: Int, _ firstNumbers: [Int], _ firstDivider: Int, _ secondNumbers: [Int], _ secondDivider: Int) {
+    for firstNumber in firstNumbers {
+        for secondNumber in secondNumbers {
+
+            if initValue + firstNumber + secondNumber == target {
+                let secondString = &quot;\(secondNumber/secondDivider)\(getScoreMark(secondDivider))&quot;
+                let firstString = &quot;\(firstNumber/firstDivider)\(getScoreMark(firstDivider))&quot;
+                if initValue == 0 {
+                    otherSet.insert(firstString + &quot; &quot; + secondString)
+                } else {
+                    let initialString = &quot;\(initValue/2)D&quot;
+                    if (firstString &lt; secondString) {
+                        trippleHitSet.insert(firstString + &quot; &quot; + secondString + &quot; &quot; + initialString)
+                    } else {
+                        trippleHitSet.insert(secondString + &quot; &quot; + firstString + &quot; &quot; + initialString)
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+func findCheckOut(target: Int) -&gt; Int {
+    trippleHitSet.removeAll(keepingCapacity: false)
+    otherSet.removeAll(keepingCapacity: false)
+
+    // Double, Miss, Miss 
+    for first in doubleScores {
+        if first == target {
+            otherSet.insert(&quot;\(first/2)D&quot;)
+        }
+    }
+
+    // Double, Hit, Miss
+    check2Arrays(target, 0, doubleScores, 2, singleScores, 1)
+    check2Arrays(target, 0, doubleScores, 2, doubleScores, 2)
+    check2Arrays(target, 0, doubleScores, 2, trippleScores, 3)
+
+    // Double, Hit, Hit
+    for number in doubleScores {
+        check2Arrays(target, number, singleScores,  1, singleScores,  1)
+        check2Arrays(target, number, singleScores,  1, doubleScores,  2)
+        check2Arrays(target, number, singleScores,  1, trippleScores, 3)
+        check2Arrays(target, number, doubleScores,  2, singleScores,  1)
+        check2Arrays(target, number, doubleScores,  2, doubleScores,  2)
+        check2Arrays(target, number, doubleScores,  2, trippleScores, 3)
+        check2Arrays(target, number, trippleScores, 3, singleScores,  1)
+        check2Arrays(target, number, trippleScores, 3, doubleScores,  2)  
+        check2Arrays(target, number, trippleScores, 3, trippleScores, 3)  
+    }
+
+    return otherSet.count + trippleHitSet.count
+}
+
+var totalCount = 0
+for i in 2..&lt;100 {
+    totalCount += findCheckOut(target: i)
+}
+print(totalCount)
+
+
+</code></pre>
+
+<p>계산 결과는 38182입니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/04/07 03:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">졸린하마</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17962"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">singles = [i for i in range(1, 21)] + [25]
+doubles = [2 * i for i in range(1, 21)] + [2 * 25]
+triples = [3 * i for i in range(1, 21)]
+points = singles + doubles + triples
+
+def checkout(n):
+    count = 0
+    # 1번
+    if n in doubles: count += 1
+
+    # 2번
+    for a in doubles:
+        count += points.count(n - a)
+
+    # 3번
+    for a in doubles:
+        for i, b in enumerate(points):
+            count += points[i:].count(n - a - b)
+
+    return count
+
+print(sum( (checkout(n) for n in range(1, 100)) ))  #38182
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/21 18:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">messi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_24587"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>문제가 쉽지 않네요..</p>
+<pre><code class="python">class dart:
+  def __init__(self, x):
+    self.hitsum, self.sumscore = 0, x
+    self.leaderboard, self.scorelist = [], list(range(1, 21))+[25]
+
+  def main(self):
+    for score in range(1, self.sumscore):
+      self.score = score
+      for i in [num for num in self.scorelist if (num &lt;=self.score//2)]:
+        self.bullsfinder(2, 2*i ,[f'{i:d}double'])
+      self.leaderboard = list(set([' '.join(sorted(log[:-1])+[log[-1]]) for log in self.leaderboard]))  
+      for i in self.leaderboard:
+        print(i)
+      self.hitsum += len(self.leaderboard)
+      print('\n',f'total {len(self.leaderboard):d} cases for the {score:d} points holder')
+      self.leaderboard.clear()
+    print('\n',f'total {self.hitsum:d} cases for players below {self.sumscore:d} points')
+
+  def bullsfinder(self, num, score, log):  #hitnum, ascore, log
+    x, y, z = num, score, log
+    if y==self.score:
+      self.leaderboard.append(z)
+    elif x&gt;0:
+      for i in [x for x in self.scorelist if (x &lt;=self.score)]:
+        x, y, zlog= x-1, y+i, [f'{i:d}single'] + z
+        self.bullsfinder(x, y, zlog)
+        x, y=x+1, y-i
+      for i in [x for x in self.scorelist if (x &lt;=self.score//2)]:
+        x, y, zlog= x-1, y+2*i, [f'{i:d}double'] + z
+        self.bullsfinder(x, y, zlog)
+        x, y=x+1, y-2*i      
+      for i in [x for x in self.scorelist if (x &lt;=min(self.score//3,20))]:
+        x, y, zlog= x-1, y+3*i, [f'{i:d}triple'] + z
+        self.bullsfinder(x, y, zlog)
+        x, y=x+1, y-3*i 
+
+omg = dart(100)
+omg.main()
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/02/02 18:28</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박영빈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

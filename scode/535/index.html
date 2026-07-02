@@ -1,0 +1,692 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="이진트리를 그리기 위해 각 노드의 위치 (x,y)를 계산하는 문제다. 트리의 노드 위치를 결정하기 위한 레이아웃 알고리즘은 아래와 같다.
+
+출처: https://sites.google.com/site/prologsite/prolog-probl...">
+    <title>이진트리 레이아웃 #2 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">이진트리 레이아웃 #2</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">2</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 4</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>이진트리를 그리기 위해 각 노드의 위치 (x,y)를 계산하는 문제다. 트리의 노드 위치를 결정하기 위한 레이아웃 알고리즘은 아래와 같다.</p>
+<p>출처: https://sites.google.com/site/prologsite/prolog-problems/4</p>
+<h2 id="_1">레이아웃 알고리즘</h2>
+<p>두 자식의 x축 상 간격이 2의 배수로 증가한다. y좌표는 트리 상의 깊이로 결정된다.</p>
+<p><img alt="" src="https://prof.ti.bfh.ch/hew1/informatik3/prolog/p-99/p65.gif" /></p>
+<h2 id="_2">입출력</h2>
+<p>트리를 생성하기 위한 입력 포맷이나, 레이아웃이 적용된 각 노드의 위치를 출력하는 형식은 자유롭게 결정한다.</p>
+<h3 id="1">입력 예 #1</h3>
+<p><code>"n(k(c(a,e(d,g)),m),u(p(,q),))"</code>와 같이 입력받을 수 있다. <code>parent(left,right)</code>의 모양을 재귀적으로 표현한 것이다. (자식이 둘다 없으면 괄호부분이 생략된다.)</p>
+<h3 id="2">입력 예 #2</h3>
+<p><code>"nkcmaedgupq"</code>와 같이 입력 받아 각 글자를 노드의 라벨로 하여 이진탐색트리를 만들 수 있다.</p>
+<h3 id="3">입력 예 #3</h3>
+<p>입력을 따로 신경쓰고 싶지 않다면 코드로 직접 트리를 만들어도 된다. 만약 Java라면 다음과 같을 것이다.</p>
+<pre><code class="java">class Tree&lt;A&gt; {
+  A value;
+  Tree&lt;A&gt; left;
+  Tree&lt;A&gt; right;
+  ...
+}
+
+Tree&lt;String&gt; t = new Tree(&quot;root&quot;, new Tree(&quot;left&quot;, null, null), new Tree(&quot;right&quot;, null, null));
+</code></pre>
+
+<h3 id="1_1">출력 예 #1</h3>
+<p>inorder 출력으로 각 노드의 내용과 위치 (x,y)를 출력한다.</p>
+<pre><code>a 1 4
+c 3 3
+d 4 5
+e 5 4
+g 6 5
+...
+</code></pre>
+
+<h3 id="2_1">출력 예 #2</h3>
+<p>HTML/SVG/GraphViz 등으로 직접 그려도 좋을 것이다.</p>
+<h3 id="3_1">출력 예 #3</h3>
+<p>출력할 필요없이 테스트 코드로 확인해도 좋다.</p>
+<pre><code class="java">public void test() {
+  Tree&lt;Integer&gt; t = ...;
+  Tree&lt;Point&gt;   expected = ...;
+  assertEquals(expected, layout(t));
+}
+</code></pre>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">이진트리</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2016/11/16 06:22</p>
+                    <p class="static-profile" style="margin:0;padding:0;">Han Jooyung</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>7개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_5281"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>예의 그림에서 c를 기준으로 보면..
+c의 높이는 3(맨 밑을 1로 보면)
+c의 자식들의 x는 c를 기준으로 -2, +2 에 있다. 이는 <code>2^(height-2)</code>다.</p>
+<pre><code>  123456
+1   c
+2 a   e
+3    d g
+</code></pre>
+
+<p>즉, 미리 루트의 높이를 계산하면 루트에서의 양팔의 길이를 알 수 있고,
+자식들로 내려가면서 양팔의 길이는 반씩 줄여가면 된다.</p>
+<p>이때, x는 왼쪽 오른쪽의 자식들 상황에 따라 달라지므로,
+임의의 값으로 진행한 다음 후보정하는 방법을 취하거나
+루트에서 맨왼쪽 자식까지의 높이 차를 기준으로 선보정할 수 있다.</p>
+<p>다른 utility 함수들은 <a href="http://codingdojang.com/scode/534?answer=5280#answer_5280">레이아웃#1 풀이</a>를 참고하고..
+후보정하는 방식으로 구현한다면..</p>
+<pre><code class="c">// 노드의 양팔 길이는 2^height
+void tree_layout2(tree* t) {
+    int height = tree_height(t);           // 높이
+    layout2_(t, 0, 1, powi(2, height - 2));// 팔길이계산하여 0, 1기준으로 layout시작
+    int minx = tree_leftmost(t)-&gt;x;              // 맨왼쪽 자식의 x가
+    layout2_translate_x(t, 1-minx);        // 1이 되도록 translate
+}
+
+void layout2_(tree* t, int x, int y, int arm) {
+    t-&gt;x = x;
+    t-&gt;y = y;
+
+    if (t-&gt;left) layout2_(t-&gt;left, x-arm, y+1, arm/2);
+    if (t-&gt;right) layout2_(t-&gt;right, x+arm, y+1, arm/2);
+}
+
+void layout2_translate_x(tree* t, int dx) {
+    t-&gt;x += dx;
+
+    if (t-&gt;left) layout2_translate_x(t-&gt;left, dx);
+    if (t-&gt;right) layout2_translate_x(t-&gt;right, dx);
+}
+
+tree* tree_leftmost(tree* t) {
+    while (t-&gt;left) {
+        t = t-&gt;left;
+    }
+    return t;
+}
+
+int tree_height(tree* t) {
+    if (!t) return 0;
+    return 1 + max(tree_height(t-&gt;left), tree_height(t-&gt;right));
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/11/16 11:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Han Jooyung</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5331"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<p>좌측순회를 마친 뒤 L(node.x), U(node.x), R(node.r.x) 순서로 x 계산. </p>
+<pre><code class="ruby">add = -&gt;par,node do 
+  par ? node.y = par.y + 1 : (return node)
+  chd = node.val &lt; par.val ? par.l : par.r
+  chd ? add[chd, node] : (node.val &lt; par.val ? par.l = node : par.r = node)
+  par
+end
+
+calc_x = -&gt;node,par,max_y do
+  left_x = par.x + 2**(max_y-node.y) * (node == par.l ? -1 : 1) if par
+  node.x = (node.l ? node.l.x + 2**(max_y-node.y-1) : par&amp;.x &gt; 0 ? left_x : 1)
+  node.r.x = node.x + 2**(max_y-node.y-1) if node.r                           
+end
+
+layout = -&gt;tree_str=gets.chop do
+  Node = Struct.new(:val, :x, :y, :l, :r)
+  nodes = tree_str.chars.map {|c| Node.new(c, 0, 1) }
+  btree, max_y = nodes.reduce(&amp;add), nodes.max_by(&amp;:y).y
+
+  trav = -&gt;node,par=nil do
+    trav[node.l, node] if node.l
+    calc_x[node, par, max_y]
+    puts node.values[0..2].join(&quot; &quot;)
+    trav[node.r, node] if node.r
+  end
+  trav[btree]
+end
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby">in_ordered =  &quot;a 1 4\n&quot;  + &quot;c 3 3\n&quot;  + &quot;d 4 5\n&quot;  + &quot;e 5 4\n&quot;  +
+              &quot;g 6 5\n&quot;  + &quot;k 7 2\n&quot;  + &quot;m 11 3\n&quot; + &quot;n 15 1\n&quot; +
+              &quot;p 19 3\n&quot; + &quot;q 21 4\n&quot; + &quot;u 23 2\n&quot;
+expect{ layout[&quot;nkcmaedgupq&quot;] }.to output(in_ordered).to_stdout
+</code></pre>
+
+<p><strong>Output</strong></p>
+<pre><code class="ruby">cmd &gt; layout.call
+nkcmaedgupq
+a 1 4
+c 3 3
+d 4 5
+e 5 4
+g 6 5
+k 7 2
+m 11 3
+n 15 1
+p 19 3
+q 21 4
+u 23 2
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/11/21 13:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5535"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">class BinaryTree():
+    class Node():
+        def __init__(self, data):
+            self.left = None
+            self.right = None
+            self.data = data
+            self.depth = 1
+            self.x = 0
+
+        def child(self, node):
+            if self.data == node.data:
+                return
+            key = 'left' if self.data &gt; node.data else 'right'
+            if self.__dict__[key] == None:
+                node.depth = self.depth + 1
+                self.__dict__[key] = node
+            else:
+                self.__dict__[key].child(node)
+
+        def print_inorder_pos(self, x, depth):
+            if self.left != None:
+                self.left.print_inorder_pos(x, depth)
+                self.x = self.left.x + (2 ** (depth - self.left.depth))
+            else:
+                self.x = 1 if x == -1 else x + (2 ** (depth - self.depth))
+            print(self.data, self.x, self.depth)
+            if self.right != None:
+                self.right.print_inorder_pos(self.x, depth)
+
+    def __init__(self, data):
+        self.depth = 1
+        self.root = None
+        if data != None:
+            self.set(data)
+
+    def set(self, data):
+        for x in data:
+            self.add(BinaryTree.Node(x))
+
+    def add(self, node):
+        if self.root == None:
+            self.root = node
+        else:
+            self.root.child(node)
+        if node.depth &gt; self.depth:
+            self.depth = node.depth
+
+    def print_inorder(self):
+        self.root.print_inorder_pos(-1, self.depth)
+
+bt = BinaryTree(&quot;nkcmaedgupq&quot;)
+bt.print_inorder()
+
+</code></pre>
+
+<p>Python 3.5.2에서 작성하였습니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/12/09 11:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Yeo HyungGoo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8031"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>트리는 배열에 바로 저장하고, 다음과 같이 사용합니다.</p>
+<p>.</p>
+<p>btree[0]: 사용 안 함</p>
+<p>btree[1]: 루트 노드</p>
+<p>btree[x]의 왼쪽자식   = btree[x*2]</p>
+<p>btree[x]의 오른쪽자식 = btree[x*2+1]</p>
+<p>btree[x]의 부모       = btree[x//2]</p>
+<p>.</p>
+<p>그리고 편의상 깊이 대신 높이를 사용합니다.</p>
+<p>깊이와는 반대로 가장 깊은 노드부터 0, 1, 2, 3, ... 으로 증가하며, 문제의 예시에서는 루트 노드의 높이가 4가 됩니다.</p>
+<p>현재 노드의 깊이를 d, 트리의 최대 깊이를 D, 현재 노드의 높이를 h, 트리의 최대 깊이를 H 라고 하면 다음과 같이 변환됩니다.</p>
+<p>h = D - d</p>
+<p>d = H - h + 1</p>
+<p>높이가 h인 부모 노드와 그 자식 노드 사이의 거리는 2의 (h-1)제곱이 됩니다.</p>
+<pre><code class="python">from math import log, floor
+
+def trav(idx, x, h):
+    if idx &gt;= len(btree) or btree[idx] is '.':
+        return
+
+    trav(idx*2, x - 2**(h-1), h-1)
+    print(btree[idx], x, H-h+1)
+    trav(idx*2+1, x + 2**(h-1), h-1)
+
+btree = &quot; nkucmp.ae...q....dg&quot;
+H = floor(log(len(btree) - 1, 2))  # 최대 높이(root의 높이). 
+trav(1, 2**H - 1, H)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/07/26 22:43</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9723"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from string import ascii_letters
+from itertools import count
+
+class node:
+    def __init__(self, name, left = None, right = None):
+        self.name = name
+        self.left = left
+        self.right = right
+
+    def in_order_trav(self, counter = None, queue = {}, depth = 1):
+        if counter == None:
+            counter = count()
+        if self.left:
+            self.left.in_order_trav(counter, queue, depth + 1)
+        queue[next(counter)] = (self, depth)
+        if self.right:
+            self.right.in_order_trav(counter, queue, depth + 1)
+        return queue
+
+    def even_number_layout_trav(self, width = 0, pos = 0, queue = {}, depth = 1):
+        if width == 0:
+            width = 2**(self.get_max_depth()-2)
+        if self.left:
+            self.left.even_number_layout_trav(width/2, pos-width, queue, depth + 1)
+        queue[pos] = (self, depth)
+        if self.right:
+            self.right.even_number_layout_trav(width/2, pos+width, queue, depth + 1)
+        return queue
+
+    def get_max_depth(self, depth = 1):
+        res = depth
+        if self.left:
+            res = max(res, self.left.get_max_depth(depth + 1))
+        if self.right:
+            res = max(res, self.right.get_max_depth(depth + 1))
+        return res
+
+    def __str__(self):
+        return self.name
+
+class table:
+    def __init__(self, queue:{int:(node, int)}):
+        self.max_height = max(queue[key][1] for key in queue)
+        self.table = []
+        for i in range(self.max_height):
+            self.table.append(list(' ' * (int(max(queue) - min(queue))+1)))
+        transition = 0-min(queue)
+        for key in queue:
+            self.table[queue[key][1]-1][int(key + transition)] = queue[key][0].name
+
+    def __str__(self):
+        res = '   ' + ' '.join('%2d'%i for i in range(1, len(self.table[0])+1)) + '\n'
+        for height in range(1, self.max_height+1):
+            res += '%2d '%height + ' '.join('%2s'%i for i in self.table[height-1])
+            res += '\n'
+        return res
+
+def make_tree(_in):
+    t_in = list(_in)
+    for i in range(len(_in)-1, -1, -1):
+        char = t_in[i]
+        if char in ascii_letters:
+            if _in[i+1] == '(':
+                t_in.insert(i+2, ',')
+                t_in[i], t_in[i+1] = t_in[i+1], t_in[i]
+                t_in.insert(i+2, '\'')
+                t_in.insert(i+1, '\'')
+                t_in = t_in[:i] + list('node') + t_in[i:]
+            else:
+                t_in = t_in[:i] + list('node(\'') + [t_in[i], '\')'] + t_in[i+1:]
+
+    str_in = ''.join(t_in)
+    str_in = str_in.replace(',,', ', right=')
+    str_in = str_in.replace(',)', ')')
+
+    root = eval(str_in)
+    return root
+
+if __name__ == '__main__':
+    in_1 = 'n(k(c(a,h(g(e,),)),m),u(p(,s(q,)),))'
+    print(table(make_tree(in_1).in_order_trav()))
+    in_2 = 'n(k(c(a,e(d,g)),m),u(p(,q),))'
+    print(table(make_tree(in_2).even_number_layout_trav()))
+</code></pre>
+
+<p>1편의 코드를 수정했습니다.</p>
+<p>파이썬 3.6.2 64</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/12/19 22:53</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Flair Sizz</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13817"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">class binarytreelayout:
+    def __init__(self,data=None):
+        self.tree = []
+        if data == None: return
+        else:
+            data = ''.join(j for i,j in enumerate(data) if j not in data[:i])
+            tmp = sorted(data)
+            item = ( [i,tmp.index(i)] for i in data )
+
+            for node in item:
+                depth,id = 0,0
+                while 1:
+                    if depth == len(self.tree): self.tree.append([None for i in range(2**depth)])
+                    if self.tree[depth][id] == None: self.tree[depth][id] = node; break
+                    if self.tree[depth][id][0] &gt; node[0]: id = id*2
+                    else: id = id*2 + 1
+                    depth += 1
+        return
+
+    def layout2(self):
+        tmp = 0
+        lnt = 2**(len(self.tree) - 2)
+        for i in range(1,len(self.tree)):
+            for j,k in enumerate(self.tree[i]):
+                if k:
+                    k[1] = self.tree[i-1][j&gt;&gt;1][1] - ((-1)**j) * lnt
+                    tmp = min(k[1],tmp)
+            lnt &gt;&gt;= 1
+
+        return (f'{j[0]} {j[1]+1-tmp} {i+1}' for i in range(len(self.tree))
+                                         for j in self.tree[i] if j)
+
+data = 'nkcmaedgupq'
+x = binarytreelayout(data)
+
+for i in sorted(x.layout2()): print(i)
+</code></pre>
+
+<pre><code>a 1 4
+c 3 3
+d 4 5
+e 5 4
+g 6 5
+k 7 2
+m 11 3
+n 15 1
+p 19 3
+q 21 4
+u 23 2
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/28 13:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_22101"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>x축 설명은 이해가 안되어서 구현을 못했습니다 어떻게 접근해야할까요??</p>
+<pre><code class="python">class Node:
+    def __init__(self,data):
+        self.data=data
+        self.left=None
+        self.right=None
+        self.y=1
+        self.x=0
+class BST:
+    def __init__(self):
+        self.root=None
+
+    def insert(self,data):
+        newnode=Node(data)
+        if self.root is None:
+            self.root=newnode
+            return
+
+        cur=self.root
+        count=1
+        while True:
+            parent=cur
+            count+=1
+            if data&lt;cur.data:
+                cur=cur.left
+                if cur is None:
+                    parent.left=newnode
+                    parent.left.y=count
+                    break
+            else:
+                cur=cur.right
+                if cur is None:
+                    parent.right=newnode
+                    parent.right.y = count
+                    break
+
+    def inorder(self,node):
+        if node is not None:
+            self.inorder(node.left)
+            print(node.data,node.y)
+            self.inorder(node.right)
+
+alpa=input(&quot;입력 &gt;&gt;&quot;)
+bst=BST()
+for i in range(len(alpa)):
+    bst.insert(alpa[i])
+bst.inorder(bst.root)
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/05 22:43</p>
+                                <p class="static-profile" style="margin:0;padding:0;">kim center</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

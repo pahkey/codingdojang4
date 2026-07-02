@@ -1,0 +1,365 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="연관문제: [버전비교](http://codingdojang.com/scode/493)
+
+원문: [Semantic Versioning 2.0.0](https://semver.org/), [(한글번역) 유의적 버전 2.0.0](https://se...">
+    <title>버전비교(풀버전) - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">버전비교(풀버전)</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">1</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 3</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>연관문제: <a href="http://codingdojang.com/scode/493">버전비교</a></p>
+<p>원문: <a href="https://semver.org/">Semantic Versioning 2.0.0</a>, <a href="https://semver.org/lang/ko/">(한글번역) 유의적 버전 2.0.0</a></p>
+<p>이 <a href="https://creativecommons.org/licenses/by/3.0/">라이센스</a> 를 표기해줘야 한답니다.</p>
+<h1 id="_1">문제</h1>
+<p>소프트웨어 버전들을 입력 받아, 우선순위가 높은 순서로 출력하시오.</p>
+<p>위 글에서 형식 부분만 정리했습니다.</p>
+<h1 id="_2">배포 버전</h1>
+<p>예) <code>0.1.0, 1.5.0, 4.12.2</code></p>
+<p>X.Y.Z 로 표기한다. X, Y, Z 모두 0 이상의 정수이다.</p>
+<p>0을 앞에 붙이지 않는다 (예: 1.03.0 (X), 1.3.0 (O))</p>
+<h1 id="pre-release">pre-release 버전</h1>
+<p>예) <code>1.0.0-alpha, 1.0.0-alpha.1, 1.0.0-0.3.7, 1.0.0-x.7.z.92</code></p>
+<p>X.Y.Z 뒤에 붙임표 "-"를 넣고, 마침표 "."로 구분된 1개 이상의 식별자(id)를 붙인다.</p>
+<p>식별자(id)는 한 글자 이상이다(예: 1.0.0-1..1 (X), 1.0.0-1.0.1 (O))</p>
+<p>식별자(id)는 반드시 아스키(ASCII) 문자, 숫자, 붙임표로만 구성한다: [0-9A-Za-z-]</p>
+<p>숫자 식별자 앞에 0을 붙이지 않는다.</p>
+<h1 id="_3">빌드 메타데이터</h1>
+<p>예) <code>1.0.0-alpha+001, 1.0.0+20130313144700, 1.0.0-beta+exp.sha.5114f85</code></p>
+<p>X.Y.Z 뒤, 또는 pre-release 버전의 뒤에 "+"를 넣고, ,마침표(".")로 구분된 1개 이상의 식별자(id)를 붙인다.</p>
+<p>식별자(id) 작성 규칙은 pre-release 버전에 기술한 바와 같다.</p>
+<h1 id="_4">버전 우선순위 비교</h1>
+<h2 id="_5">대원칙</h2>
+<p>식별자를 차례로 비교해서 다른 부분이 나타나면 우선순위가 결정된다.</p>
+<p>숫자로만 구성된 식별자는 수의 크기로 비교하고,</p>
+<p>알파벳이나 붙임표 "-" 가 포함된 경우에는 아스키 문자열 정렬을 한다.</p>
+<p>(사전 순서를 의미하는 듯함)</p>
+<h2 id="_6">비교 방법</h2>
+<p>1) X.Y.Z 에서 X, Y, Z 를 차례로, 숫자로서 비교한다.</p>
+<p><code>1.0.0 &lt; 2.0.0 &lt; 2.1.0 &lt; 2.1.1</code></p>
+<p>마침표 "." 는 소수점이 아님을 주의하라. 아래의 예에서 비교 순서는 1 == 1 그리고 5 &lt; 12 이다.</p>
+<p><code>1.5.0 &lt; 1.12.0</code></p>
+<p>2). X.Y.Z 가 같으면 pre-release 버전의 우선순위가 더 낮다.</p>
+<p><code>1.0.0-alpha &lt; 1.0.0</code></p>
+<p>3) 숫자로만 구성된 식별자는 그렇지 않은 식별자보다 우선순위가 무조건 더 낮다.</p>
+<p><code>1.0.0-10 &lt; 1.0.0-alpha</code></p>
+<p>4) 빌드 메타데이터는 버전 우선순위에 영향이 없다.</p>
+<p>아래 두 버전의 우선순위는 같다.</p>
+<p><code>1.0.0-alpha+001, 1.0.0-alpha+exp.sha.5114f85</code></p>
+<p>5) pre-release 버전에서 앞선 식별자가 모두 같으면 필드 수가 많은 쪽의 우선순위가 더 높다.</p>
+<p><code>1.0.0-alpha &lt; 1.0.0-alpha.1 &lt; 1.0.0-alpha.beta &lt; 1.0.0-beta &lt; 1.0.0-beta.2 &lt; 1.0.0-beta.11 &lt; 1.0.0-rc.1 &lt; 1.0.0</code></p>
+<h1 id="_7">입출력 예시</h1>
+<p>우선순위가 높은 순서대로 출력한다.</p>
+<p>우선순위가 같으면 전체 길이가 긴 버전을 먼저 출력한다.</p>
+<h2 id="_8">입력</h2>
+<pre><code>1.2.0
+1.0.0-beta+exp.sha.5114f85
+1.12.0
+1.0.0-beta.1.2
+1.0.0-alpha
+1.0.0-rc.1
+1.0.0-rc.2
+1.2.1
+1.0.0-beta.2
+1.0.0
+1.10.0
+1.0.0+20130313144700
+1.0.0-alpha.beta
+1.0.0-10
+1.5.0
+1.0.0-beta.11
+1.0.0-alpha.1
+1.0.0-alpha+001
+1.0.0-beta.1
+</code></pre>
+
+<h2 id="_9">출력</h2>
+<p>빈 줄은 보기 편하도록 넣었으니 실제 출력할 때는 없어도 관계없습니다.</p>
+<pre><code>1.12.0
+1.10.0
+1.5.0
+1.2.1
+1.2.0
+
+1.0.0+20130313144700
+1.0.0
+
+1.0.0-rc.2
+1.0.0-rc.1
+
+1.0.0-beta.11
+1.0.0-beta.2
+1.0.0-beta.1.2
+1.0.0-beta.1
+1.0.0-beta+exp.sha.5114f85
+
+1.0.0-alpha.beta
+1.0.0-alpha.1
+1.0.0-alpha+001
+1.0.0-alpha
+
+1.0.0-10
+</code></pre>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2018/09/04 01:42</p>
+                    <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                </div>
+            </div>
+
+            
+                <a name="comment_2359"></a>
+                <div class="comment_line comment-content">
+                    
+                        <span style="color:orangered;">+1</span>
+                    
+                    <span style="white-space:pre-wrap;">출력 예시 pre release 우선순위 거꾸로 된 듯 합니다</span>
+                    -
+                    <span style="font-size:11px;">
+                        Creator,
+                        2018/09/06 19:14
+                    </span>
+                </div>
+            
+                <a name="comment_2367"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">감사합니다. 수정했습니다.</span>
+                    -
+                    <span style="font-size:11px;">
+                        Noname,
+                        2018/09/07 14:46
+                    </span>
+                </div>
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>2개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_14542"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def ver(x):
+  length = len(x)
+  m = x.find('+')
+  if m &gt; -1: x = x[:m]
+  p = x.find('-')
+  if p == -1:
+    return [[int(i) for i in x.split('.')], 1, length]
+  else:
+    pre = x[p+1:].split('.')
+    tmp = max(len(i) for i in pre)
+    return [[*map(int, x[:p].split('.'))], 0, [i.zfill(tmp) if i.isdigit() else i for i in pre], length]
+
+test = '''\
+1.2.0
+1.0.0-beta+exp.sha.5114f85
+1.12.0
+1.0.0-beta.1.2
+1.0.0-alpha
+1.0.0-rc.1
+1.0.0-rc.2
+1.2.1
+1.0.0-beta.2
+1.0.0
+1.10.0
+1.0.0+20130313144700
+1.0.0-alpha.beta
+1.0.0-10
+1.5.0
+1.0.0-beta.11
+1.0.0-alpha.1
+1.0.0-alpha+001
+1.0.0-beta.1'''
+test = [i.strip() for i in test.splitlines()]
+
+for i in sorted(test, key=ver, reverse=True): print(i)
+</code></pre>
+
+<pre><code>1.12.0
+1.10.0
+1.5.0
+1.2.1
+1.2.0
+1.0.0+20130313144700
+1.0.0
+1.0.0-rc.2
+1.0.0-rc.1
+1.0.0-beta.11
+1.0.0-beta.2
+1.0.0-beta.1.2
+1.0.0-beta.1
+1.0.0-beta+exp.sha.5114f85
+1.0.0-alpha.beta
+1.0.0-alpha.1
+1.0.0-alpha+001
+1.0.0-alpha
+1.0.0-10
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/06 18:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_14634"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># 유효성 검사는 하지 않는다.
+class Identifier(str):
+    def __lt__(self, other):
+        if self.isdigit() and other.isdigit():
+            return int(self) &lt; int(other)
+        else:
+            return str(self) &lt; str(other)
+
+
+class Version(str):
+    def __init__(self, src):
+        super().__init__()
+        self.rel, self.pre = [], []
+
+        if '+' in src:
+            src = src[:src.index('+')]
+
+        if '-' in src:
+            i = src.index('-')
+            self.pre = [Identifier(x) for x in src[i + 1:].split('.')]
+            src = src[:i]
+
+        self.rel = [Identifier(x) for x in src.split('.')]
+
+    def __lt__(self, other):
+        if self.rel != other.rel:
+            return self.rel &lt; other.rel
+        else:
+            # X.Y.Z 같음
+            if not self.pre and not other.pre:
+                return len(self) &lt; len(other)   # release X 2
+            elif bool(self.pre) != bool(other.pre):
+                return bool(self.pre) # pre-relese, release
+            else:
+                # pre-release X 2
+                if self.pre == other.pre:
+                    return len(self) &lt; len(other)
+                else:
+                    return self.pre &lt; other.pre
+
+
+versions = [Version(x) for x in inp_str.split('\n')]
+print('\n'.join(sorted(versions, reverse=True)))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/14 00:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

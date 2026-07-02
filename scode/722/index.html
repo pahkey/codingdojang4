@@ -1,0 +1,1825 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="영어 단어장 조건
+1. 추가, 삭제 가능하게 하기
+2. 문제 풀기 기능 만들기
+
+출력 결과 예시
+```
+--------------------------
+1. 단어 추가
+2. 단어 삭제
+3. 문제 풀기
+---------------...">
+    <title>영어 단어장 만들기 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">영어 단어장 만들기</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">3</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 2</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>영어 단어장 조건
+1. 추가, 삭제 가능하게 하기
+2. 문제 풀기 기능 만들기</p>
+<p>출력 결과 예시</p>
+<pre><code>--------------------------
+1. 단어 추가
+2. 단어 삭제
+3. 문제 풀기
+--------------------------
+메뉴 선택 : (번호 입력)
+</code></pre>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2022/11/12 19:04</p>
+                    <p class="static-profile" style="margin:0;padding:0;">고양이 푸딩</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>17개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_28863"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">2</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">class  Eng_Txt():
+    def __init__(self) -&gt; None:
+        self.txt = {}
+    def add_text(self):
+        text = input('추가 하실 단어를 입력하세요! : ')
+        min = input(f'{text}의 뜻을 입력하세요! : ')
+        self.txt[text] = min
+        print('정상적으로 추가 되었어요!')
+    def del_text(self):
+        text = input('삭제 하실 단어를 입력해주세요! : ')
+        del self.txt[text]
+        print('정상적으로 삭제 되었어요!')
+    def txt_test(self):
+        while 1:
+            ko_en = input('영어 한국어로 적기와 한국어 영어로 적기중 무엇으로 테스트를 볼 것입니까? : ')
+            if ko_en in ['한국어', '영어']:
+                point = {'정답':0, '오답':0}
+                if ko_en == '한국어':
+                    for i in self.txt:
+                        text = input(f'{i}의 뜻을 입력해주세요! : ')
+                        if text == self.txt[i]:
+                            point['정답'] += 1
+                            continue
+                        else:
+                            point['오답'] += 1
+                            continue
+                    print(f'정답 : {point[&quot;정답&quot;]}, 오답 : {point[&quot;오답&quot;]}')
+                elif ko_en == '영어':
+                    for i in self.txt:
+                        text = input(f'{self.txt[i]}를 영어로 입력해주세요! : ')
+                        if text == i:
+                            point['정답'] += 1
+                            continue
+                        else:
+                            point['오답'] += 1
+                            continue
+                    print(f'정답 : {point[&quot;정답&quot;]}, 오답 : {point[&quot;오답&quot;]}')
+                print('&quot;한국어&quot;, &quot;영어&quot; 중에 입력해주세요!')
+                continue
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/12/09 21:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">별키</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29190"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import random
+
+menu_list = ['1', '2', '3', '4', '5', '6']
+file_name = 'E:\English_word.txt'        #파일명 지정
+
+def print_line():
+    print('-----------------------')
+
+def print_line2():
+    print('=======================')
+
+def print_menu():
+    while (1):
+        print_line2()
+        print('1. 단어장 출력')
+        print('2. 문제 풀기')  # 영단어 뜻
+        print('3. 종료')  # 종료
+        print_line()
+        print('4. 단어 추가')       #a
+        print('5. 단어 삭제')       #w
+        print('6. 단어장 초기화')    #초기화
+        print_line2()
+        result = input(&quot;메뉴선택 : &quot;)
+
+        if result in menu_list:
+            return result
+        else:
+            print(&quot;잘못된 선택입니다.&quot;)
+
+def f_write():
+    e_word = input(&quot;영단어 입력 : &quot;)
+    e_mean = input(&quot;단어 뜻 입력 : &quot;)
+
+    f = open(file_name, 'a')
+    f.write(e_word + '|' + e_mean + '\n')
+    f.close()
+
+def f_del():
+    word = input(&quot;삭제할 단어입력 : &quot;)
+
+    f = open(file_name, 'r')
+    lines = f.readlines()
+    f.close()
+    x = 0           #삭제 구분자
+    f = open(file_name, 'w')
+    for line in lines:
+        if word + '|' not in line.strip('\n'):
+            f.write(line)
+        else:
+            x = 1
+    if x == 0:
+        print(&quot;단어를 찾을 수 없습니다.&quot;)
+    else:
+        print(&quot;삭제완료&quot;)
+
+    f.close()
+def init():
+    init_select = input('초기화 하시겠습니까? (Y)')
+
+    if init_select != 'y' and init_select != 'Y':
+        print(&quot;취소&quot;)
+        return
+
+    f = open(file_name, 'w')
+    f.write('')
+    f.close()
+    print(&quot;초기화 완료&quot;)
+
+def f_read():
+    word_dic = {}
+    f = open(file_name, 'r')
+    while(1):
+        line = f.readline().strip()
+        if not line:
+            break
+        n_word = line.split('|')
+        if n_word[0] != '':
+            word_dic.setdefault(n_word[0], n_word[1])
+    f.close()
+    return word_dic
+
+def exam():
+    exam_dic = f_read()
+    exam_list = []
+
+    for i in exam_dic.keys():
+        exam_list.append(i)
+
+    ex_len = len(exam_dic)
+    ex_num = random.randrange(0, ex_len)
+    ex_word = exam_list[ex_num]
+    print('문제 : ' + ex_word)
+    ex_sel = input('정답 : ')
+    if ex_sel == exam_dic[ex_word]:
+        print(&quot;정답!&quot;)
+    else:
+        print(&quot;오답입니다.&quot;)
+
+while(True):
+    select = print_menu()
+    if select == '3':           #종료
+        print(&quot;종료&quot;)
+        print_line2()
+        break
+    elif select == '1':         #단어장 출력
+        word_dic = f_read()
+        for key, val in word_dic.items():
+            print(key + ' : ' + val)
+    elif select == '2':         #문제풀기
+        exam()
+    elif select == '4':         #단어추가
+        f_write()
+    elif select == '5':         #단어삭제
+        f_del()
+    elif select == '6':         #초기화
+        init()
+    print_line2()
+
+</code></pre>
+
+<p>기능
+1. 단어장 목록출력(기본 x)
+2. 문제풀기
+3. 종료
+4. 단어 추가
+5. 단어 삭제
+6. 단어장 초기화</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/03/31 13:12</p>
+                                <p class="static-profile" style="margin:0;padding:0;">HoHyeon Kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28847"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="c">int main  (void)
+int a ;
+{
+printf(&quot;-----------------------\n&quot;);
+printf(&quot;1.단어추가\n&quot;);
+printf(&quot;2.단어삭제\n&quot;);
+printf(&quot;3.문제풀기\n&quot;);
+printf(&quot;-----------------------\n&quot;);
+scanf_s(&quot;메뉴선택 : %d, &amp;a);
+
+return 0;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/11/29 13:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">깜장콩</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28857"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def show_menu():
+    print()
+    print()
+    print ('-------------')
+    print ('1. 단어추가')
+    print ('2. 단어 삭제')
+    print ('3. 문제풀기')
+    print ('4. 단어보기')    
+    print ('-------------')   
+
+word={}
+
+while (1):
+    show_menu()
+    choice=int(input('메뉴 선택 : '))
+
+    if choice==1:
+        en_word=input('추가하려는 영어 단어를 입력해주세요...')
+        ko_word=input('추가하려는 영어 단어의 뜻을 입력해주세요...')
+        word[en_word]=ko_word
+        print ('단어가 추가되었습니다')
+
+    elif choice==2:
+        en_word=input('삭제하려는 영어 단어를 입력해주세요...')
+        word.pop(en_word)
+        print ('단어가 삭제되었습니다')
+
+    elif choice==3:
+        for i in word:
+            q=i+'의 뜻은 무엇인가요?'
+            ans=input(q)
+
+            if ans==word[i]:
+                print ('딩동댕')
+            else:
+                print ('땡')
+
+    elif choice==4:
+        for i in word:
+            print ('%15s%15s' %(i,word[i]))
+
+    else:
+        print ('잘못 입력하셨습니다')
+
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/12/02 01:00</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Buckshot</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2938"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">-------------
+1. 단어추가
+2. 단어 삭제
+3. 문제풀기
+4. 단어보기
+-------------
+메뉴 선택 : 1
+추가하려는 영어 단어를 입력해주세요...apple
+추가하려는 영어 단어의 뜻을 입력해주세요...사과
+단어가 추가되었습니다
+
+
+-------------
+1. 단어추가
+2. 단어 삭제
+3. 문제풀기
+4. 단어보기
+-------------
+메뉴 선택 : 1
+추가하려는 영어 단어를 입력해주세요...banana
+추가하려는 영어 단어의 뜻을 입력해주세요...바나나
+단어가 추가되었습니다
+
+
+-------------
+1. 단어추가
+2. 단어 삭제
+3. 문제풀기
+4. 단어보기
+-------------
+메뉴 선택 : 4
+          apple             사과
+         banana            바나나
+
+
+-------------
+1. 단어추가
+2. 단어 삭제
+3. 문제풀기
+4. 단어보기
+-------------
+메뉴 선택 : 2
+삭제하려는 영어 단어를 입력해주세요...apple
+단어가 삭제되었습니다
+
+
+-------------
+1. 단어추가
+2. 단어 삭제
+3. 문제풀기
+4. 단어보기
+-------------
+메뉴 선택 : 4
+         banana            바나나
+
+
+-------------
+1. 단어추가
+2. 단어 삭제
+3. 문제풀기
+4. 단어보기
+-------------
+메뉴 선택 : 1
+추가하려는 영어 단어를 입력해주세요...watermelon
+추가하려는 영어 단어의 뜻을 입력해주세요...수박
+단어가 추가되었습니다
+
+
+-------------
+1. 단어추가
+2. 단어 삭제
+3. 문제풀기
+4. 단어보기
+-------------
+메뉴 선택 : 3
+banana의 뜻은 무엇인가요?바나나
+딩동댕
+watermelon의 뜻은 무엇인가요?망고
+땡</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Buckshot,
+                                    2022/12/02 01:01
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28859"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">dic = {'a':'ㄱ','b':'ㄴ','c':'ㄷ'}
+import random
+def add():
+    print('키(영단어) 입력하세요.')
+    k= input()
+    print('값(한국어) 입력하세요.')
+    v= input()
+    print('저장 되었습니다.')
+    dic[k]=v
+def sub():
+    print('삭제하고 싶은 영단어를 입력하세요.')
+    k= input()
+    del dic[k]
+    print('삭제되었습니다.')
+def q():
+    dk=list(dic.keys())
+    ck=random.choice(dk)
+    print(ck+'의 한국어 뜻은?')
+    ans=input()
+    print('당신이 입력한 답은 '+ans+', 답은 '+dic[ck])
+def menu():
+    print('사전내용: ',list(zip(dic.keys(),dic.values())))
+    print(&quot;기능: 1. 단어 추가 2. 단어 삭제 3. 문제풀기&quot;)
+    print('실행할 기능의 번호를 입력하세요.')
+    mc=int(input())
+    print('입력한 번호는 '+str(mc))
+
+    if mc == 1:
+        print('단어 추가 실행')
+        add()
+    if mc == 2:
+        print('단어 삭제 실행')
+        sub()
+    if mc == 3:
+        print('문제 풀기 실행')
+        q()
+    print('끝')
+
+while True:
+    menu()
+
+
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/12/04 13:32</p>
+                                <p class="static-profile" style="margin:0;padding:0;">di figo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28899"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def add(words):
+    key = input(&quot;단어 입력: &quot;)
+    words[key] = input(&quot;뜻 입력: &quot;)
+
+def delete(words):
+    key = input(&quot;제거할 단어: &quot;)
+    if key in words:
+        del words[key]
+    else: 
+        print(&quot;해당 단어 없음&quot;)
+
+def problem(words):
+    print(&quot;\n\n\n문제지\n&quot;)
+    for i in words:
+        print(f&quot;{i} : &quot;)
+    print(&quot;\n\n\n&quot;)
+
+def mode(num, words):
+
+    if num == 1:
+        add(words)
+    if num == 2:
+        delete(words)
+    if num == 3:
+        problem(words)   
+    if num == 4:
+        print(words)
+
+words = {}
+num = 3
+while num != 5:
+    num = int(input(
+        &quot;-----------------\n&quot;
+        &quot;1. 단어 추가\n&quot;
+        &quot;2. 단어 삭제\n&quot;
+        &quot;3. 문제 풀기\n&quot;
+        &quot;4. 단어장 보기\n&quot;
+        &quot;5. 종료\n&quot;
+        &quot;-----------------\n&quot;
+        &quot;번호 입력 : &quot;
+    ))
+    mode(num, words)
+</code></pre>
+
+<p>파이썬입니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/12/28 17:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">코딩재미</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28928"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import random
+
+# Create an empty dictionary to store words
+words = {}
+
+# Function to add a word
+def add_word():
+    eng = input(&quot;Enter the English word: &quot;)
+    kor = input(&quot;Enter the Korean translation: &quot;)
+    words[eng] = kor
+
+# Function to delete a word
+def delete_word():
+    eng = input(&quot;Enter the English word to delete: &quot;)
+    del words[eng]
+
+# Function to test the words
+def test_words():
+    score = 0
+    for eng, kor in words.items():
+        question = random.choice([eng, kor])
+        if question == eng:
+            ans = input(f&quot;What is the Korean translation for {eng}? &quot;)
+            if ans == kor:
+                print(&quot;Correct!&quot;)
+                score += 1
+            else:
+                print(f&quot;Incorrect. The correct answer is {kor}.&quot;)
+        else:
+            ans = input(f&quot;What is the English translation for {kor}? &quot;)
+            if ans == eng:
+                print(&quot;Correct!&quot;)
+                score += 1
+            else:
+                print(f&quot;Incorrect. The correct answer is {eng}.&quot;)
+    print(f&quot;Total score: {score}/{len(words)}&quot;)
+
+# Main menu
+while True:
+    print(&quot;--------------------------&quot;)
+    print(&quot;1. Add a word&quot;)
+    print(&quot;2. Delete a word&quot;)
+    print(&quot;3. Test words&quot;)
+    print(&quot;--------------------------&quot;)
+    choice = int(input(&quot;Menu choice: &quot;))
+    if choice == 1:
+        add_word()
+    elif choice == 2:
+        delete_word()
+    elif choice == 3:
+        test_words()
+    else:
+        print(&quot;Invalid choice. Please try again.&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/01/15 17:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Beom Yeol Lim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29013"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/02/09 16:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김현식</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29102"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">print('영어 단어장입니다')
+dictionary = [['hello','안녕'],['apple','사과'],['banana','바나나']]
+
+while True:
+    print(&quot;--------------------------\n1. 단어 추가\n2. 단어 삭제\n3. 문제 풀기\n4. 종료\n--------------------------&quot;)
+    a = int(input('메뉴 선택 : '))
+    if a == 1:
+        b = input('추가할 단어 입력(영어) : ')
+        b1 = b.replace(' ','')
+        c = input('단어의 한글 뜻 입력 : ')
+        c1 = c.replace(' ','')
+        e = [b1,c1]
+        dictionary.append(e)
+
+    if a == 2:
+        aa = 0
+        for i in dictionary:
+            print(aa+1,'',dictionary[aa][0])
+            aa += 1
+        delete = int(input('삭제하고싶은 단어의 번호를 입력하십시오 : '))
+        print(dictionary[delete-1][0]+' 가 삭제되었습니다.')
+        del dictionary[delete-1]
+
+    if a == 3:
+        print('문제풀기를 선택하셨습니다. 영어단어에 맞는 한국어를 입력하십시오.')
+        bb = 0
+        for ii in dictionary:
+            solu = ii[0]+' 의 뜻을 적으시오 : '
+            solution = input(solu)
+            solution1 = solution.replace(' ','')
+            if solution1 == ii[1]:
+                print('맞추셨습니다!')
+            else:
+                print('틀리셨습니다. X')
+
+    if a == 4:
+        break
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/03/05 20:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Tae Joo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29103"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import random 
+dictionary = {}
+quiz = []
+while True:
+    choose = int(input(&quot;&quot;&quot;
+--------------------------
+       1. 단어 추가
+       2. 단어 삭제
+       3. 문제 풀기
+--------------------------
+메뉴 선택 : &quot;&quot;&quot;))
+    if choose == 1:
+        word = input(&quot;단어를 입력하세요. : &quot;)
+        quiz.append(word)
+        mean = input(&quot;뜻을 입력하세요 : &quot;)
+        dictionary[word]=mean
+    elif choose == 2:
+            delword = input(&quot;삭제할 단어를 입력해주세요 : &quot;)
+            if delword in dictionary:
+                del dictionary[delword]
+                print(dictionary)
+            else:
+                print(&quot;입력하신 단어가 없습니다 다시 입력하여 주세요&quot;)
+    elif choose == 3:
+        quiznum = random.randrange(len(quiz))
+        answer = input(&quot;{0}의 뜻은 무엇인가요? : &quot;.format(str(quiz[quiznum])))
+        if answer == dictionary[str(quiz[quiznum])]:
+             print(&quot;정답!&quot;)
+        else:
+             print(&quot;오답&quot;)
+    else:
+        print(&quot;다시 입력해 주세요&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/03/07 16:37</p>
+                                <p class="static-profile" style="margin:0;padding:0;">가이구</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29253"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">random = 0
+correct = 0
+number = 0
+con = True
+word = ['perfect', 'hard', 'practice', 'like', 'favorite', 'dog', 'love', 'cat', 'python']
+mean = ['완벽한', '어려운', '연습하다', '좋아하다', '가장 좋아하는', '개/강아지', '사랑', '고양이', '파이썬']
+while con:
+    print('''--------------------------
+1. 단어 추가
+2. 단어 삭제
+3. 문제 풀기
+4. 나가기
+--------------------------''')
+    function = int(input('매뉴선택(번호입력): '))
+    if function == 1:
+        new_word = str(input('새 단어를 입력하세요: '))
+        new_mean = str(input('그 의미를 입력하세요: '))
+        word.append(new_word)
+        mean.append(new_mean)
+    elif function == 2:
+        del_word = str(input('삭제할 단어를 입력하세요: '))
+        del_mean = str(input('그 의미를 입력하세요: '))
+        word.remove(del_word)
+        mean.remove(del_mean)
+    elif function == 3:
+        number = 0
+        for i in word:
+            number+=1
+            print('{0}번 문제'.format(number))
+            answer = str(input('{0}의 영어단어: '.format(mean[number-1])))
+            if answer == word[number-1]:
+                correct+=1
+                print('정답입니다!')
+            else:
+                print('틀렸습니다..')
+                print('정답은 {0}입니다'.format(word[number-1]))
+        print('{0}개중에서 {1}개 맞췄습니다'.format(len(word), correct))
+        correct = 0
+        number = 0
+    elif function == 4:
+        con = False
+    else:
+        print('잘못 입력하셨습니다')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/04/18 16:15</p>
+                                <p class="static-profile" style="margin:0;padding:0;">makepizza</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29264"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import os
+import random
+fileName=&quot;Dict.txt&quot;
+
+def inputData(maxNum):
+    selectedItem = 0
+    try:    
+        selectedItem = int(input(&quot;메뉴선택 : (번호입력)&quot;))
+    except:
+        print(&quot;잘못 입력하셧습니다&quot;)
+    if selectedItem &gt; maxNum or selectedItem &lt; 0 :
+        print(&quot;숫자를 잘못 입력하셨습니다&quot;)
+        selectedItem=0
+
+    return selectedItem
+
+def fileWrite(data):
+
+    file= open(fileName,&quot;w&quot;,encoding= 'utf-8')
+   #  file.write(&quot;{}&quot;.format(dict))
+    file.write(data)
+    file.close()
+
+def fileOpen() :
+    strData = &quot;&quot;
+    try:
+
+      with open(fileName,'r',encoding= 'utf-8') as file:
+          for line in file:
+           #   print(type(line))
+              strData += line
+    except FileNotFoundError as fe:
+        print(&quot;파일이 없습니다&quot;)
+
+    return strData
+#파일 삭제
+def init():
+    value=input(&quot;초기화하겠습니까&quot;)
+    if (value == &quot;Y&quot;):
+        print(&quot;파일 삭제합니다&quot;)
+        os.remove(fileName)
+
+# 유형
+dict ={}
+#init()
+strData = fileOpen()
+if ( strData != None):
+  print(eval(strData))
+  dict=eval(strData)
+
+print(f&quot;있는 데이터는 {dict} 입니다&quot;)
+Items = {1:&quot;단어추가&quot;,2:&quot;단어삭제&quot;,3:&quot;문제풀이&quot;}
+print(&quot;==================================&quot;)
+print(&quot;1. 단어추가&quot;)
+print(&quot;2. 단어삭제&quot;)
+print(&quot;3. 문제풀기&quot;)
+print(&quot;==================================&quot;)
+maxNum =3
+selectedItem =0
+while selectedItem == 0:
+   selectedItem= inputData(maxNum)
+
+print(f&quot;{Items[selectedItem]}을 선택하셨습니다&quot;)
+
+
+if selectedItem == 1 :
+    key = input(&quot;단어를 입력해주세요:&quot;)
+    value = input(&quot;뜻을 입력해주세요:&quot;)
+    dict[key] = value
+elif selectedItem == 2:
+    keyArray= dict.keys()
+    print(&quot;===============================&quot;)
+
+    for k in keyArray :
+        print(f&quot;대상 : {k}&quot;)
+    print(&quot;===============================&quot;)
+
+    delKey = input(&quot;삭제 대상을 입력해주세요:&quot;)
+
+    if ( delKey in dict.keys()) :
+        del dict[delKey]
+    else:
+        print (f&quot;{delKey} 값이 없습니다&quot;)
+
+elif selectedItem == 3:
+
+    templist=list(dict.keys())
+
+    size =len(templist)
+    currentRange=random.randrange(0,size)
+    selectedKey= templist[currentRange]
+    print(&quot; 크기 :&quot;  , size  , &quot; 랜덤 값: &quot; , currentRange , &quot;선택 키값:&quot;, selectedKey )
+    print(&quot;===============================&quot;)
+    print(&quot; 문제 : &quot;,dict[selectedKey], &quot;의 단어는 ?&quot;)
+    userSelect= input(&quot;입력:&quot;)
+    # 사용자가 선택한 문자에서 공백 제거후 비교
+    if userSelect.strip().upper()  == selectedKey.upper():
+        print(&quot;잘 맞췄습니다&quot;)
+    else:
+        print(f&quot;틀렸습니다 값은 {selectedKey} 입니다&quot;) 
+
+#print(dict)
+#list = (list(zip(dict.keys,dict.values)))
+#print(list)
+if (selectedItem != 3):
+    fileWrite(&quot;{}&quot;.format(dict))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/04/20 13:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Seokwoo Choi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29310"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import random
+
+
+def menu():
+    print('\n\t')
+    print('--------------------')
+    print('1. 단어 추가')
+    print('2. 단어 삭제')
+    print('3. 문제 풀기')
+    print('4. 그 만')
+    print('--------------------')
+
+
+vNote = {}
+p = '1'
+while p != '4':
+    menu()
+    p = input('메뉴 선택 : ')
+    if p == '1':
+        v = input('단어 입력 : ')
+        vNote[v] = input('뜻 입력: ')
+    elif p == '2':
+        v = input('삭제할 단어: ')
+        vNote.pop(v)
+    elif p == '3':
+        v = random.choice(list(vNote.items()))
+        ans = input('{}의 뜻은: '.format(v[0]))
+        if ans == v[1]:
+            print('정 답')
+        else:
+            print('{} 뜻은 {}입니다'.format(v[0], v[1]))
+
+print(vNote)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/05/19 20:00</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29630"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>심심해서 풀어봤는데 예상보다 꽤 걸렸네요....</p>
+<pre><code class="python">words={}
+
+def num1():
+    error=0
+    eng=input('영문 입력: ')
+    for i in range(0,len(eng)):
+        if ord('가')&lt;=ord(eng[i])&lt;=ord('힣'):
+            print('잘못된 입력')
+            error+=1
+            break      
+    kor=input('한글 입력: ')
+    for i in range(0,len(kor)):
+        if ord('a')&lt;=ord(kor[i])&lt;=ord('z'):
+            print('잘못된 입력')
+            error+=1
+            break
+    if error&lt;=0:
+        words[eng]=kor
+
+def num2():
+    delete=input('삭제할 영단어를 입력하세요: ')
+    if delete in words:
+        del(words[delete])
+    else:
+        print('해당 영단어가 사전에 없습니다.')
+
+def num3():
+    score=0
+    for i in words.keys():
+        answer=input(&quot;&lt;%s&gt;의 답을 적으시오: &quot;%i)
+        if answer in words[i]:
+            print(&quot;정답&quot;)
+            score+=1
+        else:
+            print(&quot;오답&quot;)
+
+if __name__==&quot;__main__&quot;:
+    while True:
+        print('-'*30)
+
+        print('1. 단어 추가\n2. 단어 삭제\n3. 문제 풀기')
+
+        print('-'*30)
+
+        select=int(input(&quot;메뉴 선택 : &quot;))
+
+        if select==1:
+            num1()
+            print(words)
+        elif select==2:
+            num2()
+            print(words)
+        elif select==3:
+            num3()
+        else:
+            print(&quot;잘못된 입력&quot;)
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/09/11 00:36</p>
+                                <p class="static-profile" style="margin:0;padding:0;">고니</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29843"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package CodingTest1;
+import java.util.*;
+
+public class myWordbook implements wordbookfunction {
+
+    static Map&lt;String,String&gt; wordbook = new HashMap&lt;String,String&gt;();
+
+    public myWordbook() {
+        wordbook.put(&quot;student&quot;, &quot;학생(기본단어)&quot;);
+        wordbook.put(&quot;apple&quot;, &quot;사과(기본단어)&quot;);
+        wordbook.put(&quot;people&quot;, &quot;사람(기본단어)&quot;);
+        wordbook.put(&quot;pizza&quot;, &quot;피자(기본단어)&quot;);
+
+    }
+
+    @Override
+    public void Menu() {
+        System.out.println(&quot;등록된 단어 수 : &quot; + wordbook.size());
+        System.out.println(&quot;----------선택하시오 -------------&quot;);
+        System.out.println(&quot;1.단어등록&quot;);
+        System.out.println(&quot;2.단어조회&quot;);
+        System.out.println(&quot;3.단어삭제&quot;);
+        System.out.println(&quot;4.테스트&quot;);
+        System.out.println(&quot;5.단어목록 보기&quot;);
+        System.out.println(&quot;6.프로그램 종료&quot;);
+        System.out.println(&quot;--------------------------------&quot;);
+    }
+
+    @Override
+    public void addWord() {
+
+        String english = null;
+        String korean = null;
+        Scanner sc = new Scanner(System.in);
+
+        while(true) {
+            System.out.print(&quot;등록할 영어 단어를 입력하시오 (메뉴로 가려면 menu를 입력) &gt; &quot;);
+
+            english = sc.nextLine();
+            if(english.equals(&quot;menu&quot;) || english.equals(&quot;Menu&quot;)) {
+                break;
+            } else {
+                if(wordbook.containsKey(english) == true) {
+                    System.out.println(&quot;이미 등록된 단어입니다. 수정을 원하시면 삭제후 다시 등록 해주세요.&quot;);
+                } else {
+                    System.out.print(&quot;뜻을 입력하시오 &gt;&gt;&quot; );
+                    korean = sc.nextLine();
+                    try {
+                        wordbook.put(english, korean);
+                    } catch(Exception e) {
+                        System.out.println(&quot;다시 입력해주세요&quot;);
+                        e.printStackTrace();
+                    } finally {
+                        System.out.println(&quot;입력되었습니다.&quot;);
+                    }
+            }
+        }
+            }
+
+    }
+
+    @Override
+    public void searchWord() {
+        Scanner sc = new Scanner(System.in);
+        while(true) {
+            System.out.print(&quot;조회하고 싶은 영단어를 입력하시오. (메뉴로 가려면 menu 입력)&quot;);
+            String eng = sc.nextLine();
+            if(eng.equals(&quot;menu&quot;)||eng.equals(&quot;Menu&quot;)) {
+                break;
+            } else {
+                if(wordbook.containsKey(eng)) {
+                    System.out.println(wordbook.get(eng)); // 한국어 뜻 출력
+                }else {
+                    System.out.println(&quot;등록되지 않은 단어입니다.&quot;);
+                }
+            }
+        }
+        sc.close();
+    }
+
+    @Override
+    public void deleteWord() {
+        Scanner sc = new Scanner(System.in);
+        while(true) {
+            System.out.println(&quot;======= 단어 목록 ======&quot;);
+            Set key = wordbook.keySet();
+            Iterator iterator;
+
+            for(iterator = key.iterator(); iterator.hasNext();) {
+                String keyValue = (String) iterator.next(); // next() 메소드를 사용 할 때마다 적절한 타입으로 캐스팅 해줘야함.
+                String valueVar = (String) wordbook.get(keyValue);
+                System.out.println(&quot;-&quot; + keyValue + &quot; : &quot; + valueVar);
+            }
+            System.out.println(&quot;=======================&quot;);
+
+            System.out.println(&quot;삭제하고 싶은 단어를 입력하시오(메뉴로 가려면 menu 입력.)&quot;);
+            String del = sc.nextLine();
+            if(del.equals(&quot;menu&quot;) || del.equals(&quot;Menu&quot;)) {
+                break;
+            } else {
+                if(wordbook.containsKey(del) == true) {
+                    System.out.println(&quot;입력한 단어 (&quot; + del +
+                            &quot;:&quot;+ wordbook.remove(del)+&quot;)&quot;);
+                } else {
+                    System.out.println(&quot;존재하지 않는 단어입니다.&quot;);
+                }
+            }
+        }
+        sc.close();
+
+    }
+
+    @Override
+    public void test() {
+        Scanner sc = new Scanner(System.in);
+        while(true) {
+            System.out.println(&quot;1.시작하기   2.종료하기&quot;);
+            int a = sc.nextInt();
+            if(a==1) {
+                Set key = wordbook.keySet();
+                int count = 0;
+                int totalCount = 0;
+                Iterator iterator;
+                System.out.println(&quot;&lt;==== 뜻에 맞는 영단어를 입력하시오 ====&gt; &quot;);
+                for(iterator = key.iterator(); iterator.hasNext();) {
+                    String keyValue = (String) iterator.next();
+                    String valueVar = (String) wordbook.get(keyValue);
+                    System.out.println(valueVar);
+                    String answer = sc.nextLine();
+
+                    if(answer.equals(keyValue)) {
+                        System.out.println(&quot;정답입니다.&quot;);
+                        count++;
+                        totalCount++;
+                    } else {
+                        System.out.println(&quot;틀렸습니다. (답 : &quot; + keyValue + &quot;)&quot;);
+                        totalCount++;
+                    }
+                }
+                System.out.println(&quot;&lt;&lt; 결과 : &quot; + count + &quot;/&quot; + totalCount + &quot;&gt;&gt;&quot;);
+                break;
+            } else if ( a==2 ) {
+                break;
+            } else {
+                System.out.println(&quot;1 또는 2만 입력하시오.&quot;);
+            }
+        }
+        sc.close();
+
+    }
+
+    @Override
+    public void wordList() {
+
+        System.out.println(&quot;======= 단어 목록 ======&quot;);
+        Set key = wordbook.keySet();
+        Iterator iterator;
+
+        for(iterator = key.iterator(); iterator.hasNext();) {
+            String keyValue = (String) iterator.next(); // next() 메소드를 사용 할 때마다 적절한 타입으로 캐스팅 해줘야함.
+            String valueVar = (String) wordbook.get(keyValue);
+            System.out.println(&quot;-&quot; + keyValue + &quot; : &quot; + valueVar);
+        }
+        System.out.println(&quot;=======================&quot;);
+
+    }
+
+    @Override
+    public void exit() {
+        System.out.println(&quot;단어장을 종료합니다.&quot;);
+
+    }
+
+}
+
+``````{.java}
+package CodingTest1;
+
+public interface wordbookfunction {
+    public void Menu();
+    public void addWord();
+    public void searchWord();
+    public void deleteWord();
+    public void test();
+    public void wordList();
+    public void exit();
+}
+
+
+
+package CodingTest1;
+import java.util.*;
+
+public class myWordbook implements wordbookfunction {
+
+    static Map&lt;String,String&gt; wordbook = new HashMap&lt;String,String&gt;();
+
+    public myWordbook() {
+        wordbook.put(&quot;student&quot;, &quot;학생(기본단어)&quot;);
+        wordbook.put(&quot;apple&quot;, &quot;사과(기본단어)&quot;);
+        wordbook.put(&quot;people&quot;, &quot;사람(기본단어)&quot;);
+        wordbook.put(&quot;pizza&quot;, &quot;피자(기본단어)&quot;);
+
+    }
+
+    @Override
+    public void Menu() {
+        System.out.println(&quot;등록된 단어 수 : &quot; + wordbook.size());
+        System.out.println(&quot;----------선택하시오 -------------&quot;);
+        System.out.println(&quot;1.단어등록&quot;);
+        System.out.println(&quot;2.단어조회&quot;);
+        System.out.println(&quot;3.단어삭제&quot;);
+        System.out.println(&quot;4.테스트&quot;);
+        System.out.println(&quot;5.단어목록 보기&quot;);
+        System.out.println(&quot;6.프로그램 종료&quot;);
+        System.out.println(&quot;--------------------------------&quot;);
+    }
+
+    @Override
+    public void addWord() {
+
+        String english = null;
+        String korean = null;
+        Scanner sc = new Scanner(System.in);
+
+        while(true) {
+            System.out.print(&quot;등록할 영어 단어를 입력하시오 (메뉴로 가려면 menu를 입력) &gt; &quot;);
+
+            english = sc.nextLine();
+            if(english.equals(&quot;menu&quot;) || english.equals(&quot;Menu&quot;)) {
+                break;
+            } else {
+                if(wordbook.containsKey(english) == true) {
+                    System.out.println(&quot;이미 등록된 단어입니다. 수정을 원하시면 삭제후 다시 등록 해주세요.&quot;);
+                } else {
+                    System.out.print(&quot;뜻을 입력하시오 &gt;&gt;&quot; );
+                    korean = sc.nextLine();
+                    try {
+                        wordbook.put(english, korean);
+                    } catch(Exception e) {
+                        System.out.println(&quot;다시 입력해주세요&quot;);
+                        e.printStackTrace();
+                    } finally {
+                        System.out.println(&quot;입력되었습니다.&quot;);
+                    }
+            }
+        }
+            }
+
+    }
+
+    @Override
+    public void searchWord() {
+        Scanner sc = new Scanner(System.in);
+        while(true) {
+            System.out.print(&quot;조회하고 싶은 영단어를 입력하시오. (메뉴로 가려면 menu 입력)&quot;);
+            String eng = sc.nextLine();
+            if(eng.equals(&quot;menu&quot;)||eng.equals(&quot;Menu&quot;)) {
+                break;
+            } else {
+                if(wordbook.containsKey(eng)) {
+                    System.out.println(wordbook.get(eng)); // 한국어 뜻 출력
+                }else {
+                    System.out.println(&quot;등록되지 않은 단어입니다.&quot;);
+                }
+            }
+        }
+        sc.close();
+    }
+
+    @Override
+    public void deleteWord() {
+        Scanner sc = new Scanner(System.in);
+        while(true) {
+            System.out.println(&quot;======= 단어 목록 ======&quot;);
+            Set key = wordbook.keySet();
+            Iterator iterator;
+
+            for(iterator = key.iterator(); iterator.hasNext();) {
+                String keyValue = (String) iterator.next(); // next() 메소드를 사용 할 때마다 적절한 타입으로 캐스팅 해줘야함.
+                String valueVar = (String) wordbook.get(keyValue);
+                System.out.println(&quot;-&quot; + keyValue + &quot; : &quot; + valueVar);
+            }
+            System.out.println(&quot;=======================&quot;);
+
+            System.out.println(&quot;삭제하고 싶은 단어를 입력하시오(메뉴로 가려면 menu 입력.)&quot;);
+            String del = sc.nextLine();
+            if(del.equals(&quot;menu&quot;) || del.equals(&quot;Menu&quot;)) {
+                break;
+            } else {
+                if(wordbook.containsKey(del) == true) {
+                    System.out.println(&quot;입력한 단어 (&quot; + del +
+                            &quot;:&quot;+ wordbook.remove(del)+&quot;)&quot;);
+                } else {
+                    System.out.println(&quot;존재하지 않는 단어입니다.&quot;);
+                }
+            }
+        }
+        sc.close();
+
+    }
+
+    @Override
+    public void test() {
+        Scanner sc = new Scanner(System.in);
+        while(true) {
+            System.out.println(&quot;1.시작하기   2.종료하기&quot;);
+            int a = sc.nextInt();
+            if(a==1) {
+                Set key = wordbook.keySet();
+                int count = 0;
+                int totalCount = 0;
+                Iterator iterator;
+                System.out.println(&quot;&lt;==== 뜻에 맞는 영단어를 입력하시오 ====&gt; &quot;);
+                for(iterator = key.iterator(); iterator.hasNext();) {
+                    String keyValue = (String) iterator.next();
+                    String valueVar = (String) wordbook.get(keyValue);
+                    System.out.println(valueVar);
+                    String answer = sc.nextLine();
+
+                    if(answer.equals(keyValue)) {
+                        System.out.println(&quot;정답입니다.&quot;);
+                        count++;
+                        totalCount++;
+                    } else {
+                        System.out.println(&quot;틀렸습니다. (답 : &quot; + keyValue + &quot;)&quot;);
+                        totalCount++;
+                    }
+                }
+                System.out.println(&quot;&lt;&lt; 결과 : &quot; + count + &quot;/&quot; + totalCount + &quot;&gt;&gt;&quot;);
+                break;
+            } else if ( a==2 ) {
+                break;
+            } else {
+                System.out.println(&quot;1 또는 2만 입력하시오.&quot;);
+            }
+        }
+        sc.close();
+
+    }
+
+    @Override
+    public void wordList() {
+
+        System.out.println(&quot;======= 단어 목록 ======&quot;);
+        Set key = wordbook.keySet();
+        Iterator iterator;
+
+        for(iterator = key.iterator(); iterator.hasNext();) {
+            String keyValue = (String) iterator.next(); // next() 메소드를 사용 할 때마다 적절한 타입으로 캐스팅 해줘야함.
+            String valueVar = (String) wordbook.get(keyValue);
+            System.out.println(&quot;-&quot; + keyValue + &quot; : &quot; + valueVar);
+        }
+        System.out.println(&quot;=======================&quot;);
+
+    }
+
+    @Override
+    public void exit() {
+        System.out.println(&quot;단어장을 종료합니다.&quot;);
+
+    }
+
+}
+
+ackage CodingTest1;
+
+import java.util.*;
+
+public class wordbook {
+
+    public static void main(String[] args) {
+        myWordbook mybook = new myWordbook();
+        Scanner sc = new Scanner(System.in);
+        while(true) {
+            mybook.Menu();
+
+            int select = sc.nextInt();
+
+            switch(select){
+            case 1:
+                mybook.addWord();
+                break;
+            case 2:
+                mybook.searchWord();
+                break;
+            case 3:
+                mybook.deleteWord();
+                break;
+            case 4:
+                mybook.test();
+                break;
+            case 5:
+                mybook.wordList();
+                break;
+            case 6:
+                mybook.exit();
+                break;
+            } 
+            if(select&gt;6) {
+                System.out.println(&quot;1~6까지의 숫자만 입력하시오 &gt;&gt; &quot;);
+            }
+        }
+    }
+
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2024/01/24 15:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이현우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29877"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>def add_word(words: dict, input_eng, input_kr):def add_word(words: dict, input_eng, input_kr):
+    words[input_eng] = input_kr
+    return words
+
+def del_word(words: list, input_eng):
+    del words[input_eng]
+    return words
+
+def search_word(words: list, input_eng, input_kr):
+    if words[input_eng] == input_kr:
+        return True 
+    else:
+        return False 
+
+def print_dict(words):
+    print(words)
+
+def select_menu():
+    display_string = f&quot;&quot;&quot;{'-'*30}
+1. 단어 추가
+2. 단어 삭제
+3. 문제 풀기
+4. 단어장 펼쳐보기
+{'-'*30}&quot;&quot;&quot;
+    words = {}
+    while True:
+        try:
+            print(display_string)
+            input_num = int(input(&quot;메뉴 선택 : (번호 입력)&quot;))
+            if input_num not in [1, 2, 3,4 ]:
+                print(&quot;1, 2, 3 이외의 값을 입력하셨습니다.&quot;)
+                continue
+            elif input_num == 1:
+                print(&quot;단어 추가 옵션을 선택 하셨습니다.&quot;)
+                input_eng = input(&quot;영어단어를 입력해주세요. &quot;)
+                input_kr = input(&quot;한글로 뜻을 입력해주세요. &quot;)
+                words = add_word(words, input_eng, input_kr)
+            elif input_num == 2:
+                print(&quot;단어 삭제 옵션을 선택 하셨습니다.&quot;)
+                input_eng = input(&quot;영어단어를 입력해주세요. &quot;)                
+                words = del_word(words, input_eng)
+            elif input_num == 3:    
+                if words:
+                    print(&quot;문제 풀기 옵션을 선택하셨습니다.&quot;)
+                    input_eng = input(&quot;영어단어를 입력해주세요. &quot;)
+                    input_kr = input(&quot;한글로 뜻을 입력해주세요. &quot;)
+                    if search_word(words, input_eng, input_kr):
+                        print(f&quot;정답입니다. {input_eng} ---&gt; {input_kr}&quot;)
+                    else:
+                        print(f&quot;오답입니다. {input_eng} ---&gt; {input_kr}&quot;)
+                else:
+                    print(&quot;단어장이 비어있습니다. 단어 추가 후, 해당 메뉴를 선택해주세요.&quot;)
+            elif input_num == 4:  
+                print_dict(words)
+            else:
+                pass
+
+        except Exception as e:
+            continue     
+
+if __name__ == '__main__':
+    select_menu()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2024/02/12 19:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이용호</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29939"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">word = {}
+a = None
+while True:
+    print('''1. 단어 추가
+2. 단어 삭제
+3. 문제 풀기''')
+    A = input('메뉴를 골라주세요 :')
+
+    if A == '1':
+        A1 = input('추가할 단어를 말해주세요 :')
+        a = input('뜻을 말해주세요 :')
+        word[A1]=a
+        print('단어 목록 :',word)
+
+    elif A == '2':
+        A2 = input('어떤 단어를 삭제할까요? :')
+        word.pop(A2)
+        print('단어 목록 :',word)
+
+    elif A == '3':
+        for x in word:
+
+            print(x,'의 뜻은 무엇인가요?')
+            a = input('답 :')
+
+            if a == word[x]:
+                print('정답')
+
+            else:
+                print('땡')
+</code></pre>
+
+<p>딕셔너리를 이용하여 만들어 봤습니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2024/03/24 09:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">라구리</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

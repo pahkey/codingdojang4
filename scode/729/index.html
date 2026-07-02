@@ -1,0 +1,994 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="서양 중세를 실제 배경으로 한 게임 Kingdom come deliverance에서는 다음과 같은 규칙의 주사위 게임이 등장한다.
+
+**1부터 6까지 적힌 여섯 면의 주사위 6개가 주어지고, 이것을 무작위로 한 번에 다 던진다.** 다음과 같...">
+    <title>서양 중세 주사위 게임 : 킹덤 컴 딜리버런스(Kingdom come deliverance) - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">서양 중세 주사위 게임 : 킹덤 컴 딜리버런스(Kingdom come deliverance)</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">0</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 3</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>서양 중세를 실제 배경으로 한 게임 Kingdom come deliverance에서는 다음과 같은 규칙의 주사위 게임이 등장한다.</p>
+<p><strong>1부터 6까지 적힌 여섯 면의 주사위 6개가 주어지고, 이것을 무작위로 한 번에 다 던진다.</strong> 다음과 같은 규칙에 따라 점수를 획득하여 목표 점수에 먼저 도달한 사람이 게임에 이긴다.</p>
+<p><strong>윗면의 숫자가</strong></p>
+<p><strong>(1) 1 하나 당 점수 100을 더한다. 그러나 1이 3개라면 1000을 더한다. 여기서 4개, 5개, 6개이면 각각 x2를 한다(4개 = 2000, 5개 = 4000, 6개 = 8000). </strong></p>
+<p><strong>(2) 5 하나 당 점수 50을 더한다. 5가 3개이면 500을 더한다. 여기서 위와 같이 4개, 5개, 6개이면 각각 1000, 2000, 4000이 된다.</strong></p>
+<p><strong>(3) 2, 3, 4, 6이 각각 3개이면 해당 숫자의 x100한 값을 더한다. 예) 3이 3개 = 300, 6이 3개 = 600. 위와 비슷하게 같은 숫자가 3개보다 많으면 하나 당 곱하기 2를 한다. 예) 3이 4개 = 600. 6이 5개 = 2400</strong></p>
+<p><strong>(4) 숫자 1, 2, 3, 4, 5의 조합은 750, 그리고 2, 3, 4, 5, 6은 1250, 또 1, 2, 3, 4, 5, 6은 2000을 더한다. </strong></p>
+<p><strong>(5) 한 턴에 6개 모든 주사위로 점수를 획득하면 주사위를 한 번 더 굴릴 수 있는 선택이 주어진다. 예를 들어 1) 1,2,3,4,5 + 1이면 750점 + 100점을 얻고 모든 주사위를 한 번 더 굴려서 점수를 더 얻을 수 있다. 여기서 턴을 종료하면 850점을 얻고, 주사위를 한 번 더 굴렸으나 어떠한 조합도 나오지 않는 "꽝"이 나오면 이전에 얻은 점수를 모두 날리고 0점으로 초기화 되며, 턴은 종료 된다. </strong></p>
+<p>이 규칙을 구현해보시오. 인풋은 Array 형태로 주어지고, 되도록이면 알고리즘 내에서 Array의 숫자 순서를 재배열해서는 안된다. 6개 숫자 생성은 Pseudo-random-number generator를 사용하여 무작위로 생성할 수 있다. 예) Python - Random library. 목표 점수는 사용자가 임의로 지정하면 된다. </p>
+<p>입력 - 출력 예)
+                   [1, 3, 2, 6, 2, 2] -&gt; 200(2가 3개) + 100(1이 1개) = 300점</p>
+<pre><code>                [3, 6, 6, 3, 4, 2] -&gt; 0점
+
+                [2, 6, 1, 1, 6, 3] -&gt; 200점
+
+                [1, 5, 2, 3, 6, 4] -&gt; 2000점
+
+                [3, 5, 1, 5, 3, 3], [2, 4, 6, 3, 3, 4] -&gt; 0점
+
+                [5, 2, 1, 2, 5, 2] -&gt; 400점
+
+                [1, 2, 3, 4, 5, 5], [5, 2, 1, 2, 1, 2], [4, 6, 4, 1, 4, 4] -&gt; 800 + 450 + 900 = 2150
+</code></pre>
+<p>킹덤 컴 딜리버런스 2가 나온다길래 생각이 나서 올려보았습니다, 재미있게 풀어보세용~</p>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2024/06/23 02:10</p>
+                    <p class="static-profile" style="margin:0;padding:0;">lovegalois2</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>5개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_30033"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#랜덤 라이브러리 호출
+import random
+#주사위 숫자 생성 함수
+def kingdome_dice():
+    a=[]
+    for i in range(6):
+        a.append(random.randrange(1,7))
+    return a
+
+# rule 1 - 첫번쨰와 두번째 규칙에서 사용한 주사위의 개수와 점수를 반환한다.
+def rule_1(dice):
+    a=dice.count(1)
+    b=dice.count(5)
+    if a &lt; 3:
+        point=a*100
+    if a &gt;= 3:
+        point=1000*2**(a-3)
+    if b &lt; 3:
+        point=point+(b*50)
+    if b &gt;= 3:
+        point=point+(500*2**(b-3))
+    return a+b,point
+
+# rule 2 - 2,3,4,6의 갯수 탐색
+def rule_2(dice,n):
+    a=dice.count(n)
+    if a &lt; 3:
+        point=0
+        a=0
+        return a,point
+    if a &gt;= 3:
+        point=n*100*2**(a-3)
+        return a,point
+# rule 3 - 5개 이상의 연속된 숫자 탐색
+def rule_3(dice):
+    a=set(dice)
+    if len(a)&lt;5:
+        return 0,0
+    if len(a)==6:
+        return 6,2000
+    if len(a)==5:
+        if 1 in a and 6 in a:
+            return 0,0
+        else:
+            if 1 in a:
+                return 5,750
+            if 6 in a:
+                return 5,1250
+
+# 주사위를 돌리고 점수 확인 후 다시 돌리는지 여부 확인
+def diceplay(sppoint):
+    point=sppoint
+    while True:
+        dice=kingdome_dice()
+        print(dice)
+        a16=rule_3(dice)
+        if a16[0]==6:
+            point=point+a16[1]
+            print(point)
+            continue
+        if a16[0]==5 and dice.count(1)==2:
+            point=point+a16[1]+100
+            print(point)
+            continue
+        if a16[0]==5 and dice.count(5)==2:
+            point=point+a16[1]+50
+            print(point)
+            continue
+        if a16[0]==5:
+            point=point+a16[1]
+            print(point)
+            return point
+            break
+        else:
+            a15=rule_1(dice)
+            a2=rule_2(dice,2)
+            a3=rule_2(dice,3)
+            a4=rule_2(dice,4)
+            a6=rule_2(dice,6)
+            point=point+a15[1]+a2[1]+a3[1]+a4[1]+a6[1]
+            count=a15[0]+a2[0]+a3[0]+a4[0]+a6[0]
+            if count==6:
+                print(point)
+            else:
+                print(point)
+                return point
+                break
+
+#주사위 목표 점수 입력 받기
+total_point=int(input(&quot;목표 점수를 입력하시오:&quot;))
+pointlist=[]
+totalpoint=0
+count=1
+while totalpoint&lt;total_point:
+    a=diceplay(totalpoint)
+    totalpoint=int(a)
+    count=count+1
+print(&quot;플레이어&quot;,count,&quot;의 게임을 하여 &quot;,totalpoint,&quot;의 점수를 획득하였습니다&quot;)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2024/07/20 21:12</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Dr.Choi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_30137"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Java 뉴비의 코드입니다</p>
+<pre><code class="java">package kingdom_come_deliverance;
+
+public class Die {
+    int num; //주사위의 눈
+    boolean used; //주사위가 점수 도출에 이용되었는지 여부
+
+    public Die(int num) {
+        this.num = num;
+        this.used = false;
+    }
+}
+</code></pre>
+
+<hr />
+<pre><code class="java">package kingdom_come_deliverance;
+
+import java.util.Random;
+
+public class DieGenerator { //랜덤으로 주사위 6개의 배열 만듦
+    Random random = new Random();
+
+    public Die[] getDice() {
+        Die[] dice = new Die[6];
+        for (int i = 0; i &lt; 6; i++) {
+            dice[i] = new Die(random.nextInt(6) + 1);
+        }
+        return dice;
+    }
+}
+</code></pre>
+
+<hr />
+<pre><code class="java">package kingdom_come_deliverance;
+
+//import java.security.PublicKey;
+//주석은 테스트용 코드
+
+public class Main {
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        /*ScoreCounter sc = new ScoreCounter();
+        DieGenerator dg = new DieGenerator();*/
+        Player player = new Player();
+
+        int limit = 10000; //최대 점수
+        int score = 0; //누적 점수
+
+        /*int[] seed = {1, 5, 2, 3, 6, 4};
+        Die[] dice = new Die[6];
+
+        for (int i = 0; i &lt; 6; i++) {
+            dice[i] = new Die(seed[i]);
+        }
+        Result result  = sc.countScore(dice);
+        System.out.println(&quot;score: &quot; + result.score);*/
+
+        while(true) {
+            score += player.play(0, 0);
+            System.out.println(&quot;현재 점수: &quot; + score);
+            System.out.println(&quot;&quot;);
+
+            if(score &gt;= limit) {
+                System.out.println(&quot;성공!&quot;);
+                break;
+            }
+        }
+    }
+}
+</code></pre>
+
+<hr />
+<pre><code class="java">package kingdom_come_deliverance;
+
+import java.util.Scanner;
+
+public class Player {
+    ScoreCounter sc = new ScoreCounter();
+    DieGenerator dg = new DieGenerator();
+    Scanner scanner = new Scanner(System.in);
+
+    int play(int streak, int acc) { //streak: 연속 플레이 횟수, acc: 누적 점수
+        Die[] dice = dg.getDice();
+        for (Die die : dice) {
+            System.out.print(die.num); //주사위 배열 표시
+        }
+        System.out.println(&quot;&quot;);
+        System.out.println(&quot;현재 연속: &quot; + streak);
+
+        Result result = sc.countScore(dice); //점수 계산 결과 추출
+
+        if(streak != 0 &amp;&amp; !result.combo) { //5번 조건에서 조합 실패 시
+            System.out.println(&quot;실패!&quot;);
+            return 0; //연속 플레이의 점수가 모두 0으로 처리됨
+        }
+
+        if(result.again) { //모든 주사위가 점수 도출에 쓰인 경우
+            System.out.println(&quot;계속 하시겠습니까?(O: 0, X: 1)&quot;); //연속 여부 입력
+            if(scanner.nextInt() == 0) {
+                return play(streak + 1, acc + result.score);
+                //재귀함수를 이용해서 연속 플레이를 구현했습니다.
+            }
+        }
+        return result.score;
+    }
+}
+</code></pre>
+
+<hr />
+<pre><code class="java">package kingdom_come_deliverance;
+
+public class Result { //점수, 연속 플레이 여부, 조합 여부를 묶어서 전달
+    int score; //조합 점수
+    boolean again; //연속 플레이가 가능한지 여부
+    boolean combo; //조합이 나왔는지 여부
+
+    public Result(int score, boolean again) {
+        this(score, again, true);
+    }
+
+    public Result(int score, boolean again, boolean combo) {
+        this.score = score;
+        this.again = again;
+        this.combo = true;
+    }
+}
+</code></pre>
+
+<hr />
+<pre><code class="java">package kingdom_come_deliverance;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ScoreCounter {
+    static final int[] scoreModel1 = {0, 100, 200, 300, 1000, 2000, 4000};
+    //1의 눈에 대한 점수 배율
+    static final int[] scoreModel2 = {0, 10, 20, 30, 100, 200, 400};
+    //5의 눈에 대한 점수 배율
+    static final int[] scoreModel3 = {0, 0, 0, 100, 200, 400, 800};
+    //2, 3, 4, 6의 눈에 대한 점수 배율
+
+    public Result countScore(Die[] dice) {
+        int score = 0;
+        List&lt;List&lt;Die&gt;&gt; count = new ArrayList&lt;List&lt;Die&gt;&gt;();
+        //1~6까지 각각의 눈이 나온 주사위의 리스트
+
+        for (int i = 0; i &lt; 6; i++) {
+            count.add(new ArrayList&lt;Die&gt;());
+        }
+
+        for (Die die : dice) {
+            count.get(die.num - 1).add(die);
+        }
+
+        //4번 조건 검사
+        boolean cond1 = true; //1, 2, 3, 4, 5
+        boolean cond2 = true; //2, 3, 4, 5, 6
+        boolean cond3 = true; //1, 2, 3, 4, 5, 6
+
+        int twice = -1; //cond1, cond2일 때 두 번 나온 눈이 무엇인지 확인
+
+        for (int i = 0; i &lt; 6; i++) {
+            List&lt;Die&gt; list = count.get(i);
+            if(list.size() == 0) { //하나라도 없는 눈이 있으면 cond3 위배
+                cond3 = false;
+                if(i != 0) { //1 제외 없는 눈이 있으면 cond2 위배
+                    cond2 = false;
+                }
+                if(i != 5) { //6 제외 없는 눈이 있으면 cond1 위배
+                    cond1 = false;
+                }
+            }
+            else if(list.size() == 2) {
+                twice = i;
+            }
+        }
+        if(cond3) {
+            score += 2000;
+            return new Result(score, true);
+        }
+        else if(cond2) {
+            score += 1250;
+            if(twice == 4) {
+                score += 50;
+                return new Result(score, true); //두 번 나온 값이 5이면 모두 사용
+            }
+            else {
+                return new Result(score, false);
+            }
+        }
+        else if (cond1) {
+            score += 750;
+            if(twice == 0) {
+                score += 100;
+                return new Result(score, true);
+            }
+            else if(twice == 4) {
+                score += 50;
+                return new Result(score, true);
+            }
+            else {
+                return new Result(score, false);
+            }
+
+            //두 번 나온 값이 1 또는 5이면 모두 사용
+        }
+
+        //1, 2, 3번 조건 검사
+        boolean combo = false;
+
+        for (int j = 0; j &lt; 6; j++) {
+            boolean used = false; //해당 눈의 주사위들이 사용되었는지 여부
+            int size = count.get(j).size();
+            int[] scoreModel = new int[6];
+
+            switch (j) {
+            case 0: //1의 눈의 개수
+                if(size &gt; 0) {
+                    used = true;
+                    scoreModel = scoreModel1;
+                }
+                break;
+            case 4: //5의 눈의 개수
+                if(size &gt; 0) {
+                    used = true;
+                    scoreModel = scoreModel2;
+                }
+                break;
+            default: //2, 3, 4, 6의 경우
+                if(size &gt; 2) {
+                    used = true;
+                    scoreModel = scoreModel3;
+                }
+                break;
+            }
+
+            score += scoreModel[size]*(j+1);
+            for (Die die : count.get(j)) {
+                if(used) {
+                    die.used = true;
+                    combo = true;
+                }
+            }
+        }
+
+        for (Die die : dice) {
+            if(!die.used) { //하나라도 사용되지 않은 주사위가 있으면 다시 하지 않음
+                return new Result(score, false, combo);
+            }
+        }
+        return new Result(score, true, combo);
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2025/01/07 21:26</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박준우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_30150"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import random
+
+def getDiceNum():
+    return [random.randint(1, 6) for _ in range(6)]
+
+def listToDict(diceNum):
+    diceDict = dict()
+    for n in diceNum:
+        if n not in diceDict:
+            diceDict[n] = 1
+        else:
+            diceDict[n] += 1
+    return diceDict
+
+def isStraigt(diceDict, start, end):
+    if False not in [True if x in diceDict else False for x in range(start, end)]:
+        return True
+    else:
+        return False
+def get1and5Score(diceDict):
+    addScore = 0
+    if 1 in diceDict and diceDict[1] == 2:
+        addScore = 100
+    if 5 in diceDict and diceDict[5] == 2:
+        addScore += 50
+    return addScore
+
+def addTurnScoreInfo(info, tag,  score):
+    info[tag] = score
+
+def getCountAndMoreScore(info, diceDict):
+    addScore = 0
+    for x in range(1, 7):
+        if x in diceDict:
+            baseScore = x * 100
+            if x == 5:
+                baseScore =50
+
+            if x in [1, 5] and diceDict[x] == 2:
+                baseScore += baseScore
+
+            if x == 1 and diceDict[x] &gt;= 3:
+                baseScore = 1000
+
+            if x == 5 and diceDict[x] &gt;= 3:
+                baseScore = 500
+
+            if diceDict[x] &gt;= 4:
+                for y in range(4, diceDict[x]+1):
+                    baseScore = baseScore *2
+            if (x in [1, 5]) or (x in [2, 3, 4, 6] and diceDict[x] &gt;= 3):
+                addScore += baseScore
+                addTurnScoreInfo(scoreInfo, f'{x} is {diceDict[x]}', baseScore)
+
+    return addScore
+
+if __name__ == '__main__':
+    totalScore = 0
+    goCount = 1
+    isGo = True
+    while isGo:
+        turnScore = 0
+        #diceNum = [4, 6, 4, 1, 4, 4]
+        diceNum = getDiceNum()
+        print(diceNum)
+        scoreInfo = {}
+        diceDict = listToDict(diceNum)
+        if isStraigt(diceDict, 1, 7):
+            turnScore += 2000
+            addTurnScoreInfo(scoreInfo, '1to6',  turnScore)
+        else:
+            if isStraigt(diceDict, 1, 6):
+                turnScore += 750
+                addTurnScoreInfo(scoreInfo, '1to5', turnScore)
+                score1or5 = get1and5Score(diceDict)
+                turnScore += score1or5
+                addTurnScoreInfo(scoreInfo, '1or5 more', score1or5)
+            elif isStraigt(diceDict, 2, 7):
+                turnScore += 1250
+                addTurnScoreInfo(scoreInfo, '2to6', turnScore)
+                score1or5 = get1and5Score(diceDict)
+                turnScore += score1or5
+                addTurnScoreInfo(scoreInfo, '1or5 more', score1or5)
+            else:
+                turnScore +=getCountAndMoreScore(scoreInfo, diceDict)
+        print(f'{goCount} - turnScore : {turnScore}')
+        print(f'=&gt; {scoreInfo}')
+
+
+        if turnScore == 0:
+            totalScore = 0
+            isGo = False
+        else:
+            totalScore += turnScore
+
+        print(f'totalScore : {totalScore}')
+
+        if isGo == True:
+            go_yn = input('go and stop?(go: anykey, stop: n )')
+            if 'n' == go_yn:
+                isGo = False
+                print('stop!!')
+            else:
+                print('go!!')
+
+        goCount += 1
+    print(&quot;finish&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2025/01/17 13:58</p>
+                                <p class="static-profile" style="margin:0;padding:0;">JI HOON Yang</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_30172"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import random
+
+class dice:
+    def __init__(self) -&gt; None:
+        self.result = 0
+
+    def throw(self) : 
+        self.result = random.randint(1,6)
+        return self.result
+
+    def getDiceValue(self) :  
+        return self.result
+
+
+#점수 계산하는 함수
+def calculatePoint(result) :
+    point = 0
+    idx = 0
+    zeroIdx = []
+    serialType = 'N'
+
+    diceResult = {}
+
+    for i in range(1,7) :
+        diceResult[i] = result.count(i)
+
+    print(&quot;주사워 숫자별 통계 : &quot; , diceResult)    
+
+    for v in diceResult : 
+        if diceResult[v] &gt; 0 :
+            idx += 1
+        else :
+            idx += 0
+            zeroIdx.append(v)
+
+    print(&quot;serial : &quot;, idx, &quot;/&quot;, zeroIdx)
+
+    #연속된 숫자 점수 주기
+    if idx == 6 :
+        point = 2000
+        serialType = 'F'
+    elif idx == 5 and 1 in zeroIdx :
+        point = 1250
+        serialType = 'P'
+    elif idx == 5 and 6 in zeroIdx :
+        point = 750
+        serialType = 'P'
+    else :
+        serialType = 'N'
+
+    retPoint = calculatePointNum(diceResult, serialType)
+
+    point += retPoint[0]
+
+    print('serialType : ', serialType, '/Point : ', point)
+
+    retPoint[0] = point
+
+    return retPoint
+
+## end calculatePoint
+
+
+#   숫자별 점수 계산
+def calculatePointNum(result, serialType):
+
+    point = 0
+    p = 0    
+    isAllDicePoint = False
+
+    mat = {1:[0,100,200,1000,2000,4000,8000],
+           2:[0,0,0,200,400,800,1200],
+           3:[0,0,0,300,600,1200,2400],
+           4:[0,0,0,400,800,1600,3200],
+           5:[0,50,100,500,1000,2000,4000],
+           6:[0,0,0,600,1200,2400,4800]}
+
+    for i in result :
+        if serialType != 'N' and result[i]&gt;0 :          
+            p = mat[i][result[i]-1]
+        else :
+            p = mat[i][result[i]]   
+
+        if serialType == 'P' and p&gt;0 :
+            isAllDicePoint = isAllDicePoint | True
+        elif serialType == 'N' and result[i] &gt; 0 and p == 0 :
+            isAllDicePoint = isAllDicePoint | False
+        elif serialType == 'N' and result[i] &gt; 0 and p &gt; 0 :
+            isAllDicePoint = isAllDicePoint &amp; True
+        elif serialType == 'F' : 
+            isAllDicePoint = True
+
+        point += p
+        print('key : ' , i, '/ Point : ',p, '/ TotolPoint : ', point, '/isAllDiceType : ', isAllDicePoint)
+
+    return [point, isAllDicePoint]
+
+##  end calculatePointEachNum
+
+################# Main Program ######################################
+
+diceCount = 6   #주사위 갯수
+finalPoint = 0
+isAgain = True
+answerAgain = 'Y'
+targetPoint = 1000
+
+targetPoint = input(&quot;목표점수를 입력하세요 : &quot;)
+
+#주사위 객체 생성 
+dice1 = dice() 
+
+# 모든 주사위가 점수를 획득하면 한번더 던질지를 선택할 수 있다.
+# 사용자가 한번더를 원하지 않거나 모든 주사위가 점수를 획득하지 못하면 그때까지의 점수를 최종으로 한다.
+# 한번 더 던진 결과가가 0점일 경우 최종 점수는 0으로 세팅
+
+while isAgain:
+
+    diceValue = [] 
+
+    #6번 던져서 결과 가져오기 
+    for i in range(0,6) :
+        diceValue.append(dice1.throw())
+
+
+    print('주사위 결과 : ' , diceValue)
+
+    point = calculatePoint(diceValue)
+
+    isAgain = point[1]
+
+    print ('Point : ' , point)
+
+    if point[0] &gt; 0 :
+        finalPoint += point[0]
+    else :
+        finalPoint = 0
+
+    if isAgain and targetPoint &gt; finalPoint: 
+        answer = input(&quot;게임을 한번더 하시겠습니까(Y/N)?&quot;).strip().upper()
+        isAgain = True if answer == 'Y' else False        
+    else : None    
+
+print ('당신의 최종 점수는 : ' , finalPoint)
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2025/01/30 20:17</p>
+                                <p class="static-profile" style="margin:0;padding:0;">yoonjaepa</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_30233"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong> Ruby </strong></p>
+<p>값을 보관하는 <code>Data</code>, 주사위를 굴리고 규칙에 따라 점수를 계산하는 <code>Role</code>, 입출력을 처리하는 <code>Presenter</code>, 이들을 사용해 게임을 진행(랜덤 주사위 or 데이터 입력)하는 <code>Context</code>를 작성.</p>
+<pre><code class="ruby"># Data
+class DiceGameModel
+  attr_accessor :inputs, :scores, :turn_data, :target_score
+
+  def initialize
+    clear
+  end
+
+  def total_score
+    @scores.sum
+  end
+
+  def clear
+    @inputs, @scores = [], []
+    @turn_data = nil
+    @target_score = target_score
+  end
+
+  def over
+    @scores.empty? || total_score &gt;= @target_score
+  end 
+end
+
+# Role
+module DiceRollable
+  def roll
+    @inputs &lt;&lt; (@turn_data&amp;.shift || Array.new(6) { rand(1..6) })# data or random
+    @scores &lt;&lt; score(@inputs.last)
+    @scores.clear if @scores.last.zero? # bomb
+  end
+
+  private
+  def score(dice)
+    frequencies = dice.tally # hash { num =&gt; occur, ... }
+    score_sequence(frequencies).nonzero? || frequencies.sum { score_spots(*_1) }
+  end
+
+  def score_spots(num, occur)
+    base, bonus = { 1 =&gt; 100, 5 =&gt; 50 }, { 1 =&gt; 1000, 5 =&gt; 500 } # 15 rule
+    base.default, bonus.default = 0, 100 # 2346 rule
+    occur &lt; 3 ? base[num] * occur : num * bonus[num] * (2**(occur - 3)) 
+  end
+
+  def score_sequence(frequencies, seq_len = frequencies.size)
+    rest_score = -&gt;(hash) { score_spots(hash.key(2), 1) }
+    case 
+    when seq_len == 5 &amp;&amp; !frequencies.key?(6) then 750 + rest_score[frequencies]
+    when seq_len == 5 &amp;&amp; !frequencies.key?(1) then 1250 + rest_score[frequencies]
+    when seq_len == 6 then 2000
+    else
+      0
+    end
+  end
+end
+
+# Presenter
+class Presenter
+  def input_target_score
+    print &quot;Input target score: &quot;
+    gets.to_i
+  end
+
+  def continue_turn(target_score, total_score)
+    print &quot;[target: #{target_score}, now: #{total_score}]. continue the turn? (y/n): &quot;
+    gets.strip == 'y'
+  end
+
+  def display_result(inputs, scores, total_score)
+    formatted_scores = scores.size &gt; 1 ? &quot;#{scores.join(' + ')} = &quot; : &quot;&quot;
+    puts &quot;#{inputs.map(&amp;:to_s).join(', ')} -&gt; &quot; + formatted_scores + &quot;#{total_score} pts&quot;
+  end
+end
+
+# Context
+class DiceGamePlayContext
+  def initialize(game, presenter)
+    @game = game
+    @presenter = presenter
+    @game.extend DiceRollable
+  end
+
+  def execute(turn_data = nil, target_score = nil)
+    setup(turn_data, target_score)
+    begin @game.roll end while continue_playing
+    display_result
+  end
+
+  private
+  def setup(turn_data, target_score)
+    @game.turn_data = turn_data
+    @game.target_score = target_score || @presenter.input_target_score # data or stdin
+  end
+
+  def continue_playing
+    return false if @game.over
+    @game.turn_data ? @game.turn_data.any? : @presenter.continue_turn(@game.target_score, @game.total_score)
+  end
+
+  def display_result
+    @presenter.display_result(@game.inputs, @game.scores, @game.total_score)
+    @game.clear
+  end
+end
+</code></pre>
+
+<h2 id="_1">실행</h2>
+<p>테스트 데이터로 주사위 굴리기</p>
+<pre><code class="ruby">target_score = 2000
+play_context = DiceGamePlayContext.new(DiceGameModel.new, Presenter.new)
+play_context.execute([[3, 6, 6, 3, 4, 2]], target_score) # spots : base score(2346)
+play_context.execute([[2, 6, 1, 1, 6, 3]], target_score) # spots : base score(1)
+play_context.execute([[1, 5, 2, 3, 6, 4]], target_score) # sequence : 123456 
+play_context.execute([[3, 5, 1, 5, 3, 3], [2, 4, 6, 3, 3, 4]], target_score) # spots : bomb 
+play_context.execute([[5, 2, 1, 2, 5, 2]], target_score) # spots : base score(15) + bonus score(2)
+# spots : target score exceeded.
+play_context.execute([[1, 2, 3, 4, 5, 5], [5, 2, 1, 2, 1, 2], [4, 6, 4, 1, 4, 4]], target_score) 
+
+[3, 6, 6, 3, 4, 2] -&gt; 0 pts
+[2, 6, 1, 1, 6, 3] -&gt; 200 pts
+[1, 5, 2, 3, 6, 4] -&gt; 2000 pts
+[3, 5, 1, 5, 3, 3], [2, 4, 6, 3, 3, 4] -&gt; 0 pts
+[5, 2, 1, 2, 5, 2] -&gt; 400 pts
+[1, 2, 3, 4, 5, 5], [5, 2, 1, 2, 1, 2], [4, 6, 4, 1, 4, 4] -&gt; 800 + 450 + 900 = 2150 pts
+</code></pre>
+
+<p>랜덤하게 주사위 굴리기</p>
+<pre><code class="ruby">play_context = DiceGamePlayContext.new(DiceGameModel.new, Presenter.new)
+play_context.execute
+
+Input target score: 1000
+[target: 1000, now: 200]. continue the turn? (y/n): y
+[target: 1000, now: 400]. continue the turn? (y/n): y
+[1, 3, 4, 3, 6, 1], [5, 4, 5, 1, 4, 3], [3, 3, 3, 4, 1, 3] -&gt; 200 + 200 + 700 = 1100 pts
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2025/04/08 01:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

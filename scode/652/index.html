@@ -1,0 +1,333 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="전회차에서지구 기울기를 입력 하였는데 이것을 날자를 입력하여 기울기로 계산하도록 하겠습니다.  
+전회차에서 만든 프로그램에 월과, 일로 지구기울기 계산만  합니다.  
+지구 기울기 입력은 없어 짐으로 한번 더 입력이 늘어 나는 것이죠.  
+...">
+    <title>일출,일몰 시각 계산하기-2)월일로 지구 기울기 계산 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">일출,일몰 시각 계산하기-2)월일로 지구 기울기 계산</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">1</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 4</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>전회차에서지구 기울기를 입력 하였는데 이것을 날자를 입력하여 기울기로 계산하도록 하겠습니다.<br />
+전회차에서 만든 프로그램에 월과, 일로 지구기울기 계산만  합니다.<br />
+지구 기울기 입력은 없어 짐으로 한번 더 입력이 늘어 나는 것이죠.<br />
+제데로 하려면 복잡 합니다.<br />
+춘분이 태양 방향으로 0도가  되는 날이라고 하지만사실 0도가 되는 것은 그날의 어느 한 순간일 뿐인 것이지 그 날자 전체가 아닌거죠.<br />
+그런것 까지는 신경 쓰지 말자구요.<br />
+이걸 계산해서 우주선 쏘아 올리겠다는것은 아니고 일출 일몰 타이머에 사용할 정도의 오차는 허용해 주야 겠죠.<br />
+앞서 비율 계산에서도 사실은 위와 같은 오차가 있습니다.
+같은날 일출이 일어날때 태양에서본 지구의 각도와 일몰 시 각도가 사실은 차이가 있거든요.<br />
+1년 365일, 윤달 무시~<br />
+동지는 무조건 12월22일, 하루차이 정도는 무시~<br />
+지구공전은 완전한 원, 약간 타원인거 무시~<br />
+지구 세차운동 무시~<br />
+지구는 완전한 구체, 적도가 조금 더 큰거(배 나왔네?) 무시~
+무시하는것이 많아서, 오차가 무시무시 하게 많이 날까요?<br />
+태양이 어느순간에 뿅 나타 나면서 "이제부터 낮이다!" 라고 외칠 것도 아니고일출 보고 있어도 이제 낮이다 하는 순간을 말해 보라고 하면 개인 마다 몇분 정도는 차이가 나겠죠?. 
+동지는 -23.5도, 하지는 +23.5도이것이 왔다갔다 두번 함으로 하루에
+23.5×4/365 도 만큼씩 변해 나가겠죠.<br />
+저는 12월 22일을 동지로 지정하여 시작할 겁니다.<br />
+동지의 -23.5도 제일 바닥인 거죠.  여기서부터 매일 증가하다가 23.5도가 넘는 순간에는 감소하게 됩니다.<br />
+12월 22일 부터 몇일이 지났는지 계산하여 경과 날자로 지구의 기울기를 계산하면 됩니다.<br />
+저는 월별로 전월까지 12월 22일 부터 경과일을 배열로 저장 후 "전월까지 경과일수 + 날자"로 경과 일수를 계산 할 생각 입니다.
+https://blog.naver.com/i_jeju/221508368388</p>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2019/04/09 14:33</p>
+                    <p class="static-profile" style="margin:0;padding:0;">이이충학</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>2개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_17470"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#월일과 위도 입력으로 밤시간과 낮시간 계산 
+import math
+
+def NightR(Q1,Q2):
+    if  abs(Q2) &gt; abs(90)-abs(Q1):
+        if Q1*Q2 &gt; 0:
+            return 0
+        if Q1*Q2 &lt; 0:
+            return 1
+    #밤 비율 계산
+    rat1=math.acos(math.tan(math.radians(Q1))*math.tan(math.radians(Q2)))
+    rat2=2*math.degrees(rat1)
+    return rat2/360
+
+lmsd=[9,40,68,99,129,160,190,221,251,281,312,343]
+Dedo=23.5 * 4 / 365
+mm=int(input('월입력 :'))
+dd=int(input('일입력 :'))
+pd=lmsd[mm-1]+dd #경과 날자
+if pd &gt;= 365 :
+    pd=pd-365
+
+se1=-23.5+pd*Dedo #각도 계산
+if se1 &gt; 23.5:
+    se1 = 23.5-(se1-23.5)
+
+se2=float(input('위도 입력 :')) #북위 +, 남위 -
+nrat=NightR(se1,se2)
+
+if  nrat == 0:
+    print('계속 낮 입니다')
+else:
+    if nrat == 1:
+        print('계속 밤 입니다')
+    else :
+        #밤 길이 비율을 시간으로 계산
+        nti=int(nrat*24)
+        ims=nrat*24 - nti
+        nmi=int(ims*60)
+        ims=ims*60 - nmi
+        nse=int(ims*60+0.5)
+        #낮 길이 비율을 시간으로 계산
+        ati=int((1-nrat)*24)
+        ims=(1-nrat)*24 - ati
+        ami=int(ims*60)
+        ims=ims*60 - ami
+        ase=int(ims*60+0.5)
+        #인쇄
+        print('밤길이',nti,':',nmi,':',nse)
+        print('낮길이',ati,':',ami,':',ase)
+
+
+</code></pre>
+
+<p>월입력 :4<br />
+일입력 :10<br />
+위도 입력 :38<br />
+밤길이 11 : 31 : 21<br />
+낮길이 12 : 28 : 39</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/04/10 09:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이이충학</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_17680"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C#</p>
+<ul>
+<li>일 차이는 평년(2019년, 365일) 기준으로 계산</li>
+<li>동지(12/22) 기준 경과일 <code>d</code>에 대해 자전축의 기울기는 다음과 같이 나타낼 수 있습니다(선형가정).</li>
+<li><code>94/365 * d - 23.5</code>   for <code>d</code> within <code>[0, 365/2]</code></li>
+<li><code>-94/365 * d + 70.5</code>  for<code>d</code> within <code>[365/2, 365]</code></li>
+</ul>
+<pre><code class="cs">using System;
+using System.Text;
+
+namespace CD222
+{
+    internal class Program
+    {
+        private static void Main()
+        {
+            Console.Write(&quot;월(month): &quot;);
+            int month = int.Parse(Console.ReadLine());
+            Console.Write(&quot;일(day): &quot;);
+            int day = int.Parse(Console.ReadLine());
+            Console.Write(&quot;위도(degree): &quot;);
+            double latitude = double.Parse(Console.ReadLine());
+
+            DayNightRatio testCase = new DayNightRatio(month, day, latitude);
+            Console.WriteLine(testCase.ToString());
+        }
+    }
+
+    public class DayNightRatio
+    {
+        private readonly double AxialTilt;
+        private readonly double Latitude;
+
+        // 자전축 각도가 주어질 경우
+        public DayNightRatio(double axialTilt, double latitude) // 각도(Degree) 단위 입력
+        {
+            AxialTilt = axialTilt;
+            Latitude = latitude;
+        }
+
+        // 월, 일이 주어질 경우
+        public DayNightRatio(int month, int day, double latitude) // 각도(Degree) 단위 입력
+        {
+            AxialTilt = DateToAxialTilt(month, day);
+            Latitude = latitude;
+        }
+
+        private double NightRatio()
+        {
+            if (Math.Abs(AxialTilt) &gt; 90 - Math.Abs(Latitude))
+            {
+                return AxialTilt * Latitude &gt;= 0 ? 0 : 1;
+            }
+            double theta3Rad =
+                Math.Acos(Math.Tan(ToRad(AxialTilt)) * Math.Tan(ToRad(Latitude)));
+            return 2 * ToDeg(theta3Rad) / 360;
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            double ratio = NightRatio();
+            if (ratio == 0)
+            {
+                sb.AppendLine(&quot;계속 낮입니다.&quot;);
+            }
+            else if (ratio == 1)
+            {
+                sb.AppendLine(&quot;계속 밤입니다.&quot;);
+            }
+            else
+            {
+                TimeSpan nightTime = TimeSpan.FromSeconds(60 * 60 * 24 * ratio);
+                TimeSpan dayTime = TimeSpan.FromSeconds(60 * 60 * 24 * (1 - ratio));
+                sb.AppendLine($&quot;낮의 길이 {dayTime.ToString()}&quot;);
+                sb.AppendLine($&quot;밤의 길이 {nightTime.ToString()}&quot;);
+            }
+            return sb.ToString();
+        }
+
+        // 월, 일로부터 자전축 기울기 계산
+        private static double DateToAxialTilt(int month, int day)
+        {
+            // 평년(2019)년 기준으로 일차 계산
+            DateTime winterSolsticeDate = new DateTime(2019, 12, 22);
+            DateTime checkDate = new DateTime(2019, month, day);
+            int timeSpan = (checkDate - winterSolsticeDate).Days;
+            timeSpan = timeSpan &lt; 0 ? 365 + timeSpan : timeSpan;
+
+            double axialTilt = timeSpan &lt;= (double)365 / 2 ?
+                (double)94 / 365 * timeSpan - 23.5 :
+                -(double)94 / 365 * timeSpan + 70.5;
+            return axialTilt;
+        }
+
+        private static double ToRad(double degree) =&gt; 2 * Math.PI / 360 * degree;
+
+        private static double ToDeg(double rad) =&gt; 360 / (2 * Math.PI) * rad;
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/02 11:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

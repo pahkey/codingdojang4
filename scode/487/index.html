@@ -1,0 +1,3013 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="###  문제
+
+&gt; 일반적인 1부터 12까지 아라비아 숫자가 적혀있는 시계가 있습니다.
+&gt; 이 시계는 오전 12:00 정각에 작동하기 시작하여 하루동안 움직이게 되어있습니다.
+&gt; 이 때 시침과 분침이 **직각**이 될 때의 시간을 hh:m...">
+    <title>시침과 분침이 직각이 되는 순간은? - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">시침과 분침이 직각이 되는 순간은?</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">8</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 3</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <h3 id="_1">문제</h3>
+<blockquote>
+<p>일반적인 1부터 12까지 아라비아 숫자가 적혀있는 시계가 있습니다.<Br>
+이 시계는 오전 12:00 정각에 작동하기 시작하여 하루동안 움직이게 되어있습니다.<Br>
+이 때 시침과 분침이 <strong>직각</strong>이 될 때의 시간을 hh:mm 형태로 나타내고 하루동안 직각이 된 총 횟수를 구해보세요!</p>
+</blockquote>
+<h3 id="_2">출력(예시)</h3>
+<blockquote>
+<ol>
+<li>09:00<p></li>
+<li>15:00<p>
+...<p>
+Total: n번!<p></li>
+</ol>
+</blockquote>
+<p><p>
+시간표현은 오전, 오후가 아닌 24시 방식으로 써주세요!
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2015/07/22 22:31</p>
+                    <p class="static-profile" style="margin:0;padding:0;">홍옥</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>48개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_2807"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">6</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#!/usr/bin/env python
+#-*- coding: utf-8 -*-
+'''
+시침은 하루에 2회전, 분침은 하루에 24회전 한다.
+같은 방향으로 회전하므로 시침에 대한 분침의 &quot;상대적인&quot; 회전수는
+하루에 24-2 = 22회전이다.
+시침과 분침이 직각을 이루는 경우는 분침이 시침에 대해 다음과 같은 회전수를
+했을 경우이다.
+1/4, 3/4, 1+1/4, 1+3/4, ... , 21+1/4 , 21+3/4
+따라서 하루에 총 44번 직각을 이룬다는 것을 알 수 있다.
+위의 수열을 일반항으로 표현하면
+(2n-1)/4 (1&lt;=n&lt;=44)이다.
+상대적인 1회전에 걸리는 시간은 24/22 = 12/11 시간이고,
+위의 일반항에 12/11을 곱하면 24시간중 직각을 이루는 시간의 일반항이 나온다.
+즉,
+3(2n-1)/11 (1&lt;=n&lt;=44)
+위의 결과값은 시간이므로 프로그램에서는 이를 시간과 분으로 적절히 변환해서
+표현하면 되겠다.
+예) 3.25시 -&gt; 3:15
+'''
+for n in range(1, 45):
+    h=(6*n-3)/11.0
+    m = (h-int(h))*60
+    print &quot;%02d:%02d&quot;%(h,m)
+print &quot;Total:44번!&quot;
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/01/17 13:24</p>
+                                <p class="static-profile" style="margin:0;padding:0;">상파</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1652"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">오..... 코딩보다도 수학적으로 푸셨네요</span>
+                                -
+                                <span style="font-size:11px;">
+                                    취미로재미로,
+                                    2016/01/27 16:47
+                                </span>
+                            </div>
+                        
+                            <a name="comment_2004"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">풀이 감사합니다. 저도 거의 같은 방법으로 풀었습니다. 위의 설명이 훨씬 간결합니다만, 위의 설명으로 이해하기 어려운 부분은 각속도로 설명한 제 풀이 <a href="http://codingdojang.com/scode/487?answer=7093#answer_7093" rel="nofollow">http://codingdojang.com/scode/487?answer=7093#answer_7093</a> 를 참조하시기 바랍니다. 누구든지 이해할 수 있게 설명하는 바람에 좀 길지만 이해하실 수 있으리라 생각합니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    예강효빠,
+                                    2017/05/07 13:57
+                                </span>
+                            </div>
+                        
+                            <a name="comment_2286"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">Good!</span>
+                                -
+                                <span style="font-size:11px;">
+                                    WJ K,
+                                    2018/07/10 19:08
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7093"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">4</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3.4.2 각속도 개념이해가 필요합니다. <a href="https://ko.wikipedia.org/wiki/각속도">위키피디아-각속도</a>를 참조하세요.</p>
+<p>각속도란 변화시간내에 몇도나 돌아갔나를 나타내는 개념입니다. 속도의 거리가 각도로 바뀌어 있다고 생각하면 쉽습니다.</p>
+<p>즉, 속도 = 거리/시간 이듯이 <strong>각속도 = 각도/시간</strong> 입니다.</p>
+<p>아시다시피 분침은 시침보다 빨리 돕니다. 즉 <strong>분침이 시침보다 각속도가 빠릅니다.</strong> (흡사 거북이와 토끼)</p>
+<p>그리고 분침과 시침의 속도는 모두 등속도입니다. (가속도가 아닙니다. 매우 중요)</p>
+<p>얼마나 빠를까요? 하루를 기준으로 생각해봅시다. 그럼 0시 시침과 분침이 같은 출발선에 서 있다가 뛰기 시작한다면</p>
+<p>하루에 분침은 24바퀴를 돕니다. 시침은 두바퀴를 돌죠. 즉, <strong>분침각속도 = 24바퀴/하루, 시침각속도 = 2바퀴/하루</strong> 입니다.</p>
+<p>즉, 0시에서 다음날 0시가 되는, <strong>하루라는 동일한 기준시점에 분침은 시침보다 22바퀴를 더 앞서 달리고 있는 겁니다.</strong> 이해가시죠?</p>
+<p>그럼 차근차근 0시부터 생각해보면,</p>
+<p>출발선에서 "땅"하고 시작하면 분침은 휭~하고 앞서 달리기 시작합니다.</p>
+<p>(1) 그러다 어느 시각에 분침이 시침을 1/4바퀴 앞섭니다. 즉, 1/4 * 바퀴(360도) = 90도 를 앞섭니다.</p>
+<p>자 계속 달립니다. 분침은 계속 시침과 간격을 벌립니다.</p>
+<p>(2) 그러다 어느 시각에 분침이 시침을 3/4바퀴 앞섭니다. 즉, 3/4 * 바퀴(360도) = 270도 를 앞섭니다.</p>
+<p>자 이제는 분침은 이미 한바퀴를 돌았습니다. 그리고 시침을 재쳐버립니다. 그리고서</p>
+<p>(3) 그러다 어느 시각에 분침이 시침을 한바퀴와 1/4바퀴 앞섭니다. 즉, 5/4(1 과 1/4) * 바퀴(360도) = 450도 를 앞섭니다.</p>
+<p>(4) 그리고 더 달려가서 분침은 시침을 1 과 3/4 바퀴 즉, 7/4 * 바퀴(360도) = 630도 앞서죠</p>
+<p>.</p>
+<p>.</p>
+<p>이렇게 계속 달리면 결국 분침은 계속 앞서 나가게 되고 다음날 0시가 되는 시점에 22바퀴를 앞서게 된다고 했으니 그전에는</p>
+<p>(44) 마지막으로 어느 시각에 분침이 시침을 21바퀴와 3/4바퀴 앞섭니다.</p>
+<p><strong>즉, 분침이 한바퀴를 앞서갈때마다 2번 직각을 이루고 총 44번 직각을 이룹니다.</strong></p>
+<p>이해가시나요? 그럼, 이제 단위를 바꿔 봅시다.</p>
+<p>어느 시각이라고 했으니 시간단위로 바꿉니다.</p>
+<p>분침각속도 = 24바퀴/하루 = 24*360도/24시간 = 360 도/시간</p>
+<p>시침각속도 =  2바퀴/하루 =  2*360도/24시간 =  30 도/시간</p>
+<p>T1 에 1/4 * 360도 앞서고</p>
+<p>T2 에 3/4 * 360도 앞서고</p>
+<p>T3 에 5/4 * 360도 앞서고</p>
+<p>T4 에 7/4 * 360도 앞서고</p>
+<p>.</p>
+<p>.</p>
+<p>Tn 에 <strong>(2n-1)/4 * 360 도</strong> 를 앞서게 됩니다. 맞죠? 이로서 앞서는 <strong>직각도 수열의 일반공식</strong>입니다.</p>
+<p>각속도 = 각도/시간 이라고 했으니 <strong>각도 = 각속도*시간</strong> 입니다. 그리고 <strong>시간 = 각도/각속도</strong> 입니다.</p>
+<p>그런데 어느 시각에 라고 했으니 시간은 동일합니다.</p>
+<p>그렇다면 <strong>분침각도 - 시침각도 = 직각도의 일반공식</strong> 이란 얘기고, </p>
+<p>이건 <strong>(분침각속도 - 시침각속도)*직각을 이루는 시간 = 직각도의 일반공식</strong> 이며</p>
+<p>따라서 <strong>직각을 이루는 시간 = 직각도의 일반공식/(분침각속도 - 시침각속도)</strong> 입니다. (여기까지 이해하셨나요?)</p>
+<p>대입해봅니다.</p>
+<p>(360 도/시간 - 30 도/시간)Tn = (2n-1)/4 * 360도</p>
+<p>Tn = (2n-1)/4 * 360/330</p>
+<p>= (2n-1)/4 * 12/11</p>
+<p>= <strong>3*(2n-1) / 11</strong></p>
+<p>라는 <strong>직각을 이루는 시간의 일반공식</strong>이 나옵니다 여기다가 1&lt;= n &lt;=44 를 integer 를 대입하면 됩니다.</p>
+<pre><code class="python">m_turn = 24 # 분침 하루에 도는 바퀴
+h_turn = 2 # 시침 하루에 도는 바퀴
+times_right = (m_turn - h_turn) * 2 # 한시간에 2번 직각을 이룰때 하루에 모두 몇번?
+print(&quot;{} times&quot;.format(times_right))
+for i in range(1, times_right+1):
+    hour = (3*(2*i-1))/11.0 # 만나는 시간을 floating 으로
+    min = (hour - int(hour)) * 60 # 소숫점부분만 분단위로
+    print(&quot;%2d:%02d&quot;%(hour,min)) # **:** 단위로 출력
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/05/07 13:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">예강효빠</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2568"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">우와..정말 자세히 이해하기 쉽게 잘 설명해주셨네요.. 정말 감사합니다!</span>
+                                -
+                                <span style="font-size:11px;">
+                                    인애,
+                                    2019/08/06 15:11
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2508"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">hr_angle= 0
+count=0
+for h in range(24):
+    min_angle=0
+    if hr_angle&gt;=360-1.0/12.0: hr_angle = 0
+
+    for m in range(360):
+        angle=abs(min_angle-hr_angle)
+        if angle&gt;=90.0-0.42 and angle&lt;=90.42 or angle&gt;=270.0-0.42 and angle&lt;=270.42:
+            print &quot;%0.2d:%0.2d&quot;%(h,m/6); count+=1
+        min_angle += 1
+        hr_angle += 1.0/12.0
+
+print &quot;Total: %d times!&quot;%count
+
+``````출력결과입니다.
+00:16
+00:49
+01:21
+01:54
+02:27
+03:00
+03:32
+04:05
+04:38
+05:10
+05:43
+06:16
+06:49
+07:21
+07:54
+08:27
+09:00
+09:32
+10:05
+10:38
+11:10
+11:43
+12:16
+12:49
+13:21
+13:54
+14:27
+15:00
+15:32
+16:05
+16:38
+17:10
+17:43
+18:16
+18:49
+19:21
+19:54
+20:27
+21:00
+21:32
+22:05
+22:38
+23:10
+23:43
+Total: 44 times!
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/11/18 20:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noh Hun</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1963"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">좋은 풀이 따라하고 싶은데 이해가 잘 안됩니다ㅠㅠ
+왜 1.0/12.0을 빼줘야 하는지요? 0.42 는 대체 어디서 온 숫자인가요?
+상세히 설명해주시는 분 복받으실거예요</span>
+                                -
+                                <span style="font-size:11px;">
+                                    ken choi,
+                                    2017/03/28 13:46
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1965"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">1/12 곱하기 12 하면 1이라는 정수가 나옵니다. 하지만 저는 분침이 1도 움직일때 시침이 1/12 도 가게했습니다. 그런데 1/12가 무리수여서 1/12씩 12번 더하면 1로 떨저지지 않습니다. 그래서 분침이 60번씩 12번 돌면 시침이 360도가 되는게 아닌 359.99999999998795 이렇게 나오는데 사실상 저때가 12시:00, 즉 분침이 60*12번 돌았을 때입니다. if hr_angle&gt;=360 라고 하면 분침이 359.99999999998795(사실상360) 에서 0도로 초기화가 안됩니다. 
+
+359.99999999998795 는 360 - 1/12 보다는 크므로 재때에 0도로 초기화가 됩니다. angle도 같은 맥락에서 0.42를 범위로 준겁니다. 분침이 1도 움직일때 시침이 소수점으로 움직이니 정확히 90도 라는 정수가 안나오므로 90.xx가 걸릴 범위로 잡아준 겁니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Noh Hun,
+                                    2017/03/28 20:16
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3575"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>시침과 분침이 겹쳐있는 상태에서 다음 겹친 상태로 가는데는 720/11 분이 걸리고, 그 사이에 두 번의 직각이 되는 시점이 있습니다. (180/11, 540/11) 하루는 1440분이니 시침과 분침이 겹치는 시점은 총 22회 있고, 따라서 44회의 직각이 있을 수 있습니다. </p>
+<p>따라서 초항이 180/11, 공차가 360/11 인 등차수열로 해당 시점의 분을 구할 수 있고, 분단위의 시간을 00시00분 포맷으로 표시해주면 됩니다. </p>
+<pre><code class="python">from fractions import Fraction
+
+def format_time(p):
+    return &quot;{:02d}:{:02d}&quot;.format(*divmod(int(p), 60))
+
+a1 = Fraction(180, 11)
+k = Fraction(360, 11)
+for i in range(44):
+    print(format_time(a1 + k * i))
+</code></pre>
+
+<p>결과는 다음과 같습니다.</p>
+<pre><code class="no-highlight">00:16
+00:49
+01:21
+01:54
+02:27
+03:00
+03:32
+04:05
+04:38
+05:10
+05:43
+06:16
+06:49
+07:21
+07:54
+08:27
+09:00
+09:32
+10:05
+10:38
+11:10
+11:43
+12:16
+12:49
+13:21
+13:54
+14:27
+15:00
+15:32
+16:05
+16:38
+17:10
+17:43
+18:16
+18:49
+19:21
+19:54
+20:27
+21:00
+21:32
+22:05
+22:38
+23:10
+23:43
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/05/03 17:38</p>
+                                <p class="static-profile" style="margin:0;padding:0;">룰루랄라</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2178"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>python입니다.</p>
+<pre><code class="python">from fractions import Fraction
+from math import floor
+
+total = 0
+
+for i in range(90, 7920, 180):
+    total += 1
+    minute = Fraction(i*2, 11)
+    hour = floor(Fraction(i, 330))
+    print(hour, '시', minute-60*hour, '분')
+
+print('총', total, '번')
+</code></pre>
+
+<h3 id="_1">해설 :</h3>
+<p>0시를 기준으로 시침과 분침이 회전한 각도의 차이를 A라 합시다. 그러면 시침과 분침이 직각일 때 A의 값으로 가능한 것은</p>
+<ul>
+<li>90도 - 0시 180/11 분</li>
+<li>270도 - 0시 540/11 분</li>
+<li>(...)</li>
+<li>7830도 - 23시 480/11 분</li>
+</ul>
+<p>가 됩니다. A를 5.5로 나누면 0시를 기준으로 몇 분인지 구할 수 있습니다.</p>
+<p>여기선 분수 표현을 위해 fractions 모듈을 사용했습니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/07/22 23:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김 정우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2195"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def Clock ( i, j ):
+    print (&quot;&quot; if i&gt;9 else &quot;0&quot;) + str(i) + &quot;:&quot; + (&quot;&quot; if j&gt;9 else &quot;0&quot;) + str(j)   
+
+su = 0
+bfr = 0
+
+for i in range(24) :
+  for j in range (60) :
+    a = abs (  (i if (i&lt;12) else (i-12)) * 5 * 6 + 30 * j / 60 - j * 6 )
+    if a &gt; 180 : a = 360 - a
+    if ( a &gt;= 90 and bfr &lt; 90 ) or ( a &lt;= 90 and bfr &gt; 90 ) :       
+        Clock( i, j )
+        su += 1 
+    bfr = a
+
+print &quot;Total: %d times!&quot;%su
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/07/30 10:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Kim JungRae</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2225"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">void exce92()
+{
+    int hh = 0, mm = 0;
+    int dgr = 0;
+    int count = 0;
+
+    for (int i = 0; i &lt; 720; i++)
+    {
+        mm += 2;
+        if (mm == 60)
+        {
+            mm = 0;
+            hh++;
+        }
+
+        dgr = (dgr + 11) % 360;
+
+        if (dgr == 90 || dgr == 270)
+        {
+            count++;
+            printf(&quot;%d. %02d:%02d\n&quot;, count,hh, mm);
+        }
+    }
+    printf(&quot;총 %d번 90도가 됩니다.\n&quot;, count);
+}
+</code></pre>
+
+<p>매 분마다 체크를 하니까 생각보다 90도가 되는 횟수가 적네요..</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/08/11 15:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">조서현</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2238"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">res = filter(lambda x : abs((30*(x[0]%12) + 1/2*x[1]) - 6*x[1]) == 90,[ (x,y) for x in range(0,24) for y in range(0,60) ])
+
+for x, y in res :
+    print '%02d:%02d' % (x,y)
+print &quot;total : %d&quot; % len(res)
+
+</code></pre>
+
+<p>한줄코드 도전!</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/08/13 14:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">BaekSeungWoo</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1607"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">시침이 움직이는거 고려하지 않으셧네요;;</span>
+                                -
+                                <span style="font-size:11px;">
+                                    승학,
+                                    2015/08/17 15:55
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1608"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">답변 감사합니다. (30*(x[0]%12) + 1/2*x[1])에서 1/2*x[1] &lt;-- 분침 이동을 고려한 것입니다. 60분 중에 30분을 넘으면 좌우 대칭이 되므로, (60/2)*x + 1*(1/2)*y 한겁니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    BaekSeungWoo,
+                                    2015/08/18 17:58
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2250"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>제 시계는 분단위로 움직입니다 또각 또각</p>
+<pre><code class="python">oneDayMunite = 24*60; # 하루 총 분의 양
+h = 0
+ma = 0
+ha = 0
+m = 0
+result =[];
+for i in range(0,oneDayMunite+1):   
+    #시간 증가
+    if(m &gt; 0 and m%60 == 0):
+        ma = 0 #시간이 지나면 분침각도는 0
+        m = 0 #시간이 지나면 0분부터~
+        h = h+1 #시간증가
+        if(h == 12): #12시가 되면은 각도가 0
+            ha = 0
+    #결과 넣기
+    if(abs(ma-ha) == 90 or abs(ma-ha) == 270):
+        result.append(str(h).zfill(2) +&quot;:&quot;+ str(m).zfill(2))
+    #결과확인용 debug
+    print(  str(abs(ma-ha)) + &quot; &quot; + str(h) +&quot;:&quot;+ str(m) + &quot; ha:&quot;+str(ha) +&quot; ma:&quot;+ str(ma) )
+    ma = ma+6 #분침은 6도 씩 증가
+    ha = ha+0.5 #시침은 0.5도 씩 증가
+    m = m+1 #1분증가
+
+for x in result:
+    print(x)
+print(&quot;총 &quot; + str(len(result)) + &quot;번 !&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/08/19 22:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">최 혁</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2307"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>1분 이동시 분침 이동각도 = 6
+1분 이동시 시침 이동각도 = 0.5
+1시간 이동시 시침 이동각도 = 30</p>
+<p>90 또는 270도가 될때마다 카운트 증가</p>
+<pre><code class="python">result = 0
+
+for hour in range(0, 24) :
+    for min in range(0, 60) :
+        h_degree = ((hour * 30) + (min * 0.5)) % 360
+        m_degree = min * 6
+
+        gap = abs(h_degree - m_degree)
+
+        if gap == 90 or gap == 270 :
+            print(hour , min, sep=&quot; : &quot;)
+            result += 1
+
+print(&quot;total &quot; , result)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/09/05 23:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">ice029</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2336"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C# </p>
+<pre><code class="cs">            int count = 0;
+
+            for(int i = 0; i &lt;= 23; i++)
+            {
+                for(int j = 0; j &lt;= 59; j++) {
+                    double angleHour = ((360d / (12d * 60d)) * (i * 60d + j)) % 360d;
+                    double angleMinute = (360d / 60d * (i * 60d + j)) % 360d;
+
+                    double abs = Math.Abs(angleHour - angleMinute);
+
+                    if (abs == 90d || abs == 270d)
+                    {
+                        count++;
+                        Console.WriteLine(&quot;{0:d4} {1:d2}:{2:d2}&quot;, count, i, j);
+                    }
+                }
+            }
+            Console.WriteLine(&quot;Total: {0}번!&quot;, count);
+</code></pre>
+
+<p>결과값 :
+0001 03:00
+0002 09:00
+0003 15:00
+0004 21:00
+Total: 4번!</p>
+<p>이게 분단위라 정확히 90도는 4번 밖에 안 나오네요.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/09/17 16:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">임 정구</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1966"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">저는 분단위로 하면 4번밖에 안나온다는 걸 깨닫지 못한채 몇시간 삽질만 했네요..ㅠㅠ</span>
+                                -
+                                <span style="font-size:11px;">
+                                    ken choi,
+                                    2017/03/30 16:08
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2354"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">        static void Main(string[] args)
+        {
+            int count = 0;
+            for (int h = 1; h &lt; 24; h++)
+            {
+                for(int s = 0; s &lt; 60;s++)
+                {
+                    double hangle = ((h&gt;12?h-12:h)*30)+s*0.5;
+                    int mangle = s==0?360:s*6;
+                    Console.WriteLine(&quot;{0} : {1}  시침각도 {2} 분침각도 {3}&quot;, h&lt;=9?&quot;0&quot;+h.ToString():h.ToString(), s&lt;=9?&quot;0&quot;+s.ToString():s.ToString(),hangle,mangle);
+                    if(Math.Abs(hangle-mangle) == 90||Math.Abs(hangle -mangle)== 270)
+                    {
+                        count++;
+                    }
+                }
+            }
+            Console.WriteLine(&quot;직각인된 횟수 {0}&quot;, count);
+        }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/09/21 17:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">정우진</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2493"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from fractions import Fraction
+import math
+
+si = 0.0
+bun = 0.0
+transition = 2 * math.pi / 360
+counter = 0
+for i in range(25):
+    for j in range(60):
+        for k in range(60):
+            si = si + 0.5/60
+            bun = bun + 0.1
+            if round(si,1) - round(bun,1) == 90  or round(bun,1) - round(si,1) == 90 or round(si,1) - round(bun,1) == 270 or round(bun,1) - round(si,1) == 270:
+                zero =''
+                zero2 =''
+                if i&lt;10 : zero = '0'
+                if j&lt;10 : zero2 = '0'
+                print(&quot;%s%d:%s%d&quot; % (zero,i ,zero2, j))
+                counter = counter + 1
+
+    bun = 0
+
+print('Total: %d번!'% counter)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/11/13 18:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">강인구</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2649"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">파이썬 2.7
+
+def append_result():
+    result.append('{}:{}'.format(hour, min))
+    result.append('{}:{}'.format(hour, (min+30)%60))
+
+
+result = []
+
+for hour in range(24):
+    for min in range(60):
+        if hour &lt; 12 :
+
+            if hour &gt;=9:
+                rec = hour*5 + 15 - min - 60 #  시:분,  9:00, 10:5, 11:10
+                if rec == 0:
+                    append_result()
+            else:
+                rec = hour*5 + 15 - min #  시:분,  0:15, 1:20, 2:25, 3:30
+                if rec == 0:
+                    append_result()
+
+
+        else:
+             if hour &gt;= 21 :
+                    rec = (hour-12)*5 + 15 - min - 60 #  시:분,  0:15, 1:20, 2:25, 3:30
+                    if rec == 0:
+                        append_result()
+             else:
+                    rec = (hour-12)*5 + 15 - min #  시:분,  0:15, 1:20, 2:25, 3:30
+                    if rec == 0:
+                        append_result()
+print result; print
+print '총 개수: ', len(result)
+
+
+결과:
+['0:15', '0:45', '1:20', '1:50', '2:25', '2:55', '3:30', '3:0', '4:35', '4:5', '5:40', '5:10', '6:45', '6:15', '7:50', '7:20', '8:55', '8:25', '9:0', '9:30', '10:5', '10:35', '11:10', '11:40', '12:15', '12:45', '13:20', '13:50', '14:25', '14:55', '15:30', '15:0', '16:35', '16:5', '17:40', '17:10', '18:45', '18:15', '19:50', '19:20', '20:55', '20:25', '21:0', '21:30', '22:5', '22:35', '23:10', '23:40']
+
+총 개수: 48
+
+
+** 코드가 거지같네요.. **
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/12/30 17:39</p>
+                                <p class="static-profile" style="margin:0;padding:0;">hana11</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2750"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="objectivec">#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+int main(void){
+        int h,m,i=1;
+        double ha=-0.5,ma;
+        for(h=0;h&lt;12;h++){
+                for(m=0;m&lt;60;m++){
+                        ma=m*6.0;
+                        ha+=0.5;
+                        if((fabs(ha-ma)==90)||(fabs(ha-ma)==270)){
+                                printf(&quot;%d. %02d:%02d\n&quot;,i,h,m);
+                                i++;
+                                printf(&quot;%d. %02d:%02d\n&quot;,i,h+12,m);
+                                i++;
+
+                        }
+                }
+        }
+        printf(&quot;Total=%d\n&quot;,i-1);
+}
+
+</code></pre>
+
+<p>출력결과:
+1. 03:00
+2. 15:00
+3. 09:00
+4. 21:00
+Total=4
+원래 4번 나오는게 맞는건가요???</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/01/09 18:29</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김종헌 </p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2910"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">lst = []
+result = []
+for i in range(86401):
+    if round((11.0/120.0)*float(i), 0)%180 == 90:
+        lst.append(&quot;%d:%d&quot; % (i//3600, (i//60)%60))
+lst = list(set(lst))
+print lst
+print len(lst)
+</code></pre>
+
+<p>1초 단위로 움직입니다. 분 단위로 움직이면 4번밖에 안나와서....</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/01/27 16:45</p>
+                                <p class="static-profile" style="margin:0;padding:0;">취미로재미로</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3392"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import math
+m = h = math.pi/2;
+previous = [0,0,1]; now = [0,0,1]; result = []
+for x in range(24):
+    for y in range(60):
+        h = math.pi*(1/2-(x/6+y/360)); m = math.pi*(1/2-y/30)
+        now = [x,y,math.cos(h-m)]
+        if previous[2] * now[2] &lt;= 0:result.append(now[:2] if x in list(3*k for k in range(8)) else previous[:2])
+        previous = now
+for x, y in result:print(str(x)+':'+str(y))
+</code></pre>
+
+<p>44개네요. 삼각함수로 이전값*현재값&lt;=0 이면 추가. 파이썬 3.5.1</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/04/12 19:53</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Flair Sizz</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3697"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#파이썬3.5.1
+'''
+시침과 분침이 직각이 되는 경우는 시침이 분침 앞에 있을때 경우와 분침이 시침 앞에 있을때 경우가 있다.
+(여기서 몇도을 움직인다는 것은 12시를 기준, 시계방향으로이다. 앞에 있다는 것도 시계방향으로이다.)
+또, 오전 오후 두가지 경우가 있으므로 1시부터 12시까지만 생각한다.
+그리고,
+1시간동안 시침은 30도, 분침은 360도
+1분동안 시침은 0.5도, 분침은 6도
+움직인다.
+h시 m분이고(1&lt;=h&lt;=12,0&lt;=m&lt;=59) 시침이 분침 앞에 있을때
+시침이 움직인 각도는 30*h+0.5*m도
+분침이 움직인 각도는 6*m도
+30*h+0.5m - 6*m = 90
+30*h - 90 = 5.5*m
+m = 300/55 * h - 900/55
+=60/11 * h - 180/11
+분침이 시침 앞에 있을때
+6*m - (30*h+0.5*m) = 90
+5.5*m = 90+30*h
+m = 60/11 * h + 180/11
+(h의 단위는 '시', m의 단위는 '분'이다;'도'가 아니다)
+m과 h와의 관계를 알아냈으니, 이를 토대로 코드를 짠다.
+'''
+from fractions import *
+#그냥 실수로 나누어 실행해보았더니 중복될것이 중복이 안되어 분수형태로 해보았다
+#이에따라 출력형식도 조금 변형하였다
+times = []
+for h in range(0,12):
+    mm = Fraction(60*h,11)-Fraction(180,11)
+    if mm &lt; 0:
+        hh = h - 1
+        if h &gt; 0:
+            t1 = (hh, mm+60)
+        else:
+            t1 = (hh+12, mm+60)
+    else:
+        t1 = (h, mm)
+    mp = Fraction(60*h,11)+Fraction(180,11)
+    if mp &gt;= 60:
+        hh = h + 1
+        if hh &lt; 12:
+            t3 = (hh, mp-60)
+        else:
+            t3 = (hh-12, mp-60)
+    else:
+        t3 = (h, mp)
+    t2 = (t1[0]+12, t1[1])
+    t4 = (t3[0]+12, t3[1])
+    times.extend([t1,t2,t3,t4])
+times = sorted(list(set(times)))
+for t in times:
+    print(str(t[0])+'시 '+str(t[1])+'분')
+print('Total :', len(times), 'times!')
+</code></pre>
+
+<pre><code>출력:
+0시 180/11분
+0시 540/11분
+1시 240/11분
+1시 600/11분
+2시 300/11분
+3시 0분
+3시 360/11분
+4시 60/11분
+4시 420/11분
+5시 120/11분
+5시 480/11분
+6시 180/11분
+6시 540/11분
+7시 240/11분
+7시 600/11분
+8시 300/11분
+9시 0분
+9시 360/11분
+10시 60/11분
+10시 420/11분
+11시 120/11분
+11시 480/11분
+12시 180/11분
+12시 540/11분
+13시 240/11분
+13시 600/11분
+14시 300/11분
+15시 0분
+15시 360/11분
+16시 60/11분
+16시 420/11분
+17시 120/11분
+17시 480/11분
+18시 180/11분
+18시 540/11분
+19시 240/11분
+19시 600/11분
+20시 300/11분
+21시 0분
+21시 360/11분
+22시 60/11분
+22시 420/11분
+23시 120/11분
+23시 480/11분
+Total : 44 times!
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/05/15 13:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">차우정</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3812"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C#으로 작성했습니다. 1분에 시침은 0.5도, 분침은 6도 움직이는 것으로 4번 나옵니다. 1초로 계산하게 되면, 3으로 나눠떨어지지 않기 때문에 round를 써야 하는데 정확한 90도가 아니기 때문에 넘겼습니다.</p>
+<pre><code class="cs">        public int CountRightAngles()
+        {
+            var count = 0;
+            var hour = 0m;
+            var minute = 0m;
+            for (int i = 0; i &lt; 12; i++)
+            {
+                for (int j = 0; j &lt; 60; j++)
+                {
+                    minute += 6.0m;
+                    hour += 0.5m;
+                    if (Math.Abs(hour - minute) == 90) 
+                        count++;
+                }
+                minute = 0m;
+                if (Math.Abs(hour - minute) == 90) 
+                    count++;
+            }
+            return count*2;
+        }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/05/31 16:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Straß Böhm Jäger</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3840"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<pre><code class="ruby">rtime = -&gt;n { h=(6*n-3)/11.0; m=(h-h.to_i)*60; &quot;%2d. %02d:%02d&quot; %[n,h,m] } 
+out_rt = proc { puts (1..44).map(&amp;rtime), &quot;Total: 44번!&quot;}
+</code></pre>
+
+<p>or</p>
+<pre><code class="ruby">rtime = -&gt;n { h=(6*n-3)/11.0; m=(h-h.to_i)*60; &quot;%2d. %02d:%02d&quot; %[n,h,m] }
+times = -&gt;n=0,r=[] { r &lt;&lt; rtime[n+=1] until rtime[n+1][4,2]&gt; '23'; r }
+out_rt = -&gt;r=times[] { puts r, &quot;Total: #{r.size}번!&quot;}
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby">expect(rtime[1] ).to eq &quot; 1. 00:16&quot;
+expect(rtime[44]).to eq &quot;44. 23:43&quot;
+#=&gt; stdout test
+rt_outs = &quot; 1. 00:16\n 2. 00:49\n 3. 01:21\n 4. 01:54\n 5. 02:27\n 6. 03:00\n&quot;+ 
+          &quot; 7. 03:32\n 8. 04:05\n 9. 04:38\n10. 05:10\n11. 05:43\n12. 06:16\n&quot;+
+          &quot;13. 06:49\n14. 07:21\n15. 07:54\n16. 08:27\n17. 09:00\n18. 09:32\n&quot;+
+          &quot;19. 10:05\n20. 10:38\n21. 11:10\n22. 11:43\n23. 12:16\n24. 12:49\n&quot;+
+          &quot;25. 13:21\n26. 13:54\n27. 14:27\n28. 15:00\n29. 15:32\n30. 16:05\n&quot;+
+          &quot;31. 16:38\n32. 17:10\n33. 17:43\n34. 18:16\n35. 18:49\n36. 19:21\n&quot;+
+          &quot;37. 19:54\n38. 20:27\n39. 21:00\n40. 21:32\n41. 22:05\n42. 22:38\n&quot;+
+          &quot;43. 23:10\n44. 23:43\nTotal: 44번!\n&quot;
+expect { out_rt[] }.to output(rt_outs).to_stdout
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/06/02 16:53</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3880"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Java로 구현하였습니다.</p>
+<pre><code class="java">public class Clock90Deg {
+    public static void main(String[] args) {
+        int count = 0;
+
+        for (int i = 0; i &lt; 24; i++) {
+            int hour = i % 12;
+
+            int min = (int)((30 * hour - 90) / 5.5);
+
+            if ((min &gt;= 0) &amp;&amp; (min &lt;= 60))
+            {
+                System.out.print(String.format(&quot;%02d&quot;, i) + &quot;:&quot; + String.format(&quot;%02d&quot;, min));
+                System.out.println();
+                count++;
+            }
+
+            min = (int)((30 * hour + 90) / 5.5);
+
+            if ((min &gt;= 0) &amp;&amp; (min &lt;= 60)) {
+                System.out.print(String.format(&quot;%02d&quot;, i) + &quot;:&quot; + String.format(&quot;%02d&quot;, min));
+                System.out.println();
+                count++;
+            }
+        }
+
+        System.out.println(&quot;Total: &quot; + String.valueOf(count) + &quot;번!&quot;);
+    }
+}
+</code></pre>
+
+<p>hour시 min분에 직각이 될 때는
+|30 * hour + 0.5 * hour - 6 * min| = 90이 성립한다는 점에서 착안하여 풀었습니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/06/05 11:38</p>
+                                <p class="static-profile" style="margin:0;padding:0;">손 량</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4058"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C언어 입니다.
+저는 그냥 반복문돌렸습니다..
+접근법은 시침이 1번이동할때 분침은 12번 이동한다 이구요 ㅎㅎ..
+그래서 횟수는 48회나오고
+8시 59분이 직각으로나오고, 9시 00도 직각으로나오네요 ㅡㅜ</p>
+<pre><code class="cpp">#define _CRT_SECURE_NO_WARNINGS
+#include&lt;stdio.h&gt;
+#include&lt;malloc.h&gt;
+
+int main()
+{
+    int j = 0; 
+    int i = 0;
+    int count = 0;
+    for (int k = 0; k &lt; 2; k++)
+    {
+        for (i = 0; i &lt; 60; i++)
+        {
+            for (int c = 0; c &lt; 12; c++)
+            {
+                if ((60 + j + c - i) % 60 == 15)
+                {
+                    printf(&quot;%d : %d  \n&quot;, (i / 5) + k * 12, j + c);
+                    count++;
+                }
+                if ((60 + i - j - c) % 60 == 15)
+                {
+                    printf(&quot;%d : %d  \n&quot;, (i / 5) + k * 12, j + c);
+                    count++;
+                }
+            }
+            j += 12;
+            j = j % 60;
+        }
+
+    }
+    printf(&quot;횟수 : %d &quot;, count);
+
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/07/03 17:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">양 상호</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1830"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">더 시간을 잘개 쪼개셔서 분침이 1분동안 이동할때 움직이는 각을 기준으로 잡으시면 해결될듯 하네요</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Choi Byeong Gyu,
+                                    2016/08/21 16:34
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4325"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>자바 로 코딩</p>
+<p>1분에 시침 과 분침이 직각이 되는 수는 2번 <br/>
+12시 부터 24시 까지 1440 번이 나오네요 <br/>
+이거 맞나요?ㅎㅎ <br/>
+<br/>
+<br/>
+1. calendar 생성 <br/>
+2. Calendar.SECOND 증가 <br/></p>
+<pre><code class="java">    public static void main(String[] args){
+
+        // 변수 초기화
+        int checkSecondTime_1   = 0;
+        int checkSecondTime_2   = 0;
+        String  endTimeCheck    = &quot;&quot;;
+
+        int minute  = 0;
+        int second  = 0;
+        int secondCnt   = 0;
+
+        int totalCnt = 0;
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY , 0);
+        cal.set(Calendar.MINUTE      , 0);
+        cal.set(Calendar.SECOND      , 0);
+
+        try{
+
+            do{
+
+                minute  = cal.get(Calendar.MINUTE);
+                second  = cal.get(Calendar.SECOND);
+
+                if( second == 0 ){
+                    checkSecondTime_1 = minute + 15;
+                    checkSecondTime_2 = minute + 45;
+                }
+
+
+                if( checkSecondTime_1 == second || checkSecondTime_2 == second){
+                    System.out.println( new SimpleDateFormat(&quot;hh:mm:ss&quot;).format(cal.getTime()) );
+                    totalCnt++;
+                }
+
+                // SECOND 카운트
+                cal.add(Calendar.SECOND, ++secondCnt);
+                secondCnt = 0;
+
+                endTimeCheck = new SimpleDateFormat(&quot;HHmmss&quot;).format(cal.getTime());
+
+            }while( !&quot;000000&quot;.equals(endTimeCheck)  );
+
+            System.out.println(&quot;총 횟수 :: ==&gt; &quot; + totalCnt);
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/08/05 17:15</p>
+                                <p class="static-profile" style="margin:0;padding:0;">황 정석</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4608"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>c언어 활용</p>
+<pre><code>#include&lt;stdio.h&gt;
+
+int main(void)
+{
+    int i, time;
+    int index=0;
+    int time_array[50];
+
+    for(i=1; ; i+=2)
+    {
+        time=90*i/5.5;
+        if(time&gt;1440)
+        {
+            break;
+        }
+        else
+        {
+            time_array[index]=time;
+            index++;
+        }
+    }
+
+    for(i=0; i&lt;index; i++)
+    {
+        printf(&quot;%02d:%02d \n&quot;, time_array[i]/60, time_array[i]%60);
+    }
+
+    printf(&quot;total %d times \n&quot;, index);
+
+    return 0;
+}
+
+</code></pre>
+
+<p>%02d는 정수형을 출력할 때 되도록 2자릿수로 맞추고, 빈 공간은 0으로 채워넣으라는 의미입니다(ex: 5-&gt;05)
+출력결과는 다음과 같습니다(숫자 색깔 다르게 나오는건 무시하세요)</p>
+<pre><code>00:16
+00:49
+01:21
+01:54
+02:27
+03:00
+03:32
+04:05
+04:38
+05:10
+05:43
+06:16
+06:49
+07:21
+07:54
+08:27
+09:00
+09:32
+10:05
+10:38
+11:10
+11:43
+12:16
+12:49
+13:21
+13:54
+14:27
+15:00
+15:32
+16:05
+16:38
+17:10
+17:43
+18:16
+18:49
+19:21
+19:54
+20:27
+21:00
+21:32
+22:05
+22:38
+23:10
+23:43
+total 44 times
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/08/21 16:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Choi Byeong Gyu</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5204"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package test003;
+
+public class RightAngle {
+    private Integer count = 0;
+    private boolean seeLeft = true;
+
+    protected void printTime(Integer hour, Integer minute) {
+        System.out.println(String.format(&quot;%02d&quot;, hour) + &quot;:&quot; + String.format(&quot;%02d&quot;, minute));
+    }
+
+    protected Integer getCount() {
+        return count;
+    }
+
+    protected void loop() {
+        int maxHour = 24;
+        int maxMinute = 60;
+
+        for (int hour = 0; hour &lt; maxHour; hour++) {
+            for (int minute = 0; minute &lt; maxMinute; minute++) {
+                isItRightAngle(hour, minute);
+            }
+        }
+        System.out.println(&quot;Total:&quot; + getCount() + &quot;번&quot;);
+    }
+
+    protected void isItRightAngle(Integer hour, Integer minute) {
+        double hourPosition = (double) (((hour % 12) * 60 + minute)) / 720;
+        double minutePostion = (double) minute / 60;
+
+        double distance = minutePostion - hourPosition;
+        if (distance &lt;= 0) {
+            distance = minutePostion + 1 - hourPosition;
+        }
+
+        if (seeLeft == true &amp; distance &gt;= 0.25 &amp; distance &lt; 0.5) {
+            if (distance == 0.25) {
+                printTime(hour, minute);
+            } else {
+                printTime(hour, minute - 1);
+            }
+            count++;
+            seeLeft = false;
+        } else if (seeLeft == false &amp; distance &gt;= 0.75) {
+            if (distance == 0.75) {
+                printTime(hour, minute);
+            } else {
+                printTime(hour, minute - 1);
+            }
+            count++;
+            seeLeft = true;
+        }
+    }
+
+    public static void main(String[] args) {
+        new RightAngle().loop();
+    }
+}
+
+</code></pre>
+
+<p>00:16
+00:49
+01:21
+01:54
+02:27
+03:00
+03:32
+04:05
+04:38
+05:10
+05:43
+06:16
+06:49
+07:21
+07:54
+08:27
+09:00
+09:32
+10:05
+10:38
+11:10
+11:43
+12:16
+12:49
+13:21
+13:54
+14:27
+15:00
+15:32
+16:05
+16:38
+17:10
+17:43
+18:16
+18:49
+19:21
+19:54
+20:27
+21:00
+21:32
+22:05
+22:38
+23:10
+23:43
+Total:44번</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/11/06 21:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">얌얌</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5406"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">d_h = 360.0 / 12.0 / 60.0 # 시침이 1분에 움직이는 각도 0.5
+d_m = 360.0 / 1.0 / 60.0 # 분침이 1분에 움직이는 각도 6
+m_h = 0
+m_m = 0
+total = 0
+for m in range(0, (24 * 60)):
+    if m != 0:
+        m_h = (m_h + d_h) % 360
+        m_m = (m_m + d_m) % 360
+    #시침은 6도씩 움직인다고 가정함(분침이 1분에 움직이는 각도, 시계의 한 눈금)
+    mm_h = m_h - (m_h % 6)
+    if abs(mm_h - m_m) == 90 or abs(mm_h - m_m) == 270:
+        total+=1
+        print('{:&gt;2}. {:0&gt;2}:{:0&gt;2}'.format(total, m // 60, m % 60))
+
+print('Total:{}번!'.format(total))
+
+
+</code></pre>
+
+<p>Python 3.5.2에서 작성하였습니다.<br>
+시침이 시계 한눈금(6도)씩 움직인다고 가정해서 48번이 나왔습니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/11/25 15:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Yeo HyungGoo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6009"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">hour, count = 11, 0
+for x in range(24):
+    hour += 1
+    if hour == 25:
+        hour = 1
+    _h = (12 % hour * 30) % 180
+    for y in range(60):
+        _m = (y * 6) % 180
+        if abs(_h - _m) == 90:
+            count += 1
+            print('%d. %02d:%02d' % (count, hour, y))
+print('Total: %d번!' % count)
+
+#### 2017.01.23 D-395 ####
+</code></pre>
+
+<p>시침 고정되어있을때</p>
+<pre><code class="python">_h, count = -0.5, 1
+for x in range(12,37):
+    for y in range(60):
+        _h = (_h + 0.5) % 180
+        _m = y * 6 % 180
+        if abs(_h - _m) == 90:
+            print('%d. %02d:%02d' % (count, x%24, y))
+            count += 1
+
+#### 2017.01.24 D-394 ####
+</code></pre>
+
+<p>시침이동할때.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/01/23 23:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GunBang</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6178"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def clock():
+    k=1
+    for i in range(24):
+        for j in range(60):
+            n=i*30+j*0.5
+            m=j*6
+            #print(abs(n-m)%180)
+            if abs(abs(n-m)%180-90)&lt;2.75:
+                print(&quot;%d. %0.2d:%0.2d&quot; %(k,i,j))
+                k+=1
+    print(&quot;총 %d번&quot; %k )
+clock()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/02/14 02:53</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김구경</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6626"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">public class HourMinute {
+
+    public static void main(String[] args) {
+        int c = 0;
+        for (Double i = 0D; i &lt;= 60 * 24; i++) {
+            Double h = (i * 0.5);
+            Double m = (i * 6) % 360;
+            Double hm = Math.abs(h - m) % 360;
+
+            if (hm == 90 || hm == 270) {
+                System.out.printf(&quot;%02d:%02d \n&quot;, h.intValue() / 30, m.intValue());
+                c++;
+            }
+        }
+        System.out.println(c);
+    }
+}
+</code></pre>
+
+<p>애매하네요...</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/03/20 00:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">genius.choi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6872"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">hr=-1
+a=0
+for i in range(24):
+    for k in range(1,60):
+        if k in [1,12,24,36,48]:
+            hr=hr+1
+        if hr==60:
+            hr=0
+        if k==60:
+            k=0
+        result=abs(k-hr)
+        if result==15 or result==45:
+            a=a+1
+            print(&quot;{0}:{1}--{2}&quot;.format(i,k,a))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/04/13 14:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">조현</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7088"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>답이 정확하게 맞는지는 모르겠습니다. 
+시침을 분침과 같이 놓고 뺏을때 절대값이 15와 45가 나오는 것에서 답을 추론하였습니다.
+그리고 시침을 5로 나눠서 출력하였습니다.</p>
+<pre><code class="java">public class Rightangle{
+    public static void main(String[] args){
+        int mcount=0;
+        int hcount=0;
+        int right=0;
+        int rcount=0;
+        String memo=&quot;&quot;;
+        for(int i=1;i&lt;=120;i++){
+            for(int j=0;j&lt;12;j++){
+                mcount+=1;
+                if((Math.abs(mcount-hcount)==15) || (Math.abs(mcount-hcount)==45)){
+                    right++;
+                    int hour = hcount/5;
+                    if(hour/10==0){
+                        String temp = &quot;0&quot;+hour;
+                        memo=memo+temp+&quot;:&quot;+mcount+&quot;\n&quot;;
+                        rcount++;
+                    }
+                    else{
+                        memo=memo+hour+&quot;:&quot;+mcount+&quot;\n&quot;;
+                        rcount++;
+                    }
+                }
+            }
+            hcount+=1;
+
+            if(mcount==60)
+                mcount=0;
+
+        }
+        System.out.print(memo);
+        System.out.println(&quot;갯수는&quot;+rcount);
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/05/06 21:39</p>
+                                <p class="static-profile" style="margin:0;padding:0;">CHIJE PARK</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7272"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3으로 작성해 보았습니다. 
+Python에서 클래스 연습하려고 클래스로 만들었습니다. 
+전 총 4번만 나오네요. 다른 경우는 float방식에서 1도 이하의 오차가 발생하여 정확하게 90도가 되는 시간이 없는 것 같아요 ㅠㅠ 
+맞는지 한번만 봐주세요~</p>
+<p>답:
+3:0 (90.0)
+9:0 (270.0)
+15:0 (90.0)
+21:0 (270.0)</p>
+<p>코드:</p>
+<pre><code class="python">class hourAndMinDegree:
+    currentHour = 0
+    currentMin = 0
+    hourDegree = float(360/12)
+    hourMinDegree = float(hourDegree/60)
+    minDegree = float(360/60)
+    def increaseTime(self):
+        self.currentMin += 1
+        if self.currentMin == 60:
+            self.currentHour += 1
+            self.currentMin = 0
+        if self.currentHour == 24:
+            self.currentHour = 0
+    def calculateDegree(self, degree):
+        while True:
+            self.increaseTime()
+            currentHourDegree = self.hourDegree * self.currentHour + self.hourMinDegree * self.currentMin if self.currentHour &lt; 12 else self.hourDegree * (self.currentHour - 12) + self.hourMinDegree * self.currentMin
+            currentMinDegree = self.minDegree * self.currentMin
+            degreeDiff = currentMinDegree - currentHourDegree if currentMinDegree &gt; currentHourDegree else currentHourDegree - currentMinDegree
+            if degreeDiff == degree or degreeDiff == (360-degree):
+                print(str(self.currentHour) + ':' + str(self.currentMin) + &quot; (&quot; + str(degreeDiff) + &quot;) &quot;)
+            if self.currentHour == 0 and self.currentMin == 0:
+                break
+
+if __name__ == &quot;__main__&quot;:
+    timerCal = hourAndMinDegree()
+    timerCal.calculateDegree(90)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/05/27 01:11</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Mike</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7627"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>초단위로 계산해보았습니다.</p>
+<p>초단위로 하면 90도/270도가 딱 맞는 시간은 3시, 9시, 15시, 21시밖에 없지요.</p>
+<p>그래서 이전 각도와 지금 각도의 차를 가지고 </p>
+<p>89-&gt;90, 90-&gt;89, 269-&gt;270, 270-&gt;269 넘어갈 때만 출력하도록 하였습니다.</p>
+<p>지저분해졌지만, 그래도 44번이 나오긴 하는군요 ^^</p>
+<p><strong>javascript</strong></p>
+<pre><code class="javascript">var minAngle = function(sec) {
+    return (sec / 10) % 360;
+};
+
+var hourAngle = function(sec) {
+    return (sec / 120) % 360;
+}
+
+var getTime = function(sec) {
+    return `${(&quot;0&quot; + parseInt(sec / 3600)).slice(-2)}:${(&quot;0&quot; + parseInt((sec % 3600) / 60)).slice(-2)}`;
+}
+
+var count = 0;
+var now = 0;
+var prev = 0;
+for (let i = 0; i &lt; 86400; i++) {
+    now = Math.abs(hourAngle(i) - minAngle(i));
+
+    // 이전각을 기억하여 89-90/269-270 변할 때를 체크
+    if ((parseInt(prev) === 89 &amp;&amp; parseInt(now) === 90) 
+            || (parseInt(prev) === 90 &amp;&amp; parseInt(now) === 89)
+            || (parseInt(prev) === 269 &amp;&amp; parseInt(now) === 270) 
+            || (parseInt(prev) === 270 &amp;&amp; parseInt(now) === 269)) {
+        console.log(getTime(i));
+        count++;
+    }
+    prev = now;
+}
+
+console.log(`${count}번`);
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/23 00:36</p>
+                                <p class="static-profile" style="margin:0;padding:0;">funnystyle</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7710"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <h1 id="include">include<stdio.h></h1>
+<p>int main()
+{
+    int j = 0; 
+    int i = 0;
+    int count = 0;
+    for (int k = 0; k &lt; 2; k++)
+    {
+        for (i = 0; i &lt; 60; i++)
+        {
+            for (int c = 0; c &lt; 12; c++)
+            {
+                if ((60 + j + c - i) % 60 == 15)
+                {
+                    printf("%d : %d  \n", (i / 5) + k * 12, j + c);
+                    count++;
+                }
+                if ((60 + i - j - c) % 60 == 15)
+                {
+                    printf("%d : %d  \n", (i / 5) + k * 12, j + c);
+                    count++;
+                }
+            }
+            j += 12;
+            j = j % 60;
+        }</p>
+<pre><code>}
+printf("횟수 : %d ", count);
+</code></pre>
+<p>}</p>
+<p>참고 많이 하고 한건데 완벽하지는 않을거에요 디버깅 해보시고 오류난거 수정하면 괜찮을거 같아요</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/07/02 12:29</p>
+                                <p class="static-profile" style="margin:0;padding:0;">정종서</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8119"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">public class ClockAngle {
+    public static void main(String[] args) {
+        int hour;
+        float minute;
+        for(int n=1; n&lt;=44; n++) {
+            hour = (3*(2*n-1))/11;
+            minute = (((3*(2*(float)n-1))/11)%1)*60;
+            System.out.println(hour + &quot; : &quot; + (int)minute);
+        }
+        System.out.println(&quot;total: 44번!&quot;);
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/01 11:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">곽철이</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9331"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def angle(h, m):
+    h = h if h &lt; 12 else h - 12             ## 24h -&gt; 12h
+    am = 360 * m / 60                       ## angle of hour
+    ah = 360 * h / 12 + am / 12             ## angle of minuite
+    ang = abs(am-ah)                        ## angle btw hour and minute
+    ang = ang if ang &lt;= 180 else 360-ang    ## normalize angle under 180
+    return ang
+
+tmp = (0, 0, 0)
+cnt = 0
+for h in range(24):
+    for m in range(60):
+        if (90 - tmp[2]) * (90 - angle(h, m)) &lt; 0:          ## if cross over 90
+            cnt += 1                                        ## increase cnt
+            print('%2d. %02d:%02d' %(cnt, tmp[0], tmp[1]))  ## print time
+        tmp = (h, m, angle(h, m))
+
+print('Total: %d번!' %cnt)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/11/21 14:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">songci</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10166"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3.6</p>
+<p>아이디어&gt;</p>
+<ol>
+<li>직각이 되는 순간은 시침과 분침의 간격이 15칸일 때</li>
+<li>한 바퀴는 60칸</li>
+<li>각 시간간의 간격은 5칸</li>
+<li>분침이 10칸 이동할 때 시침은 1 칸 이동</li>
+<li>시침각이 뒤에 있을때 : 시침위치-분침위치=15 or 45 위치가 직각</li>
+<li>시침각이 앞에 있을때 : 시침위치-분침위치=-15 or -45 위치가 직각</li>
+<li>시침의 각속도가 분침의 각속도보다 큰 결과값은 제외</li>
+</ol>
+<pre><code class="python">time,hour,h_angle,m_angle,watch_angle,count,t = '',0,0,0,0,0,0
+timelist =[]
+
+for i in range(3):
+    for h in range(10):
+        if i == 2 and h &gt; 3:
+            break
+        for m in range(6):
+            for n in range(10):
+                time = str(i)+str(h)+':'+str(m)+str(n)
+                hour = int(str(i)+str(h))
+                m_angle = int(str(m)+str(n))
+                if 0 &lt; m_angle &lt;=10:
+                    h_angle = hour * 5 
+                elif 10 &lt; m_angle &lt;= 20:
+                    h_angle = hour * 5 + m
+                elif 20 &lt; m_angle &lt;= 30:
+                    h_angle = hour * 5 + m
+                elif 30 &lt; m_angle &lt;= 40:
+                    h_angle = hour * 5 + m
+                elif 40 &lt; m_angle &lt;= 50:
+                    h_angle = hour * 5 + m
+                else:
+                    h_angle = hour * 5 + m
+                if h_angle &gt; 60:
+                    h_angle = h_angle - 60
+                watch_angle = h_angle - m_angle
+                timelist.append([time,h_angle,m_angle,watch_angle])
+                if abs(watch_angle) == 15 or abs(watch_angle) == 45:
+                    if int(timelist[t][1])-int(timelist[t-1][1]) &gt;= int(timelist[t][2])-int(timelist[t-1][2]) and timelist[t-1][3] == timelist[t][3]:
+                        pass
+                    else:
+                        count += 1
+                        print(&quot;%d 번째:&quot;%count,time)
+                t += 1
+print(&quot;\n&quot;&quot;Total : %d번! &quot;%count)
+</code></pre>
+
+<ul>
+<li>결과값</li>
+</ul>
+<pre><code class="python">1 번째: 00:16
+2 번째: 00:49
+3 번째: 01:22
+4 번째: 01:55
+5 번째: 02:27
+6 번째: 03:00
+7 번째: 03:33
+8 번째: 04:05
+9 번째: 04:38
+10 번째: 05:10
+11 번째: 05:44
+12 번째: 06:16
+13 번째: 06:49
+14 번째: 07:22
+15 번째: 07:55
+16 번째: 08:27
+17 번째: 09:00
+18 번째: 09:33
+19 번째: 10:05
+20 번째: 10:38
+21 번째: 11:10
+22 번째: 11:44
+23 번째: 12:16
+24 번째: 12:49
+25 번째: 13:22
+26 번째: 13:55
+27 번째: 14:27
+28 번째: 15:00
+29 번째: 15:33
+30 번째: 16:05
+31 번째: 16:38
+32 번째: 17:10
+33 번째: 17:44
+34 번째: 18:16
+35 번째: 18:49
+36 번째: 19:22
+37 번째: 19:55
+38 번째: 20:27
+39 번째: 21:00
+40 번째: 21:33
+41 번째: 22:05
+42 번째: 22:38
+43 번째: 23:10
+44 번째: 23:44
+
+Total : 44번!
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/01/15 16:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">justbegin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10408"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>분침과 시침의 속도 차이는 1시간에 330도 입니다.</p>
+<p>90도, 270도, 450도, .... (180*n-90)도 에서 직각이 됩니다.</p>
+<p>따라서 (180<em>n-90)/330</em>60분에 직각입니다.</p>
+<p>1시간은 60분으로 나누어 몫은 시간 hh, 나머지는 분mm 입니다.</p>
+<pre><code class="python"># 파이썬
+
+for m in range(1, 45):
+    minute = (180*m-90)/330*60
+    hh = int(minute // 60)
+    mm = int(minute % 60)
+    print(str(m) + &quot;. &quot; + str(hh)+&quot;:&quot;+str(mm))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/01/31 12:06</p>
+                                <p class="static-profile" style="margin:0;padding:0;">olclocr</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10671"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def clock():
+    a = list()
+    for i in range(24*60):
+        if (abs(55*i-900)%3600 &lt; abs(55*(i+1)-900)%3600 and abs(55*i-900)%3600&lt; abs(55*(i-1)-900)%3600) or (abs(55*i-2700)%3600 &lt; abs(55*(i+1)-2700)%3600 and abs(55*i-2700)%3600 &lt; abs(55*(i-1)-2700)%3600):
+            a.append(&quot;{0:02d}:{1:02d}&quot;.format(i//60, i%60))
+    return a, len(a)
+print(clock())
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/13 01:36</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김동하</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10899"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">ans_list=['03:00','09:00','15:00','21:00']
+for hour in range(0,24):
+    temp_hour_angle=(hour%12)*30
+    if 270&gt;=temp_hour_angle&gt;90:
+        for min in range(0,60):
+            if 84.5&lt;temp_hour_angle-5.5*min&lt;90 or -95.5&lt;temp_hour_angle-5.5*min&lt;-90:
+                if min&lt;10 and hour&lt;10:
+                    ans_list.append('0'+str(hour)+&quot;:&quot;+&quot;0&quot;+str(min-1))
+                elif min&lt;10 and hour&gt;=10:
+                    ans_list.append(str(hour)+&quot;:&quot;+&quot;0&quot;+str(min-1))
+                elif min&gt;=10 and hour&lt;10:
+                    ans_list.append('0'+str(hour)+&quot;:&quot;+str(min-1))
+                else:
+                    ans_list.append(str(hour)+':'+str(min-1))
+    elif temp_hour_angle&lt;=90:
+        for min in range(0,60):
+            if -90&lt;temp_hour_angle-5.5*min&lt;-84.5 or -270&lt;temp_hour_angle-5.5*min&lt;-264.5:
+                if min&lt;10 and hour&lt;10:
+                    ans_list.append('0'+str(hour)+&quot;:&quot;+&quot;0&quot;+str(min))
+                elif min&lt;10 and hour&gt;=10:
+                    ans_list.append(str(hour)+&quot;:&quot;+&quot;0&quot;+str(min))
+                elif min&gt;=10 and hour&lt;10:
+                    ans_list.append('0'+str(hour)+&quot;:&quot;+str(min))
+                else:
+                    ans_list.append(str(hour)+':'+str(min))
+    elif temp_hour_angle&gt;270:
+        for min in range(0,60):
+            if 84.5&lt;temp_hour_angle-5.5*min&lt;90 or 265.5&lt;temp_hour_angle-5.5*min&lt;270:
+                if min&lt;10 and hour&lt;10:
+                    ans_list.append('0'+str(hour)+&quot;:&quot;+&quot;0&quot;+str(min-1))
+                elif min&lt;10 and hour&gt;=10:
+                    ans_list.append(str(hour)+&quot;:&quot;+&quot;0&quot;+str(min-1))
+                elif min&gt;=10 and hour&lt;10:
+                    ans_list.append('0'+str(hour)+&quot;:&quot;+str(min-1))
+                else:
+                    ans_list.append(str(hour)+':'+str(min-1))
+
+
+ans_list.sort()
+for ans in ans_list:
+    print(ans)
+print(len(ans_list))
+
+
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/24 18:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">D B</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13152"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.text.*;
+
+public class Main {
+    public static void main(String[] args) {
+        double time=0;
+        int n=1;
+
+        while(true) {
+            time=(3*(2*n-1))/11;
+
+            if(time&gt;24.0) {
+                break;
+            }
+            n++;
+            int hours=(int)time;
+            int minutes=(int)((time-((int)time))*60);
+            System.out.println(hours+&quot;:&quot;+minutes);
+        }
+
+        System.out.println(n-1);//1부터 시작하므로.
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/25 20:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">에에엑</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13289"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">
+public class Main {
+    public static void main(String[] args) {
+        int count = 0, h = 0, m = 0;
+        while (h != 24) {
+            if (++m == 60) {
+                m = 0;
+                h++;
+            }
+            double angle = Math.abs(m * 6 - ((h &gt;= 12 ? h - 12 : h) * 30 + m * 0.5));
+            if ((angle &lt;= 90 &amp;&amp; angle &gt; 84.5) || (angle &lt;= 270 &amp;&amp; angle &gt; 264.5)) {
+                count++;
+                System.out.println(String.format(&quot;%02d:%02d&quot;, h, m));
+            }
+        }
+        System.out.println(count);
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/02 19:24</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김지훈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13713"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">mv,hv = 6,0.5
+r = []
+for i in range(1441):
+    t = (mv*i - hv*i)%360
+    for j in (90,270):
+        if t &gt; j and oldt &lt;= j: r.append(i-1)
+    oldt = t
+
+print('total:',len(r))
+for i in r:
+    print('{:02}:{:02}'.format(i//60,i%60))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/24 09:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14746"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>시침:30도/시간, 분침:360도/시간</p>
+<p>자정에서 h시간 (0.0 &lt;= h &lt; 24.0)이 지났을 때,</p>
+<p>시침과 분침의 각도차는</p>
+<p><code>(360 - 30)h = 330h</code></p>
+<p>이다. 따라서</p>
+<pre><code>330h % 360=90 또는 330h % 360=270
+
+=&gt; 330h=360n+90 또는 330h=360n+270, n = 0,1,2,...
+
+=&gt; h=(360n+90)/330 또는 (360n+270)/330, n=0,1,2...
+</code></pre>
+
+<p>를 만족하는 h의 집합 H를 구하면 된다. h의 범위에 위 식을 대입하면</p>
+<pre><code>0.0&lt;=h&lt;24.0
+
+=&gt; 0.0&lt;=(360n+90)/330&lt;24.0 또는 0.0&lt;=(360n+270)/330&lt;24.0
+
+=&gt; -0.25&lt;=n&lt;21.75 또는 -0.75&lt;=n&lt;21.25
+
+=&gt; 0&lt;=n&lt;=21
+
+그러므로
+
+H = {h | h=(360n+90)/330 또는 h=(360n+270)/330, n = 0,1,...,21}
+</code></pre>
+
+<p>중1 수준 수학인데 왜케 어렵지... T.T</p>
+<pre><code class="python">H = {(360*n+90)/330 for n in range(22)} | {(360*n+270)/330 for n in range(22)}
+
+for h in sorted(H):
+    hh, mm = int(h), int((h-int(h))*60)
+    print('{:02d}:{:02d}'.format(hh, mm))
+
+print('총', len(H), '번')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/27 05:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16117"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#하루동안 시침과 분침의 각이 직각이 된 횟수
+hour=0;minute=0;second=0;count=0;counts=0
+k=[90,270,450,630]
+for hour in range(0,24):
+    for minute in range(0,60):
+        for second in range(0,60):
+            angle_m=minute*6+0.1*second
+            angle_h=minute*0.5+hour*30+second/120
+            angle=angle_h-angle_m
+            if abs(round(angle)) in k:#각도오차:+-0.5
+                count+=1
+                print(hour,':',minute)
+                break#각 시각(hh:mm)당 1회만 출력
+print('total:{}회'.format(count))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/01/21 15:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GammaKnight</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20122"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3</p>
+<ul>
+<li>분 단위로 각도가 변하므로(6˚)</li>
+<li>시침과 분침의 각도 차이 <code>ang_diff</code>가 다음의 조건을 만족하는 경우를 출력함 <ul>
+<li><code>90˚ - delta &lt; ang_diff &lt; 90˚ + delta</code> or <code>270˚ - delta &lt; ang_diff &lt; 270˚ + delta</code></li>
+<li>where, <code>delta = 6˚ / 2</code></li>
+</ul>
+</li>
+</ul>
+<pre><code class="python">def main():
+    count = 0
+    for hh in range(24):
+        for mm in range(60):
+            if is_right_angle(hh, mm):
+                print(f&quot;{hh:0&gt;2}:{mm:0&gt;2}&quot;)
+                count += 1
+    print(count)
+
+
+def is_right_angle(hh, mm):
+    hh_ang = ((60 * hh + mm) * 0.5) % 360
+    mm_ang = 6 * mm
+    ang_diff = hh_ang - mm_ang
+    if ang_diff &lt; 0:
+        ang_diff += 360
+
+    delta = 3
+    chk1 = 90 - delta &lt; ang_diff &lt; 90 + delta
+    chk2 = 270 - delta &lt; ang_diff &lt; 270 + delta
+    return chk1 or chk2
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/12/04 11:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25082"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">count=0
+for hour in range(0,24):
+    for ang in [90, 270]:
+        move = 360*hour+ang
+        min = move/5.5
+        hours = min//60
+        if hours &lt; 24:
+            print(&quot;%02d:%02d&quot;%(hours,min%60))
+            count+=1
+print(count)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/03/29 21:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">fox.j</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29764"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def isRightAngle(h, m, s):
+    if h &gt; 12:
+        h -= 12
+    ha = 30*h + m//2
+    ma = 6*m + s//10
+    a = abs(ha - ma)
+    return a == 90 or a == 270
+
+cnt = 0
+for h in range(24):
+    for m in range(60):
+        for s in range(60):
+            if isRightAngle(h, m, s):
+                print(&quot;\t%2d:%02d:%02s&quot;%(h,m,s))
+                cnt += 1
+                break
+print('Total: %d번!' %(cnt))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/11/22 19:27</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

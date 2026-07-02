@@ -1,0 +1,684 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="가로, 세로, 한 줄에, 파리(1) 3마리, 구더기(0) 3마리씩 놓아라.
+
+3마리 이상 붙일 수 없다.
+
+  예)
+  011100 - X
+  011001 - O
+
+```
+input:
+--0-1-
+------
+11--0-
+...">
+    <title>[게임] cube escape - harvey&#39;s box 벌레 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">[게임] cube escape - harvey&#39;s box 벌레</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">2</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 3</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>가로, 세로, 한 줄에, 파리(1) 3마리, 구더기(0) 3마리씩 놓아라.</p>
+<p>3마리 이상 붙일 수 없다.</p>
+<p>예)
+  011100 - X
+  011001 - O</p>
+<pre><code>input:
+--0-1-
+------
+11--0-
+-1----
+-----0
+-10---
+
+output:
+100110
+001011
+110100
+011001
+101010
+010101
+</code></pre>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2018/09/13 15:02</p>
+                    <p class="static-profile" style="margin:0;padding:0;">박범수</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>6개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_14646"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">class harvey_box:
+  def __init__(self, p):
+    self.brd = [list(i) for i in p.splitlines()]
+    self._row, self._clm = len(self.brd), len(self.brd[0])
+    self.x = [(i, j) for i in range(self._row) for j in range(self._clm) if self.brd[i][j] == '-']
+
+  def solve(self):
+    stc = [self._solver(*self.x[0])]
+    while stc:
+      try:
+        if next(stc[-1]): continue
+        if len(stc) == len(self.x): self.print_brd(); continue
+        stc.append(self._solver(*self.x[len(stc)]))
+      except:
+        stc.pop()
+
+  def print_brd(self):
+    for i in self.brd: print(''.join(i))
+    print()
+
+  def _solver(self, px, py):
+    for i in range(2):
+      self.brd[px][py] = str(i)
+      tmp1 = ''.join(self.brd[px])
+      tmp2 = ''.join(self.brd[i][py] for i in range(self._row))
+      yield tmp1.count('111')&gt;0 or tmp1.count('000')&gt;0 or tmp2.count('111')&gt;0 or tmp2.count('000')&gt;0\
+      or tmp1.count('0')&gt;3 or tmp1.count('1')&gt;3 or tmp2.count('0')&gt;3 or tmp2.count('1')&gt;3
+    self.brd[px][py] = '-'
+
+if __name__ == '__main__':
+  test = '''\
+--0-1-
+------
+11--0-
+-1----
+-----0
+-10---'''
+  harvey_box(test).solve()
+</code></pre>
+
+<pre><code>100110
+001011
+110100
+011001
+101010
+010101
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/15 02:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2377"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">구더기도 3마리이상 붙일 수 없습니다 ^^</span>
+                                -
+                                <span style="font-size:11px;">
+                                    박범수,
+                                    2018/09/17 11:10
+                                </span>
+                            </div>
+                        
+                            <a name="comment_2379"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">예외 추가했습니다~</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Creator,
+                                    2018/09/18 08:16
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14657"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>
+def find(board, i, j):
+    # 파리, 구더기
+    for m in ('0', '1'):
+        board[i][j] = m
+        # 가로, 세로
+        for l in ('col', 'row'):
+            s = ''
+            for k in range(6):
+                if l == 'col':
+                    s += board[i][k]
+                else:
+                    s += board[k][j]
+            # 불가능하면, 반대가 정답
+            if s.count('1') &gt; 3 or s.count('0') &gt; 3 or s.count('111') &gt; 0 or s.count('000') &gt; 0:
+                if board[i][j] == '0':
+                    board[i][j] = '1'
+                else:
+                    board[i][j] = '0'
+                return 1
+    # 둘 다 가능하면 원복
+    board[i][j] = '-'
+    return 0
+
+
+def print_board(board):
+    for i in range(6):
+        print(''.join(board[i]))
+    print()
+
+
+
+
+input = '''\
+--0-1-
+------
+11--0-
+-1----
+-----0
+-10---'''
+
+empty_cnt = input.count('-')
+board = [[j for j in i] for i in input.splitlines()]
+print_board(board)
+
+while empty_cnt &gt; 0:
+    for i in range(6):
+        for j in range(6):
+            if board[i][j] == '-':
+                # 파리나 구더기를 넣어보고 불가능하면, 반대가 정답
+                empty_cnt -= find(board, i, j)
+
+print_board(board)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/17 15:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박범수</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14732"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>가로 또는 세로 한 줄에 대해서</p>
+<p>3마리씩 놓아아 하므로, '1' 세 개인 줄은 '0'을 채운다.</p>
+<p>'1'이 세 개 연속될 수 없으므로, '11-' =&gt; '110', '-11' =&gt; '011' , '1-1' =&gt; '101'</p>
+<p>'0'에 대해서도 똑같이 처리한다.</p>
+<pre><code class="python">import numpy as np
+
+
+# line(1행 또는 1열)에서 x('1' 또는 '0')에 대해 검사한다.
+def check(line, x):
+    global changed
+
+    y = {'1':'0', '0':'1'}[x]
+    res = line[:]
+    if res.count(x) == 3:
+        res = res.replace('-', y)
+    else:
+        res = res.replace('-'+x+x, y+x+x)
+        res = res.replace(x+x+'-', x+x+y)
+        res = res.replace(x+'-'+x, x+y+x)
+
+    if line != res:
+        changed = True
+
+    return res
+
+
+inp_str = '''--0-1-
+------
+11--0-
+-1----
+-----0
+-10---'''
+
+arr = np.array([list(x) for x in inp_str.splitlines()])
+changed = True
+while changed:
+    changed = False
+    for k in range(6):
+        arr[k,:] = list(check(check(''.join(arr[k,:]), '1'), '0')) # k번 행
+        arr[:,k] = list(check(check(''.join(arr[:,k]), '1'), '0')) # k번 열
+
+for i in range(6):
+    print(''.join(arr[i,:]))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/25 18:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22527"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from random import *
+
+inp1='''--0-1-
+------
+11--0-
+-1----
+-----0
+-10---'''
+print ('&lt;input&gt;\n',inp1,'\n\n&lt;output&gt;')
+inp1=inp1.split('\n')
+
+for i in range (len(inp1)):
+    while (1):
+        temp=list(inp1[i])
+        for j in range (len(temp)):
+            if temp[j]=='-':
+                if temp.count('0')&lt;3 and temp.count('1')&lt;3:
+                    temp[j]=str(randint(0,1))
+                elif temp.count('0')==3 and temp.count('1')&lt;3:
+                    temp[j]='1'
+                elif temp.count('0')&lt;3 and temp.count('1')==3:
+                    temp[j]='0'
+
+        temp=''.join(temp)
+        if '000' not in temp and '111' not in temp:
+            print (temp)
+            break
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/06/08 12:31</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Buckshot</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2761"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">&lt;input&gt;
+ --0-1-
+------
+11--0-
+-1----
+-----0
+-10---
+
+&lt;output&gt;
+100110
+110010
+110100
+010011
+110010
+110100</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Buckshot,
+                                    2020/06/08 12:31
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23048"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import numpy as np
+inp=&quot;&quot;&quot;--0-1-
+------
+11--0-
+-1----
+-----0
+-10---&quot;&quot;&quot;
+lst=[list(ln) for ln in inp.split(&quot;\n&quot;)]  #print(np.matrix(lst))
+def check(y,x,cmp):
+    global lst
+    if lst[y].count(cmp)==3:  #한줄(같은 y축)에 동일한 요소가 3개 있으면 False
+        return False
+    if [lst[j][x] for j in range(6)].count(cmp)==3:  #한줄(같은 x축)에 동일한 요소가 3개 있으면 False
+        return False
+    for i in range(4):  #동일한 요소가 3개 이상 반복되면 False
+        if lst[y][i]==lst[y][i+1]==lst[y][i+2] and lst[y][i]!=&quot;-&quot;:
+            return False
+        if lst[i][x]==lst[i+1][x]==lst[i+2][x] and lst[i][x]!=&quot;-&quot;:
+            return False
+    return True
+def solve():
+    global lst
+    for y in range(6):
+        for x in range(6):
+            if lst[y][x]==&quot;-&quot;:
+                for cmp in range(2):
+                    if check(y,x,str(cmp)):
+                        lst[y][x]=str(cmp)
+                        solve()
+                        lst[y][x]=&quot;-&quot;
+                return
+    for ln in lst:  #그냥 이렇게 4줄 말고 print(np.matrix(lst))로 써도 무방
+        for cmp in ln:
+            print(&quot;%2s&quot;%cmp, end=&quot;&quot;)
+        print()
+solve()
+</code></pre>
+
+<p>정답:</p>
+<pre><code class="python"> 1 0 0 1 1 0
+ 0 0 1 0 1 1
+ 1 1 0 1 0 0
+ 0 1 1 0 0 1
+ 1 0 1 0 1 0
+ 0 1 0 1 0 1
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/08/31 11:32</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박시원</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29586"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">using System;
+
+namespace solution
+{
+    class Program
+    {
+        public static string[,] map;
+        static void Main(string[] args)
+        {
+            string[] input = { &quot;--0-1-&quot;, &quot;------&quot;, &quot;11--0-&quot;, &quot;-1----&quot;, &quot;-----0&quot;, &quot;-10---&quot; };
+            int n = input.Length;
+            map = new string[n, n];
+            arrCube(n, input);
+
+            int cntBugs = 0;
+            while(cntBugs &lt; n*n)
+                cntBugs = putBugsInCube(n, map);
+
+            for (int r = 0; r &lt; n; r++)
+            {
+                for (int c = 0; c &lt; n; c++)
+                    Console.Write(&quot; {0}&quot;, map[r,c]);
+                Console.WriteLine();
+            }
+        }
+
+        private static int putBugsInCube(int n, string[,] map)
+        {
+            int cnt = 0;
+            checkRow(n);
+            checkCol(n);
+
+            for (int r = 0; r &lt; n; r++)
+            {
+                for (int c = 0; c &lt; n; c++)
+                {
+                    if (map[r, c] == &quot;-&quot;)
+                    {
+                        if (colrowCnt(&quot;0&quot;, n, r, c) == 3)
+                            map[r, c] = &quot;1&quot;;
+                        else if (colrowCnt(&quot;1&quot;, n, r, c) == 3)
+                            map[r, c] = &quot;0&quot;;
+                    }
+                    else
+                        cnt++;
+                }
+            }
+            return cnt;
+        }
+
+        private static void checkCol(int n)
+        {
+            string ss = &quot;&quot;;
+            for (int c = 0; c &lt; n; c++)
+            {
+                ss = (map[0, c] == &quot;-&quot;) ? &quot;&quot; : map[0,c];
+                for (int i = 1; i &lt; n; i++)
+                {
+                    if (map[i, c] == &quot;-&quot;)
+                    {
+                        if(i+1 &lt; n &amp;&amp; ss != &quot;&quot; &amp;&amp; map[i+1,c] == ss)
+                        {
+                            map[i, c] = (ss == &quot;0&quot;) ? &quot;1&quot; : &quot;0&quot;;
+                            ss = map[i, c];
+                        }
+                        else ss = &quot;&quot;;
+                    }
+                    else if (ss == &quot;&quot; || ss.ToString() != map[i, c])
+                        ss = map[i, c];
+                    else if ( ss != &quot;&quot; &amp;&amp; ss.ToString() == map[i,c])
+                    {
+                        if (i - 2 &gt;= 0)
+                            map[i - 2, c] = (ss == &quot;0&quot;) ? &quot;1&quot; : &quot;0&quot;;
+                        if (i + 1 &lt; n)
+                            map[i + 1, c] = (ss == &quot;0&quot;) ? &quot;1&quot; : &quot;0&quot;;
+                        ss = &quot;&quot;;
+                    }
+                }
+            }
+        }
+
+        private static void checkRow(int n)
+        {
+            string ss = &quot;&quot;;
+            for (int r = 0; r &lt; n; r++)
+            {
+                ss = (map[r, 0] == &quot;-&quot;) ? &quot;&quot; : map[r, 0];
+                for (int i = 1; i &lt; n; i++)
+                {
+                    if (map[r, i] == &quot;-&quot;)
+                    {
+                        if(i+1 &lt; n &amp;&amp; map[r, i+1] == ss)
+                        {
+                            map[r, i] = (ss == &quot;0&quot;) ? &quot;1&quot; : &quot;0&quot;;
+                            ss = map[r, i];
+                        }
+                        else ss = &quot;&quot;;
+                    }
+                    else if (ss == &quot;&quot; || ss.ToString() != map[r, i])
+                        ss = map[r, i];
+                    else if (ss != &quot;&quot; &amp;&amp; ss.ToString() == map[r,i])
+                    {
+                        if (i - 2 &gt;= 0 &amp;&amp; map[r, i - 2] == &quot;-&quot;)
+                            map[r, i - 2] = (ss == &quot;0&quot;) ? &quot;1&quot; : &quot;0&quot;;
+                        if (i + 1 &lt; n &amp;&amp; map[r, i + 1] == &quot;-&quot;)
+                            map[r, i + 1] = (ss == &quot;0&quot;) ? &quot;1&quot; : &quot;0&quot;;
+                        ss = &quot;&quot;;
+                    }
+                }
+            }
+        }
+
+        private static int colrowCnt(string s, int n, int r, int c)
+        {
+            int cnt = 0;
+            for (int y = 0; y &lt; n; y++)
+                if (map[y, c] == s)
+                    cnt++;
+            if (cnt == 3)
+                return cnt;
+            cnt = 0;
+            for (int x = 0; x &lt; n; x++)
+                if (map[r, x] == s)
+                    cnt++;
+            return cnt;
+        }
+
+        private static void arrCube(int n, string[] input)
+        {
+            for (int r = 0; r &lt; n; r++)
+            {
+                for (int c = 0; c &lt; n; c++)
+                    map[r, c] = input[r][c].ToString();
+            }
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/08/27 21:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

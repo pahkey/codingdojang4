@@ -1,0 +1,3624 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="## 문제
+
+텍스트가 입력으로 주어질 때, 단어의 개수를 세는 프로그램을 작성한다.
+
+&quot;문자 세기&quot;와 &quot;단어 세기&quot;는 프로그래밍 입문에 성공했는지를 가늠하는 문제라고 할 수 있습니다.
+
+지금은 발가락으로도 만드는 분들이 많겠지만 처음에...">
+    <title>단어 세기 Word Counting - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">단어 세기 Word Counting</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">12</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 2</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <h2 id="_1">문제</h2>
+<p>텍스트가 입력으로 주어질 때, 단어의 개수를 세는 프로그램을 작성한다.</p>
+<p>"문자 세기"와 "단어 세기"는 프로그래밍 입문에 성공했는지를 가늠하는 문제라고 할 수 있습니다.</p>
+<p>지금은 발가락으로도 만드는 분들이 많겠지만 처음에는 의외로 많이 어려워합니다.</p>
+<p>추억을 살려 봅시다.</p>
+<h2 id="_2">입력</h2>
+<p>아래 내용을 가진 텍스트파일을 미리 만들어 두고, 프로그램을 실행하면 파일 내용을 읽어들인다(출처: Wikipedia).</p>
+<pre><code>As the country became embroiled in a domestic crisis, the first government was dislodged and succeeded by several different administrations. Bolikango served as Deputy Prime Minister in one of the new governments before a partial state of stability was reestablished in 1961. He mediated between warring factions in the Congo and briefly served once again as Deputy Prime Minister in 1962 before returning to the parliamentary opposition. After Joseph-Desire Mobutu took power in 1965, Bolikango became a minister in his government. Mobutu soon dismissed him but appointed him to the political bureau of the Mouvement Populaire de la Revolution. Bolikango left the bureau in 1970. He left Parliament in 1975 and died seven years later. His grandson created the Jean Bolikango Foundation in his memory to promote social progress. The President of the Congo posthumously awarded Bolikango a medal in 2005 for his long career in public service.
+</code></pre>
+
+<h2 id="_3">출력</h2>
+<p>구분자(Separator)는 마침표 '.', 쉼표 ',', 공백 ' ' 이다.</p>
+<p>가장 많이 나온 순서대로 단어 10개와 그 단어의 빈도를 출력한다.</p>
+<p>빈도가 같은 단어들 사이의 순서는 무시한다.</p>
+<pre><code>in 12
+the 10
+Bolikango 5
+a 4
+of 4
+and 3
+to 3
+his 3
+became 2
+government 2
+</code></pre>
+
+<h2 id="_4">도전과제</h2>
+<p>같은 일을 하는 프로그램을 최소 세 가지 이상의 전혀 다른 스타일로 작성한다.</p>
+<blockquote>
+<p>참고: 프로그래밍 패턴 - 프로그램을 작성하는 33가지 방법, 크리스티나 로페즈, 이상주 옮김, 위키북스, 2015</p>
+</blockquote>
+<p>예시) 본인 성향은 어떤지 한 번 생각해봅시다.</p>
+<ul>
+<li>한국인: 빨리빨리. 손 가는 대로 코딩한다. 결과가 안 나오면 그때가서 다시 고친다.</li>
+<li>예술가: 심혈을 기울여서 예쁜 코드를 만든다. 조금 비효율적이면 어떤가!</li>
+<li>즐기는 자: 그저 알고리즘에 심취한다.</li>
+<li>사장님: 성공의 비결은 내가 잘 하는 게 아니라 잘 갖다 쓰는 거다. API를 최대한 활용한다.</li>
+<li>호인: procedural, functional, OOP 안 가리고 그때그때 적당히 섞어 쓴다. 물에 물 탄 듯.</li>
+<li>나르시스트: 모든 반복문은 재귀함수로 만들 수 있다. 재귀는 아름다운 것이여.</li>
+<li>상남자: 짧고 굵은 게 최고다. LOC(Lines Of Code) 또는 소스파일의 크기(byte)를 최소로 만든다.</li>
+<li>노가다꾼: C 스타일로 작성한다. 문자열은 문자 배열로 취급하고, 정렬 알고리즘도 in-place로 직접 만든다.</li>
+<li>레이서: 효율성의 노예. 극한의 빠름을 추구한다.</li>
+<li>추상화가: "순수" 객체 지향 프로그래밍을 추구한다.</li>
+<li>은거고수: 먹으면 싸는 게 인생. 함수(functional programming)는 항상 옳다. side-effect는 악(惡)이다.</li>
+<li>구글덕후: 구글은 위대하다. <strong>MapReduce: simplified data processing on large clusters</strong>, Jeffrey Dean and Sanjay Ghemawat. 2008.</li>
+</ul>
+<hr />
+<p><strong>추가:</strong></p>
+<p>설명이 부족한 듯해 사족을 답니다. 책 광고는 아닌데...</p>
+<p>위 책은 "단어 세기"라는 한 가지 간단한 문제를, 파이썬으로 수십 가지 패턴으로 만들어 봅니다.</p>
+<p>제약-지원되는 추상화의 수준이나, 하드웨어적인 제약 등-에 따라 프로그래밍 패턴이 달라진다고 주장하고 있는데,</p>
+<p>어셈블리에 가까운 코드부터 함수형 프로그래밍, 병행성, 객체지향의 설계 등을 총망라하고 있어서 흥미롭습니다.</p>
+<p>저는 책을 정독하기 전에, 스스로 어디까지 변주가 되는지 궁금해졌습니다.</p>
+<p>그래서 이 문제는 쉬운 문제이지만 마냥 쉽지는 않습니다.</p>
+<p>"한 가지 문제를 다양한 관점으로 접근해보자"는 컨셉으로 작성되었음을 유념해 주시기 바랍니다.</p>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2018/10/01 02:53</p>
+                    <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                </div>
+            </div>
+
+            
+                <a name="comment_2406"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">입력 중에 é 가 있어서 e 로 수정했습니다.</span>
+                    -
+                    <span style="font-size:11px;">
+                        Noname,
+                        2018/10/03 21:36
+                    </span>
+                </div>
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>54개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_14805"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">5</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>책에 나온 예제: collections.Counter 라는 게 있네요.</p>
+<pre><code class="python">from collections import Counter
+
+with open('input.txt', 'r') as f:
+    words = [w.strip('.,') for w in f.read().split()]
+    for w, c in Counter(words).most_common(10):
+        print(w, c)
+</code></pre>
+
+<p>Counter 쓰면 재미 없으니까 안 쓰기로 하고.</p>
+<p>미친척하고 최대한 짧게:</p>
+<pre><code class="python">W=[w.strip('.,') for w in open('input.txt').read().split()]
+for c,w in sorted((W.count(w),w) for w in set(W))[-1:-11:-1]:print(w,c)
+</code></pre>
+
+<p>procedural: 위에 거 고쳐씀.</p>
+<pre><code class="python">with open('input.txt', 'r') as f:
+    text = f.read()
+
+word_lst = []
+for word in text.split():
+    word_lst.append(word.strip('.,'))
+
+word_cnt = []
+for word in set(word_lst):
+    cnt = word_lst.count(word)
+    word_cnt.append((cnt, word))
+
+word_cnt.sort(reverse=True)
+
+for cnt, word in word_cnt[:10]:
+    print(word, cnt)
+</code></pre>
+
+<p>O(N^2)은 좀 부끄러우니까... 제 취향은 딱 이 정도:</p>
+<pre><code class="python">with open('input.txt', 'r') as f:
+    text = f.read()    
+    words = text.replace(',', ' ').replace('.',' ').split()
+
+dic = {}
+for w in words:
+    if w in dic:
+        dic[w] += 1
+    else:
+        dic[w] = 1
+
+lst = sorted(dic.items(), key=lambda kv: kv[1], reverse=True)
+for w, c in lst[:10]:
+    print(w, c)
+</code></pre>
+
+<p>.</p>
+<p>functional: 경험이 많진 않은데, 이렇게 하는 거 맞을 겁니다 아마.</p>
+<pre><code class="python">def wordcnt(f):
+    def fread(f):
+        with open('input.txt', 'r') as f:
+            return f.read()
+
+    def wordlst(text):
+        return text.replace('.', ' ').replace(',', ' ').split()
+
+    def count(wset, wlst):
+        #return [(wlst.count(w), w) for w in wset]
+        return [] if not wset else [(wlst.count(wset[0]), wset[0])] + count(wset[1:], wlst)
+
+    def tostr(clst):
+        #return ''.join('{} {}\n'.format(*reversed(c)) for c in clst)
+        return '' if not clst else '{} {}\n'.format(*reversed(clst[0])) + tostr(clst[1:])
+
+    return \
+        tostr(
+            sorted(
+                count(
+                    list(set(wordlst(fread(f)))),
+                    wordlst(fread(f))
+                ),
+                reverse=True
+            )[:10]
+        )
+
+
+print(wordcnt(&quot;input.txt&quot;))
+</code></pre>
+
+<p>.</p>
+<p>procedural/structural(C):</p>
+<p>간만에 하려니 힘듭니다... 해시테이블을 만들까 하다가, <a href="https://ko.wikipedia.org/wiki/%EB%B8%94%EB%A3%B8_%ED%95%84%ED%84%B0">bloom filter</a>만 가져와서 썼습니다.</p>
+<pre><code class="cpp">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &quot;libbloom-master/bloom.h&quot; // https://github.com/jvirkki/libbloom
+
+#define BUFSIZE 10000
+#define MAXWORD 1000
+
+#define MAX(a, b)   ((a)&gt;=(b) ? (a):(b))
+#define MIN(a, b)   ((a)&lt;(b) ? (a):(b))
+
+
+typedef struct {
+    char *word;
+    int len;
+    int cnt;
+} Wordcnt;
+
+Wordcnt* counter[MAXWORD];
+int cntsize = 0;
+
+
+// comparator for qsort()
+int cmp_f(const void *a, const void *b) {
+    const Wordcnt* wc1 = *(const Wordcnt**) a;
+    const Wordcnt* wc2 = *(const Wordcnt**) b;
+    return wc2-&gt;cnt - wc1-&gt;cnt;
+}
+
+
+// fetch a word from buf
+char* fetch_word(char *buf, int *plen)
+{
+    char* word;
+    if ((word = strtok(buf, &quot; &quot;)) == NULL)
+        return NULL;
+
+    // removing '.', ','
+    int len = strlen(word);
+    if (word[len-1] == ',' || word[len-1] == '.') {
+        word[len-1] = '\0';
+        len--;
+    }
+
+    // set length
+    *plen = len;
+
+    return word;
+}
+
+
+// allocate new counter
+void counter_alloc(char* word, int len)
+{
+    Wordcnt* newcounter = (Wordcnt *)malloc(sizeof(Wordcnt));
+    newcounter-&gt;word = word; newcounter-&gt;len = len; newcounter-&gt;cnt = 1;
+    counter[cntsize] = newcounter;
+    cntsize++;
+}
+
+
+// add a counter, or increase existing counter
+void counter_add(char* word, int len)
+{
+    static struct bloom blm;
+    static int blm_init_OK = 0;
+    if (!blm_init_OK) {
+        bloom_init(&amp;blm, MAX(MAXWORD, 1000), 0.1);
+        blm_init_OK = 1;
+    }
+
+    if (bloom_check(&amp;blm, (void *)word, len) == 0) { // negative
+        bloom_add(&amp;blm, (void *)word, len);
+        counter_alloc(word, len);
+    } else {
+        for (int i = 0; i &lt; cntsize; i++) { // positive
+            if (strncmp(word, counter[i]-&gt;word, MAX(len, counter[i]-&gt;len)) == 0) {
+                counter[i]-&gt;cnt++;
+                return;
+            }
+        }
+
+        // false positive
+        bloom_add(&amp;blm, (void *)word, len);
+        counter_alloc(word, len);
+    }
+}
+
+
+int main()
+{
+    FILE *fp = fopen(&quot;input.txt&quot;, &quot;r&quot;);
+    char buf[BUFSIZE];
+    fgets(buf, sizeof(buf), fp);
+    fclose(fp);
+
+    char* word;
+    int len;
+
+    word = fetch_word(buf, &amp;len);
+    do {
+        counter_add(word, len);
+    } while ((word = next_word(NULL, &amp;len))!= NULL);
+
+    qsort(counter, cntsize, sizeof(Wordcnt*), cmp_f);
+
+    for (int i = 0; i &lt; MIN(10, cntsize); i++)
+        printf(&quot;%s %d\n&quot;, counter[i]-&gt;word, counter[i]-&gt;cnt);
+
+    for (int i = 0; i &lt; cntsize; i++)
+        free(counter[i]);
+
+    return 0;
+}
+</code></pre>
+
+<p>.</p>
+<p>OOP: C# 입니다.</p>
+<pre><code class="C#">using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace WordCount
+{    
+    public static class StringExtension
+    {
+        public static string[] ToWordArray(this string str) { return str.Replace('.', ' ').Replace(',', ' ').Replace(&quot;  &quot;, &quot; &quot;).Split(); }
+    }
+
+    class Counter
+    {
+        private int value;
+        public int Value { get =&gt; value; }
+        public Counter() { value = 1; }
+        public void Increase() { value++; }
+    }
+
+    class WordCountComparer : IComparer&lt;KeyValuePair&lt;string, Counter&gt;&gt;
+    {
+        public int Compare(KeyValuePair&lt;string, Counter&gt; x, KeyValuePair&lt;string, Counter&gt; y)
+        {
+            Counter counter1 = x.Value, counter2 = y.Value;
+            return counter2.Value - counter1.Value;
+        }
+    }
+
+    class WordCounter
+    {
+        private Dictionary&lt;string, Counter&gt; dict;
+
+        public WordCounter(string[] wordArray)
+        {
+            dict = new Dictionary&lt;string, Counter&gt;();
+            foreach (var word in wordArray)
+                this.Add(word);
+        }
+
+        public void Add(String word)
+        {
+            if (dict.ContainsKey(word))
+                dict[word].Increase();
+            else
+                dict.Add(word, new Counter());
+        }
+
+        public KeyValuePair&lt;string, Counter&gt;[] Top(int numItem)
+        {            
+            var arr = dict.ToArray();
+            Array.Sort(arr, new WordCountComparer());
+            var result = new KeyValuePair&lt;string, Counter&gt;[10];
+            Array.Copy(arr, result, numItem);
+            return result;
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string text = System.IO.File.ReadAllText(&quot;..\\..\\input.txt&quot;);
+            var wordCounter = new WordCounter(text.ToWordArray());
+            foreach (var kv in wordCounter.Top(10))
+            {
+                Console.WriteLine(kv.Key + &quot; &quot; + kv.Value.Value);
+            }
+            Console.ReadLine();
+        }        
+    }
+}
+</code></pre>
+
+<p>.</p>
+<p>메모리가 아주 넉넉하다면:</p>
+<p>검증된, 실제로 사용되는 해시함수들은 생각보다 오버헤드가 큽니다. dictionary()나 set()도 마찬가지지요.</p>
+<p>메모리가 무한하다고 가정하면 각 단어와 배열 원소를 1:1로 매핑할 수 있으므로 충돌이 없는 해시테이블이 됩니다.</p>
+<p>1:1매핑이기 때문에, 각 엔트리에는 키값이 들어가는 대신 해당 단어의 카운터를 바로 저장할 수 있습니다.</p>
+<p>.</p>
+<p>실제로는 메모리 한계가 있기 때문에, 아래에서는 5글자까지만 잘라서 1:1 매핑하고 뒷부분은 그냥 손실됩니다(즉 불완전한 코드). </p>
+<p>또 한 가지, 테이블이 커지면 캐시 때문에 속도가 안 난다는 이유도 있기 떄문에...</p>
+<p>좀 더 리얼하게 하자면 해시함수 대신 문자열의 처음 몇 글자를 태그로 사용할 수 있는데, 여기까지 만들면 구조가 너무 복잡해져서 패스했습니다.</p>
+<p>.</p>
+<p>해시테이블 인덱스는 char-&gt;byte-&gt;int로 바꿔서 바로 사용해도 되지만, 아래에서는 각 문자열을 27진수(26진수를 쓰면 0000('')과 0000('a')를 구분할 수 없기 때문에)로 변환하는 방법을 사용했습니다.</p>
+<p>.</p>
+<p>파싱도 직접 했고... 마지막에 단어를 정렬할 때는 bucket sort를 사용해봤습니다. </p>
+<p>테이블을 순회하는 비용을 줄이기 위해 비어 있지 않은 엔트리들을 리스트로 만들어 둡니다.</p>
+<p>그리고 앞서 처리할 때 최대빈도수maxcnt를 저장해 두고, </p>
+<p>maxcnt 크기의 배열을 만들어서 빈도수를 인덱스로 단어를 저장합니다.</p>
+<p>문제의 입력에서는 빈도수가 20을 못 넘으니 아주 효율적입니다.</p>
+<pre><code class="python">class WordCountHash:
+    def __init__(self):
+        self.cntarr = [0] * 27**5 # 27**6 부터는 실제로 할당이 불가능함
+        self.ent = [] # 값이 0보다 큰 카운터들의 인덱스
+        self.maxcnt = 0
+
+    # 길이 k 문자열 =&gt; k자리 27진수
+    def idx(self, word):
+        i = 0
+        for ch in word:
+            i = i * 27 + (ord(ch.lower()) - ord('a') + 1)
+
+        return i
+
+    # k자리 27진수 =&gt; 길이 k 문자열
+    def str(self, idx):
+        w = ''
+        while idx:
+            w = chr(idx % 27 - 1 + ord('a')) + w
+            idx = idx // 27
+
+        return w
+
+    def add(self, word):
+        i = self.idx(word[:5])
+        self.cntarr[i] += 1
+        self.maxcnt = max(self.maxcnt, self.cntarr[i])
+        if self.cntarr[i] == 1:
+            self.ent.append(i)
+
+    # bucket sort using cntarr
+    def top(self, n):
+        bucket = [list() for _ in range(self.maxcnt + 1)]
+
+        # 버킷에 넣고,
+        for i in self.ent:
+            cnt, word = self.cntarr[i], self.str(i)
+            bucket[cnt].append((word, cnt))
+
+        # 위에서부터 n개만 뺀다. (n &gt; 단어개수)인 경우는 없다고 가정.
+        bkt_idx = self.maxcnt
+        for _ in range(n):
+            while not bucket[bkt_idx]:
+                bkt_idx -= 1
+
+            yield bucket[bkt_idx].pop()
+
+
+# 파일을 읽어서 알파벳으로 이루어진 단어를 뱉는다.
+def word_gen(filename):
+    with open(filename, 'r') as f:
+        word = ''
+        for ch in f.read():
+            if ch.isalpha():
+                word += ch
+            else:
+                if word:
+                    yield word
+                word = ''
+
+        if word:
+            yield word
+
+
+counter = WordCountHash()
+for word in word_gen(&quot;input.txt&quot;):
+    counter.add(word)
+
+for word, cnt in counter.top(10):
+    print(word, cnt)
+</code></pre>
+
+<p>.</p>
+<p>반대로 메모리가 아주 작다면:</p>
+<p>예시의 입력 데이터는 1KB가 조금 안 됩니다. 이렇게 가정을 해 봅시다.</p>
+<ul>
+<li>디스크의 한 블록은 1KB 이다.</li>
+<li>프로세서와 메모리의 성능은 초월적이다.</li>
+<li>대신, 이 메모리는 크기가 1KB + 128 Byte 에 불과하다.</li>
+</ul>
+<p>각 단어가 한 글자 + null char (2byte)일 때 1KB에는 최대 512개 단어가 들어있다.</p>
+<p>따라서 단어의 인덱스는 short(2byte)형으로 충분하고, 단어 개수는 0~512 사이의 값이므로 역시 short로 충분하다.</p>
+<p>=&gt; 1KB 블록을 읽고, 남은 128Byte로는 최대 128개의 문자, 혹은 64개의 short형 변수를 사용할 수 있다.</p>
+<p>아래 코드에서 정수형 변수는 모두 short형이라고 가정한다.</p>
+<p>.</p>
+<p>1) 그럴 리 없지만, 극단적으로 길이 300인 단어가 들어있으면 한 번 복사하는 것만으로 메모리는 빵꾸난다.</p>
+<p>=&gt; 단어는 복사할 수 없다. 오로지 버퍼 인덱스(시작, 끝)만으로 구분한다.</p>
+<p>2) "이미 카운트한 단어"를 따로 저장할 여유는 없다.</p>
+<p>=&gt; 한번 카운트한 단어는 버퍼를 공백으로 채워서 바로 지운다.</p>
+<p>3) 단어별로 빈도를 기억하면 그것만으로 최대 512 Byte가 필요하다.</p>
+<p>=&gt; 가장 빈도가 높은 10개 단어만 기억한다. 고작 10개이므로 삽입정렬 방식으로 집어넣는다.</p>
+<p>.</p>
+<p>결과가 약간 틀리게 나오는데 대충 맞으니까 그냥 냅둡니다. </p>
+<pre><code class="python"># 단어가 text[i:j]라면 (i, j) 를 리턴한다.
+def word_gen(text, startidx):
+    length = len(text)
+    s = startidx
+    for i in range(startidx, length):
+        if not text[i].isalpha():
+            if s &lt; i:
+                yield (s, i) # text[s:i]
+            s = i + 1
+
+    if s &lt; length:
+        yield (s, length) # text[s:length]
+
+
+# text[i:]에서 text[i:j]가 몇 개인지 찾는다.
+# 찾으면서, text[i:j]와 중복된 단어는 text[]에서 지운다.
+def count(text, i, j):
+    cnt = 1
+    for m, n in word_gen(text, j+1):
+        if text[i:j] == text[m:n]:
+            cnt += 1
+            for k in range(m, n): text[k] = ' '
+
+    return cnt
+
+
+# insertion sort. 빈도가 가장 높은 10개 단어만 기억한다.
+def insert(arr, item):
+    for i in range(len(arr)):
+        if arr[i] &lt; item:
+            # arr[i]에 삽입
+            for j in range(len(arr)-1, i, -1):
+                arr[j] = arr[j-1]
+            arr[i] = item
+            return
+
+    return # 더 작은 게 없으면 아무것도 안 함
+
+
+if __name__ == '__main__':
+    with open(&quot;input.txt&quot;, 'r') as f:
+        text = list(f.read().lower())  # sizeof(text)==1KB, char 배열이라고 생각하자.
+
+    top10 = [(0,0,0)] * 10 # sizeof(top10) = 2*3*10 = 60Byte
+    for i, j in word_gen(text, 0):
+        cnt = count(text, i, j)
+        insert(top10, (cnt, i, j))        
+
+    for cnt, i, j in top10:
+        print(''.join(text[i:j]), cnt)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/10/02 02:39</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14784"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">3</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>python3 입니다.</p>
+<p>temp.txt 에 저장하고 불러왔습니다.</p>
+<pre><code class="python">with open('temp.txt', 'r') as f:
+    text = f.read()
+word_list = text.replace(',', ' ').replace('.', ' ').split()
+word_list_no_duplicate = list(set(word_list))
+word_count = []
+for word in word_list_no_duplicate:
+    word_count.append((word_list.count(word), word))
+n = 0
+for result in sorted(word_count, reverse=True):
+    n += 1
+    print(result[1], ':', result[0])
+    if n == 10:
+        break
+</code></pre>
+
+<h3 id="result">result</h3>
+<pre><code class="python">in : 12
+the : 10
+Bolikango : 5
+of : 4
+a : 4
+to : 3
+his : 3
+and : 3
+was : 2
+served : 2
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/10/01 13:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hyuk</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2401"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">operator 를 사용하면 빈도가 같은 단어들 사이의 순서도 정렬할 수 있겠네요</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Hyuk,
+                                    2018/10/01 13:52
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14806"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">3</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬입니다.</p>
+<pre><code class="python">from collections import Counter
+with open('sample.txt') as f:
+  for w, c in Counter(x.strip(',.') for x in f.read().split()).most_common()[:10]:
+    print(w, c)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/10/02 10:09</p>
+                                <p class="static-profile" style="margin:0;padding:0;">룰루랄라</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2402"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">strip을 쓰면 되네요!</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Noname,
+                                    2018/10/02 14:10
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14814"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">2</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><em>python3.6.5</em></p>
+<pre><code class="python">import re
+
+txt = open(path, 'r').read()
+result = {}
+while txt:
+  word = re.search('[^\s,.]+', txt)
+  txt,n = re.subn(f'([ ,.]|^)+{word.group()}([ ,.]|$)+', lambda x: '' if not(x.group(1) and x.group(2)) else ' ', txt)
+  result[word.group()] = n
+for word in sorted(result, key = lambda x: result[x], reverse = True)[:10]:
+  print(word,result[word])
+</code></pre>
+
+<p>정규식으로 해봤습니다</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/10/03 16:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2407"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">추천 이미 써버렸는데.. 입으로 추천 드립니다ㅎㅎ</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Noname,
+                                    2018/10/06 01:25
+                                </span>
+                            </div>
+                        
+                            <a name="comment_2408"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">검은띠는 멀티 추천이 가능합니다. ^^</span>
+                                -
+                                <span style="font-size:11px;">
+                                    pahkey,
+                                    2018/10/06 12:08
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14819"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>손가는대로.</p>
+<pre><code class="python">f = open('input.txt', 'r')
+text = f.read()
+f.close()
+
+words = text.replace('.', ' ').replace(',', ' ').split()
+#print(words)
+
+dic = dict()
+for word in words:
+    if word in dic:
+        dic[word] = dic[word]+1
+    else:
+        dic[word] = 1
+#print(dic)
+
+sorted_x = sorted(dic, key=dic.get, reverse=True)
+#print(sorted_x)
+sorted_list = [(key, dic[key]) for key in sorted_x]
+
+#print(sorted_list)
+for n in range(10):
+    i, j = sorted_list[n]
+    print(i, j)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/10/03 21:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">phg98</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14801"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class SpiralArray {
+    public static void main(String[] args) {
+        String input = &quot;As the country became embroiled in a domestic crisis, the first government was dislodged and succeeded by several different administrations. Bolikango served as Deputy Prime Minister in one of the new governments before a partial state of stability was reestablished in 1961. He mediated between warring factions in the Congo and briefly served once again as Deputy Prime Minister in 1962 before returning to the parliamentary opposition. After Joseph-Désiré Mobutu took power in 1965, Bolikango became a minister in his government. Mobutu soon dismissed him but appointed him to the political bureau of the Mouvement Populaire de la Révolution. Bolikango left the bureau in 1970. He left Parliament in 1975 and died seven years later. His grandson created the Jean Bolikango Foundation in his memory to promote social progress. The President of the Congo posthumously awarded Bolikango a medal in 2005 for his long career in public service.&quot;;
+        String[] str = input.replaceAll(&quot;[^a-zA-Z0-9 ]&quot;, &quot;&quot;).split(&quot; &quot;);
+        Arrays.sort(str);
+        ArrayList&lt;String&gt; result = new ArrayList&lt;&gt;();
+        for (int i = 0; i &lt; str.length; i++)
+            if (i + 1 &lt; str.length) {
+                int count = check(str, i);
+                if (count &gt; 0)
+                    result.add(str[i] + &quot; &quot; + (count + 1));
+                i += count;
+            }
+        Collections.sort(result, new Comparator&lt;String&gt;() {
+            @Override
+            public int compare(String o1, String o2) {
+                return new Integer(o2.replaceAll(&quot;[^0-9]&quot;, &quot;&quot;)).compareTo(new Integer(o1.replaceAll(&quot;[^0-9]&quot;, &quot;&quot;)));
+            }
+        });
+        for (int i = 0; i &lt; 10; i++)
+            System.out.println(result.get(i));
+    }
+
+    private static int check(String[] str, int i) {
+        return str[i].equals(str[i + 1]) ? 1 + check(str, i + 1) : 0;
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/10/01 22:16</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김지훈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14809"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def firstway(stri):
+    a = stri.replace('.', '')
+    a = a.replace(',', '')
+    a = a.split()
+    b = list(set(a))
+    d = []
+    for c in b:
+        d.append((a.count(c), c))
+    d.sort(reverse=True)
+    for e in d[:10]:
+        print(e[1], e[0])
+def secondway(strin):
+    a = strin.replace('.', '').replace(',', '')
+    b = a.split()
+    counting = {}
+    for c in b:
+        if c in counting: counting[c] += 1
+        else: counting[c] = 1
+    ke = list(counting.keys())
+    va = list(counting.values())
+    fi = reversed(sorted(list(zip(va, ke)))[-10:])
+    for p in fi: print(p[1], p[0])
+def thirdway(string):
+    a = string.replace(',', '').replace('.', '').split()
+    b = list(set(a))
+    li = []
+    for c in b:
+        li.append(0)
+        while c in a:
+            a.remove(c)
+            li[-1] += 1
+        li[-1] = (li[-1], c)
+    li.sort(reverse=True)
+    for p in li[:10]: print(p[1], p[0])
+z = input()
+firstway(z)
+print()
+secondway(z)
+print()
+thirdway(z)
+</code></pre>
+
+<p>python으로 3가지 방법 작성했습니다
+근데 파일입력 조건이 있었네요...</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/10/02 20:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">myyh2357</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14815"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">python 3 입니다
+
+with open(&quot;c:\\temp\wlist.txt&quot;, &quot;r&quot;) as f:
+    wcnt = f.read()
+wcnt1 = wcnt.replace(&quot;,&quot;, &quot; &quot;).replace(&quot;.&quot;, &quot; &quot;).split()
+wcnt2 = list(set([(i, wcnt1.count(i)) for i in wcnt1]))
+wcnt2.sort(key = lambda x : x[1], reverse = True)
+for i in range(10):
+    print(*wcnt2[i])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/10/03 16:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">bangrangman</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14824"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">A=&quot;As the country became embroiled in a domestic crisis, the first government was dislodged and succeeded by several different administrations. Bolikango served as Deputy Prime Minister in one of the new governments before a partial state of stability was reestablished in 1961. He mediated between warring factions in the Congo and briefly served once again as Deputy Prime Minister in 1962 before returning to the parliamentary opposition. After Joseph-Désiré Mobutu took power in 1965, Bolikango became a minister in his government. Mobutu soon dismissed him but appointed him to the political bureau of the Mouvement Populaire de la Révolution. Bolikango left the bureau in 1970. He left Parliament in 1975 and died seven years later. His grandson created the Jean Bolikango Foundation in his memory to promote social progress. The President of the Congo posthumously awarded Bolikango a medal in 2005 for his long career in public service.&quot;
+b={}
+a=A.replace(&quot;.&quot;,&quot; &quot;).replace(&quot;,&quot;,&quot; &quot;).split()
+for i in range(len(a)):
+    count=a.count(a[i])
+    #print(a[i],count)
+    b[a[i]]=count
+c=list(b.values())
+c.sort()
+c.reverse()
+d=list(b)
+for i in range(10):
+    for j in range (len(list(b.items()))):
+        if c[i]==list(b.items())[j][1]:
+            print(list(b.items())[j][0], list(b.items())[j][1])
+</code></pre>
+
+<pre><code class="python">부분 풀이입니다. 결과는 
+in 12
+the 10
+Bolikango 5
+a 4
+of 4
+a 4
+of 4
+and 3
+to 3
+his 3
+and 3
+to 3
+his 3
+and 3
+to 3
+his 3
+became 2
+government 2
+was 2
+served 2
+as 2
+Deputy 2
+Prime 2
+Minister 2
+before 2
+He 2
+Congo 2
+Mobutu 2
+him 2
+bureau 2
+left 2
+became 2
+government 2
+was 2
+served 2
+as 2
+Deputy 2
+Prime 2
+Minister 2
+before 2
+He 2
+Congo 2
+Mobutu 2
+him 2
+bureau 2
+left 2
+</code></pre>
+
+<pre><code>
+이네요... a=A.replace(&quot;.&quot;,&quot; &quot;).replace(&quot;,&quot;,&quot; &quot;).split() 이 코드는 먼저 분의 답을 인용했습니다 ^^;;
+점프투파이썬의 함수 전까지 부분을 이용해서 최대한 풀어보려했습니다.
+딕셔너리를 이용해서 key, value를 설정하고 value부분을 훑어서 빈도수 list에 대한 value가 같은 것이 있으면
+key를 내보내도록 짜보았습니다.
+
+2번 빈도인 수를 제한하는 방법은 더 연구해봐야 할 것 같습니다. ;;```{.python}
+지금보니 and도 여러개가 나오네요.. 좀더 연구해보겠습니다 ㅎㅎ
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/10/03 23:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">송동규</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14835"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">l,c = [],[]
+for x in open(&quot;C:/sentences.txt&quot;, 'r').readline().split():
+    l.append(x)
+for x in list(sorted(set(l))):
+    c.append([x,l.count(x)])
+for x in list(reversed(sorted(c,key = lambda x : x[1])))[0:10]:
+    print(x[0],x[1])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/10/04 19:29</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김영성</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14844"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<pre><code class="ruby">def max_freq_words_of(file, size=10)
+  freqs = IO.read(file).gsub(/[,.]/, ' ').split.reduce(Hash.new 0) {|h,k| h[k+' ']+=1; h}
+  puts freqs.max_by(size, &amp;:last).map(&amp;:join)
+end
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code>require 'rspec/mocks/standalone'
+
+contents = 'As the country became embroiled in a domestic crisis, the first government was dislodged and succeeded by several different administrations. Bolikango served as Deputy Prime Minister in one of the new governments before a partial state of stability was reestablished in 1961. He mediated between warring factions in the Congo and briefly served once again as Deputy Prime Minister in 1962 before returning to the parliamentary opposition. After Joseph-Desire Mobutu took power in 1965, Bolikango became a minister in his government. Mobutu soon dismissed him but appointed him to the political bureau of the Mouvement Populaire de la Revolution. Bolikango left the bureau in 1970. He left Parliament in 1975 and died seven years later. His grandson created the Jean Bolikango Foundation in his memory to promote social progress. The President of the Congo posthumously awarded Bolikango a medal in 2005 for his long career in public service.'
+
+allow(IO).to receive(:read).with('sample.txt').and_return(contents)
+expect{ max_freq_words_of('sample.txt') }.to output(&quot;in 12\n&quot; +
+                                                    &quot;the 10\n&quot; +
+                                                    &quot;Bolikango 5\n&quot; +
+                                                    &quot;a 4\n&quot; +
+                                                    &quot;of 4\n&quot; +
+                                                    &quot;his 3\n&quot; +
+                                                    &quot;and 3\n&quot; +
+                                                    &quot;to 3\n&quot; +
+                                                    &quot;as 2\n&quot; +
+                                                    &quot;government 2\n&quot;).to_stdout
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/10/06 10:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14853"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C#</p>
+<p><em>ps. 다른 단어 카운트 사이트나 앱을 보면 대소문자 구분 없이 카운트 하는 경우가 많습니다. 본 문제의 예제와 같이 아래 풀이에서도 대소문자를 별도로 취급하였습니다.</em></p>
+<pre><code class="cs">using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.IO;
+
+namespace CD205
+{
+    class Program
+    {
+        static void Main()
+        {
+            // read text from file
+            string inputFileName = Environment.CurrentDirectory + @&quot;\input.txt&quot;;
+            string[] inputText =
+                File.ReadAllText(inputFileName)
+                .Split(' ', '.', ',').Select(s =&gt; s.Trim()).Where(e =&gt; e.Length &gt; 0).ToArray();
+
+            // count each word
+            Dictionary&lt;string, int&gt; wordCount = new Dictionary&lt;string, int&gt;();
+            foreach (var s in inputText)
+            {
+                if (wordCount.ContainsKey(s)) { wordCount[s] += 1; }
+                else { wordCount[s] = 1; }
+            }
+
+            // display result 
+            StringBuilder sb = new StringBuilder();
+            var result = from pair in wordCount orderby pair.Value descending select pair;
+            int displayCount = 0;
+            foreach (var pair in result)
+            {
+                sb.AppendLine($&quot;{pair.Key} {pair.Value}&quot;);
+                if (++displayCount &gt;= 10) { break; }
+            }
+            Console.WriteLine(sb.ToString());
+        }
+    }
+}
+
+</code></pre>
+
+<p><strong>도전 과제</strong></p>
+<p>&lt;풀이 1&gt;</p>
+<p>파일 입력 및 단어 카운트 부분을 각각 클래스화 하여 OOP 방식으로 작성한 풀이입니다.</p>
+<pre><code class="cs">using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.IO;
+
+namespace CD205AltOOP
+{
+    class Program
+    {
+        static void Main()
+        {
+            string aFileName = @&quot;\input.txt&quot;;
+            var altCase = new WordCount(new InputFile(aFileName).ContentsArray);
+            altCase.DisplayTop10();
+        }
+    }
+
+    sealed class InputFile // 입력 파일 핸들링을 위한 클래스 
+    {
+        private readonly string inputFileName;
+
+        public InputFile(string aFileName)
+        {
+            inputFileName = Environment.CurrentDirectory + aFileName;
+        }
+
+        // 텍스트 파일의 각 단어 요소를 배열
+        public string[] ContentsArray =&gt; File.ReadAllText(inputFileName)
+                    .Split(' ', '.', ',').Select(s =&gt; s.Trim()).Where(e =&gt; e.Length &gt; 0).ToArray();
+    }
+
+    sealed class WordCount // 텍스트 배열에 대한 단어 카운트 클래스
+    {
+        private readonly string[] stringArray; // 입력 텍스트 배열
+
+        public WordCount(string[] aStringArray)
+        {
+            stringArray = aStringArray;
+        }
+
+        // 텍스트 배열 구성 단어 전체에 대한 카운트 쌍(단어 - 빈도)
+        private Dictionary&lt;string, int&gt; WordCountPair
+        {
+            get
+            {
+                Dictionary&lt;string, int&gt; count = new Dictionary&lt;string, int&gt;();
+                foreach (var s in stringArray)
+                {
+                    if (count.ContainsKey(s)) { count[s] += 1; }
+                    else { count[s] = 1; }
+                }
+                return count;
+            }
+        }
+
+        public void DisplayTop10() // 정렬 및 상위 10개 출력
+        {
+            StringBuilder sb = new StringBuilder();
+            var result = from pair in WordCountPair orderby pair.Value descending select pair;
+            int displayCount = 0;
+            foreach (var pair in result)
+            {
+                sb.AppendLine($&quot;{pair.Key} {pair.Value}&quot;);
+                if (++displayCount &gt;= 10) { break; }
+            }
+            Console.WriteLine(sb.ToString());
+        }
+    }
+}
+
+</code></pre>
+
+<p>&lt;풀이 2&gt;</p>
+<p>개인적으로 가장 선호하는 방법입니다. </p>
+<p><a href="https://wordcounttools.com/">https://wordcounttools.com/</a> 에서 해결. </p>
+<p>텍스트를 붙여 넣거나, 텍스트 파일을 불러 오거나 할 수 있으며, 문장과 단어 등에 대한 다양한 분석치를 보여줍니다.  또한 본 문제에서 요구하는 바와 같이 단어 카운트 (2 words, 3 words까지) 및 grammar words (본 예제의 in, the, a, his, of 등)를 포함/불포함 한 경우에 대해서도 모두 분석합니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/10/08 17:27</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15259"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>python3</p>
+<pre><code class="python">import collections
+
+with open('input.txt', 'r') as f:
+    d = collections.defaultdict(int)
+    for x in f.read().strip(',.').split():
+        d[x] += 1
+
+for word, cnt in sorted(d.items(), key=lambda x: x[1], reverse=True)[:10]:
+    print(word, cnt)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/11/19 16:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">디디</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15329"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from collections import Counter
+counter = Counter()
+with open(&quot;data/wikitest.txt&quot;,&quot;r&quot;) as wiki:
+    for line in wiki:
+        for test in line.split():
+            counter[test] += 1
+
+for word,index in counter.most_common(10):
+    print(word,&quot; : &quot;,index)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/11/27 14:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">도장깨기</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15339"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="r">text_raw &lt;- readline()
+text_blank &lt;- strsplit(text_raw, split = ' ')
+
+text_sblank &lt;- text_blank[[1]]
+text_comma &lt;- strsplit(text_sblank, split = ',')
+
+text_scomma &lt;- rep(NA)
+for (i in seq(text_comma)){
+  text_scomma[i] &lt;- text_comma[[i]]
+}
+
+text_period &lt;- strsplit(text_scomma, split = '.', fixed = T)
+text_speriod &lt;- rep(NA)
+for (i in seq(text_period)){
+  text_speriod[i] &lt;- text_period[[i]]
+}
+
+text_set &lt;- union(text_speriod, NULL)
+
+text_df &lt;- NULL
+
+for (i in seq(text_set)){
+  temp &lt;- c(text_set[i], sum(text_speriod == text_set[i]))
+  text_df &lt;- rbind(text_df, temp)
+}
+
+head(text_df[order(text_df[, 2], decreasing = T), ], 10)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/11/28 15:25</p>
+                                <p class="static-profile" style="margin:0;padding:0;">physche</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15471"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">f = open('test.txt','w')
+f.write('As the country became embroiled in a domestic crisis, the first government was dislodged and succeeded by several different administrations. Bolikango served as Deputy Prime Minister in one of the new governments before a partial state of stability was reestablished in 1961. He mediated between warring factions in the Congo and briefly served once again as Deputy Prime Minister in 1962 before returning to the parliamentary opposition. After Joseph-Desire Mobutu took power in 1965, Bolikango became a minister in his government. Mobutu soon dismissed him but appointed him to the political bureau of the Mouvement Populaire de la Revolution. Bolikango left the bureau in 1970. He left Parliament in 1975 and died seven years later. His grandson created the Jean Bolikango Foundation in his memory to promote social progress. The President of the Congo posthumously awarded Bolikango a medal in 2005 for his long career in public service.')
+f.close()
+
+with open('test.txt', 'r') as f:
+    data = f.read()
+
+lists = data.replace(',', ' ').replace('.', ' ').split()
+lists_중복제거= list(set(lists))
+count = []
+n=0
+
+for word in lists_중복제거:
+    count.append((lists.count(word), word))
+
+
+for result in sorted(count, reverse=True):
+    n += 1
+    print(result[1], ':', result[0])
+    if n == 10:
+        break
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/12/08 14:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">S.H</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15650"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#HiCode
+split_t = text.replace(',', '').replace('.', '').split(' ')
+
+count={ x:0 for x in split_t }
+
+for i in count.keys():
+    count[i] = split_t.count(i)
+
+words = sorted(count, key=count.get, reverse=True)
+[(key, count[key]) for key in words][:10]
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/12/26 13:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김혜인</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15799"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.*;
+import java.io.*;
+
+public class word_count {
+
+    public static void main(String[] args) throws FileNotFoundException
+    {
+        PrintStream ps = new PrintStream(new File(&quot;output.txt&quot;));
+        Scanner cs = new Scanner(System.in);
+        String fName = cs.next();
+        File f = new File(fName);
+        Scanner sc = new Scanner(f);
+        ArrayList&lt;String&gt; strings = new ArrayList&lt;String&gt;();
+        ArrayList&lt;String&gt; sorted = new ArrayList&lt;String&gt;();
+        int[] counts = new int[10000];
+        String tmp = &quot;&quot;;
+        int k = 0;
+        while (sc.hasNext())
+        {
+            tmp = sc.next();
+            tmp = tmp.replace(&quot;.&quot;, &quot;&quot;);
+            tmp = tmp.replace(&quot;,&quot;, &quot;&quot;);
+            strings.add(tmp);
+            k++;
+        }
+        int total = k;
+        Collections.sort(strings);
+        int cnt = 1;
+        int tt = 0;
+        int t = 0;
+        while (tt &lt; total)
+        {
+            if (t == 0)
+            {
+                sorted.add(strings.get(0));
+                counts[0]++;
+                t++;
+                tt++;
+                continue;
+            }
+            int tm = 0;
+            int check = 0;
+            tmp = strings.get(tt);
+            while (tm &lt; cnt)
+            {
+                if (tmp.compareTo(sorted.get(tm)) == 0)
+                {
+                    counts[tm]++;
+                    check = 1;
+                    break;
+                }
+                tm++;
+            }
+            if (check == 0)
+            {
+                sorted.add(tmp);
+                counts[tm]++;
+                cnt++;
+            }
+            tt++;
+        }
+        for (int i = cnt - 1; i &gt; 0; i--)
+        {
+            for (int j = 0; j &lt; i; j++)
+            {
+                if (counts[j] &gt; counts[j+1])
+                {
+                    int a = counts[j];
+                    counts[j] = counts[j+1];
+                    counts[j+1] = a;
+                    String b = sorted.get(j);
+                    sorted.remove(j);
+                    sorted.add(j+1, b);
+                }
+            }
+        }   
+        for (int i = cnt-1; i &gt; cnt-11 ; i--)
+        {
+            ps.printf(&quot;%s : %d\n&quot;, sorted.get(i), counts[i]);
+        }       
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/01/04 21:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김민지</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15991"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">with open('test.txt', mode='rt', encoding='utf-8') as f:
+  doc = f.read()
+
+import re
+re_comp = re.compile('[.|,]')
+doc=re_comp.sub('', doc)
+doc = doc.split(' ')
+init_dict = {k:0 for k in doc}
+for i in doc:
+  init_dict[i] += 1
+list_dic = sorted(init_dict.items(), key = lambda x: x[1], reverse=True)
+for i, v in list_dic:
+  print(i,&quot;:&quot;,v)
+
+---- result ----
+in : 12
+the : 10
+Bolikango : 5
+a : 4
+of : 4
+and : 3
+to : 3
+his : 3
+became : 2
+government : 2
+was : 2
+served : 2
+as : 2
+Deputy : 2
+Prime : 2
+Minister : 2
+before : 2
+He : 2
+Congo : 2
+Mobutu : 2
+him : 2
+bureau : 2
+left : 2
+As : 1
+country : 1
+embroiled : 1
+domestic : 1
+crisis : 1
+first : 1
+dislodged : 1
+succeeded : 1
+by : 1
+several : 1
+different : 1
+administrations : 1
+one : 1
+new : 1
+governments : 1
+partial : 1
+state : 1
+stability : 1
+reestablished : 1
+1961 : 1
+mediated : 1
+between : 1
+warring : 1
+factions : 1
+briefly : 1
+once : 1
+again : 1
+1962 : 1
+returning : 1
+parliamentary : 1
+opposition : 1
+After : 1
+Joseph-Desire : 1
+took : 1
+power : 1
+1965 : 1
+minister : 1
+soon : 1
+dismissed : 1
+but : 1
+appointed : 1
+political : 1
+Mouvement : 1
+Populaire : 1
+de : 1
+la : 1
+Revolution : 1
+1970 : 1
+Parliament : 1
+1975 : 1
+died : 1
+seven : 1
+years : 1
+later : 1
+His : 1
+grandson : 1
+created : 1
+Jean : 1
+Foundation : 1
+memory : 1
+promote : 1
+social : 1
+progress : 1
+The : 1
+President : 1
+posthumously : 1
+awarded : 1
+medal : 1
+2005 : 1
+for : 1
+long : 1
+career : 1
+public : 1
+service : 1
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/01/15 00:33</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Gerrad kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16169"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import operator
+
+def CountWord(string):
+    res={}
+    for i in string.replace('.',' ').replace(',',' ').split():
+        if i not in res.keys():
+            res[i]=1
+        else:
+            res[i]+=1
+    res = sorted(res.items(), key=operator.itemgetter(1), reverse=True)
+    for i in range(10):
+        print(&quot;%s %s&quot;%(res[i][0],res[i][1])) 
+
+
+string = &quot;&quot;
+CountWord(string)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/01/22 22:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">얀차</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16263"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>
+f = open(&quot;text.txt&quot;)
+text = f.read()
+print(text.count(&quot;The&quot;) + text.count(&quot;the&quot;))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/01/26 15:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">jidon333</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17082"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import re
+from functools import reduce 
+
+f=open('/home/sssunda/example.txt')
+s=f.read()
+
+li=re.split('[.,\s]',s)
+li=[x for x in li if x]
+result=reduce(lambda x, y: x.update({y:x.get(y,0)+1}) or x,li,{})
+
+result_s=sorted(result.items(), key=lambda result: result[1],reverse=True)
+for i in range(0,10):
+    print(f'{result_s[i][0]} {result_s[i][1]}')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/03/12 12:39</p>
+                                <p class="static-profile" style="margin:0;padding:0;">쨔이</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17124"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">with open('No.205 text.txt', 'r') as file:
+    script = file.read()
+    words = script.split()
+
+    for word in words:
+        word.strip('.,')
+
+    set_words = list(set(words))
+
+    count = 0
+    temp = []
+    count = []
+    result = []
+
+    for i in set_words:
+        temp.append([i, words.count(i)])
+        count.append(words.count(i))
+
+    for i in range(max(*count), 0, -1):
+        for j in range(len(temp)):
+            if len(result) &gt; 9:
+                break
+            if temp[j][1] == i:
+                result.append(temp[j])
+
+    for i in result:
+        print(i[0], i[1])
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/03/14 15:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">D.H.</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17311"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="javascript">var text = 'As the country became embroiled in a domestic crisis, the first government was dislodged and succeeded by several different administrations. Bolikango served as Deputy Prime Minister in one of the new governments before a partial state of stability was reestablished in 1961. He mediated between warring factions in the Congo and briefly served once again as Deputy Prime Minister in 1962 before returning to the parliamentary opposition. After Joseph-Desire Mobutu took power in 1965, Bolikango became a minister in his government. Mobutu soon dismissed him but appointed him to the political bureau of the Mouvement Populaire de la Revolution. Bolikango left the bureau in 1970. He left Parliament in 1975 and died seven years later. His grandson created the Jean Bolikango Foundation in his memory to promote social progress. The President of the Congo posthumously awarded Bolikango a medal in 2005 for his long career in public service.';
+
+
+var arr = text.split(/[\s,\s.]+/);
+
+var obj = {};
+
+for (var i = 0; i &lt; arr.length; i++) {
+    var key = arr[i];
+    if (obj[key]) {
+        obj[key]++;
+    } else {
+        obj[key] = 1;
+    }
+}
+
+var keys = Object.keys(obj).sort(function (a, b) {
+    return obj[b] - obj[a]
+});
+
+for (var j = 0; j &lt; 10; j++) {
+    var value = obj[keys[j]];
+    console.log(keys[j], value);
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/03/27 22:55</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이계민</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17663"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def f(s):
+    L = list(map(lambda x : x.strip('.,'), s.split(' ')))
+    T = []
+    S = set(L)
+    for word in S:
+        T.append([word, L.count(word)])
+    T.sort(key=lambda x : x[1], reverse=True)
+    for i in range(10):
+        print(T[i][0], T[i][1])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/01 15:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">messi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17882"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">using System;
+using System.Collections;
+using System.Collections.Generic;
+
+namespace ConsoleApp1
+{
+    struct WordCount
+    {
+        public string str;
+        public int num;
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string a = Console.ReadLine();
+
+            Console.WriteLine(a.Length);
+            string[] str = a.Split(' ');
+
+            WordCount[] wc;
+            wc = new WordCount[str.Length];
+
+            for (int i = 0; i &lt; str.Length; i++)
+            {
+                for (int j = 0; j &lt; wc.Length; j++)
+                {
+                    if (wc[j].str == str[i])
+                    {
+                        wc[j].num++;
+                        break;
+                    }
+                    else if (wc[j].str == null)
+                    {
+                        Console.WriteLine(str[i]);
+                        wc[j].str = str[i];
+                        wc[j].num++;
+                        break;
+                    }
+                }
+            }
+            //단어, 갯수 출력
+            for (int j = 0; j &lt; wc.Length; j++)
+            {
+                if(wc[j].str != null)
+                    Console.WriteLine(&quot;{0} 갯수 : {1}&quot;, wc[j].str, wc[j].num);
+            }
+        }
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/15 19:03</p>
+                                <p class="static-profile" style="margin:0;padding:0;">와디더</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18214"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import operator
+
+f = open('C:/doit/test.txt', 'r')
+
+txt = f.read()
+w = []
+for x in txt.split('.'):
+    for y in x.split(','):
+        for z in y.split(' '):
+            w.append(z)
+
+n = dict()
+for x in list(set(w)):
+    n[x] = w.count(x)
+
+n = sorted(n.items(), key = operator.itemgetter(1), reverse=True)
+
+for i in range(10):
+    print(n[i][0], n[i][1])
+
+f.close()
+</code></pre>
+
+<pre><code class="no-highlight">in 12
+ 11
+the 10
+Bolikango 5
+a 4
+of 4
+to 3
+and 3
+his 3
+Minister 2
+</code></pre>
+
+<p>작성했습니다. 문제는 딕셔너리에서 ''가 11개나 나오네요. 이게 왜 이런건지 누가 좀 알려주시면 감사드리겠습니다...</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/06/11 12:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이진형</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19394"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package hw;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+public class part1 {
+
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/09/22 22:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이세민</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19448"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import re
+file = open(&quot;D:word counter.txt&quot;, 'r')
+read_data = file.readlines()
+print(read_data)
+com = re.compile(&quot;[a-zA-Z0-9]+&quot;)
+so = sorted(com.findall(read_data[0]))
+result0, count = [], 1
+for da in range(0, len(so)) :
+    if so[da] != so[da-1] :
+        count = 1
+        result0.append([so[da], count])
+    elif so[da] == so[da-1] :
+        count += 1
+        result0[-1][1] = count
+result0.sort(key = lambda x:x[1], reverse = True)
+for k in range(0, 10) :
+    print(&quot;%s : %s&quot;%(result0[k][0], result0[k][1]))
+</code></pre>
+
+<p>아직 실력이 부족해서 이 정도 밖에 못하겠어요 ㅠㅠ</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/09/27 11:09</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GG</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20260"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>ArrayList를 무분별하게 사용해서 코드를 알아보기가 힘드네요.....</p>
+<pre><code class="java">public class 단어세기WordCounting {
+
+    public static void main(String[] args) {
+
+        Scanner scan = new Scanner(System.in);
+        String str = scan.nextLine().replaceAll(&quot;[.,]&quot;, &quot;&quot;);
+        String[] words = str.split(&quot; &quot;);
+
+        ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;();  //처음 words[]에 있는 배열을 list로 옮겼습니다.
+        ArrayList&lt;String&gt; list2 = new ArrayList&lt;String&gt;();  //중복이 1보다 큰 단어들을 list2에 단어를 추가하고
+        for(int i=0; i&lt;words.length; i++) {                       //바로 뒤에 중복된 횟수를 추가했습니다. ex(in ,12, the, 10......)
+            list.add(words[i]);
+        }
+        for(int i=0; i&lt;list.size(); i++) {
+            int count = 1;
+            if(!list.get(i).equals(&quot;0&quot;)) {
+                for(int j=i+1; j&lt;list.size(); j++) {
+                    if(!list.get(j).equals(&quot;0&quot;)&amp;&amp;list.get(i).equals(list.get(j))) {
+                        count++;
+                        list.set(j, &quot;0&quot;);
+                    }
+                }
+            }
+            if(count&gt;1) {
+                list2.add(list.get(i));
+                list2.add(Integer.toString(count));
+            }
+        }
+        ArrayList&lt;Integer&gt; integer = new ArrayList&lt;Integer&gt;();  //중복된 횟수를 따로 분리해줄 list를 만들었습니다.
+        for(int i=1; i&lt;list2.size(); i=i+2) {
+            integer.add(Integer.parseInt(list2.get(i)));
+        }
+        Collections.sort(integer);
+        Collections.reverse(integer);  //리스트를 내림차순으로 정렬했습니다.
+        for(int i=0; i&lt;10; i++) {       //10번 실행
+            for(int j=1; j&lt;list2.size(); j=j+2) {   //리스트의 i번째 값과 같은 수를 찾으며 출력하였습니다.
+                if(Integer.parseInt(list2.get(j))==integer.get(i)&amp;&amp;!list2.get(j-1).equals(&quot;0&quot;)) { 
+                    System.out.println(list2.get(j-1) + &quot; &quot; + list2.get(j));
+                    list2.set(j-1, &quot;0&quot;);
+                    break;
+                }
+            }
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/12/20 18:13</p>
+                                <p class="static-profile" style="margin:0;padding:0;">big Ko</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20577"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">with open (&quot;foo.txt&quot;, 'r') as f:
+    a=f.read()
+    b=str(a).split()
+c=set(b)
+count=dict()
+for i in c:
+    count[i]=0
+
+for i in b:
+    if i in c:
+        count[i]+=1
+
+num=list()
+
+for i in c:
+    num.append(count[i])
+num.sort()
+num.reverse()
+num=num[0:10]
+
+word=list()
+for i in num:
+    for j in count:
+        if count[j] is i:
+            if j not in word:
+                word.append(j)
+for i in range(len(num)):
+    print(word[i],num[i])
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/16 17:11</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박재욱</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20676"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">fn=input(&quot;파일 명을 입력하십시오: &quot;) #word count.txt
+dict={}
+fh=open(fn)
+for ln in fh:
+    ln=ln.rstrip() #오른쪽 공백(또는 개행문자) 지우기
+    wds=ln.split()
+    for w in wds:
+        dict[w]=dict.get(w,0)+1
+elst=[]
+for k,v in dict.items():
+    elst.append([v,k]) #빈도수를 기준으로 정렬하기 위해 [밸류,키] 순으로 리스트 생성
+#print(sorted(elst)[::-1])
+for i in range(10):
+    print(sorted(elst)[::-1][i][1],sorted(elst)[::-1][i][0])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/21 22:17</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박시원</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_21408"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">N = input().split()
+M = {}
+test = list()
+for i in N:
+    check = 0
+    go = 0
+    for j in range(len(test)):
+        if test[j] == i:
+            check = 1
+            go = j
+    if check == 0:
+        M[i] = 1
+        test.append(i)
+    elif check == 1:
+        M[test[go]] = M[test[go]] + 1
+
+finalcheck = 0
+for i in sorted(M.items(), key=lambda x: x[1], reverse=True):
+    finalcheck += 1
+    if finalcheck == 11:
+        break
+    print(i)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/03/16 00:12</p>
+                                <p class="static-profile" style="margin:0;padding:0;">BlakeLee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_21673"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;string&gt;
+#include &lt;fstream&gt;
+#include &lt;sstream&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+/*
+텍스트가 입력으로 주어질 때, 단어의 개수를 세는 프로그램을 작성한다.
+&quot;문자 세기&quot;와 &quot;단어 세기&quot;는 프로그래밍 입문에 성공했는지를 가늠하는 문제라고 할 수 있습니다.
+지금은 발가락으로도 만드는 분들이 많겠지만 처음에는 의외로 많이 어려워합니다.
+추억을 살려 봅시다.
+
+아래 내용을 가진 텍스트파일을 미리 만들어 두고, 프로그램을 실행하면 파일 내용을 읽어들인다(출처: Wikipedia).
+As the country became embroiled in a domestic crisis, the first government was dislodged and succeeded by several different administrations. 
+Bolikango served as Deputy Prime Minister in one of the new governments before a partial state of stability was reestablished in 1961. 
+He mediated between warring factions in the Congo and briefly served once again as Deputy Prime Minister in 1962 before returning to the parliamentary opposition. 
+After Joseph-Desire Mobutu took power in 1965, Bolikango became a minister in his government. 
+Mobutu soon dismissed him but appointed him to the political bureau of the Mouvement Populaire de la Revolution. 
+Bolikango left the bureau in 1970. He left Parliament in 1975 and died seven years later. 
+His grandson created the Jean Bolikango Foundation in his memory to promote social progress. 
+The President of the Congo posthumously awarded Bolikango a medal in 2005 for his long career in public service.
+*/
+
+vector&lt;string&gt; split(string s) {
+    string temp;
+    stringstream ss;
+    ss.str(s);
+    vector&lt;string&gt; v;
+    while (ss &gt;&gt; temp) {
+        v.push_back(temp);
+    }
+
+    return v;
+}
+
+bool cmp(pair&lt;int, string&gt; &amp;a, pair&lt;int, string&gt; &amp;b) {
+    if (a.first == b.first) 
+        return a.second &lt; b.second;
+
+    return a.first &gt; b.first;
+}
+
+int main() {
+    ifstream in(&quot;text.txt&quot;);
+    string s;
+    int size;
+    vector&lt;string&gt; v;
+    if (in.is_open()) {
+        in.seekg(0, ios::end);
+        size = in.tellg();
+        s.resize(size);
+        in.seekg(0, ios::beg);
+        in.read(&amp;s[0], size);
+
+        for (int i = 0; i &lt; s.length(); i++)
+            if (s[i] == ',' || s[i] == '.') { s[i] = ' '; }
+
+    }
+    else { cout &lt;&lt; &quot;파일 열기 실패&quot; &lt;&lt; endl; exit(-1); }
+
+    v = split(s);
+    sort(v.begin(), v.end());
+
+    vector&lt;pair&lt;int, string&gt;&gt; r;
+    int count = 1;
+    for (vector&lt;string&gt;::iterator iter = v.begin(); iter != v.end(); iter++) {
+        if ((iter + 1) == v.end()) { break; }
+        if (*iter == *(iter + 1)) { count++; }
+        else { r.push_back(make_pair(count, *iter)); count = 1; }
+    }
+
+    sort(r.begin(), r.end(), cmp);
+    cout &lt;&lt; &quot;=============text.txt에서 등장단어 빈도수 순위10===============&quot; &lt;&lt; endl &lt;&lt; endl;
+
+    for (int i = 0; i &lt; 10; i++)
+        cout &lt;&lt; &quot;단어:&quot; &lt;&lt; r[i].second &lt;&lt; &quot; 등장수:&quot; &lt;&lt; r[i].first &lt;&lt; endl;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/04/06 18:34</p>
+                                <p class="static-profile" style="margin:0;padding:0;">++C</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_21982"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def count(s):
+    f = open(s, 'r')
+    data = f.read()
+    f.close()
+
+    table = str.maketrans('!,.', ' '' '' ')
+    data = data.translate(table)
+
+    words_list = data.split(' ') # 리스트로 만들기
+
+    words_set = set(words_list)
+    words_set.remove('')
+
+    dic = {}
+
+    for i in words_set:
+        dic[i] = words_list.count(i)
+
+    dic_list = []
+    for a, b in dic.items():
+        dic_list.append(b)
+
+    count = 0
+    while count != 10:
+        for a, b in dic.items():
+            if b == max(dic_list):
+                print(a, b)
+                dic_list.remove(b)
+                count += 1
+                if count == 10:
+                    break
+
+count('example.txt')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/04/27 23:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">ptjddn95</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22364"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import re
+def word_count(text):
+    dict = {}
+    for s in text:
+        if dict.get(s):
+            dict[s] += 1
+        else:
+            dict[s] = 1
+    r = list(sorted(dict.items(), key=lambda x: x[1], reverse=True))
+    result = r[:10]
+    for i, j in result:
+        print(i, j)
+
+if __name__ == '__main__':
+    with open('./word counting.txt', 'r') as f:
+        t = f.read()
+        text = re.findall('[a-zA-Z]+', t)
+    word_count(text)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/18 11:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hwaseong Nam</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22487"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#파이썬
+#아직 초보라 소스가 좀 길어져 버렸습니다
+#문제에 있는 결과와 제가 만든 소스의 결과가 다릅니다
+#예를들어 저는 the가 11개가 나왔고, 한글에 저 텍스트를 넣어서 찾기를 해보면 11개가 나옵니다
+#문제에는 10개라고 되어 있네요
+#딕셔너리로 풀면 더 간단할것 같은데, 아직 딕셔너리를 잘 다루지 못해서 리스트를 이용하여 풀어보았습니다
+
+fileopen=open(&quot;text.txt&quot;)
+text=fileopen.read()
+
+text=text.split(' ')
+for i in range (len(text)):
+    if '.' in text[i]:
+        text[i]=text[i].split('.')
+        if '' in text[i]:
+            text[i].remove('')
+        text[i]=text[i][0]
+    if ',' in text[i]:
+        text[i]=text[i].split(',')
+        if '' in text[i]:
+            text[i].remove('')
+        text[i]=text[i][0]
+    if '-' in text[i]:
+        text[i]=text[i].split('-')
+        if '' in text[i]:
+            text[i].remove('')
+        text[i]=text[i][0]
+
+    text[i]=text[i].lower()
+
+text_keys,text_count=[],[]
+for i in range (len(text)):
+    if text[i] not in text_keys:
+        text_keys.append(text[i])
+        text_count.append(1)
+    else:
+        text_count[text_keys.index(text[i])]+=1
+
+temp=list(text_count)
+temp.sort(reverse=True)
+
+tenth=temp[9] #9번째 값 검출
+
+text_keys2,text_count2=[],[]
+for i in range (len(text_keys)):
+    if text_count[i]&gt;=tenth:
+        text_keys2.append(text_keys[i])
+        text_count2.append(text_count[i])
+
+for k in range (0,len(text_keys2)):
+    for i in range (len(text_keys2)-1):    
+        if text_count2[i]&lt;text_count2[i+1]:
+            temp=text_count2[i+1]
+            text_count2[i+1]=text_count2[i]
+            text_count2[i]=temp
+
+for i in range (len(text_keys2)):
+    print (text_keys2[i],':',text_count2[i])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/06/04 14:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Buckshot</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2760"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">as : 12
+the : 11
+in : 5
+a : 4
+and : 4
+bolikango : 4
+minister : 3
+of : 3
+to : 3
+his : 3</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Buckshot,
+                                    2020/06/04 14:18
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22680"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬</p>
+<pre><code class="python">a=input()
+b=a.replace(',', ' ').replace('.',' ').split()
+c={}
+for i in range(len(b)):
+    c[b[i]]=b.count(b[i])
+
+d=sorted(c.items(), key=lambda x: x[1], reverse=True)
+for j in range(10):
+    print(d[j][0],':',d[j][1])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/07/05 12:53</p>
+                                <p class="static-profile" style="margin:0;padding:0;">SREBP1c</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23186"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.*;
+
+public class test8 {
+    public static void main(String[] args) {
+        String input = &quot;Apple Inc. is an American multinational technology company headquartered in Cupertino, California, that designs, develops, and sells consumer electronics, computer software, and online services. It is considered one of the Big Tech technology companies, alongside Amazon, Google, Microsoft, and Facebook.&quot;;
+        Map&lt;String, Integer&gt; map = new LinkedHashMap&lt;&gt;();
+
+        for(String a : input.split(&quot;[ ,.]&quot;)) {
+            if(!a.equals(&quot;&quot;)) {
+                if(map.containsKey(a)) {
+                    map.replace(a,map.get(a)+1);
+                } else {
+                    map.put(a,1);
+                }
+            }
+        }
+
+        LinkedHashMap&lt;String, Integer&gt; result = SortMapByValue(map);
+
+        for(int i = 0; i &lt; result.size(); i++) {
+            System.out.println(result.keySet().toArray()[i]+&quot; : &quot;+result.get(result.keySet().toArray()[i]));
+        }
+    }
+
+    public static LinkedHashMap&lt;String, Integer&gt; SortMapByValue (Map&lt;String,Integer&gt; input) {
+        List&lt;Map.Entry&lt;String,Integer&gt;&gt; entries = new LinkedList&lt;&gt;(input.entrySet());
+        Collections.sort(entries, (o1,o2)-&gt; o2.getValue().compareTo(o1.getValue()));
+        LinkedHashMap&lt;String, Integer&gt; result = new LinkedHashMap&lt;&gt;();
+        for(Map.Entry&lt;String, Integer&gt; entry: entries) {
+            result.put(entry.getKey(), entry.getValue());
+        }
+        return result;
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/09/16 10:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">nazunamoe</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23331"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import re
+import operator
+f=open(&quot;wiki.txt&quot;,'r')
+text=f.read()
+txt=re.findall(r&quot;[\w']+&quot;,text.lower())
+lst={}
+for i in txt:
+    if i in lst:
+        lst[i]+=1
+    elif i not in lst:
+        lst[i]=1
+print(sorted(lst.items(), key=lambda lst: lst[1], reverse=True)[0:10:])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/10/02 23:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김동석</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23855"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">with open(&quot;wordCounting.txt&quot;, 'r') as f:
+    temp = []
+    for i in f.read().split(&quot;. &quot;):
+        temp += i.split(&quot; &quot;)
+    x = set(temp)
+    result = {}
+    for i in x:
+        result[i] = temp.count(i)
+    v = list(result.values())
+    v.sort()
+    v.reverse()
+    count = 0
+    for n in range(10):
+        for i, k in result.items():
+            if k == v[n]:
+                print(i +&quot; : &quot;+ str(v[n]))
+                count+=1
+            if count == 10:
+                break
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/12/02 18:14</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김우석</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25096"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">f = open('E:/Word Counting.txt','r')
+line = f.read()
+c = list(line.split())
+count=0
+d=[]
+e={}
+a={}
+w=0
+for i in c:                     # ',' , '.' 가지고있는 단어 ',' , '.' 없애기
+    if i[-1]==',' or i[-1]=='.':
+        i=i[:-1]
+        d.append(i)
+    else:
+        d.append(i)
+for i in set(d):              # 집합과 리스트의 반복문으로 중복단어 세기
+    count=0
+    for j in d:
+        if i==j:
+            count+=1
+    e[i]=count
+for key, value in e.items():   # 벨류값이 1인 딕셔너리 삭제
+    if value!=1:
+        a[key]=value
+a = sorted(a.items(),reverse=True,key=lambda item:item[1])
+while w&lt;10:
+    print(a[w][0],a[w][1])
+    w+=1
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/04/01 22:02</p>
+                                <p class="static-profile" style="margin:0;padding:0;">fox.j</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26381"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>a=input('글자를 입력해 주세요')
+공백포함=len(a)
+공백재외=len(a)-a.count(' ')-a.count(',')-a.count('.')
+단어수=a.count(' ')+1
+print('공백포함:%d'%공백포함)
+print('공백재외:%d'%공백재외)
+print('단어수:%d'%단어수)</p>
+<h1 id="_1">난 빼박 래이서 ㅋㅋㅋ</h1>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/09/24 12:02</p>
+                                <p class="static-profile" style="margin:0;padding:0;">ᄋᄋᄋ</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26637"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">txt='As the country became embroiled in a domestic crisis, the first government was dislodged and succeeded by several different administrations. Bolikango served as Deputy Prime Minister in one of the new governments before a partial state of stability was reestablished in 1961. He mediated between warring factions in the Congo and briefly served once again as Deputy Prime Minister in 1962 before returning to the parliamentary opposition. After Joseph-Desire Mobutu took power in 1965, Bolikango became a minister in his government. Mobutu soon dismissed him but appointed him to the political bureau of the Mouvement Populaire de la Revolution. Bolikango left the bureau in 1970. He left Parliament in 1975 and died seven years later. His grandson created the Jean Bolikango Foundation in his memory to promote social progress. The President of the Congo posthumously awarded Bolikango a medal in 2005 for his long career in public service.'
+txt2 = txt.split()
+txt3 = []
+txt4 = []
+for i in txt2:
+    i.strip('.,')
+    if i not in txt3:
+        txt3.append(i)
+for i in txt3:
+    co = txt2.count(i)
+    txt4.append([co,i])
+txt4.sort()
+txt4.reverse()
+count = 0
+for j,h in txt4:
+    print(h,j)
+    count += 1
+    if count == 10:
+        break
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/11/13 15:12</p>
+                                <p class="static-profile" style="margin:0;padding:0;">한고선</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27039"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def strp (a):
+    result = a.strip(',').strip('.')
+    return result
+
+f = open('memo.txt','r')
+r = f.read().split(&quot; &quot;)
+all_words = list(map(strp,r))
+words = set(all_words)
+cnt_arr =[]
+
+for i in words :
+    cnt_arr.append([all_words.count(i),i])
+
+cnt_arr.sort()
+cnt_arr.reverse()
+
+for k in range(10):
+    print(cnt_arr[k][1],&quot; &quot;,cnt_arr[k][0])
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/18 23:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">양캠부부</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27186"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>// Rust</p>
+<p>use std::collections::HashMap;
+fn word_counting() {</p>
+<pre><code>let input = "As the country became embroiled in a domestic crisis, 
+...
+ Bolikango a medal in 2005 for his long career in public service.";
+let words = input.split_whitespace().map(str::to_lowercase);
+
+// word frequency를 map에 저장
+let mut map: HashMap&lt;String, u32&gt; = HashMap::new();
+for word in words {
+    let word_ = word.replace(|c: char| !c.is_alphanumeric(), "");
+    let count = map.entry(word_).or_default();
+    *count += 1;
+}
+
+// (word, count) pair를 뒤집어 (count, [word])로 map에 저장
+let mut map_: HashMap&lt;u32, Vec&lt;String&gt;&gt; = HashMap::new();
+for (k, v) in map {
+    let word_vec = map_.entry(v).or_default();
+    word_vec.push(k);
+}
+
+// count 높은 순으로 출력
+let mut counts: Vec&lt;&amp;u32&gt; = map_.keys().collect();
+counts.sort_by_key(|&amp;n| -(*n as i32));
+for count in counts {
+    println!("{:2} {:?}", count, map_[count]);
+}
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/30 12:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">JW KIM</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27533"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">article='As the country became embroiled in a domestic crisis, the first government was dislodged and succeeded by several different administrations. Bolikango served as Deputy Prime Minister in one of the new governments before a partial state of stability was reestablished in 1961. He mediated between warring factions in the Congo and briefly served once again as Deputy Prime Minister in 1962 before returning to the parliamentary opposition. After Joseph-Desire Mobutu took power in 1965, Bolikango became a minister in his government. Mobutu soon dismissed him but appointed him to the political bureau of the Mouvement Populaire de la Revolution. Bolikango left the bureau in 1970. He left Parliament in 1975 and died seven years later. His grandson created the Jean Bolikango Foundation in his memory to promote social progress. The President of the Congo posthumously awarded Bolikango a medal in 2005 for his long career in public service.'
+lower=article.lower()
+words=lower.replace('.','').replace(',','').split()
+wordsx=list(set(words))
+ans={}
+while len(wordsx)&gt;0:
+    a=words.count(wordsx[0])
+    ans[wordsx[0]]=a
+    wordsx.remove(wordsx[0])
+print(ans)
+k=list(ans.keys())
+v=list(ans.values())
+
+for i in range(1,11):
+    print(k[v.index(max(v))],max(v))
+    k.remove(k[v.index(max(v))])
+    v.remove(max(v))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/03/05 01:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">코딩초보박영규</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27656"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># 파일 열기
+tx = open(&quot;test.txt&quot;, 'r')
+data = tx.read()
+tx.close
+
+# 문자열 split
+data = data.replace(',', ' ').replace('.', ' ').split()
+
+# 딕셔너리에 단어:횟수 형태로 추가 
+dict = {}
+for i in data:
+    if i not in dict:
+        dict[i] = 1
+    else:
+        dict[i] += 1
+
+# value을 기준으로 내림차순 정렬하여 리스트로 변환
+dict = sorted(dict.items(), key = lambda x : x[1], reverse=True)
+
+# 리스트 9번째 까지 출력
+count = 0
+while count &lt; 10:
+    print(dict[count][0], dict[count][1])
+    count += 1
+</code></pre>
+
+<p>딕셔너리 밸류값기준으로 내림차순하는 건 구글링했습니당ㅋㅋ</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/03/24 08:24</p>
+                                <p class="static-profile" style="margin:0;padding:0;">kh ahn</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27802"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>a="As the country became embroiled in a domestic crisis, the first government was dislodged and succeeded by several different administrations. Bolikango served as Deputy Prime Minister in one of the new governments before a partial state of stability was reestablished in 1961. He mediated between warring factions in the Congo and briefly served once again as Deputy Prime Minister in 1962 before returning to the parliamentary opposition. After Joseph-Desire Mobutu took power in 1965, Bolikango became a minister in his government. Mobutu soon dismissed him but appointed him to the political bureau of the Mouvement Populaire de la Revolution. Bolikango left the bureau in 1970. He left Parliament in 1975 and died seven years later. His grandson created the Jean Bolikango Foundation in his memory to promote social progress. The President of the Congo posthumously awarded Bolikango a medal in 2005 for his long career in public service."</p>
+<h1 id="remove">,. remove</h1>
+<p>b=a.replace(",","")
+a=b.replace(".","")</p>
+<h1 id="_1">단어 리스트에 넣기</h1>
+<p>li=a.split(" ")</p>
+<h1 id="_2">딕셔너리에 넣기</h1>
+<p>count=0
+dic={i:0 for i in li}
+for i in li:
+    for j in dic:
+        if i==j:
+            dic[j]+=1</p>
+<h1 id="_3">숫자 높은거 순으로 정렬</h1>
+<p>li1=sorted(dic, key=dic.get,reverse=True)</p>
+<h1 id="printli1">print(li1)</h1>
+<h1 id="printli">print(li)</h1>
+<h1 id="_4">숫자세기</h1>
+<p>li2=[]
+for i in li1[0:10]:
+    count=0
+    for j in li:
+        if i==j:
+            count+=1
+    li2.append(i)
+    li2.append(count)
+print(li2)</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/04/20 18:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">yunjae</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27803"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>print(li)
+se=set(li)
+print(se)
+li1=list(se)
+print(li1)
+li2=[]
+for i in li1:
+    count=0
+    for j in li:
+        if i==j:
+            count+=1
+    li2.append((count,i))
+    li2.sort(reverse=True)
+print(li2)
+for i in li2[:10]:
+    print(i)</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/04/20 18:39</p>
+                                <p class="static-profile" style="margin:0;padding:0;">yunjae</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27804"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>1 .</p>
+<p>b=a.replace(",","").replace(".","")
+li=b.split()
+dic={i:li.count(i) for i in li}
+dic=sorted(dic,key=dic.get,reverse=True)
+print(dic)
+for i in dic[:10]:
+    print(i,li.count(i))</p>
+<ol>
+<li>b=a.replace(",","").replace(".","")
+li=b.split()
+print(li)
+li1=[]
+for i in li:
+    if i not in li1:
+        li1.append((li.count(i),i))
+li2=set(li1)
+li1=list(li2)
+li1.sort(reverse=True)
+for i in li1[:10]:
+    print(i)</li>
+</ol>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/04/20 18:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">yunjae</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28432"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">i = 0
+
+f = open(&quot;count_word&quot;, &quot;r&quot;)
+
+char = f.readline()
+word = char.split()
+
+print(len(char))
+print(len(word))
+
+dic = dict()
+
+for wd in word:
+    try : dic[wd] = dic[wd] + 1
+    except : dic[wd] = 1
+
+sort_dic = sorted(dic.items(), key=lambda x:x[1], reverse=True)
+
+for key, value in sort_dic:
+    print(key, &quot;:&quot;,  value)
+    i += 1
+
+    if i == 10:
+        break
+
+f.close()
+``````{.python}
+i = 0
+
+f = open(&quot;count_word&quot;, &quot;r&quot;)
+
+char = f.readline()
+word = char.split()
+
+print(len(char))
+print(len(word))
+
+dic = dict()
+
+for wd in word:
+    try : dic[wd] = dic[wd] + 1
+    except : dic[wd] = 1
+
+sort_dic = sorted(dic.items(), key=lambda x:x[1], reverse=True)
+
+for key, value in sort_dic:
+    print(key, &quot;:&quot;,  value)
+    i += 1
+
+    if i == 10:
+        break
+
+f.close()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/08/21 20:56</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박종훈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29090"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">f = open(&quot;example.txt&quot;,'r')
+data = f.read()
+f.close()
+data = data.replace(&quot;.&quot;,&quot; &quot;)
+data = data.replace(&quot;,&quot;,&quot; &quot;)
+
+lis = data.split()
+data_set = set(lis)
+count_dict = {key:0 for key in data_set}
+
+for word in lis:
+    count_dict[word] += 1
+
+for k, v in count_dict.items():
+    print(&quot;key: %15s value: %3d&quot; %(k,v))
+</code></pre>
+
+<p>야호</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/02/26 13:02</p>
+                                <p class="static-profile" style="margin:0;padding:0;">제작자</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29577"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">words = &quot;As the country became embroiled in a domestic crisis, &quot; \
+        &quot;the first government was dislodged and succeeded by several&quot; \
+        &quot; different administrations. Bolikango served as Deputy Prime &quot; \
+        &quot;Minister in one of the new governments before a partial state of &quot; \
+        &quot;stability was reestablished in 1961. He mediated between warring &quot; \
+        &quot;factions in the Congo and briefly served once again as Deputy Prime&quot; \
+        &quot; Minister in 1962 before returning to the parliamentary opposition.&quot; \
+        &quot; After Joseph-Desire Mobutu took power in 1965, Bolikango became &quot; \
+        &quot;a minister in his government. Mobutu soon dismissed him but appointed &quot; \
+        &quot;him to the political bureau of the Mouvement Populaire de la Revolution.&quot; \
+        &quot; Bolikango left the bureau in 1970. He left Parliament in 1975 and died&quot; \
+        &quot; seven years later. His grandson created the Jean Bolikango Foundation&quot; \
+        &quot; in his memory to promote social progress. The President of the Congo&quot; \
+        &quot; posthumously awarded Bolikango a medal in 2005 for his long career in&quot; \
+        &quot; public service.&quot;
+
+w = ''
+dic = {}
+for s in words:
+    if s == ' ' or s == '.':
+        if len(w) &gt; 0:
+            if w not in dic:
+                dic[w] = 0
+            dic[w] += 1
+        w = ''
+    else:
+        w += s
+
+lst = sorted(dic.items(), key=lambda kv: kv[1], reverse=True)
+for k, v in lst[:10]:
+    print('{0}: {1}'.format(k,v))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/08/21 21:03</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

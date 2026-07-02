@@ -1,0 +1,4127 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="출처: [http://uva.onlinejudge.org/external/1/136.html](http://uva.onlinejudge.org/external/1/136.html)
+
+심술쟁이 수는 2,3,5의 곱으로 만들 수 있는 수이다. 다...">
+    <title>Ugly Numbers - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">Ugly Numbers</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">10</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 3</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>출처: <a href="http://uva.onlinejudge.org/external/1/136.html">http://uva.onlinejudge.org/external/1/136.html</a></p>
+<p>심술쟁이 수는 2,3,5의 곱으로 만들 수 있는 수이다. 다음과 같은 순서의 수가 11개의 심술쟁이 수이다.</p>
+<blockquote>
+<p>1,2,3,4,5,6,8,9,10,12,15,....</p>
+</blockquote>
+<p>처음 수는 1로 시작하도록 한다. 입력은 받지 않고, <code>&lt;number&gt;</code> 에 1500번째 심술쟁이 수가 출력되게 한다.</p>
+<p><strong>Sample Output</strong></p>
+<pre><code class="no-highlight">The 1500'th ugly number is &lt;number&gt;.
+</code></pre>
+
+<p><strong>답</strong></p>
+<pre><code class="no-highlight">859963392
+</code></pre>
+
+<p>(1550번째는 <code>1093500000</code>, 십만번째는 <code>290142196707511001929482240000000000000</code>)</p>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">multiples</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2014/03/18 21:59</p>
+                    <p class="static-profile" style="margin:0;padding:0;">pahkey</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>64개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_486"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">5</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>real    0m0.006s
+user    0m0.005s
+sys 0m0.002s
+</code></pre>
+
+<pre><code class="cpp">#include&lt;set&gt;
+#include&lt;iostream&gt;
+using namespace std;
+
+set&lt;long long&gt; s;
+
+int main(){         
+    int n=1;
+    s.insert(1);
+
+    do
+    {
+        long long next_ugly_number = *s.begin();            
+        s.erase(next_ugly_number);
+
+        s.insert(next_ugly_number * 2);
+        s.insert(next_ugly_number * 3);
+        s.insert(next_ugly_number * 5);
+        n++;        
+    }while(n &lt; 1500);
+
+    cout &lt;&lt; &quot;The 1500'th ugly number is &quot; &lt;&lt; *s.begin() &lt;&lt; &quot;.\n&quot;;
+    return 0;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/03/19 16:25</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Kim Jaeju</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1383"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">와우~ 멋집니다. 하지만 알고리즘이 이해하기 쉽지 않군요.. 매번 첫번째 항목을 가지고 2,3,5배 한수를 곱해서 중복되지 않게 정렬되도록 추가하고, 그 다음 첫번째 거를 제거하고 n번 만큼 반복,, 그러면 n번째 반복했을 때 그 첫번째 값이 n의 ugly number가 되다니.. ㅎㅎ .. 쉽지 않네요.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    pahkey,
+                                    2014/03/19 18:32
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1384"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">아.. 항상 처음것을 제거했으니,, n번째 첫번째 항목이 ugly number가 되겠네요 ^^</span>
+                                -
+                                <span style="font-size:11px;">
+                                    pahkey,
+                                    2014/03/19 18:13
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1755"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">저도 이런 알고리즘을 사용해서 짰는데요 next_ugly_number가 커지면 커질수록 5를 곱한 것보다 2*2 를 곱한게 더 작은 수가 될 가능성이 높아집니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    xeo,
+                                    2016/04/23 07:30
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19706"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">2</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <h4 id="python-37">Python 3.7</h4>
+<pre><code class="python">def ugly(n):
+    re = 1
+    n2, n3, n5 = [], [], []
+    for i in range(n-1):
+        n2 += [re*2]
+        n3 += [re*3]
+        n5 += [re*5]
+        re = min(n2[0], n3[0], n5[0])
+        if re == n2[0]:
+            del n2[0]
+        if re == n3[0]:
+            del n3[0]
+        if re == n5[0]:
+            del n5[0]
+    return re
+</code></pre>
+
+<p>시간복잡도 O(n)</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/10/18 17:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">AY</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2875"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">한참 고민하다가 못 풀어서 AY님 풀이를 보고 완전히 이해했습니다.
+그런데 위 알고리듬은 시간복잡도가 O(n)은 아닌 것 같습니다. 십만번째를 구할 때 약 0.14초 정도 걸리지만 백만번째를 구할 때 약 5초 이상이 걸립니다. 아마도 n2, n3, n5 리스트의 크기가 커지면서 첫번째 원소를 제거할 때 인덱스를 재정렬하는 과정에서 많은 추가 시간이 발생하는 것 같습니다. 원소를 제거하지 않는 쪽으로 수정하면 메모리 사용은 커지겠지만 시간을 단축시킬 수 있습니다. 제가 AY님의 알고리듬을 약간 수정해서 테스트해보니 100만번째 항을 구하는 데에 메모리가 약 230메가바이트 가량 사용되었으나 시간은 1.1초에서 1.2 정도로 크게 단축시킬 수 있었습니다. 그리고 각 리스트의 천번째 항이 ugly가 될 때마다 앞의 항 천개씩을 제거하는 방식으로 조금 수정해보니까 메모리 사용은 매번 하나씩 제거하는 것과 별로 다르지 않으나 시간은 단지 0.1초 가량만 증가하여 1.3초 이내에 구할 수가 있게 되는 것도 확인했습니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    ­박철희,
+                                    2021/09/25 03:16
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_488"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬이라 그런지 그닥 빠르지는 않습니다.<br />
+그래도 1500 같은 경우 1초내로 응답이 오네요. </p>
+<p>100000 은 안 나올것 같습니다.</p>
+<pre><code class="python">def ugly(n):
+    result = [1]
+    while True:
+        last = result[-1]
+        if len(result)==n:
+            return last
+
+        tmp = []
+        for r in result:
+            for t in r*2,r*3,r*5:
+                if t &gt; last: 
+                    tmp.append(t)
+
+        result.append(min(tmp))
+
+
+print ugly(1500)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/03/19 17:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">pahkey</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1381"></a>
+                            <div class="comment_line comment-content">
+                                
+                                    <span style="color:orangered;">-2</span>
+                                
+                                <span style="white-space:pre-wrap;">파이썬이라서라기보단 알고리즘 문제죠.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Kim Jaeju,
+                                    2014/03/19 17:16
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1745"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">알고리즘이 같아도 인터프리터와 컴파일 언어는 원래 속도 차이가 많이 납니다만.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Flair Sizz,
+                                    2016/04/15 19:07
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2568"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import time
+
+def _mod_getuglyat(pos):
+    uglys, minval = [ 1 ], 1
+    for _ in range(pos):
+        uglys = list(set(uglys + [ minval * 2, minval * 3, minval * 5 ]))
+        uglys.sort()
+        minval = uglys.pop(0)
+    return minval
+
+def getuglyat(pos):
+    uglys = [ 1 ]
+    for cindex in range(pos):
+        uglys = list(set(uglys + [ uglys[cindex] * 2,
+                                   uglys[cindex] * 3,
+                                   uglys[cindex] * 5 ]))
+        uglys.sort()
+    return uglys[pos - 1]
+
+if __name__ == '__main__':
+    pos = 1500
+    startat = time.time()
+    print ('The %dth ugly number is %d.' % ( pos, _mod_getuglyat(pos) ), end=' =&gt; ')
+    print ('Elapsed %.02f' % ( time.time() - startat ))
+
+    startat = time.time()
+    print ('The %dth ugly number is %d.' % ( pos, getuglyat(pos) ), end=' =&gt; ')
+    print ('Elapsed %.02f' % ( time.time() - startat ))
+</code></pre>
+
+<p>Python 3.5 환경에서 작성한 코드 입니다.<br /><br /></p>
+<p>처음에 약수라 생각하고 접근하는 바람에 고전 하다<br />
+거꾸로 곱셈을 해볼까 싶어 다시 짜보았더니 훨씬 빨랐지만,<br /><br /></p>
+<p>먼저 올려주셨던 'Kim Jaeju'님의 풀이를 보고 감탄!<br />
+요거다 싶어 잽싸게 하나 더 작성해보았더니.<br />
+위 코드 실행 결과는 아래와 같았습니다.<br /><br /></p>
+<p>The 1500th ugly number is 859963392. =&gt; Elapsed 0.07<br />
+The 1500th ugly number is 859963392. =&gt; Elapsed 0.41<br /><br /></p>
+<p>1,500번째 숫자만 보더라도 꽤 시간 차이가 크게 나는데<br />
+10만번째는 어떨까 싶어 실험해보았습니다.<br /><br /></p>
+<p>......<br /><br />
+The 100000th ugly number is 290142196707511001929482240000000000000. =&gt; Elapsed 108.62
+......<br />
+......<br />
+......<br /><br />
+...KILL!<br /><br /></p>
+<p>죄송합니다. 마냥 기다릴수는 없는 상황이라 그냥 죽였네요. ( _ _)a;;<br /><br /></p>
+<p>찾고자 하는 인덱스 값이 크면 클수록 퍼포먼스 갭은 더 크게 벌어지겠죠.<br />
+10만번째는 실패했으니 1,500번째 차이와 끝끝내 비교는 한번 보고싶어서<br />
+1만번 째 숫자를 찾아본 결과를 함께 공유 드립니다.<br /><br /></p>
+<p>The 10000th ugly number is 288325195312500000. =&gt; Elapsed 2.14<br />
+The 10000th ugly number is 288325195312500000. =&gt; Elapsed 22.65<br /></p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/12/04 14:14</p>
+                                <p class="static-profile" style="margin:0;padding:0;">如 月華</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_484"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬과 Objective-C로 짜봤습니다, 사실 Algorithm 상의 차이는 없는데 확실히 계산엔 파이썬이 좀 더 걸리네요.</p>
+<h3 id="python">Python</h3>
+<pre><code class="python">def isUgly(number):
+
+    denominators = [5, 3, 2]
+
+    for n in denominators:
+        while True:
+            if divmod(number, n)[1] == 0:
+                number = number/n
+            else:
+                break
+
+    if number == 1:
+        return True
+    else :
+        return False
+
+
+#
+# Main Part
+#
+
+count = 0
+num = 1
+
+while count &lt; 1500:
+    if isUgly(num) == True:
+        count += 1
+
+    num += 1
+
+print(&quot;The 1500'th ugly number is &quot; + str(num - 1) + '.')
+</code></pre>
+
+<h3 id="objective-c">Objective-C</h3>
+<pre><code class="objectivec">bool isUgly(long number)
+{
+
+    int denom[3] = {5, 3, 2};
+
+    for (int i = 0; i &lt; 3; i++) {
+        while ( true ) {
+            if (remainder(number, denom[i]) == 0 ) {
+                number /= denom[i];
+            }
+            else {
+                break;
+            }
+        }
+    }
+
+
+    if ( number == 1 ) {
+        return true;
+    }
+    else {
+        return false;
+    }
+
+
+}
+
+
+int main(int argc, const char * argv[])
+{
+
+    int count = 0;
+    long num = 1;
+
+    while ( count &lt; 1500 ) {
+        if ( isUgly(num) == true ) {
+            count++;
+        }
+        else {
+        }
+        num++;
+    }
+
+     NSLog(@&quot;The 1500'th ugly number is %lu.&quot;, num - 1);
+
+    return 0;
+}
+
+</code></pre>
+
+<p>결과는 둘다</p>
+<blockquote>
+<p>The 1500'th ugly number is 859963392.</p>
+</blockquote>
+<p>입니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/03/19 11:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Onkel</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_485"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def ugly_number(n):
+    ugly = [2,3,5]
+    next = 5
+    i=4
+    while i &lt; n:
+        test = next
+        while True:
+            if (test % 5) != 0:
+                break
+            test=test/5
+        while True:
+            if (test % 3) != 0:
+                break
+            test=test/3
+        while True:
+            if (test % 2) != 0:
+                break
+            test=test/2
+        if test == 1:
+            i+=1
+        next+=1
+    print next-1
+
+
+ugly_number(1500)
+</code></pre>
+
+<p>파이썬입니다.</p>
+<p>무식하게 했습니다.
+n이 커지니까 너무 느려지네요;;
+초보라 그런데 조언좀 부탁드려요.
+왜 느린지도 어떻게 빨리 계산할 수 있는지 모르겠어요ㅜㅜ</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/03/19 13:29</p>
+                                <p class="static-profile" style="margin:0;padding:0;">승학</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1744"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">느린건 원래 파이썬이 인터프리터 언어라 그럽니다. 어쩔 수 없어요.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Flair Sizz,
+                                    2016/04/15 18:55
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_489"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C언어 기본 타입으론 100000번째를 구할 수가 없어서 루비로 짜 봤습니다
+제 컴퓨터에서 2.4초 걸리네요.</p>
+<pre><code class="ruby">require &quot;pqueue&quot;
+require &quot;set&quot;
+
+pq = PQueue.new([1]) {|a,b| a &lt; b}
+set = Set.new([1])
+
+n = 1
+
+before = 0
+ugly_num = 0
+loop do     
+    ugly_num = pq.pop
+    next if ugly_num == before      
+    break if n == 100000
+
+    before = ugly_num
+
+    [2,3,5].each do |time|
+        s = ugly_num * time         
+        unless set.include? s           
+            set &lt;&lt; s
+            pq.push s
+        end     
+    end     
+
+    n+=1
+end
+
+puts ugly_num
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/03/19 17:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Kim Jaeju</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_680"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>자바로 풀어 보았습니다.
+처리 효율은.... 뜨악 이네요 ㅋㅋ
+좀 더 좋은 방법이 없을까요?</p>
+<pre><code class="java">public class MainClass {
+
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+
+        //1포함 2,3,5의 곱으로 만들 수 있는 수는 심술쟁이 수.
+        //이때 1500번째 심술쟁이 수는 무엇인가?
+
+        //무한 반복, 심술쟁이 수가 나올 때마다 count++
+        int cnt = 1;
+        int number = 1;
+        while(cnt &lt; 1500){
+            number++;
+            //2,3,5의 인수이면 cnt++
+            if(checkUgly(number)){
+                cnt++;
+            }
+        }
+        System.out.println(&quot;The 1500'th ugly number is &quot;+number);
+
+    }
+
+    private static boolean checkUgly(int number){
+        //각자 나눈 수의 나눈 나머지가 0이면 값 적용
+        boolean check = true;
+        while(check){
+            if(number%5==0){
+                number = number/5;
+            }else if(number%3==0){
+                number = number/3;
+            }else if(number%2==0){
+                number = number/2;
+            }else{
+                if(number==1){
+                    break;
+                }else{
+                    check = false;
+                }
+            }
+        }
+        return check;
+    }
+
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/05/13 01:29</p>
+                                <p class="static-profile" style="margin:0;padding:0;">요한</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_1135"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">
+'''
+[2,   3,   4,   5,   6,   8,   9,   10,  12,  14,  15,  16,  18,  20,  21,  22,  24,  25,  26,  27,  28,  30]
+[32,  33,  34,  35,  36,  38,  39,  40,  42,  44,  45,  46,  48,  50,  51,  52,  54,  55,  56,  57,  58,  60]
+[62,  63,  64,  65,  66,  68,  69,  70,  72,  74,  75,  76,  78,  80,  81,  82,  84,  85,  86,  87,  88,  90]
+[92,  93,  94,  95,  96,  98,  99,  100, 102, 104, 105, 106, 108, 110, 111, 112, 114, 115, 116, 117, 118, 120]
+[122, 123, 124, 125, 126, 128, 129, 130, 132, 134, 135, 136, 138, 140, 141, 142, 144, 145, 146, 147, 148, 150]
+30단위로 똑같은 패턴을 보입니다.
+22개의 숫자로 이루어진 수열이 나오죠. 1을 제외하고는요 
+따라서 (n-1)/22 의 몫*30 + 수열[나머지]가 답일거 같지만 나머지가 0부터 시작해야하므로.. 
+(n-2)/22+수열[나머지] 가 답인듯합니다..
+문제 예시의 답과는 안맞지만.. 문제 예시가 좀 이상한듯하네요. 제가 잘못이해한거라면 알려주세요.
+'''
+
+n=1500
+def UglyNumber(n):
+    if n==1:
+        return 1
+    else:
+        a00=set(range(2,31,2))
+        b00=set(range(3,31,3))
+        c00=set(range(5,31,5))        
+        a=sorted(list((a00|b00)|c00))        
+        n01=n-2
+        Quotient=int(n01/22)
+        Remainder=n01%22 
+        Answer=Quotient*30+a[Remainder]
+        return Answer
+
+print(UglyNumber(1500))
+</code></pre>
+
+<p>py 3.4 작성.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/10/24 13:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Lee SeungChan</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1959"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">&#39;2,3,5를 약수로 갖는 수&#39;가 아니라 &#39;2 또는 3 또는 5만 약수로 갖는 수&#39;를 찾는 것 같습니다.
+예를 들면 33은 3 x 11 이라서, 여기에 해당이 되지 않지요.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    c0din9,
+                                    2017/03/14 16:21
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_1651"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C#으로 작성했습니다. ulong보다 더 큰 memory가 필요하길래 System.Numerics를 reference해서 BigInteger로 계산했습니다. string list에다 ugly numbers를 차례대로 저장하였고, 100000번째 숫자 계산하는데 걸린 시간은 제 컴퓨터로 약 4.5 seconds 걸렸습니다. (빠르면 4.2, 느리면 4.7 정도 걸리더군요.)
+O(n) 입니다.</p>
+<pre><code class="cs">using System.Collections.Generic;
+using System.Linq;
+using System.Numerics;
+
+        public string FindUglyNumber(int n)
+        {
+            var outputs = new List&lt;string&gt;();
+            outputs.Add(&quot;1&quot;);
+            int two = 0, three = 0, five = 0;
+            for (int i = 1; i &lt; n; i++)
+            {
+                var temp = FindMinimum(BigInteger.Parse(outputs[two])*2, BigInteger.Parse(outputs[three])*3,
+                    BigInteger.Parse(outputs[five])*5);
+                if (temp % 2 == 0 &amp;&amp; temp &gt;= 2) two++;
+                if (temp % 3 == 0 &amp;&amp; temp &gt;= 3) three++;
+                if (temp % 5 == 0 &amp;&amp; temp &gt;= 5) five++;
+                outputs.Add(temp.ToString());
+            }
+            return outputs.Last();
+        }
+
+        public BigInteger FindMinimum(BigInteger two, BigInteger three, BigInteger five)
+        {
+            if (two &lt;= three &amp;&amp; two &lt;= five) return two;
+            if (three &lt;= two &amp;&amp; three &lt;= five) return three;
+            if (five &lt;= two &amp;&amp; five &lt;= three) return five;
+            return 1;
+        }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/02/05 21:09</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Straß Böhm Jäger</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2628"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def ugly_num(k):
+    s=[1]
+    for i in range(0,k-1):
+        next_element = s[0]
+        s.append(next_element*2)
+        s.append(next_element*3)
+        s.append(next_element*5)
+        s=sorted(list(set(s)))
+        s.remove(next_element)
+    return s[0]
+
+print ugly_num(1500)
+</code></pre>
+
+<p>제일위의코드 파이썬으로 따라해본건데..
+c++는 모르겠지만 파이썬 set은 non-ordered라 좀 지저분하게 짜졌네요.
+c++ set은 순차적으로 add가되나보네요?</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/12/29 11:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김 매미</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2840"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <ul>
+<li>C# 입니다. 100만번째 수 같은경우엔 0.68초 정도 걸립니다. 10만번째는 금방 나오네요.</li>
+<li>전 큐를 활용해 각 배수에 곱해질 수들을 가져왔구요, 큰 배열 단위를 컨트롤하지 않기 때문에 빠르게 계산 되는것 같습니다.</li>
+<li>알고리즘이 특별하거나 그러지 않는데, 전체적인 문제의 흐름을 계속 파악하니까 문제를 심플하게 해석 할 수 있었네요.</li>
+</ul>
+<pre><code class="cs">const int NUM = 100000;            
+BigInteger c2 = 0, c3 = 0, c5 = 0, re = 1;
+Queue&lt;BigInteger&gt; q2 = new Queue&lt;BigInteger&gt;(new BigInteger[] { re });
+Queue&lt;BigInteger&gt; q3 = new Queue&lt;BigInteger&gt;(new BigInteger[] { re });
+Queue&lt;BigInteger&gt; q5 = new Queue&lt;BigInteger&gt;(new BigInteger[] { re });
+
+for (int i = 1; i &lt; NUM; ++i)
+{
+    while (c2 &lt;= re) { c2 = q2.Dequeue() * 2; }
+    while (c3 &lt;= re) { c3 = q3.Dequeue() * 3; }
+    while (c5 &lt;= re) { c5 = q5.Dequeue() * 5; }
+
+    re = c2 &lt; c3 ? c2 : c3;
+    re = c5 &lt; re ? c5 : re;
+
+    q2.Enqueue(re);
+    q3.Enqueue(re);
+    q5.Enqueue(re);
+}
+Console.WriteLine(re);
+</code></pre>
+
+<h3 id="_1">결과</h3>
+<ul>
+<li>[ 1500'th ugly number - elapsed:00:00:00.0087949 ]</li>
+<li>
+<ul>
+<li>859963392</li>
+</ul>
+</li>
+<li></li>
+<li>[ 1550'th ugly number - elapsed:00:00:00.0053298 ]</li>
+<li>
+<ul>
+<li>1093500000</li>
+</ul>
+</li>
+<li></li>
+<li>[ 100000'th ugly number - elapsed:00:00:00.0686909 ]</li>
+<li>
+<ul>
+<li>290142196707511001929482240000000000000</li>
+</ul>
+</li>
+<li></li>
+<li>[ 1000000'th ugly number - elapsed:00:00:00.6818439 ]</li>
+<li>
+<ul>
+<li>519312780448388736089589843750000000000000000000000000000000000000000000000000000000</li>
+</ul>
+</li>
+<li></li>
+<li>[ 10000000'th ugly number - elapsed:00:00:09.5505225 ]</li>
+<li>
+<ul>
+<li>162441050638304318232392153117595750351085388205966408633356724833252116013682
+09812790155410766601562500000000000000000000000000000000000000000000000000000000
+000000000000000000000000</li>
+</ul>
+</li>
+<li></li>
+<li>[ 30000000'th ugly number - elapsed:00:00:41.2799976 ]</li>
+<li>
+<ul>
+<li>475791107342743770657276785200487784260789735006610954326926109049914705394567
+71772243273466391665233527085670538668819062877446413040161132812500000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000</li>
+</ul>
+</li>
+</ul>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/01/20 10:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이 우람</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2851"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n=input()
+L = [1]
+i=0
+for i in range(n-1)
+    for m in [2,3,5]:
+        new = L[0]*m
+        if L[-1] &lt; new : L.append(new);continue
+        ii = -1
+        while new &lt; L[ii] : ii -= 1
+        if new == L[ii] : continue
+        else : L.insert(ii+1,new)
+    L.pop()
+print L.pop()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/01/21 17:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">상파</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3027"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<pre><code class="ruby">uglys = {2=&gt;[1], 3=&gt;[1], 5=&gt;[1]}
+make = -&gt;n { uglys.each { |k,seq| seq.shift if seq[0] == n; seq &lt;&lt; k*n } }
+ugly = -&gt;nth { (0..nth).inject { uglys.values.map(&amp;:first).min.tap &amp;make } }
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby">expect(ugly[1500]).to eq 859963392
+expect(ugly[100000]).to eq 290142196707511001929482240000000000000
+</code></pre>
+
+<p><strong>Perfomance</strong></p>
+<pre><code class="no-highlight">                          user     system      total        real
+1500'th ugly number   0.000000   0.000000   0.000000 (  0.002240)
+                          user     system      total        real
+100000'th ugly number 0.250000   0.000000   0.250000 (  0.252110)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/02/24 07:09</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3424"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import time
+def add(li, x):
+    if x not in li:
+        if x&gt;li[-1]:
+            li.append(x)
+        else:
+            for i in range(len(li)):
+                if li[i]&gt;x:
+                    li.insert(i, x)
+                    break
+while __name__ == '__main__':
+    inpt = int(input('&gt;&gt;&gt;'))
+    a = time.time()
+    l = [1]
+    i = -1
+    while 1:
+        i += 1
+        t = l[i]
+        add(l,t*2)
+        add(l,t*3)
+        add(l,t*5)
+        if  i == inpt-1:
+            print(l[inpt-1],'\n',time.time()-a)
+            break
+</code></pre>
+
+<p>한자리 증가할 때마다 거의 100배씩 시간이 증가하네요. 파이썬 3.5.1</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/04/15 22:02</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Flair Sizz</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3503"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>2*2 를 일단 하고, 회수는 늘렸습니다. 그래야. 작은 수가 누락하는걸 놓치지 않기 위함인데, 더 좋은 방법 좀 생각해 봐야겠네요; </p>
+<pre><code class="java">
+    public void generator(int number){
+       // HashSet set = new HashSet();
+        ArrayList set = new ArrayList();
+        long result = 1, input = 0 ;
+        set.add(result);
+        Iterator it = set.iterator();
+        int i =0;
+        while(true){
+
+            input = (long)set.get(i++);
+
+            if(!set.contains(input*2))
+                set.add(input*2);
+            if(!set.contains(input*3))
+                set.add(input*3);
+            if(!set.contains(input * 4))
+                set.add(input * 4);
+            if(!set.add(input*5))
+                set.add(input*5);
+
+            System.out.println(&quot; size : &quot; + set.size());
+            //print(set);
+
+
+            Collections.sort(set);
+
+
+            if(set.size() &gt;= (number +100)) {
+                System.out.print(&quot;Ugly Number :  &quot; + set.get(number-1));
+                break;
+            }
+        }
+    }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/04/23 12:02</p>
+                                <p class="static-profile" style="margin:0;padding:0;">xeo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3574"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>비겁하지만 일단 문제는 1500번째 수를 구하는 것이니까, </p>
+<pre><code class="python">from itertools import product
+
+def do(n):
+    temp = [1]*3 + ([0] * (n - 1))
+    bases = (2, 3, 5)
+    for i in range(3, n+2):
+        s = [x for x in temp[0:i] if x &gt;= temp[i-1] // 5]
+        temp[i] = min([x for x in [a*b for a, b in product(s, bases)]
+             if x &gt; temp[i-1]])
+    return temp[-1]
+
+%time print(do(1500))
+%time print(do(1550))
+</code></pre>
+
+<p>대략 1초 내로 나오긴 합니다.</p>
+<pre><code>859963392
+Wall time: 666 ms
+1093500000
+Wall time: 769 ms
+</code></pre>
+
+<p>보시다시피, 효율성하고는 거리가 먼 코드라 10만의 경우에는 또르르를....</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/05/03 17:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">룰루랄라</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3913"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p> 우선순위 큐를 활용해서 해결했습니다. 제가 예전에 이 문제의 일반화된 문제를 해결한적이 있는데 <a href = "http://blog.naver.com/programmer18/220684940941"> 제 블로그 포스트</a>를 참고해주세요. 아래는 제 C++ code 입니다. 그리고 아래 코드는 1500번째 수는 거뜬히 계산하지만, 십만번째 수는 long long 변수를 사용해도 overflow가 생기기 때문에 더 큰 수를 찾기 위해선 string객체를 이용해서 big int를 구현해야합니다.</p>
+
+<pre><code class="cpp">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;  
+#include &lt;cstdlib&gt;
+#include &lt;climits&gt; 
+#include &lt;queue&gt; 
+#include &lt;algorithm&gt; 
+using namespace std;
+
+typedef long long ll; 
+
+int main(){
+    ll val = 0; 
+    priority_queue&lt; ll,vector&lt;ll&gt;,greater&lt;ll&gt; &gt; que2; 
+    priority_queue&lt; ll,vector&lt;ll&gt;,greater&lt;ll&gt; &gt; que3; 
+    priority_queue&lt; ll,vector&lt;ll&gt;,greater&lt;ll&gt; &gt; que5;
+    que2.push(1); 
+    for (int i = 1; i &lt;= 1500; i++){
+        ll v2 = que2.size() &gt; 0 ? que2.top() : INT_MAX;  
+        ll v3 = que3.size() &gt; 0 ? que3.top() : INT_MAX;  
+        ll v5 = que5.size() &gt; 0 ? que5.top() : INT_MAX;  
+        val = min(v2,min(v3,v5));    
+        if (val == v2){
+            que2.pop();  
+            que2.push(2*val); 
+            que3.push(3*val); 
+        }else if (val == v3){
+            que3.pop(); 
+            que3.push(3*val); 
+        }else if (val == v5){
+            que5.pop();  
+        }
+        que5.push(5*val); 
+    }
+    printf(&quot;The 1500'th ugly number is %lld.\n&quot;,val); 
+    return 0; 
+}  
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/06/08 18:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">iljimae</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4034"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def ugnum(x):
+    tmp, mul, j = [1], (2,3,5), 0
+    while True:
+        j += 1
+        tmp = sorted(list(set(tmp + list(t * m for t in tmp for m in mul))))
+        try :
+            tmp = tmp[:x+1]
+            if 2 ** j &gt; tmp[x-1]: break
+        except : pass
+
+    print('the %dth ugly number is %d' % (x, tmp[x-1]))
+
+ugnum(1500)
+ugnum(1550)
+ugnum(100000)
+</code></pre>
+
+<p>tmp의 최초값을 1로 두고 각 값에 2,3,5를 곱한 값을 tmp에 추가하여 sort하는 방법을 택했습니다.
+숫자가 커질수록 우리가 찾는 x번째 항목 뒤쪽으로 불필요한 숫자가 기하급수적으로 증가하고, 곱하기의 특성상 계속해서 커지기 때문에 불필요하다고 판단, x번째 항목 뒤로 발생하는 값들은 날려버리도록 하니 속도는 훨씬 빨라졌네요</p>
+<p>그래도 여전히 10만번째 녀석을 찾는 건 16초정도 걸리네요 더 빠른 방법을 고민해보아야겠습니다.</p>
+<p>지금 구상은 뒤쪽 뿐만 아니라 앞쪽을 덜어내는 건데요
+지금의 코딩으로는 앞에서부터 세는 방식을 택하고 있기 때문에 덜어낼경우 전반적인 구조를 수정해야할것같아서 고민으로 남긴 채 업로드해봅니다 ^^</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/06/28 23:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Park Jay</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4115"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>java
+그냥 index 를 2와 3과 5의 인덱스를 따로 두어서 정렬없이 순차적으로 넣었습니다.</p>
+<pre><code class="java">int Max = 1500;
+
+        int two_index = 0, three_index = 0, five_index = 0;
+        ArrayList&lt;Long&gt; al = new ArrayList&lt;Long&gt;();
+        Long first_data = 1L;
+        al.add(first_data);
+        while (al.size() &lt; Max) {
+            if (2 * al.get(two_index) &lt;= 3 * al.get(three_index) 
+                    &amp;&amp; 2 * al.get(two_index) &lt;= 5 * al.get(five_index)) {
+                if (!al.contains(2 * al.get(two_index))) {
+                    al.add(2 * al.get(two_index++));
+                } else {
+                    two_index++;
+                }
+            } else if (3 * al.get(three_index) &lt;= 2 * al.get(two_index) 
+                    &amp;&amp; 3 * al.get(three_index) &lt;= 5 * al.get(five_index)) {
+                if (!al.contains(3 * al.get(three_index))) {
+                    al.add(3 * al.get(three_index++));
+                } else {
+                    three_index++;
+                }
+
+            } else if (5 * al.get(five_index) &lt;= 2 * al.get(two_index) 
+                    &amp;&amp; 5 * al.get(five_index) &lt;= 3 * al.get(three_index)) {
+                if (!al.contains(5 * al.get(five_index))) {
+                    al.add(5 * al.get(five_index++));
+                } else {
+                    five_index++;
+                }
+            }
+        }
+        System.out.println(&quot;\n data = &quot; + al.get(Max - 1));
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/07/09 17:17</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이승용</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4242"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeSet;
+
+public class test {
+
+    public static void main(String[] argv) {
+
+         // 시작 시간
+        long startTime = System.currentTimeMillis();
+
+        Set&lt;Long&gt; longList = new TreeSet&lt;Long&gt;();
+
+        long start_num = 1L;
+
+        longList.add(start_num);
+
+        for(int i = 1; i &lt; 1500; i++){
+
+            longList.add(start_num * 2);
+            longList.add(start_num * 3);
+            longList.add(start_num * 5);
+
+            Iterator&lt;Long&gt; iterator = longList.iterator();
+
+            while(iterator.hasNext()){
+
+                long temp = iterator.next();
+
+                if(temp &gt; start_num){
+                    longList.remove(start_num);
+                    start_num = temp;
+                    break;
+                }
+            }
+
+        }
+
+        System.out.println(&quot;The 1500'th ugly number is &quot; + start_num);
+
+        // 종료 시간
+        long endTime = System.currentTimeMillis();
+
+        // 시간 출력
+        System.out.println(&quot;##  소요시간(초.0f) : &quot; + ( endTime - startTime )/1000.0f +&quot;초&quot;); 
+
+    }
+
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/07/26 17:13</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이 승준</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5498"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>속도가 엄청 느림 ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ</p>
+<p>1
+2
+.....
+239148450
+240000000
+241864704
+243000000
+244140625
+245760000
+246037500
+248832000
+250000000
+251658240
+251942400
+253125000
+254803968
+255091680
+256000000
+258280326
+259200000
+262144000
+262440000
+263671875
+265420800
+265720500
+268435456
+268738560
+270000000
+272097792
+273375000
+276480000
+279936000
+281250000
+283115520
+283435200
+284765625
+286654464
+286978140
+288000000
+291600000
+292968750
+294912000
+295245000
+298598400
+300000000
+301989888
+302330880
+303750000
+306110016
+307200000
+307546875
+311040000
+312500000
+314572800
+314928000
+316406250
+318504960
+318864600
+320000000
+322486272
+324000000
+327680000
+328050000
+331776000
+332150625
+335544320
+335923200
+337500000
+339738624
+340122240
+341718750
+344373768
+345600000
+349920000
+351562500
+353894400
+354294000
+358318080
+358722675
+360000000
+362797056
+364500000
+368640000
+369056250
+373248000
+375000000
+377487360
+377913600
+379687500
+382205952
+382637520
+384000000
+387420489
+388800000
+390625000
+393216000
+393660000
+398131200
+398580750
+400000000
+402653184
+403107840
+405000000
+408146688
+409600000
+410062500
+414720000
+419430400
+419904000
+421875000
+424673280
+425152800
+429981696
+430467210
+432000000
+437400000
+439453125
+442368000
+442867500
+447897600
+450000000
+452984832
+453496320
+455625000
+459165024
+460800000
+466560000
+468750000
+471859200
+472392000
+474609375
+477757440
+478296900
+480000000
+483729408
+486000000
+488281250
+491520000
+492075000
+497664000
+500000000
+503316480
+503884800
+506250000
+509607936
+510183360
+512000000
+512578125
+516560652
+518400000
+524288000
+524880000
+527343750
+530841600
+531441000
+536870912
+537477120
+540000000
+544195584
+546750000
+552960000
+553584375
+559872000
+562500000
+566231040
+566870400
+569531250
+573308928
+573956280
+576000000
+583200000
+585937500
+589824000
+590490000
+597196800
+597871125
+600000000
+603979776
+604661760
+607500000
+612220032
+614400000
+615093750
+622080000
+625000000
+629145600
+629856000
+632812500
+637009920
+637729200
+640000000
+644972544
+645700815
+648000000
+655360000
+656100000
+663552000
+664301250
+671088640
+671846400
+675000000
+679477248
+680244480
+683437500
+688747536
+691200000
+699840000
+703125000
+707788800
+708588000
+716636160
+717445350
+720000000
+725594112
+729000000
+732421875
+737280000
+738112500
+746496000
+750000000
+754974720
+755827200
+759375000
+764411904
+765275040
+768000000
+774840978
+777600000
+781250000
+786432000
+787320000
+791015625
+796262400
+797161500
+800000000
+805306368
+806215680
+810000000
+816293376
+819200000
+820125000
+829440000
+838860800
+839808000
+843750000
+849346560
+850305600
+854296875
+859963392</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+void main() {
+    int val = 1;
+    int count = 0;
+    int temp = 0;
+    while(count&lt;1500) {
+        temp = val;
+        while(temp!=0) {
+            if(temp%2==0) {
+                temp = temp/2;
+            }
+            else if(temp%3==0){
+                temp = temp/3;
+            }
+            else if(temp%5==0) {
+                temp = temp/5;
+            } else 
+                break;
+        }
+        if(temp == 1 || val==1) {
+            count++;
+            printf(&quot;%d\n&quot;, val);
+        }
+        val++;
+    }
+
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/12/04 12:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">코딩초보</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5517"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Haskell</p>
+<p>오름차순 무한리스트 두개를 머지하는 merge 함수를 정의하고,
+ugly를 cyclic list로 만들어서 2,3,5를 곱하면서 전체머지(foldr1 merge)합니다.</p>
+<pre><code class="haskell">merge (x:xs) (y:ys) | x&lt;y  = x:merge xs (y:ys)
+                    | x==y = x:merge xs ys
+                    | x&gt;y  = y:merge (x:xs) ys
+ugly = 1:foldr1 merge [map (*x) ugly | x &lt;- [2,3,5]]
+main = print (ugly !! 1499)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/12/06 14:41</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Han Jooyung</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5559"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def do(n):
+    i = 0
+    set_ = {1}
+    while True:    
+        t = min(set_)
+        set_.remove(t)
+        i += 1
+        set_.add(t * 2)
+        set_.add(t * 3)
+        set_.add(t * 5)
+        if i == n:
+            print(t)
+            break
+
+do(1500)
+do(1550)
+do(100000)
+
+</code></pre>
+
+<p>Python 3.5.2에서 작성하였습니다.<br></p>
+<pre><code class="python">from sortedcontainers import SortedSet
+def do(n):
+    i = 0
+    set_ = SortedSet([1])
+    while True:    
+        t = set_.pop(0)
+        i += 1
+        set_.add(t * 2)
+        set_.add(t * 3)
+        set_.add(t * 5)
+        if i == n:
+            print(t)
+            break
+
+do(1500)
+do(1550)
+do(100000)
+
+</code></pre>
+
+<p>sortedcontainers library를 설치하고 SortedSet을 사용하니 속도가 빠르네요.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/12/12 12:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Yeo HyungGoo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5691"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package algorithm;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.TreeSet;
+
+public class Ex7 {
+    private TreeSet&lt;Long&gt; cueSet = new TreeSet&lt;Long&gt;();
+    private List&lt;Long&gt; multiples = new ArrayList&lt;Long&gt;();
+    private long currentFirstValue = 1;
+
+    public int multiple(long value) {
+        this.cueSet.add(value * 2);
+        this.cueSet.add(value * 3);
+        this.cueSet.add(value * 5);
+
+        this.multiples.add(this.cueSet.first());
+        this.currentFirstValue = this.cueSet.first();
+        this.cueSet.remove(this.cueSet.first());
+
+        return this.multiples.size();
+    }
+    public void makeResult() {
+        if(this.multiples.size() == 0) {
+            this.multiples.add(1l);
+        }
+        int totalSize = this.multiple(this.currentFirstValue);
+        if(totalSize &lt; 1500) {
+            this.makeResult();
+        }
+        else if(totalSize == 1500){
+            System.out.println(this.multiples.get(this.multiples.size() - 1));
+            return;
+        }
+    }
+
+
+    public static void main(String[] args) {
+        Ex7 ex = new Ex7();
+        ex.makeResult();
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/12/27 00:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박요한</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6098"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import time
+start = time.time()
+step,count = 0,0
+while count != 1500:
+    step += 1
+    num = step
+    while True:
+        if num == 1:
+            count += 1
+            break
+        if num % 2 == 0:
+            num /= 2
+        elif num % 3 == 0:
+            num /= 3
+        elif num % 5 == 0:
+            num /= 5
+        else:
+            break
+print(step)
+print(time.time() - start)
+
+#### 2017.02.03 D-384 ####
+</code></pre>
+
+<p>과감하게. 효율을 포.기.한.다.
+아 진짜 찾아보려고했는데 잘안되요.ㅠ</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/02/03 23:43</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GunBang</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6249"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">times=1550
+c=1
+sn=2
+while c&lt;times:
+    n=sn
+    while n%2==0:
+        n=int(n/2)
+    while n%3==0:
+        n=int(n/3)
+    while n%5==0:
+        n=int(n/5)
+    if n==1:
+        c=c+1
+        cn=sn
+        sn+=1
+    else:
+        sn+=1
+print(cn) 
+
+</code></pre>
+
+<p>이방법은... 시간이 너무 많이 소요되네요;;;ㅠㅜ</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/02/18 18:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">전용준</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6658"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package algorithmPractice;
+
+public class UglyNumbers {
+        public static void main(String[] args) {
+        int arr[] = {2,3,5}; // 2,3,5의 수를 인덱스로 쉽게 접근하여 나누기 위해서 사용함
+        int index = 0; 
+
+        int result=0; //최종 결과값 
+        int countNum = 1; //몇번째의 값인지 알기 위해서, 1을 초기값으로 한 것은 맨처음의 1를 건너 뛰기 위해서
+
+        int number = 2; // 2부터 하나하나 씩 정수를 비교하기 위해서 
+        int imsi = 2; // 이 변수는 몫의 값도 들어가고 비교하기 위한 정수도 들어가는 변수이다.
+
+        int input = 1550;
+        while(countNum &lt; input){
+
+            if(imsi%7==0 || index==3){
+                imsi = ++number;
+                index=0;
+                continue; 
+            } // if end
+
+            if(imsi%arr[index]==0){ 
+                imsi = imsi/arr[index];
+                index=0;
+            }else{ index++; }
+
+            if(imsi==1){
+                result = number; 
+                imsi = ++number;
+                ++countNum;
+            }
+
+        }//end while
+        System.out.println(input+&quot; 번째의 결과 값은 ==&quot; + result);
+    }//end main
+}// end UglyNumbers Class
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/03/24 15:31</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김현중</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7573"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>javascript</strong></p>
+<pre><code class="javascript">var getUgly = function(index) {
+    var n = 1, ugly = [1];
+
+    do {
+        var u = ugly.shift();
+        ugly = Array.from(new Set([...ugly,2 * u, 3 * u, 5 * u])).sort((a, b) =&gt; a - b);
+        n++;
+    } while (n &lt; index);
+
+    return ugly[0];
+}
+
+console.log(`The 1500'th ugly number is ${getUgly(1500)}.`);
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/19 12:32</p>
+                                <p class="static-profile" style="margin:0;padding:0;">funnystyle</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7849"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3으로 풀었습니다.</p>
+<p>PriorityQueue를 이용하면 손쉽게 작은 순으로 뽑을 수 있고,</p>
+<p>set을 이용하여 중복 검사를 최소화하면 O(n) 시간에 풀 수 있습니다.</p>
+<p>1500, 1550, 100000 모두 계산했을 때, 1.22초 정도 걸리네요. (컴퓨터 성능따라 약간 차이는 있을 것 같습니다.)</p>
+<pre><code class="python">import queue
+def get_ugly_number(n):
+    output, pre_defined = [], [2, 3, 5]
+    check = {1}
+    PQ = queue.PriorityQueue()
+    PQ.put(1)
+
+    for i in range(n):
+        new = PQ.get()
+        output.append(new)
+
+        for x in pre_defined:
+            val = x * new
+            if val not in check:
+                PQ.put(val)
+                check.add(val)
+    return output[-1]
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/07/13 19:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">SOUP</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2306"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">좋네요! ㅇㅅㅇ)b</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Noname,
+                                    2018/07/27 06:39
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8486"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def getUglyNum(param):
+    idx = 0
+    while param &gt; 0:
+        idx += 1
+        num = idx
+        status = False
+        while True:
+            cnt = 0
+            for m1 in [2,3,5]:
+                if num % m1 == 0:
+                    num = num / m1
+                    cnt += 1
+            if num == 1:
+                status = True
+                break
+            if cnt == 0:
+                status = False
+                break
+        if status:
+            param -= 1
+    print(idx)
+
+print(&quot;The 1500'th ugly number is &lt;number&gt;.&quot;)
+getUglyNum(11)
+
+
+
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/23 16:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">piko</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8741"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+
+int main(){
+    int mok = 0;
+    int bool = 0;
+    int count = 2;
+    for(int i=2;i&lt;10000000000;i++)
+    {
+        mok=i;
+        bool=1;
+        while(bool)
+        {
+            if(mok%2==0)
+            {
+                mok = mok/2;
+                if(mok==1)
+                {
+                    printf(&quot;%d %d \n&quot;,count,i);
+                    count++;
+                    bool = 0;
+                }
+            }
+            else if(mok%3==0)
+            {
+                mok = mok/3;
+                if(mok==1)
+                {
+                    printf(&quot;%d %d \n&quot;,count,i);
+                    count++;
+                    bool = 0;
+                }
+
+            }
+            else if(mok%5==0)
+            {
+                mok = mok/5;
+                if(mok==1)
+                {
+                    printf(&quot;%d %d \n&quot;,count,i);
+                    count++;
+                    bool = 0;
+                }
+            }
+            else
+            {
+                if(mok!=1)
+                {
+                    bool=0;
+                }
+            }
+
+        }
+        if(count==1501)
+            break;
+    }
+
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/09/07 14:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">정모조</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10445"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3.6</p>
+<pre><code class="python">def uglynums(num):
+    tmp,divisors, count, mul_list = [1],[2,3,5],0,[]
+    while True:
+        count += 1
+        for divisor in divisors:
+            for value in tmp:
+                mul_list.append(value*divisor)
+        tmp.extend(mul_list)
+        tmp = sorted(list(set(tmp)))
+        tmp = tmp[:num+1]
+        if len(tmp) &gt;= num:
+            if 2 ** count &gt; tmp[num-1]:
+                break
+    print(&quot;The %dth ugly number is %d.&quot;%(num,tmp[num-1]))
+
+if __name__ == &quot;__main__&quot;:
+    uglynums(1500)
+    uglynums(1550)
+
+*결과값
+The 1500th ugly number is 859963392.
+The 1550th ugly number is 1093500000.
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/01 19:55</p>
+                                <p class="static-profile" style="margin:0;padding:0;">justbegin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10783"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def ugly(n):
+    a = [(2**i)*(3**j)*(5**k) for i in range(int(7.4*n**(1/3))+2)
+         for j in range(int(5.1*n**(1/3))+2)
+         for k in range(int(3.2*n**(1/3))+2)]
+    a.sort()
+    return a[n-1]
+
+
+print(ugly(int(input())))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/18 12:11</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김동하</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11112"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">a={1}
+sp=1
+n=1500
+while len(a)&lt;n:
+    a=a|{i*2 for i in a}|{i*3 for i in a}|{i*5 for i in a}
+while sp==1:
+    b=sorted(list(a))
+    b=b[0:n]
+    if ({i*2 for i in b} -a ==set())*({i*3 for i in b} -a ==set())*({i*5 for i in b} -a ==set())==0:
+        a=a|{i*2 for i in b}|{i*3 for i in b}|{i*5 for i in b}
+    else:
+        sp=0
+print(sorted(list(a))[n-1])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/03/14 09:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김자현</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11113"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int ugly(int n) {
+    if (n == 1) {
+        return 1;
+    }
+    else if(n % 2 == 0) {
+        n = n / 2;
+    }
+    else if (n % 3 == 0) {
+        n = n / 3;
+    }
+    else if (n % 5 == 0) {
+        n = n / 5;
+    }
+    else { return 0; }
+    ugly(n);
+}
+
+int main() {
+    int j = 1, i=0, k=0;
+    int re, n ;
+    n = 1500;
+    while (i&lt;n) {
+        if (ugly(j) == 1) {
+            i++;
+        }
+        j++;
+    }
+    printf(&quot;The %d'th ugly number is %d&quot;,n,  j-1);
+
+
+    return 0;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/03/14 09:36</p>
+                                <p class="static-profile" style="margin:0;padding:0;">탁성하</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11156"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+
+
+public class test2 {
+    public static void main(String args[]){
+        int targetIdx = 1500;   
+            /* 중복 자동 제거를 위해 HashSet 사용 
+                   큰 수 연산을 위해 BigNumber 사용  */
+        HashSet&lt;BigInteger&gt; numList = new HashSet&lt;BigInteger&gt;();
+        numList.add(BigInteger.ONE);    
+        BigInteger two = new BigInteger(&quot;2&quot;);
+        BigInteger three= new BigInteger(&quot;3&quot;);
+        BigInteger five = new BigInteger(&quot;5&quot;);
+        int cnt = 0;        
+        while(numList.size() &lt; targetIdx){
+            HashSet&lt;BigInteger&gt; temp = new HashSet&lt;BigInteger&gt;();
+            for(BigInteger num:numList){
+                temp.add(num.multiply(two));
+                temp.add(num.multiply(three));
+                temp.add(num.multiply(five));
+            }
+            numList.addAll(temp);
+            cnt++;          
+        }           
+        for(int i = cnt; Math.pow(2,i)&lt;Math.pow(5, cnt) ; i++){
+            HashSet&lt;BigInteger&gt; temp2 = new HashSet&lt;BigInteger&gt;();
+            for(BigInteger num:numList){
+                temp2.add(num.multiply(two));
+                temp2.add(num.multiply(three));
+                temp2.add(num.multiply(five));
+            }
+            numList.addAll(temp2);          
+        }
+        ArrayList&lt;BigInteger&gt; arr = new ArrayList&lt;BigInteger&gt;(numList);         
+        Collections.sort(arr, new Compa());
+        System.out.println(arr.get(targetIdx - 1));
+        System.out.println(arr.size());
+    }   
+}
+class Compa implements Comparator&lt;BigInteger&gt;{
+    public int compare(BigInteger o1, BigInteger o2){
+        return o1.compareTo(o2);    
+    }
+}
+</code></pre>
+
+<ol>
+<li>
+<p>중복 없이 N번의 곱셈연산의 결과수가 1500개 이상인 최소의 N을 구함</p>
+</li>
+<li>
+<p>N번 이상의 곱셈연산 결과값에 5^N 보다 작은 숫자들이 누락되어있으므로 5^N &lt; 2^M 인 최소의 M을 구하여 M-N번의 추가 곱셈 연산을 수행</p>
+</li>
+<li>
+<p>정렬 후 1500번째 숫자 출력</p>
+</li>
+</ol>
+<p><strong>※ 최적의 N 값을 구하는 더 효율적인 방법이 있다면 더 빠른 시간내에 구할 수도 있을것 같음.</strong></p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/03/16 16:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Wannagenie</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11647"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.ArrayList;
+import java.util.List;
+
+public class UglyNumbers {
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        List&lt;Integer&gt; uglyList = new ArrayList&lt;&gt;();
+        int start = 1;
+        uglyList.add(start++);
+        int temp = start;
+        while(uglyList.size() &lt; 1500){
+
+            if(temp % 2 == 0 || temp % 3 == 0 || temp % 5 == 0){
+                if(temp % 2 == 0){
+                    temp /= 2;
+                }
+                if(temp % 3 == 0){
+                    temp /= 3;
+                }
+                if(temp % 5 == 0){
+                    temp /= 5;
+                }
+            }else if(temp == 1){
+                uglyList.add(start++);
+                temp = start;
+            }else{
+                temp = ++start;
+            }
+
+        }
+        System.out.println(uglyList.get(uglyList.size()-1));
+    }
+
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/04/10 17:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김태훈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11997"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">    static boolean checkUgly(int num) {
+        while(true) {
+            if(num % 2 == 0 || num % 3 == 0 || num % 5 == 0) {
+                if(num % 2 == 0)
+                    num /= 2;
+                if(num % 3 == 0)
+                    num /= 3;
+                if(num % 5 == 0)
+                    num /= 5;
+            } else {
+            if(num == 1)
+                return true;
+            else
+                return false;
+            }
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(br.readLine()); 
+        int cnt = 1;
+        int num = 1;
+        while(cnt &lt; 1500) {
+            num++;
+            if(checkUgly(num))
+                cnt++;
+        }
+        System.out.println(num);
+    }
+} 와 되게 느리네요
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/03 17:37</p>
+                                <p class="static-profile" style="margin:0;padding:0;">정몽준</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12198"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">
+public class UglyNumbers {
+        public static void main(String[] args) {
+            int count=0;
+            int number=0;
+
+            while(count&lt;1500) {
+                number++;
+                if(Uglycheck(number)==true) {
+                    count++;
+                }
+            }
+            System.out.println(number);
+
+        }
+        static boolean Uglycheck(int number) {
+            boolean check=true;
+            while(check) {
+                if(number%5==0) {
+                number/=5;
+            }else if(number%3==0) {
+                number/=3;
+            }else if(number%2==0) {
+                number/=2;
+            }else if(number==1) {
+                break;
+            }else {
+                return false;
+            }
+        }
+            return check;   
+        }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/11 12:41</p>
+                                <p class="static-profile" style="margin:0;padding:0;">강윤일</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12489"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def ugly(num):
+    ugly_list = [1]
+    while True:
+        if len(ugly_list) == num :
+            return ugly_list[-1]
+        else :
+            tmp = []
+            for u in ugly_list:
+                for t in u*2, u*3, u*5 :
+                    if t &gt; ugly_list[-1]: tmp.append(t)
+            ugly_list.append(min(tmp))
+
+
+print(ugly(1500))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/24 13:36</p>
+                                <p class="static-profile" style="margin:0;padding:0;">yijeong</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13338"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>자력으로 풀어볼려다가 실행시간이 너무 길어서 잘하신 분의 알고리즘을 파이썬으로 작성했습니다. 역시 대단하신 분이 많네요 --)/ 배워갑니다.</p>
+<pre><code class="python">a = [1]
+count = 1
+while(count != 1500):
+    a.append(a[0] * 2)
+    a.append(a[0] * 3)
+    a.append(a[0] * 5)
+    a = sorted(list(set(a)))[1:]
+    count += 1
+print(a[0])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/04 20:41</p>
+                                <p class="static-profile" style="margin:0;padding:0;">재즐보프</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13658"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def uglynum(n):
+    id,un = 0,[1]
+    while 1:
+        for j in (un[id]*2,un[id]*3,un[id]*5):
+            for i in range(len(un)):
+                if un[-i-1] &lt; j:
+                    un.append(j) if i==0 else un.insert(-i,j)
+                    break
+                if un[-i-1] == j: break
+        id += 1
+        if len(un) &gt;= n and un[id]*2 &gt;= un[n-1]:
+            return un[n-1]
+
+print(uglynum(1500))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/20 18:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13807"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from heapset import HeapSet
+
+hs = HeapSet(1)
+for i in range(100000):
+    e = hs.pop()
+    hs.push(e*2, e*3, e*5)
+
+print(e)
+</code></pre>
+
+<p>집합을 쓰면 코드가 간단한데, 집합에서 최소값 찾기가 (아마도) 비효율적입니다.</p>
+<p>찾아보니 적당한 자료구조가 없어서 그냥 만들었습니다.</p>
+<p><a href="https://stackoverflow.com/questions/5997189/how-can-i-make-a-unique-value-priority-queue-in-python">여기를 참고했음</a></p>
+<p>수행시간은 아주 만족스럽습니다.</p>
+<pre><code class="python">import heapq
+
+
+# a HeapSet is a heap containing unique items
+class HeapSet:
+    def __init__(self, *args):
+        self.heap = []
+        self.set = set()
+        self.push(*args)
+
+    def push(self, *args):
+        for item in args:
+            if item not in self.set:
+                heapq.heappush(self.heap, item)
+                self.set.add(item)
+
+    def pop(self):
+        item = heapq.heappop(self.heap)
+        self.set.remove(item)
+        return item
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/27 06:14</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14317"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package test;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class test {
+    public static void main(String[] args) {
+        ArrayList&lt;Long&gt; number = new ArrayList&lt;&gt;();
+        number.add(1L);
+        int j = 0;
+        while (number.size() &lt; 2000) {
+            Long n = number.get(j += j &lt; number.size() - 1 ? 1 : 0);
+            if (!number.contains(n * 2))
+                number.add(n * 2);
+            if (!number.contains(n * 3))
+                number.add(n * 3);
+            if (!number.contains(n * 5))
+                number.add(n * 5);
+            Collections.sort(number);
+        }
+        System.out.println(number.get(1499));
+        System.out.println(number.get(1549));
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/26 00:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김지훈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14541"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>쟤가 이렇게 풀었는데, 어디서 잘 못 된건지 모르겠네요, 일단 문제에서 제시한 답이 맞나요?&gt;..</p>
+<p>집합을 사용하여 100까지 2,3,5로 만든 수열의 개수를 구하기 위해선, 하나 하나 다 만들수 있지만, </p>
+<pre><code>        100까지의 2의 배수 + 100까지의 3의 배수 + 100까지의 5의 배수
+
+          - 100까지의 6의 배수 -100까지의 10의 배수 - 100까지의 15의 배수
+
+             + 100까지의 30의 배수
+
+       로 구하게 되면 쉽게 구할 수 있다.
+</code></pre>
+<p>이제는 n번째 수를 어떻게 구할 것인지가 중요하다. </p>
+<p>n = x/2 + x/3 ﻿+ x/5 - x/6 - x/10 - x/15 + x/30</p>
+<p>이다. 여기서 x값을 구할 수 있는데, x = 15/11*n 이라는 식이 된다. </p>
+<p>이 식은, n번째가 11의 배수인 경우에만 정확한 계산이 가능하다.</p>
+<p>이 문제에서 제시한 1550를 11로 나눠 정수값만 사용하여 x값을 구한다. 그러게 되면, 1540번째 값을 계산하게 되고</p>
+<p>남은 10번의 과정을 1씩 증가 시켜 확인 후 카운터한다.</p>
+<pre><code class="python">num=1550
+x = (num//11)*15
+i=num%11
+while i != 0:
+    x+=1
+    if x%2==0 | x%3==0 | x%5==0:
+        i-=1
+print(x)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/06 18:06</p>
+                                <p class="static-profile" style="margin:0;padding:0;">JaehakChoi</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2447"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">소인수 분해를 했을 때 소인수들이 2, 3, 5를 갖는 수만 찾아야 하는데 이 방법은 그 외에 다른 수들도 함께 찾아서 본 문제와는 맞지 않는 것 같습니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    physche,
+                                    2018/11/13 16:21
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14747"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C#</p>
+<ul>
+<li>nth가 커지면 ugly number의 자리 수가 굉장히 커지므로 BigInteger 타입을 사용했습니다.  </li>
+<li>1부터 시작해서 각각 2, 3, 5를 곱한 값을 SortedSet에 추가하였습니다 (SortedSet 참조 형식을 사용해서 자동적으로 중복 제거 및 정렬이 되도록 하였습니다)  </li>
+<li>2, 3, 5를 곱한 후, 해당 SortedSet의 최소값이 ugly number 리스트에 이동됩니다.  </li>
+<li>이동 후 SortedSet의 다음 최소값에 대해 2, 3, 5를 곱하여 (ugly number 리스트의 크기가 nth가 될 때까지) 반복합니다. </li>
+</ul>
+<hr />
+<ul>
+<li>nth = 100000의 경우 제 환경에서는 계산에 약 35초 정도 소요됩니다.  </li>
+<li>ugly number 정의에 따라, {2, 3, 5}외의 소수를 약수로 갖지 않는 수를 brute force 방식으로도 시도해봤는데, 코드는 쉬워지나 계산 시간이 엄청나네요^^</li>
+</ul>
+<pre><code class="cs">using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Numerics;
+
+namespace CD049
+{
+    class Program
+    {
+        static void Main()
+        {
+            UglyNumber testCase;
+            testCase = new UglyNumber(1500); Console.WriteLine(testCase.NthNumber);
+            testCase = new UglyNumber(1550); Console.WriteLine(testCase.NthNumber);
+            testCase = new UglyNumber(100000); Console.WriteLine(testCase.NthNumber);
+        }
+    }
+
+    class UglyNumber
+    {
+        private readonly int nth;
+
+        public BigInteger NthNumber =&gt; CalculateNthNumber();
+
+        public UglyNumber(int nth)
+        {
+            this.nth = nth;
+        }
+
+        private BigInteger CalculateNthNumber()
+        {
+            List&lt;BigInteger&gt; uglyNumbers = new List&lt;BigInteger&gt;();
+            SortedSet&lt;BigInteger&gt; processNumbers = new SortedSet&lt;BigInteger&gt;() { 1 };
+            BigInteger checkNumber = processNumbers.Min();
+            while (uglyNumbers.Count() &lt; nth)
+            {
+                processNumbers.Add(checkNumber * 2);
+                processNumbers.Add(checkNumber * 3);
+                processNumbers.Add(checkNumber * 5);
+                // ugly number 리스트에 최소값 이동
+                uglyNumbers.Add(processNumbers.Min());
+                processNumbers.Remove(checkNumber);
+                // 이동 후 최소값에 대해 연산 반복
+                checkNumber = processNumbers.Min();
+            }
+            return uglyNumbers[nth - 1];
+        }
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/27 14:17</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15200"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>무식하지만 결과는 나옴</p>
+<pre><code class="r">n &lt;- 1
+x &lt;- 1
+ugly &lt;- NULL
+
+while (n &lt;= 1500){
+  temp &lt;- x
+  i_2 &lt;- i_3 &lt;- i_5 &lt;- 0
+  while (temp %% 2 == 0){
+    temp &lt;- temp / 2
+    i_2 &lt;- i_2 + 1
+  }
+  while (temp %% 3 == 0){
+    temp &lt;- temp / 3
+    i_3 &lt;- i_3 + 1
+  }
+  while (temp %% 5 == 0){
+    temp &lt;- temp / 5
+    i_5 &lt;- i_5 + 1
+  }
+  if (temp == 1){
+    ugly[n] &lt;- (2 ^ i_2) * (3 ^ i_3) * (5 ^ i_5)
+    n &lt;- n + 1
+  }
+  x &lt;- x + 1
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/11/13 16:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">physche</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15368"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">base = [2,3,5]
+ugly = [1]
+n = 1550
+count = 0
+for k in range(n):
+    i = ugly[k]
+    for j in base:
+        value = i * j         
+        if ugly.count(value) == 0:   
+            ugly.append(value)
+    ugly.sort()
+ugly.sort()
+print(ugly[n-1])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/11/30 17:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Dae Su Jeong</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18080"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3.7.2</p>
+<pre><code class="python">def factors(n):
+    result = []
+    for x in range(1, n+1):
+        if n%x == 0:
+            result.append(x)
+    return list(set(result))
+def prime_factors(n: int):
+    n_fac = factors(n)
+    result = []
+    for x in range(len(n_fac)):
+        if set(factors(n_fac[x])) == {1, n_fac[x]}:
+            result.append(n_fac[x])
+    return result
+
+a = int(input(&quot;&gt; &quot;))
+ugly = [1]
+x = 1
+while len(ugly) &lt; a:
+    if set(prime_factors(x)) | {1, 2, 3, 5} == {1, 2, 3, 5}:
+        ugly.append(x)
+    x += 1
+print(&quot;The &quot;+str(a)+&quot;'th ugly number is &quot;+str(ugly[-1]))
+</code></pre>
+
+<p>알고리즘은 맞는 것 같은데... 시간이 너무 오래 걸리네요.... 조언 좀 부탁드립니다!!</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/30 19:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">CT_EK</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18729"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>import java.util.Scanner;</p>
+<p>public class sol049 {</p>
+<pre><code>public static int check(int n) {
+
+    int num = n;
+
+    while(true) {
+
+        if(num%2 == 0) {
+            num /= 2;
+        } else if(num%3 == 0) {
+            num /= 3;
+        } else if(num%5 == 0) {
+            num /= 5;
+        } else {
+            if(num == 1) return 1;
+            return 0;
+        }
+    }
+}
+
+
+public static void main(String[] args) throws Exception {
+
+    Scanner sc = new Scanner(System.in);
+
+    int count = 0;
+    int n = 1;
+
+    while(true) {
+
+        count += check(n);
+
+        if(count == 1500) {
+            System.out.println(n);
+            return;
+        }
+        n++;
+    }
+}
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/07/30 09:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이병호</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19811"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>// 코딩왕초보입니다. 
+// 방법①: 연속된 숫자를 2,3,5를 연속적으로 나누어 나머지가 0인 숫자를 찾음 =&gt; 약 6~7초정도 걸림.
+// 방법②: 방법①로 찾은 ugly_number에 2,3,5 를 곱한 숫자를 충접값을 제외되는 특성을 이용해 HashSet 타입으로 저장하고, HashSet 타입의 값의 갯수를 측정
+// 방법②참고: https://www.geeksforgeeks.org/ugly-numbers/  =&gt; 속도는 1~2초 걸림.</p>
+<p>// 방법②의 경우 시간단축은 가능하나, 1400번대 쯤의 ugly_number 536,870,912를 잡아내지 못했고, 이후로갈수록 놓치는 경우가 지속 발생하는 듯합니다.
+// 잘 생각해보면 방법②이 문제가 확실히 있다는걸 파악할 수 있을 듯합니다.
+// 혹시 Kim Jaeju의 코드로 테스트 하신분 결과값 비교한번 부탁드려요.</p>
+<p>package CodingDoJang;</p>
+<p>import java.util.HashSet;
+import java.util.Iterator;</p>
+<p>public class MultiplesOf3And5Otherway {</p>
+<pre><code>public static int sum=0;
+
+public static void main (String[]  agrs) {
+
+
+HashSet&lt;Long&gt; uglyNumber = new HashSet&lt;Long&gt;();
+
+
+long i = 0L, rest=0L;
+long startTime, endTime;
+
+startTime = System.currentTimeMillis();
+
+for (i=0; i&lt;1000000000 ; i++) {
+
+    rest = i;
+
+    while (rest/2 &gt; 0 &amp;&amp; rest%2 == 0 ) {
+        rest /= 2;
+    }
+    while (rest/3 &gt; 0 &amp;&amp; rest%3 ==0 ) {
+        rest /= 3;
+    }
+    while (rest/5 &gt; 0 &amp;&amp; rest%5 ==0 ) {
+        rest /= 5;
+    }
+
+    if (rest == 1) {
+</code></pre>
+<p>//          System.out.println(i);
+            sum +=1;
+            uglyNumber.add(i);
+            uglyNumber.add(i<em>2);
+            uglyNumber.add(i</em>3);
+            uglyNumber.add(i*5);
+            }</p>
+<pre><code>    if (uglyNumber.size()&gt;1500) {break;}
+
+    if (sum == 1500) {break;}
+
+}
+
+
+Iterator&lt;Long&gt; hi = uglyNumber.iterator();
+while(hi.hasNext()){
+    System.out.println(hi.next());
+}
+
+
+endTime = System.currentTimeMillis();
+System.out.println ((startTime - endTime)/1000);
+}
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/11/03 23:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">JS Kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_21925"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#저는 잘 못짜서 그런지 시간이 너무 많이 걸립니다 ㅠㅠ
+
+def checknum(x):
+    temp=True    
+    while (x&gt;1):
+        if x%2==0:
+            x/=2
+        elif x%3==0:
+            x/=3
+        elif x%5==0:
+            x/=5
+        else:
+            temp=False            
+            break
+    return temp
+
+num=int(input('num....'))
+n,i=1,1
+while (1):
+    if checknum(i)==True:
+        n+=1
+    if n&gt;num:
+        break
+    i+=1
+
+print(i)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/04/24 11:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Buckshot</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2701"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">859963392</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Buckshot,
+                                    2020/04/24 11:52
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22035"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def ugly(n):
+    ugly_list = [1]
+    j = 2
+    while len(ugly_list) &lt; n:
+        i = j
+        while i % 2 == 0:
+            i = int(i/2)
+        while i % 3 == 0:
+            i = int(i/3)
+        while i % 5 == 0:
+            i = int(i/5)
+        if i == 1:
+            ugly_list.append(j)
+        j = j + 1
+
+    print(ugly_list[n-1])
+
+ugly(1500)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/01 22:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">ptjddn95</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22430"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">lst=[1]
+for num in lst:
+    if 2*num not in lst:
+        lst.append(2*num)
+    if 3*num not in lst:
+        lst.append(3*num)
+    if 5*num not in lst:
+        lst.append(5*num)
+    lst.sort()
+    if len(lst)&gt;2000:
+        break
+print(lst[1499]) #859963392
+print(lst[1549]) #1093500000
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/26 23:11</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박시원</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23515"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import time
+
+t = time.time()
+x = []
+for i in range(500):
+    for j in range(200):
+        for k in range(100):
+            m = 2 ** i * 3 ** j * 5 ** k
+            x.append(m)
+data = sorted(x)
+print(len(data),&quot;{:.3f}&quot;.format(time.time()-t))
+
+def urgly(a):
+    print(data[a-1])
+
+urgly(1500)
+urgly(1550)
+urgly(100000)
+urgly(1000000)
+</code></pre>
+
+<p>초보입니다. <br />
+저는 2,3,5의 제곱수를 계속 곱해서 리스트를 만들고 이걸 순서대로 sorting했습니다. (for 문을 삼중으로 돌림)   <br />
+이 때 for 문의 range를 어떻게 하느냐가 가장 큰 문제였습니다. <br />
+예를 들어 2,3,5 세 숫자 모두 range(100)으로 돌렸다고 가정하면, 2^100이 5^100 보다는 훨씬 작기 때문에 2^101 같은 숫자가 중간에 리스트에 빠지는 문제가 발생하게 됩니다. <br />
+따라서 2,3,5 각각의 range를 어느 정도 숫자를 맞춰줘야 합니다. <br />
+이때 range는 가장 큰 숫자 5를 기준으로 3은 5/3x100 = 167, 2는 5/2x100 = 250 정도로 하면 될 것 같은데... <br />
+그냥 최대한 많이 하였습니다. (2배, 5배) <br />
+결과 값은 천만개 리스트를 만드는데 30초 가량 걸리네요. <br />
+이론적으로는 5^100이 가장 작으니 100x100x100 = 100만번째까지는 신뢰성이 있습니다. <br />
+물론 10만번째를 구하기 위해서는 100만개 정도의 리스트만 만들면 되니 시간은 3초 정도 걸리겠네요. <br />
+(실제로는 range를 5는 60, 3은 100, 2는 150을 넣고 돌리니 1.9초가 나오네요)</p>
+<p>리스트 길이 = 10000000, 연산에 걸린 시간 = 30.340   <br />
+urgly(1500) : 859963392      <br />
+urgly(1550) : 1093500000  <br />
+urgly(100000) : 290142196707511001929482240000000000000  <br />
+urgly(1000000) : 730504020930060366263901734750448260239800034079539200000000000000000000000000000000</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/10/23 13:16</p>
+                                <p class="static-profile" style="margin:0;padding:0;">SK Kwak</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2876"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">1000000번째 항의 경우 519312780448388736089589843750000000000000000000000000000000000000000000000000000000 입니다. 승수를 제한해놓으셨기 때문에 큰 수에 대해서는 오류가 발생합니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    ­박철희,
+                                    2021/09/25 03:37
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25037"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def ugly(n):
+    result = [1]
+    while True:
+        last = result[-1]
+        if len(result)==n:
+            return last
+        tem = []
+        for r in result:
+            for t in r*2,r*3,r*5:
+                if t &gt; last: 
+                    tem.append(t)
+
+        result.append(min(tem))
+
+
+print(ugly(1500))
+</code></pre>
+
+<p>참고해서 풀었어요.. 한참 해맸네요</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/03/24 22:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">fox.j</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26383"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>앞의 AY님의 풀이를 참고하여 조금 수정했습니다.
+파이썬으로 작성하였으나 1550번째 항을 구하는 데에 약 0.002초 가량 걸리고
+100만번째 항을 구하는 데에 약 1.3초 가량 걸립니다.</p>
+<pre><code class="python">n = int(input())
+
+uglys = [1]
+mn = 1  # 최소값
+m2, m3, m5 = [], [], []
+i2 = i3 = i5 = 0  # m2, m3, m5 리스트에서의 현재 위치
+for i in range(n-1):
+    m2.append(mn*2)
+    m3.append(mn*3)
+    m5.append(mn*5)
+    tmpmn = min(m2[i2], m3[i3], m5[i5])
+    uglys.append(tmpmn)
+    mn = tmpmn
+    if mn == m2[i2]:
+        i2 += 1
+    if mn == m3[i3]:
+        i3 += 1
+    if mn == m5[i5]:
+        i5 += 1
+    if i2 == 1000:  # 메모리 사용을 줄이기 위해 1000 싸이클마다 1000개의 항 제거
+        m2 = m2[1000:]
+        i2 = 0
+    if i3 == 1000:
+        m3 = m3[1000:]
+        i3 = 0
+    if i5 == 1000:
+        m5 = m5[1000:]
+        i5 = 0
+print(uglys[-1])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/09/25 03:29</p>
+                                <p class="static-profile" style="margin:0;padding:0;">­박철희</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27338"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def fun (arr1):
+    num=[]
+    for i in arr1:
+        num.append(i*2)
+        num.append(i*3)
+        num.append(i*5)
+    return list(set(num))
+
+arr=[1]
+while True:
+    arr.extend(fun(arr))
+    arr= sorted(list(set(arr)))
+    if len(arr)&gt;=1000000:
+        break
+
+print(arr[99999])
+</code></pre>
+
+<p>10만번쨰는 좀 시간이 걸리네요..
+ 맨 아래 코드에 구하려는 순서-1 해서 입력하면 됩니다</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/02/14 19:34</p>
+                                <p class="static-profile" style="margin:0;padding:0;">양캠부부</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27510"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def pn235(n):
+    ug=[]
+    for x in range(n):
+        for y in range(n):
+            for z in range(n):
+                ug.append((2**x)*(3**y)*(5**z))
+    return len(ug)
+
+tn = 1500
+n = 1
+
+while pn235(n) &lt; tn:
+    n += 1
+
+ug=[]
+for x in range(n+20):
+        for y in range(n+20):
+            for z in range(n+20):
+                ug.append((2**x)*(3**y)*(5**z))
+
+print(sorted(ug)[tn-1])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/03/02 19:34</p>
+                                <p class="static-profile" style="margin:0;padding:0;">로만가</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27805"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>def 공약수(n):
+    if n==1:
+        return(1)
+    if n%2==0:
+        return(공약수(n//2))<em>2
+    elif n%3==0:
+        return(공약수(n//3))</em>3
+    elif n%5==0:
+        return(공약수(n//5))*5
+    else:
+        return(0)
+def sim(n):
+    li = []
+    i = 1
+    while len(li)&lt;n:
+        if 공약수(i)!=0:
+            li.append(i)
+        i += 1
+    li=sorted(list(set(li)))
+    print(li)
+    print(len(li))
+    return(li[-1])
+print(sim(150))</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/04/20 19:33</p>
+                                <p class="static-profile" style="margin:0;padding:0;">yunjae</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29753"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>// AY 님 코드 이해하고 사실상 따라 적어봤습니다.
+// 언어는 자바스크립트 입니다.</p>
+<pre><code class="javascript">const solution = (n) =&gt; {
+
+  let result = 1;
+
+  const arr02 = [];
+  const arr03 = [];
+  const arr05 = [];
+
+  for(let i = 1 ; i &lt; n ; i++){
+    arr02.push(result*2);
+    arr03.push(result*3);
+    arr05.push(result*5);
+
+    if(result &gt;= arr02[0]){
+      arr02.shift();
+    }
+    if(result &gt;= arr03[0]){
+      arr03.shift();
+    }
+    if(result &gt;= arr05[0]){
+      arr05.shift();
+    }
+
+    result = Math.min(arr02[0],arr03[0],arr05[0]);
+
+    if(result === arr02[0]){
+      arr02.shift();
+    }else if(result === arr03[0]){
+      arr03.shift();
+    }else if(result===arr05[0]){
+      arr05.shift();
+    }
+  }
+
+
+  return `${n}th Ugly Number is ${result}`;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/11/15 23:43</p>
+                                <p class="static-profile" style="margin:0;padding:0;">전찬혁</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29821"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#N = 1500            # 859963392
+#N = 1550
+N = 100000
+
+u2, u3, u5 = 2,3,5
+lst = [1]
+a,b,c = 0,0,0
+cnt=1
+
+while True:
+    m = min(u2,u3,u5)
+    lst.append(m)
+    if m==u2:
+        a += 1
+        u2 = 2*lst[a]
+    if m==u3: 
+        b += 1
+        u3 = 3*lst[b]
+    if m==u5:
+        c += 1
+        u5 = 5*lst[c]
+
+    cnt += 1
+
+    if cnt==N:
+        print(&quot;The {0}'th ugly number is : {1}&quot;.format(N,m))
+        break
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/12/29 22:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_30222"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>JAVA입니다. 재귀나 메모이제이션을 사용하려고도 해 보았으나 힙 크기 문제로 단순 반복문을 사용했습니다.</p>
+<pre><code class="java">package question4.ugly_numbers;
+
+public class Main {
+
+    public static void main(String[] args) {
+        int i = 0;
+        int count = 0;
+
+        while(true) {
+            i++;
+            boolean result = isUgly(i);
+
+            if(result) {
+                count++;
+            }
+            if(count == 1500) {
+                break;
+            }
+        }
+
+        System.out.println(&quot;The 1500'th ugly number is &quot; + i);
+    }
+
+    static boolean isUgly(int i) {
+        while(true) {
+            if(i == 1) {
+                return true;
+            }
+            if(i%2 == 0) {
+                i = i/2;
+            }
+            else if(i%3 == 0) {
+                i = i/3;
+            }
+            else if(i%5 == 0) {
+                i = i/5;
+            }
+            else {
+                return false;
+            }
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2025/02/26 22:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박준우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

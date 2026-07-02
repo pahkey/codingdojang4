@@ -1,0 +1,791 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="설명을 잘 못해서... 양해 부탁드립니다...
+python으로만 해봐서 다른 언어로는 되는지 모르겠어요...
+
+먼저 몇행 몇열로 할지를 물은 후, 그 행과 열에 맞는 지뢰판을 출력한다.
+(https://codingdojang.com/sco...">
+    <title>문자열 지뢰찾기 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">문자열 지뢰찾기</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">1</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 5</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>설명을 잘 못해서... 양해 부탁드립니다...
+python으로만 해봐서 다른 언어로는 되는지 모르겠어요...</p>
+<p>먼저 몇행 몇열로 할지를 물은 후, 그 행과 열에 맞는 지뢰판을 출력한다.
+(https://codingdojang.com/scode/421)같이 구현을 하되 출력물은 빈칸으로
+각 칸에 지뢰가 들어갈 확률은 1/5</p>
+<p>지뢰판이 처음 출력되기 전에 총 지뢰의 개수를 출력한다.</p>
+<p>첫 지뢰판의 출력 후, 칸을 조사할지 깃발을 꽂을 지를 묻는다
+몇행 몇열을 조사할지(깃발을 꽂을지)를 묻고, 그 칸을 조사한다(깃발을 꽂는다).
+실행 결과를 출력한다.</p>
+<p>만약 조사했을때 지뢰가 나오면 game over를 출력한다.
+만약 지뢰가 있는 칸을 제외하고 모두 조사하는데 성공하면 성공입니다를 출력하고, 걸린 시간을 소숫점 셋째 자리에서 반올림해서 출력한다.
+만약 위에 두 조건을 만족하지 못할 경우 조사/깃발을 다시 실행한다.</p>
+<p>게임이 끝나면 게임을 다시 실행할지를 묻고 다시실행/종료를 실행한다.</p>
+<p>추가 조건
+1. 처음에 누르는 칸을 중심으로 3x3에는 지뢰가 있어서는 안된다. (-&gt;처음에 나오는 칸은 0이여야 함)
+2. 지뢰의 개수는 0개거나 칸을 다 채워서는 안된다
+3. 조사한 칸이 0일 경우, 그 칸을 중심으로 3x3을 자동으로 조사한다.
+4. 깃발을 꽂을 칸을 조사할 경우/조사한 칸에 깃발을 꽂으려 시도할 경우 실패 메시지를 출력한다.
+5. 이미 조사한 칸을 다시 조사할 경우, 그 칸의 숫자만큼 그 칸 주위에 깃발이 꽂혀있으면, 그 칸을 중심으로 3x3을 모두 조사한다. (3번 추가 조건에 따라, 깃발이 꽂힌 칸은 조사하지 않는다.)</p>
+<pre><code>예시입니다.
+
+#10행10열로 실행했을 경우
+
+총 지뢰 개수는 16개 입니다.
+
+▯▯▯▯▯▯▯▯▯▯
+▯▯▯▯▯▯▯▯▯▯
+▯▯▯▯▯▯▯▯▯▯
+▯▯▯▯▯▯▯▯▯▯
+▯▯▯▯▯▯▯▯▯▯
+▯▯▯▯▯▯▯▯▯▯
+▯▯▯▯▯▯▯▯▯▯
+▯▯▯▯▯▯▯▯▯▯
+▯▯▯▯▯▯▯▯▯▯
+▯▯▯▯▯▯▯▯▯▯
+
+#1행1열을 조사할경우
+
+0001▯▯▯▯▯▯
+00012▯▯▯▯▯
+00001▯▯▯▯▯
+11001▯▯▯▯▯
+▯1112▯▯▯▯▯
+▯▯▯▯▯▯▯▯▯▯
+▯▯▯▯▯▯▯▯▯▯
+▯▯▯▯▯▯▯▯▯▯
+▯▯▯▯▯▯▯▯▯▯
+▯▯▯▯▯▯▯▯▯▯
+
+#5행1열에 깃발을 꽂을 경우
+
+0001▯▯▯▯▯▯
+00012▯▯▯▯▯
+00001▯▯▯▯▯
+11001▯▯▯▯▯
+▮1112▯▯▯▯▯
+▯▯▯▯▯▯▯▯▯▯
+▯▯▯▯▯▯▯▯▯▯
+▯▯▯▯▯▯▯▯▯▯
+▯▯▯▯▯▯▯▯▯▯
+▯▯▯▯▯▯▯▯▯▯
+
+#5행2열을 조사할 경우
+0001▯▯▯▯▯▯
+00012▯▯▯▯▯
+00001▯▯▯▯▯
+11001▯▯▯▯▯
+▮1112▯▯▯▯▯
+111▯▯▯▯▯▯▯
+▯▯▯▯▯▯▯▯▯▯
+▯▯▯▯▯▯▯▯▯▯
+▯▯▯▯▯▯▯▯▯▯
+▯▯▯▯▯▯▯▯▯▯
+
+</code></pre>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">python</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2021/08/10 23:28</p>
+                    <p class="static-profile" style="margin:0;padding:0;">Percy</p>
+                </div>
+            </div>
+
+            
+                <a name="comment_2858"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">python에서 실행하면 칸이 일치합니다. 여기는 ▯이 기호가 너무 넓게 나오네요...</span>
+                    -
+                    <span style="font-size:11px;">
+                        Percy,
+                        2021/08/10 23:32
+                    </span>
+                </div>
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>2개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_26001"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>게임 설명rhk 난이도 조절을 중간에 넣어보았습니다.
+아직 배운지 얼마 안되서 지저분해 보여도 양해 부탁드립니다.</p>
+<pre><code class="python">import random
+import time
+import math
+def minemap(m,n):
+    user=[]
+    x=0
+    for k in range(m):
+        for l in range(n):
+            save=[]
+            if mine[x]=='*':
+                user.append(mine[x])
+            else:
+                if k&gt;=1:
+                    save.append(mine[x-n])
+                    if x-(n+1)&gt;=0 and (x-(n+1))/n&gt;=k-1:
+                        save.append(mine[x-(n+1)])
+                    if x-n+1&gt;=1 and (x-n+1)/n&lt;k:
+                        save.append(mine[x-n+1])
+                if x-1&gt;=0 and x/n&gt;k:
+                    save.append(mine[x-1])
+                if x+1&lt;=m*n-1 and (x+2)/n&lt;=k+1:
+                    save.append(mine[x+1])
+                if k+1&lt;m:
+                    save.append(mine[x+n])
+                    if x+(n-1)&lt;=m*n-2 and (x+(n-1))/n&gt;=k+1:
+                        save.append(mine[x+(n-1)])
+                    if x+(n+1)&lt;=m*n-1 and k+2&gt;(x+(n+1))/n&gt;k+1:
+                        save.append(mine[x+n+1])
+                user.append(save.count('*'))
+            x+=1
+    return user
+def sheetmaker(a):
+    sheetmaking='\n'
+    counter=0
+    for i in a:
+        sheetmaking+=str(i)
+        counter+=1
+        if counter%usern==0:
+            sheetmaking+='\n'
+    return sheetmaking
+def choose():
+    playe=0
+    while not playe==1 and not playe==2:
+        playe=int(input('조사할거면 1, 깃발을 꽂으려면 2를 입력해주세요: '))
+        print('')
+        if not playe==1 and not playe==2:
+            print('''
+1또는 2를 입력해주세요.''')
+    playm=0
+    playn=0
+    if playe==1:
+        while not 0&lt;playm&lt;=userm:
+            playm=int(input('몇행을 조사할까요?: '))
+            print('')
+            if not 0&lt;playm&lt;=userm:
+                print('''1~%d 까지의 수를 입력해주세요.
+''' %userm)
+        while not 0&lt;playn&lt;=usern:
+            playn=int(input('몇열을 조사할까요?: '))
+            if not 0&lt;playm&lt;=userm:
+                print('''1~%d 까지의 수를 입력해주세요.
+''' %usern)
+    else:
+        while not 0&lt;playm&lt;=userm:
+            playm=int(input('몇행에 깃발을 꽂을까요?: '))
+            print('')
+            if not 0&lt;playm&lt;=userm:
+                print('''1~%d 까지의 수를 입력해주세요.
+''' %userm)
+        while not 0&lt;playn&lt;=usern:
+            playn=int(input('몇열에 깃발을 꽂을까요?: '))
+            if not 0&lt;usern&lt;=usern:
+                print('''1~%d 까지의 수를 입력해주세요.
+''' %usern)
+    return [playe,playm,playn]
+def judge(a):
+    if a[0]==1 and not sheet[(a[1]-1)*usern+a[2]-1]=='▮':
+        if answer[(a[1]-1)*usern+a[2]-1]=='*':
+            del sheet[(a[1]-1)*usern+a[2]-1]
+            sheet.insert((a[1]-1)*usern+a[2]-1,'*')
+            return 9
+        elif answer[(a[1]-1)*usern+a[2]-1]&gt;0:
+            del sheet[(a[1]-1)*usern+a[2]-1]
+            sheet.insert((a[1]-1)*usern+a[2]-1,answer[(a[1]-1)*usern+a[2]-1])
+            return 1
+        elif sheet[(a[1]-1)*usern+a[2]-1]=='▯':
+            del sheet[(a[1]-1)*usern+a[2]-1]
+            sheet.insert((a[1]-1)*usern+a[2]-1,0)
+            if a[1]&gt;1:
+                judge([1,a[1]-1,a[2]])
+                if a[2]&gt;1:
+                    judge([1,a[1]-1,a[2]-1])
+                if a[2]&lt;usern:
+                    judge([1,a[1]-1,a[2]+1])
+            if a[2]&gt;1:
+                judge([1,a[1],a[2]-1])
+            if a[2]&lt;usern:
+                judge([1,a[1],a[2]+1])
+            if a[1]&lt;userm:
+                judge([1,a[1]+1,a[2]])
+                if a[2]&gt;1:
+                    judge([1,a[1]+1,a[2]-1])
+                if a[2]&lt;usern:
+                    judge([1,a[1]+1,a[2]+1])
+    elif a[0]==2:
+        if sheet[(a[1]-1)*usern+a[2]-1]=='▯':  
+            del sheet[(a[1]-1)*usern+a[2]-1]
+            sheet.insert((a[1]-1)*usern+a[2]-1,'▮')
+        elif sheet[(a[1]-1)*usern+a[2]-1]=='▮':
+            del sheet[(a[1]-1)*usern+a[2]-1]
+            sheet.insert((a[1]-1)*usern+a[2]-1,'▯')
+        else:
+            print('''
+이미 열린 칸에는 깃발을 꽂을 수 없습니다.''')
+        return 1
+    else:
+        print('''
+깃발을 꽂은 칸은 조사를 할 수 없습니다.''')
+def judge2(a):
+    count=0
+    total=0
+    if a[1]&gt;1:
+        if sheet[(a[1]-2)*usern+a[2]-1]=='▮':
+            count+=1
+        if a[2]&gt;1:
+            if sheet[(a[1]-2)*usern+a[2]-2]=='▮':
+                    count+=1
+        if a[2]&lt;usern:
+            if sheet[(a[1]-2)*usern+a[2]]=='▮':
+                    count+=1
+    if a[2]-1&gt;0:
+        if sheet[(a[1]-1)*usern+a[2]-2]=='▮':
+            count+=1
+    if a[2]&lt;usern:
+        if sheet[(a[1]-1)*usern+a[2]]=='▮':
+            count+=1
+    if a[1]&lt;userm:
+        if sheet[a[1]*usern+a[2]-1]=='▮':
+            count+=1
+        if a[2]&gt;1:
+            if sheet[a[1]*usern+a[2]-2]=='▮':
+                count+=1
+        if a[2]&lt;usern:
+            if sheet[a[1]*usern+a[2]]=='▮':
+                count+=1
+    if count==sheet[(a[1]-1)*usern+a[2]-1]:
+        if a[1]&gt;1:
+            if sheet[(a[1]-2)*usern+a[2]-1]=='▯':
+                total+=judge([1,a[1]-1,a[2]])
+            else:
+                total+=1
+            if a[2]&gt;1:
+                if sheet[(a[1]-2)*usern+a[2]-2]=='▯':
+                    total+=judge([1,a[1]-1,a[2]-1])
+                else:
+                    total+=1
+            if a[2]&lt;usern:
+                if sheet[(a[1]-2)*usern+a[2]]=='▯':
+                    total+=judge([1,a[1]-1,a[2]+1])
+                else:
+                    total+=1
+        if a[2]-1&gt;0:
+            if sheet[(a[1]-1)*usern+a[2]-2]=='▯':
+                total+=judge([1,a[1],a[2]-1])
+            else:
+                total+=1
+        if a[2]&lt;usern:
+            if sheet[(a[1]-1)*usern+a[2]]=='▯':
+                total+=judge([1,a[1],a[2]+1])
+            else:
+                total+=1
+        if a[1]&lt;userm:
+            if sheet[a[1]*usern+a[2]-1]=='▯':
+                total+=judge([1,a[1]+1,a[2]])
+            else:
+                total+=1
+            if a[2]&gt;1:
+                if sheet[a[1]*usern+a[2]-2]=='▯':
+                    total+=judge([1,a[1]+1,a[2]-1])
+                else:
+                    total+=1
+            if a[2]&lt;usern:
+                if sheet[a[1]*usern+a[2]]=='▯':
+                    total+=judge([1,a[1]+1,a[2]+1])
+                else:
+                    total+=1
+    else:
+        print('''
+칸의 숫자와 깃발의 개수가 일치하지 않아 주위를 조사할 수 없습니다.''')
+    if total&gt;9:
+        return 9
+    else:
+        return 1
+
+while True:  
+    print('''
+지금부터 문자열 지뢰찾기를 시작합니다.
+
+문자열 지뢰찾기의 규칙을 들으시려면 1, 건너뛰시려면 0을 눌러주세요.
+''')
+    userc=-1
+    while not userc==1 and not userc==0:
+        userc=int(input('0 또는 1을 입력해주세요: '))
+        if userc==1:
+            print('''
+먼저 지뢰판의 행과 열을 설정합니다.
+
+예를 들어 행을 3, 열을 4로 선택하시면 다음과 같은 판이 출력됩니다.
+
+▯▯▯▯
+▯▯▯▯
+▯▯▯▯
+
+행과 열이 너무 크면 출력이나 실행에 문제가 생길 수 있습니다.
+''')
+        elif userc==0:
+            print('''
+설명을 건너뛰셨습니다. 바로 게임을 진행합니다.
+''')
+        elif not userc==1 and not userc==0:
+            print('''
+0 또는 1을 입력하셔야합니다.
+''')
+    userm=0
+    usern=0
+    while userm*usern&lt;=1:        
+        userm=int(input('몇행으로 할까요?: '))
+        print('')
+        usern=int(input('몇열로 할까요?: '))
+        if userm*usern&lt;=1:
+            print('''
+행*열이 2 이상이 되도록 입력해주세요.
+''')
+    if userc==1:
+        print('''
+난이도 선택에 따라 지뢰의 개수가 변동됩니다.
+난이도 1이면 약 5%±a, 난이도 9면 약 45%±a 정도가 지뢰로 깔려있게 됩니다.''')
+    userl=0
+    while not 0&lt;userl&lt;=9:
+        userl=int(input('''
+게임의 난이도를 선택해주세요.
+1(매우 쉬움)~9(매우 어려움)
+'''))
+        if not 0&lt;userl&lt;=9:
+            print('''
+1~9 까지의 수를 입력해주세요.''')
+    level=''
+    for i in range(userl):
+        level+='*'
+    for i in range(20-len(level)):
+        level+='.'
+    mine=[]
+    for i in range(userm*usern):
+        mine.append(random.choice(level))
+    answer=minemap(userm,usern)
+    if userc==1:
+        print('''
+지뢰판이 출력된 후, 몇행의 몇열의 칸을 조사하거나 깃발을 꽂을 수 있습니다.
+
+예를 들어 2행의 3열을 조사하기로 선택했을때
+
+▯▯▯▯
+▯▯1▯
+▯▯▯▯
+
+가 출력됩니다.
+
+만약 2행의 3열에 깃발을 꽂기로 선택했을때
+
+▯▯▯▯
+▯▯▮▯
+▯▯▯▯
+
+가 출력됩니다.
+
+모든 지뢰가 있는 곳에 깃발을 꽂으면 승리합니다.
+''')
+    while answer.count('*')==0 or answer.count('*')==userm*usern:
+        answer=minemap(userm,usern)
+    print('''
+총 지뢰 개수수는 %d 개 입니다.''' %answer.count('*'))
+    sheet=[]
+    for i in range(userm*usern):
+        sheet.append('▯')
+    sheetm=sheetmaker(sheet)
+    print(sheetm)
+    begin=time.time()
+    chosen=choose()
+    while not answer[(chosen[1]-1)*usern+chosen[2]-1]==0:
+        random.shuffle(mine)
+        answer=minemap(userm,usern)
+    if chosen[0]==1 and type(sheet[(chosen[1]-1)*usern+chosen[2]-1])==int and sheet[(chosen[1]-1)*usern+chosen[2]-1]&gt;=1:
+        playj=judge2(chosen)
+    else:
+        playj=judge(chosen)
+    if sheet.count('▯')+sheet.count('▮')==answer.count('*'):
+        end=time.time()
+        playj=0
+        sheetm=sheetmaker(answer)
+        print(sheetm)
+        print('''축하합니다! 게임을 %s 초 만에 클리어하셨습니다!
+''' %str(round(end-begin,3)))
+    elif playj==9:
+        sheetm=sheetmaker(sheet)
+        print(sheetm)
+        print('''gameover
+''')
+    elif playj==1 or playj==None:
+        while not playj==0 and not playj==9:
+            if sheet.count('▯')+sheet.count('▮')==answer.count('*'):
+                end=time.time()
+                playj=0
+                sheetm=sheetmaker(answer)
+                print(sheetm)
+                print('''축하합니다! 게임을 %s 초만에 클리어하셨습니다!
+''' %str(round(end-begin)))
+            else:
+                sheetm=sheetmaker(sheet)
+                print(sheetm)
+                chosen=choose()
+                if chosen[0]==1 and type(sheet[(chosen[1]-1)*usern+chosen[2]-1])==int and sheet[(chosen[1]-1)*usern+chosen[2]-1]&gt;=1:
+                    playj=judge2(chosen)
+                else:
+                    playj=judge(chosen)
+        if playj==9:
+            sheetm=sheetmaker(sheet)
+            print(sheetm)
+            print('''gameover
+''')
+    replay=9
+    while not replay==0 and not replay==1:
+        replay=int(input('다시하려면 1, 종료하시려면 0을 눌러주세요: '))
+        if not replay==0 and not replay==1:
+            print('''
+0 또는 1을 입력하셔야합니다.
+''')
+    if replay==0:
+        exit()
+    else:
+        continue
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/08/10 23:29</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Percy</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_27630"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>위에있는 풀이를 보고 여러날에 걸려서 만들었습니다.
+감사합니다.</p>
+<pre><code class="python">def minemap(m,n):
+    user=[]
+    for x in range(m*n):
+        save=[]
+        if mine[x]=='*':
+            user.append(mine[x])
+        else:
+            if x &gt; n-1:
+                save.append(mine[x-n])
+                if x%n &gt; 0:
+                    save.append(mine[x-n-1])
+                if x%n &lt; n-1:
+                    save.append(mine[x-n+1])
+            if x%n &gt; 0:
+                save.append(mine[x-1])
+            if x%n &lt; n-1:
+                save.append(mine[x+1])
+            if x &lt; (m-1)*n:
+                save.append(mine[x+n])
+                if x%n &gt; 0:
+                    save.append(mine[x+n-1])
+                if x%n &lt; n-1:
+                    save.append(mine[x+n+1])
+            user.append(save.count('*'))
+    return user
+
+def judge(q):
+    aaa = []
+    bbb = []
+    aaa.append(q)
+    while 0 &lt; len(aaa):
+        bbb.clear()
+        bbb = aaa.copy()
+        aaa.clear()
+        for a in bbb:
+            if lanb[a] == '?':
+                pass
+            else:
+                if lanb[a] == ' ':
+                    if sheet[a] == 0:
+                        if a &lt; usern:
+                            if a == 0:
+                                aaa.append(a+1)
+                                aaa.append(a+usern)
+                                aaa.append(a+usern+1)
+                            elif a == usern-1:
+                                aaa.append(a-1)
+                                aaa.append(a+usern-1)
+                                aaa.append(a+usern)
+                            else:
+                                aaa.append(a-1)
+                                aaa.append(a+1)
+                                aaa.append(a+usern-1)
+                                aaa.append(a+usern)
+                                aaa.append(a+usern+1)
+                        if usern-1 &lt; a &lt; (userm-1)*usern:
+                            if a%usern == 0:
+                                aaa.append(a-usern)
+                                #aaa.append(a-usern+1)
+                                aaa.append(a+1)
+                                aaa.append(a+usern)
+                                aaa.append(a+usern+1)
+                            elif a%usern == usern-1:
+                                aaa.append(a-usern-1)
+                                aaa.append(a-usern)
+                                aaa.append(a-1)
+                                aaa.append(a+usern-1)
+                                aaa.append(a+usern)
+                            else:
+                                aaa.append(a-usern-1)
+                                aaa.append(a-usern)
+                                aaa.append(a-usern+1)
+                                aaa.append(a-1)
+                                aaa.append(a+1)
+                                aaa.append(a+usern-1)
+                                aaa.append(a+usern)
+                                aaa.append(a+usern+1)
+                        if a &gt; (userm-1)*usern-1:
+                            if a == (userm-1)*usern:
+                                aaa.append(a-usern)
+                                aaa.append(a-usern+1)
+                                aaa.append(a+1)
+                            elif a == userm*usern-1:
+                                aaa.append(a-usern-1)
+                                aaa.append(a-usern)
+                                aaa.append(a-1)
+                            else:
+                                aaa.append(a-usern-1)
+                                aaa.append(a-usern)
+                                aaa.append(a-usern+1)
+                                aaa.append(a-1)
+                                aaa.append(a+1)
+                    lanb[a] = sheet[a]
+                    for a in range(userm*usern):
+                        lanb[a] = str(lanb[a])
+
+def onMouse(event, x, y, flags, param):
+    global t1, t2
+
+    img[45:656, 45:656] = capple
+    cv2.imshow('minesweeper', img)
+
+    b = 0
+    for m in range(userm):
+        for n in range(usern):
+            if lanb[b] == ' ':
+                pass
+            if lanb[b] == '?':
+                cv2.putText(img,(lanb[b]),(56+38*n,75+38*m),font,0.9,(0,0,255),3)
+                cv2.imshow('minesweeper', img)
+            if lanb[b] == '0':
+                cv2.putText(img,(lanb[b]),(56+38*n,75+38*m),font,0.9,(255,255,255),3)
+                cv2.imshow('minesweeper', img)
+            if lanb[b] == '1' or lanb[b] == '2' or lanb[b] == '3' or lanb[b] == '4' or lanb[b] == '5' or lanb[b] == '6' or lanb[b] == '7' or lanb[b] == '8':
+                cv2.putText(img,(lanb[b]),(56+38*n,75+38*m),font,0.9,(255,0,0),3)
+                cv2.imshow('minesweeper', img)
+            if lanb[b] == '*':
+                cv2.putText(img,(lanb[b]),(56+38*n,75+38*m),font,0.9,(0,0,255),3)
+                cv2.imshow('minesweeper', img)
+            b += 1
+
+    if 46 &lt; x &lt; 654 and 46 &lt; y &lt; 654:
+        if event == cv2.EVENT_MOUSEMOVE:
+            for m in range(userm):
+                for n in range(usern):
+                    if 46+38*n &lt; x &lt; 84+38*n and 46+38*m &lt; y &lt; 84+38*m:
+                        cv2.rectangle(img, (46+38*n, 46+38*m), (84+38*n, 84+38*m), (0, 0, 255), 2)
+                        cv2.imshow('minesweeper', img)
+
+        if event == cv2.EVENT_LBUTTONDOWN:
+            if t1 == 0:
+                t1 = time.time()
+            judge(((y-46)//38)*usern+(x-46)//38)
+
+        if event == cv2.EVENT_RBUTTONDOWN:
+            if lanb[((y-46)//38)*usern+(x-46)//38] == ' ':
+                lanb[((y-46)//38)*usern+(x-46)//38] = '?'
+            elif lanb[((y-46)//38)*usern+(x-46)//38] == '?':
+                lanb[((y-46)//38)*usern+(x-46)//38] = ' '
+
+    if lanb.count('*') &gt; 0:
+        if t2 == 0:
+            t2 = round(time.time()-t1)
+            cv2.putText(img,('%d seconds')%t2,(670,35),font,1,(0,255,0),2)
+            cv2.imshow('minesweeper', img)
+        cv2.putText(img,('gameover'),(670,135),font,1,(0,0,255),2)
+        cv2.imshow('minesweeper', img)
+        cv2.waitKey(3000)
+        cv2.destroyWindow('minesweeper')
+
+    if lanb.count(' ')+lanb.count('?') == sheet.count('*'):
+        if t2 == 0:
+            t2 = round(time.time()-t1)
+            cv2.putText(img,('%d seconds')%t2,(670,35),font,1,(0,255,0),2)
+            cv2.imshow('minesweeper', img)
+        cv2.putText(img,('perfect!!'),(670,135),font,1,(0,255,0),2)
+        cv2.imshow('minesweeper', img)
+        cv2.waitKey(3000)
+        cv2.destroyWindow('minesweeper')
+
+############################################################
+import cv2, numpy, random, time
+
+while True:
+    img = numpy.full((700, 900, 3), (255, 255, 255), dtype=numpy.uint8)
+    cv2.imshow('minesweeper', img)
+    font=cv2.FONT_HERSHEY_SIMPLEX
+    userm = usern = 16
+    userl = 40
+    t1 = t2 = 0
+
+    lanb = [' ']*userm*usern
+    mine = ['*']*userl + ['.']*(userm*usern-userl)
+    random.shuffle(mine)
+    sheet = minemap(userm, usern)
+    if userm%2 == 0:
+        sen = userm*usern//2-usern//2
+    if userm%2 == 1:
+        sen = userm*usern//2
+    while not sheet[sen] == 0:
+        random.shuffle(mine)
+        sheet = minemap(userm, usern)
+
+    for m in range(userm):
+        for n in range(usern):
+            cv2.rectangle(img, (46+38*n, 46+38*m), (84+38*n, 84+38*m), (0, 255, 0), 1)
+            cv2.rectangle(img, (59+38*n, 57+38*m), (71+38*n, 73+38*m), (200, 255, 100), 3)
+            cv2.imshow('minesweeper', img)
+    cv2.putText(img,('LandMine=%d')%userl,(670,235),font,1,(0,255,0),2)
+    cv2.imshow('minesweeper', img)
+    apple = img[45:656, 45:656]
+    capple = apple.copy()
+
+    cv2.setMouseCallback('minesweeper', onMouse)
+
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+    replay=9
+    while not replay==0 and not replay==1:
+        replay=int(input('다시하려면 1, 종료하시려면 0을 눌러주세요: '))
+        if not replay==0 and not replay==1:
+            print('\n0 또는 1을 입력하셔야합니다.\n')
+        if replay==0:
+            exit()
+        else:
+            continue
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/03/17 15:45</p>
+                                <p class="static-profile" style="margin:0;padding:0;">bangul</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

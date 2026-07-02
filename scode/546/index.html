@@ -1,0 +1,3328 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="출처 : [프로젝트 오일러 5번문제](https://projecteuler.net/problem=5), [한글 번역판](http://euler.synap.co.kr/prob_detail.php?id=5)
+
+----
+
+1 ~ 10 사이의 어...">
+    <title>Smallest multiple - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">Smallest multiple</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">3</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 2</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>출처 : <a href="https://projecteuler.net/problem=5">프로젝트 오일러 5번문제</a>, <a href="http://euler.synap.co.kr/prob_detail.php?id=5">한글 번역판</a></p>
+<hr />
+<p>1 ~ 10 사이의 어떤 수로도 나누어 떨어지는 가장 작은 수는 2520입니다.</p>
+<p>그러면 1 ~ 20 사이의 어떤 수로도 나누어 떨어지는 가장 작은 수는 얼마입니까?</p>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2017/06/04 23:58</p>
+                    <p class="static-profile" style="margin:0;padding:0;">S ReolSt</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>72개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_7397"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">3</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>python 3.6, 재귀호출 &amp; functools.reduce 1부터 20까지. 예를 들면, reduce(lambda x, y: x+y, [1, 2, 3, 4, 5])  이것은 ((((1+2)+3)+4)+5) 됩니다.</p>
+<pre><code class="python">import functools
+
+def gcd(x, y):
+    if y: return gcd(y, x%y)
+    else: return x
+
+def lcm(x, y):
+    return int(x * y / gcd(x, y))
+
+&gt;&gt;&gt; print(functools.reduce(lambda x, y: lcm(x, y), [a for a in range(1,21)]))
+232792560
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/06 16:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">예강효빠</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2243"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">배우고 갑니다 ^^</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Taesoo Kim,
+                                    2018/06/15 15:19
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7387"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<pre><code class="ruby">lcm = -&gt;a,b { a*b / (a,b = b,a%b until b == 0; a) }
+sm = -&gt;range { range.reduce &amp;lcm }
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby">expect( sm[1..10] ).to eq 2520
+expect( sm[1..20] ).to eq 232792560
+expect( sm[1..20] ).to eq (1..20).reduce(:lcm) # same to stdlib's lcm.
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/05 18:25</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7544"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python3 입니다.
+답은 232792560 이네요.</p>
+<pre><code class="python">smallestMultiple = 2
+increment = 2
+count = 3
+
+while count &lt;= 20:
+    if smallestMultiple % count != 0:
+        smallestMultiple = smallestMultiple + increment
+    else:
+        count = count + 1
+        increment = smallestMultiple
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/17 23:15</p>
+                                <p class="static-profile" style="margin:0;padding:0;">SPJung</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8103"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>일단 예를 들어, 가장 큰 20부터 차례대로(하차열) 그 수의 약수들을 제외시킵니다. 이렇게 1까지 과정을 반복하면 수들의 리스트에는 20과 같은 큰 수들과 일부 소수가 남게 됩니다. 이때 남은 수들을 모두 곱해주면 답이 나옵니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/07/31 18:45</p>
+                                <p class="static-profile" style="margin:0;padding:0;">P.Y.Thon</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16686"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>예강효빠님의 풀이를 참고하여 1 부터 n까지의 수들의 최소공배수가 답임을 알았습니다.</p>
+<pre><code class="python">from math import gcd
+
+def lcm(a,b):
+    return int(a*b/gcd(a,b))
+
+def small(n):
+    n = list(range(1,n+1))
+    while len(n) != 1:
+        n[0:2] = [lcm(n[0],n[1])]
+    return n[0]
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/02/15 13:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김영성</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2535"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">최소공배수를 구하기 위하여 온갖 별의 별 행동을 하던 차, math모듈의 존재를 잊어버리고 있었읍니다;; 확실히 코드가 간결해 지는군요!</span>
+                                -
+                                <span style="font-size:11px;">
+                                    암살자까마귀,
+                                    2019/05/08 23:36
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19873"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">i, sig = 1, 0
+while True : 
+    sig = 0
+    for k in range(1, 21) :
+        if i%k != 0 :
+            sig = 1
+            break
+    if sig == 0 :
+        print(i)
+        break
+    i += 1
+</code></pre>
+
+<p>주먹구구식으로 했더니 한세월 걸리네요ㅜㅜ</p>
+<p>결과</p>
+<p>232792560</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/11/08 17:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GG</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7414"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">result=1
+i=0
+j=1
+number=range(1,21)
+numbers=[0]*len(number)
+ref = [0]*20
+
+while True:
+    for x in number:
+        numbers[x-1] = result % x
+    if numbers == ref:
+        print(result)
+        break
+    else:
+        print(result)
+        j=j+1
+        result=20*j
+</code></pre>
+
+<p>1~20까지 나눈 값이 모두 0인 배열을 찾는다.
+답은 232792560</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/08 02:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">hanny</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7423"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">
+void multi(vector&lt;int&gt;&amp;vt, int num)
+{
+    for (int iter = 0; iter &lt; vt.size(); iter++)
+    {
+        if ((num%vt[iter] )== 0)
+        {
+            num /= vt[iter];
+        }
+    }
+    int mod = 2;
+    while (mod &lt;= num)
+    {
+        if ((num%mod )== 0)
+        {
+            vt.push_back(mod);
+            num /= mod;
+        }
+        else
+        {
+            mod++;
+        }
+    }
+}
+void CsmallDlg::OnBnClickedOk()
+{
+    vector&lt;int&gt; vt;
+    for (int iter = 2; iter &lt;= 20; iter++)
+    {
+        multi(vt, iter);
+    }
+    int nResult = 1;
+    CString str;
+    for (int iter = 0; iter &lt; vt.size(); iter++)
+    {
+        nResult *= vt[iter];
+        str.AppendFormat(_T(&quot;%d\n&quot;), vt[iter]);
+    }
+    str.AppendFormat(_T(&quot;%d&quot;),nResult);
+    AfxMessageBox(str);
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/09 15:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김 영남</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7463"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="javascript">var gcd = function g(x, y) {
+    return y ? g(y, x % y) : x;
+}
+
+var lcd = function(x, y) {
+    return x * y / gcd(x, y);
+}
+
+var arr = Array.from({length: 20}, (v, k) =&gt; k + 1); // make 1 to 20 array with array-like object and mapFn
+
+var res = arr.reduce(lcd);
+
+console.log(res);
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/13 16:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">funnystyle</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7481"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">// 20까지 모두 나누어 떨어진다 - C
+#include &lt;stdio.h&gt;
+int main(void)
+{
+    int i, j, c;
+    for (i = 1; ; i++)
+    {
+        c = 0;
+        for (j = 1; j &lt;= 20; j++)
+        {
+            if (i % j != 0)
+            {
+                c = 1; break;
+            }
+        }
+        if (c == 0)
+        {
+            printf(&quot;%d&quot;, i);
+            // 답은 232792560
+            break;
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/14 11:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jeong Hoon Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7554"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <ol>
+<li>구할려는 수는 2520에 11부터 20까지 있는 소수를 곱한 값보다는 클거라 예상</li>
+<li>1~10까지의 수는 11부터 20까지의 수의 약수가 될수 있으므로 구할려는 수를 11~20까지로만 나눠서 나머지를 확인함</li>
+</ol>
+<pre><code class="java">public class Multiple {
+    public static void main(String[] args) {
+        int count = 2520*11*13*17*19;
+        int success = 0;
+        while(true) {
+            count++;
+            for(int i=11;i&lt;21;i++) {
+                if(count%i == 0) {
+                    success++;
+                }
+            }
+            if(success == 10) {
+                System.out.println(count);
+                break;
+            }
+            success = 0;
+
+        }
+    }
+
+}
+
+</code></pre>
+
+<p>출력 : 232792560</p>
+<p>처음 count값에다가 그냥 2 곱하니까 출력값이 나오네요 11은 만들어지고 12는 3*4로 만들어지고 계속해보면 16이 안만들어지는데 16만들기 위해서 2가 필요해서 2만 곱하면 되는것 같아요</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/18 09:31</p>
+                                <p class="static-profile" style="margin:0;padding:0;">JH</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7644"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <h2 id="36">파이썬 3.6으로 했습니다.</h2>
+<pre><code class="python">#codingdojang.com 132번 문제.
+primenumber = [2]
+interval = 20; temp = 3
+
+#20까지의 소수를 구합니다.
+while(temp &lt; interval) : 
+    if temp % 2 == 0 : #2의 배수는 생각할 필요도 없이 pass
+        temp = temp + 1
+        continue
+    for i in primenumber : #list내의 소수와 비교해서 나누어 떨어진다면 not 소수
+        if temp % i == 0 :
+            break
+        elif i == primenumber[len(primenumber) - 1]:
+            primenumber.append(temp)
+    temp = temp + 1
+
+
+#소수별로 20을 넘지않는 제곱수를 구합니다.
+#예를 들어서 2는 16, 3은 9, 5는 5, ... 이런식으로 다 구해서
+#곱한 수가 1~20사이의 어떤 수로도 나누어 떨어지는 가장 작은 수입니다.
+
+result = 1
+for i in primenumber :
+    while(1) :
+        if i * i &lt; interval :
+            i = i * i
+        else :
+            result = result * i
+            break
+print(result)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/26 20:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">KimSeonbin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7693"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3.6입니다</p>
+<pre><code class="python">i=2*3*5*7*11*13*17*19
+k=1
+
+while True:
+    if i%k==0 and k&lt;20:
+        k=k+1
+
+    elif i%k !=0:
+        i=i+2*3*5*7*11*13*17*19
+        k=1
+
+    elif i%k==0 and k==20:
+        print(i)
+        break
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/07/01 11:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">안성준</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7704"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">limit=20
+i=0
+f=True
+while f:
+    i=i+1
+    for d in range(1, limit+1):
+        if i%d!=0:
+            break
+        if d==limit and i%d==0:
+            f=False
+print(i)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/07/01 17:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">keroro10398</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7791"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>1에서 20사이어 어떤 수로든 나누어 떨어지는 수는 1과 20사이의 모든 자연수의 공배수이고, 그 중 가장 작은 수는 최소공배수입니다. </p>
+<p>세 자연수 A, B, C의 최소 공배수는 A, B의 최소공배수 L 과 나머지 C의 최소 공배수와 같습니다. </p>
+<p>따라서 최소공배수를 구하는 함수를 만들고, 1,2,...20 의 리스트를 이 함수를 적용해서 접으면 됩니다. </p>
+<p>Swift 입니다. </p>
+<pre><code class="swift">func gcd(_ m: Int, _ n: Int) -&gt; Int {
+    guard m &gt; 0, n &gt; 0 else { return 0 }
+    guard m &gt;= n else { return gcd(n, m) }
+
+    if m % n == 0 { return n }
+    return gcd(n, m % n)
+}
+
+func lcm(_ m: Int, _ n: Int) -&gt; Int {
+    guard case let g = gcd(m, n), g &gt; 0 else { return 0 }
+    let (a, b) = (m / g, n / g)
+    return a * b * g
+}
+
+print(Array(1...20).reduce(1, lcm))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/07/06 14:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">룰루랄라</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7869"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">num = 2520
+for x in range(11,21): 
+    if num % x ==0:
+        continue
+    elif num % x != 0:
+        for y in range(2,10):
+            if (num*y) % x ==0:
+                num = num * y
+                break
+        else: num = num * x
+print(num)
+</code></pre>
+
+<p>아직초보라 잘 하지는 못합니다...</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/07/15 17:25</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이기현</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7900"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="scala">object Problem5 {
+  def IsCorrect(N : Int, i : Int, Ei : Int): Int = if(N % i == 0) {if(i &gt; Ei) IsCorrect(N,i - 1,Ei) else 1} else 0
+  def IsPrime(N : Int, i : Int): Int = if(N % i != 0) {if(i &gt; 2) IsPrime(N,i - 1) else 1} else if(N == 2 || N == 3) 1 else 0
+  def Multiple(ML : IndexedSeq[Int], ind : Int, N : Int) : Int = if(ind &lt; ML.length - 1) Multiple(ML, ind + 1, N * ML(ind)) else  N * ML(ind)
+  def Search(N : Int, i : Int): Int = if(IsCorrect(N * i,20,11) == 1) N * i else Search(N, i + 1)
+  def main(args: Array[String]): Unit = print(Search(Multiple((2 to 20) filter(x =&gt; IsPrime(x,x/2) == 1),0,1),2))
+}
+</code></pre>
+
+<p>//부작용 없는 순수한 함수형 프로그래밍에 가까워지도록 노력해보았습니다. 재귀를 많이 쓰긴 했지만 전부 꼬리재귀라 stack overflow 걱정은 없습니다.
+<br>(수정) scala 코드는 예전에 쓴 것입니다.</br></p>
+<pre><code class="clojure">(defn IsCorrect [n] (if(= (count (for [x (range 11 20) :when (= (mod n x) 0)] x)) 9) 1 0))
+(defn IsPrime [n] (if(or (= (count (for [x (range 2 (/ n 2)) :when (= (mod n x) 0)] x)) 0) (= n (or 2 3))) 1 0))
+(defn Search [n i] (if(= (IsCorrect (* n i)) 1) (* n i) (Search n (inc i))))
+(println (Search (reduce * (for [x (range 2 20) :when (= (IsPrime x) 1)] x)), 2))
+</code></pre>
+
+<p>조금 더 익숙해진 뒤에 Clojure로도 작성해 보았습니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/07/18 00:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">S ReolSt</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7956"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Smallest multiple Number for 20 is : 232792560</p>
+<pre><code class="java">public class Calculate {
+
+    public static void main(String[] args) {
+        int maxInt = 20;
+        boolean found = false;
+
+        for(int sm=1 ; ; sm++) { //최소공배수로 확인할 수
+            for( int j=1 ; j&lt;=maxInt ; j++) { // 나누는 수
+                if(sm%j != 0) break; // 나누는 수로 나누어지지 않으면 
+                if( j==maxInt ) { // 나누는 수가 max 값이면 출력 후 종료
+                    System.out.println(&quot;Smallest multiple Number for &quot; + maxInt + &quot; is : &quot; + sm);
+                    found = true;
+                }
+            }
+            if(found) break;
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/07/21 16:33</p>
+                                <p class="static-profile" style="margin:0;padding:0;">SH</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7972"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># Python 3.6
+x = 20
+while True:
+    rtn = list(filter(lambda y: x % y, range(2, 21)))
+
+    if len(rtn) == 0:
+        print(&quot;The number is %s&quot; % x);    #The number is 232792560
+        break
+    x += 1
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/07/23 04:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">최우인</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8192"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from math import gcd
+from functools import reduce
+
+print(reduce(lambda x,y: x*y//gcd(x,y), range(1, 21))) # 232792560
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/04 05:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8719"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># python 3.6
+n = nmax = 20
+while True:
+    chk = any([n % i for i in range(1, nmax + 1)])
+    if chk is False:
+        print(n)
+        break
+    n += nmax
+# ans: 232792560
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/09/05 12:55</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8800"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def smallest_multiple(min, max) :
+    the_range = range(min, max + 1)
+    n = 1
+
+    while True :
+        box = []
+        for i in the_range :
+            if n % i == 0 :
+                box.append(1)
+            else :
+                pass
+        if len(box) == len(the_range) :
+            break
+        else :
+            n += 1
+
+    return n
+
+print(smallest_multiple(1, 20))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/09/12 12:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">다크엔젤</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8821"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">namespace _20170916
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int a = 1;
+             RE:
+            for(int i=1;i&lt;=20;i++)
+            {
+                int b = a % i;
+                if(b!=0)
+                {
+                    int c = i - b;
+                    a = a + c;
+                    goto RE;
+                }
+
+            }
+            Console.WriteLine(a);
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/09/16 12:36</p>
+                                <p class="static-profile" style="margin:0;padding:0;">정주영</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9099"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>다른 2 레벨 문제들에 비해 구현하는 것은 너무 쉬운 편인 것 같아서, 가능한 실행 속도를 최대한 개선시키는 것이 관건이라고 생각했습니다. Break 문을 사용해서 1 ~ 20으로 나눠보는 도중 단 한 번이라도 나눠지지 않는 경우 바로 다음 수로 넘어가게 했습니다. 제 능력선에서 가능한 최대한 실행 속도를 개선하려고 해봤는데 이게 최선인지는 모르겠네요.</p>
+<pre><code class="java">public class SmallestMultiple {
+    public static void main(String[] args) {
+        for(int num = 1; num &lt; Integer.MAX_VALUE; num++) {
+            int count = 0;
+            for(int divideNum = 1; divideNum &lt;= 20; divideNum++) {
+                if(num % divideNum == 0) {
+                    count++;
+                } else {
+                    break;
+                }
+            }
+            if(count == 20) {
+                System.out.println(num);
+                break;
+            }
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/25 05:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">SungWook Jung</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9227"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">gcd = lambda a, b : gcd(b, a%b) if a%b else b
+lcm = lambda a, b : a * b // gcd(a, b)
+
+
+res = 1
+for i in range(2, 21):
+    res = lcm(i, res)
+print(res)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/11/10 10:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">songci</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10247"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3.6</p>
+<pre><code class="python">def main(n):
+    num = 1
+    while True:
+        for i in range(1,n+1):
+            if num % i != 0: break
+        if i == n:
+            print(num)
+            break
+        else: num += 1
+
+if __name__ == &quot;__main__&quot;:
+    n = int(input(&quot;범위 마지막 수를 입력하세요 = &quot;))
+    main(n)
+
+*결과값
+범위 마지막 수를 입력하세요 = 20
+232792560
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/01/21 12:56</p>
+                                <p class="static-profile" style="margin:0;padding:0;">justbegin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10267"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Java 입니다.</p>
+<p>public class level_2_smallest_mulitple {</p>
+<pre><code>public static void main(String[] args) {
+
+    for(int i = 1; i &lt;= Integer.MAX_VALUE; i++)
+    {
+        int count = 0;          
+        for(int j = 1; j &lt;= 20; j++)
+        {
+            if(i % j == 0)
+            {
+                count++;
+            }
+            else
+            {
+                break;
+            }
+        }
+        if(count == 20)
+        {
+            System.out.println(i);
+            break;
+        }
+    }
+}
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/01/23 11:12</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Byam_Gyu</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10450"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># 파이썬
+
+# '에라토스테네스의 체'로 소수를 구한다.
+# n이하 소수를 거듭제곱하여 n이하 최대로 올린다.
+# 거듭제곱 하지 않은 소수들과 거듭제곱 수들을 곱한다.
+
+
+def eratosthenes(i):
+    candidates = list(range(3, i+1))
+    base = 2
+    product = 2
+    prime = [2]
+    while candidates:
+        while product &lt;= i:
+            product += base
+            if product in candidates:
+                candidates.remove(product)
+        base = candidates.pop(0)
+        product = base
+        prime.append(base)
+    return prime
+
+
+def smallest_multiple(i):
+    primes = eratosthenes(i)
+    print(primes)
+    for m in range(len(primes)):
+        prime = primes[m]
+        while primes[m]*prime &lt; i:
+            primes[m] *= prime
+    print(primes)
+    r = 1
+    for n in primes:
+        r *= n
+    return r
+
+
+print(smallest_multiple(20))
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/02 01:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">olclocr</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10700"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def primeset(n):
+    l = list()
+    for i in range(2, n + 1):
+        if all([i % j for j in l]):
+            l.append(i)
+    return l
+def smallmul(n):
+    result = 1
+    for i in primeset(n):
+        j = 0
+        while i**j &lt;= n:
+            j += 1
+        result = result * (i**(j-1))
+    return result
+
+
+print(smallmul(20))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/14 14:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김동하</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11535"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <h3 id="36">파이썬3.6</h3>
+<pre><code class="python">import math
+from functools import reduce
+
+def lcm(*numbers):
+    def lcm(a, b):
+        return (a * b) // math.gcd(a, b)
+    return reduce(lcm, numbers)
+
+assert lcm(*range(1, 10 + 1)) == 2520
+print(lcm(*range(1, 20 + 1))) #232792560
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/04/05 14:32</p>
+                                <p class="static-profile" style="margin:0;padding:0;">디디</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11677"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Swift입니다.</p>
+<p>단순하게, 20부터 20씩 증가하면서 1부터 20까지 나눠 떨어지는지를 검사합니다.</p>
+<pre><code class="no-highlight">import Foundation
+
+var dividers = Array(1...20)
+
+func canBeDividedByAll(_ number : Int) -&gt; Bool {
+    for divider in dividers {
+        if number % divider != 0 {
+            return false
+        }
+    }
+    return true
+}
+
+func findMinNumber() -&gt; Int {
+    var number = 20
+    while true {
+        if canBeDividedByAll(number) {
+            break
+        }
+        number += 20
+    }
+    return number
+}
+
+print( findMinNumber() )
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/04/12 10:09</p>
+                                <p class="static-profile" style="margin:0;padding:0;">졸린하마</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12083"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">// 자바
+public static void main(String[] args) throws Exception {
+//      BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//      int n = Integer.parseInt(br.readLine());
+
+        boolean flag = false;
+        long n = 2519;
+        while(!flag) {
+            n++;
+            flag = true;
+            for (long i=1; i&lt;20; i++) {
+                if (n%i != 0)
+                    flag = false;
+            }
+            System.out.println(n);
+        }
+
+    }//232792560 답나오긴 하는데 개오래 걸림... 쓰레기 코드입니다
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/07 01:17</p>
+                                <p class="static-profile" style="margin:0;padding:0;">정몽준</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12763"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">public class test {
+    public static void main(String[] args) {
+        for(int num = 1; num &lt; Integer.MAX_VALUE; num++) {
+            int count = 0;
+            for(int a = 1; a &lt;= 20; a++) {
+                if(num % a == 0) {
+                    count++;
+                } else {
+                    break;
+                }
+            }
+            if(count == 20) {
+                System.out.println(num);
+                break;
+            }
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/04 12:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">聂金鹏</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12993"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 다른사람 참고</p>
+<pre><code class="python">import functools
+
+
+# 최대공약수
+def gcd(x, y):
+    if y:
+        return gcd(y, x % y)
+    else:
+        return x
+
+
+# 최소공배수
+def lcm(x, y):
+    return int(x*y/gcd(x, y))
+
+
+print(functools.reduce(lambda x, y: lcm(x, y), [a for a in range(11, 21)]))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/15 15:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Taesoo Kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13741"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from functools import reduce
+
+def lcm(a,b):
+    c = a*b
+    while b &gt; 0: a,b = b,a%b
+    return c/a
+
+print(reduce(lcm,range(1,21)))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/24 22:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14125"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>#include &lt;stdio.h&gt;
+
+#define NUM 20
+
+int main(void)
+{
+    int num=10, j, boolean;
+
+    while(1)
+    {
+        boolean = 0;         
+
+        for(j=2; j&lt;=NUM; j++) //1로 는 어떤수도나누어 떨어지기떄문에 2이상 
+        {
+            if(num%j!=0)
+            {
+                boolean =1;
+                break;        
+            }
+        }
+
+        if(boolean == 0)
+        {
+            printf(&quot;%d&quot;, num);
+            break;
+        }
+
+        num++;
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/15 12:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이우경</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14254"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">Matrix = [[0]*8 for i in range(21)]  # 8*21 matrix (마지막 줄은 출력값)
+lst_prime = [2, 3, 5, 7, 11, 13, 17, 19]
+
+result = 1
+i = 1
+while i &lt;= 20:
+    for k in lst_prime:
+        e = 0
+        while i % (k ** e) == 0:
+            e = e + 1
+        e = e - 1
+        j = lst_prime.index(k)
+        Matrix[i-1][j] = e
+        if e &gt;= Matrix[20][j]:
+            Matrix[20][j] = e
+    i = i + 1
+
+for k in lst_prime:
+    j = lst_prime.index(k)
+    result = result * (k ** Matrix[20][j])
+
+print(result)
+</code></pre>
+
+<p>저는 python을 사용하였습니다.
+1~20을 행에, 20이하의 소수를 열에 배치하고 각 칸에는 행 값의 지수를 적습니다.
+그리고 각 열의 최댓값을 마지막 행에 적어두어 이에 해당하는 수를 취하면 됩니다.
+최댓값을 취할 때에는 각 행에 대해서 마지막 행과의 비교 연산을 수행하였습니다.
+보시다시피 for문을 2번이나 사용하였는데, while문을 수행함과 동시에 result 값을 올리려면 개행하는 타이밍이 없기에 중복하여 사용하였습니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/23 01:41</p>
+                                <p class="static-profile" style="margin:0;padding:0;">aa</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14292"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import functools
+
+def func(x,y):
+    if y:
+        return func(y, x%y)
+    else:
+        return x
+
+print(functools.reduce(lambda x,y: x*y//func(x,y), [a for a in range(1,21)]))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/24 13:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">S.H</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14351"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">int i = 7 * 11 * 13 * 15 * 17 * 19 * 20;
+        boolean go = false;
+        while (!go) {
+            go = true;
+            for (int j = 11; j &lt; 21; j++) {
+                if (i++ % j != 0) {
+                    go = false;
+                    break;
+                }
+            }
+        }
+        System.out.println(i);
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/26 20:24</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김지훈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14352"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">boolean ha = true;
+        for (int j = 1; ; j++) {
+            ha = true;
+            for (int i = 1; i &lt;= 20; i++) {
+                if (j % i != 0) {
+                    ha = false;
+                    break;
+                }
+            }
+            if(ha == true) {
+                System.out.println(j);
+                break;
+            }
+        }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/26 20:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">채규빈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15105"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#Greatest Common Divisor(최대공약수)
+def gcd(a,b) :
+    gcd_num = min(a,b)+1
+    while gcd_num!= 1:
+        if a%gcd_num==0 and b%gcd_num==0:
+            return gcd_num
+        gcd_num= gcd_num-1
+    return 1
+
+#Least Common Multiple(최소공배수)
+#어떤 수로도 나누어 떨어지는 가장 작은 수 = 최소공배수
+#최대공약수와 최대공배수의 관계 (두 자연수 A, B) 
+#A*B=gcd*lcm
+def lcm(n):
+    lcm_num=1
+    for i in range(2, n):
+        lcm_num=int((lcm_num*i)/gcd(lcm_num,i))        
+    return lcm_num
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/11/05 22:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">쨔이</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15632"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package pac;
+import java.util.*;
+
+public class franklin {
+    public static void main(String[] args)
+    {
+        int i=0,j=0,k=0;
+        while(true)
+        {
+            i++;
+            for(j=1;j&lt;21;j++)
+            {
+                if(i%j==0)
+                {
+                    k++;
+                }
+
+            }
+            if(k == 20)
+                break;
+            else
+                k = 0;
+        }
+        System.out.println(i);
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/12/24 14:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">dbnfqe</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16495"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from math import gcd
+
+def lcm(a, b):
+    Lcm = a * b / gcd(a, b)
+    return int(Lcm)
+
+num_list = [i for i in range(2, 20)]
+
+for i in range(17):
+    num_list[i+1] = lcm(num_list[i],num_list[i+1])
+
+print(num_list[17])
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/02/07 15:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">D.H.</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16705"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">prime_number =[]
+for i in range(2,21):
+    chk = True
+    for j in range(2,i):
+        if i%j == 0:
+            chk = False
+            break
+    if chk:
+        prime_number .append(i)
+multiplication=1
+for z in prime_number:
+    multiplication*=int(z)
+
+answer=0
+while True:
+    ti=0
+    answer = answer + multiplication
+    for i in range(1,21):
+        i=int(i)
+        if answer%i==0:
+            ti+=1
+        if ti==20:
+            print(answer)
+            quit()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/02/15 17:02</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이정헌</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16873"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">static void Main(string[] args)
+        {
+            Console.WriteLine(&quot;*** 코딩도장 Q132 ***&quot;);
+
+            int startNum = 1;
+            int endNum = 20;
+            int ans = 1;
+
+            for (int i = startNum; i &lt; endNum; i++)
+            {
+                if (ans%i!=0)
+                {
+                    ans++;
+                    i = startNum;
+                    continue;
+                }
+            }
+            Console.WriteLine(&quot;정답은 {0} 입니다.&quot;, ans);
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/02/24 18:41</p>
+                                <p class="static-profile" style="margin:0;padding:0;">DrKilling</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16922"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">namespace codingdojang__
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            bool found = false;
+            int number = 20;
+            int temp = 0;
+
+            while (found == false)
+            {
+                for (int i = 11; i &lt; 21; i++)
+                {
+                    if (number % i != 0)
+                    {
+                        break;
+                    }
+                    else if (i == 20 &amp;&amp; number % i == 0)
+                    {
+                        found = true;
+                        temp = number;
+                    }
+                }
+                number += 20;
+            }
+            Console.WriteLine(temp);
+        }
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/02/26 17:28</p>
+                                <p class="static-profile" style="margin:0;padding:0;">bat</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16938"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">num=2
+sum=0
+while True:
+    for div in range(1,21):
+        if num%div!=0:
+            num += 2
+            break
+        elif div==20:
+            print(num)
+            exit()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/02/28 12:06</p>
+                                <p class="static-profile" style="margin:0;padding:0;">나</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16981"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def factor(n):
+    factor=[]
+    for i in range(1,int(n**0.5)+1):
+        if n%i==0:
+            factor.append(i)
+            if n/i!=i:
+                factor.append(int(n/i))
+    return factor
+
+def lcm(a,b):
+    fa=factor(a)
+    fb=factor(b)
+    fab=[]
+    for i in fa:
+        if i in fb:
+            fab.append(i)
+    return a*b//max(fab)
+
+mul=1
+for i in range(1,21):
+    mul=lcm(mul,i)
+
+print(mul)
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/03/02 20:03</p>
+                                <p class="static-profile" style="margin:0;padding:0;">ykleeac</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17366"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>자바입니다. 생각보다 간단하네요.</p>
+<pre><code class="java">
+public class practice {
+
+    public static void main(String[] args) {
+
+        int n = 1;
+
+        while(true) {
+            int cnt= 0;
+        for (int i = 1; i &lt;= 20; i++)
+        {
+            if (n % i ==0)
+                {cnt++;}
+        }
+        if (cnt == 20)
+            {System.out.println(n);
+        break;}
+        else {
+            n++;
+        }
+        }
+
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/04/02 14:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Albert</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17798"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def sosu(LIST,ALIST):
+    if LIST==[]:
+        return ALIST
+
+    for i in range(2,LIST[0]): 
+        if LIST[0]%i==0:
+            del LIST[0]
+            return sosu(LIST,ALIST)
+
+    ALIST.append(LIST[0]);del LIST[0]
+    return sosu(LIST,ALIST)
+
+ANSL=sosu(list(range(3,21)),[2]);ansl=sosu(list(range(3,21)),[2]);ans=1
+
+for i in range(len(ANSL)):
+    while 1:
+        if ANSL[i]*ansl[i]&gt;20:
+            break
+        ANSL[i]*=ansl[i]
+    ans*=ANSL[i]
+
+print(ans)
+</code></pre>
+
+<p>일전에 레벨1에서 풀어본 적이 있는 문제같은데, 잘 기억이 나질 않는군요. 20이하의 소수를 죄다 구하여 그들의 20 이하의 최대 제곱수들을 곱하였읍니다.그래도 상당히 매우 길으군요 T.T</p>
+<pre><code>from math import*
+
+def lcm(q,w):
+    return int(q*w/gcd(q,w))
+
+def ans(q,w,N):
+    if q==N:
+        return lcm(q,w)
+    return ans(q+1,lcm(q,w),N)
+
+print(ans(1,2,int(input())))
+</code></pre>
+
+<p>math모듈을 사용하여 다시 풀어보았읍니다. 역시 최대공약수와 최소공배수를 단번에 구할수있어서 확실히 코드의 길이가 줄어들었읍니다. 모처럼이니, 굳이 상한을 20이 아닌 사용자가 직접 설정 할 수 있도록 하였읍니다. 그러나 저의 파이손으로는 상한 216까지만 계산이 되고(대략 10의 307제곱 자리 크기이군요.) 이 보다 큰 수라면 계산용량을 초과해 버리는군요.^^</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/08 23:02</p>
+                                <p class="static-profile" style="margin:0;padding:0;">암살자까마귀</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17969"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>11부터 20 까지의 최소공배수를 구하면 됩니다.
+2의 지수가 있는수 - 12,14,16,18,20. 최대 - 16.(2^4)
+3 - 12,15,18 최대 - 18.(3^2)
+5 - 10,15,20. 최대 - 다.(5^1)
+5 이후는 모두 지수가 1이니,
+2^4 * 3^2 * 5 * 7 * 11 * 13 * 17 * 19 를 하면 됩니다.
+--- 232,792,560
+</code></pre>
+
+<ul>
+<li>Made by Endever</li>
+</ul>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/21 21:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Firelight</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20087"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>자연수 X,Y가 있을 경우 최소공배수는 (X*Y/최대공약수)라고 하더라고요..... 
+두수의 최소공배수를 구하고 구한 최소공배수를 다음수랑 비교하는 방식으로 구했습니다.
+처음 최소공배수를 6으로 설정한 이유는 2와 3의 최소공배수가 6이기 때문입니다. 
+최소공배수가 다음수보다 크다는 설정을 했습니다.</p>
+<pre><code class="java">public class SmallestMultiple {
+
+    public static void main(String[] args) {
+
+        long 최소공배수 = 6;  //최소공배수
+        for(int i=4; i&lt;21; i++) {
+            int 최대공약수 = 0;  //최대공약수
+            for(int j=2;j&lt;i+1;j++) {
+                if(최소공배수%j==0&amp;&amp;i%j==0) {
+                    최소공배수 = j;
+                }
+            }
+            if(최대공약수==0) {
+                최소공배수 = 최소공배수*i;
+            }
+            else {
+            최소공배수 = 최소공배수*i/최대공약수;
+            }
+        }
+        System.out.println(최소공배수);
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/11/28 20:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">big Ko</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20761"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">
+Run = True
+value = 21
+
+while Run:        
+    count = 0
+    for i in range(1,21):
+        if value % i ==0:
+            count += 1
+    if count == 20:
+        print(value)
+        Run = False
+    else :
+        value +=1
+</code></pre>
+
+<p>초보자의 coding이라  시간이 어마어마 하게 걸립니다..ㅠㅜ</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/28 00:33</p>
+                                <p class="static-profile" style="margin:0;padding:0;">semipooh</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_21403"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>num=0<br />
+while(1):<br />
+    num=num+(2<em>3</em>5<em>7</em>11<em>13</em>17*19)<br />
+    i=0<br />
+    while (i&lt;21):<br />
+        i=i+1<br />
+        if num%i!=0:<br />
+            break<br />
+    if (i&gt;20):<br />
+        print (num)<br />
+        break</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/03/15 07:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Buckshot</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22122"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from math import gcd
+def sol(arr):
+    def lcm(x, y):
+        return x*y // gcd(x, y)
+    while True:
+        arr.append(lcm(arr.pop(), arr.pop()))
+        if len(arr) == 1:
+            return arr[0]
+
+if __name__ == '__main__':
+    print(sol([i for i in range(1, int(input('값을 입력하시오: '))+1)]))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/06 18:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hwaseong Nam</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22351"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from math import gcd
+
+def lcm(a,b):
+    return int(a*b/gcd(a,b))
+
+def small(n):
+    n = list(range(1,n+1))
+    while len(n) &gt;= 1:
+        n[0:2] = [lcm(n[0],n[1])]
+        print(n[0:2])
+    return n[0]
+small(10)
+</code></pre>
+
+<p>math까진 생각해뒀는데 윗 풀이들을 통해 함수를 두개 만들어 풀이하는 것을 배웠습니다~</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/15 11:24</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Money_Coding</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24257"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>import math as m</p>
+<pre><code>def count_numer(number):
+
+  for_answer=[2]
+
+  for i in range(3,number+1,1):
+
+    check=True
+
+    for j in for_answer:
+
+      if i%j==0:
+
+        check=False
+
+    if check==True:
+
+      for_answer.append(i)
+
+  return for_answer
+
+
+def smallest_multiple(number):
+
+  for_answer=[]
+
+  for_answer_list=count_numer(number)
+
+  for_dic={}
+
+  for i in for_answer_list:
+
+    for_dic[i]=0
+
+  for k in range(2,number+1,1):
+
+    for j in for_dic:
+
+      count=0
+
+      check=k
+
+      while check%j==0:
+
+        count+=1
+
+        check=check/j
+
+      if count&gt;for_dic[j]:
+
+        for_dic[j]=count
+
+  answer=1
+
+  for number in for_dic:
+
+    answer=answer*m.pow(number,for_dic[number])
+
+  return int(answer)
+
+print(smallest_multiple(10))
+
+print(smallest_multiple(20))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/01/08 16:25</p>
+                                <p class="static-profile" style="margin:0;padding:0;">전준혁</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24468"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>왕초보입니다. sieve(n)은 부스트코스-처음 배우는 프로그래밍 w파이썬의 자료를 참고했습니다.</p>
+<pre><code class="python">def sieve(n):
+    candidates = list(range(2, n))
+    i = 0
+    while i &lt; len(candidates):
+        prime = candidates[i]
+        j = i + 1
+        while j &lt; len(candidates):
+            if candidates[j] % prime ==0:
+                candidates.pop(j)
+            else:
+                j += 1
+        i += 1
+    return candidates
+
+def smallest_multiple(n):
+    candidates = sieve(n+1)
+    multiple = 1
+    for i in range(len(candidates)):
+        prime = candidates[i]
+        power = 1
+        while prime ** (power+1) &lt; n:
+            power += 1
+        else:
+            multiple = multiple * ((candidates[i]) ** power)
+    return multiple
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/01/22 23:26</p>
+                                <p class="static-profile" style="margin:0;padding:0;">팝코니</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24773"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="javascript">    let num=1;
+    let cnt=0;
+
+    while(true){
+        for (let i = 1; i &lt;= 20; i++) {
+            if(num%i==0){
+                cnt++
+            }else{
+                break;
+            }
+        }
+        if(cnt==20){
+            console.log(num); 
+            break;
+        }else{
+            cnt=0;
+            num++;
+        }
+    }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/02/16 13:53</p>
+                                <p class="static-profile" style="margin:0;padding:0;">wldus</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24916"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">number=0
+
+while True:
+    number+=1
+    if number % 1 == 0 and number % 2 == 0 and number % 3 == 0 and number % 4 == 0 and number % 5 == 0 and number % 6 == 0 and number % 7 == 0 and number % 8 == 0 and number % 9 == 0 and number % 10 == 0 and number % 11 == 0 and number % 12 == 0 and number % 13 == 0 and number % 14 == 0 and number % 15 == 0 and  number % 16 == 0 and number % 17 == 0 and number % 18 == 0 and  number % 19 == 0 and number % 20 == 0 :
+        print(number)
+        break
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/03/02 09:27</p>
+                                <p class="static-profile" style="margin:0;padding:0;">최우진</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25001"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">a=[]
+for i in range(1,21):
+    count=0
+    for j in range(1,i+1):
+        if i%j==0:
+            count+=1
+    if count==2:
+        a.append(i)
+a.remove(2)
+a.remove(3)
+count=0
+while True:
+    count+=1
+    if 2**count&gt;=10:
+        a.append(2**count)
+        break
+count=0
+while True:
+    count+=1
+    if 3**count&gt;=7:
+        a.append(3**count)
+        break
+total=1
+for i in a:
+    total*=i
+print(a)
+print(total)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/03/18 22:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">fox.j</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25168"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def func1(num):
+    n = int(num)
+    number = 1
+    div_result = []
+    flag = True
+    while flag:
+        for i in range(1,n+1):
+            if number % i == 0:
+                div_result.append(0)
+            else:
+                div_result.append(1)
+
+        if len(set(div_result)) == 1 and list(set(div_result))[0] == 0:
+            print('FOUND!!!!', number)
+            break
+        else:
+            number += 1
+            div_result = []
+
+func1(20)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/04/12 15:33</p>
+                                <p class="static-profile" style="margin:0;padding:0;">DSHIN</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25822"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>python 3.9.6입니다. 1~10 사이의 어떤 수로도 나누어 떨어지는 가장 작은 수와 20!(팩토리얼) 사이에 값이 있다는 것을 이용했습니다. 또한, 이 범위 내에서 수는 11~20 사이의 모든 소수의 곱씩 건너뛰어도 됩니다.
+소스 코드입니다.</p>
+<pre><code class="python">import math
+for num in range(2520*11*13*17*19, math.factorial(20), 11*13*17*19):
+    status = True
+    for test in range(11, 21):
+        if num % test: status = False; break
+    if status: print(num); break
+</code></pre>
+
+<p>실행 결과는 232792560입니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/07/20 09:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이준우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26156"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#codingdojing_smallest_multiple
+
+# 1. 중간까지 곱한다음에 젤 큰 숫자로 계속 올린다. 
+# 2. 최소 공배수를 구한다. LCM = a*b/GCD
+
+from functools import reduce
+
+def GCD(a, b): #a&gt;b , a&lt;b여도 알아서 바뀜
+
+    if a%b == 0: return b
+    else: return GCD(b, a%b)
+
+print(int(reduce(lambda x,y: x*y//GCD(x,y), range(1,21))))
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/08/24 16:02</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jaeman Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26398"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">ans = 1
+num = 20
+
+def a(n):
+    a = True
+    for i in range(2, n):
+        if n % i == 0:
+            a = False
+            break
+    return a
+
+
+for i in range(2, num + 1):
+    if a(i):
+        ans *= i
+        k = 2
+        while True:
+            if i**k &lt;= num:
+                ans *= i
+                k += 1
+            else:break
+
+
+print(ans)
+
+</code></pre>
+
+<p>범위 사이에 존재하는 모든 소수의 가장 큰 자승수를 곱하면 나오네용</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/09/27 17:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Kim Hangil</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26589"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def smallest_multiple(a):
+    i = a
+    while True:
+        x = 0
+        i += 2
+        for y in range(1,a+1):
+            if i%y == 0:
+                x += 1
+            else:
+                break
+    if x == a:
+        return i
+
+if __name__ == '__main__':
+    a = 20
+    print(smallest_multiple(a))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/10/27 19:27</p>
+                                <p class="static-profile" style="margin:0;padding:0;">서현준</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26978"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n =1
+result =1
+while n!=20:
+    if result%n ==0 :
+       n+=1
+    elif result%n !=0:
+        result +=1
+        n=1
+
+print(result)
+</code></pre>
+
+<p>코드는 간단해서 맘에들지만.. 속도가 맘에 안드네요
+효율화 하고싶어요</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/07 23:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">양캠부부</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27358"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n=20
+
+import math
+
+def math_lcm(a,b):
+  return (a * b) // math.gcd(a,b)
+
+def mlcm(n):
+    a=[x for x in range(1,n+1)]
+    lcm = 1
+
+    for i in range(n):
+        lcm = math_lcm(lcm, a[i])
+    return lcm
+
+mlcm(n) 
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/02/16 19:38</p>
+                                <p class="static-profile" style="margin:0;padding:0;">로만가</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27403"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package org.javaturotials.ex;
+import java.util.*;
+public class test {
+
+    public static void main(String[] args) {
+        int i=1;
+        int num=0;
+        int count=0;
+        while(true) {
+            for(int j=1; j&lt;=20; j++) {
+                if(i%j==0) {
+                count++;
+                }
+            }
+            if(count==20) {
+                num=i;
+                break;
+            }
+            count=0;
+            i++;
+        }
+        System.out.println(num);
+        }
+        }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/02/20 12:36</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Kkubuck</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29228"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def get_multiple(num1, num2):
+    for i in range(max(num1, num2), num1*num2+1):
+        if i % num1 == 0 and i % num2 == 0:
+            return i
+
+max_len = 20
+result = 2
+for i in range(2, max_len+1):
+    result = get_multiple(result, i)
+
+print(result)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/04/04 15:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">HoHyeon Kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29710"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n = 20
+nums = [ x for x in range(1, n + 1)]
+lcmNum = 1
+for i in range(1, n):
+    lcmNum *= nums[i]
+    for j in range(i+1,n):
+        if nums[j] % nums[i] == 0:
+            nums[j] //= nums[i]
+print(lcmNum)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/10/19 12:28</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_30348"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import math
+
+nums = [x for x in range(1, 21)]
+result = nums[0]
+
+for num in nums:
+    result = math.lcm(result, num)
+
+print(result)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2026/05/15 00:31</p>
+                                <p class="static-profile" style="margin:0;padding:0;">우영재</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

@@ -1,0 +1,3128 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="[출처](https://www.acmicpc.net/problem/13335)
+강을 가로지르는 하나의 차선으로 된 다리가 하나 있다. 이 다리를 n 개의 트럭이 건너가려고 한다. 트럭의 순서는 바꿀 수 없으며, 트럭의 무게는 서로 같지 않을 수...">
+    <title>트럭 - ACM 2016 문제 중에서 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">트럭 - ACM 2016 문제 중에서</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">8</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 2</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p><a href="https://www.acmicpc.net/problem/13335">출처</a>
+강을 가로지르는 하나의 차선으로 된 다리가 하나 있다. 이 다리를 n 개의 트럭이 건너가려고 한다. 트럭의 순서는 바꿀 수 없으며, 트럭의 무게는 서로 같지 않을 수 있다. 다리 위에는 단지 w 대의 트럭만 동시에 올라갈 수 있다. 다리의 길이는 w 단위길이(unit distance)이며, 각 트럭들은 하나의 단위시간(unit time)에 하나의 단위길이만큼만 이동할 수 있다고 가정한다. 동시에 다리 위에 올라가 있는 트럭들의 무게의 합은 다리의 최대하중인 L보다 작거나 같아야 한다. 참고로, 다리 위에 완전히 올라가지 못한 트럭의 무게는 다리 위의 트럭들의 무게의 합을 계산할 때 포함하지 않는다고 가정한다. </p>
+<p>예를 들어, 다리의 길이 w는 2, 다리의 최대하중 L은 10, 다리를 건너려는 트럭이 트럭의 무게가 [7, 4, 5, 6]인 순서대로 다리를 오른쪽에서 왼쪽으로 건넌다고 하자. 이 경우 모든 트럭이 다리를 건너는 최단시간은 아래의 그림에서 보는 것과 같이 8 이다.<br />
+<img alt="다리건너기 과정" src="https://onlinejudgeimages.s3-ap-northeast-1.amazonaws.com/problem/13335/1.png" /></p>
+<p>다리의 길이와 다리의 최대하중, 그리고 다리를 건너려는 트럭들의 무게가 순서대로 주어졌을 때, 모든 트럭이 다리를 건너는 최단시간을 구하는 프로그램을 작성하라.  </p>
+<p>입력<br />
+입력 데이터는 표준입력을 사용한다. 입력은 두 줄로 이루어진다. 입력의 첫 번째 줄에는 세 개의 정수 n (1 ≤ n ≤ 1,000) , w (1 ≤ w ≤ 100) and L (10 ≤ L ≤ 1,000)이 주어지는데, n은 다리를 건너는 트럭의 수, w는 다리의 길이, 그리고 L은 다리의 최대하중을 나타낸다. 입력의 두 번째 줄에는 n개의 정수 a1, a2, ⋯ , an (1 ≤ ai ≤ 10)가 주어지는데, ai는 i번째 트럭의 무게를 나타낸다.  </p>
+<p>출력<br />
+출력은 표준출력을 사용한다. 모든 트럭들이 다리를 건너는 최단시간을 출력하라.  </p>
+<p>샘플 1.  </p>
+<pre><code>4 2 10
+7 4 5 6
+8
+</code></pre>
+
+<p>샘플 2.  </p>
+<pre><code>1 100 100
+10
+101
+</code></pre>
+
+<p>샘플 3.  </p>
+<pre><code>10 100 100
+10 10 10 10 10 10 10 10 10 10
+110
+</code></pre>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2016/10/11 20:59</p>
+                    <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>43개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_8257"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">4</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python3</p>
+<pre><code class="python">def cross(W, L, trucks):
+    bridge = [0] * W
+    time = 0
+    while bridge:
+        time += 1
+        bridge.pop(0)
+        if trucks:
+           if sum(bridge) + trucks[0] &lt;= L:
+               bridge.append(trucks.pop(0))
+           else:
+               bridge.append(0)
+
+        #print(bridge); input()
+
+    return time
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/08 09:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2534"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">이해도 간결명료하고 읽기 편하여 큰 도움이 되었읍니다. C만 쓰시는 줄 알았는데, 파이손 같은 언어도 잘 다루시는군요. 매우 부러웁니다ㅠㅠ</span>
+                                -
+                                <span style="font-size:11px;">
+                                    암살자까마귀,
+                                    2019/05/08 21:34
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4953"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<pre><code class="ruby">def min_times
+  (_,w,l), trucks = (1..2).map {gets.split.map &amp;:to_i}
+  add = -&gt;b,c,t { b.shift; b.sum &lt;= l-t ? [b&lt;&lt;t, c+1] : add[b&lt;&lt;0, c+1, t] }
+  puts trucks.reduce([[0]*w,0]) {|a,truck| add[*a,truck] }[1] + w
+end
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby"># stdin datas
+case1 = &quot;4 2 10\n7 4 5 6\n&quot; 
+case2 = &quot;1 100 100\n10\n&quot;   
+case3 = &quot;10 100 100\n10 10 10 10 10 10 10 10 10 10\n&quot;
+$stdin = StringIO.new(case1 + case2 + case3)
+
+expect{ min_times }.to output(&quot;8\n&quot;).to_stdout   # case 1
+expect{ min_times }.to output(&quot;101\n&quot;).to_stdout # case 2
+expect{ min_times }.to output(&quot;110\n&quot;).to_stdout # case 3
+</code></pre>
+
+<p><strong>Output</strong></p>
+<pre><code class="ruby">min_times
+11 2 10
+7 4 5 6 1 4 2 3 5 7 4
+17
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/13 07:24</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5088"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>다리로 이용할 리스트(길이가 w 이고 0으로 가득찬)를 준비해서 큐로 사용합니다. 
+다리의 내용을 한 칸 밀고, 남은 무게의 합과 대기열 중 가장 앞 트럭의 무게를 더해서 
+안전한 수준이면 다리 뒤에 추가합니다.
+그렇지 않으면 0을 추가합니다. 
+대기열에 트럭이 없는 경우에도 다리는 0을 밀어넣습니다.</p>
+<p>이런식으로 트럭대기열이 비고, 다리위에 트럭이 없을 때까지 반복해서
+몇 번 반복했는지 카운트를 세면 됩니다. </p>
+<p>(수정)</p>
+<p>다리를 못 건너는 트럭이 있을 수 있어서 체크하는 로직을 추가했습니다. 
+더불어 각 틱마다 트럭의 위치를 표시하게끔 했습니다.</p>
+<pre><code class="python">def do():
+
+    n, w, l = [int(x) for x in input().split()][:3]
+    xs = [int(x) for x in input().split()][:n]
+    if max(xs) &gt; l:
+        print(&quot;can't cross the bridge.&quot;)
+    bridge = [0] * w
+    elapsed = 0
+
+    def show():
+        print(
+            elapsed,
+            '({:02d})'.format(sum(bridge)),
+            ''.join('[{}]'.format(x if x &gt; 0 else '_') for x in bridge),
+            xs
+        )
+
+    show()
+    while xs or sum(bridge) &gt; 0:
+        x = xs[0] if xs else 0
+        if sum(bridge[1:]) + x &lt;= l:
+            bridge = bridge[1:] + [x]
+            xs = xs[1:]
+        else:
+            bridge = bridge[1:] + [0]
+        elapsed += 1
+        show()
+    return elapsed
+
+print(do())
+</code></pre>
+
+<p>아래는 결과입니다</p>
+<pre><code>8 4 12
+4 2 5 8 6 2 4 9
+(00) (00) [_][_][_][_] [4, 2, 5, 8, 6, 2, 4, 9]
+(01) (04) [_][_][_][4] [2, 5, 8, 6, 2, 4, 9]
+(02) (06) [_][_][4][2] [5, 8, 6, 2, 4, 9]
+(03) (11) [_][4][2][5] [8, 6, 2, 4, 9]
+(04) (11) [4][2][5][_] [8, 6, 2, 4, 9]
+(05) (07) [2][5][_][_] [8, 6, 2, 4, 9]
+(06) (05) [5][_][_][_] [8, 6, 2, 4, 9]
+(07) (08) [_][_][_][8] [6, 2, 4, 9]
+(08) (08) [_][_][8][_] [6, 2, 4, 9]
+(09) (08) [_][8][_][_] [6, 2, 4, 9]
+(10) (08) [8][_][_][_] [6, 2, 4, 9]
+(11) (06) [_][_][_][6] [2, 4, 9]
+(12) (08) [_][_][6][2] [4, 9]
+(13) (12) [_][6][2][4] [9]
+(14) (12) [6][2][4][_] [9]
+(15) (06) [2][4][_][_] [9]
+(16) (04) [4][_][_][_] [9]
+(17) (09) [_][_][_][9] []
+(18) (09) [_][_][9][_] []
+(19) (09) [_][9][_][_] []
+(20) (09) [9][_][_][_] []
+(21) (00) [_][_][_][_] []
+
+21
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/28 12:28</p>
+                                <p class="static-profile" style="margin:0;padding:0;">룰루랄라</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2242"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">아주 훌륭하군요</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Taesoo Kim,
+                                    2018/06/14 17:27
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4939"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Java</p>
+<ul>
+<li>트럭 클래스를 정의하고 다리 최초 진입 시의 진행 단계(stage)와 다리를 다 건넜을 때의 단계를 기록한다.</li>
+<li>트럭은 한 번 다리에 올라가면 다리 길이 만큼 진행 후에 다리를 건넌 상태가 된다.</li>
+<li>제일 마지막으로 지나간 트럭의 종료 단계를 출력한다.</li>
+</ul>
+<pre><code class="java">import java.util.Scanner;
+
+public class TruckTimer {
+    public static int process(String input1, String input2) {
+        String[] inputList1 = input1.split(&quot; &quot;);
+        String[] inputList2 = input2.split(&quot; &quot;);
+        int w = Integer.parseInt(inputList1[1]);
+        int l = Integer.parseInt(inputList1[2]);
+        Truck[] trucks = new Truck[inputList2.length];
+        for (int i = 0; i &lt; trucks.length; i++) {
+            int weight = Integer.parseInt(inputList2[i]);
+            trucks[i] = new Truck(weight);
+        }
+        return checkTime(w, l, trucks);
+    }
+
+    private static int checkTime(int w, int l, Truck[] trucks) {
+        int stage = 1;
+        int currentWeight = 0;
+        for (int i = 0; i &lt; trucks.length; i++) {
+            for (int j = 0; j &lt;= i; j++) {
+                if (trucks[j].endStage == stage) {
+                    currentWeight -= trucks[j].weight;
+                }
+            }
+            if (currentWeight + trucks[i].weight &lt;= l) {
+                currentWeight += trucks[i].weight;
+                trucks[i].startStage = stage;
+                trucks[i].endStage = stage + w;
+                stage++;
+            } else {
+                stage += w;
+                trucks[i].startStage = stage;
+                trucks[i].endStage = stage + w;
+            }
+        }
+        return trucks[trucks.length-1].endStage;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String input1 = sc.nextLine();
+        String input2 = sc.nextLine();
+        System.out.println(TruckTimer.process(input1, input2));
+    }
+}
+
+class Truck {
+    public final int weight;
+    public int startStage;
+    public int endStage;
+    public Truck(int weight) {
+        super();
+        this.weight = weight;
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/12 17:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">compert</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4958"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">#include &lt;cstdlib&gt;
+#include &lt;iostream&gt;
+
+using namespace std;
+
+int count_zero(int *a,int m){
+     int i;
+     for(i=0;i&lt;m;i++){
+                      if(a[i]!=0)return 1;
+                      }
+      return 0;               
+}
+
+int count_sum(int *b,int m){
+      int i;
+      int sum=0;
+      for(i=0;i&lt;m;i++){
+                       sum=sum+b[i];
+                       }
+      return sum;                      
+}
+
+
+int  clean1(int *a,int m,int n){
+
+     int i;
+
+     for(i=0;i&lt;m;i++){
+                      if(a[i]==n){
+                                  a[i]=0;
+                                  return 0;
+                                  }
+                      }
+     return 1;
+     }
+
+
+int main(int argc, char *argv[])
+{
+    FILE* stream1;
+
+    int m,w,n;//m 차량수 ,w 다리길이, n 하중한계 
+
+    int i,j;
+
+    //int a[100]={0,};
+    int *a;
+    int *b;
+    int z=0;
+    //int b[100]={0,};
+    int sum=0;
+
+    stream1=fopen(&quot;1.txt&quot;,&quot;r&quot;);
+
+    fscanf(stream1,&quot;%d %d %d&quot;,&amp;m,&amp;w,&amp;n);
+
+    a=new int[m];
+    b=new int[w];
+    memset(a, 0, m * sizeof(int));
+    memset(b, 0, w * sizeof(int));  
+
+    for(i=0;i&lt;m;i++){
+                     fscanf(stream1,&quot;%d&quot;,&amp;a[i]);
+                     } 
+
+    //memset(a, 0, m * sizeof(int));
+    //memset(b, 0, w * sizeof(int));          
+    while(count_zero(a,m)){
+
+
+                           for(i=w-1;i&gt;=0;i--){
+                                             if(b[i]!=0&amp;&amp;i==w-1){
+
+                                                               // b[i+1]=b[i];
+                                                                clean1(a,m,b[i]);
+                                                                b[i]=0;
+
+                                                                }
+
+
+
+                                             if(b[i]==0&amp;&amp;i!=0){
+                                                                  b[i]=b[i-1];
+                                                                  b[i-1]=0;  
+                                                                  }
+                                            /*
+                                            if(b[i]!=0&amp;&amp;i!=w-1){                                                               
+                                                                //clean1(a,m,b[i]);
+                                                                b[i+1]=b[i];
+                                                                b[i]=0;
+                                                                i--;
+                                                                }
+                                            */
+                                            }
+
+
+
+                           if(b[0]==0&amp;&amp;count_sum(b,w)+a[z]&lt;=n){
+
+                                                             b[0]=a[z];
+                                                             //printf(&quot;%d\n&quot;,b[0]);
+                                                             z++;
+                                                             }                
+                          /* 
+                          for(i=0;i&lt;w;i++){
+                                           printf(&quot;%d &quot;,b[i]);
+                                           }
+                          printf(&quot;\n&quot;);
+                          /*
+                          for(i=0;i&lt;m;i++){
+                                           printf(&quot;%d &quot;,a[i]);
+                                           }
+                          printf(&quot;\n&quot;);                          
+                           */ 
+                           sum++;
+                           }
+
+    delete []a;
+    delete []b;
+    printf(&quot;%d\n&quot;,sum);
+    system(&quot;PAUSE&quot;);
+    return EXIT_SUCCESS;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/13 15:37</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Lee Gorden</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4962"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <h1 id="java">JAVA</h1>
+<p>Truck, Bridge 클래스를 만들었습니다. Truck 자신의 위치를 알고 있습니다. 
+Bridge 클래스는 현재 건너고 있는 트럭들을 리스트로 갖습니다. 
+리스트에 있는 트럭을 한 번에 시행에서 모두 왼쪽으로 이동합니다. 저는 W값에서 0으로 이동하면 다 이동했다고 판단하여 그 트럭을 리스트에서 제거 시킵니다.
+트럭을 추가할 때는 현재 새로 들어올 트럭이 totalWeight에 포함이 되어도
+최대 하중을 버틸 수 있는지 체크를 합니다. 버틸 수 있다면 리스트에 추가를 합니다. 
+main 함수에는 모든 트럭이 추가됐는지 또는 모든 트럭이 다리를 지나갔는지 두 가지를 판단하여 while 문을 돌립니다.</p>
+<h3 id="truck">Truck 트럭 클래스</h3>
+<pre><code class="java">public static class Truck {
+        private int weight;
+        private int position;
+
+        public Truck(int position, int weight) {
+            this.position = position;
+            this.weight = weight;
+        }
+
+        public void decraese() {
+            this.position--;
+        }
+
+        public int getPosition() {
+            return this.position;
+        }
+        public int getWeight() {
+            return weight;
+        }
+    }
+</code></pre>
+
+<h4 id="bridge">Bridge 클래스</h4>
+<pre><code class="java">public static class Bridge {
+        private int W;
+        private int L;
+        private ArrayList&lt;Truck&gt; trucks;
+        int totalWeight = 0;
+        public Bridge(int w, int l) {
+            W = w;
+            L = l;
+            trucks = new ArrayList&lt;&gt;();
+        }
+
+        public void moveLeft() {
+            Truck removed = null;
+            if (trucks == null) {
+                return;
+            }
+            if (trucks.size() &lt; 1) {
+                return;
+            }
+            for (Truck truck : trucks) {
+                truck.decraese();
+                if(truck.getPosition() &lt; 1) {
+                    totalWeight -= truck.getWeight();
+                    removed = truck;
+                }
+            }
+            if (removed != null) {
+                trucks.remove(removed); 
+            }
+        }
+        public int trucksSize() {
+            return trucks.size();
+        }
+        public void enterTruck(Truck truck) {
+            totalWeight += truck.getWeight();
+            trucks.add(truck);
+        }
+        public boolean ableEnterTruck(int weight) {
+            if (totalWeight + weight &lt;= L &amp;&amp; trucks.size() &lt; W) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+</code></pre>
+
+<h3 id="main">Main 클래스</h3>
+<pre><code class="java">
+public class TruckACM2016 {
+
+    static final int SIZE = 1000;
+    static int n, w, l;
+
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        int[] A = getInput(args);
+
+        int i=0;
+        int count =0;
+        Bridge bridge = new Bridge(w, l);
+        Truck truck;
+        while(i&lt;n || bridge.trucksSize() &gt; 0) {
+            bridge.moveLeft();
+            if (i&lt;n &amp;&amp; bridge.ableEnterTruck(A[i])) {
+                truck = new Truck(w, A[i]);
+                bridge.enterTruck(truck);
+                i++;
+            }
+            count++;
+        }
+        System.out.println(&quot;count : &quot;+count);
+
+    }
+
+    public static int[] getInput(String[] args) {
+        int i = 0;
+        int[] input = new int[SIZE];
+        n = Integer.valueOf(args[i++]);
+        w = Integer.valueOf(args[i++]);
+        l = Integer.valueOf(args[i++]);
+        for (; i&lt;n+3; i++) {
+            input[i-3] = Integer.valueOf(args[i]);
+        }
+        return input;
+    }
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/14 20:39</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Moon TaeMin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4973"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>루비와 대조되는 하드코딩 버젼</p>
+<h3 id="javascript">JavaScript</h3>
+<pre><code class="javascript">class Truck {
+    constructor(weight, location) {
+        this.weight = (weight || 1);
+        this.location = (location || 0);
+    }
+    Move(dist) {
+        this.location += dist;
+    }
+}
+class myArray extends Array {
+    constructor() {
+        super();
+    }
+    RemoveByIndex(index) {
+        if (index &gt;= 0 &amp;&amp; index &lt; this.length)
+            return this.splice(index, 1);
+    }
+}
+class Bridge {
+    constructor(length, maxWeight) {
+        this.length = length;
+        this.maxWeight = maxWeight;
+        this.arr = new myArray();
+    }
+    CalcAllWeight() {
+        var sum = 0;
+        for (var obj of this.arr)
+            sum += obj.weight;
+        return sum;
+    }
+    CheckEntry(nextObj) {
+        if (nextObj.weight &gt; this.maxWeight)
+            return &quot;overweight&quot;;
+        if (this.CalcAllWeight() + nextObj.weight &gt; this.maxWeight)
+            return false;
+        return true;
+    }
+    In(obj) {
+        this.arr.push(obj);
+    }
+    Out() {
+        return this.arr.RemoveByIndex(0);
+    }
+}
+class EntrySimulator {
+    constructor() {
+        this.bridge = new Bridge();
+        this.trucks = new myArray();
+    }
+    SetOptions(w, L) { //w는 길이, L은 최대하중
+        this.bridge = new Bridge(w, L);
+    }
+    SetTrucks(arr) {
+        for (var i = 0; i &lt; arr.length; i++) {
+            this.trucks.push(new Truck(parseInt(arr[i]), i));
+        }
+    }
+    Calculate() {
+        var timediff = 0,
+            passed = 0,
+            entered = 0,
+            error = undefined;
+        while(!error &amp;&amp; passed &lt; this.trucks.length) { //이 while문을 한번 돌 때마다 한 턴(unit time)이 지나감.
+            timediff++;
+            for (var i = passed; i &lt; entered; i++) { //다리 위에 올라와있는 트럭들이 먼저 이동함.
+                this.trucks[i].Move(-1);
+            }
+            if (this.trucks[passed].location &lt; -this.bridge.length) {
+                this.bridge.Out(); //다리 위의 제일 앞 트럭이 통과했다면 관련 처리를 함.
+                passed++;
+            }
+            if (entered &gt;= this.trucks.length) //다리에 진입하지 못한 트럭이 더 없다면 뒷부분은 거칠 필요 없음.
+                continue;
+            switch (this.bridge.CheckEntry(this.trucks[entered])) { //다리 앞에 있는 트럭이 다리로 올라올 수 있는지 검사.
+                case true :
+                    this.bridge.In(this.trucks[entered]);
+                    for (var i = entered; i &lt; this.trucks.length; i++) { //다리 앞의 트럭이 올라왔으므로 그 트럭과 뒤의 모든 트럭들이 한칸씩 이동함.
+                        this.trucks[i].Move(-1);
+                    }
+                    entered++;
+                    break;
+                case &quot;overweight&quot; : //입력 단계에서 걸러지지만 언젠가 있을 오류를 대비하여 작성.
+                    error = true;
+                    alert(&quot;초과중량 차량이 있습니다. 현재 초과중량 차량에 대한 대응 메뉴얼이 없습니다.&quot;);
+                    break;
+            }
+        }
+        return timediff;
+    }
+}
+function FilteringResult(plain, num) { //num을 입력하지 않으면 갯수제한 없이 전부 반환함.
+    var arr = plain.split(' ', num); //띄워쓰기를 기준으로 문자열을 나눔. num보다 갯수가 많으면 그 뒤는 버려짐.
+    if (arr.length == 1)
+        arr = arr.split(',', num); //띄워쓰기가 아니라면 쉼표를 기준으로 나눔.
+    console.log(arr);
+    for (var i = 0; i &lt; arr.length; i++) {
+        arr[i] = arr[i].replace(/[^0-9]/g,''); //각 문자열에서 숫자를 제외하고 모두 제거.
+    }
+    console.log(arr);
+    return arr;
+}
+function Simulate() {
+    var simulator = new EntrySimulator();
+    var truck_num = 1, bridge_length, bridge_limit;
+    const MIN_NUM = 1, MAX_NUM = 1000,
+          MIN_LEN = 1, MAX_LEN = 100,
+          MIN_WTL = 10, MAX_WTL = 1000;
+    while (true) {
+        var result = FilteringResult(prompt(&quot;Set number of trucks(1 ~ 1000), bridge length(1 ~ 100), bridge max weight(10 ~ 1000). use space or comma as separator.&quot;, &quot;4 2 10&quot;), 3);
+        truck_num = result[0];
+        bridge_length = result[1];
+        bridge_limit = result[2];
+        if (truck_num &lt; MIN_NUM) {
+            alert(&quot;트럭이 최소 한 대는 있어야 합니다&quot;); //제한에 걸리지 않을 때까지 계속 입력을 반복함.
+            continue;
+        }
+        if (truck_num &gt; MAX_NUM) {
+            alert(&quot;트럭의 갯수가 너무 많습니다&quot;);
+            continue;
+        }
+        if (bridge_length &lt; MIN_LEN) {
+            alert(&quot;다리의 길이가 너무 짧습니다.&quot;);
+            continue;
+        }
+        if (bridge_length &gt; MAX_LEN) {
+            alert(&quot;다리의 길이가 너무 깁니다.&quot;);
+            continue;
+        }
+        if (bridge_limit &lt; MIN_WTL) {
+            alert(&quot;최대 하중이 너무 작습니다.&quot;);
+            continue;
+        }
+        if (bridge_limit &gt; MAX_WTL) {
+            alert(&quot;최대 하중이 너무 큽니다.&quot;);
+            continue;
+        }
+        break; //어떤 제한에도 걸리지 않으면 통과.
+    }
+    simulator.SetOptions(bridge_length, bridge_limit);
+    var trucks;
+    const MIN_TW = 1, MAX_TW = 10;
+    while(true) {
+        var result = FilteringResult(prompt(&quot;Input weight of each trucks(1 ~ 10)&quot;, &quot;7 4 5 6&quot;), truck_num);
+        var error = false;
+        for (var i = 0; i &lt; result.length; i++) {
+            result[i] = parseInt(result[i]);
+            if (result[i] &lt; MIN_TW) {
+                alert(&quot;트럭의 무게가 너무 작습니다.&quot;);
+                error = true;
+                break;
+            }
+            if (result[i] &gt; MAX_TW) {
+                alert(&quot;트럭의 무게가 너무 큽니다.&quot;);
+                error = true;
+                break;
+            }
+        }
+        if (!error)
+            break;
+    }
+    simulator.SetTrucks(result);
+    alert(&quot;Result : &quot; + simulator.Calculate() + &quot; unit time&quot;);
+}
+window.addEventListener('load', Simulate);
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/17 07:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이촉즉발 .</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5036"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">while __name__ == '__main__':
+    #입력
+    for s in ['n, w, L', 't']:
+        exec(s + ''' = [*map(int, input('&gt;&gt;&gt;').split())]''')
+    #다리를 w개의 칸을 가진 리스트로 만듦.
+    bridge = [0] * w; end = bridge[:]
+    #i를 1부터 세기 시작
+    for i in __import__('itertools').count(1):
+        #남은 트럭이 있고 다리가 곧 나가는 트럭을 제외한 트럭을 버틸 수 있으면
+        if t != [] and sum(bridge[1:]) + t[0] &lt;= L:
+            #남은 트럭을 빼서 다리에 트럭 추가
+            bridge += [t.pop(0)]
+        else:
+            #아니면 빈칸 추가
+            bridge += [0]
+        #한칸 전진
+        bridge = bridge[1:]
+        #다리가 비어있고 남은 트럭이 없으면
+        if bridge == end and t == []:
+            #시간을 출력하고 종료
+            print(i)
+            break
+</code></pre>
+
+<p>짧은 버전</p>
+<pre><code class="python">while __name__ == '__main__':
+    for s in ['n, w, L', 't']:
+        exec(s + ''' = [*map(int, input('&gt;&gt;&gt;').split())]''')
+    bridge = [0] * w; end = bridge[:]
+    i = 1
+    while True:
+        bridge = bridge[1:] + ([t.pop(0)] if t != [] and sum(bridge[1:]) + t[0] &lt;= L else [0])
+        if bridge == end and t == []:
+            print(i)
+            break
+        i += 1
+</code></pre>
+
+<p>파이썬 3.5.2 64</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/21 23:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Flair Sizz</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5070"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">
+#n number of truck
+#w bridge length
+#l weight
+def Cross_the_bridge(n,w,l):
+    count,t=0,0
+    d_list=[0 for i in range(0,w)]
+    c=raw_input().split()
+    c_list=[int(i) for i in c] 
+    while(len(c_list)!=0):
+        count=0
+        if(sum(d_list)==0):
+            for j in range(0,n+1):
+                if(j&lt;=w):
+                    if(sum(c_list[0:j])&gt;l):
+                        break
+            for k in range(0,w):
+                if(len(c_list)==0):
+                    break
+                c_n=c_list.pop(0)
+                d_list[count]=c_n
+                count+=1
+                t+=1
+
+        for i in range(0,w):
+            d_list[i]=0
+            t+=1
+        ##print d_list
+        ##print len(c_list)
+    print t
+
+Cross_the_bridge(4,2,10)
+Cross_the_bridge(1,100,100)               
+Cross_the_bridge(10,100,100)   
+</code></pre>
+
+<p><strong>for문을 이용해서 다리위에 있는 트럭의 무게합이 0일 경우 다리 길이 만큼 무게합이 다리 무게보다 작거나 같을때까지 다리위에 올려 이동시키고 이동할때 마다 시간을 1씩 증가 시키면서 풀었습니다.</strong> </p>
+<ul>
+<li>입력:<code>4 2 10</code> 결과:<code>8</code></li>
+<li>입력:<code>1 100 100</code> 결과:<code>101</code></li>
+<li>입력:<code>10 100 100</code> 답"<code>110</code></li>
+</ul>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/26 17:33</p>
+                                <p class="static-profile" style="margin:0;padding:0;">leye195</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5106"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def solution(n,w,L,a):
+    count = 0
+    b = a + [0]
+    for i, weight in enumerate(b):
+        if b[i] &lt; L and b[i] != 0:
+            count += 1
+            if b[i+1] &lt; L - b[i]:
+                pass
+            else:
+                count += w-1
+        else:
+            break
+    count = count + w
+    return count
+</code></pre>
+
+<p>Python 3.5.2</p>
+<p>입력을 두줄로 하라는 부분은 생략했습니다.
+일단 주어진 샘플 입력값들을 넣어보면 다 맞게 나옵니다.
+잘못된 부분이 있으면 지적 부탁드립니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/30 19:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Kim J.S.</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5111"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>CPP code 
+queue를 이용한 구현문제 </p>
+<pre><code class="cpp">#include &lt;iostream&gt; 
+#include &lt;cstdlib&gt; 
+#include &lt;queue&gt; 
+using namespace std;  
+
+int main(){
+    ios_base::sync_with_stdio(false); 
+    cin.tie(NULL); 
+    int N,W,L; 
+    cin &gt;&gt; N &gt;&gt; W &gt;&gt; L;  
+    int sum = 0,cnt = 0,ret = 0,truck;  
+    queue&lt;int&gt; que; 
+    for (int i = 0; i &lt; N; i++){
+        cin &gt;&gt; truck; 
+        while (true){
+            ++ret; 
+            if (cnt == W){
+                --cnt;  
+                sum -= que.front(); 
+                que.pop();  
+            }
+            if (sum+truck &gt; L){
+                ++cnt; 
+                que.push(0);  
+            }else{
+                ++cnt; 
+                sum += truck;  
+                que.push(truck);  
+                break; 
+            }
+        }
+    }
+    cout &lt;&lt; ret+W &lt;&lt; endl; 
+    return 0; 
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/31 12:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">iljimae</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5236"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">#include &lt;stdio.h&gt;
+
+typedef struct TRUCK
+{
+    int nWeight;  //트럭의 무게
+    int nTime;    //다리 통과 까지 남은 시간
+    bool bPass;   //통과 했나
+    bool bStart;  //시작 했나
+}TRUCK;
+
+int main(int argc, char argv[])
+{
+    TRUCK sTruck[1000];      //n
+    int nNumberOfTruck = 0;
+    int nBridgeLength = 0;   //w
+    int nMaxWeight = 0;      //L
+    int i = 0;
+    //input
+    scanf(&quot;%d %d %d&quot;, &amp;nNumberOfTruck, &amp;nBridgeLength, &amp;nMaxWeight);
+    for(i = 0; i &lt; nNumberOfTruck; i++)
+    {
+        scanf(&quot;%d&quot;, &amp;sTruck[i].nWeight);
+        sTruck[i].nTime = nBridgeLength;
+        sTruck[i].bPass = false;
+        sTruck[i].bStart = false;
+    }
+
+    //input data check
+    printf(&quot;Number of Truck(n): %d\n&quot;, nNumberOfTruck);
+    printf(&quot;Bridge Length(w): %d\n&quot;, nBridgeLength);
+    printf(&quot;Bridge Maximum Weight(L): %d\n&quot;, nMaxWeight);
+    printf(&quot;Truck Weight(a_n)\n&quot;);
+    for(int i = 0; i &lt; nNumberOfTruck; i++)
+        printf(&quot;%d &quot;, sTruck[i]);
+    printf(&quot;\n\n&quot;);
+
+    //check done
+
+    //start
+    int nNowBridgeTruckWeight = 0; //다리 위에 올라와 있는 트럭의 무게
+    int nTruckPos = 0; // 트럭 위치
+    int nTime = 0;
+    while(1)
+    {
+        //모든 트럭이 다 건넜나? 마지막 트럭만 체크를 해 준다.
+        if(sTruck[nNumberOfTruck-1].bPass == true)
+            break;
+
+        //단위 시간 증가
+        nTime++;
+        //printf(&quot;now Time: %d\n&quot;, nTime);
+
+        //다리에 올라와 있는 트럭들 이동
+        for(i = 0; i &lt; nNumberOfTruck; i++)
+        {
+            //트럭이 출발했고 &amp;&amp; 아직 다리를 건너지 못했다면
+            if(sTruck[i].bStart == true &amp;&amp; sTruck[i].bPass == false)
+            {
+                //트럭이 다리를 건너기 까지 남은 시간의 감소
+                sTruck[i].nTime--;
+                //printf(&quot;%d트럭 남은 시간: %d\n&quot;,i,  sTruck[i].nTime);
+            }
+        }
+
+        //다리를 건넌 트럭이 있는지 확인한다.
+        for(i = 0; i &lt; nTruckPos; i++)
+        {
+            if(sTruck[i].nTime &lt;= 0 &amp;&amp; sTruck[i].bPass == false)
+            {
+                //다리 건넌 표시를 해준다.
+                sTruck[i].bPass = true;
+
+                //다리를 다 건넜으니 다리에 가해지고 있던 하중을 빼 준다.
+                nNowBridgeTruckWeight -= sTruck[i].nWeight;
+
+                //printf(&quot;다 건넌 트럭: %d\n&quot;, i);
+            }
+        }
+
+
+        //최대 다리 하중보다 현재 트럭의 무게가 낮으면(이하이면) 트럭이 올라간다
+        //하나의 단위시간에 하나의 트럭밖에 올라가지 못한다.
+        //printf(&quot;[%d]부하 하중:%d 올라가고자 하는 트럭의 무게:%d \n&quot;, nTime, nNowBridgeTruckWeight, sTruck[nTruckPos].nWeight);
+        if(sTruck[nTruckPos].bStart == false)
+        {
+            if((nNowBridgeTruckWeight + sTruck[nTruckPos].nWeight) &lt;= nMaxWeight)
+            {
+                nNowBridgeTruckWeight += sTruck[nTruckPos].nWeight;
+                sTruck[nTruckPos].bStart = true;
+                //printf(&quot;%d시간 %d번 트럭 올라감. 무게 %d\n&quot;, nTime, nTruckPos, sTruck[nTruckPos].nWeight);
+                nTruckPos++;
+            }
+        }
+    }
+
+    printf(&quot;elapsed Time: %d\n&quot;, nTime);
+
+    return 0;
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/11/10 11:15</p>
+                                <p class="static-profile" style="margin:0;padding:0;">황 승태</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5392"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>트럭마다 다리에 들어오는 시간과 나가는 시간을 계산합니다.<br>
+한 트럭이 다리에 들어오는 시간은<br>
+(자기포함 앞쪽의 트럭의 무게를 합산해나가다가 하중을 넘치는 트럭의 나가는 시간) 과<br>
+(내 직전 트럭의 다리에 들어오는 시간 + 1 ) 중<br>
+큰 값이 됩니다.<br>
+트럭이 다리에서 나가는 시간은 (들어오는 시간 + 다리의 길이) 입니다.<br>
+입력받으면서 순차 계산하고 맨 마지막 트럭의 나가는 시간이 답이 됩니다.<br><br></p>
+<p>최악의 경우 O(NlogN) 으로 풀리며, 최선의 케이스는 O(N) 으로 해결됩니다.<br><br></p>
+<p>ex) 입력이 다음과 같을 경우<br>
+4 2 10<br>
+7 4 5 6<br>
+List배열은 아래와 같이 채워집니다.<br>
+7 1 3<br>
+4 3 5  (무게가 넘치는 트럭의 나가는 시간 3, 직전 트럭의 들어가는 시간+1 은 2) -&gt; 3 <br>
+5 4 6  (무게가 넘치는 트럭의 나가는 시간 3, 직전 트럭의 들어가는 시간+1 은 4) -&gt; 4 <br>
+6 6 8  (무게가 넘치는 트럭의 나가는 시간 6, 직전 트럭의 들어가는 시간+1 은 5) -&gt; 6 <br></p>
+<pre><code class="java">import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+class A39TruckBridge {
+
+    static StringTokenizer st;
+    static int N;   //트럭갯수
+    static int L;   //다리길이
+    static int W;   //최대하중
+    static int [][] List;
+    static int sumWeight;
+    static int lastTime;
+
+    public static void main(String args[]) throws Exception {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        st = new StringTokenizer (br.readLine());
+        N = Integer.parseInt(st.nextToken());
+        L = Integer.parseInt(st.nextToken());
+        W = Integer.parseInt(st.nextToken());
+
+        List = new int [N][3];  // 0컬럼은 트럭무게, 1컬럼은 다리에 들어서는 시간, 2컬럼은 다리를 빠져나가는 시간
+
+                // 첫번째 트럭의 값을 입력
+        st = new StringTokenizer (br.readLine());
+        List[0][0] = Integer.parseInt(st.nextToken());
+        List[0][1] = 1;
+        List[0][2] = List[0][1] + L;
+
+        for (int i=1; i&lt;N; i++) {
+            List[i][0] = Integer.parseInt(st.nextToken());
+
+            sumWeight = List[i][0];
+
+            for (int x = i-1; x &gt;= 0; x--) {
+                sumWeight += List[x][0];
+                lastTime = List[x][2];
+                if (sumWeight &gt; W) break;
+            }
+            List[i][1] = Math.max(List[i-1][1]+1, lastTime);
+            List[i][2] = List[i][1] + L;
+        }
+        System.out.println(List[N-1][2]);
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/11/24 12:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">wowpapa</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5516"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n, w, L = map(int, input(&quot;:&quot;).strip().split(' '))
+an = list(map(int, input(&quot;:&quot;).strip().split(' ')[:n]))
+q = [0] * w
+t = 0
+for i in an:
+    while True:
+        t+=1
+        q.pop(0)
+        if i &gt; L:
+            raise Exception('ai &lt;= L')
+        elif sum(q)+i &gt; L:
+            q.append(0)
+        else:
+            q.append(i)
+            break
+while sum(q) != 0:
+    t+=1
+    q.pop(0)
+print(t)
+
+</code></pre>
+
+<p>Python 3.5.2에서 작성하였습니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/12/06 10:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Yeo HyungGoo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5833"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">a=input().split(&quot; &quot;)
+b=input().split(&quot; &quot;)
+if int(a[0])==len(b):
+    w=list()
+    r=0
+    t=0
+    for i in range(int(a[1])):
+        w.append(0)
+    while 1:
+        if b.count(0)==len(b) and sum(w)==0:
+            break
+        if r&lt;int(a[1]):
+            w.pop(0)
+            if sum(w)+int(b[0])&lt;=int(a[2]):
+                w.append(int(b[0]))
+                b.pop(0)
+                b.append(0)
+                t=t+1
+                r=r+1
+            else:
+                w.append(0)
+                t=t+1
+                r=r+1
+        else:
+            r=0
+
+    print(t)
+else:
+    print(&quot;잘못된 입력입니다.&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/01/04 21:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Dr.Choi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5890"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <h1 id="c">C로작성</h1>
+<p>부족한 부분이나 개선점은 지적 부탁드려용</p>
+<pre><code class="c">#include &lt;stdio.h&gt;
+
+int main(){
+
+    int truck_n = 0, Bridge_w = 0, Weight_L = 0;
+    int a[100] = {0,};
+    int i = 0, j =0, temp = 0;
+    int ans = 0;
+    int status = 0;
+
+    int *Bridge_Array;
+
+    FILE *fp;
+    fp = fopen(&quot;input_1.txt&quot;,&quot;rt&quot;);
+    if(fp == NULL){
+        printf(&quot;파일 읽기 실패\r\n&quot;);
+        system(&quot;pause&quot;);
+        return 1;
+    }
+
+    //트럭수, 다리길이, 다리 최대하중
+    fscanf(fp, &quot;%d %d %d&quot;, &amp;truck_n, &amp;Bridge_w, &amp;Weight_L);
+
+    //트럭 무게 읽기
+    for(i = 0; i &lt; truck_n; i++){
+        fscanf(fp, &quot;%d&quot;, &amp;a[i]);
+    }
+
+    //다리 길이에 맞는 배열 만들기
+    Bridge_Array = (int*)malloc(sizeof(int)*Bridge_w);
+    for(j = 0; j &lt; Bridge_w; j++){
+        Bridge_Array[j] = 0;
+    }
+
+    //For debug
+    printf(&quot;트럭갯수 : %d, 다리 길이 : %d, 최대 하중 : %d \r\n&quot;, truck_n, Bridge_w, Weight_L);
+
+    printf(&quot;각 트럭 무게 : &quot;); 
+    for(i = 0; i&lt;truck_n; i++){
+        printf(&quot;%d &quot;, a[i]);
+    }
+    printf(&quot;\r\n&quot;); 
+    //////
+
+
+    i = 0;
+    j = 0;
+    status = Bridge_w;
+
+    while(1){
+
+        int sum_Weight = 0;
+        int k = 0;
+
+
+        if(i == truck_n){   //마지막 트럭이 출발함
+            status --;
+        }else{                      //아직 가야할 트럭 남음
+
+            //다리 마지막 위치를 제외한 위치의 무게 SUM
+            for(k=0; k&lt;(Bridge_w-1); k++){
+                sum_Weight += Bridge_Array[k];
+            }
+            //+새로운 트럭 무게 
+            sum_Weight += a[i];
+        }
+
+        //트럭 이동
+        for(k=Bridge_w - 1; k != 0; k--){
+            Bridge_Array[k] = Bridge_Array[k-1];
+        }
+
+        //최대 하중을 넘지 않고, 가야할 트럭이 남아있으면,
+        if((sum_Weight &lt;= Weight_L) &amp;&amp; (i &lt; truck_n)){
+
+                //새 트럭 출발
+                Bridge_Array[0] = a[i];
+                i++;
+
+        }else{
+
+            //무게 0 대입
+            Bridge_Array[0] = 0;
+        }
+
+        //For debug Start
+        /*
+        for(j = 0; j&lt;Bridge_w; j++){
+            printf(&quot;%d &quot;, Bridge_Array[j] ); 
+        }
+        printf(&quot;\r\n&quot;); 
+        */
+        //For debug End
+
+        ans++;
+
+        if(status == 0){
+            break;
+        }
+    }
+
+    printf(&quot;ans : %d \r\n&quot;, ans); 
+    fclose(fp);
+
+    system(&quot;pause&quot;);
+
+    return 0;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/01/10 18:41</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jeon Jihyeon</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6011"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def bridgetruck(*args):
+    x=[list(map(lambda x: int(x), arg.split(&quot; &quot;))) for arg in args]
+    a=x[1]; n=x[0][0]; w=x[0][1]; l=x[0][2]; bridge=[0]*w; time=0
+    while sum(a)&gt;0:
+        if a[0]&gt;w: return &quot;이 화물로는 도저히 다리를 건널 수 없겠는걸?&quot;
+        time+=1; bridge.pop(0)
+        if sum(bridge)+a[0] &lt; l:
+            bridge.append(a.pop(0))
+        else: bridge.append(0)
+    return time+w
+
+ss=input(&quot;다리 정보:&quot; )
+sa=input(&quot;화물트럭 정보: &quot;)
+print(bridgetruck(ss, sa))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/01/24 21:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Song Seoha</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6015"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def count_up(val):
+    return val+1
+
+data = list(map(int,input().split(' ')))
+bus = list(map(int,input().split(' ')))
+count, length, weight = 0,0,0
+bus2, gps = list(), list()
+
+while bus != [] or bus2 != []:
+    count += 1
+    if gps != []:
+        gps = list(map(count_up,gps))
+        if gps[0] == data[1]:
+            weight -= bus2.pop(0)
+            length -= 1
+            gps.pop(0)
+    if bus != [] and weight+bus[0] &lt;= data[2] and length &lt; data[1]:
+        weight += bus[0]
+        length += 1
+        gps.append(0)
+        bus2.append(bus.pop(0))
+print(count)
+
+#### 2017.01.24 D-394 ####
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/01/24 23:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GunBang</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6439"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>move 라는 method를 구현해서, bridge list 와 트럭 list가 한 칸씩 움직일 때마다 사용하는 방법으로 풀어봤습니다. 
+초보라서 input 받는 부분이 복잡하네요ㅠ</p>
+<pre><code class="python">#x = input(&quot;input n, w, L and a_n with new line.&quot;)
+#x = '4 2 10\n7 4 5 6'
+#x = '1 100 100\n10'
+x ='10 100 100\n10 10 10 10 10 10 10 10 10 10'
+
+def move(list):
+    for i in range(len(list)- 1):
+            list[i] = list[i+1]
+    list[-1] = 0
+
+t = 1
+x = x.split('\n')
+n, w, L = x[0].split(' ')
+a = x[1].split(' ')
+a = [int(i) for i in a]
+bridge = [0] * int(w)
+bridge[-1] = a[0]
+move(a)
+
+while 1:
+    t += 1
+    bridge[0] = 0
+
+    if sum(bridge) + sum(a) == 0:
+        break
+
+    elif sum(bridge) + a[0] &lt;= int(L):
+        move(bridge)
+        bridge[-1] = a[0]
+        move(a)
+
+    else:
+        move(bridge)
+
+print(t)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/03/03 15:38</p>
+                                <p class="static-profile" style="margin:0;padding:0;">최해준</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6698"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import static java.lang.System.in;
+
+public class Truck {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(in);
+        int n = sc.nextInt();
+        int w = sc.nextInt();
+        int l = sc.nextInt();
+        for (int i = 0; i &lt; n; i++) {
+            ((List&lt;Integer&gt;) new ArrayList(n)).add(sc.nextInt());
+        }
+
+        ((List&lt;Integer&gt;) new ArrayList(n)).stream().reduce((a, b) -&gt; {
+            if (a + b &gt; l) ((List&lt;Integer&gt;) new ArrayList(n)).add(w - 1);
+            return b;
+        });
+
+        System.out.println(n + w + ((List&lt;Integer&gt;) new ArrayList(n)).stream().mapToInt(Integer::intValue).sum());
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/03/29 01:45</p>
+                                <p class="static-profile" style="margin:0;padding:0;">genius.choi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6939"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>경우의 수를 다 뒤져봐야하는 NP-완전문제 -&gt; greedy로 푸는게 나을듯
+가장 빠른 시간내에 통과한다는 조건
+  -&gt; 모든 차가 지나가는 배열에 공백이 없이 최대한 채움
+  -&gt; 윈도우 내에 최대한 무게를 꽉꽉 채움</p>
+<pre><code class="python">def calc_fast_time(w, l, cars_l):
+    passing_arr = []
+    cars_l_sorted = list(reversed(sorted(cars_l)))
+    t = 0
+    while cars_l_sorted:
+        window = passing_arr[-w+1:] # 1대씩 추가할 거니까 배열의 마지막 w-1개까지만 가져옴
+
+        # 윈도우 내의 남은 무게
+        win_l = sum(window)
+        rest_l = l - win_l
+
+        # 해당 위치에 들어갈 차를 선택
+        for car in cars_l_sorted:
+            if car &lt;= rest_l:
+                passing_arr.append(car)
+                cars_l_sorted.remove(car)
+                t += 1
+                break
+        # 채울 수 있는 무게가 모자르면 공백을 채움
+        if cars_l_sorted and (rest_l == 0 or rest_l &lt; min(cars_l_sorted)):
+            passing_arr.append(0)
+            t += 1
+    print('elapsed:', t+w) #마지막 차까지 사라지려면 다리가 마지막차가 w만큼 시간이 더 든다
+
+# w l arr
+calc_fast_time(2, 10, [7, 4, 5, 6])
+
+# w l arr
+calc_fast_time(100, 100, [10])
+
+# w l arr
+calc_fast_time(100, 100, [10 for x in range(10)])
+</code></pre>
+
+<p>결과</p>
+<pre><code class="no-highlight">elapsed: 8
+elapsed: 101
+elapsed: 110
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/04/19 10:43</p>
+                                <p class="static-profile" style="margin:0;padding:0;">soleaf</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8865"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">w, L = 2, 10
+trucks = [7, 4, 5, 6]
+bridge = [0] * w
+
+i = 0
+while sum(bridge + trucks) &gt; 0:
+    bridge.pop(0)
+    n = trucks.pop(0) if trucks and sum(bridge) + trucks[0] &lt;= L else 0
+    bridge += [n]
+    i += 1
+    print(i, bridge, trucks)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/09/22 15:14</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박범수</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9231"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">inp = &quot;4 2 10\n7 4 5 6&quot;
+
+inp = inp.split('\n')
+n, w, L = [int(i) for i in inp[0].split(' ')]
+wait = [int(i) for i in inp[1].split(' ')]
+bridge = [0]*w
+
+time = 0
+while sum(bridge + wait):
+    time += 1
+    bridge.pop(0)
+    if sum(bridge) + wait[0] &lt; L:
+        bridge += [wait.pop(0)]
+        wait += [0]
+    else:
+        bridge += [0]
+
+print(time)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/11/10 16:13</p>
+                                <p class="static-profile" style="margin:0;padding:0;">songci</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10243"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3.6</p>
+<pre><code class="python">def crosstime(data):
+    n,w,L = data[0][0],data[0][1],data[0][2]
+    a_list = data[1]
+    time,a_weight,t = 0,0,0
+# 건너지 않은 트럭이 있는 경우 반복 진행
+    while t &lt; int(n):
+        a_weight += int(a_list[t])
+# 맨 처음 트럭이 다리를 건너기 시작하면 시간 1 증가
+        if t == 0: time += 1
+# 두번째 트럭부터 다리 위에 있는 트럭의 무게와의 합이 다리의 하중을 초과하지 않는 경우 뒤이어 이동하며 시간 1씩 증가
+# 다리가 허용하는 하중까지 뒤 순번의 트럭 연속 이동하며 시간 증가
+        while t &lt; int(n)-1 and a_weight + int(a_list[t+1]) &lt;= int(L):
+            t += 1
+            a_weight += int(a_list[t])
+            time += 1
+# 다리가 허용하는 하중을 초과하는 경우 모든 트럭이 다리를 건널 때까지 대기
+# 모든 트럭이 다리를 빠져나오는데 걸리는 시간은 다리의 길이(w)와 같음
+        else:
+            time += int(w)
+            t += 1
+            a_weight = 0
+    print(' '.join(data[0]))
+    print(' '.join(data[1]))
+    print(time,&quot;\n&quot;)
+
+if __name__ == &quot;__main__&quot;:
+    data1 =[['4','2','10'],['7','4','5','6']]
+    data2 = [['1','100','100'],['10']]
+    data3 = [['10','100','100'],['10','10','10','10','10','10','10','10','10','10']]
+    for data in [data1,data2,data3]:
+        crosstime(data)
+</code></pre>
+
+<p>*결과값</p>
+<pre><code class="python">4 2 10
+7 4 5 6
+8 
+
+1 100 100
+10
+101 
+
+10 100 100
+10 10 10 10 10 10 10 10 10 10
+110 
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/01/20 18:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">justbegin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10441"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>도와주세요. 부탁드립니다.</p>
+<p>되는 것 같기는 한데 이상합니다.</p>
+<p>두가지 문제가 있습니다.</p>
+<ul>
+<li>
+<p>1번 샘플과 3번 샘플의 리턴 값이 none으로 뜹니다. 같은 대상 (time + l) 을 print 했을 때는 제대로 나옵니다. 그런데 또 2번 샘플은 리턴값이 나옵니다.</p>
+</li>
+<li>
+<p>여러 샘플을 시행했을 때 뒤에 시행한 함수에는 초깃값이 제대로 입력되지 않는 것 같습니다. 왜 그런지를 모르곘습니다.</p>
+</li>
+</ul>
+<pre><code class="python"># 파이썬
+
+# 트럭 수 n , 다리 길이 l , 최대 하중 w
+# list_pre = 대기중인 트럭
+# on_weight = 다리위에 올라간 트럭 각각의 무게
+# on_time = 다리위에 올라간 트럭 각각의 진입 시점
+
+# 다리 위 트럭 중 가장 앞의 것이 도착하면 꺼낸다.
+# 새로 올릴 수 있으면 올리고 무게와 시간을 기록한다.
+# 트럭이 남아있으면 반복한다.
+# 트럭이 없으면 리턴값을 구한다.
+
+
+is1 = [4, 2, 10, [7, 4, 5, 6]]
+is2 = [1, 100, 100, [10]]
+is3 = [10, 100, 100, [10, 10, 10, 10, 10, 10, 10, 10, 10, 10]]
+
+
+def cross_bridge(l, w, list_pre, on_weight=[0], on_time=[0], time=0):
+    time += 1
+    print(l, w, list_pre, on_weight, on_time, time)
+
+    if on_time[0] == time - l:
+        del on_weight[0]
+        del on_time[0]
+
+    if list_pre[0] &lt;= w - sum(on_weight) and len(on_weight) &lt; l:
+        on_weight.append(list_pre.pop(0))
+        on_time.append(time)
+
+    if list_pre:
+        cross_bridge(l, w, list_pre, on_weight, on_time, time)
+    else:
+        print(time + l)
+        return &quot;end&quot;
+
+
+print('q1')
+print(cross_bridge(is1[1], is1[2], is1[3]))
+
+print('q2')
+print(cross_bridge(is2[1], is2[2], is2[3]))
+
+print('q3')
+print(cross_bridge(is3[1], is3[2], is3[3]))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/01 16:39</p>
+                                <p class="static-profile" style="margin:0;padding:0;">olclocr</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10697"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def truck(n, w, l):
+    bridge = [0 for i in range(w)]
+    time = 0
+    m = n + [0 for i in range(w)]
+    while any(bridge) or m:
+        time += 1
+        bridge.pop(0)
+        if sum(bridge) + m[0] &lt;= l:
+            bridge.append(m.pop(0))
+        else:
+            bridge.append(0)
+    return time
+
+
+a = list(map(int, input().split(' ')))
+b = list(map(int, input().split(' ')))
+print(truck(b, a[1], a[2]))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/14 12:09</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김동하</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11598"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n,w,l = map(int,input(&quot;n,w,l: &quot;).split(' '))
+a = [[0]*w, list(map(int,input().split(' ')))]
+t = 0
+while a[0].count(0) + a[1].count(0) != w+n:
+    if sum(a[0][1:]) + a[1][0] &lt;= l:
+        a[0][0:-1] = a[0][1:]
+        a[0][-1] = a[1][0]
+        a[1][0:-1] = a[1][1:]
+        a[1][-1] = 0
+    else:
+        a[0][0:-1] = a[0][1:]
+        a[0][-1] = 0
+    t += 1
+print(t)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/04/09 01:43</p>
+                                <p class="static-profile" style="margin:0;padding:0;">정익수</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12985"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python</p>
+<pre><code class="python">n, w, L = list(map(int, input().split(' ')))
+a = list(map(int, input().split(' ')))
+bridge = [0]*w
+time = 0
+while a or sum(bridge) &gt; 0:
+    x = a[0] if a else 0
+    if sum(bridge[1:]) + x &lt;= L:#다리에 올라탐
+        bridge = bridge[1:] + [x]
+        a = a[1:]
+    else:#못올라탐
+        bridge = bridge[1:] + [0]
+    time += 1
+    print(bridge, a)
+print(time)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/14 17:27</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Taesoo Kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13732"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n,w,l = map(int,input().split())
+while 1:
+    a = list(map(int,input().split()))
+    if len(a) == n: break
+
+cnt,q = 0,[]
+while a or set(q) != {0}:
+    cnt += 1
+    if len(q) == w: q.pop(0)
+    if a and sum(q) + a[0] &lt;= l: q.append(a.pop(0))
+    else: q.append(0)
+
+print(cnt)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/24 18:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14119"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def Truck(n,w,L):
+     lis = [0,list(map(lambda x : int(x), ('0 '*(n+w)).split())),n+w]
+     inp = lis[1]+list(map(lambda x : int(x), input('Truck : ').split()))
+     while inp[n:] != lis[1]:
+          if sum(inp[n+1:-n+1]) &lt;= L:
+               del inp[0]
+               inp.append(0)
+          else:
+               inp.insert(lis[2],0)
+               del inp[0]
+          lis[0] += 1
+     print(lis[0])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/14 21:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김영성</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16492"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from collections import deque
+n, w, L = map(int, input().split())
+
+truck = list(map(int, input().split()))
+
+bridge = deque([0] * w)
+time = 0
+
+while True:
+    if sum(bridge) &lt;= L:
+        if sum(bridge) - bridge[0] + truck[0] &lt;= L:
+            bridge.popleft()
+            bridge.append(truck[0])
+            truck.pop(0)
+            truck.append(0)
+            time += 1
+        else:
+            bridge.popleft()
+            bridge.append(0)
+            time += 1
+    else:
+        print('elapsed')
+
+    if sum(bridge) == 0:
+        break
+
+print(time)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/02/07 14:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">D.H.</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17160"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3.7<br />
+차량 행렬에 대해 교량이 이동하는 관점으로 접근했습니다.<br />
+입력 변수들은 문제의 조건을 만족하는 것으로 가정, 유효성 테스트는 생략했습니다.</p>
+<pre><code class="python">n, w, L = map(int, input().split())  # n: 트럭의 수, w: 다리의 길이, L: 다리의 최대 하중
+tws = [int(s) for s in input().split()[:n]]  # 트럭의 무게 리스트(차량 행렬)
+# 차량 행렬에 대해 교량이 이동하는 관점으로 접근
+tws = [0] * w + tws + [0] * w  # 교량 인덱싱을 위해 차량 행렬 수정
+idx, move_time = 0, 0
+while idx &lt; len(tws) - w:
+    if sum(tws[idx + 1:idx + 1 + w]) &lt;= L:  # 다음 차량으로 교량 이동이 가능할 경우
+        idx += 1
+    else:  # 다음 이동이 불가할 경우 교량 위 차량만 이동
+        tws = tws[:idx + w] + [0] + tws[idx + w:]
+        idx += 1
+    move_time += 1
+print(move_time)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/03/17 16:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17795"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def BCROSS(W,LIST):
+    MTB=[0]*W;ANS=0
+
+    while MTB:
+        del MTB[0];ANS+=1
+        if LIST:
+            if sum(MTB)+LIST[0]&lt;=L:
+                MTB.append(LIST[0]);del LIST[0]
+            else:
+                MTB.append(0)
+    return ANS
+
+n,w,L =map(int,input().split());ans=0
+truck=list(map(int,input().split()))
+
+print(BCROSS(w,truck))
+</code></pre>
+
+<p>이거를 재귀로 풀어보려고 했으나, 그러면 전달인자만 많아지고 복잡해질것 같아서 이미 풀이를 하신분의 풀이를 참고하여 재귀없이 풀어보았읍니다. 재귀로푸는것 보다 한번에 계산하는것이 더 편하군요 이 문제는.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/08 21:32</p>
+                                <p class="static-profile" style="margin:0;padding:0;">암살자까마귀</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18089"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Truck
+{
+    class Program
+    {
+        public static int solution(int bridge_length, int weight, int[] truck_weights)
+        {
+            int answer = 0;
+            int second = 0;
+
+            Queue queue = new Queue();
+            int[] delay = new int[truck_weights.GetLength(0)];
+            int front = 0;
+            int rear = 0;
+
+            queue.Enqueue(truck_weights[0]);
+            second++;
+            delay[0]++;
+
+            while (queue.Count &gt; 0)
+            {
+                second++;
+                for (int i = front; i &lt;= rear; i++)
+                {
+                    delay[i]++;
+                    if (delay[i] &gt; bridge_length)
+                    {
+                        queue.Dequeue();
+                        front++;
+                    }
+                }
+                if (!(rear + 1 == truck_weights.GetLength(0)))
+                {
+                    if ((sum(truck_weights, front, rear) + truck_weights[rear + 1]) &lt;= weight)
+                    {
+                        queue.Enqueue(truck_weights[++rear]);
+                        delay[rear]++;
+                    }
+                }
+            }
+            answer = second;
+
+            return answer;
+        }
+
+        public static int sum(int[] arr, int idx1, int idx2)
+        {
+            int sum = 0;
+
+            for (int i = idx1; i &lt;= idx2; i++)
+            {
+                sum += arr[i];
+            }
+
+            return sum;
+        }
+
+        static void Main(string[] args)
+        {
+            int bridge_length = 2;
+             int weight = 10;
+            int[] truck_weights = {7,4,5,6};
+
+            Console.WriteLine(solution(bridge_length, weight, truck_weights).ToString());
+        }
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/31 17:38</p>
+                                <p class="static-profile" style="margin:0;padding:0;">정태식</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20085"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>룰루랄라님이 말씀하신방법을 자바로 바꿔봤습니다.</p>
+<pre><code class="java">public class ACM2016문제중에서 {
+
+    public static void main(String[] args) {
+
+        Scanner  scan = new Scanner(System.in);
+        int n = scan.nextInt();  //트럭의 수
+        int w = scan.nextInt();  //다리의 길이
+        int L = scan.nextInt();  //다리의 최대하중
+        ArrayList&lt;Integer&gt; start = new ArrayList&lt;Integer&gt;();
+        ArrayList&lt;Integer&gt; bridge = new ArrayList&lt;Integer&gt;();
+
+        for(int i=0; i&lt;n; i++) {
+            start.add(scan.nextInt());
+        }
+
+        for(int i=0; i&lt;w; i++) {
+            bridge.add(0);
+        }
+        int sum = bridge.stream().mapToInt(Integer::intValue).sum();
+        bridge.set(bridge.size()-1, start.get(0));
+        sum = bridge.stream().mapToInt(Integer::intValue).sum();
+        int time = 1;
+        start.remove(0);
+
+        for(int j=0;;j++) {
+            if(start.size()==0) {
+                time+=w;
+                break;
+            }
+            if(sum&lt;=L) {
+                if(bridge.get(0)!=0) {
+                    bridge.set(0, 0);
+                    sum = bridge.stream().mapToInt(Integer::intValue).sum();
+                }
+                Collections.rotate(bridge, -1);
+                bridge.set(bridge.size()-1, start.get(0));
+                sum = bridge.stream().mapToInt(Integer::intValue).sum();
+                if(sum&gt;L) {
+                    bridge.set(bridge.size()-1, 0);
+                    sum = bridge.stream().mapToInt(Integer::intValue).sum();
+                }
+                else {
+                    start.remove(0);
+                }
+                time++;
+            }
+        }
+        System.out.println(time);
+    }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/11/28 19:25</p>
+                                <p class="static-profile" style="margin:0;padding:0;">big Ko</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20757"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">
+n,w,l = map(int, input(&quot;n w l :&quot;).split())
+trucks = []
+for i in range(n):
+    t=int(input(&quot;트럭 무게 : &quot;))
+    trucks.append(t)
+
+time = 0
+bridge =[0] * w
+
+while bridge :
+    time += 1
+    bridge.pop(0)
+    if trucks:
+        if sum(bridge) + trucks[0] &lt;= l:
+
+                bridge.append(trucks.pop(0))                
+        else :
+            bridge.append(0)
+
+print(time)
+
+</code></pre>
+
+<p>알고리즘은 앞에 풀이 copy하였습니다....</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/27 23:00</p>
+                                <p class="static-profile" style="margin:0;padding:0;">semipooh</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22110"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from collections import deque
+def truck(w, l, ti):
+
+    ut = deque(maxlen=w)
+    ut.append(ti[0])
+    sec = 1
+    for i in range(1, len(ti)):
+        if ti[i] + ti[i-1] &gt; l:
+            sec += w
+            ut.append(ti[i])
+        else:
+            sec += 1
+            ut.append(ti[i])
+    return sec + w
+
+if __name__ == '__main__':
+    n, w, l = 1, 100, 100
+    ti = [10]*10
+    print(truck(w, l, ti))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/06 14:53</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hwaseong Nam</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22638"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬3입니다.</p>
+<pre><code class="python">import random as r
+
+Length = r.randint(1,100) # Length of Bridge
+maxLoad = r.randint(10,1000) # Live load limit
+truckWeight = [ r.randint(1,10) for _ in range(1,r.randint(1,1000))] #Truck weight list
+bridge =[0]*Length #Initialize the default live load
+time = 0 # The number of moving trucks
+
+for w in truckWeight :
+    for _ in range(Length) :
+        time += 1
+        bridge.append(w)
+        bridge.remove(bridge[0])
+        loadWeight = sum(bridge)
+        if loadWeight &gt; maxLoad :
+            bridge.pop()
+            bridge.append(0)
+
+print(f'The length of the bridge is {Length}.')
+print(f'The max load of the bridge is {maxLoad}.')
+print(f'The number of trucks is {len(truckWeight)}.')
+print(f'the number of moving trucks is {time}.')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/06/26 08:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">누마루</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24236"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>def sumlist0(lists):</p>
+<pre><code>  for_return=0
+
+  for i in lists:
+
+    for_return+=int(i[0])
+
+  return for_return
+
+def pluslist1(lists):
+
+  for i in lists:
+
+    i[1]+=1
+
+def truck(n,w,L,trucks):
+
+  trucks.reverse()
+
+  for_answer=[]
+
+  for i in trucks:
+
+    a=[]
+
+    a.append(i)
+
+    a.append(0)
+
+    for_answer.append(a)
+
+  line_truck=[]
+
+  time=0
+
+  while for_answer!=[] or line_truck !=[]:
+
+    if line_truck != []:
+
+      for i in line_truck:
+
+        if i[1]==w:
+
+          line_truck.remove(i)
+
+    if for_answer!=[]:
+
+      if sumlist0(line_truck)+int(for_answer[-1][0])&lt;=L:
+
+        line_truck.append(for_answer[-1])
+
+        for_answer.pop()
+
+    pluslist1(line_truck)
+
+    time+=1
+
+  return time
+
+def main():
+
+  firsts=input("n, w, L")
+
+  second=input("lists")
+
+  firsta=firsts.split(' ')
+
+  seconda=second.split(' ')
+
+  secondb=[]
+
+  for i in seconda:
+
+    secondb.append(int(i))
+
+  print(truck(int(firsta[0]),int(firsta[1]),int(firsta[2]),seconda))
+
+main()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/01/06 18:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">전준혁</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25094"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def rotation_1(_list):
+    # temp_last = _list[-1]
+    for i in range(len(_list)):
+        j = len(_list) - 1 - i
+        if j == 0:
+            _list[j] = 0
+        else:
+            _list[j] = _list[j-1]
+        # print(_list, j, temp_last)
+    return _list
+
+
+def cross():
+    input_firstline = input('FIRST LINE : ')
+    input_secondline = input('SECOND LINE : ')
+    truck_number = int(input_firstline.split()[0])
+    bridge_length = int(input_firstline.split()[1])
+    maximum_weight = int(input_firstline.split()[2])
+
+    time = 0
+    list_truck = []
+    list_bridge = []
+    for i in range(truck_number):
+        list_truck.append(int(input_secondline.split()[i]))
+    for i in range(bridge_length):
+        list_bridge.append(0)
+
+    # first truck enter the bridge
+    time += 1
+    list_bridge[0] = list_truck[0]
+    del list_truck[0]
+    # print('list_truck : {} / list_bridge : {} / time : {}'.format(list_truck, list_bridge, time))
+    time += 1
+
+    flag = True
+    while flag:
+        for i in range(bridge_length):
+            if i+1 == bridge_length:
+                #exit the truck from the bridge
+                list_bridge[-1] = 0
+            elif i+1 &lt; bridge_length:
+                rotation_1(list_bridge)
+
+            try: 
+                if sum(list_bridge) + list_truck[0] &lt;= maximum_weight:
+                    list_bridge[0] = list_truck[0]
+                    del list_truck[0]
+            except: pass
+
+            if len(list_truck) == 0 and sum(list_bridge) == 0:
+                # print('list_truck : {} / list_bridge : {} / time : {} / i : {}'.format(list_truck, list_bridge, time, i))
+                print('ALL PASSED : total time {} sec'.format(time))
+                flag = False
+                break
+
+            # print('list_truck : {} / list_bridge : {} / time : {} / i : {}'.format(list_truck, list_bridge, time, i))
+            time += 1
+
+cross()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/04/01 13:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">DSHIN</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26150"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#codingdojing_truck_ACM2016
+
+#다리 길이 w(초), 최대하중 L
+#풀이를 좀 참고했다. 
+#n의 개수만큼 리스트 생성. [0, 0, 0, 0] 한칸씩 이동시키고 (pop(0)), 다음 숫자랑 합이 L이하면 append, 이상이면 append(0)
+
+import sys
+
+n, w, L = map(int,input('n w L: ').split())
+trucks = list(map(int, input('weight(n): ').split()))
+
+if n != len(trucks): 
+    print('input error')
+    sys.exit()
+
+bridge = [0]*w
+count = 0
+
+while bridge: #bride가 완전히 없어질 때까지
+    count += 1
+    bridge.pop(0)   #지나감.
+
+    if trucks:  #아직 안건넌 트럭이 있으면
+        if sum(bridge) + trucks[0] &lt;= L: 
+            bridge.append(trucks.pop(0)) #[ 0, 0, 4, 5]
+        else:
+            bridge.append(0)             #[0, 0, 4, 0]
+
+print(count)
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/08/24 14:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jaeman Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26965"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">while True:
+    n = int(input(&quot;트럭의 수:&quot;))
+    if n&gt;=1 and n&lt;=1000 :
+        break
+while True:
+    w = int(input(&quot;다리의길이:&quot;))
+    if w&gt;=1 and w&lt;=100 :
+        break
+while True:
+    L = int(input(&quot;다리 최대 하중:&quot;))
+    if L&gt;=10 and L&lt;=1000 :
+        break
+truck =[]
+for i in range(n):
+    while True:
+        print(i+1,&quot;번째&quot;,end=&quot;&quot;)
+        a = int(input(&quot;트럭의 무게는:&quot;))
+        if a&gt;=1  and a&lt;=10 :
+            truck.append(a)
+            break
+for k in range(w):
+    truck.append(0)
+
+bridge=[0 for _ in range(w)]
+print(bridge)
+cnt = 0
+k=0
+while True:
+    if sum(bridge)+truck[k]-bridge[0]&lt;= L:
+        bridge.pop(0)
+        bridge.insert(w,truck[k])
+        cnt+=1
+        k+=1
+    else :
+        bridge.pop(0)
+        bridge.insert(w,0)
+        cnt+=1 
+    if sum(bridge)==0:
+        break
+
+print(&quot;최단시간:&quot;,cnt)
+</code></pre>
+
+<p>pop &amp; insert를 통해서 풀이해봤어요~</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/07 01:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">양캠부부</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29726"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def crossBridge(W, L, trucks):
+    bridge = [0] * W
+    tl = 0
+    t = 0
+    while tl &gt; 0 or len(trucks) &gt; 0:
+        tl -= bridge.pop(0)
+        if len(trucks) &gt; 0 and tl + trucks[0] &lt;= L:
+            bridge.append(trucks[0])
+            tl += trucks.pop(0)
+        else:
+            bridge.append(0)
+        t += 1
+    return t
+
+n, W, L = map(int, input('다리를 건너는 트럭의 수, 다리의 길이, 다리의 최대하중 (n W L): ').split())
+trucks = [int(i) for i in input('각각의 트럭의 무게: ').split()]
+print(crossBridge(W, L, trucks))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/10/28 22:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

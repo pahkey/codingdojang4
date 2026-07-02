@@ -1,0 +1,3323 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="어떤 자연수에서 자릿수가 점점 커지는 수를 증가수라고 하겠습니다(예: 135689).
+자연수들 중에서는 그 수와 그 수의 자리의 순서가 반대인 수를 곱했을 때(여기서 자리의 순서가 반대가 된다는 것은 숫자의 자리가 앞뒤가 바뀐다는 것입니다, 예...">
+    <title>자릿수를 뒤바꿔 곱했을 때 증가수가 되는 수 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">자릿수를 뒤바꿔 곱했을 때 증가수가 되는 수</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">2</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 2</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>어떤 자연수에서 자릿수가 점점 커지는 수를 증가수라고 하겠습니다(예: 135689).
+자연수들 중에서는 그 수와 그 수의 자리의 순서가 반대인 수를 곱했을 때(여기서 자리의 순서가 반대가 된다는 것은 숫자의 자리가 앞뒤가 바뀐다는 것입니다, 예: 5319 -&gt; 9135) 증가수가 되는 수들이 있습니다.
+예를 들어 47과 47의 자리를 바꾼 74를 곱하면 3478이 되는데, 이 수는 증가수입니다.</p>
+<p>세 자리 자연수들 중에 그 수와 그 수의 자리를 바꾼 수의 곱이 증가수가 되는 수는 모두 몇 개입니까?
+(단, 세 자리 자연수의 마지막 자릿수는 0이 아니고, 증가수에는 1335 같은 중간에 자릿수의 크기가 바뀌지 않는 것도 포함됩니다.)</p>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2017/08/05 11:20</p>
+                    <p class="static-profile" style="margin:0;padding:0;">P.Y.Thon</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>66개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_8706"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">4</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># python 3.6
+# nunmber * number.reverse 리스트(문자열) 생성
+gen = [str(i * int(str(i)[::-1])) for i in range(100, 1001) if str(i)[-1] != &quot;0&quot;]
+count = 0
+for s in gen:
+    # 각 자리 수가 증가하지 않을 경우 false --&gt; all true인 경우 count + 1
+    if all([int(s[i]) &lt;= int(s[i + 1]) for i in range(len(s) - 1)]):
+        count += 1
+print(count)
+# ans: 21
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/09/04 17:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19591"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">count = 0
+for numb in range(100, 1000) :
+    if list(str(numb * int(&quot;&quot;.join(reversed(list(str(numb))))))) == sorted(list(str(numb * int(&quot;&quot;.join(reversed(list(str(numb)))))))) :
+        count += 1
+print(count)
+</code></pre>
+
+<p>결과</p>
+<p>21</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/10/10 11:02</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GG</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8301"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package practiceBasic.binaryOut;
+
+public class shiftPositionMultiple {
+    public static void main(String[] args) {
+        int resultCount = 0;
+        for (int i = 101; i &lt; 1000; i++) {
+            if (i % 10 == 0)
+                continue;
+            if (isAscending(reverseMultiple(i)))
+                resultCount++;
+        }
+        System.out.println(resultCount);
+    }
+
+    private static int reverseMultiple(int num) {
+        int tmpNum = num;
+        String reverseNum = &quot;&quot;;
+        while (tmpNum &gt;= 1) {
+            reverseNum += tmpNum % 10;
+            tmpNum /= 10;
+        }
+        return num * Integer.parseInt(reverseNum);
+    }
+
+    private static boolean isAscending(int num) {
+        while (num &gt;= 1) {
+            if (num % 10 &lt; num / 10 % 10)
+                return false;
+            num /= 10;
+        }
+        return true;
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/10 15:56</p>
+                                <p class="static-profile" style="margin:0;padding:0;">어머언니</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8304"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<pre><code class="ruby">asc = -&gt;n { nums = (n * n.to_s.reverse.to_i).digits; nums == nums.sort.reverse }
+cnt_asc = -&gt; { (100..999).select(&amp;asc).count }
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby">expect( asc[47] ).to eq true
+expect( cnt_asc.call ).to eq 21
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/10 19:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8307"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">inc_num=0
+
+def check_num(i):
+    #문자열로 변환
+    num=str(i)
+    if(num[2]==&quot;0&quot;) : return 0
+
+    else :
+        #반대인수 곱하기
+        result=i*int(num[2]+num[1]+num[0])
+        #결과값 문자로 변환
+        result=str(result)
+
+        #숫자 지속 증가하고 있는지 비교
+        for k in range (0,len(result)-1) :
+            if(int(result[k])&lt;=int(result[k+1])) : check=1
+            else :
+                check=0
+                break
+        if(check==1) : return 1
+
+for i in range (101 , 1000) :
+    if(check_num(i)==1): inc_num=inc_num+1
+
+print(inc_num)
+
+21개 맞는지는 모르겠네요
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/10 22:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박준</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8314"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>python3로 작성했습니다</p>
+<pre><code class="python">def swap(n):
+    str_n = str(n)
+    rst = []
+
+    for i in range(len(str_n)):
+        rst.append(str_n[-(i+1)])
+
+    return int(''.join(rst))
+
+def isincrease(n):
+    str_n = str(n)
+    a = '0'
+
+    for ch in str_n:
+        if a &gt; ch: return False
+        a = ch
+
+    return True 
+
+rst = 0
+
+for i in range(100, 1000):
+    if i % 10 == 0: continue
+    if isincrease(i * swap(i)): rst += 1
+
+print(rst)
+</code></pre>
+
+<pre><code class="no-highlight"># 실행결과
+21
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/11 09:45</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Envil_Saintan</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8326"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def reversing(n) :  # type(n) == int
+
+    result = []
+    listn = list(str(n))
+
+    for i in range(1, len(listn) + 1) :
+        result.append(listn[-i])
+
+    return int(''.join(result))
+
+
+def ifaugment(n) :  # type(n) == int
+
+    listn = list(str(n))
+
+    for i in range(0, len(listn)) :
+        listn[i] = int(listn[i])
+    listn.sort()
+
+    for i in range(0, len(listn)) :
+        listn[i] = str(listn[i])
+
+    if int(''.join(listn)) == n :
+        return True
+
+    else :
+        return False
+
+True_False = []
+for s in range(100, 1000) :
+    True_False.append(ifaugment(s * reversing(s)))
+
+print(True_False.count(True))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/12 16:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">다크엔젤</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8423"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <ol>
+<li>파이썬 3.6</li>
+<li>답은 21입니다</li>
+</ol>
+<pre><code class="python">
+def NumtoStr(n=int): #숫자를 list형식으로 표시하여 증가수판단을 위해 쓰임
+    hub = n
+    result1 = []
+    count = 0
+    while 1:
+        if hub%10 != 0:
+            count += 1
+            hub += -1
+        else:
+            result1.insert(0, count)
+            count = 0
+            hub = hub//10
+            if hub==0:
+                break
+    return result1
+
+def asdf(n=int): #증가수면 n을 반환 아니면 -1을 반환 
+    n_rev = ''
+    for i in range(len(str(n))):
+        n_rev += str(n)[-(i+1)]
+    if str(n)[-1] != '0' \
+        and (NumtoStr(n * int(n_rev))==sorted(NumtoStr(n * int(n_rev)))):
+        return n
+    else:
+        return -1
+
+result = []
+for i in range(101,999):
+    if asdf(i)&gt;0:
+        result.append(asdf(i))
+
+print(len(result)) #=21
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/21 10:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">고든</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8473"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>JAVA: 그냥 숫자로 계산</p>
+<pre><code class="java">public class test { 
+    static boolean increasing(int x) { // 일의 자리부터 계산
+        if (x &lt; 10)
+            return true;        
+        else if (x % 10 &lt; ((x / 10) % 10))
+            return false;
+        else
+            return increasing(x / 10);
+    }
+
+    public static void main(String[] args) {
+        int cnt = 0;        
+
+        for (int hnd = 1; hnd &lt;= 9; hnd++) {
+            for (int ten = 0; ten &lt;= 9; ten++) {
+                for (int one = 0; one &lt;= 9; one++) {
+                    int a = 100 * hnd + 10 * ten + one;
+                    int b = 100 * one + 10 * ten + hnd;
+                    if (increasing(a * b))
+                        cnt++;
+                }
+            }
+        }
+        System.out.println(cnt);  // 21
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/22 22:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8557"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">//C로 작성하였습니다. 21이 나오네요
+
+#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+
+int func1(int n) {
+    //어떤 수 n이 증가수인지 아닌지 판별, 증가수이면 0, 아니면 1 반환하는 함수
+    int i, a, b;
+    i = n;
+    while (i &gt;= 10) {
+        a = i % 10;
+        b = (i / 10) % 10;
+        if (b &gt; a) return 0;
+        else i = i / 10; }
+
+    return 1;
+}
+
+int func2(int n) {
+    //어떤 수 n의 자리수를 뒤집는 함수
+    int len=0, i=n, m=0;
+
+    while (i &gt; 10) {
+        len = len + 1;
+        i = i / 10; }
+
+    for (i = len; i &gt;= 0; i = i - 1) {
+        m = m + (n % 10)*pow(10, i);
+        n = n / 10; }
+
+    return m;
+}
+
+int main() {
+    //3자리의 숫자 들 중 마지막 숫자가 0인것을 제외하고, 자릿수를 뒤바꿔 곱했을 때 증가수가 되는 수 들의 갯수를 센다
+    int n, m, count=0;
+    for (n = 100; n &lt; 1000; n = n + 1) {
+        if ((n % 10) != 0) {
+            m = n*func2(n);
+            if (func1(m) == 1) count = count + 1; } }
+
+    printf(&quot;자릿수를 뒤바꿔 곱했을 때 증가수가 되는 수는 %d개 입니다.\n&quot;, count);
+    return 0;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/28 00:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">우플밍</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8566"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">
+public class Calculate {
+
+    public static void main(String[] args) {
+        int cnt = 0;
+        int reverse = 0;
+
+        for(int i=101 ; i&lt;1000 ; i++) {
+            if(i%10 == 0) 
+                continue;
+            else {
+                reverse = Integer.parseInt(new StringBuffer(i+&quot;&quot;).reverse().toString());
+                if(isIncreasingNumber(i*reverse))
+                    cnt++;
+            }
+        }
+        System.out.println(cnt);
+    }
+
+    static boolean isIncreasingNumber(int reverse) {
+        boolean result = true;
+        String checkNum = reverse+&quot;&quot;;
+        for (int i=0 ; i&lt;checkNum.toCharArray().length-1 ; i++){
+            if(checkNum.toCharArray()[i] &gt; checkNum.toCharArray()[i+1]) {
+                result = false;
+                break;              
+            }
+        }       
+        return result;
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/28 13:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">SH</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8602"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="go">// golang 1.9
+package main
+
+import (
+    &quot;fmt&quot;
+    &quot;strconv&quot;
+)
+
+func main() {
+
+    count := 0
+    for i3 := 1; i3 &lt;= 9; i3++ {
+        for i2 := 0; i2 &lt;= 9; i2++ {
+            for i1 := 1; i1 &lt;= 9; i1++ {
+                numStr := fmt.Sprintf(&quot;%d%d%d&quot;, i3, i2, i1) // 마지막 자리가 0이 아닌 3자리 자연수 문자열 생성
+                numRev := rev(numStr)                       // 역 숫자(로된) 문자열
+                numX, _ := strconv.Atoi(numStr)
+                numR, _ := strconv.Atoi(numRev)
+                if incChk(numX * numR) {
+                    count++
+                }
+            }
+        }
+    }
+    fmt.Println(count)
+}
+
+// 숫자(로된) 문자열의 역 숫자(로된) 문자열 반환
+func rev(s string) string {
+    retStr := &quot;&quot;
+    for i := 0; i &lt; len(s); i++ {
+        retStr = s[i:i+1] + retStr
+    }
+    return retStr
+}
+
+// 숫자가 증가수인지 체크
+func incChk(n int) bool {
+    var chk bool = true
+    s := fmt.Sprintf(&quot;%d&quot;, n) // 숫자의 문자열에 대해
+    for i := 0; i &lt; len(s)-1; i++ {
+        nf, _ := strconv.Atoi(s[i : i+1])   // i 자리
+        nb, _ := strconv.Atoi(s[i+1 : i+2]) // i+1 자리
+        if nf &gt; nb {                        // 증가 여부 체크
+            chk = false
+        }
+    }
+    return chk
+}
+
+// ans: 21
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/29 16:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8727"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def demonstrate(x):
+  a=list(str(x))
+  bool=[]
+
+  c=0
+  for i in range(0,len(a)-1):
+    bool.append(a[c]&lt;=a[c+1])
+    c=c+1
+
+
+  if bool.count(False)==0:
+    return True
+  else:
+    return False
+
+def reverseint(y):
+  j=str(y)
+  c=0
+  k=''
+  for z in range(0,len(j)):
+    k=j[c]+k
+    c=c+1
+  return int(k)
+
+score=0
+for x in set(range(100,1000)):
+  b=reverseint(x)
+  if demonstrate(a*b)==True:
+    score=score+1
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/09/06 11:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">lssac</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8815"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 </p>
+<pre><code class="python">
+def IsIncreseNum(each_num) :
+    ret = True;
+    for i in range(len(each_num)-1) :
+        if int(each_num[i]) &gt; int(each_num[i+1]) :              
+            ret = False   
+    return ret
+
+num = [str(i*int(str(i)[::-1])) for i in range(101, 1000) if i % 10 != 0]
+
+result = 0
+for each_num in num : 
+    if IsIncreseNum(each_num) == True :        
+        result = result + 1 
+
+print(result)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/09/14 18:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김동환</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8953"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <h1 id="3">파이썬 3으로 작성했습니다</h1>
+<h1 id="num3-int0">num3 = int(0)</h1>
+<p>inc_num = []
+inc_rev = []
+inc_iwant = []</p>
+<h1 id="inc_iwant2">inc_iwant2 = []</h1>
+<p>for i in range(100, 1000):
+    k = list(str(i))
+    rev = int(k[2] + k[1] + k[0])
+    if int(k[0]) &lt;= int(k[1]) and int(k[1]) &lt;= int(k[2]):
+        inc_big = i * rev
+        if inc_big &gt; 99999:
+            list6 = []
+            ctrl = 0
+            for i2 in range(6):
+                list6.append(int(str(inc_big)[i2]))
+            for i3 in range(5):
+                if list6[i3] &lt;= list6[i3+1]:
+                    ctrl = ctrl + 1
+            if ctrl == 5:
+                inc_iwant.append(inc_big)
+        else:
+            list5 = []
+            ctrl2 = 0
+            for i4 in range(5):
+                list5.append(int(str(inc_big)[i4]))
+            for i5 in range(4):
+                if list5[i5] &lt;= list5[i5+1]:
+                    ctrl2 = ctrl2 + 1
+            if ctrl2 == 5:
+                inc_iwant.append(inc_big)</p>
+<h1 id="inc_numappendi">inc_num.append(i)</h1>
+<h1 id="inc_revappendrev">inc_rev.append(rev)</h1>
+<h1 id="for-i-in-rangeleninc_num">for i in range(len(inc_num)):</h1>
+<h1 id="inc_fin-inc_numi-inc_revi">inc_fin = inc_num[i] * inc_rev[i]</h1>
+<h1 id="inc_iwant2appendinc_fin">inc_iwant2.append(inc_fin)</h1>
+<h1 id="print-inc_num">print (inc_num)</h1>
+<h1 id="print-inc_rev">print (inc_rev)</h1>
+<p>print (inc_iwant)</p>
+<h1 id="print-inc_iwant2">print (inc_iwant2)</h1>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/06 02:03</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Yungbin Kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9169"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># 한글 처리 in Atom 1.21.1 + Anaconda(Python 3.6.3)
+import sys
+import io
+
+sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding='utf-8')
+sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding='utf-8')
+
+# 어떤 자연수에서 자릿수가 점점 커지는 수를 증가수라고 하겠습니다(예: 135689).
+# 자연수들 중에서는 그 수와 그 수의 자리의 순서가 반대인 수를 곱했을 때
+# (여기서 자리의 순서가 반대가 된다는 것은 숫자의 자리가 앞뒤가 바뀐다는 것입니다, 예: 5319 -&gt; 9135)
+# 증가수가 되는 수들이 있습니다.
+# 예를 들어 47과 47의 자리를 바꾼 74를 곱하면 3478이 되는데, 이 수는 증가수입니다.
+# 세 자리 자연수들 중에 그 수와 그 수의 자리를 바꾼 수의 곱이 증가수가 되는 수는 모두 몇 개입니까?
+# (단, 세 자리 자연수의 마지막 자릿수는 0이 아니고, 증가수에는 1335 같은 중간에 자릿수의 크기가 바뀌지 않는 것도 포함됩니다.)
+
+for i in range(100, 1000):
+    if i % 10:
+        i_reverse = int(str(i)[::-1])
+        product = ' '.join(str(i * i_reverse)).split()
+        if product == sorted(' '.join(product).split()):
+            print(&quot;{} * {} = {}&quot;.format(i, i_reverse, i * i_reverse))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/11/04 08:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jace Alan</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9194"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def isInc(num):
+    for i in range(len(num)-1):
+        if int(num[i+1]) - int(num[i]) &lt; 0:
+            return 0
+    return 1
+
+
+cnt = 0
+for num in range(101, 999):
+    if num % 10 :
+        mult = num * int(str(num)[::-1])
+        cnt += isInc(str(mult))
+
+print(cnt)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/11/06 14:39</p>
+                                <p class="static-profile" style="margin:0;padding:0;">songci</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9221"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">public class Solution2 {
+    public static void main(String args[]) {
+
+       int count = 0;
+        for(int i = 100; i &lt; 1000; i++) {
+            if(i % 100 == 0) {
+                continue;
+            }
+            int result = i * Integer.parseInt(new StringBuilder(i + &quot;&quot;).reverse().toString());
+            if(checkAddNumber(result)) {
+                count++;
+            }
+        }
+        System.out.println(count);
+    }
+
+    private static boolean checkAddNumber(int num) {
+        boolean result = true;
+
+        String strNum  = String.valueOf(num);
+        for(int i = 1; i &lt; strNum.length(); i++) {
+
+            Integer num1 = Character.getNumericValue(strNum.charAt(i-1));
+            Integer num2 = Character.getNumericValue(strNum.charAt(i));
+
+            if(num2 &lt; num1) {
+                result = false;
+                break;
+            }
+        }
+        return result;
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/11/09 15:03</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이지영</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9230"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>package codingdojang;</p>
+<p>import java.util.ArrayList;</p>
+<p>public class ex146 {</p>
+<pre><code>public static void main(String[] args) {
+    // TODO Auto-generated method stub
+    int count = 0;
+    int rev = 0;
+    String temp;
+    boolean or = false;
+
+    ArrayList&lt;String&gt; isor = new ArrayList&lt;String&gt;();
+
+    for(int i=100; i&lt;1000; i++) {
+        rev = 0;
+        temp = null;
+        or = false;
+
+        if(i%10 != 0) {
+
+            rev = (i/100)%10 + ((i/10)%10)*10 + (i%10)*100;
+            temp = Integer.toString(i*rev);
+
+            for(int j=0; j&lt;temp.length()-1; j++) {
+                if(temp.charAt(j) &gt; temp.charAt(j+1)) {
+                    or = false;
+                    break;
+                }
+                or = true;
+            }
+
+            if(or) {
+                count++;
+                isor.add(temp);
+            }
+        }
+    }
+
+    for(int i=0; i&lt;isor.size(); i++) {
+        System.out.println(isor.get(i));
+    }
+
+    System.out.println("3자리에서의 오름수 갯수 = "+count);
+}
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/11/10 14:58</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이병호</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9395"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>python 2.7</p>
+<pre><code class="python">
+def inc_numb(nb_range):
+    inc_numb = []
+
+    for i in nb_range:
+        if str(i)[:-1] &lt;&gt; '0':
+            nb = i * int(str(i)[::-1])
+            nb_lst = [int(x) for x in str(nb)]
+
+            if all(nb_lst[i] &lt;= nb_lst[i + 1] for i in range(len(nb_lst) - 1)):
+                inc_numb.append(nb)
+
+    return len(inc_numb)
+
+nb_sample = range(100,1000)
+print (inc_numb(nb_sample))
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/11/27 18:06</p>
+                                <p class="static-profile" style="margin:0;padding:0;">vkospi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9614"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>재귀함수를 써보고 싶어서 써봤으나 재귀함수를 쓰기에는 좋지 않은 예제였습니다.</p>
+<pre><code class="python">def compare(x_rx):
+    if len(str(x_rx)) - 1:
+        if str(x_rx)[len(str(x_rx))-2] &lt;= str(x_rx)[len(str(x_rx))-1]:
+            return compare(str(x_rx)[:-1])
+        else:
+            return False
+    return True
+
+lis = []
+c = 0
+for x in range(101, 1000):
+    if str(x)[-1] != 0:
+        x_rx = x*int(str(x)[::-1])
+        if compare(x_rx):
+            c +=1
+print(c)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/12/13 14:38</p>
+                                <p class="static-profile" style="margin:0;padding:0;">홍철현</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9616"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def iscl(num):
+    tmp=list(str(num))
+    result=True
+    for i in range(len(tmp)-1):
+        result=result and tmp[i]&lt;=tmp[i+1]
+    return(result)
+
+count=0
+for i in range(100, 1000):
+    if i%10 and iscl(i*int(str(i)[::-1])):
+        count+=1
+
+print(count)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/12/13 14:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">빗나감</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9622"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">arr = []
+
+def isSame(num):
+    str_num = str(num)
+    for i in range(len(str_num)):
+        cnt = str_num.count(str_num[i])
+        if cnt &gt; 1:
+            return True
+    return False
+
+def isIncNum(num):
+    for i in range(len(str(num)) - 1):
+        if int(str(num)[i]) &gt; int(str(num)[i+1]):
+            return False
+    return True
+
+for i in range(100, 999):
+    if str(i).count(&quot;0&quot;):
+        continue
+    if isSame(i) == True:
+        continue
+    v = 1
+    for j in range(len(str(i))):
+        v *= int(str(i)[j])
+    if isSame(v):
+        continue
+
+    if isIncNum(v) == True:
+        arr.append([i,v])
+print(arr)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/12/13 16:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이형영</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9759"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">f = lambda n: (lambda x: x == eval('int(&quot;%s&quot;)'%''.join(sorted(list(str(x))))))(n * eval('int(&quot;%s&quot;)'%str(n)[::-1]))
+calc = lambda start, stop: sum(f(i) for i in range(start, stop+1))
+
+if __name__ == '__main__':
+    print(calc(100, 999))
+</code></pre>
+
+<p>파이썬 3.6.2 64</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/12/21 01:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Flair Sizz</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9986"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>저는 크게 두 가지 함수를 만들었습니다.</p>
+<p>자리의 순서가 반대가 되는 함수</p>
+<pre><code class="python">def flipper(a):
+    new_a = list(str(a))
+    b = []
+    for i in range(len(new_a)):
+        b_item = new_a[len(new_a)-(i+1)]
+        b.append(b_item)   
+    flipped_a = ''.join(b)
+    return int(flipped_a)
+</code></pre>
+
+<p>증가수인지 확인하는 함수</p>
+<pre><code class="python">def checker(a):
+    str_a = str(a)
+    for i in range(len(str_a)):        
+        if i != len(str_a)-1:
+            if str_a[i] &gt; str_a[i+1]:
+                return 'False'
+                break
+            elif str_a[i] &lt; str_a[i+1]:                
+                continue
+            else:
+                continue
+        else:
+            return 'True'
+</code></pre>
+
+<p>두 함수를 이용해 정답을 구해보겠습니다.</p>
+<pre><code class="python">count = 0
+for i in range(100,1000):
+    if i != 999:
+        if checker(flipper(i)*i) == 'True':
+            count += 1
+        else:
+            continue
+    else:
+        print(count)
+</code></pre>
+
+<p>정답은 21</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/01/03 16:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">정재훈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10260"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3.6</p>
+<pre><code class="python">multiple,tmp,numlist = 0,[],[]
+for i in range(101,1000):
+    if str(i)[-1] != '0': 
+        multiple = i * int(str(i)[::-1])
+        if multiple == int(''.join(sorted(list(str(multiple))))): 
+            numlist.append(multiple)
+print(len(numlist))
+
+* 결과값
+
+21
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/01/22 11:58</p>
+                                <p class="static-profile" style="margin:0;padding:0;">justbegin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10464"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># 파이썬
+
+ascending = []
+for m in range(100, 1000):
+    n = int(str(m)[::-1])
+    mn = str(m*n)
+    r = True
+    for t in range(len(mn)-1):
+        if int(mn[t]) &gt; int(mn[t+1]): r = False
+    if r: ascending.append(m)
+
+
+print(ascending)
+print(len(ascending))
+
+# [138, 148, 158, 186, 249, 284, 346, 383, 385, 457, 467, 482, 583, 643, 681, 754, 764, 831, 841, 851, 942]
+# 21
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/02 22:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">olclocr</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10522"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">ans=[]
+for num in range(100,1000):
+    t = [a for a in str(num)]
+    t.reverse()
+    rev_num = int(&quot;&quot;.join(t))
+    num_multiplied = num * rev_num
+    t2 = [a for a in str(num_multiplied)]
+    if t2 == sorted(t2):
+        ans.append(num) 
+len(ans) # 21  
+</code></pre>
+
+<p>파이선 3.6입니다</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/05 20:15</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Seohyun Choi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10711"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def reverseincrease(n,m):
+    result = 0
+    for i in range(n,m+1):
+        a = str(i*int(str(i)[::-1]))
+        if all([a[j] &lt;= a[j+1] for j in range(len(a)-1)]):
+            result += 1
+    return result
+
+
+print(reverseincrease(100, 999))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/14 17:24</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김동하</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11187"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <h3 id="python3">python3</h3>
+<pre><code class="python">def palindrome(n):
+    '수를 뒤집어 리턴한다'
+    s = str(n)
+    return int(s[::-1])
+
+def is_incr(n):
+    '증가수인가?'
+    s = str(n)
+    #인접한 두수의 차 리스트를 구할때,
+    #[a - b for a, b in zip(a, a[1:])]를 사용할 수 있다
+    diff = [int(a) - int(b) for a, b in zip(s, s[1:])]
+    for i in diff:
+        if i &gt; 0:
+            return False
+    return True
+
+#참의 갯수를 카운트할때, 
+#sum(bool(n) for n in iterable),
+#sum(map(bool, iterable) 형태로 사용할 수 있다
+print(sum(bool(n) for n in range(100, 1000) if n % 10 != 0 and is_incr(n * palindrome(n))))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/03/18 09:39</p>
+                                <p class="static-profile" style="margin:0;padding:0;">디디</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11811"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="scala">    var x = 0
+    var y = &quot;&quot;
+    var ans = 0
+    var bool = false
+    for(i &lt;- 100 until 1000){
+        bool = true
+        x = i.toString.reverse.toInt
+        y = (i * x).toString
+        for(j &lt;- 1 until y.length){
+            if(y(j) &lt; y(j - 1)) bool = false
+        }
+        if(bool) ans += 1
+
+      // if(y == y.sorted){
+        //     ans += 1
+        // }
+    }
+    println(ans)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/04/18 15:13</p>
+                                <p class="static-profile" style="margin:0;padding:0;">한강희</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11820"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Swift입니다.</p>
+<pre><code class="no-highlight">import Foundation
+
+func countNumber() -&gt; Int {
+    var count = 0
+    for number in 100...999 {
+        if number % 10 != 0 {
+            let reversedNumber = Int(String(String(number).reversed()))!
+            let result = Array(String(number * reversedNumber))        
+            if result.reduce(0, {($0 &gt;= 0 &amp;&amp; $0 &lt;= Int(String($1))!) ? Int(String($1))! : -1}) &gt; 0 {
+                print(&quot;\(number) x \(reversedNumber) = \(number * reversedNumber)&quot;)
+                count += 1
+            }
+        }
+    }
+    return count
+}
+
+print( &quot;Total count = \(countNumber())&quot;)
+
+</code></pre>
+
+<p>결과는 21개.</p>
+<pre><code class="no-highlight">138 x 831 = 114678
+148 x 841 = 124468
+158 x 851 = 134458
+186 x 681 = 126666
+249 x 942 = 234558
+284 x 482 = 136888
+346 x 643 = 222478
+383 x 383 = 146689
+385 x 583 = 224455
+457 x 754 = 344578
+467 x 764 = 356788
+482 x 284 = 136888
+583 x 385 = 224455
+643 x 346 = 222478
+681 x 186 = 126666
+754 x 457 = 344578
+764 x 467 = 356788
+831 x 138 = 114678
+841 x 148 = 124468
+851 x 158 = 134458
+942 x 249 = 234558
+Total count = 21
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/04/20 04:38</p>
+                                <p class="static-profile" style="margin:0;padding:0;">졸린하마</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12012"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">// 자바입니다
+        int cnt = 0;
+        for (int i=101; i&lt;1000; i++) {
+            if(i%10 != 0) {
+                StringBuffer sb = new StringBuffer(String.valueOf(i));
+                int rev = Integer.parseInt(sb.reverse().toString());
+                int search = i*rev;
+                String s = String.valueOf(search);
+                boolean acend = true;
+                for (int j=0, k=1; j&lt;s.length()-1; j++, k++) {
+                    if(s.charAt(j) &gt; s.charAt(k)) {
+                        acend = false;
+                                                break;
+                                }
+                }
+                if(acend)
+                    cnt++;
+            }
+        }
+        System.out.println(cnt);
+// 21개 맞나요? ㅋㅋ
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/04 12:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">정몽준</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12159"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def isincreasing(number):
+    lst = list(str(number))
+
+    lst2 = sorted(lst)
+
+    if lst == lst2:
+        return True
+    else:
+        return False
+
+
+count = 0
+for number in range(100,1000):
+    res = number * int(str(number)[::-1])
+
+    a = isincreasing(res)
+    if a == True:
+        count += 1
+    else:
+        pass
+
+print(count)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/09 00:55</p>
+                                <p class="static-profile" style="margin:0;padding:0;">최우성</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13020"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python</p>
+<pre><code class="python">ans = 0
+for x in range(100, 1000):
+    if str(x)[-1] == &quot;0&quot;:
+        continue
+    #if x &gt; int(str(x)[::-1]):
+    #    continue
+    y = str(x*int(str(x)[::-1]))
+    for i in range(len(y)-1):
+        if y[i] &gt; y[i+1]:
+            break
+    else:
+        ans += 1
+print(ans)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/18 15:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Taesoo Kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13751"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">isincnum = lambda n: ''.join(sorted(i for i in str(n))) == str(n)
+print( sum(isincnum(i * int(str(i)[::-1])) for i in range(101,1000) if i%10) )
+# 21
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/25 03:03</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14435"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">result=[]
+count=0
+ans=0
+
+for i in range(100,1000):
+    result=str(i)
+    #마지막 자릿수가 0인지 체크
+    if result[-1] == '0':
+        continue
+
+    #3글자수를 거꾸로해서 곱함
+    test=str(eval(result+'*'+result[::-1]))
+
+    #증가수인지 체크
+    for j in range(1,len(test)):
+            if test[j] &gt;= test[j-1]:
+                count+=1
+                if count == (len(test)-1):
+                    ans+=1
+                    count=0
+                continue
+            elif test[j] &lt; test[j-1]:
+                count=0
+                break
+print(ans)
+
+#21
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/30 15:31</p>
+                                <p class="static-profile" style="margin:0;padding:0;">S.H</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15510"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="r">ct &lt;- 0
+for (i in 100:999){
+  if (i %% 10 == 0){
+    next()
+  }
+
+  i_r &lt;- strsplit(as.character(i), '')[[1]]
+  i_r_n &lt;- as.numeric(paste(i_r[length(i_r):1], sep = '', collapse = ''))
+  t &lt;- i * i_r_n
+  t_r &lt;- as.numeric(strsplit(as.character(t), '')[[1]])
+
+  if (all(sort(t_r) == t_r)){
+    ct &lt;- ct + 1
+  }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/12/12 10:41</p>
+                                <p class="static-profile" style="margin:0;padding:0;">physche</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16185"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">i = 0
+for x in range(100,1000):
+    x = str(x* int(str(x)[::-1]))
+    if sorted(x) == list(x):
+        i += 1
+print(i)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/01/23 13:31</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김영성</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16535"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def is_increase(n):
+    num = list(map(int, str(n)))
+    if num == sorted(num):
+        return True
+    else:
+        return False
+
+def change(n):
+    result = ''
+    num = list(str(n))
+    num.reverse()
+    for i in num:
+        result += i
+    return int(result)
+
+count = 0
+
+for i in range(100, 1000):
+    if is_increase(i * change(i)):
+        count += 1
+
+print(count)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/02/08 15:14</p>
+                                <p class="static-profile" style="margin:0;padding:0;">D.H.</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16979"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def rev(n):
+    a=list(str(n))
+    a.reverse()
+    revstring=''
+    for i in a:
+        revstring+=str(i)
+    return int(revstring)
+
+def increasing(n):
+    a=list(str(n))
+    a.sort()
+    if a==list(str(n)):
+        return True
+    else:
+        return False
+
+count=0
+for i in range(100,999):
+    if i%10==0:
+        continue
+    elif increasing(i*rev(i)):
+        count+=1
+    else:
+        continue
+
+print(count)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/03/02 19:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">ykleeac</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17963"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def is_inc(n):
+    L = list(str(n))
+    return L == sorted(L)
+
+def pal_mul(n):
+    return n * int(str(n)[::-1])
+
+print(sum( is_inc(pal_mul(n)) for n in range(100, 1000) ))  #21
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/21 18:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">messi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17971"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def reverser(ls):
+    a_list=[]
+    for y in ls:
+        a_list.append(y)
+    for x in range(len(ls)):
+        a_list[x] = ls[len(ls)-(x+1)]
+    return a_list
+
+def final_number(n):
+    number_list = []
+    number_string =&quot;&quot;
+    for x in str(n):
+        number_list.append(x)
+    reversed_list = reverser(number_list)
+    for y in reversed_list:
+        number_string+=y
+    fin_num=int(number_string)*n
+    return fin_num
+
+def increasing_num(x):
+    num_string = str(final_number(x))
+    boolean_list =[]
+    for a in range(len(num_string)-1):
+        if int(num_string[a])&lt;=int(num_string[a+1]):
+            boolean_list.append('T')
+        else:
+            boolean_list.append('F')
+    if 'F' in boolean_list:
+        return False
+    else:
+        return True
+
+counter=0            
+for x in range(100,1000):
+    if increasing_num(x)==True:
+        counter+=1
+print(counter)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/21 21:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박범수</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20097"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">public class 자릿수를뒤바꿔곱했을때증가수가되는수 {
+
+    public static void main(String[] args) {
+
+        ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;();
+        for(int i=101; i&lt;1000; i++) {
+            if(i%10==0) {
+                continue;
+            }
+            int a = i/100;
+            int b = (i/10)%10;
+            int c = i%10;
+            list.add(Integer.toString(i*(c*100+b*10+a)));
+        }
+
+        int count = 0;
+        for(int i=0; i&lt;list.size(); i++) {
+            String[] str = list.get(i).split(&quot;&quot;);
+            int[] nums = Arrays.stream(str).mapToInt(Integer::parseInt).toArray();
+            int N = 0;
+            for(int j=0; j&lt;nums.length-1; j++) {
+                if(nums[j]&lt;=nums[j+1]) {
+                    N++;
+                }
+            }
+            if(N==nums.length-1) {
+                count++;
+            }
+        }
+        System.out.println(count);
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/12/01 18:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">big Ko</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20191"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def zouka(num, cou) :
+    if num &gt;= 1000 : 
+        return print(cou)
+    s = &quot;&quot;.join(list(reversed(list(str(num)))))
+    while s[0] == '0' :
+        s = s[1:]
+    su = eval(s+'*'+ str(num))
+    if &quot;&quot;.join(sorted(list(str(su)))) == str(su) : # 증가수 판별
+        return zouka(num+1, cou+1)
+    else :
+        return zouka(num+1, cou)
+zouka(100, 0)
+</code></pre>
+
+<p>결과</p>
+<pre><code>21
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/12/16 17:45</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GG</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20612"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">count=0
+for n in range(100,1000):
+    nn=n*int(str(n)[::-1])
+    if list(map(int,str(nn)))==sorted(list(map(int,str(nn)))): #만약 곱한 결과가 증가수가 맞다면 그대로 각 자리의 수를 리스트화한 것과 이를 정렬한 리스트와 같아야함.
+            count+=1
+print(count) #21
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/18 11:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박시원</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20809"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">count =0
+for i in range(101,1000):
+    num_str1 =&quot;&quot;
+    num_str2 =&quot;&quot;
+    sum_str = &quot;&quot;
+    sum_sort_str =&quot;&quot;
+    num_int1 = 0
+    num_int2 = 0
+    sum_int = 0
+    sum_list = []
+    sum_list_int =[]
+    sum_sort_list =[]
+    temp_sum_int = 0
+
+    num_str1 = str(i)
+
+    if num_str1[-1] == &quot;0&quot;:
+        continue
+    else:
+        for j in range(1,len(num_str1)+1):
+            num_str2 += num_str1[-j]
+    num_int1 = int(num_str1)
+    num_int2 = int(num_str2)
+    sum_int = num_int1 * num_int2
+    sum_str = str(sum_int)
+    sum_list = list(sum_str)
+    for n in sum_list:
+        sum_list_int.append(int(n))
+
+    sum_list_int.sort()
+
+    for k in sum_list_int:
+        sum_sort_list.append(str(k))
+    sum_sort_str = &quot;&quot;.join(sum_sort_list)
+
+    if sum_str == sum_sort_str:
+        count +=1
+print(count)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/02/02 18:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">semipooh</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_21471"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">num=0
+for i in range (100,1000):
+    ii=str(i)
+    ir=int(ii[2])*100+int(ii[1])*10+int(ii[0])
+    if i%10==0:
+        iir=0
+    else:
+        iir=i*ir
+    iirstr=str(iir)
+    j=0
+    while j in range (0,len(iirstr)-1):
+        if iirstr[j]&gt;iirstr[j+1]:
+            break
+        if j+1==len(iirstr)-1:
+            num=num+1
+            print (i,ir,iir,num)
+        j=j+1
+print('answer=',num)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/03/20 03:13</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Buckshot</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_21545"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def cal_increasing_number():
+    list_a = []
+    result = []
+    for i in range(100, 1000):
+        if str(i)[-1] != '0':
+            list_a.append(str(i * int(str(i)[::-1])))
+
+    for x in range(0, len(list_a)):
+        flg_a = 0
+        for y in range(0, len(list_a[x]) - 1):
+            if int(list_a[x][y]) &gt; int(list_a[x][y + 1]):
+                flg_a = 1
+        if flg_a == 0:
+            result.append(list_a[x])
+
+    return len(result)
+
+
+print(cal_increasing_number())
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/03/27 13:29</p>
+                                <p class="static-profile" style="margin:0;padding:0;">inca1735</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22231"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">num = [str(i * int(str(i)[::-1])) for i in range(100, 1001) if str(i)[-1] != '0']
+cnt = 0
+for i in num:
+    l = 0
+    bn = i[0]
+    for j in i[1:]:
+        if int(j) &lt; int(bn):
+            break
+        else:
+            l += 1
+            bn = str(j)
+        if l == len(i)-1:
+            cnt += 1
+print(cnt)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/09 15:31</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hwaseong Nam</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22269"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def find_increasing_nums():
+    count = 0
+    def check_increasing(n):
+        str_n = str(n)
+        for i in range(len(str_n) - 1):
+            if str_n[i] &gt; str_n[i + 1]:
+                return False
+        return True
+    def reversed_num(n):
+        return int(str(n)[::-1])
+    for i in range(100, 1000):
+        if i % 10 != 0 and check_increasing(i * reversed_num(i)):
+            count += 1
+    return count
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/11 01:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김준혁</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22384"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">uppernumber = 0
+for a in range(100,1000):
+    b = (str(a)[::-1])
+    c = str(int(a)*int(b))
+    count = 0
+    for i in range(0,len(c)-1):
+        if int(c[i]) &lt;= int(c[i+1]):
+            count += 1
+        else:
+            continue
+    if count == len(c)-1:
+        uppernumber += 1
+    else:
+        continue
+uppernumber
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/20 17:16</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Money_Coding</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22643"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬3입니다.</p>
+<pre><code class="python">nList = [x*int(str(x)[::-1]) for x in range(100,1000) if str(x)[2] != '0' ]
+cnt = 0
+
+for x in nList :
+    if all([str(x)[n] &gt;= str(x)[n-1] for n in range(1,len(str(x)))]) :
+        cnt += 1
+
+print(f'There are {cnt} plus numbers between 100 and 999')
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/06/29 11:12</p>
+                                <p class="static-profile" style="margin:0;padding:0;">누마루</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23844"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def isIncrease(n):
+    x = n * int(str(n)[::-1])
+    jud = [True if str(x)[i] &lt;= str(x)[i + 1] else False for i in range(len(str(x)) - 1)]
+    return True if False not in jud else False
+
+
+num = [i if str(i)[-1] != '0' else '' for i in range(100, 1000)]
+result = [isIncrease(i) if i != '' else False for i in num]
+print(result.count(True))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/12/01 14:43</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김우석</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24273"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>def change_number(number):</p>
+<pre><code>  str_number=str(number)
+
+  list_number=list(str_number)
+
+  list_number.reverse()
+
+  str_numbers="".join(list_number)
+
+  return int(str_numbers)
+
+def up_number(number):
+
+  list_number=list(str(number))
+
+  a=list_number
+
+  a.sort()
+
+  b=int(''.join(a))
+
+  if number==b:
+
+    return True
+
+  else:
+
+    return False
+
+def find_up_number(start_number,end_number):
+
+  count=0
+
+  for i in range(start_number,end_number+1,1):
+
+    if i%10!=0:
+
+      for_answer=i*change_number(i)
+
+      if up_number(for_answer)==True:
+
+        count+=1
+
+  return count
+
+def main():
+
+  print(find_up_number(100,999))
+
+main()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/01/10 12:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">전준혁</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24528"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def add(N):
+    M = &quot;&quot;
+    for i in N:
+        M += i
+    return M
+
+final = 0
+
+for i in range(100, 1000):
+    N = list(str(i))
+    N.reverse()
+    N = add(N)
+    check = list(str(i * int(N)))
+    test = 0
+    for j in range(len(check)-1):
+        if int(check[j]) &gt; int(check[j+1]):
+            test = 1
+    if test == 0:
+        print(check)
+        final += 1
+print(final)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/01/30 17:38</p>
+                                <p class="static-profile" style="margin:0;padding:0;">BlakeLee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25004"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">total=0
+for i in range(100,1000):
+    count=0
+    a=i*int(str(i)[::-1])
+    for j in range(len(str(a))-1):
+        if int(str(a)[j])&lt;=int(str(a)[j+1]):
+            count+=1
+    if count==len(str(a))-1:
+        total+=1
+
+
+print(total)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/03/19 22:02</p>
+                                <p class="static-profile" style="margin:0;padding:0;">fox.j</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25601"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def increase(num):
+    result = True
+    for i in range(1, len(num)):
+        if num[i] &lt; num[i-1]:
+            result = False
+            break
+
+    return result
+
+def reverse_mult(num):
+    num_reverse = num[-1::-1]
+
+    return str(int(num_reverse)*int(num))
+
+if __name__ == '__main__':
+    cnt = 0
+    for numbers in range(100,1000):
+        if increase(reverse_mult(str(numbers))):
+            cnt += 1
+            print('{} / {}'.format(numbers, cnt))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/06/23 11:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">DSHIN</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26451"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#codingdojing_palindrome_up
+
+cnt = 0
+for i in range(100,1000):
+    if str(i)[-1] != '0':
+        result = i*int(str(i)[::-1])
+        if result == int(''.join(sorted(str(result)))):
+            cnt += 1
+
+print(cnt) #21
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/10/11 19:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jaeman Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26455"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">count=0
+for i in range(100,1000):
+    l=list(str(i*int(str(i)[::-1])))
+    if l==sorted(l): count+=1
+print(count)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/10/11 20:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">LSW</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26504"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># 숫자뒤집기
+def rev(n: int) -&gt; int:
+  s = 0
+  while n &gt; 0:
+    n, r = divmod(n, 10)
+    s = s * 10 + r
+  return s
+
+# 증가수인지
+def is_asc(n: int) -&gt; bool:
+  x = n % 10
+  while n &gt; 0:
+    n, r = divmod(n, 10)
+    if x &lt; r:
+      return False
+    x = r
+  return True
+
+# 조건에 맞는지
+def test(n):
+  return is_asc(n * rev(n))
+
+# 확인
+print(sum(1 for x in range(100, 1000) if x % 10 &gt; 0 and test(x)))
+# ==&gt; 21
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/10/19 16:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">룰루랄라</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26992"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#역순 함수
+def Reverse (a):
+    b = list(str(a))
+    b.reverse()
+    c =int(&quot;&quot;.join(b))
+    return c
+
+#증가수 여부 판단 함수
+def Judge (a):
+    b= list(map(int,list(str(a))))
+    if b==list(sorted(b)):
+        return True
+    else:
+        return False
+
+cnt =0
+for i in range(100,1000):
+    if i%10 !=0 and Judge(i*Reverse(i)):
+        cnt+=1
+
+print(cnt)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/09 12:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">양캠부부</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27173"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>// Rust</p>
+<p>use std::collections::HashSet;
+fn range_rev_mul_increasing(i: u32, j: u32) -&gt; HashSet<u32> {</p>
+<pre><code>let mut result = HashSet::new();
+for n in i..=j {
+    if n % 10 == 0 || result.contains(&amp;n) { continue; }
+    let m = rev_number(n);
+    if is_increasing_number(n * m) {
+        result.insert(n);
+        result.insert(m);
+    }; 
+}
+result
+</code></pre>
+<p>}
+fn rev_number(n_: u32) -&gt; u32 {</p>
+<pre><code>let mut n = n_;
+let mut m = 0;
+while n &gt; 0 {
+    m = n % 10 + 10 * m;
+    n /= 10;
+}
+m
+</code></pre>
+<p>}
+fn is_increasing_number(n_: u32) -&gt; bool {</p>
+<pre><code>assert!(n_ &gt;= 10);
+let mut n = n_;
+while n &gt;= 10 {
+    if n % 10 &lt; (n / 10) % 10 {
+        return false;
+    }
+    n /= 10;
+}
+true
+</code></pre>
+<p>}</p>
+<h1 id="test">[test]</h1>
+<p>fn t() {</p>
+<pre><code>assert_eq!(range_rev_mul_increasing(100, 999).iter().count(), 21);
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/28 23:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">JW KIM</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27362"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">cnt = 0
+
+def mul_reverse(n):
+    return n*(int(''.join([x for x in str(n)[::-1]])))
+
+def plus(n):
+    digits = len(str(n))     
+    return [int(str(n)[x]) &gt;= int(str(n)[x-1])  for x in range(1,digits)].count(False)
+
+for i in range(100,1000):
+    if plus(mul_reverse(i)) == 0:
+        cnt += 1
+
+print(cnt)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/02/17 15:27</p>
+                                <p class="static-profile" style="margin:0;padding:0;">로만가</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27419"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package org.javaturotials.ex;
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class test {
+    public static void main(String[] args) {    
+    int count=0;
+for(int i=100; i&lt;1000; i++) {
+    int cnt =0;
+    String ints = String.valueOf(i);
+    StringBuffer ac = new StringBuffer(ints);
+    String rev = ac.reverse().toString();
+    int revint = Integer.valueOf(rev);
+    int mul = i *revint;
+    String muls = String.valueOf(mul);
+    String[] arr = muls.split(&quot;&quot;);
+    int[] irr = new int[arr.length];
+    int[] rirr = new int[arr.length];
+    for(int j=0; j&lt;arr.length; j++) {
+        irr[j] = Integer.valueOf(arr[j]);
+        rirr[j] = Integer.valueOf(arr[j]);
+    }
+    Arrays.sort(rirr);
+    for(int z=0; z&lt;irr.length; z++) {
+        if(irr[z]==rirr[z]) cnt++;
+    }
+    if(cnt==irr.length) {
+        count++;
+    }
+}
+System.out.println(count);      
+    }
+    }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/02/21 13:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Kkubuck</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29688"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">using System;
+using System.Collections.Generic;
+
+namespace solution
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List&lt;int&gt; lst = new List&lt;int&gt;();
+            for (int num = 100; num &lt; 1000; num++)
+            {
+                if(num % 10 != 0)
+                    lst.Add(num * reverseNum(num));
+            }
+
+            int cnt = 0;
+            for (int i = 0; i &lt; lst.Count; i++)
+            {
+                if (isIncreasingNumber(lst[i]))
+                    cnt++;
+            }
+            Console.WriteLine(&quot;\n 증가수가 되는 수는 모두 {0} 개 &quot;, cnt);
+        }
+
+        private static bool isIncreasingNumber(int num)
+        {
+            string strSu = num.ToString();
+            for (int i = 0; i &lt; strSu.Length-1; i++)
+            {
+                if (strSu[i] &gt; strSu[i + 1])
+                    return false;
+            }
+            return true;
+        }
+
+        private static int reverseNum(int num)
+        {
+            string str = &quot;&quot;;
+            while (num &gt; 0)
+            {
+                str += (num % 10).ToString();
+                num /= 10;
+            }
+            return int.Parse(str);
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/10/08 22:36</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

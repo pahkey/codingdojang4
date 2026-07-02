@@ -1,0 +1,2842 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="놀이공원에 가면 인형 맞추기 게임이 있다.
+
+한 놀이공원에는 인형에 숫자를 써놓고 인형 맞추기를 한다.
+
+그런데 맞춘 인형의 숫자의 합이 특정한 값이 되는 경우에만 맞춘 인형을 가져 갈 수 있다.
+
+가령 10개의 인형에 쓰여진 숫자가 ...">
+    <title>놀이공원 인형 맞추기 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">놀이공원 인형 맞추기</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">6</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 3</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>놀이공원에 가면 인형 맞추기 게임이 있다.</p>
+<p>한 놀이공원에는 인형에 숫자를 써놓고 인형 맞추기를 한다.</p>
+<p>그런데 맞춘 인형의 숫자의 합이 특정한 값이 되는 경우에만 맞춘 인형을 가져 갈 수 있다.</p>
+<p>가령 10개의 인형에 쓰여진 숫자가 각각 25 27 3 12 6 15 9 30 21 19이고 숫자의 합이 50이 되는 경우만 인형을 가져갈수 있다면 6 19 25가 쓰여진 인형을 맞춰야 인형을 가져 갈 수 있다.</p>
+<p>이때 인형의 갯수와 각각의 숫자와 필요한 합을 입력받으면 맞춰야 하는 인형의 숫자를 출력하는 프로그램을 작성해 보자. </p>
+<p>입력 - 첫줄에는 인형의 갯수와 필요한 합, 둘째줄에는 인형 각각에 쓰여진 숫자</p>
+<p>예)</p>
+<p>10 50</p>
+<p>25 27 3 12 6 15 9 30 21 19</p>
+<p>출력 - 필요한 합이 되는 인형 각각의 숫자를 오름차순으로 출력</p>
+<p>예)</p>
+<p>6 19 25</p>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2016/10/18 22:10</p>
+                    <p class="static-profile" style="margin:0;padding:0;">Lee Gorden</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>39개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_5532"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">2</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">len_, sum_ = map(int, input(&quot;:&quot;).split(' '))
+list_ = list(map(int, input(&quot;:&quot;).split(' ')))
+result = [sorted(x) for x in [[list_[i] for i in range(len(list_)) if j &amp; (1 &lt;&lt; i)]
+                              for j in range(1, 1 &lt;&lt; len(list_))]
+              if sum(x) == sum_]
+print('\n'.join([','.join(map(str, x)) for x in result]))
+
+</code></pre>
+
+<p>Python 3.5.2에서 작성하였습니다.<br>
+bit연산으로 부분집합을 구해서 풀었습니다.<br></p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/12/09 09:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Yeo HyungGoo</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1940"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">와 정말 뭐가뭔지 모르겠어요. 
+혹시 여유가 되시면 bit 연산을 어떻게 응용했는지 설명좀 부탁드립니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Dr.Choi,
+                                    2017/01/10 00:48
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1941"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">전체 부분 집합을 만드는 방법이 진짜 신박한데 너무 궁금해요!!!!</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Dr.Choi,
+                                    2017/01/10 01:55
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1942"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">무식하게 풀었는데 감사합니다..^^;;
+배열 수 만큼의 길이의 bit를 나열하고 1 이되는 자리수의 값을 배열로 묶어서 부분집합을 만들었습니다.
+[0, 1, 2]
+1 : 0 0 1 : [2]
+2 : 0 1 0 : [1]
+3 : 0 1 1 : [1, 2]
+4 : 1 0 0 : [0]
+5 : 1 0 1 : [0, 2]
+6 : 1 1 0 : [0, 1]
+7 : 1 1 1 : [0, 1, 2]</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Yeo HyungGoo,
+                                    2017/01/10 09:41
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4996"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>java로 작성해봤습니다
+지적 환영합니다</p>
+<pre><code class="java">import java.util.*;
+import java.io.*;
+
+public class doll {
+
+    public static void main(String[] args) throws FileNotFoundException {
+        Scanner sc = new Scanner(new File(&quot;c:/oop/doll.txt&quot;));
+        int n = sc.nextInt();
+        int mubiao = sc.nextInt();
+        ArrayList&lt;Integer&gt; nums = new ArrayList&lt;Integer&gt;();
+        boolean[] result = new boolean[n];
+        Random ran = new Random();
+        while (sc.hasNext()){
+            nums.add(sc.nextInt());
+        }
+        Collections.sort(nums);
+        int sum=0;
+        while(sum!=mubiao){
+            sum=0;
+            for(int i=0; i&lt;n;i++){
+                result[i]=ran.nextBoolean();
+                if (result[i]==true) sum+=nums.get(i);
+            }
+        }
+        for(int i=0; i&lt;n;i++){
+            if (result[i]==true) System.out.print(nums.get(i)+&quot; &quot;);
+
+
+        }
+
+    }
+
+}
+
+</code></pre>
+
+<p>입력 값(doll.txt)
+10 50</p>
+<p>25 27 3 12 6 15 9 30 21 19</p>
+<p>실행결과 
+6 19 25</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/19 09:55</p>
+                                <p class="static-profile" style="margin:0;padding:0;">장핌</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5035"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">while __name__ == '__main__':
+    res = []
+    for s in ['a, b', 'c']:
+        exec(s + ''' = [*map(int, input('&gt;&gt;&gt;').split())]''')
+    _ = [*([*(res.append(j) for j in __import__('itertools').combinations(c, i+1) if sum(j) == b)] for i in range(a))]
+    for i in res:
+        print(i)
+</code></pre>
+
+<p>속도는 고려하지 않았습니다. 10개 수준에서는 즉시 나옵니다. 파이썬 3.5.2 64</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/21 23:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Flair Sizz</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1877"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">멋진 풀이입니다^^
+list(map(...)) == [*map(...)] 인줄 이제 알았네요~
+컴프리헨션안에 append 사용하는것도 _ 변수로 처리하는것도 인상적이네요</span>
+                                -
+                                <span style="font-size:11px;">
+                                    디디,
+                                    2016/10/27 11:24
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1884"></a>
+                            <div class="comment_line comment-content">
+                                
+                                    <span style="color:orangered;">+1</span>
+                                
+                                <span style="white-space:pre-wrap;">while __name__ == &#39;__main__&#39;:
+    
+    for s in [&#39;a, b&#39;, &#39;c&#39;]:
+        exec(s + &#39;&#39;&#39; = [*map(int, input(&#39;&gt;&gt;&gt;&#39;).split())]&#39;&#39;&#39;)
+        
+    for res in (j for i in range(a) for j in __import__(&#39;itertools&#39;).combinations(c, i+1) if sum(j) == b):
+        print(sorted(res))
+
+그런데, append 하지 않아도 이렇게 하는것이 더 자연스러워 보여 올려봤습니다. Flair sizz님 풀이 공부하면서요.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    디디,
+                                    2016/10/28 11:47
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5218"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>입력을 다 처리했다 치면 <code>main()</code>은 아래처럼 만들어볼 수 있다.</p>
+<pre><code class="c">int main(int argc, const char * argv[]) {
+    int ns[] = {25,27,3,12,6,15,9,30,21,19};
+    nsum(ns, 10, 50);
+    return 0;
+}
+</code></pre>
+
+<p><code>nsum()</code>은 숫자들로 합계를 만들어보고 가능하면 그 값들을 출력해준다.</p>
+<p>마치 여러가지 동전들로 특정 금액 만드는 문제와 비슷하다.
+처음부터 하나씩 넣어보고(<code>dfs</code>) sum을 만들어보자.</p>
+<pre><code class="c">void nsum(int ns[], int len, int sum) {
+    int* answer = (int*)malloc(sizeof(int) * len);
+
+    int* answer2 = dfs(ns, len, 0, answer, sum); // 0번부터 시작!
+    if (answer2) {
+        for (int* i=answer; i &lt; answer2; i++) {  // 답을 찾았으면 숫자들 출력
+            printf(&quot;%d &quot;, *i);
+        }
+        printf(&quot;\n&quot;);
+    } else {
+        printf(&quot;impossible\n&quot;);
+    }
+
+    printf(&quot;%d steps\n&quot;, step); // 184
+    free(answer);
+}
+</code></pre>
+
+<p><code>dfs</code>는 i번째 위치의 숫자를 넣는 경우와 넣지 않는 경우로 모든 경우를 검사한다.
+그전에 재귀의 끝을 확인한다.</p>
+<pre><code class="c">int* dfs(int ns[], int len, int i,
+         int* answer, int sum) {
+    if (sum == 0) // 답을 찾았다!
+        return answer;
+    if (i == len) // 더이상 처리할 숫자가 없다.
+        return 0;
+
+    // i를 넣거나
+    *answer = ns[i];
+    int *answer2 = dfs(ns, len, i+1, answer+1, sum-ns[i]);
+    if (answer2) return answer2;
+
+    // 넣지 않거나
+    return dfs(ns, len, i+1, answer, sum);
+}
+</code></pre>
+
+<p>그런데, 이러면 모든 경우를 살펴보는 것이고.. 미리 숫자가 정렬되어 있으면
+앞으로 만들어야하는 합보다 남은 숫자들이 더 큰 경우 더 이상 테스트해볼 필요가 없다.
+(예, 10을 만들어야 하는데 11, 12, 13..이 남았다면 11뿐만 아니라 12, 13도 살펴볼 필요가 없다)</p>
+<p>미리 정렬 해 놓고,</p>
+<pre><code class="c">int intComp(const void* a, const void* b) {
+    return *(int*)a == *(int*)b ? 0 : *(int*)a &gt; *(int*)b ? 1 : -1;
+}
+
+void nsum(int ns[], int len, int sum) {
+    qsort(ns, len, sizeof(int), intComp);
+    ...
+}
+</code></pre>
+
+<p><code>dfs()</code>에서 만들 <code>sum</code>이 현재 값 <code>ns[i]</code>보다 작으면 <code>i</code> 뒤로는 볼 필요없다.</p>
+<pre><code class="c">int* dfs(int ns[], int len, int i,
+         int* answer, int sum) {
+    if (sum == 0) // 답을 찾았다!
+        return answer;
+    if (i == len) // 더이상 처리할 숫자가 없다.
+        return 0;
+    if (ns[i] &gt; sum) // i 뒤로는 볼 필요 없다.
+        return 0;
+
+    ...
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/11/09 10:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Han Jooyung</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4998"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Java</p>
+<ul>
+<li>이진수를 이용해 모든 경우의 합을 계산하고 일치할 때 출력.</li>
+<li>break 문을 넣으면 처음 일치하는 경우만 출력.</li>
+</ul>
+<pre><code class="java">import java.util.Scanner;
+import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
+import java.util.regex.Pattern;
+
+public class TargetDolls {
+    public static void process(String input1, String input2) {
+        String[] inputList1 = Pattern.compile(&quot; &quot;).split(input1);
+        int size = Integer.parseInt(inputList1[0]);
+        int targetSum = Integer.parseInt(inputList1[1]);
+        int[] sortedList = Pattern.compile(&quot; &quot;).splitAsStream(input2)
+                .mapToInt(Integer::parseInt).sorted().toArray();
+        int binaryMax = (int)Math.pow(2d, (double)size);
+        for (int i = 1; i &lt; binaryMax; i++) {
+            if (computeSum.apply(i, sortedList) == targetSum) {
+                showResult.accept(i, sortedList);
+                //break;
+            }
+        }
+    }
+
+    private static BiFunction&lt;Integer, int[], Integer&gt; computeSum = (caseNum, values) -&gt; {
+        int pos = 0, sum = 0;
+        while (caseNum &gt; 0) {
+            sum += caseNum % 2 == 1 ? values[pos]:0;
+            pos++;
+            caseNum = caseNum/2;
+        }
+        return sum;
+    };
+
+    private static BiConsumer&lt;Integer, int[]&gt; showResult = (caseNum, values) -&gt; {
+        int pos = 0;
+        while (caseNum &gt; 0) {
+            System.out.print(caseNum % 2 == 1 ? values[pos]+&quot; &quot;:&quot;&quot;);
+            pos++;
+            caseNum = caseNum/2;
+        }
+        System.out.println();
+    };
+
+    public static void main(String[] args) {
+        try (Scanner sc = new Scanner(System.in)) {
+            String input1 = sc.nextLine();
+            String input2 = sc.nextLine();
+            TargetDolls.process(input1, input2);
+        }
+    }
+}
+</code></pre>
+
+<h1 id="_1">결과</h1>
+<ul>
+<li>입력: 5 10</li>
+<li>입력: 1 2 3 4 5</li>
+<li>1 2 3 4 </li>
+<li>2 3 5 </li>
+<li>1 4 5</li>
+</ul>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/19 14:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">compert</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5006"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<p>두가지로 풀었습니다. 첫째, combination. 둘째, 인형의 수가 아주 많아질 경우를 상정한 conditional combination구현.</p>
+<pre><code class="ruby">def lottery_game
+  (n, sum), nums = 2.times.map { gets.split.map(&amp;:to_i) }
+  (1..n).flat_map {|i| nums.combination(i).select {|e| e.sum(0) == sum } }
+        .map {|e| puts e.sort.join(' ') }
+end
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby">$stdin = StringIO.new(&quot;10 50\n25 27 3 12 6 15 9 30 21 19\n&quot;)
+expect { lottery_game }.to output(&quot;6 19 25\n&quot;).to_stdout
+</code></pre>
+
+<p><strong>Output</strong></p>
+<pre><code class="ruby">lottery_game
+10 50
+25 27 3 12 6 15 9 30 21 19
+</code></pre>
+
+<p><strong>Ruby - Conditional combination</strong></p>
+<p>combination 생성범위를 줄이기 위해서 두가지 조건을 줍니다. combination(depth+1)은 head, rest[1,1]로 생성하는데 둘의 합이 50보다 클 때만 생성합니다. combination(depth)는 head, rest[0]과 rest[1..-1]중 한개의 수로 생성하는데, 앞의 head와 rest[0]합이 sum보다 작거나 같을 때만 동작합니다. 범위가 극단적으로 줄어드므로 훨씬 빠릅니다. 재귀로 구현했는데 깔끔치는 않네요.</p>
+<pre><code class="ruby">def lottery_game_fast
+  (n, sum), nums = 2.times.map { gets.split.map(&amp;:to_i) }
+  comb = -&gt;head,rest,out do
+    return out if (head + rest).empty?
+    if rest.empty?
+      head.sum == sum ? out &lt;&lt; head : out
+    else
+      comb[head +[rest[0]], rest[1..-1], out] if head.sum(0) &lt;= sum - rest[0]
+      (head + rest[1..-1]).sum(0) &gt;= sum ? comb[head, rest[1..-1], out] : out
+    end
+  end
+
+  puts comb[[],nums,[]].map {|e| e.sort.join(' ') }
+end
+</code></pre>
+
+<p><strong>Performance</strong></p>
+<pre><code class="ruby">$stdin = StringIO.new(&quot;10 50\n25 27 3 12 6 15 9 30 21 19\n&quot;)
+puts Benchmark.realtime { lottery_game } 
+6 19 25
+0.0011008729925379157
+
+$stdin = StringIO.new(&quot;10 50\n25 27 3 12 6 15 9 30 21 19\n&quot;)
+puts Benchmark.realtime { lottery_game_fast }
+6 19 25
+0.000771850987803191
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/20 01:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1879"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">제가 루비는 잘 모르지만 권용훈님 풀이는 항상 논리적이시네요^^</span>
+                                -
+                                <span style="font-size:11px;">
+                                    디디,
+                                    2016/10/27 10:51
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5055"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>(수정)</p>
+<p>디디님 너무 좌절하시는 거 같아서....</p>
+<p>N개의 숫자에 대해서 임의의 A개의 숫자를 골라 더할 수 있는 경우는 2^N이고,
+전체 케이스를 완전 탐색한다고 하면, 지수적 시간복잡도를 갖는 문제이고, 
+다항 시간 내에 풀기도 쉽지 않을 것 같습니다. 만약 문제에서 "전체 조합을 구하라" 같은 조건이
+명시돼 있었다고 가정하면...</p>
+<p>만약 입력된 숫자들이 오름차순으로 정렬되어 있다고 할 때
+작은 숫자부터 우선 선택하며, 선택한 숫자의 개수도 작도록 숫자를 선별합니다.
+K 개의 숫자를 골라서 고른 숫자의 합이 S보다 작으면 버리고, 일치하면 줍습니다. 그리고 S보다 크면 K개 조합의 그 이후 버전은 다 볼필요가 없으므로 건너뛸만하겠죠.</p>
+<p>이런식으로 볼 필요가 없는 부분들을 빼고 검사해나가면 좀 더 빠르게 풀 수 있습니다만, 
+숫자의 개수가 아주 많고, 1, 2, 3 등 작은 값들의 비율이 크고 S가 꽤 큰 값이라면
+이것 역시 시간이 오래 걸릴 수 밖에 없습니다.</p>
+<pre><code class="python">from itertools import combinations
+
+def do2(n, xs):
+    result = []
+    xs.sort()
+    for i in range(2, len(xs)+1):
+        cb = combinations(xs, i)
+        for ys in cb:
+            if sum(ys) == n:
+                result.append((*ys,))
+            elif sum(ys) &gt; n:
+                break
+    return [sorted(x) for x in result]
+
+def main2():
+    n, s = [int(x) for x in input().split()][:2]
+    xs = [int(x) for x in input().split()][:n]
+    result = do2(s, xs)
+    print(&quot;\n&quot;.join(str(x) for x in result))
+    print('done')
+
+# &gt;&gt;&gt; 344 1888
+# &gt;&gt;&gt; 2 9 11 12 14 17 20 22 25 26 28 33 36 44 50 52 59 61 66 79 80 88 91 93 94 96 102 103 104 109 113 118 120 128 132 134 136 137 145 147 148 149 154 157 158 162 163 166 168 169 172 173 174 176 178 179 180 181 184 193 195 196 199 201 202 210 213 216 217 218 221 232 235 236 237 244 248 250 251 252 253 257 260 264 268 277 278 287 289 291 293 299 301 302 303 304 305 306 308 317 319 322 325 328 329 330 332 333 338 342 345 349 351 355 356 357 358 359 360 364 366 369 370 371 372 375 383 384 386 390 396 399 400 402 403 404 409 412 413 415 417 419 424 425 426 443 444 447 448 449 454 457 463 465 469 471 478 479 480 482 486 487 490 492 497 498 499 502 504 506 512 513 518 520 521 522 525 526 533 537 538 540 543 547 551 553 555 556 558 559 562 566 567 572 574 575 577 580 581 582 583 585 590 594 598 599 600 603 604 610 612 615 625 628 633 635 639 643 644 651 652 654 655 658 660 664 665 667 669 673 676 678 680 684 685 687 688 689 690 691 695 696 700 702 706 712 718 719 721 722 724 726 727 732 734 735 739 740 745 746 750 751 752 753 754 755 757 759 761 765 766 767 771 773 777 782 783 785 790 794 795 799 812 815 819 821 823 826 827 830 833 838 845 846 847 848 850 851 856 857 858 862 867 868 876 878 880 883 890 892 900 908 910 914 917 918 919 921 922 923 924 930 932 937 940 946 947 949 952 954 959 961 969 971 973 977 978 979 982 986 988 990 994 999
+
+[2, 9, 878, 999]
+[2, 9, 11, 867, 999]
+[2, 9, 11, 12, 14, 17, 20, 22, 782, 999]
+[2, 9, 11, 12, 14, 17, 20, 22, 25, 757, 999]
+[2, 9, 11, 12, 14, 17, 20, 22, 25, 26, 28, 33, 36, 44, 590, 999]
+[2, 9, 11, 12, 14, 17, 20, 22, 25, 26, 28, 33, 36, 44, 50, 540, 999]
+[2, 9, 11, 12, 14, 17, 20, 22, 25, 26, 28, 33, 36, 44, 50, 52, 59, 61, 66, 302, 999]
+[2, 9, 11, 12, 14, 17, 20, 22, 25, 26, 28, 33, 36, 44, 50, 52, 59, 61, 66, 79, 232, 990]
+[2, 9, 11, 12, 14, 17, 20, 22, 25, 26, 28, 33, 36, 44, 50, 52, 59, 61, 66, 79, 80, 88, 91, 93, 94, 96, 680]
+[2, 9, 11, 12, 14, 17, 20, 22, 25, 26, 28, 33, 36, 44, 50, 52, 59, 61, 66, 79, 80, 88, 91, 93, 94, 96, 102, 103, 104, 371]
+[2, 9, 11, 12, 14, 17, 20, 22, 25, 26, 28, 33, 36, 44, 50, 52, 59, 61, 66, 79, 80, 88, 91, 93, 94, 96, 102, 103, 104, 109, 113, 149]
+
+done 
+( 959 ms )
+
+</code></pre>
+
+<hr />
+<p>역시나 속도는 할말 없습니다;;; python3.5입니다.</p>
+<pre><code class="python">def do(s, xs):
+    if s == 0:
+        return [], True
+    for i, x in enumerate(xs):
+        ys = xs[:i] + xs[i+1:]
+        zs, r = do(s-x, ys)
+        if r:
+            zs.append(x)
+            return zs, True
+    return [], False
+
+
+def main():
+    n, s = [int(x) for x in input().split()][:2]
+    xs = [int(x) for x in input().split()][:n]
+    result, r = do(s, xs)
+    if r:
+        print(' '.join(str(x) for x in sorted(result)))
+    else:
+        print('no combination')
+
+
+if __name__ == '__main__':
+    main()
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/24 18:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">룰루랄라</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1878"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">같은 리스트에서 목표를 28로 하였을때 3, 25만 나오네요
+(3, 6, 19)  (9, 19)는 누락됐어요</span>
+                                -
+                                <span style="font-size:11px;">
+                                    디디,
+                                    2016/10/27 10:47
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1881"></a>
+                            <div class="comment_line comment-content">
+                                
+                                    <span style="color:orangered;">+2</span>
+                                
+                                <span style="white-space:pre-wrap;">네, 암꺼나 빨리 맞추고 다른 놀이기구 타러가야 하기 때문에....</span>
+                                -
+                                <span style="font-size:11px;">
+                                    룰루랄라,
+                                    2016/10/27 10:58
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1883"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">최고입니다^^</span>
+                                -
+                                <span style="font-size:11px;">
+                                    디디,
+                                    2016/10/27 11:22
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1887"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">친절한 설명 감사합니다^^ 그러나 저의 좌절은 아직 끝나지 않았습니다.
+하나하나 뜯어서 다시 볼게요^^</span>
+                                -
+                                <span style="font-size:11px;">
+                                    디디,
+                                    2016/10/28 11:53
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1943"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">감사합니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Dr.Choi,
+                                    2017/01/11 01:13
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5078"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <h3 id="35">파이썬3.5<br></h3>
+<p>죄송합니다... 위 댓글에는 지적질을 했는데 정작 제풀이는 형편이 없습니다.<br>
+속도도 최악입니다. 어떻게 손을 써볼수가 없었습니다.<br>
+입력, 출력 풀어조건에도 맞질 않습니다. 속도가 느리니 즐겁지가 않아 여기까지만 했습니다.</p>
+<pre><code class="python">def f(a, target):
+
+    a = sorted(a)
+    result = set()
+
+    def g(a):
+
+        if sum(a) == target:
+            result.add(tuple(a))
+            return
+
+        elif sum(a) &lt; target:
+            return
+
+        else:
+            for i in range(len(a)):
+                x = a[:i] + a[i+1:]
+                g(x)
+
+    g(a)
+
+    return result
+
+
+a = [25, 27, 3, 12, 6, 15, 9, 30, 21, 19]
+target = 50
+f(a, target)
+</code></pre>
+
+<h3 id="343">파이썬3.4.3<br></h3>
+<p>위의 방식보다 획기적으로 속도개선을 했습니다. 그러나 느리지요. 왜냐하면 완전탐색이니까요ㅜㅜ<br>
+보다 나은 알고리즘을 공부하면 다시 올리겠습니다.<br></p>
+<pre><code class="python"># 제출 코드
+
+# 입력
+n, goal = tuple(map(int, input().split()))
+a = sorted(list(map(int, input().split())))
+assert len(a) == n
+
+# 처리
+result = []
+def shot(last=0, picked=None, score=0):
+
+    global result
+
+    if picked is None:
+        picked = []
+
+    # 기저사례
+    if score == goal:
+        return picked
+
+    elif score &gt; goal:
+        return False
+
+    for i in range(last, n):      
+        picked.append(a[i])
+        ret = shot(i+1, picked, score+a[i])
+        if ret: result.append(ret[:])    # result.append(ret)는 빈값이 됨.
+        picked.pop()
+
+# 출력
+shot()
+for line in result:
+    for case in line:
+        print(case, end=' ')
+    print()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/27 11:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">디디</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5090"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">using System;
+using System.Collections;
+using System.Collections.Generic;
+
+namespace CodingTest
+{
+    class Program
+    {
+        private static int sum = 50;
+        private static int[] entities = new int[] { 25, 27, 3, 12, 6, 15, 9, 30, 21, 19 };
+        private static List&lt;string&gt; itemSet = new List&lt;string&gt;();
+
+        static void Main(string[] args)
+        {
+            Array.Reverse(entities);
+            for (int i = 0; i &lt; entities.Length; i++)
+            {
+                checkToSum(i);
+            }
+            foreach (string im in itemSet)
+            {
+                Console.WriteLine(im);
+            }
+            Console.ReadLine();
+        }
+
+        static void checkToSum(int startIdx)
+        {
+            int targetInt = sum - entities[startIdx];
+            int parentInt = 0;
+            int childInt = 0;
+            for (int i = 0; i &lt; entities.Length; i++)
+            {
+                if (entities[i] == entities[startIdx] || parentInt == entities[startIdx]) continue;
+                if (parentInt == 0) parentInt = entities[i];
+                childInt = entities[i];
+                if (parentInt == childInt) continue;
+                if (targetInt == parentInt + childInt)
+                {
+                    ArrayList ax = new ArrayList();
+                    ax.Add(entities[startIdx]);
+                    ax.Add(parentInt);
+                    ax.Add(childInt);
+                    ax.Sort();
+                    string result = string.Format(&quot;{0} {1} {2}&quot;, ax[0], ax[1], ax[2]);
+                    if (itemSet.FindAll(x =&gt; x == result).Count == 0)
+                        itemSet.Add(result);
+                    return;
+                }
+            }
+        }
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/10/28 15:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Min Jason</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5548"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.Random;* 
+
+public class DollHitter {
+
+    public static void main(String args[]){
+
+    int num = 15;
+    int sum = 60;
+    Random ran = new Random();
+
+    int arr[] = new int[num];
+    for(int i = 0 ; i &lt; num ; i++){
+
+        arr[i] = ran.nextInt(30)+1;
+        for(int j = 0 ; j &lt; i ; j++){
+            if(arr[i] == arr[j]){
+                i--;
+            }
+        }
+    }
+    중복되지 않는 30 이하 난수 15개 생성 (제한 포인트는 맘대로 지정하셔도 됩니다)
+
+    for(int i = 0 ; i &lt; arr.length ; i++){
+        System.out.print(arr[i]+&quot; : &quot;);
+    }
+
+    int set[] = {};
+
+    for(int i = 0 ; i &lt; arr.length ; i++){
+        set = new int[3];
+        set[0] = arr[i];
+        for(int j = i+1 ; j &lt; arr.length ; j++){
+            set[1] = arr[j];
+            for(int k = j+1 ; k &lt; arr.length ; k++){
+                set[2] = arr[k];
+                if(set[0]+set[1]+set[2] == sum){
+                    System.out.println(set[0]+&quot; : &quot;+set[1]+&quot; : &quot;+set[2]);
+                }
+
+            }
+        }
+
+    }
+
+    바깥 for문은 생성된 난수 배열의 합이 60이 되는 세개의 숫자중 첫번재 숫자
+    중간 for문은 생성된 난수 배열의 합이 60이 되는 세개의 숫자중 두번재 숫자
+    안쪽 for문은 생성된 난수 배열의 합이 60이 되는 세개의 숫자중 세번째 숫자
+
+
+
+
+    }
+
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/12/11 13:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">ㅅㅅㅇㅁㅎ</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5718"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>subsquence를 뽑아낼 때 재귀를 사용했습니다. 파이썬 3을 사용하였습니다.</p>
+<pre><code class="python">def combination(x):
+    if len(x)==1:
+        return [[x[0]]]
+    else:
+        smallercombi=combination(x[:len(x)-1])
+        realcombi=smallercombi[:]
+        for smaller in smallercombi:
+            realcombi.append(smaller+[x[len(x)-1]])
+        realcombi.append([x[len(x)-1]])
+        return realcombi
+
+numofdoll, target =  map(int, input(&quot;두 수를 공백으로 구분하여 입력하시오 : &quot;).split())
+numlist = []
+for x in range(numofdoll):
+    numlist.append(int(input(&quot;인형에 써진 수를 입력하시오 : &quot;)))
+subsequence = combination(numlist)
+for sub in subsequence:
+    if sum(sub) == target:
+        sub.sort()
+        print(sub)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/12/29 04:55</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박 시우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5893"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def sublist_(a):
+    sublist=list()
+    result=[]
+    for i in range(1,1&lt;&lt;len(a)):
+        k=str(bin(i))
+        r=0
+        for j in reversed(k[2:]):
+            if j==&quot;1&quot;:
+               sublist.append(a[r])
+            r+=1
+        result.append(sublist)
+        sublist=[]
+    return result
+a,b=map(int,input().split(&quot; &quot;))
+setlist=list(map(int,input().split(&quot; &quot;)))
+setlist_=sublist_(setlist)
+for i in setlist_:
+    if sum(i)==a:
+        print(i,end=&quot; &quot;)
+
+</code></pre>
+
+<p>전체 부분 집합을 만들고 합을 구해서 같으면 출력합니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/01/11 01:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Dr.Choi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6132"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class AmusementPark {
+
+    public static void main(String[] args) throws FileNotFoundException {
+        String path = AmusementPark.class.getResource(&quot;&quot;).getPath();
+        Scanner sc = new Scanner(new File(path + &quot;AmusementPark.txt&quot;));
+
+        int size = sc.nextInt();
+        int target = sc.nextInt();
+        int[] dolls = new int[size];
+
+        for (int i = 0; i &lt; size; i++) {
+            dolls[i] = sc.nextInt();
+        }
+
+        for (int i = 1; i &lt; 1 &lt;&lt; size; i++) {
+            int k = i;
+            int d = 0;
+            List&lt;Integer&gt; t = new ArrayList&lt;&gt;();
+            while (k &gt; 0) {
+                if (k % 2 == 1) t.add(dolls[d]);
+                k = k / 2;
+                d++;
+            }
+            if (t.stream().mapToInt(Integer::intValue).sum() == target) {
+                System.out.println(t);
+            }
+        }
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/02/11 22:12</p>
+                                <p class="static-profile" style="margin:0;padding:0;">genius.choi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6282"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def doll(data):
+    n,limit=data[0]
+    data=sorted(data[1])
+    if sum(data)&lt;limit or min(data)&gt;limit:
+        return -1
+    for i in range(n):
+        if data[i]==limit:
+            return [data[i]]
+        elif doll([[n-1,limit-data[i]],data[0:i]+data[i+1:]])==-1:
+            pass
+        else:
+            return [data[i]]+doll([[n-1,limit-data[i]],data[0:i]+data[i+1:]])
+    return -1
+doll([[10,50],[25, 27, 3, 12, 6, 15, 9, 30, 21, 19]])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/02/20 01:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김구경</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6410"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="matlab">우선은 brute-force 방법으로 MATLAB 짜보았습니다
+
+clear all
+close all
+clc
+
+t_start=clock;
+
+% brute-force combination
+
+
+%% input values
+
+input_val1=str2num(input('인형갯수 필요한합 ','s'));
+dolls_N=input_val1(1);
+target_sum=input_val1(2);
+
+dolls_input=str2num(input(sprintf('인형숫자들 (%d개) ',dolls_N),'s'));
+
+
+%% find the combinations 
+dolls_sorted=sort(dolls_input,'ascend');
+
+% length would be 2^N, where N is the number of the dolls
+solution_cnt=0;
+solution_arr_aloc=cell(2^dolls_N,dolls_N);
+
+% find all combination
+% example, if there are 3 numbers, the combination would be 2^3 - 1 = 7
+% X X O
+% X O X 
+% O X X
+% X O O
+% O X O
+% O O X
+% O O O
+
+for n=1:2^dolls_N-1
+
+    % at this combination, collect the index numbers
+    test_array=[];
+    tmp=n;
+    for p=dolls_N:-1:0
+        if tmp &gt;= 2^p
+            test_array=[test_array p+1];
+            tmp=tmp-2^p;
+        end
+    end
+
+    % if the sum of the selected dolls is equal to the target num, save it
+    if sum(dolls_input(test_array))==target_sum
+        solution_cnt=solution_cnt+1;
+        solution_arr_aloc{solution_cnt}=dolls_input(test_array);
+    end
+end
+
+refined_solution_arr_aloc=cell(solution_cnt,dolls_N);
+for q=1:solution_cnt
+    refined_solution_arr_aloc{q}=solution_arr_aloc{q};
+end
+clear solution_arr_aloc
+
+%% show the result
+disp(['number of combinations : ' num2str(solution_cnt)]);
+for q=1:solution_cnt
+    sort(refined_solution_arr_aloc{q},'ascend')
+end
+
+
+%% show the elapsed time
+t_finish=clock;
+elapsed_time=etime(t_finish,t_start);
+
+if elapsed_time&lt;60
+    disp(['    elapsed time : ' num2str(elapsed_time) ' sec']);
+elseif elapsed_time&lt;3600
+    disp(['    elapsed time : ' num2str(elapsed_time/60) ' mins']);
+else    
+    disp(['    elapsed time : ' num2str(elapsed_time/3600) ' hours']);
+end
+
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/03/02 09:11</p>
+                                <p class="static-profile" style="margin:0;padding:0;">c0din9</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6695"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>package codingdojang;</p>
+<p>import java.util.Scanner;</p>
+<p>public class doll {</p>
+<pre><code>public static void main(String[] args) {
+    // TODO Auto-generated method stub
+    Scanner s=new Scanner(System.in);
+
+    int dollCnt=s.nextInt();
+    int dollSum=s.nextInt();
+    int arr[]=new int[dollCnt];
+    for(int i=0;i&lt;dollCnt;i++){
+        arr[i]=s.nextInt();
+    }
+    int n1=0,n2=0,n3=0;
+    for(int i=0;i&lt;10;i++){
+        for(int j=i+1;j&lt;10;j++){
+            for(int k=j+1;k&lt;10;k++){
+                if(arr[i]+arr[j]+arr[k]==50){
+                    n1=i;
+                    n2=j;
+                    n3=k;
+                    break;
+                }
+            }
+        }
+    }
+    System.out.println(arr[n1]+" , "+arr[n2]+" , "+arr[n3]);
+}
+</code></pre>
+<p>}</p>
+<pre><code class="java">
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/03/28 20:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김재인</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7111"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">print('dsd')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/05/09 11:13</p>
+                                <p class="static-profile" style="margin:0;padding:0;">백근우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7631"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <h1 id="javascript">javascript</h1>
+<p>주어진 수열을 가지고 만들 수 있는 모든 조합을 생성한 후,</p>
+<p>합이 50이 되는 것을 필터링하고</p>
+<p>소트해서 보여줍니다.</p>
+<pre><code class="javascript">var input = 
+`10 50
+25 27 3 12 6 15 9 30 21 19`;
+
+var [[count, sum], dolls] = input.split(&quot;\n&quot;).map($ =&gt; $.split(&quot; &quot;).map($ =&gt; parseInt($)));
+
+var combination = function combination(array){
+    if (array.length === 0)
+        return [[]];
+    var combs = [];
+    for (var i = 0; i &lt;= array.length; i++){
+        var head = array.slice(i, i + 1),
+            tail = array.slice(i + 1),
+            tailcombs = combination(tail);
+        combs.push(...tailcombs.map($ =&gt; head.concat($)))
+    }
+    return combs;
+};
+
+var result = combination(dolls).filter($ =&gt; $.reduce((a, b) =&gt; a + b, 0) === sum)
+                               .map($ =&gt; $.sort((a, b) =&gt; a - b));
+
+console.log(result.map($ =&gt; $.join(&quot; &quot;)).join(&quot;\n&quot;));
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/24 01:16</p>
+                                <p class="static-profile" style="margin:0;padding:0;">funnystyle</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7679"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">
+array = input(&quot;input number array : &quot;)
+tgt = input(&quot;input target sum : &quot;)
+
+
+array = [int(x) for x in array.split(&quot; &quot;)]
+result = []
+result_list = []
+
+for i in range(0,len(array)):
+    for j in range(i+1,len(array)):
+        for k in range(j+1,len(array)):
+            if (array[i] + array[j] + array[k]) == int(tgt):
+                result = sorted([array[i], array[j], array[k]])
+                result_list.append(result)
+
+
+for l in range(0,len(result_list)):
+    for m in range(l+1,len(result_list)):
+        if result_list[l] == result_list[m]:
+            del(result_list[m])
+            break
+
+
+print (result_list)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/30 11:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Bo Hyun Seo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8246"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>shoot()은 맞춘 인형 중 가장 숫자가 큰 인형을 뽑는 함수입니다.</p>
+<p>예를 들어 인형이 1 2 3 4 5 가 있다고 할 떄,</p>
+<p>숫자가 큰 인형부터 맞춘다고 가정하면(결과가 숫자의 조합이기 때문에 무리 없는 가정) </p>
+<p>첫 번쨰로 5를 맞춘 경우, 첫 번째로 4를 맞춘 경우, ... 1을 맞춘 경우가 생깁니다.</p>
+<p>요점은 지금 맞춘 인형이 "가장 숫자가 큰" 인형이기 때문에 그보다 숫자가 큰 인형을 제외할 수 있습니다.</p>
+<p>즉 첫 번째로 5를 맞췄으면 두 번째 숫자가 큰 인형은 1 2 3 4 중 하나,</p>
+<p>첫 번째로 4를 맞췄으면 다음에는 1 2 3 중 하나,</p>
+<p>첫 번쨰로 3을 맞췄으면 다음에는 1 2 중 하나,</p>
+<p>첫 번째로 2를 맞췄으면 다음에는 1 이 됩니다.</p>
+<p>물론 합이 다 찼으면 다음으로 넘어가지 않고 중단합니다.</p>
+<pre><code class="python">def shoot(dolls, sum, hits):
+    if sum == 0: return hits
+    if sum &lt; 0: return None
+
+    while dolls:
+        hit = dolls.pop()
+        ret = shoot(dolls[:], sum - hit, [hit] + hits)
+        if ret: return ret
+    return None
+
+inp = '''10 50
+25 27 3 12 6 15 9 30 21 19'''
+
+inp = list(map(int, inp.split()))
+print(shoot(sorted(inp[2:]), inp[1], [])) # 6 19 25
+</code></pre>
+
+<p>만약 인형 개수가 정해져 있어서 위의 재귀함수를 for문으로 처리한다면 이런 형태가 됩니다.</p>
+<pre><code class="python">for i in range(len(dools)):
+    for j in range(i+1, len(dools)):
+        for k in range(j+1, len(dools)):
+            ...
+                if dools[i] + dools[j] + dools[k] + .... == sum:
+                    return [..., dools[k], dools[j], dools[i]]
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/07 11:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8861"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># 맞춘 인형은, 서있는 목록에서 넘어진 목록으로 넘긴 후,
+# 점수가 같을 때까지 재귀로 찾기
+def find(score, fallen_list, standing_list):
+    if sum(fallen_list) == score:
+        print(&quot;find! &quot;, sorted(fallen_list))
+    elif sum(fallen_list) &lt; score:
+        for i, x in enumerate(standing_list):
+            find(score, fallen_list + [x], standing_list[(i + 1):])
+
+
+fallen_list = []
+standig_list = [25, 27, 3, 12, 6, 15, 9, 30, 21, 19]
+score = 50
+find(score, fallen_list, standig_list)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/09/22 10:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박범수</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10682"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3.6</p>
+<pre><code class="python">&quot;&quot;&quot;
+아이디어&gt;
+ 1) 첫 번째 인형의 점수가 목표 점수와 같은지, 작은지, 큰지 확인 합니다.
+ 2) 첫 번째 인형의 점수가 목표 점수보다 작으면, 그 다음 순서 인형의 점수와 합하여 다시 목표 점수와 비교합니다.
+ 3) 첫 번째 두번째 인형의 점수가 목표 점수보다 작으면 나머지 인형들을 목표 점수와 같거나 초과 할때까지 누적 합산합니다.(목표 점수가 될 수 있는 인형의 수는 정해져 있지 않으므로 모든 인형 조합에 대해 목표점수를 비교합니다.)
+ 4) 모든 인형의 조합에 대해 위와 같은 과정을 반복하며, 목표 점수와 같은 경우 출력합니다. 
+&quot;&quot;&quot;
+
+def inputdata():
+    n = input('').split()
+    points = input('').split()
+    data = [n,points]
+    return data
+
+def shotdoll(data):
+    aim,point,t,tmp = int(data[0][1]),0,0,[]
+    print(&quot;\n&quot;&quot;목표 점수 = %d&quot;%aim)
+    for i,value_i in enumerate(data[1]):
+        for h,value_h in enumerate(data[1][i+1:]):
+            if int(value_i) == aim:
+                tmp.append(int(value_i))
+                print(' '.join(answer))
+                break
+            elif int(value_i) &gt; aim:
+                break
+            if i+h &lt; len(data[1])-1:
+                point = int(value_i) + int(value_h)
+                tmp = [int(value_i),int(value_h)]
+                if point == aim:
+                    answer = map(str,sorted(tmp))
+                    print(' '.join(answer))
+                    break
+                while True:
+                    t += 1
+                    if i+h+t &lt;= len(data[1])-1:
+                        point += int(data[1][h+t])
+                    else:
+                        break
+                    if point &lt; aim:
+                        tmp.append(int(data[1][h+t]))
+                    elif point == aim:
+                        tmp.append(int(data[1][h+t]))
+                        answer = map(str,sorted(tmp))
+                        print(' '.join(answer))
+                        break
+                    else:
+                        tmp = [int(value_i),int(value_h)]
+                        point = int(value_i)+int(value_h)
+                tmp,t = [],0
+
+if __name__ == &quot;__main__&quot;:
+    data = inputdata()
+    shotdoll(data)
+</code></pre>
+
+<ul>
+<li>결과값</li>
+</ul>
+<pre><code class="python">10 50
+25 27 3 12 6 15 9 30 21 19
+
+목표 점수 = 50
+6 19 25
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/13 17:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">justbegin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10856"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def dolls(m, b):
+    b.sort()
+    result = list()
+    def doll(n, a):
+        result = list()
+        if sum(a) == n:
+            return [a]
+        elif sum(a) &lt; n:
+            return []
+        for i in range(len(a)):
+            for j in doll(n-a[i], a[i+1:]):
+                result.append([a[i]]+j)
+        return result
+    for i in range(len(b)):
+        result += doll(m, b[:i+1])
+    return result
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/22 16:33</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김동하</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11217"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">Input = [[10, 50], [25, 27, 3, 12, 6, 15, 9, 30, 21, 19]]
+
+def fitScore(inpu):
+    n = inpu[0][0]
+    maxScore = inpu[0][1]
+    score = inpu[1]
+    outpu=inpu[2]
+    if n==1:
+        if maxScore != score[0]:
+            return [0,[]]
+        else:
+            return [1,outpu+[socre[0]]]
+    if sum(outpu)&gt;maxScore:
+        return [0,[]]
+    for i in range(n):
+        if maxScore==score[i]:
+            return [1,outpu+[score[i]]]
+        else:
+            if fitScore([[n-1,maxScore-score[i]],score[0:i]+score[i+1:],outpu+[score[i]]])[0]==1:
+                return fitScore([[n-1,maxScore-score[i]],score[0:i]+score[i+1:],outpu+[score[i]]])
+    return [0,[]]
+print(sorted(fitScore(Input+[[]])[1]))
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/03/19 21:33</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김자현</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11219"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">#define _CRT_SECURE_NO_WARNINGS
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;    // malloc, free 함수가 선언된 헤더 파일
+
+int compare(const void *a, const void *b)    // 오름차순 비교 함수 구현
+{
+    int num1 = *(int *)a;    // void 포인터를 int 포인터로 변환한 뒤 역참조하여 값을 가져옴
+    int num2 = *(int *)b;    // void 포인터를 int 포인터로 변환한 뒤 역참조하여 값을 가져옴
+
+    if (num1 &lt; num2)    // a가 b보다 작을 때는
+        return 1;      // -1 반환
+
+    if (num1 &gt; num2)    // a가 b보다 클 때는
+        return -1;       // 1 반환
+
+    return 0;    // a와 b가 같을 때는 0 반환
+}
+
+
+
+int fit_score(int inpu0,int inpu1,int  *inpu2) {
+    int n = inpu0;
+    int max_score = inpu1;
+
+    if (n == 1) {
+        if (inpu2[0] == max_score) {
+            return max_score;
+        }
+        else {
+            return 0;
+        }
+    }
+    int* score = malloc(sizeof(int) *(n - 1));
+    for (int i = 0; i &lt; n; i++) {
+        int k = 0;
+        for (int j = 0; j &lt; n; j++) {
+            if (i != j) {
+                score[k] = inpu2[j];
+                k++;
+            }
+        }
+
+        if (max_score &gt; inpu2[i]) {
+            int re = fit_score(n - 1, max_score - inpu2[i], score);
+
+            if (re==0) {
+            }
+            else {
+                printf(&quot;%d &quot;, inpu2[i]);
+                free(score);
+                return re;
+            }
+        }
+        else if (max_score==inpu2[i]){
+            free(score);
+            printf(&quot;%d &quot;, inpu2[i]);
+            return max_score;
+
+        }
+
+
+
+    }
+
+    free(score);
+    return 0;
+}
+
+
+int main() {
+    int n = 10;
+    int **input = malloc(sizeof(int*) * 2);
+    input[0]= malloc(sizeof(int) * 2);
+    input[1] = malloc(sizeof(int)*n);
+
+    input[0][0] = n;
+    input[0][1] = 50;
+
+    input[1][0] = 25;
+    input[1][1] = 27;
+    input[1][2] = 3;
+    input[1][3] = 12;
+    input[1][4] = 6;
+    input[1][5] = 15;
+    input[1][6] = 9;
+    input[1][7] = 30;
+    input[1][8] = 21;
+    input[1][9] = 19;
+
+    qsort(input[1], n, sizeof(int), compare);
+
+    fit_score(input[0][0], input[0][1], input[1]);
+
+
+    free(input[0]);
+    free(input[1]);
+    free(input);
+    return 0;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/03/19 22:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">탁성하</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11693"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Swift입니다.</p>
+<p>재귀호출로 풀었습니다.
+재귀 함수는 만들고자 하는 합과 배열을 받습니다.
+재귀 호출이 반복 되면, 조합을 발견하게 되는 경우, 마지막에는 주어진 총합과 같은 배열항목을 배열에서 찾게 됩니다.</p>
+<p>주어진 점수들 중에서 2개 이상의 조합이 있는 경우, 첫번째 발견된 조합만을 리턴하게 되는 제한이 있네요.</p>
+<pre><code class="no-highlight">import Foundation
+
+func findSum(_ targetSum: Int, _ givenNumbers: [Int]) -&gt; [Int] {
+    var numbers = givenNumbers.sorted()
+    var foundSeries = [Int]()
+    var found = false
+    for i in 0..&lt;numbers.count {
+        if numbers[i] &lt; targetSum {
+            let returnArray = findSum(targetSum - numbers[i], Array(numbers[(i + 1)..&lt;numbers.count]))
+            if returnArray.count &gt; 0 {
+                found = true
+                foundSeries.append(numbers[i])
+                foundSeries += returnArray
+                break
+            }
+        } else if targetSum == numbers[i] {
+            foundSeries.append(numbers[i])
+            found = true
+            break
+        }
+    }
+    return found ? foundSeries : []
+}
+
+let targetScore = Int(readLine()!)!
+let scoreInput = readLine()!.split(separator: &quot; &quot;)
+let scores = scoreInput.map({return Int($0)!})
+
+print( findSum(targetScore, scores) )
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/04/13 06:26</p>
+                                <p class="static-profile" style="margin:0;padding:0;">졸린하마</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11858"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="r">Doll &lt;- function(x, target){
+  library(dplyr)
+  subset_list &lt;- 1:8 %&gt;% sapply(combn, x=x)  
+  istarget &lt;- lapply(subset_list, function(x) apply(x,2,sum)) %&gt;% lapply(function(x) x==target) 
+  target_list_number &lt;- which((istarget %&gt;% lapply(function(x) any(sum(x)==1)) %&gt;% unlist) == T)
+  return(subset_list[[target_list_number]][,which(istarget[[target_list_number]]==T)] %&gt;% sort())
+}
+
+Doll(c(25,27,3,12,6,15,9,30,21,19), 50)
+[1]  6 19 25
+</code></pre>
+
+<p>체이닝을 위해 dplyr패키지만 불러왔습니다.
+1. 모든 조합 (부분집합)을 만들고 다 더합니다.
+2. target과 같은지 검사 합니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/04/24 21:34</p>
+                                <p class="static-profile" style="margin:0;padding:0;">권석현</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11881"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>재귀호출로 풀었습니다.</p>
+<pre><code class="java">import java.util.Stack;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+/**
+ * @author Kimseongsu
+ * @see http://codingdojang.com/scode/531
+ * 
+ */
+public class Problem531 {
+
+    static int SIZE;
+    static int TARGET_SCORE;
+    static Integer[] SCORES;
+
+    public static void main(String[] args) {
+        String[] INPUT = {
+                &quot;10 50&quot;,
+                &quot;25 27 3 12 6 15 9 30 21 19&quot;
+        };
+
+        SIZE = Integer.valueOf(INPUT[0].split(&quot; &quot;)[0]);
+        TARGET_SCORE = Integer.valueOf(INPUT[0].split(&quot; &quot;)[1]);
+        SCORES = Stream.of(INPUT[1].split(&quot; &quot;))
+                .mapToInt(Integer::valueOf)
+                .boxed()
+                .sorted((o1, o2) -&gt; Integer.compare(o2, o1))    // 큰 점수부터 정렬
+                .toArray(Integer[]::new);
+
+        final Stack&lt;Integer&gt; shootable = new Stack&lt;&gt;(); // 결과가 저장될 스택. 인형의 idx
+
+        tryShoot(shootable, 0, 0);
+
+        String result = shootable.stream()
+                .mapToInt(offset -&gt; SCORES[offset])
+                .sorted()
+                .mapToObj(n -&gt; String.valueOf(n))
+                .collect(Collectors.joining(&quot; &quot;));
+        System.out.println(&quot;result: &quot; + result);
+    }
+
+    /**
+     * 현재점수와 이번 점수로 인형을 쏠지 말지 결정
+     * @param shootable 맞추기로 결정한 인형들
+     * @param offset    이번에 시도(점수를 더해볼)할 인형
+     * @param score     현재까지의 점수
+     */
+    private static void tryShoot(Stack&lt;Integer&gt; shootable, int offset, int score) {
+        if (score == TARGET_SCORE) {
+//          System.out.println(&quot;found. stack:&quot; + logStack(shootable) + &quot; score:&quot; + score);
+            return;
+        }
+
+        if (score &lt;= TARGET_SCORE &amp;&amp; offset + 1 &lt; SCORES.length) {  // 아직 인형을 더 쏠수 있음 &amp; 다음 시도할 인형이 있을경우: 이번 인형은 쏘는걸로 결정
+            shootable.push(offset); // 이번 인형을 스택에 넣음
+//          System.out.println(&quot;stack:&quot; + logStack(shootable) + &quot;, push:&quot; + SCORES[offset] + &quot;, score:&quot; + (score + SCORES[offset]));
+            tryShoot(shootable, offset + 1, score + SCORES[offset]);    // 다음 인형을 쏠수 있는지 시도 재귀호출
+        } else {    // 점수가 넘거나 다음 시도할 인형이 없음: 기존에 쏘기로 결정했던 인형을 하나 없애고 그것 다음 인형으로 시도
+            if (shootable.size() &lt; 1) {
+                return;
+            }
+
+            int pop = shootable.pop();  // 이전에 결정했던 인형을 하나 없앰. 스택에서 제거
+//          System.out.println(&quot;stack:&quot; + logStack(shootable) + &quot;, pop:&quot; + SCORES[pop] + &quot;, score:&quot; + (score - SCORES[pop]));
+            tryShoot(shootable, pop + 1, score - SCORES[pop]);  // 없앤 인형의 다음 인형으로 시도
+        }
+    }
+
+    private static String logStack(Stack&lt;Integer&gt; shootable) {
+        return &quot;[&quot; + 
+                shootable.stream()
+                    .mapToInt(offset -&gt; SCORES[offset])
+                    .mapToObj(n -&gt; String.valueOf(n))
+                    .collect(Collectors.joining(&quot; &quot;)) +
+                &quot;]&quot;;
+    }
+
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/04/26 16:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Seongsu Kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13084"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">입력에 들어갈 숫자들은 임의로 지정해주었습니다
+
+bool Compare(int num)
+{
+    for (num; num &lt; total; num++)
+    {
+        if ((temp - dolls[num]) == 0)
+        {
+            combine.push_back(dolls[num]);
+            return true;
+        }
+
+        else if ((temp - dolls[num]) &gt; 0)
+        {
+            temp -= dolls[num];
+            combine.push_back(dolls[num]);
+            if (Compare(num + 1))
+                return true;
+            else
+            {
+                combine.pop_back();
+                temp += dolls[num];
+            }
+        }
+
+        else if ((temp - dolls[num]) &lt; 0)
+        {
+            continue; 
+        }
+    }
+
+    // num 번째 숫자에서 끝까지 돌았는데 찾지 못한 경우
+
+    return false;
+}
+
+int main()
+{
+        for (int i = 0; i &lt; total; i++)
+    {
+        temp = sum;
+        if (Compare(i)) // 성공시 값들 출력하기
+        {
+            for (int i = 0; i &lt; combine.size(); i++)
+            {
+                cout &lt;&lt; combine[i] &lt;&lt; endl;
+            }
+            break;
+        }
+        else // 실패시 계속 찾기
+        {
+            combine.clear();
+            continue;
+        }
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/22 18:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">서영균</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13212"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>import java.text.*;
+import java.util.*;
+
+public class Main {
+    static List&lt;Integer&gt;doll_num=new ArrayList&lt;Integer&gt;();
+    static List&lt;Integer&gt;answers=new ArrayList&lt;Integer&gt;() {};
+
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+
+        Random random=new Random();
+
+        System.out.print(&quot;인형의 개수는? : &quot;);
+        int dolls=sc.nextInt();
+        System.out.print(&quot;맞춰야 하는 총 점수는? : &quot;);
+        int sum=sc.nextInt();
+
+        for(int i=0;i&lt;dolls;i++) {
+            int ran_num=random.nextInt(49)+1;
+            if(!doll_num.contains(ran_num)) {
+                doll_num.add(ran_num);
+                continue;
+            }i--;
+        }
+
+        Collections.sort(doll_num);
+
+        System.out.println(doll_num);
+
+        for(int i=0;i&lt;doll_num.size();i++) {
+            int k=i+1;
+
+            while(k&lt;doll_num.size()) {
+                if(sum==(doll_num.get(i)+doll_num.get(k))) {
+                    answers.add(doll_num.get(i));
+                    answers.add(doll_num.get(k));
+                }
+                k++;
+            }
+        }
+
+        if(answers.isEmpty()) {
+            for(int i=0;i+1&lt;doll_num.size();i++) {
+                for(int k=0;k&lt;doll_num.size();k++) {
+                    if((k!=i)&amp;&amp;(k!=i+1)) {
+                        if((sum==doll_num.get(i)+doll_num.get(i+1)+doll_num.get(k))) {
+                            answers.add(doll_num.get(i));
+                            answers.add(doll_num.get(i+1));
+                            answers.add(doll_num.get(k));
+                        }
+                    }
+                }
+            }
+        }
+
+        Collections.sort(answers);
+
+        System.out.println(answers);
+    }
+}
+</code></pre>
+
+<p>뭐 알아보기 쉽지 않지만 올립니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/28 18:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">에에엑</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13799"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n,w = map(int,input().split())
+arr = [int(i) for i in input().split()]
+arr.sort()
+
+stc,result = [],[]
+id,cw = 0,0
+
+while 1:
+    if cw+arr[id] &lt; w:
+        stc.append(id)
+        cw += arr[id]
+    elif cw+arr[id] == w:
+        result.append([arr[i] for i in stc]+[arr[id]])
+    if not stc or stc[0] == len(arr)-1:
+        if cw == w: result.append([arr[-1]])
+        break
+    id += 1
+    while id == len(arr) and stc:
+        id = stc.pop()+1
+        cw = sum(arr[i] for i in stc)
+
+print(result)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/27 00:26</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16959"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from itertools import combinations
+
+def doll(input1, input2):
+    list1 = input1.split()
+    list2 = sorted(map(int,input2.split()))
+
+    #들어온 개수 확인
+    if int(list1[0]) != len(list2):
+        return &quot;인형의 개수가 올바르지 않습니다!&quot;
+
+    # 숫자합구하기
+    temp_sum=0
+    for i in range(1,len(list2)+1): #i = 1,2,3,4,...10
+        com = combinations(list2,i)
+        for c in com:
+            if sum(c) == int(list1[1]):
+                return c
+
+    return &quot;불가능!&quot;
+
+print(doll(input(),input()))
+</code></pre>
+
+<p>Combination 함수를 알고 암이 나았습니다 ㅎㅎ</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/03/01 14:43</p>
+                                <p class="static-profile" style="margin:0;padding:0;">얀차</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17613"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">class Doll:
+    def __init__(self, data, number, _sum):
+        self.data = data
+        self.n = number
+        self.s = _sum
+
+    def search(self, dolls=[], idx=0):            
+        if sum(dolls) &gt; self.s:
+            return
+        if sum(dolls) == self.s:
+            print(sorted(dolls))
+            raise NotImplementedError
+        if idx &gt;= self.n:
+            return
+
+        temp = dolls[:]
+        self.search(temp, idx+1)
+        temp.append(self.data[idx])
+        self.search(temp, idx+1)
+
+    def find(self):
+        try:
+            self.search()
+            print('정답을 찾지 못했습니다.')
+        except NotImplementedError:
+            pass
+
+
+n, s = map(int, input().split(' '))
+data = list(map(int, input().split(' ')))
+
+P = Doll(data, n, s)
+P.find()
+</code></pre>
+
+<pre><code>13 70
+7 18 15 27 3 14 6 15 9 30 21 13 25
+[15, 25, 30]
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/04/27 12:13</p>
+                                <p class="static-profile" style="margin:0;padding:0;">messi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_18732"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;</p>
+<p>public class sol122 {</p>
+<pre><code>static int sum = 50;
+
+static int doll[]  = {25, 27, 3, 12, 6, 15, 9, 30, 21, 19};
+static boolean used[] = new boolean[doll.length];
+
+static List&lt;List&lt;Integer&gt;&gt; patterns;
+
+// current를 추가함으로써 중복 방지
+public static void choose(int count, int current, ArrayList&lt;Integer&gt; pattern) {
+
+    if(sum == count) {
+        patterns.add(new ArrayList&lt;&gt;(pattern));
+        return;
+    }
+
+    for(int i=current; i&lt;doll.length; i++) {
+        if(used[i]) continue;
+
+        used[i] = true;
+        pattern.add(doll[i]);
+        choose(count+doll[i], i, pattern);
+
+        used[i] = false;
+        pattern.remove(pattern.size()-1);
+
+    }
+}
+
+public static void main(String[] args) throws Exception {
+
+    Scanner sc = new Scanner(System.in);
+
+
+    patterns = new ArrayList&lt;&gt;();
+
+    choose(0, 0, new ArrayList&lt;Integer&gt;());
+
+    for(int i=0; i&lt;patterns.size(); i++) {
+        List temp = patterns.get(i);
+
+        for(int j=0; j&lt;temp.size(); j++) {
+            System.out.print(temp.get(j) + " ");
+        }
+        System.out.println();
+    }
+
+
+
+}
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/07/30 10:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이병호</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22393"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#인형의 갯수와 합을 넣으면, 합 이하의 숫자들이 랜덤으로 생성됩니다
+#그 중 합이 입력한 합과 동일한 리스트를 출력합니다
+
+from random import *
+
+def conv(x,n):
+    result=[]
+    while(x&gt;=n):
+        if x%n not in result:
+            result.append(x%n)
+        x=x//n
+    if x not in result:
+        result.append(x)
+    return (result)   
+
+temp=str(input('인형갯수?  숫자의 합?')).split(' ')
+n,numsum=int(temp[0]),int(temp[1])
+
+num=[]
+for i in range (n):
+    num.append(randint(0,numsum-1))
+print ('인형리스트 : ',num)
+
+sum_list=[]
+for i in range (0,n**4):
+    temp,sum,doll_num_list=conv(i,n),0,[]
+
+    for j in range (len(temp)):
+        doll_num=num[temp[j]]
+        sum+=doll_num
+        doll_num_list.append(doll_num)
+
+    if sum==numsum:
+        doll_num_list.sort()
+        if doll_num_list not in sum_list:
+            sum_list.append(doll_num_list)
+
+print ('\n합이',numsum,'인 리스트 : ',sum_list)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/21 12:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Buckshot</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2745"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">&lt;결과&gt;
+
+인형갯수?  숫자의 합?10 50
+인형리스트 :  [7, 23, 46, 3, 37, 48, 2, 17, 1, 12]
+합이 50 인 리스트 :  [[2, 48], [1, 3, 46], [1, 12, 37], [3, 7, 17, 23]]
+
+
+인형갯수?  숫자의 합?10 50
+인형리스트 :  [47, 7, 2, 47, 33, 17, 8, 44, 39, 15]
+합이 50 인 리스트 :  [[17, 33], [2, 15, 33], [2, 7, 8, 33]]
+
+
+인형갯수?  숫자의 합?20 150
+인형리스트 :  [6, 0, 91, 93, 120, 129, 138, 102, 148, 12, 28, 140, 72, 105, 71, 110, 3, 29, 15, 22]
+합이 150 인 리스트 :  [[12, 138], [0, 12, 138], [28, 29, 93], [6, 15, 129], [12, 28, 110], [0, 6, 15, 129], [0, 28, 29, 93], [0, 12, 28, 110], [6, 22, 29, 93], [3, 12, 15, 120], [3, 6, 12, 129], [6, 12, 22, 110], [22, 28, 29, 71], [3, 15, 22, 110]]
+
+
+인형갯수?  숫자의 합?5 20
+인형리스트 :  [0, 17, 6, 10, 4]
+합이 20 인 리스트 :  [[4, 6, 10], [0, 4, 6, 10]]</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Buckshot,
+                                    2020/05/21 12:08
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22409"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import itertools
+while True:
+    dnrnlst=list(map(int,input(&quot;인형의 개수와 인형 획득에 필요한 숫자의 합을 입력하십시오: &quot;).split(&quot; &quot;)))
+    dn,rn=dnrnlst[0],dnrnlst[1]
+    if len(dnrnlst)==2:
+        while True:
+            dnlst=list(map(int,input(&quot;인형에 쓰인 숫자들을 입력하십시오: &quot;).split(&quot; &quot;)))
+            if len(dnlst)==dn:
+                break
+            else:
+                print(&quot;숫자들이 인형의 개수와 불일치 합니다. 다시 입력하십시오. 인형의 개수: &quot;+str(dn))
+        break
+    else:
+        print(&quot;잘못입력하셨습니다. 다시 입력하십시오.&quot;)
+i=1
+while i&lt;=dn:
+    for c in itertools.combinations(dnlst,i):
+        if sum(c)==rn:
+            print(sorted(list(c)))
+        else:
+            continue
+    i+=1
+</code></pre>
+
+<p>결과</p>
+<pre><code class="python">input1: 10 50
+input2: 25 27 3 12 6 15 9 30 21 19
+output: [6, 19, 25]
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/24 09:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박시원</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25122"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from itertools import combinations
+
+items = [x for x in input(&quot;인형 각각에 쓰여진 숫자를 입력 : &quot;).split()]
+num = int(input(&quot;인형의 필요한 합 : &quot;))
+
+for i in range(1,len(items)+1):
+    a = list(combinations(items,i))
+    for j in a:
+        total = 0
+        for k in j:
+            total+=int(k)
+        if total == num:
+            r=[]
+            for w in j:  # 오름차순 
+                r.append(int(w))
+                r.sort()
+            print(r)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/04/06 21:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">fox.j</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27221"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>// Rust</p>
+<p>// 재귀로 풀었습니다</p>
+<p>fn sum_num() {</p>
+<pre><code>let vec = vec![3,6,9,12,15,19,21,25,27,30];
+let sum = 50;
+for i in 2..10 {
+    if let Some(res) = f(i, &amp;vec[..], sum) {
+        println!("sum of {:?} = {}", res, sum);
+    }    
+}
+</code></pre>
+<p>}
+fn f(n: usize, arr: &amp;[usize], sum:usize) -&gt; Option<Vec<usize>&gt; {</p>
+<pre><code>if n == 1 { return f1(arr, sum);}
+
+let l = arr.len();
+let mut result = vec![];
+for i in 0..(l-(n-1)) {
+    let d = arr[i];
+    if d &gt; sum { continue; }
+    if let Some(res) = f(n-1, &amp;arr[i+1..], sum-d) {
+        result.push(d);
+        result.extend(res);}
+}
+if result != vec![] { Some(result) }
+else {None}
+</code></pre>
+<p>}
+fn f1(arr: &amp;[usize], sum: usize) -&gt; Option<Vec<usize>&gt; {</p>
+<pre><code>let l = arr.len();
+assert!(l &gt; 0);
+
+let mut result = vec![];
+if arr.contains(&amp;sum) { result.push(sum); }
+if result != vec![] { Some(result) }
+else {None}
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/02/01 20:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">JW KIM</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29724"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">numberOfDolls = []
+def game(sumN, i, lst, nums):
+    if sumN == 0:
+        numberOfDolls.append(lst)
+    for n in range(i, len(nums)):
+        if sumN - nums[n] &gt;= 0:
+            newlst = lst.copy()
+            newlst.append(nums[n])
+            game(sumN - nums[n], n+1, newlst, nums)
+
+# sumN = 50
+# nums = [25, 27, 3, 12, 6, 15, 9, 30, 21, 19]
+N, sumN = map(int, input('인형의 갯수와 필요한 합: ').split(' '))
+nums = [int(i) for i in input('인형의 각각의 숫자: ').split(' ')]
+game(sumN,0, [], nums)
+for nd in numberOfDolls:
+    print(nd)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/10/27 19:16</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

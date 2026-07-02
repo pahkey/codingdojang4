@@ -1,0 +1,4999 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="출처: [Programming Challenges](http://www.programming-challenges.com/pg.php?page=downloadproblem&amp;probid=110107&amp;format=html)
+
+체스판의 배치를 읽고,...">
+    <title>Check the Check - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">Check the Check</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">5</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 4</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>출처: <a href="http://www.programming-challenges.com/pg.php?page=downloadproblem&amp;probid=110107&amp;format=html">Programming Challenges</a></p>
+<p>체스판의 배치를 읽고, King이 공격을 받고 있는지(in check) 알아내는 프로그램을 만드십시오. King이 상대방이 그 다음 움직일 때 잡힐 수 있는 구역에 있을 경우를 공격을 받고 있다고(in check) 말합니다.
+White 팀의 말들은 대문자로 표시되고, Black 팀의 말들은 소문자로 표시됩니다. White편은 항상 체스판의 하단에 있고, Black 팀은 항상 체스판의 상단에 있을 것입니다.
+체스에 친숙하지 않은 사람들을 위해 각 말들의 움직임을 설명해 놓았습니다.</p>
+<pre><code>Pawn (p or P): 폰
+움직일 때는 한 번에 한 칸씩 앞쪽으로만, 직선방향으로만 갈 수 있습니다. 하지만 다른 말을 잡을 때에는 대각선에 있는 말만 잡을 수 있습니다.
+Knight (n or N): 나이트
+아래에 보여지는 것과 같이 L 모양으로 움직일 수 있습니다. (직선한칸 →대각선한칸) 나이트는 다른 말들을 뛰어넘을 수 있는 유일한 말입니다.
+Bishop(b or B): 비숍
+대각선으로 앞으로든 뒤로든 몇 개의 칸이든 움직일 수 있습니다.
+Rook(r or R): 룩
+수평이나 수직으로 앞으로든 뒤로든 몇 개의 칸이든 움직일 수 있습니다.
+Queen(q or Q): 퀸
+대각선, 수평, 수직 모든 방향으로 앞으로든 뒤로든 몇 개의 칸이든 움직일 수 있습니다.
+King(k or K): 킹
+대각선, 수평, 수직 어느 방향이든 앞으로든 뒤로든 한번에 단 한칸씩 움직일 수 있습니다.
+다음이 각 말들이 움직일 수 있는 방향입니다. ‘*’은 각 말이 다른 말을 먹을 수 있는 위치를 나타냅니다.
+
+  Pawn          Rook          Bishop        Queen         King          Knight
+ ........      ...*....      .......*      ...*...*      ........      ........
+ ........      ...*....      *.....*.      *..*..*.      ........      ........
+ ........      ...*....      .*...*..      .*.*.*..      ........      ..*.*...
+ ........      ...*....      ..*.*...      ..***...      ..***...      .*...*..
+ ...p....      ***r****      ...b....      ***q****      ..*k*...      ...n....
+ ..*.*...      ...*....      ..*.*...      ..***...      ..***...      .*...*..
+ ........      ...*....      .*...*..      .*.*.*..      ........      ..*.*...
+ ........      ...*....      *.....*.      *..*..*.      ........      ........
+
+Knight(기사)가 다른 말들을 뛰어넘을 수 있는 유일한 말임을 기억하세요.
+Pawn의 움직임은 각 편이 다른데, Black Pawn은 대각선으로 한 칸씩 판의 아래쪽으로만 움직일 수 있습니다. White Pawn은 대각선 한 칸씩 판의 위쪽으로만 움직일 수 있습니다. 위의 예에서는 소문자 p가 나타내듯이 Black Pawn입니다. 위의 움직임은 Pawn이 다른 말을 잡을 수 있는 칸을 나타냅니다.
+</code></pre>
+
+<pre><code># Input
+각각 8개 라인과 8개의 문자(characters)로 구성된, 임의의 개수의 체스판 배치를 입력하세요. “.”은 빈 칸을 나타내며, 대문자 및 소문자로 된 문자들은 위에서 정의된 말들을 나타냅니다. 유효하지 않은 문자는 입력될 수 없으며, 두 킹 모두 공격아래에 있는 (in Check) 판 배치도 입력될 수 없습니다. 입력시에는 더 이상 작동될 수 없는, 오직 “.”으로만 이루어진 빈 판을 찾을 때까지 읽어들여야 합니다. 각 체스판 배치 사이에는 빈 줄을 하나씩 입력시켜야 합니다. 빈 판을 제외하고 모든 판은 꼭 하나의 White King과 Black King이 있어야 합니다.
+
+# Output
+입력된 각 체스판 배치(구성)에 대하여, 다음 중 하나의 대답이 출력되어야 합니다. :
+Game #d: white king is in check. 
+Game #d: black king is in check. 
+Game #d: no king is in check. 
+여기서 d는 1부터 시작하는 게임 번호를 말합니다.
+</code></pre>
+
+<pre><code># Sample Input
+..k.....
+ppp.pppp
+........
+.R...B..
+........
+........
+PPPPPPPP
+K.......
+
+rnbqk.nr
+ppp..ppp
+....p...
+...p....
+.bPP....
+.....N..
+PP..PPPP
+RNBQKB.R
+
+........
+........
+........
+........
+........
+........
+........
+........
+
+# Sample Ouput
+Game #1: black king is in check.
+Game #2: white king is in check.
+</code></pre>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2014/03/17 02:15</p>
+                    <p class="static-profile" style="margin:0;padding:0;">Katherine</p>
+                </div>
+            </div>
+
+            
+                <a name="comment_1366"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">저 제가 체스를 해본지 너무 오래되서 기억이 잘 안나는데요
+Sample Input 첫번째에서 k(black)은 B(white)에 의하여 체크당한 것이고, 
+두번째에서도 b때문에 K가 체크당한거에요 맞나요?
+그리고 입력된 체크판에서 어느쪽 차례인지는 상관없이, 어느쪽이 움직이든 한쪽이 딱 한 번만 움직였을 때 다른 쪽 king이 공격당할 위치라면 체크인것 맞나요?
+영어번역이 제대로되었는지 모르겠네요. 수정해야할 곳 있다면 말씀해주세요^^</span>
+                    -
+                    <span style="font-size:11px;">
+                        Katherine,
+                        2014/03/17 02:26
+                    </span>
+                </div>
+            
+                <a name="comment_1371"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">네, 질문하신 부분 모두 생각하신게 맞는거 같네요.</span>
+                    -
+                    <span style="font-size:11px;">
+                        pahkey,
+                        2014/03/17 16:00
+                    </span>
+                </div>
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>13개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_473"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬입니다.</p>
+<p>왕(king)끼리의 체크인 상황은 올 수 없으므로 king에 대한 처리는 제외했습니다. (black, white 둘 다 동시에 체크인 되는 상황은 없다라는 조건때문에)</p>
+<pre><code class="python">import unittest
+
+class Piece:
+    def __init__(self, map):
+        self.map = map
+        self.is_white = False
+        self.king_in_check = False
+
+    def get_piece(self, row, col):
+        if 0 &lt;= col &lt; len(self.map[0]) and 0 &lt;= row &lt; len(self.map):
+            return self.map[row][col]
+        else:
+            return None
+
+    def has_king_in_path(self, next):
+        if next and not self.is_white and next == 'K':
+            return True
+        if next and self.is_white and next == 'k':
+            return True
+        return False
+
+    def is_king_in_check(self):
+        return self.king_in_check
+
+
+#
+# normal piece
+# - pawn, knight, king
+#
+class NormalPiece(Piece):
+    def move(self, row, col):
+        direction = self.get_direction()
+        for r, c in direction:
+            next = self.get_piece(row+r, col+c)
+            if self.has_king_in_path(next): self.king_in_check = True
+
+
+#
+# moving piece
+# - queen, rook, bishop
+#
+class MovingPiece(Piece):
+    def move(self, row, col):
+        direction = self.get_direction()
+        for r, c in direction:
+            _row = row
+            _col = col
+            while True:
+                _row += r
+                _col += c
+                next = self.get_piece(_row, _col)
+                if not next or next not in ['k','K','.']: break
+                if self.has_king_in_path(next): self.king_in_check = True
+
+
+class Pawn(NormalPiece):
+    def get_direction(self):
+        if self.is_white:
+            return [(-1,-1), (-1,1)]
+        else:
+            return [(1,-1), (1,1)]
+
+
+class Knight(NormalPiece):
+    def get_direction(self):
+        return [(-2,1),(-1,2),(1,2),(2,1),(2,-1),(1,-2),(-1,-2),(-2,-1)]
+
+
+class Rook(MovingPiece):
+    def get_direction(self):
+        return [(1,0),(-1,0),(0,1),(0,-1)]
+
+
+class Bishop(MovingPiece):
+    def get_direction(self):
+        return [(1,1),(1,-1),(-1,-1),(-1,1)]
+
+
+class Queen(MovingPiece):
+    def get_direction(self):
+        return [(1,0),(-1,0),(0,1),(0,-1),(1,1),(1,-1),(-1,-1),(-1,1)]
+
+
+class Empty(Piece):
+    def move(self, row, col):
+        pass
+
+
+class Chess:
+    def __init__(self, s):
+        self.rows = []
+        for r, row in enumerate(s.strip().split(&quot;\n&quot;)):
+            cols = []
+            for c, col in enumerate(list(row)):
+                cols.append(col)
+            self.rows.append(cols)
+
+    def get_piece(self, col):
+        if col in ['p', 'P']:
+            p = Pawn(self.rows)
+        elif col in ['r', 'R']:
+            p = Rook(self.rows)
+        elif col in ['b', 'B']:
+            p = Bishop(self.rows)
+        elif col in ['q', 'Q']:
+            p = Queen(self.rows)
+        elif col in ['n', 'N']:
+            p = Knight(self.rows)
+        else:
+            p = Empty(self.rows)
+
+        if col in ['P', 'R', 'B', 'Q', 'K', 'N']: 
+            p.is_white = True
+        return p
+
+
+    def check(self):
+        in_check = False
+        for r, row in enumerate(self.rows):
+            for c, col in enumerate(row):
+                p = self.get_piece(col)
+                p.move(r,c)
+                if p.is_king_in_check(): 
+                    in_check = True
+                    if p.is_white:
+                        print 'black king is in check'
+                    else:
+                        print 'white king is in check'
+        if not in_check: print 'no king is in check'
+
+
+#
+# Test Code
+#
+class MyTest(unittest.TestCase):
+    def testChess(self):
+        Chess(&quot;&quot;&quot;
+..k.....
+ppp.pppp
+........
+.R...B..
+........
+........
+PPPPPPPP
+K.......
+        &quot;&quot;&quot;).check()
+
+        Chess(&quot;&quot;&quot;
+rnbqk.nr
+ppp..ppp
+....p...
+...p....
+.bPP....
+.....N..
+PP..PPPP
+RNBQKB.R
+        &quot;&quot;&quot;).check()
+
+
+if __name__ == &quot;__main__&quot;:
+    unittest.main()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2014/03/17 15:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">pahkey</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_1351"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Perl</p>
+<p>8x8 배열에 올려놓은 뒤 킹 자리 기준으로 8개의 나이트 자리를 확인하고 8 방향에서 가장 가까운 기물을 검사합니다.<br />
+결과를 괜히 합치고 정규식으로 확인하는건 정규식으로만 하려다가 그만둬서 그렇습니다. (…)</p>
+<pre><code class="perl">use strict;
+use warnings;
+use integer;
+my @r=('no','black','white');
+my ($d,$e,$s,@b);
+while(&lt;&gt;){
+    chomp;
+    next unless length;
+    $s.=$_;
+    my @a=split(//);
+    push @b,\@a;
+    if ($#b==7){
+        exit 0 if $s eq '.' x 64;
+        $d++;$e=0;
+        my $k=index($s,'k');my $K=index($s,'K');$s=&quot;&quot;;
+        my ($x,$y);
+        $y=$k/8;$x=$k-$y*8;
+        $e=1 if a($x,$y,0);
+        $y=$K/8;$x=$K-$y*8;
+        $e=2 if a($x,$y,1);
+        @b=();
+        print &quot;Game #$d: $r[$e] king is in check.\n&quot;
+    }
+}
+sub a{
+    my ($x,$y,$o)=@_;
+    my ($n,$b,$r,$p);
+    $n=b($x,$y,1,-2,1).b($x,$y,2,-1,1).b($x,$y,2,1,1).b($x,$y,1,2,1).b($x,$y,-1,2,1).b($x,$y,-2,1,1).b($x,$y,-2,-1,1).b($x,$y,-1,-2);
+    $b=b($x,$y,1,-1).b($x,$y,1,1).b($x,$y,-1,1).b($x,$y,-1,-1);
+    $r=b($x,$y,0,-1).b($x,$y,1,0).b($x,$y,0,1).b($x,$y,-1,0);
+    $p=b($x,$y,1,-1,1).b($x,$y,1,1,1).b($x,$y,-1,1m1).b($x,$y,-1,-1,1);
+    if      ($o==0&amp;&amp;($n=~/N/||$b=~/B|Q/||$p=~/.P..|..P./||$r=~/R|Q/)){
+        return 1
+    }elsif  ($n=~/n/||$b=~/b|q/||$p=~/p...|...p/||$r=~/r|q/){
+        return 1
+    }else{
+        return 0
+    }
+}
+sub b{
+    my ($x,$y,$offsetx,$offsety,$f)=@_;
+    my $r=0;
+    if($f&gt;0){
+        $x+=$offsetx;$y+=$offsety
+    }else{
+        while($r==0){
+            $x+=$offsetx;$y+=$offsety;
+            $r++ if c($x,$y) ne '.'
+        }
+    }
+    return c($x,$y)
+}
+sub c{
+    my ($x,$y)=@_;
+    if ($x&lt;0 or $y&lt;0 or $x&gt;7 or $y&gt;7){
+        return 'E'
+    }else{
+        return $b[$y][$x]
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/01/02 20:56</p>
+                                <p class="static-profile" style="margin:0;padding:0;">*IDLE*</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_1637"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C#으로 작성했습니다. 생각했던 것보다 노가다가 되어버렸네요. 별로 마음에 들진 않지만 일단 풀었으니 올립니다. 너무 line이 많이 나왔네요. 좀 더 효율적으로 계산할 수 있는 방법이 생각나면 수정하겠습니다.</p>
+<pre><code class="cs">using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CodingDojang
+{
+
+    class CodingDojang
+    {
+        static void Main(string[] args)
+        {
+            CheckTheCheck.Answer();
+        }
+    }
+
+    public class CheckTheCheck
+    {
+
+        public class Chess
+        {
+
+            public string[] Matrix { get; set; }
+            public int BlackKingRow { get; set; }
+            public int BlackKingColumn { get; set; }
+            public int WhiteKingRow { get; set; }
+            public int WhiteKingColumn { get; set; }
+
+            public Chess()
+            {
+                Matrix = new string[8];
+                BlackKingRow = -1;
+                BlackKingColumn = -1;
+                WhiteKingRow = -1;
+                WhiteKingColumn = -1;
+            }
+
+        }
+
+        public static void Answer()
+        {
+
+            List&lt;Chess&gt; games = new List&lt;Chess&gt;();
+
+            int dummy = 0;
+
+            while(dummy == 0 || Console.ReadLine().ToString() == &quot;\n&quot;)
+            {
+
+                Chess chess = new Chess();
+
+                for (int i = 0; i &lt; 8; i++)
+                {
+
+                    chess.Matrix[i] = Console.ReadLine().ToString();
+
+                    if (chess.Matrix[i].Contains('K'))
+                    {
+                        chess.WhiteKingRow = i;
+                        chess.WhiteKingColumn = chess.Matrix[i].IndexOf('K');
+                    }
+
+                    if (chess.Matrix[i].Contains('k'))
+                    {
+                        chess.BlackKingRow = i;
+                        chess.BlackKingColumn = chess.Matrix[i].IndexOf('k');
+                    }
+
+                }
+
+                var count = chess.Matrix.Count(c =&gt; c == &quot;........&quot;);
+
+                if (count &lt; 8)
+                    games.Add(chess);
+                else
+                    break;
+
+            }
+
+            for (int i = 0; i &lt; games.Count; i++)
+
+                if (IsBlackInAttack(games[i], 
+                    games[i].WhiteKingRow, games[i].WhiteKingColumn))
+                    Console.WriteLine(&quot;Game  #&quot; + i + &quot;: white king is in check&quot;);
+                else if (IsWhiteInAttack(games[i], 
+                    games[i].BlackKingRow, games[i].BlackKingColumn))
+                    Console.WriteLine(&quot;Game  #&quot; + i + &quot;: black king is in check&quot;);
+
+        }
+
+        public static bool IsBlackInAttack(Chess chess, int row, int column)
+        {
+
+            if (CheckKing(chess, row, column))
+                return true;
+
+            if (CheckDiagonal(chess, row, column, new List&lt;string&gt; { &quot;q&quot;, &quot;b&quot; }))
+                return true;
+
+            if (CheckHorizontalVertical(chess, row, column, new List&lt;string&gt; { &quot;q&quot;, &quot;r&quot; }))
+                return true;
+
+            if (CheckKnight(chess, row, column, &quot;n&quot;))
+                return true;
+
+            if (CheckPawn(chess, row, column, &quot;p&quot;))
+                return true;
+
+            return false;
+
+        }
+
+        public static bool IsWhiteInAttack(Chess chess, int row, int column)
+        {
+
+            if (CheckKing(chess, row, column))
+                return true;
+
+            if (CheckDiagonal(chess, row, column, new List&lt;string&gt;{ &quot;Q&quot;, &quot;B&quot; }))
+                return true;
+
+            if (CheckHorizontalVertical(chess, row, column, new List&lt;string&gt; { &quot;Q&quot;, &quot;R&quot; }))
+                return true;
+
+            if (CheckKnight(chess, row, column, &quot;N&quot;))
+                return true;
+
+            if (CheckPawn(chess, row, column, &quot;P&quot;))
+                return true;
+
+            return false;
+
+        }
+
+        public static bool CheckKing(Chess chess, int row, int column)
+        {
+
+            for (int i = row - 1; i &gt;= row + 1; i++)
+                for (int j = row - 1; j &gt;= row + 1; j++)
+                    if (i &gt;= 0 &amp;&amp; j &gt;= 0)
+                    {
+
+                        if (i == row &amp;&amp; j == column)
+                            continue;
+
+                        if (chess.Matrix[i][j].ToString().ToLower() == &quot;k&quot;)
+                            return true;
+
+                    }
+
+            return false;
+
+
+        }
+
+        public static bool CheckDiagonal(Chess chess, 
+            int row, int column, List&lt;string&gt; letters)
+        {
+
+            int i = row - 1, j = column - 1;
+
+            while (i &gt;= 0 &amp;&amp; j &gt;= 0)
+            {
+                if (letters.Any(l =&gt; l == chess.Matrix[i][j].ToString()))
+                    return true;
+                if (chess.Matrix[i][j].ToString() != &quot;.&quot;)
+                    break;
+                i--; j--;
+            }
+
+            i = row + 1; j = column + 1;
+
+            while (i &lt; 8 &amp;&amp; j &lt; 8)
+            {
+                if (letters.Any(l =&gt; l == chess.Matrix[i][j].ToString()))
+                    return true;
+                if (chess.Matrix[i][j].ToString() != &quot;.&quot;)
+                    break;
+                i++; j++;
+            }
+
+            i = row + 1; j = column - 1;
+
+            while (i &lt; 8 &amp;&amp; j &gt;= 0)
+            {
+                if (letters.Any(l =&gt; l == chess.Matrix[i][j].ToString()))
+                    return true;
+                if (chess.Matrix[i][j].ToString() != &quot;.&quot;)
+                    break;
+                i++; j--;
+            }
+
+            i = row - 1; j = column + 1;
+
+            while (i &gt;= 0 &amp;&amp; j &lt; 8)
+            {
+                if (letters.Any(l =&gt; l == chess.Matrix[i][j].ToString()))
+                    return true;
+                if (chess.Matrix[i][j].ToString() != &quot;.&quot;)
+                    break;
+                i--; j++;
+            }
+
+            return false;
+
+        }
+
+        public static bool CheckHorizontalVertical(Chess chess, 
+            int row, int column, List&lt;string&gt; letters)
+        {
+
+            int i = row - 1, j = column;
+
+            while(i &gt;= 0)
+            {
+                if (letters.Any(l =&gt; l == chess.Matrix[i][j].ToString()))
+                    return true;
+                if (chess.Matrix[i][j].ToString() != &quot;.&quot;)
+                    break;
+                i--;
+            }
+
+            i = row + 1;
+
+            while (i &lt; 8)
+            {
+                if (letters.Any(l =&gt; l == chess.Matrix[i][j].ToString()))
+                    return true;
+                if (chess.Matrix[i][j].ToString() != &quot;.&quot;)
+                    break;
+                i++;
+            }
+
+            i = row; j = column - 1;
+
+            while (j &gt;= 0)
+            {
+                if (letters.Any(l =&gt; l == chess.Matrix[i][j].ToString()))
+                    return true;
+                if (chess.Matrix[i][j].ToString() != &quot;.&quot;)
+                    break;
+                j--;
+            }
+
+            j = column + 1;
+
+            while (j &lt; 8)
+            {
+                if (letters.Any(l =&gt; l == chess.Matrix[i][j].ToString()))
+                    return true;
+                if (chess.Matrix[i][j].ToString() != &quot;.&quot;)
+                    break;
+                j++;
+            }
+
+            return false;
+
+        }
+
+        public static bool CheckKnight(Chess chess, int row, int column, string knight)
+        {
+
+            if (row - 2 &gt;= 0 &amp;&amp; column - 1 &gt;= 0)
+                if (chess.Matrix[row - 2][column - 1].ToString() == knight)
+                    return true;
+
+            if (row - 1 &gt;= 0 &amp;&amp; column - 2 &gt;= 0)
+                if (chess.Matrix[row - 1][column - 2].ToString() == knight)
+                    return true;
+
+            if (row - 2 &gt;= 0 &amp;&amp; column + 1 &lt; 8)
+                if (chess.Matrix[row - 2][column + 1].ToString() == knight)
+                    return true;
+
+            if (row - 1 &gt;= 0 &amp;&amp; column + 2 &lt; 8)
+                if (chess.Matrix[row - 1][column + 2].ToString() == knight)
+                    return true;
+
+            if (row + 2 &lt; 8 &amp;&amp; column - 1 &gt;= 0)
+                if (chess.Matrix[row + 2][column - 1].ToString() == knight)
+                    return true;
+
+            if (row + 1 &lt; 8 &amp;&amp; column - 2 &gt;= 0)
+                if (chess.Matrix[row + 1][column - 2].ToString() == knight)
+                    return true;
+
+            if (row + 2 &lt; 8 &amp;&amp; column + 1 &lt; 8)
+                if (chess.Matrix[row + 2][column + 1].ToString() == knight)
+                    return true;
+
+            if (row + 1 &lt; 8 &amp;&amp; column + 2 &lt; 8)
+                if (chess.Matrix[row + 1][column + 2].ToString() == knight)
+                    return true;
+
+            return false;
+
+        }
+
+        public static bool CheckPawn(Chess chess, 
+            int row, int column, string pawn, bool white = true)
+        {
+
+            int i = white ? row + 1 : row - 1;
+
+            if (i &gt;= 8)
+                return false;
+
+            if (column - 1 &gt;= 0)
+                if (chess.Matrix[i][column - 1].ToString() == pawn)
+                    return true;
+
+            if (column + 1 &lt; 8)
+                if (chess.Matrix[i][column + 1].ToString() == pawn)
+                    return true;
+
+            return false;
+
+        }
+
+    }
+
+
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2015/02/03 19:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Straß Böhm Jäger</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_2907"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>킹의자리를 찾아서, 그 자리에서 여러방향으로 탐색하면서<br>
+적의 말이 있는지 검사하였습니다.<br>
+직선방향으로 가서 나오는 첫번째 말이 루크거나 퀸인지,<br>
+대각선방향으로 가서 나오는 첫번째 말이 비숍이거나 퀸인지 검사하고 <br>
+편이 다르면 체크로 출력했습니다<br>
+폰과 나이트도 마찬가지구요,<br>
+다만 상대편 킹은 검사하지 않았습니다.<br>
+킹이 킹을 체크하는건 자살행위이므로..<br></p>
+<pre><code class="python">from itertools import product
+chessPlates=[]
+while True:
+    chess = [raw_input() for x in range(8)]
+    raw_input()
+    if all(x=='.'*8 for x in chess): break
+    chessPlates.append(chess)
+
+def check(chess):
+    message = ' king is in check'
+    for row  in range(8):
+        for col in range(8):
+            if chess[row][col] in ['k','K']:
+                Kupper = chess[row][col].isupper()
+                side = ['black','white'][Kupper]
+            else : continue
+            for dr,dc in product([-1,0,1],repeat=2): # Rook, Bishop, Queen
+                if (dr,dc)==(0,0) : continue
+                r,c = row,col
+                while r in range(8) and c in range(8) and chess[r][c] in ['k','K','.']:
+                    r+=dr;c+=dc #eat spaces
+                if not r in range(8) or not c in range(8): continue
+                if chess[r][c] in ['r','R','q','Q'] and dr*dc==0 and Kupper != chess[r][c].isupper():
+                    return side+message
+                if chess[r][c] in ['b','B','q','Q'] and dr*dc!=0 and Kupper != chess[r][c].isupper():
+                    return side+message
+            for dr,dc in [[(1,1),(1,-1)],[(-1,-1),(-1,1)]][Kupper]: #Pawn
+                r,c = row+dr,col+dc
+                if (not r in range(8)) or (not c in range(8)) : continue
+                if chess[r][c] in ['p','P'] and Kupper != chess[r][c].isupper():
+                    return side+message
+            for dr,dc in [(-2,-1),(-2,1),(2,-1),(2,1),(1,-2),(1,2),(-1,2),(-1,-2)]:#Knight
+                r,c = row+dr,col+dc
+                if (not r in range(8)) or (not c in range(8)) : continue
+                if chess[r][c] in ['n','N'] and Kupper != chess[r][c].isupper():
+                    return side+message
+    return 'No'+message
+
+for n,chess in enumerate(chessPlates):
+    print 'Game #%d: %s'%(n+1,check(chess))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/01/27 12:36</p>
+                                <p class="static-profile" style="margin:0;padding:0;">상파</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_3599"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>깔끔하게 만들고 싶었으나 능력부족입니다.</p>
+<pre><code class="python">def do(game):
+    def get_coord(n):
+        nonlocal game
+        _game = ''.join(game.split())
+
+        i = _game.index(n)
+        return i % 8, i // 8
+
+    def check_at_coord(x, y):
+        nonlocal game
+        _game = ''.join(game.split())
+        if (0 &lt;= x &lt; 8) and (0 &lt;= y &lt; 8):
+            i = y * 8 + x
+            return _game[i]
+        else:
+            return &quot;x&quot;
+
+    def check(color='w'):
+        ''' True: 흰색 킹이 체크, False: 흑색킹이 체크, None 없음'''
+        # 킹의 색상 선택
+        is_white = color == 'w'
+        k_mark = 'K' if is_white else 'k'
+        # 킹의 좌표
+        x, y = get_coord(k_mark)
+        # pawn 이 있는지 검사
+        offsets = ((-1, -1), (1, -1))\
+                  if is_white else\
+                  ((-1, 1), (1, 1))
+        for ox, oy in offsets:
+            if check_at_coord(x + ox, y+oy) == ('p' if is_white else 'P'):
+                return is_white
+        # Nn 검사
+        offsets = (
+            (-1, -2), (1, -2), (-2, -1), (2, -1),
+            (-1, 2), (1, 2), (-2, 1), (2, 1)
+        )
+        for ox, oy in offsets:
+            if check_at_coord(x+ox, y+oy) == ('n' if is_white else 'N'):
+                return is_white
+
+        # 대각선 방향 탐색 (QqBb)
+        ## 좌상
+        for d in range(1, 8):
+            t = check_at_coord(x-d, y-d)
+            if t in ('bq' if is_white else 'BQ'):
+                return is_white
+            elif t == '.':
+                continue
+            else:
+                break
+
+        ## 우상
+        for d in range(1, 8):
+            t = check_at_coord(x+d, y-d)
+            if t in ('bq' if is_white else 'BQ'):
+                return is_white
+            elif t == '.':
+                continue
+            else:
+                break
+
+        ## 좌하
+        for d in range(1, 8):
+            t = check_at_coord(x-d, y+d)
+            if t in ('bq' if is_white else 'BQ'):
+                return is_white
+            elif t == '.':
+                continue
+            else:
+                break
+        ## 우하
+        for d in range(1, 8):
+            t = check_at_coord(x+d, y+d)
+            if t in ('bq' if is_white else 'BQ'):
+                return is_white
+            elif t == '.':
+                continue
+            else:
+                break
+
+        # 직선방향탐색 (QqRr)
+        ## 상
+        for d in range(1, 8):
+            t = check_at_coord(x, y-d)
+            if t in ('rq' if is_white else 'RQ'):
+                return is_white
+            elif t == '.':
+                continue
+            else:
+                break
+
+        ## 하
+        for d in range(1, 8):
+            t = check_at_coord(x, y+d)
+            if t in ('rq' if is_white else 'RQ'):
+                return is_white
+            elif t == '.':
+                continue
+            else:
+                break
+
+        ## 좌
+        for d in range(1, 8):
+            t = check_at_coord(x-d, y)
+            if t in ('rq' if is_white else 'RQ'):
+                return is_white
+            elif t == '.':
+                continue
+            else:
+                break
+
+        ## 우
+        for d in range(1, 8):
+            t = check_at_coord(x+d, y)
+            if t in ('rq' if is_white else 'RQ'):
+                return is_white
+            elif t == '.':
+                continue
+            else:
+                break
+        return None
+
+    if check('w') is not None:
+        print('white king is in check.')
+    elif check('b') is not None:
+        print('black king is in check.')
+    else:
+        print('no king is in check.')
+
+g = 1
+while True:
+    data = []
+    for _ in range(8):
+        data.append(input()[:8])
+    if (&quot;&quot;.join(data)).replace('.','') == '':
+        break
+    print(&quot;Game #{}: &quot;.format(g), end=&quot;&quot;)
+    do('\n'.join(data))
+    g += 1
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/05/04 17:25</p>
+                                <p class="static-profile" style="margin:0;padding:0;">룰루랄라</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_4074"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<p>k에서 뻗어나가는 직선,사선에 있는 말들을 이어붙여 문자열로 만든뒤 in_check여부를 판단합니다. stdin 받는 부분과 직선,사선 정의부분은 개선이 필요한 상태입니다.</p>
+<pre><code class="ruby">check_incheck = -&gt;chess_board,x,y,kv do
+  v = -&gt;ex,ey { ex&lt;0 || ey&lt;0 ? nil : chess_board.dig(ex,ey) }
+  s_rq = [*0..7].map {|d| [v[x-d,y], v[x+d,y], v[x,y-d], v[x,y+d]] }.transpose.map(&amp;:join)
+  s_bq = [*0..7].map {|d| [v[x-d,y-d], v[x-d,y+d], v[x+d,y+d], v[x+d,y-d]] }.transpose.map(&amp;:join)
+  s_p = s_bq[(kv==&quot;K&quot;?0:2),2].map {|s| s[1,2] }
+  s_n = (t=[1,-1].product([2,-2]); (t+t.map(&amp;:reverse)).map {|dx,dy| v[x+dx,y+dy]}.compact)
+
+  rq, bq, rp, rn = [%w(kR kQ), %w(kB kQ), &quot;P&quot;, &quot;N&quot;]
+  ([rq,bq].map {|e|e.map(&amp;:swapcase!)}; [rp,rn].map(&amp;:swapcase!)) if kv == &quot;K&quot;
+  is_incheck = rq.any? {|s| s_rq.include?(s)} | s_p.any? {|s| rp == s } |
+               bq.any? {|s| s_bq.include?(s)} | s_n.any? {|s| rn == s }
+end
+
+result = -&gt;nth,game do
+  is_k = -&gt;x,y { game[x][y].upcase == &quot;K&quot; ? [x,y,game[x][y]] : nil }
+  kings = [*0..7].product([*0..7]).map(&amp;is_k).compact
+  checkmate = kings.map {|x,y,v| check_incheck[game,x,y,v] }
+  winner = checkmate[0]? &quot;black&quot; : checkmate[1]? &quot;white&quot; : &quot;no&quot;
+  &quot;Game ##{nth} : #{winner} king is in check.&quot;
+end
+
+check_chess_games = proc do
+  games, tmp = [], [&quot;default&quot;]
+  until tmp.join.empty?
+    tmp = (0..7).map { gets.chop.chars.map {|c| c == &quot;.&quot; ? &quot;&quot; : c } }
+    tmp.join.empty? ? break : games.tap {|boards| boards &lt;&lt; tmp; puts &quot;&quot; }
+  end
+  puts games.map.with_index(1) {|game,nth| result[nth, game] }
+end
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby">stdin_games = &quot;..k.....\n&quot; +
+              &quot;ppp.pppp\n&quot; +
+              &quot;........\n&quot; +
+              &quot;.R...B..\n&quot; +
+              &quot;........\n&quot; +
+              &quot;........\n&quot; +
+              &quot;PPPPPPPP\n&quot; +
+              &quot;K.......\n&quot; +
+
+              &quot;rnbqk.nr\n&quot; +
+              &quot;ppp..ppp\n&quot; +
+              &quot;....p...\n&quot; +
+              &quot;...p....\n&quot; +
+              &quot;.bPP....\n&quot; +
+              &quot;.....N..\n&quot; +
+              &quot;PP..PPPP\n&quot; +
+              &quot;RNBQKB.R\n&quot; +
+
+              &quot;........\n&quot; +
+              &quot;........\n&quot; +
+              &quot;........\n&quot; +
+              &quot;........\n&quot; +
+              &quot;........\n&quot; +
+              &quot;........\n&quot; +
+              &quot;........\n&quot; +
+              &quot;........\n&quot;
+game_result = &quot;\n\n&quot; +  &quot;Game #1 : black king is in check.\n&quot; +
+                        &quot;Game #2 : white king is in check.\n&quot;
+$stdin = StringIO.new(stdin_games)
+expect{ check_chess_games.() }.to output( game_result ).to_stdout
+</code></pre>
+
+<p><strong>Output</strong></p>
+<pre><code class="ruby">#=&gt; check_chess_games.()
+..k.....
+ppp.pppp
+........
+.R...B..
+........
+........
+PPPPPPPP
+K.......
+
+rnbqk.nr
+ppp..ppp
+....p...
+...p....
+.bPP....
+.....N..
+PP..PPPP
+RNBQKB.R
+
+........
+........
+........
+........
+........
+........
+........
+........
+Game #1: black king is in check.
+Game #2: white king is in check.
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/07/06 02:08</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5831"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>저는 조금 다르게 입력방법을 구상했습니다
+처음에 아예 체스판의 모든 말의 위치를 제자리에 셋업시키고 난 뒤. 체스판의 말을 하나씩 옮겼을 때 킹이 체크가 되면 결과로 어느 말이 어느 킹을 체크했는지 나올 수 있도록 만들어 봤습니다. 이것을 나중에 발전 시키면 게임을 만들 수 있지 않을까 생각중입니다 (언어는 c 입니다)</p>
+<pre><code class="no-highlight">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;windows.h&gt;
+#include &lt;conio.h&gt;
+#include &lt;time.h&gt;
+
+enum ControlKeys
+{
+     UP        =    72,
+    DOWN    =    80,
+    LEFT    =    75,
+    RIGHT    =    77,
+    SPACE    =    32
+};
+void gotoxy1(int x, int y){
+    COORD Pos={x,y} ;
+  Pos.X = x;
+  Pos.Y = y;
+
+  SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
+}
+int main(void)
+{
+    int r1 = 0, q1 = 0, k1 = 0, l1 = 0, m1 = 0, n1 = 0, o1 = 0, p1 = 0, a1 = 0, b1 = 0, c1 = 0, d1 = 0, e1 = 0, f1 = 0, g1 = 0, h1 = 0, i1 = 0, j1 = 0;
+    int r2 = 0, q2 = 0, k2 = 0, l2 = 0, m2 = 0, n2 = 0, o2 = 0, p2 = 0, a2 = 0, b2 = 0, c2 = 0, d2 = 0, e2 = 0, f2 = 0, g2 = 0, h2 = 0, i2 = 0, j2 = 0;
+    int i = 0, j = 0, a = 0, b = 0, c = 0, d = 0, dd = 0, cc = 100, k = 0, l = 0, m = 0, n = 0, o = 0, p = 0, q = 0, r = 0;
+    char map[8][8] = {1,2,3,5,4,3,2,1,0,0,0,0,0,0,0,0,'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',11,11,11,11,11,11,11,11,10,9,8,7,6,8,9,10};
+
+    /*while(1)
+    {       
+        j1 = 0, r1 = 0, q1 = 0, k1 = 0, l1 = 0, m1 = 0, n1 = 0, o1 = 0, p1 = 0, a1 = 0, b1 = 0, c1 = 0, d1 = 0, e1 = 0, f1 = 0, g1 = 0, h1 = 0, i1 = 0;
+        i = 0, j = 0, a = 0, b = 0, c = 0, d = 0, dd = 0, cc = 100, k = 0, l = 0, m = 0, n = 0, o = 0, p = 0, q = 0, r = 0;*/
+        srand((unsigned)time(NULL));
+
+        for(a1 = 0; a1 &lt; 8; a1++)
+        {
+            for(b1 = 0; b1 &lt; 8; b1++)
+            {
+                if(map[a1][b1]==5)
+                {
+                    gotoxy1(a1,b1);
+                    printf(&quot;k&quot;);
+                }
+                else if(map[a1][b1]==4)
+                {
+                    gotoxy1(a1,b1);
+                    printf(&quot;q&quot;);
+                }
+                else if(map[a1][b1]==3)
+                {
+                    gotoxy1(a1,b1);
+                    printf(&quot;b&quot;);
+                }
+                else if(map[a1][b1]==2)
+                {
+                    gotoxy1(a1,b1);
+                    printf(&quot;n&quot;);
+                }
+                else if(map[a1][b1]==1)
+                {
+                    gotoxy1(a1,b1);
+                    printf(&quot;r&quot;);
+                }
+                else if(map[a1][b1]==0)
+                {
+                    gotoxy1(a1,b1);
+                    printf(&quot;p&quot;);
+                }
+                else if(map[a1][b1]==6)
+                {
+                    gotoxy1(a1,b1);
+                    printf(&quot;K&quot;);
+                }
+                else if(map[a1][b1]==7)
+                {
+                    gotoxy1(a1,b1);
+                    printf(&quot;Q&quot;);
+                }
+                else if(map[a1][b1]==8)
+                {
+                    gotoxy1(a1,b1);
+                    printf(&quot;B&quot;);
+                }
+                else if(map[a1][b1]==9)
+                {
+                    gotoxy1(a1,b1);
+                    printf(&quot;N&quot;);
+                }
+                else if(map[a1][b1]==10)
+                {
+                    gotoxy1(a1,b1);
+                    printf(&quot;R&quot;);
+                }
+                else if(map[a1][b1]==11)
+                {
+                    gotoxy1(a1,b1);
+                    printf(&quot;P&quot;);
+                }
+                else
+                {
+                    gotoxy1(a1,b1);
+                    printf(&quot;.&quot;);
+                }
+            }
+        }
+    /*}*/
+    while(1)
+    {
+F:
+
+        j1 = 0, r1 = 0, q1 = 0, k1 = 0, l1 = 0, m1 = 0, n1 = 0, o1 = 0, p1 = 0, a1 = 0, b1 = 0, c1 = 0, d1 = 0, e1 = 0, f1 = 0, g1 = 0, h1 = 0, i1 = 0;
+        b = _kbhit();
+        if(b!=0)
+        {
+            b = _getch();
+        }       
+        if(q &lt;= 7 &amp;&amp; q &gt;= 0 &amp;&amp; o &lt;= 7 &amp;&amp; o &gt;= 0)
+        {                       
+            switch(b)
+            {
+                case RIGHT:                 
+                    {
+                        c++;
+                        q++;
+                        k++;
+                        if(q==-1 || q==8 || o==-1 || o==8)
+                            goto D;
+                        if(map[c - 1][d]==5)
+                        {
+                                c--;
+                                gotoxy1(c,d);
+                                printf(&quot;k&quot;);
+                                c++;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c - 1][d]==4)
+                        {
+                                c--;
+                                gotoxy1(c,d);
+                                printf(&quot;q&quot;);
+                                c++;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c - 1][d]==3)
+                        {
+                                c--;
+                                gotoxy1(c,d);
+                                printf(&quot;b&quot;);
+                                c++;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c - 1][d]==2)
+                        {
+                                c--;
+                                gotoxy1(c,d);
+                                printf(&quot;n&quot;);
+                                c++;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c - 1][d]==1)
+                        {
+                                c--;
+                                gotoxy1(c,d);
+                                printf(&quot;r&quot;);
+                                c++;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c - 1][d]==0)
+                        {
+                                c--;
+                                gotoxy1(c,d);
+                                printf(&quot;p&quot;);
+                                c++;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c - 1][d]==6)
+                        {
+                                c--;
+                                gotoxy1(c,d);
+                                printf(&quot;K&quot;);
+                                c++;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c - 1][d]==7)
+                        {
+                                c--;
+                                gotoxy1(c,d);
+                                printf(&quot;Q&quot;);
+                                c++;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c - 1][d]==8)
+                        {
+                                c--;
+                                gotoxy1(c,d);
+                                printf(&quot;B&quot;);
+                                c++;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c - 1][d]==9)
+                        {
+                                c--;
+                                gotoxy1(c,d);
+                                printf(&quot;N&quot;);
+                                c++;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c - 1][d]==10)
+                        {
+                                c--;
+                                gotoxy1(c,d);
+                                printf(&quot;R&quot;);
+                                c++;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c - 1][d]==11)
+                        {
+                                c--;
+                                gotoxy1(c,d);
+                                printf(&quot;P&quot;);
+                                c++;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else
+                        {
+                                c--;
+                                gotoxy1(c,d);
+                                printf(&quot;.&quot;);
+                                c++;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        /*for(a = k; a &gt;= 0; a--)
+                        {
+                            gotoxy1(a,d);
+                            printf(&quot; &quot;);
+                            a--;
+                        }*/
+
+                        break;
+                    }
+                case LEFT:
+                    {
+                        c--;
+                        q--;
+                        l++;
+                        if(q==-1 || q==8 || o==-1 || o==8)
+                            goto C;
+                        if(map[c + 1][d]==5)
+                        {
+                                c++;
+                                gotoxy1(c,d);
+                                printf(&quot;k&quot;);
+                                c--;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c + 1][d]==4)
+                        {
+                                c++;
+                                gotoxy1(c,d);
+                                printf(&quot;q&quot;);
+                                c--;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c + 1][d]==3)
+                        {
+                                c++;
+                                gotoxy1(c,d);
+                                printf(&quot;b&quot;);
+                                c--;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c + 1][d]==2)
+                        {
+                                c++;
+                                gotoxy1(c,d);
+                                printf(&quot;n&quot;);
+                                c--;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c + 1][d]==1)
+                        {
+                                c++;
+                                gotoxy1(c,d);
+                                printf(&quot;r&quot;);
+                                c--;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c + 1][d]==0)
+                        {
+                                c++;
+                                gotoxy1(c,d);
+                                printf(&quot;p&quot;);
+                                c--;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c + 1][d]==6)
+                        {
+                                c++;
+                                gotoxy1(c,d);
+                                printf(&quot;K&quot;);
+                                c--;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c + 1][d]==7)
+                        {
+                                c++;
+                                gotoxy1(c,d);
+                                printf(&quot;Q&quot;);
+                                c--;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c + 1][d]==8)
+                        {
+                                c++;
+                                gotoxy1(c,d);
+                                printf(&quot;B&quot;);
+                                c--;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c + 1][d]==9)
+                        {
+                                c++;
+                                gotoxy1(c,d);
+                                printf(&quot;N&quot;);
+                                c--;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c + 1][d]==10)
+                        {
+                                c++;
+                                gotoxy1(c,d);
+                                printf(&quot;R&quot;);
+                                c--;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c + 1][d]==11)
+                        {
+                                c++;
+                                gotoxy1(c,d);
+                                printf(&quot;P&quot;);
+                                c--;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else
+                        {
+                                c++;
+                                gotoxy1(c,d);
+                                printf(&quot;.&quot;);
+                                c--;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        /*for(a = k; a &gt;= 0; a--)
+                        {
+                            gotoxy1(a,d);
+                            printf(&quot; &quot;);
+                            a--;
+                        }*/
+
+                        break;
+                    }
+                case UP:
+                    {
+                        d--;
+                        o--;
+                        j++;
+                        if(q==-1 || q==8 || o==-1 || o==8)
+                            goto B;
+                        if(map[c][d + 1]==5)
+                        {
+                                d++;
+                                gotoxy1(c,d);
+                                printf(&quot;k&quot;);
+                                d--;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c][d + 1]==4)
+                        {
+                                d++;
+                                gotoxy1(c,d);
+                                printf(&quot;q&quot;);
+                                d--;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+
+                        }
+                        else if(map[c][d + 1]==3)
+                        {
+                                d++;
+                                gotoxy1(c,d);
+                                printf(&quot;b&quot;);
+                                d--;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c][d + 1]==2)
+                        {
+                                d++;
+                                gotoxy1(c,d);
+                                printf(&quot;n&quot;);
+                                d--;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c][d + 1]==1)
+                        {
+                                d++;
+                                gotoxy1(c,d);
+                                printf(&quot;r&quot;);
+                                d--;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c][d + 1]==0)
+                        {
+                                d++;
+                                gotoxy1(c,d);
+                                printf(&quot;p&quot;);
+                                d--;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c][d + 1]==6)
+                        {
+                                d++;
+                                gotoxy1(c,d);
+                                printf(&quot;K&quot;);
+                                d--;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c][d + 1]==7)
+                        {
+                                d++;
+                                gotoxy1(c,d);
+                                printf(&quot;Q&quot;);
+                                d--;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+
+                        }
+                        else if(map[c][d + 1]==8)
+                        {
+                                d++;
+                                gotoxy1(c,d);
+                                printf(&quot;B&quot;);
+                                d--;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c][d + 1]==9)
+                        {
+                                d++;
+                                gotoxy1(c,d);
+                                printf(&quot;N&quot;);
+                                d--;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c][d + 1]==10)
+                        {
+                                d++;
+                                gotoxy1(c,d);
+                                printf(&quot;R&quot;);
+                                d--;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c][d + 1]==11)
+                        {
+                                d++;
+                                gotoxy1(c,d);
+                                printf(&quot;P&quot;);
+                                d--;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else
+                        {
+                                d++;
+                                gotoxy1(c,d);
+                                printf(&quot;.&quot;);
+                                d--;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        /*for(a = m; a &gt;= 0; a--)
+                        {
+                            gotoxy1(c,a);
+                            printf(&quot; &quot;);
+                        }*/
+
+                        break;
+                    }
+                case DOWN:
+                    {
+                        d++;
+                        o++;
+                        m++;
+                        if(q==-1 || q==8 || o==-1 || o==8)
+                            goto A;
+                        if(map[c][d - 1]==5)
+                        {
+                                d--;
+                                gotoxy1(c,d);
+                                printf(&quot;k&quot;);
+                                d++;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c][d - 1]==4)
+                        {
+                                d--;
+                                gotoxy1(c,d);
+                                printf(&quot;q&quot;);
+                                d++;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c][d - 1]==4)
+                        {
+                                d--;
+                                gotoxy1(c,d);
+                                printf(&quot;q&quot;);
+                                d++;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c][d - 1]==3)
+                        {
+                                d--;
+                                gotoxy1(c,d);
+                                printf(&quot;b&quot;);
+                                d++;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c][d - 1]==2)
+                        {
+                                d--;
+                                gotoxy1(c,d);
+                                printf(&quot;n&quot;);
+                                d++;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c][d - 1]==1)
+                        {
+                                d--;
+                                gotoxy1(c,d);
+                                printf(&quot;r&quot;);
+                                d++;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c][d - 1]==0)
+                        {
+                                d--;
+                                gotoxy1(c,d);
+                                printf(&quot;p&quot;);
+                                d++;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c][d - 1]==6)
+                        {
+                                d--;
+                                gotoxy1(c,d);
+                                printf(&quot;K&quot;);
+                                d++;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c][d - 1]==7)
+                        {
+                                d--;
+                                gotoxy1(c,d);
+                                printf(&quot;Q&quot;);
+                                d++;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c][d - 1]==8)
+                        {
+                                d--;
+                                gotoxy1(c,d);
+                                printf(&quot;B&quot;);
+                                d++;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c][d - 1]==9)
+                        {
+                                d--;
+                                gotoxy1(c,d);
+                                printf(&quot;N&quot;);
+                                d++;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c][d - 1]==10)
+                        {
+                                d--;
+                                gotoxy1(c,d);
+                                printf(&quot;R&quot;);
+                                d++;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else if(map[c][d - 1]==11)
+                        {
+                                d--;
+                                gotoxy1(c,d);
+                                printf(&quot;P&quot;);
+                                d++;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        else
+                        {
+                                d--;
+                                gotoxy1(c,d);
+                                printf(&quot;.&quot;);
+                                d++;
+                                gotoxy1(c,d);
+                                printf(&quot;*&quot;);
+                        }
+                        /*for(a = m; a &gt;= 0; a--)
+                        {
+                            gotoxy1(c,a);
+                            printf(&quot; &quot;);
+                        }*/
+
+                        break;
+                    }
+                case SPACE:
+                    {
+                        if(cc==100)
+                        {
+                            if(map[c][d]==5)
+                            {
+                                dd = 5;
+                                gotoxy1(c,d);
+                                map[c][d] = 46;
+                                printf(&quot;%c&quot;, map[c][d]);
+                                cc = 0;
+                                break;
+                            }
+                            else if(map[c][d]==4)
+                            {
+                                dd = 4;
+                                gotoxy1(c,d);
+                                map[c][d] = 46;
+                                printf(&quot;%c&quot;, map[c][d]);
+                                cc = 0;
+                                break;
+                            }
+                            else if(map[c][d]==3)
+                            {
+                                dd = 3;
+                                gotoxy1(c,d);
+                                map[c][d] = 46;
+                                printf(&quot;%c&quot;, map[c][d]);
+                                cc = 0;
+                                break;
+                            }
+                            else if(map[c][d]==2)
+                            {
+                                dd = 2;
+                                gotoxy1(c,d);
+                                map[c][d] = 46;
+                                printf(&quot;%c&quot;, map[c][d]);
+                                cc = 0;
+                                break;
+                            }
+                            else if(map[c][d]==1)
+                            {
+                                dd = 1;
+                                gotoxy1(c,d);
+                                map[c][d] = 46;
+                                printf(&quot;%c&quot;, map[c][d]);
+                                cc = 0;
+                                break;
+                            }
+                            else if(map[c][d]==0)
+                            {
+                                dd = 0;
+                                gotoxy1(c,d);
+                                map[c][d] = 46;
+                                printf(&quot;%c&quot;, map[c][d]);
+                                cc = 0;
+                                break;
+                            }
+                            else if(map[c][d]==6)
+                            {
+                                dd = 6;
+                                gotoxy1(c,d);
+                                map[c][d] = 46;
+                                printf(&quot;%c&quot;, map[c][d]);
+                                cc = 0;
+                                break;
+                            }
+                            else if(map[c][d]==7)
+                            {
+                                dd = 7;
+                                gotoxy1(c,d);
+                                map[c][d] = 46;
+                                printf(&quot;%c&quot;, map[c][d]);
+                                cc = 0;
+                                break;
+                            }
+                            else if(map[c][d]==8)
+                            {
+                                dd = 8;
+                                gotoxy1(c,d);
+                                map[c][d] = 46;
+                                printf(&quot;%c&quot;, map[c][d]);
+                                cc = 0;
+                                break;
+                            }
+                            else if(map[c][d]==9)
+                            {
+                                dd = 9;
+                                gotoxy1(c,d);
+                                map[c][d] = 46;
+                                printf(&quot;%c&quot;, map[c][d]);
+                                cc = 0;
+                                break;
+                            }
+                            else if(map[c][d]==10)
+                            {
+                                dd = 10;
+                                gotoxy1(c,d);
+                                map[c][d] = 46;
+                                printf(&quot;%c&quot;, map[c][d]);
+                                cc = 0;
+                                break;
+                            }
+                            else if(map[c][d]==11)
+                            {
+                                dd = 11;
+                                gotoxy1(c,d);
+                                map[c][d] = 46;
+                                printf(&quot;%c&quot;, map[c][d]);
+                                cc = 0;
+                                break;
+                            }   
+                            else
+                            {
+                                dd = 46;
+                                gotoxy1(c,d);
+                                map[c][d] = 46;
+                                printf(&quot;%c&quot;, map[c][d]);
+                                cc = 0;
+                                break;
+                            }
+                        }
+                        if(cc==0)
+                        {
+                            gotoxy1(c,d);
+                            map[c][d] = dd;
+                            printf(&quot;%c&quot;, map[c][d]);
+                            cc = 100;
+                        }
+                        break;
+
+                        /*for(a = m; a &gt;= 0; a--)
+                        {
+                            gotoxy1(c,a);
+                            printf(&quot; &quot;);
+                        }*/
+                    }
+            }
+        }
+        if(q==8 || q==-1 || o==8 || o==-1)
+        {
+A:
+B:
+C:
+D:
+
+            switch(b)
+            {               
+                case RIGHT:                 
+                    {   
+                        gotoxy1(c,d);
+                        c--;
+                        q = 7;
+                        break;
+                    }
+                case LEFT:
+                    {
+                        gotoxy1(c,d);
+                        c++;
+                        q = 0;
+                        break;
+                    }
+                case UP:                    
+                    {   
+                        gotoxy1(c,d);
+                        d++;
+                        o = 0;
+                        break;
+                    }
+                case DOWN:
+                    {
+                        gotoxy1(c,d);
+                        d--;
+                        o = 7;
+                        break;
+                    }
+            }
+        }
+
+    /*while(i1 &lt; 1000000)
+    {           
+        j1 = rand()%16;
+        if(c1 + d1 + e1 + f1 + g1 + h1 + k1 + l1 + m1 + n1 + o1 + p1==32)
+            break;
+        else
+        {
+            i1--;
+        }
+        if(j1%16==5)
+        {
+            if(c1==1 || (map[a1][b1]==4 || map[a1][b1]==11 || map[a1][b1]==2 || map[a1][b1]==1 || map[a1][b1]==3 || map[a1][b1]==0 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10 || map[a1][b1]==6))
+                continue;
+            map[a1][b1] = 5;
+            c1++;
+            b1++;               
+            if(b1==8)
+            {
+                a1++;
+                b1 = 0;
+            }
+            if(a1==8)
+            {
+                a1 = 0;
+            }
+        }
+        else if(j1%16==4)
+        {
+            if(d1==1 || (map[a1][b1]==3 || map[a1][b1]==11 || map[a1][b1]==2 || map[a1][b1]==1 || map[a1][b1]==5 || map[a1][b1]==0 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10 || map[a1][b1]==6))
+                continue;
+            map[a1][b1] = 4;
+            d1++;
+            b1++;           
+            if(b1==8)
+            {
+                a1++;
+                b1 = 0;
+            }
+            if(a1==8)
+            {
+                a1 = 0;
+            }
+        }
+        else if(j1%16==3)
+        {
+            if(e1==2 || (map[a1][b1]==4 || map[a1][b1]==11 || map[a1][b1]==2 || map[a1][b1]==1 || map[a1][b1]==5 || map[a1][b1]==0 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10 || map[a1][b1]==6))
+                continue;
+            map[a1][b1] = 3;
+            e1++;
+            b1++;               
+            if(b1==8)
+            {
+                a1++;
+                b1 = 0;
+            }
+            if(a1==8)
+            {
+                a1 = 0;
+            }
+        }
+        else if(j1%16==2)
+        {
+            if(f1==2 || (map[a1][b1]==4 || map[a1][b1]==11 || map[a1][b1]==3 || map[a1][b1]==1 || map[a1][b1]==5 || map[a1][b1]==0 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10 || map[a1][b1]==6))
+                continue;
+            map[a1][b1] = 2;
+            f1++;
+            b1++;               
+            if(b1==8)
+            {
+                a1++;
+                b1 = 0;
+            }
+            if(a1==8)
+            {
+                a1 = 0;
+            }
+        }
+        else if(j1%16==1)
+        {
+            if(g1==2 || (map[a1][b1]==4 || map[a1][b1]==11 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==5 || map[a1][b1]==0 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10 || map[a1][b1]==6))
+                continue;
+            map[a1][b1] = 1;
+            g1++;
+            b1++;               
+            if(b1==8)
+            {
+                a1++;
+                b1 = 0;
+            }
+            if(a1==8)
+            {
+                a1 = 0;
+            }
+        }
+        else if(j1%16==0)
+        {
+            if(h1==8 || (map[a1][b1]==4 || map[a1][b1]==11 || map[a1][b1]==2 || map[a1][b1]==1 || map[a1][b1]==5 || map[a1][b1]==3 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10 || map[a1][b1]==6))
+                continue;
+            map[a1][b1] = 0;
+            h1++;
+            b1++;               
+            if(b1==8)
+            {
+                a1++;
+                b1 = 0;
+            }
+            if(a1==8)
+            {
+                a1 = 0;
+            }
+        }
+        else if(j1%16==6)
+        {
+            if(k1==1 || (map[a1][b1]==4 || map[a1][b1]==11 || map[a1][b1]==2 || map[a1][b1]==1 || map[a1][b1]==5 || map[a1][b1]==0 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10 || map[a1][b1]==3))
+                continue;
+            map[a1][b1] = 6;
+            k1++;
+            b1++;               
+            if(b1==8)
+            {
+                a1++;
+                b1 = 0;
+            }
+            if(a1==8)
+            {
+                a1 = 0;
+            }
+        }
+        else if(j1%16==7)
+        {
+            if(l1==1 || (map[a1][b1]==4 || map[a1][b1]==11 || map[a1][b1]==2 || map[a1][b1]==1 || map[a1][b1]==5 || map[a1][b1]==0 || map[a1][b1]==3 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10 || map[a1][b1]==6))
+                continue;
+            map[a1][b1] = 7;
+            l1++;
+            b1++;               
+            if(b1==8)
+            {
+                a1++;
+                b1 = 0;
+            }
+            if(a1==8)
+            {
+                a1 = 0;
+            }
+        }
+        else if(j1%16==8)
+        {
+            if(m1==2 || (map[a1][b1]==4 || map[a1][b1]==11 || map[a1][b1]==2 || map[a1][b1]==1 || map[a1][b1]==5 || map[a1][b1]==0 || map[a1][b1]==7 || map[a1][b1]==3 || map[a1][b1]==9 || map[a1][b1]==10 || map[a1][b1]==6))
+                continue;
+            map[a1][b1] = 8;
+            m1++;
+            b1++;               
+            if(b1==8)
+            {
+                a1++;
+                b1 = 0;
+            }
+            if(a1==8)
+            {
+                a1 = 0;
+            }
+        }
+        else if(j1%16==9)
+        {
+            if(n1==2 || (map[a1][b1]==4 || map[a1][b1]==11 || map[a1][b1]==2 || map[a1][b1]==1 || map[a1][b1]==5 || map[a1][b1]==0 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==3 || map[a1][b1]==10 || map[a1][b1]==6))
+                continue;
+            map[a1][b1] = 9;
+            n1++;
+            b1++;               
+            if(b1==8)
+            {
+                a1++;
+                b1 = 0;
+            }
+            if(a1==8)
+            {
+                a1 = 0;
+            }
+        }
+        else if(j1%16==10)
+        {
+            if(o1==2 || (map[a1][b1]==4 || map[a1][b1]==11 || map[a1][b1]==2 || map[a1][b1]==1 || map[a1][b1]==5 || map[a1][b1]==0 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==3 || map[a1][b1]==6))
+                continue;
+            map[a1][b1] = 10;
+            o1++;
+            b1++;               
+            if(b1==8)
+            {
+                a1++;
+                b1 = 0;
+            }
+            if(a1==8)
+            {
+                a1 = 0;
+            }
+        }
+        else if(j1%16==11)
+        {
+            if(p1==8 || (map[a1][b1]==4 || map[a1][b1]==3 || map[a1][b1]==2 || map[a1][b1]==1 || map[a1][b1]==5 || map[a1][b1]==0 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10 || map[a1][b1]==6))
+                continue;
+            map[a1][b1] = 11;
+            p1++;
+            b1++;               
+            if(b1==8)
+            {
+                a1++;
+                b1 = 0;
+            }
+            if(a1==8)
+            {
+                a1 = 0;
+            }
+        }
+        else
+        {
+            b1++;               
+            if(b1==8)
+            {
+                a1++;
+                b1 = 0;
+            }
+            if(a1==8)
+            {
+                a1 = 0;
+            }
+        }
+    }*/
+
+    /*for(a1 = 0; a1 &lt; 8; a1++)
+    {
+        for(b1 = 0; b1 &lt; 8; b1++)
+        {
+            if(map[a1][b1]==5)
+            {
+                gotoxy1(a1,b1);
+                printf(&quot;k&quot;);
+            }
+            else if(map[a1][b1]==4)
+            {
+                gotoxy1(a1,b1);
+                printf(&quot;q&quot;);
+            }
+            else if(map[a1][b1]==3)
+            {
+                gotoxy1(a1,b1);
+                printf(&quot;b&quot;);
+            }
+            else if(map[a1][b1]==2)
+            {
+                gotoxy1(a1,b1);
+                printf(&quot;n&quot;);
+            }
+            else if(map[a1][b1]==1)
+            {
+                gotoxy1(a1,b1);
+                printf(&quot;r&quot;);
+            }
+            else if(map[a1][b1]==0)
+            {
+                gotoxy1(a1,b1);
+                printf(&quot;p&quot;);
+            }
+            else if(map[a1][b1]==6)
+            {
+                gotoxy1(a1,b1);
+                printf(&quot;K&quot;);
+            }
+            else if(map[a1][b1]==7)
+            {
+                gotoxy1(a1,b1);
+                printf(&quot;Q&quot;);
+            }
+            else if(map[a1][b1]==8)
+            {
+                gotoxy1(a1,b1);
+                printf(&quot;B&quot;);
+            }
+            else if(map[a1][b1]==9)
+            {
+                gotoxy1(a1,b1);
+                printf(&quot;N&quot;);
+            }
+            else if(map[a1][b1]==10)
+            {
+                gotoxy1(a1,b1);
+                printf(&quot;R&quot;);
+            }
+            else if(map[a1][b1]==11)
+            {
+                gotoxy1(a1,b1);
+                printf(&quot;P&quot;);
+            }
+            else
+            {
+                gotoxy1(a1,b1);
+                printf(&quot;.&quot;);
+            }
+        }
+    }*/
+    /*printf(&quot;\n\n&quot;);*/
+        while(1)
+        {
+            for(a1 = 0; a1 &lt; 8; a1++)
+            {
+                for(b1 = 0; b1 &lt; 8; b1++)
+                {
+                    if(map[a1][b1]==4)
+                    {
+                        for(i1 = 0; i1 &lt; 8; i1++)
+                        {
+                            a1++;
+                            b1++;
+                            r1++;
+                            if(map[a1][b1]==0 || map[a1][b1]==1 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==4 || map[a1][b1]==5 || map[a1][b1]==11 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10) 
+                            {
+                                a1 = a1 - r1;
+                                b1 = b1 - r1;
+                                break;
+                            }
+                            if(a1 &lt; 0 || b1 &lt; 0 || a1 &gt; 7 || b1 &gt; 7)
+                            {
+                                a1 = a1 - r1;
+                                b1 = b1 - r1;
+                                break;
+                            }
+                            if(map[a1][b1]==6)
+                            {
+                                gotoxy1(15,15);
+                                printf(&quot;white king is in check ('q')\n&quot;);
+                                q1++;
+                                break;
+                            }                       
+                        }
+                        r1 = 0;
+                        for(i1 = 0; i1 &lt; 8; i1++)
+                        {
+                            a1++;
+                            b1--;
+                            r1++;
+                            if(map[a1][b1]==0 || map[a1][b1]==1 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==4 || map[a1][b1]==5 || map[a1][b1]==11 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10) 
+                            {
+                                a1 = a1 - r1;
+                                b1 = b1 + r1;
+                                break;
+                            }
+                            if(a1 &lt; 0 || b1 &lt; 0 || a1 &gt; 7 || b1 &gt; 7)
+                            {
+                                a1 = a1 - r1;
+                                b1 = b1 + r1;
+                                break;
+                            }
+                            if(map[a1][b1]==6)
+                            {
+                                gotoxy1(15,15);
+                                printf(&quot;white king is in check ('q')\n&quot;);
+                                q1++;
+                                break;
+                            }                       
+                        }
+                        r1 = 0;
+                        for(i1 = 0; i1 &lt; 8; i1++)
+                        {
+                            a1--;
+                            b1++;
+                            r1++;
+                            if(map[a1][b1]==0 || map[a1][b1]==1 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==4 || map[a1][b1]==5 || map[a1][b1]==11 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10) 
+                            {
+                                a1 = a1 + r1;
+                                b1 = b1 - r1;
+                                break;
+                            }
+                            if(a1 &lt; 0 || b1 &lt; 0 || a1 &gt; 7 || b1 &gt; 7)
+                            {
+                                a1 = a1 + r1;
+                                b1 = b1 - r1;
+                                break;
+                            }
+                            if(map[a1][b1]==6)
+                            {
+                                gotoxy1(15,15);
+                                printf(&quot;white king is in check ('q')\n&quot;);
+                                q1++;
+                                break;
+                            }
+                        }
+                        r1 = 0;
+                        for(i1 = 0; i1 &lt; 8; i1++)
+                        {
+                            a1--;
+                            b1--;
+                            r1++;
+                            if(map[a1][b1]==0 || map[a1][b1]==1 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==4 || map[a1][b1]==5 || map[a1][b1]==11 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10) 
+                            {
+                                a1 = a1 + r1;
+                                b1 = b1 + r1;
+                                break;
+                            }
+                            if(a1 &lt; 0 || b1 &lt; 0 || a1 &gt; 7 || b1 &gt; 7)
+                            {
+                                a1 = a1 + r1;
+                                b1 = b1 + r1;
+                                break;
+                            }
+                            if(map[a1][b1]==6)
+                            {
+                                gotoxy1(15,15);
+                                printf(&quot;white king is in check ('q')\n&quot;);
+                                q1++;
+                                break;
+                            }
+                        }
+                        r1 = 0;
+                        for(i1 = 0; i1 &lt; 8; i1++)
+                        {
+                            a1++;
+                            r1++;
+                            if(map[a1][b1]==0 || map[a1][b1]==1 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==4 || map[a1][b1]==5 || map[a1][b1]==11 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10) 
+                            {
+                                a1 = a1 - r1;
+                                break;
+                            }
+                            if(a1 &lt; 0 || b1 &lt; 0 || a1 &gt; 7 || b1 &gt; 7)
+                            {
+                                a1 = a1 - r1;
+                                break;
+                            }
+                            if(map[a1][b1]==6)
+                            {
+                                gotoxy1(15,15);
+                                printf(&quot;white king is in check ('q')\n&quot;);
+                                q1++;
+                                break;
+                            }                       
+                        }
+                        r1 = 0;
+                        for(i1 = 0; i1 &lt; 8; i1++)
+                        {
+                            b1++;
+                            r1++;
+                            if(map[a1][b1]==0 || map[a1][b1]==1 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==4 || map[a1][b1]==5 || map[a1][b1]==11 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10) 
+                            {
+                                b1 = b1 - r1;
+                                break;
+                            }
+                            if(a1 &lt; 0 || b1 &lt; 0 || a1 &gt; 7 || b1 &gt; 7)
+                            {
+                                b1 = b1 - r1;
+                                break;
+                            }
+                            if(map[a1][b1]==6)
+                            {
+                                gotoxy1(15,15);
+                                printf(&quot;white king is in check ('q')\n&quot;);
+                                q1++;
+                                break;
+                            }                       
+                        }
+                        r1 = 0;
+                        for(i1 = 0; i1 &lt; 8; i1++)
+                        {
+                            a1--;
+                            r1++;
+                            if(map[a1][b1]==0 || map[a1][b1]==1 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==4 || map[a1][b1]==5 || map[a1][b1]==11 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10) 
+                            {
+                                a1 = a1 + r1;
+                                break;
+                            }
+                            if(a1 &lt; 0 || b1 &lt; 0 || a1 &gt; 7 || b1 &gt; 7)
+                            {
+                                a1 = a1 + r1;
+                                break;
+                            }
+                            if(map[a1][b1]==6)
+                            {
+                                gotoxy1(15,15);
+                                printf(&quot;white king is in check ('q')\n&quot;);
+                                q1++;
+                                break;
+                            }
+                        }
+                        r1 = 0;
+                        for(i1 = 0; i1 &lt; 8; i1++)
+                        {
+                            b1--;
+                            r1++;
+                            if(map[a1][b1]==0 || map[a1][b1]==1 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==4 || map[a1][b1]==5 || map[a1][b1]==11 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10) 
+                            {
+                                b1 = b1 + r1;
+                                break;
+                            }
+                            if(a1 &lt; 0 || b1 &lt; 0 || a1 &gt; 7 || b1 &gt; 7)
+                            {
+                                b1 = b1 + r1;
+                                break;
+                            }
+                            if(map[a1][b1]==6)
+                            {
+                                gotoxy1(15,15);
+                                printf(&quot;white king is in check ('q')\n&quot;);
+                                q1++;
+                                break;
+                            }
+                        }
+                        r1 = 0;
+                        if(q1==1)
+                            break;
+                    }
+                }
+                if(q1==1)
+                    break;
+            }
+            if(q1==1)
+                break;
+
+            q1 = 0;
+            r1 = 0;
+
+            for(a1 = 0; a1 &lt; 8; a1++)
+            {
+                for(b1 = 0; b1 &lt; 8; b1++)
+                {
+                    if(map[a1][b1]==2)
+                    {
+                        a1++;
+                        a1++;
+                        b1++;
+                        if(b1 &gt; 7 || a1 &gt; 7)
+                        {
+                            a1--;
+                            a1--;
+                            b1--;
+                        }
+                        else if(map[a1][b1]==6)
+                        {
+                            gotoxy1(15,15);
+                            q1++;
+                            printf(&quot;white king is in check ('n')\n&quot;);
+                            break;
+                        }
+                        else
+                        {
+                            a1--;
+                            a1--;
+                            b1--;
+                        }
+
+                        a1++;
+                        a1++;
+                        b1--;
+                        if(b1 &lt; 0 || a1 &gt; 7)
+                        {
+                            a1--;
+                            a1--;
+                            b1++;
+                        }
+                        else if(map[a1][b1]==6)
+                        {
+                            gotoxy1(15,15);
+                            q1++;
+                            printf(&quot;white king is in check ('n')\n&quot;);
+                            break;
+                        }
+                        else
+                        {
+                            a1--;
+                            a1--;
+                            b1++;
+                        }
+
+                        a1--;
+                        a1--;
+                        b1++;
+                        if(b1 &gt; 7 || a1 &lt; 0)
+                        {
+                            a1++;
+                            a1++;
+                            b1--;
+                        }
+                        else if(map[a1][b1]==6)
+                        {
+                            gotoxy1(15,15);
+                            q1++;
+                            printf(&quot;white king is in check ('n')\n&quot;);
+                            break;
+                        }
+                        else
+                        {
+                            a1++;
+                            a1++;
+                            b1--;
+                        }
+
+                        a1--;
+                        a1--;
+                        b1--;
+                        if(b1 &lt; 0 || a1 &lt; 0)
+                        {
+                            a1++;
+                            a1++;
+                            b1++;
+                        }
+                        else if(map[a1][b1]==6)
+                        {
+                            gotoxy1(15,15);
+                            q1++;
+                            printf(&quot;white king is in check ('n')\n&quot;);
+                            break;
+                        }
+                        else
+                        {
+                            a1++;
+                            a1++;
+                            b1++;
+                        }
+
+                        b1++;
+                        b1++;
+                        a1++;
+                        if(b1 &gt; 7 || a1 &gt; 7)
+                        {
+                            b1--;
+                            b1--;
+                            a1--;
+                        }
+                        else if(map[a1][b1]==6)
+                        {
+                            gotoxy1(15,15);
+                            q1++;
+                            printf(&quot;white king is in check ('n')\n&quot;);
+                            break;
+                        }
+                        else
+                        {
+                            b1--;
+                            b1--;
+                            a1--;
+                        }
+
+                        b1++;
+                        b1++;
+                        a1--;
+                        if(b1 &gt; 7 || a1 &lt; 0)
+                        {
+                            b1--;
+                            b1--;
+                            a1++;
+                        }
+                        else if(map[a1][b1]==6)
+                        {
+                            gotoxy1(15,15);
+                            q1++;
+                            printf(&quot;white king is in check ('n')\n&quot;);
+                            break;
+                        }
+                        else
+                        {
+                            b1--;
+                            b1--;
+                            a1++;
+                        }
+
+                        b1--;
+                        b1--;
+                        a1++;
+                        if(b1 &lt; 0 || a1 &gt; 7)
+                        {
+                            b1++;
+                            b1++;
+                            a1--;
+                        }
+                        else if(map[a1][b1]==6)
+                        {
+                            gotoxy1(15,15);
+                            q1++;
+                            printf(&quot;white king is in check ('n')\n&quot;);
+                            break;
+                        }
+                        else
+                        {
+                            b1++;
+                            b1++;
+                            a1--;
+                        }
+
+                        b1--;
+                        b1--;
+                        a1--;
+                        if(b1 &lt; 0 || a1 &lt; 0)
+                        {
+                            b1++;
+                            b1++;
+                            a1++;
+                        }
+                        else if(map[a1][b1]==6)
+                        {
+                            gotoxy1(15,15);
+                            q1++;
+                            printf(&quot;white king is in check ('n')\n&quot;);
+                            break;
+                        }
+                        else
+                        {
+                            b1++;
+                            b1++;
+                            a1++;
+                        }
+                    }
+                }
+                if(q1==1)
+                    break;
+            }   
+            if(q1==1)
+                break;
+            q1 = 0;
+            for(a1 = 0; a1 &lt; 8; a1++)
+            {
+                for(b1 = 0; b1 &lt; 8; b1++)
+                {
+                    if(map[a1][b1]==3)
+                    {
+                        for(i1 = 0; i1 &lt; 8; i1++)
+                        {
+                            a1++;
+                            b1++;
+                            r1++;
+                            if(map[a1][b1]==0 || map[a1][b1]==1 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==4 || map[a1][b1]==5 || map[a1][b1]==11 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10) 
+                            {
+                                a1 = a1 - r1;
+                                b1 = b1 - r1;
+                                break;
+                            }
+                            if(a1 &lt; 0 || b1 &lt; 0 || a1 &gt; 7 || b1 &gt; 7)
+                            {
+                                a1 = a1 - r1;
+                                b1 = b1 - r1;
+                                break;
+                            }
+                            if(map[a1][b1]==6)
+                            {
+                                gotoxy1(15,15);
+                                printf(&quot;white king is in check ('b')\n&quot;);
+                                q1++;
+                                break;
+                            }                       
+                        }
+                        r1 = 0;
+                        for(i1 = 0; i1 &lt; 8; i1++)
+                        {
+                            a1++;
+                            b1--;
+                            r1++;
+                            if(map[a1][b1]==0 || map[a1][b1]==1 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==4 || map[a1][b1]==5 || map[a1][b1]==11 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10) 
+                            {
+                                a1 = a1 - r1;
+                                b1 = b1 + r1;
+                                break;
+                            }
+                            if(a1 &lt; 0 || b1 &lt; 0 || a1 &gt; 7 || b1 &gt; 7)
+                            {
+                                a1 = a1 - r1;
+                                b1 = b1 + r1;
+                                break;
+                            }
+                            if(map[a1][b1]==6)
+                            {
+                                gotoxy1(15,15);
+                                printf(&quot;white king is in check ('b')\n&quot;);
+                                q1++;
+                                break;
+                            }                       
+                        }
+                        r1 = 0;
+                        for(i1 = 0; i1 &lt; 8; i1++)
+                        {
+                            a1--;
+                            b1++;
+                            r1++;
+                            if(map[a1][b1]==0 || map[a1][b1]==1 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==4 || map[a1][b1]==5 || map[a1][b1]==11 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10) 
+                            {
+                                a1 = a1 + r1;
+                                b1 = b1 - r1;
+                                break;
+                            }
+                            if(a1 &lt; 0 || b1 &lt; 0 || a1 &gt; 7 || b1 &gt; 7)
+                            {
+                                a1 = a1 + r1;
+                                b1 = b1 - r1;
+                                break;
+                            }
+                            if(map[a1][b1]==6)
+                            {
+                                gotoxy1(15,15);
+                                printf(&quot;white king is in check ('b')\n&quot;);
+                                q1++;
+                                break;
+                            }
+                        }
+                        r1 = 0;
+                        for(i1 = 0; i1 &lt; 8; i1++)
+                        {
+                            a1--;
+                            b1--;
+                            r1++;
+                            if(map[a1][b1]==0 || map[a1][b1]==1 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==4 || map[a1][b1]==5 || map[a1][b1]==11 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10) 
+                            {
+                                a1 = a1 + r1;
+                                b1 = b1 + r1;
+                                break;
+                            }
+                            if(a1 &lt; 0 || b1 &lt; 0 || a1 &gt; 7 || b1 &gt; 7)
+                            {
+                                a1 = a1 + r1;
+                                b1 = b1 + r1;
+                                break;
+                            }
+                            if(map[a1][b1]==6)
+                            {
+                                gotoxy1(15,15);
+                                printf(&quot;white king is in check ('b')\n&quot;);
+                                q1++;
+                                break;
+                            }
+                        }
+                        r1 = 0;
+                        if(q1==1)
+                            break;
+                    }
+                }
+                if(q1==1)
+                    break;
+            }
+            if(q1==1)
+                break;
+
+            q1 = 0;
+            r1 = 0;
+            for(a1 = 0; a1 &lt; 8; a1++)
+            {
+                for(b1 = 0; b1 &lt; 8; b1++)
+                {
+                    if(map[a1][b1]==1)
+                    {
+                        for(i1 = 0; i1 &lt; 8; i1++)
+                        {
+                            a1++;
+                            r1++;
+                            if(map[a1][b1]==0 || map[a1][b1]==1 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==4 || map[a1][b1]==5 || map[a1][b1]==11 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10) 
+                            {
+                                a1 = a1 - r1;
+                                break;
+                            }
+                            if(a1 &lt; 0 || b1 &lt; 0 || a1 &gt; 7 || b1 &gt; 7)
+                            {
+                                a1 = a1 - r1;
+                                break;
+                            }
+                            if(map[a1][b1]==6)
+                            {
+                                gotoxy1(15,15);
+                                printf(&quot;white king is in check ('r')\n&quot;);
+                                q1++;
+                                break;
+                            }                       
+                        }
+                        r1 = 0;
+                        for(i1 = 0; i1 &lt; 8; i1++)
+                        {
+                            b1++;
+                            r1++;
+                            if(map[a1][b1]==0 || map[a1][b1]==1 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==4 || map[a1][b1]==5 || map[a1][b1]==11 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10) 
+                            {
+                                b1 = b1 - r1;
+                                break;
+                            }
+                            if(a1 &lt; 0 || b1 &lt; 0 || a1 &gt; 7 || b1 &gt; 7)
+                            {
+                                b1 = b1 - r1;
+                                break;
+                            }
+                            if(map[a1][b1]==6)
+                            {
+                                gotoxy1(15,15);
+                                printf(&quot;white king is in check ('r')\n&quot;);
+                                q1++;
+                                break;
+                            }                       
+                        }
+                        r1 = 0;
+                        for(i1 = 0; i1 &lt; 8; i1++)
+                        {
+                            a1--;
+                            r1++;
+                            if(map[a1][b1]==0 || map[a1][b1]==1 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==4 || map[a1][b1]==5 || map[a1][b1]==11 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10) 
+                            {
+                                a1 = a1 + r1;
+                                break;
+                            }
+                            if(a1 &lt; 0 || b1 &lt; 0 || a1 &gt; 7 || b1 &gt; 7)
+                            {
+                                a1 = a1 + r1;
+                                break;
+                            }
+                            if(map[a1][b1]==6)
+                            {
+                                gotoxy1(15,15);
+                                printf(&quot;white king is in check ('r')\n&quot;);
+                                q1++;
+                                break;
+                            }
+                        }
+                        r1 = 0;
+                        for(i1 = 0; i1 &lt; 8; i1++)
+                        {
+                            b1--;
+                            r1++;
+                            if(map[a1][b1]==0 || map[a1][b1]==1 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==4 || map[a1][b1]==5 || map[a1][b1]==11 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10) 
+                            {
+                                b1 = b1 + r1;
+                                break;
+                            }
+                            if(a1 &lt; 0 || b1 &lt; 0 || a1 &gt; 7 || b1 &gt; 7)
+                            {
+                                b1 = b1 + r1;
+                                break;
+                            }
+                            if(map[a1][b1]==6)
+                            {
+                                gotoxy1(15,15);
+                                printf(&quot;white king is in check ('r')\n&quot;);
+                                q1++;
+                                break;
+                            }
+                        }
+                        r1 = 0;
+                        if(q1==1)
+                            break;
+                    }
+                }
+                if(q1==1)
+                    break;
+            }
+            if(q1==1)
+                break;
+
+            q1 = 0;
+            r1 = 0;
+
+            for(a1 = 0; a1 &lt; 8; a1++)
+            {
+                for(b1 = 0; b1 &lt; 8; b1++)
+                {
+                    if(map[a1][b1]==0)
+                    {
+                        for(i1 = 0; i1 &lt; 1; i1++)
+                        {
+                            a1++;
+                            b1++;
+                            r1++;
+                            if(map[a1][b1]==0 || map[a1][b1]==1 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==4 || map[a1][b1]==5 || map[a1][b1]==11 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10) 
+                            {
+                                a1 = a1 - r1;
+                                b1 = b1 - r1;
+                                break;
+                            }
+                            if(a1 &lt; 0 || b1 &lt; 0 || a1 &gt; 7 || b1 &gt; 7)
+                            {
+                                a1 = a1 - r1;
+                                b1 = b1 - r1;
+                                break;
+                            }
+                            if(map[a1][b1]==6)
+                            {
+                                gotoxy1(15,15);
+                                printf(&quot;white king is in check ('p')\n&quot;);
+                                q1++;
+                                break;
+                            }
+                            else
+                            {
+                                a1 = a1 - r1;
+                                b1 = b1 - r1;
+                                break;
+                            }
+                        }
+                        r1 = 0;
+                        for(i1 = 0; i1 &lt; 1; i1++)
+                        {
+                            a1++;
+                            b1--;
+                            r1++;
+                            if(map[a1][b1]==0 || map[a1][b1]==1 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==4 || map[a1][b1]==5 || map[a1][b1]==11 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10) 
+                            {
+                                a1 = a1 - r1;
+                                b1 = b1 + r1;
+                                break;
+                            }
+                            if(a1 &lt; 0 || b1 &lt; 0 || a1 &gt; 7 || b1 &gt; 7)
+                            {
+                                a1 = a1 - r1;
+                                b1 = b1 + r1;
+                                break;
+                            }
+                            if(map[a1][b1]==6)
+                            {
+                                gotoxy1(15,15);
+                                printf(&quot;white king is in check ('p')\n&quot;);
+                                q1++;
+                                break;
+                            }       
+                            else
+                            {
+                                a1 = a1 - r1;
+                                b1 = b1 + r1;
+                                break;
+                            }
+                        }
+                        r1 = 0;
+                        if(q1==1)
+                            break;
+                    }
+                }
+                if(q1==1)
+                    break;
+            }
+            if(q1==1)
+                break;
+
+            q1 = 0;
+            r1 = 0;
+
+            for(a1 = 0; a1 &lt; 8; a1++)
+            {
+                for(b1 = 0; b1 &lt; 8; b1++)
+                {
+                    if(map[a1][b1]==7)
+                    {
+                        for(i1 = 0; i1 &lt; 8; i1++)
+                        {
+                            a1++;
+                            b1++;
+                            r1++;
+                            if(map[a1][b1]==0 || map[a1][b1]==1 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==4 || map[a1][b1]==6 || map[a1][b1]==11 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10) 
+                            {
+                                a1 = a1 - r1;
+                                b1 = b1 - r1;
+                                break;
+                            }
+                            if(a1 &lt; 0 || b1 &lt; 0 || a1 &gt; 7 || b1 &gt; 7)
+                            {
+                                a1 = a1 - r1;
+                                b1 = b1 - r1;
+                                break;
+                            }
+                            if(map[a1][b1]==6)
+                            {
+                                gotoxy1(15,15);
+                                printf(&quot;black king is in check ('Q')\n&quot;);
+                                q1++;
+                                break;
+                            }                       
+                        }
+                        r1 = 0;
+                        for(i1 = 0; i1 &lt; 8; i1++)
+                        {
+                            a1++;
+                            b1--;
+                            r1++;
+                            if(map[a1][b1]==0 || map[a1][b1]==1 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==4 || map[a1][b1]==6 || map[a1][b1]==11 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10) 
+                            {
+                                a1 = a1 - r1;
+                                b1 = b1 + r1;
+                                break;
+                            }
+                            if(a1 &lt; 0 || b1 &lt; 0 || a1 &gt; 7 || b1 &gt; 7)
+                            {
+                                a1 = a1 - r1;
+                                b1 = b1 + r1;
+                                break;
+                            }
+                            if(map[a1][b1]==6)
+                            {
+                                gotoxy1(15,15);
+                                printf(&quot;black king is in check ('Q')\n&quot;);
+                                q1++;
+                                break;
+                            }                       
+                        }
+                        r1 = 0;
+                        for(i1 = 0; i1 &lt; 8; i1++)
+                        {
+                            a1--;
+                            b1++;
+                            r1++;
+                            if(map[a1][b1]==0 || map[a1][b1]==1 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==4 || map[a1][b1]==6 || map[a1][b1]==11 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10) 
+                            {
+                                a1 = a1 + r1;
+                                b1 = b1 - r1;
+                                break;
+                            }
+                            if(a1 &lt; 0 || b1 &lt; 0 || a1 &gt; 7 || b1 &gt; 7)
+                            {
+                                a1 = a1 + r1;
+                                b1 = b1 - r1;
+                                break;
+                            }
+                            if(map[a1][b1]==6)
+                            {
+                                gotoxy1(15,15);
+                                printf(&quot;black king is in check ('Q')\n&quot;);
+                                q1++;
+                                break;
+                            }
+                        }
+                        r1 = 0;
+                        for(i1 = 0; i1 &lt; 8; i1++)
+                        {
+                            a1--;
+                            b1--;
+                            r1++;
+                            if(map[a1][b1]==0 || map[a1][b1]==1 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==4 || map[a1][b1]==6 || map[a1][b1]==11 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10) 
+                            {
+                                a1 = a1 + r1;
+                                b1 = b1 + r1;
+                                break;
+                            }
+                            if(a1 &lt; 0 || b1 &lt; 0 || a1 &gt; 7 || b1 &gt; 7)
+                            {
+                                a1 = a1 + r1;
+                                b1 = b1 + r1;
+                                break;
+                            }
+                            if(map[a1][b1]==6)
+                            {
+                                gotoxy1(15,15);
+                                printf(&quot;black king is in check ('Q')\n&quot;);
+                                q1++;
+                                break;
+                            }
+                        }
+                        r1 = 0;
+                        for(i1 = 0; i1 &lt; 8; i1++)
+                        {
+                            a1++;
+                            r1++;
+                            if(map[a1][b1]==0 || map[a1][b1]==1 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==4 || map[a1][b1]==6 || map[a1][b1]==11 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10) 
+                            {
+                                a1 = a1 - r1;
+                                break;
+                            }
+                            if(a1 &lt; 0 || b1 &lt; 0 || a1 &gt; 7 || b1 &gt; 7)
+                            {
+                                a1 = a1 - r1;
+                                break;
+                            }
+                            if(map[a1][b1]==6)
+                            {
+                                gotoxy1(15,15);
+                                printf(&quot;black king is in check ('Q')\n&quot;);
+                                q1++;
+                                break;
+                            }                       
+                        }
+                        r1 = 0;
+                        for(i1 = 0; i1 &lt; 8; i1++)
+                        {
+                            b1++;
+                            r1++;
+                            if(map[a1][b1]==0 || map[a1][b1]==1 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==4 || map[a1][b1]==6 || map[a1][b1]==11 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10) 
+                            {
+                                b1 = b1 - r1;
+                                break;
+                            }
+                            if(a1 &lt; 0 || b1 &lt; 0 || a1 &gt; 7 || b1 &gt; 7)
+                            {
+                                b1 = b1 - r1;
+                                break;
+                            }
+                            if(map[a1][b1]==6)
+                            {
+                                gotoxy1(15,15);
+                                printf(&quot;black king is in check ('Q')\n&quot;);
+                                q1++;
+                                break;
+                            }                       
+                        }
+                        r1 = 0;
+                        for(i1 = 0; i1 &lt; 8; i1++)
+                        {
+                            a1--;
+                            r1++;
+                            if(map[a1][b1]==0 || map[a1][b1]==1 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==4 || map[a1][b1]==6 || map[a1][b1]==11 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10) 
+                            {
+                                a1 = a1 + r1;
+                                break;
+                            }
+                            if(a1 &lt; 0 || b1 &lt; 0 || a1 &gt; 7 || b1 &gt; 7)
+                            {
+                                a1 = a1 + r1;
+                                break;
+                            }
+                            if(map[a1][b1]==6)
+                            {
+                                gotoxy1(15,15);
+                                printf(&quot;black king is in check ('Q')\n&quot;);
+                                q1++;
+                                break;
+                            }
+                        }
+                        r1 = 0;
+                        for(i1 = 0; i1 &lt; 8; i1++)
+                        {
+                            b1--;
+                            r1++;
+                            if(map[a1][b1]==0 || map[a1][b1]==1 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==4 || map[a1][b1]==6 || map[a1][b1]==11 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10) 
+                            {
+                                b1 = b1 + r1;
+                                break;
+                            }
+                            if(a1 &lt; 0 || b1 &lt; 0 || a1 &gt; 7 || b1 &gt; 7)
+                            {
+                                b1 = b1 + r1;
+                                break;
+                            }
+                            if(map[a1][b1]==6)
+                            {
+                                gotoxy1(15,15);
+                                printf(&quot;black king is in check ('Q')\n&quot;);
+                                q1++;
+                                break;
+                            }
+                        }
+                        r1 = 0;
+                        if(q1==1)
+                            break;
+                    }
+                }
+                if(q1==1)
+                    break;
+            }
+            if(q1==1)
+                break;
+
+            q1 = 0;
+            r1 = 0;
+
+            for(a1 = 0; a1 &lt; 8; a1++)
+            {
+                for(b1 = 0; b1 &lt; 8; b1++)
+                {
+                    if(map[a1][b1]==9)
+                    {
+                        a1++;
+                        a1++;
+                        b1++;
+                        if(b1 &gt; 7 || a1 &gt; 7)
+                        {
+                            a1--;
+                            a1--;
+                            b1--;
+                        }
+                        else if(map[a1][b1]==5)
+                        {
+                            gotoxy1(15,15);
+                            q1++;
+                            printf(&quot;black king is in check ('N')\n&quot;);
+                            break;
+                        }
+                        else
+                        {
+                            a1--;
+                            a1--;
+                            b1--;
+                        }
+
+                        a1++;
+                        a1++;
+                        b1--;
+                        if(b1 &lt; 0 || a1 &gt; 7)
+                        {
+                            a1--;
+                            a1--;
+                            b1++;
+                        }
+                        else if(map[a1][b1]==5)
+                        {
+                            gotoxy1(15,15);
+                            q1++;
+                            printf(&quot;black king is in check ('N')\n&quot;);
+                            break;
+                        }
+                        else
+                        {
+                            a1--;
+                            a1--;
+                            b1++;
+                        }
+
+                        a1--;
+                        a1--;
+                        b1++;
+                        if(b1 &gt; 7 || a1 &lt; 0)
+                        {
+                            a1++;
+                            a1++;
+                            b1--;
+                        }
+                        else if(map[a1][b1]==5)
+                        {
+                            gotoxy1(15,15);
+                            q1++;
+                            printf(&quot;black king is in check ('N')\n&quot;);
+                            break;
+                        }
+                        else
+                        {
+                            a1++;
+                            a1++;
+                            b1--;
+                        }
+
+                        a1--;
+                        a1--;
+                        b1--;
+                        if(b1 &lt; 0 || a1 &lt; 0)
+                        {
+                            a1++;
+                            a1++;
+                            b1++;
+                        }
+                        else if(map[a1][b1]==5)
+                        {
+                            gotoxy1(15,15);
+                            q1++;
+                            printf(&quot;black king is in check ('N')\n&quot;);
+                            break;
+                        }
+                        else
+                        {
+                            a1++;
+                            a1++;
+                            b1++;
+                        }
+
+                        b1++;
+                        b1++;
+                        a1++;
+                        if(b1 &gt; 7 || a1 &gt; 7)
+                        {
+                            b1--;
+                            b1--;
+                            a1--;
+                        }
+                        else if(map[a1][b1]==5)
+                        {
+                            gotoxy1(15,15);
+                            q1++;
+                            printf(&quot;black king is in check ('N')\n&quot;);
+                            break;
+                        }
+                        else
+                        {
+                            b1--;
+                            b1--;
+                            a1--;
+                        }
+
+                        b1++;
+                        b1++;
+                        a1--;
+                        if(b1 &gt; 7 || a1 &lt; 0)
+                        {
+                            b1--;
+                            b1--;
+                            a1++;
+                        }
+                        else if(map[a1][b1]==5)
+                        {
+                            gotoxy1(15,15);
+                            q1++;
+                            printf(&quot;black king is in check ('N')\n&quot;);
+                            break;
+                        }
+                        else
+                        {
+                            b1--;
+                            b1--;
+                            a1++;
+                        }
+
+                        b1--;
+                        b1--;
+                        a1++;
+                        if(b1 &lt; 0 || a1 &gt; 7)
+                        {
+                            b1++;
+                            b1++;
+                            a1--;
+                        }
+                        else if(map[a1][b1]==5)
+                        {
+                            gotoxy1(15,15);
+                            q1++;
+                            printf(&quot;black king is in check ('N')\n&quot;);
+                            break;
+                        }
+                        else
+                        {
+                            b1++;
+                            b1++;
+                            a1--;
+                        }
+
+                        b1--;
+                        b1--;
+                        a1--;
+                        if(b1 &lt; 0 || a1 &lt; 0)
+                        {
+                            b1++;
+                            b1++;
+                            a1++;
+                        }
+                        else if(map[a1][b1]==5)
+                        {
+                            gotoxy1(15,15);
+                            q1++;
+                            printf(&quot;black king is in check ('N')\n&quot;);
+                            break;
+                        }
+                        else
+                        {
+                            b1++;
+                            b1++;
+                            a1++;
+                        }
+                    }
+                }
+                if(q1==1)
+                    break;
+            }   
+            if(q1==1)
+                break;
+            q1 = 0;
+            for(a1 = 0; a1 &lt; 8; a1++)
+            {
+                for(b1 = 0; b1 &lt; 8; b1++)
+                {
+                    if(map[a1][b1]==8)
+                    {
+                        for(i1 = 0; i1 &lt; 8; i1++)
+                        {
+                            a1++;
+                            b1++;
+                            r1++;
+                            if(map[a1][b1]==0 || map[a1][b1]==1 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==4 || map[a1][b1]==6 || map[a1][b1]==11 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10) 
+                            {
+                                a1 = a1 - r1;
+                                b1 = b1 - r1;
+                                break;
+                            }
+                            if(a1 &lt; 0 || b1 &lt; 0 || a1 &gt; 7 || b1 &gt; 7)
+                            {
+                                a1 = a1 - r1;
+                                b1 = b1 - r1;
+                                break;
+                            }
+                            if(map[a1][b1]==5)
+                            {
+                                gotoxy1(15,15);
+                                printf(&quot;black king is in check ('B')\n&quot;);
+                                q1++;
+                                break;
+                            }                       
+                        }
+                        r1 = 0;
+                        for(i1 = 0; i1 &lt; 8; i1++)
+                        {
+                            a1++;
+                            b1--;
+                            r1++;
+                            if(map[a1][b1]==0 || map[a1][b1]==1 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==4 || map[a1][b1]==6 || map[a1][b1]==11 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10) 
+                            {
+                                a1 = a1 - r1;
+                                b1 = b1 + r1;
+                                break;
+                            }
+                            if(a1 &lt; 0 || b1 &lt; 0 || a1 &gt; 7 || b1 &gt; 7)
+                            {
+                                a1 = a1 - r1;
+                                b1 = b1 + r1;
+                                break;
+                            }
+                            if(map[a1][b1]==5)
+                            {
+                                gotoxy1(15,15);
+                                printf(&quot;black king is in check ('B')\n&quot;);
+                                q1++;
+                                break;
+                            }                       
+                        }
+                        r1 = 0;
+                        for(i1 = 0; i1 &lt; 8; i1++)
+                        {
+                            a1--;
+                            b1++;
+                            r1++;
+                            if(map[a1][b1]==0 || map[a1][b1]==1 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==4 || map[a1][b1]==6 || map[a1][b1]==11 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10) 
+                            {
+                                a1 = a1 + r1;
+                                b1 = b1 - r1;
+                                break;
+                            }
+                            if(a1 &lt; 0 || b1 &lt; 0 || a1 &gt; 7 || b1 &gt; 7)
+                            {
+                                a1 = a1 + r1;
+                                b1 = b1 - r1;
+                                break;
+                            }
+                            if(map[a1][b1]==5)
+                            {
+                                gotoxy1(15,15);
+                                printf(&quot;black king is in check ('B')\n&quot;);
+                                q1++;
+                                break;
+                            }
+                        }
+                        r1 = 0;
+                        for(i1 = 0; i1 &lt; 8; i1++)
+                        {
+                            a1--;
+                            b1--;
+                            r1++;
+                            if(map[a1][b1]==0 || map[a1][b1]==1 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==4 || map[a1][b1]==6 || map[a1][b1]==11 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10) 
+                            {
+                                a1 = a1 + r1;
+                                b1 = b1 + r1;
+                                break;
+                            }
+                            if(a1 &lt; 0 || b1 &lt; 0 || a1 &gt; 7 || b1 &gt; 7)
+                            {
+                                a1 = a1 + r1;
+                                b1 = b1 + r1;
+                                break;
+                            }
+                            if(map[a1][b1]==5)
+                            {
+                                gotoxy1(15,15);
+                                printf(&quot;black king is in check ('B')\n&quot;);
+                                q1++;
+                                break;
+                            }
+                        }
+                        r1 = 0;
+                        if(q1==1)
+                            break;
+                    }
+                }
+                if(q1==1)
+                    break;
+            }
+            if(q1==1)
+                break;
+
+            q1 = 0;
+            r1 = 0;
+            for(a1 = 0; a1 &lt; 8; a1++)
+            {
+                for(b1 = 0; b1 &lt; 8; b1++)
+                {
+                    if(map[a1][b1]==10)
+                    {
+                        for(i1 = 0; i1 &lt; 8; i1++)
+                        {
+                            a1++;
+                            r1++;
+                            if(map[a1][b1]==0 || map[a1][b1]==1 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==4 || map[a1][b1]==6 || map[a1][b1]==11 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10) 
+                            {
+                                a1 = a1 - r1;
+                                break;
+                            }
+                            if(a1 &lt; 0 || b1 &lt; 0 || a1 &gt; 7 || b1 &gt; 7)
+                            {
+                                a1 = a1 - r1;
+                                break;
+                            }
+                            if(map[a1][b1]==5)
+                            {
+                                gotoxy1(15,15);
+                                printf(&quot;black king is in check ('R')\n&quot;);
+                                q1++;
+                                break;
+                            }                       
+                        }
+                        r1 = 0;
+                        for(i1 = 0; i1 &lt; 8; i1++)
+                        {
+                            b1++;
+                            r1++;
+                            if(map[a1][b1]==0 || map[a1][b1]==1 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==4 || map[a1][b1]==6 || map[a1][b1]==11 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10) 
+                            {
+                                b1 = b1 - r1;
+                                break;
+                            }
+                            if(a1 &lt; 0 || b1 &lt; 0 || a1 &gt; 7 || b1 &gt; 7)
+                            {
+                                b1 = b1 - r1;
+                                break;
+                            }
+                            if(map[a1][b1]==5)
+                            {
+                                gotoxy1(15,15);
+                                printf(&quot;black king is in check ('R')\n&quot;);
+                                q1++;
+                                break;
+                            }                       
+                        }
+                        r1 = 0;
+                        for(i1 = 0; i1 &lt; 8; i1++)
+                        {
+                            a1--;
+                            r1++;
+                            if(map[a1][b1]==0 || map[a1][b1]==1 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==4 || map[a1][b1]==6 || map[a1][b1]==11 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10) 
+                            {
+                                a1 = a1 + r1;
+                                break;
+                            }
+                            if(a1 &lt; 0 || b1 &lt; 0 || a1 &gt; 7 || b1 &gt; 7)
+                            {
+                                a1 = a1 + r1;
+                                break;
+                            }
+                            if(map[a1][b1]==5)
+                            {
+                                gotoxy1(15,15);
+                                printf(&quot;black king is in check ('R')\n&quot;);
+                                q1++;
+                                break;
+                            }
+                        }
+                        r1 = 0;
+                        for(i1 = 0; i1 &lt; 8; i1++)
+                        {
+                            b1--;
+                            r1++;
+                            if(map[a1][b1]==0 || map[a1][b1]==1 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==4 || map[a1][b1]==6 || map[a1][b1]==11 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10) 
+                            {
+                                b1 = b1 + r1;
+                                break;
+                            }
+                            if(a1 &lt; 0 || b1 &lt; 0 || a1 &gt; 7 || b1 &gt; 7)
+                            {
+                                b1 = b1 + r1;
+                                break;
+                            }
+                            if(map[a1][b1]==5)
+                            {
+                                gotoxy1(15,15);
+                                printf(&quot;black king is in check ('R')\n&quot;);
+                                q1++;
+                                break;
+                            }
+                        }
+                        r1 = 0;
+                        if(q1==1)
+                            break;
+                    }
+                }
+                if(q1==1)
+                    break;
+            }
+            if(q1==1)
+                break;
+
+            q1 = 0;
+            r1 = 0;
+
+            for(a1 = 0; a1 &lt; 8; a1++)
+            {
+                for(b1 = 0; b1 &lt; 8; b1++)
+                {
+                    if(map[a1][b1]==11)
+                    {
+                        for(i1 = 0; i1 &lt; 1; i1++)
+                        {
+                            a1--;
+                            b1++;
+                            r1++;
+                            if(map[a1][b1]==0 || map[a1][b1]==1 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==4 || map[a1][b1]==6 || map[a1][b1]==11 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10) 
+                            {
+                                a1 = a1 + r1;
+                                b1 = b1 - r1;
+                                break;
+                            }
+                            if(a1 &lt; 0 || b1 &lt; 0 || a1 &gt; 7 || b1 &gt; 7)
+                            {
+                                a1 = a1 + r1;
+                                b1 = b1 - r1;
+                                break;
+                            }
+                            if(map[a1][b1]==5)
+                            {
+                                gotoxy1(15,15);
+                                printf(&quot;black king is in check ('P')\n&quot;);
+                                q1++;
+                                break;
+                            }
+                            else
+                            {
+                                a1 = a1 + r1;
+                                b1 = b1 - r1;
+                                break;
+                            }
+                        }
+                        r1 = 0;
+                        for(i1 = 0; i1 &lt; 1; i1++)
+                        {
+                            a1--;
+                            b1--;
+                            r1++;
+                            if(map[a1][b1]==0 || map[a1][b1]==1 || map[a1][b1]==2 || map[a1][b1]==3 || map[a1][b1]==4 || map[a1][b1]==6 || map[a1][b1]==11 || map[a1][b1]==7 || map[a1][b1]==8 || map[a1][b1]==9 || map[a1][b1]==10) 
+                            {
+                                a1 = a1 + r1;
+                                b1 = b1 + r1;
+                                break;
+                            }
+                            if(a1 &lt; 0 || b1 &lt; 0 || a1 &gt; 7 || b1 &gt; 7)
+                            {
+                                a1 = a1 + r1;
+                                b1 = b1 + r1;
+                                break;
+                            }
+                            if(map[a1][b1]==5)
+                            {
+                                gotoxy1(15,15);
+                                printf(&quot;black king is in check ('P')\n&quot;);
+                                q1++;
+                                break;
+                            }       
+                            else
+                            {
+                                a1 = a1 + r1;
+                                b1 = b1 + r1;
+                                break;
+                            }
+                        }
+                        r1 = 0;
+                        if(q1==1)
+                            break;
+                    }
+                }
+                if(q1==1)
+                    break;
+            }
+            if(q1==1)
+                break;
+
+            q1 = 0;
+            if(q1==1)
+                break;
+            else
+                goto F;
+
+            /*for(a1 = 0; a1 &lt; 8; a1++)
+            {
+                for(b1 = 0; b1 &lt; 8; b1++)
+                {
+                    map[a1][b1] = -1;
+                }
+            }*/
+
+            /*q1 = 0;
+            r1 = 0;*/
+        }
+        if(q1==1)
+            break;
+    }
+
+    printf(&quot;\n&quot;);
+    return 0;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/01/04 18:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">전승빈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5960"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Queen, Bishop, Rook를 한 함수로 처리했습니다. 
+그래도 다른 부분이 부족해서 코드 많이 길어요 ㅠㅠ....</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#define MAX_COLS 100000
+const int size = 8;
+bool check_in = false;
+bool black = false;  // 소문자 블랙
+bool white = false;  // 대문자 화이트
+void Pawn(int board[size][size], int i, int j, int init);
+void BQR(int board[size][size], int i, int j, int init, int bqr, int e);
+void King(int board[size][size], int i, int j, int init, int e);
+void Knight(int board[size][size], int i, int j, int init, int e);
+
+
+// q 113 r 114 b 98 k 107 n 110 p 112  black
+// Q 81  R 82  B 66 K 75  N 78  P 80   white 
+// brq  b = 0  q = 1  r = 2
+// Bishop, Queen, Rook
+
+void main() {
+    FILE* f = fopen(&quot;input.txt&quot;,&quot;r&quot;);
+    char s[MAX_COLS] = &quot;&quot;;
+    int board[size][size];
+    int index=0;
+    while(NULL!=fgets(s, MAX_COLS, f)) {
+        for(int i=0;i&lt;size;i++) {
+            board[index][i]=s[i];
+        }
+        index++;
+    }
+    for(int i=0;i&lt;size;i++) {
+        for(int j=0;j&lt;size;j++) {
+            if(board[i][j] == 112 || board[i][j] == 80) {
+                Pawn(board, i, j, 1);
+            }
+            else if(board[i][j]==66) {
+                BQR(board, i, j, 1, 0, 107);
+                if(check_in) 
+                    white = true;
+            }
+            else if(board[i][j]==82) { // 82
+                BQR(board, i, j, 1, 2, 107);
+                if(check_in) 
+                    white = true;
+            }
+            else if(board[i][j]==81) {
+                BQR(board, i, j, 1, 1, 107);
+                if(check_in) 
+                    white = true;
+            }
+
+
+            else if(board[i][j]==98) {
+                BQR(board, i, j, 1, 0, 75);
+                if(check_in) 
+                    black = true;
+            }
+            else if(board[i][j]==114) {
+                BQR(board, i, j, 1, 2, 75);
+                if(check_in) 
+                    black = true;
+            }
+            else if(board[i][j]==113) {
+                BQR(board, i, j, 1, 1, 75);
+                if(check_in) 
+                    black = true;
+            }
+
+
+            else if(board[i][j]==75) {
+                King(board, i, j, 1, 107);
+                if(check_in) 
+                    black = true;
+            }
+            else if(board[i][j]==107) {
+                King(board, i, j, 1, 75);
+                if(check_in) 
+                    white = true;
+            }
+
+            else if(board[i][j]==78) {  // N
+                Knight(board, i, j, 1, 110);
+                if(check_in) 
+                    white = true;
+            }
+            else if(board[i][j]==110) { // n
+                Knight(board, i, j, 1, 75);
+                if(check_in) 
+                    black = true;
+            }
+            check_in = false;
+        }
+    }
+    for(int i=0;i&lt;size;i++) {
+        for(int j=0;j&lt;size;j++) {
+            printf(&quot;%3d &quot;, board[i][j]);
+        }
+        printf(&quot;\n&quot;);
+    }
+    printf(&quot;\n&quot;);
+    if(black)
+        printf(&quot;black Win     white Check in!!!\n&quot;);
+    else if(white)
+        printf(&quot;white Win      black Check in!!!\n&quot;);
+    else
+        printf(&quot;not Check in!!\n&quot;);
+}
+void Pawn(int board[size][size], int i, int j, int init) {
+    if(init &amp;&amp; board[i][j]==112)
+        Pawn(board, i,j+1, 0); 
+    if(init &amp;&amp; board[i][j]==80) {
+        Pawn(board, i, j-1, 0); 
+    }
+    if(board[i][j]==112 &amp;&amp; (board[i+1][j+1]==75 || board[i+1][j-1]==75)) { // p
+        check_in = true;
+        black = true;
+    }
+    else if(board[i][j]==112) {
+        i++;
+        if(board[i+1][j+1]==75 || board[i+1][j-1]==75) { // p
+                check_in = true;
+                black = true;
+        }
+    }
+    else if(board[i][j]==80 &amp;&amp; (board[i-1][j-1]==107 || board[i-1][j+1]==107)) { // P
+        check_in = true;
+        white = true;
+    }
+    else if(board[i][j]==80) {
+        i--;
+        if(board[i-1][j-1]==107 || board[i-1][j+1]==107) { // P
+            check_in = true;
+            white = true;
+        }
+    }
+}
+
+void Knight(int board[size][size], int i, int j, int init, int e) {
+    int x=j;
+    int y=i;
+    if(y&gt;0 &amp;&amp; x&gt;1) {
+        if(board[y-1][x-2] == e) 
+            check_in = true;
+        if(init)
+            Knight(board, y-1, x-2, 0, e);
+    }
+    if(y&gt;1 &amp;&amp; x&gt;0) {
+        if(board[y-2][x-1] == e) 
+            check_in = true;
+        if(init)
+            Knight(board, y-2, x-1, 0, e);
+    }
+
+    if(y&gt;1 &amp;&amp; x+1&lt;size) {
+        if(board[y-2][x+1] == e) 
+            check_in = true;
+        if(init)
+            Knight(board, y-2, x+1, 0, e);
+    }
+    if(y&gt;0 &amp;&amp; x+2&lt;size) {
+        if(board[y-1][x+2] == e) 
+            check_in = true;
+        if(init)
+            Knight(board, y-1, x+2, 0, e);
+    }
+
+    if(x&gt;1 &amp;&amp; y+1&lt;size) {
+        if(board[y+1][x-2] == e) 
+            check_in = true;
+        if(init)
+            Knight(board, y+1, x-2, 0, e);
+    }
+    if(y+2&lt;size &amp;&amp; x&gt;0) {
+        if(board[y+2][x-1] == e) 
+            check_in = true;
+        if(init)
+            Knight(board, y+2, x-1, 0, e);
+    }
+
+    if(y+2&lt;size &amp;&amp; x+1&lt;size) {
+        if(board[y+2][x+1] == e) 
+            check_in = true;
+        if(init)
+            Knight(board, y+2, x+1, 0, e);
+    }
+    if(y+1&lt;size &amp;&amp; x+2&lt;size) {
+        if(board[y+1][x+2] == e) 
+            check_in = true;
+        if(init)
+            Knight(board, y+1, x+2, 0, e);
+    }
+}
+
+void BQR (int board[size][size], int i, int j, int init, int bqr, int e) {
+    int x=j;
+    int y=i;
+    while(x&gt;0 &amp;&amp; y&gt;0 &amp;&amp; bqr &lt;=1) {
+        x--;
+        y--;
+        if(board[y][x] == e) {
+            check_in = true;
+            return;
+        }
+        if(init) 
+            BQR(board, y, x, 0, bqr, e);
+        if(board[y][x] !=46 ) break;
+    }
+    x=j;
+    y=i;
+    while(x&lt;size &amp;&amp; y&lt;size &amp;&amp; bqr &lt;=1) {
+        x++;
+        y++;
+        if(board[y][x] == e) {
+            check_in = true;
+            return;
+        }
+        if(init)
+            BQR(board, y, x, 0, bqr, e);
+        if(board[y][x] !=46 ) break;
+    }
+    x=j;
+    y=i;
+    while(x&gt;0 &amp;&amp; y&lt;size  &amp;&amp; bqr &lt;=1) {
+        x--;
+        y++;
+        if(board[y][x] == e) {
+            check_in = true;
+            return;
+        }
+        if(init)
+            BQR(board, y, x, 0, bqr, e);
+        if(board[y][x] !=46 ) break;
+    }
+    x=j;
+    y=i;
+    while(x&lt;size &amp;&amp; y&gt;0  &amp;&amp; bqr &gt;=1) {
+        x++;
+        y--;
+        if(board[y][x] == e) {
+            check_in = true;
+            return;
+        }
+        if(init) {
+            BQR(board, y, x, 0, bqr, e);
+        }
+        if(board[y][x] !=46 ) break;
+    }
+    x=j;
+    y=i;
+    while(x&gt;0 &amp;&amp; bqr &gt;=1) {
+        x--;
+        if(board[y][x] == e) {
+            check_in = true;
+            return;
+        }
+        if(init) 
+            BQR(board, y, x, 0, bqr, e);
+        if(board[y][x] !=46 ) break;
+    }
+    x=j;
+    y=i;
+    while(x&lt;size &amp;&amp; bqr &gt;=1) {
+        x++;
+        if(board[y][x] == e) {
+            check_in = true;
+            return;
+        }
+        if(init)
+            BQR(board, y, x, 0, bqr, e);
+        if(board[y][x] !=46 ) break;
+    }
+    x=j;
+    y=i;
+    while(y&lt;size  &amp;&amp; bqr &gt;=1) {
+        y++;
+        if(board[y][x] == e) {
+            check_in = true;
+            return;
+        }
+        if(init)
+            BQR(board, y, x, 0, bqr, e);
+        if(board[y][x] !=46 ) break;
+    }
+    x=j;
+    y=i;
+    while(y&gt;0 &amp;&amp; bqr &gt;=1) {
+        y--;
+        if(board[y][x] == e) {
+            check_in = true;
+            return;
+        }
+        if(init) {
+            BQR(board, y, x, 0, bqr, e);
+        }
+        if(board[y][x] !=46 ) break;
+    }
+    return;
+}
+
+void King (int board[size][size], int i, int j, int init, int e) {
+    int x=j;
+    int y=i;
+
+    if(y&gt;0 &amp;&amp; x&gt;0) {
+        if(board[y-1][x-1] == e) 
+            check_in = true;
+        if(init)
+            King(board, y-1, x-1, 0, e);
+    }
+    if(y&gt;0) {
+        if(board[y-1][x] == e) 
+            check_in = true;
+        if(init)
+            King(board, y-1, x, 0, e);
+    }
+    if(x&lt;size &amp;&amp; y&gt;0) {
+        if(board[y-1][x+1] == e) 
+            check_in = true;
+        if(init)
+            King(board, y-1, x+1, 0, e);
+    }
+    if(x&gt;0){
+        if(board[y][x-1] == e) 
+            check_in = true;
+        if(init)
+            King(board, y, x-1, 0, e);
+    }
+    if(x&lt;size){
+        if(board[y][x+1] == e) 
+            check_in = true;
+        if(init)
+            King(board, y, x+1, 0, e);
+    }
+    if(x&gt;0 &amp;&amp; y&lt;size) {
+        if(board[y+1][x-1] == e) 
+            check_in = true;
+        if(init)
+            King(board, y, x-1, 0, e);
+    }
+    if(y&lt;size) {
+        if(board[y+1][x] == e) 
+            check_in = true;
+        if(init)
+            King(board, y+1, x, 0, e);
+    }
+    if(y&lt;size) {
+        if(board[y+1][x+1] == e) 
+            check_in = true;
+        if(init)
+            King(board, y+1, x+1, 0, e);
+    }
+}   
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/01/17 16:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">코딩초보</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9744"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from itertools import count
+from string import ascii_letters
+
+ex1 = '''..k.....
+ppp.pppp
+........
+.R...B..
+........
+........
+PPPPPPPP
+K.......'''
+
+ex2 = '''rnbqk.nr
+ppp..ppp
+....p...
+...p....
+.bPP....
+.....N..
+PP..PPPP
+RNBQKB.R'''
+
+def clamp(m, x, M):
+    return max(m, min(x, M))
+
+class unit:
+    unit_type = {'p':0, 'r':1, 'b':2,
+                'q':3, 'k':4, 'n':5}
+    team = {'White':1, 'Black':0}
+
+    def __init__(self, unit_str):
+        self.team = (unit.team['White'] if unit_str.isupper()\
+                     else unit.team['Black'])
+        self.unit_str = unit_str.lower()
+        self.unit_type = unit.unit_type[self.unit_str]
+
+    def __str__(self):
+        return (self.unit_str.upper() if self.team else self.unit_str)
+
+class ChessBoard:
+    game_counter = count(1)
+    check_mul = {1:2, 0:3}
+    diagonal_trav = compile(&quot;&quot;&quot;for a, b in [(-1,-1), (-1, 1), (1, -1), (1, 1)]:
+    exec(f'''for i, j in zip(count(x+({a}), {a}), count(y+({b}), {b})):
+    check_list.append((i,j))
+    if (i, j) not in self.board or self.board[(i,j)] != '.':
+        break''')&quot;&quot;&quot;, '', 'exec')
+    axis_trav = compile(&quot;&quot;&quot;for a, b, c in zip(['x']*2+['y']*2,['-1, -1','+1']*2,['i,y']*2+['x,i']*2):
+    exec(f'''for i in count({a}{b}):
+    check_list.append(({c}))
+    if ({c}) not in self.board or self.board[({c})] != '.':
+        break''')&quot;&quot;&quot;, '', 'exec')
+    def __init__(self):
+        self.board = {}
+        self.check_map = {}
+        self.kings = {}
+        for y in range(1, 9):
+            for x in range(1, 9):
+                self.board[(x,y)] = '.'
+                self.check_map[(x,y)] = 1
+        self.game_num = next(ChessBoard.game_counter)
+
+    def place_unit_intrnl(self, _unit, x, y):
+        self.board[(x,y)] = _unit
+        if issubclass(type(_unit), unit) and\
+           _unit.unit_type == unit.unit_type['k']:
+            self.kings[_unit.team] = (x, y)
+
+    def place_unit_line_intrnl(self, unit_list, y):
+        for x in range(1, 9):
+            self.place_unit_intrnl(unit_list[x-1], x, y)
+
+    def place_unit_line(self, unit_list_str, y):
+        unit_list = list(unit_list_str)
+        for i, item in enumerate(unit_list):
+            if item in ascii_letters:
+                unit_list[i] = unit(item)
+        self.place_unit_line_intrnl(unit_list, y)
+
+    def get_board_input(self):
+        for y in range(1, 9):
+            self.place_unit_line(input(), y)
+        self.calc_check()
+
+    def get_board_from_str(self, string):
+        str_list = string.split('\n')
+        for y in range(1, 9):
+            self.place_unit_line(str_list[y-1], y)
+        self.calc_check()
+
+    def post_init(self):
+        self.b_is_empty = (True if self.kings=={} else False)
+
+    def calc_check(self):
+        self.post_init()
+        if self.b_is_empty:
+            return
+        unit_type = unit.unit_type
+        for y in range(1, 9):
+            for x in range(1, 9):
+                if issubclass(type(self.board[(x,y)]), unit):
+                    u_t = self.board[(x,y)].unit_type
+                    if u_t == unit_type['p']:
+                        self.calc_p(x, y)
+                    elif u_t == unit_type['r']:
+                        self.calc_r(x, y)
+                    elif u_t == unit_type['b']:
+                        self.calc_b(x, y)
+                    elif u_t == unit_type['q']:
+                        self.calc_q(x, y)
+                    elif u_t == unit_type['k']:
+                        self.calc_k(x, y)
+                    elif u_t == unit_type['n']:
+                        self.calc_n(x, y)
+
+    def calc_p(self, x, y):
+        bWhite = self.board[(x,y)].team
+        front = (1 if bWhite else -1)
+        check_list = [(x+1, y-front),
+                     (x-1, y-front)]
+        self.apply_check(check_list, bWhite)
+
+    def calc_r(self, x, y):
+        bWhite = self.board[(x,y)].team
+        check_list = []
+        exec(ChessBoard.axis_trav)
+        self.apply_check(check_list, bWhite)
+
+    def calc_b(self, x, y):
+        bWhite = self.board[(x,y)].team
+        check_list = []
+        exec(ChessBoard.diagonal_trav)
+        self.apply_check(check_list, bWhite)
+
+    def calc_q(self, x, y):
+        bWhite = self.board[(x,y)].team
+        check_list = []
+        exec(ChessBoard.diagonal_trav)
+        exec(ChessBoard.axis_trav)
+        self.apply_check(check_list, bWhite)
+
+    def calc_k(self, x, y):
+        bWhite = self.board[(x,y)].team
+        check_list = [(x+1, y+1), (x+1, y), (x+1, y-1),
+                      (x, y+1), (x, y-1),
+                      (x-1, y+1), (x-1, y), (x-1, y-1)]
+        self.apply_check(check_list, bWhite)
+
+    def calc_n(self, x, y):
+        bWhite = self.board[(x,y)].team
+        check_list = [(x+2, y+1), (x+2, y-1),
+                      (x+1, y+2), (x-1, y+2),
+                      (x-2, y+1), (x-2, y-1),
+                      (x+1, y-2), (x-1, y-2),]
+        self.apply_check(check_list, bWhite)
+
+    def apply_check(self, check_list, bWhite):
+        for i, j in check_list:
+            if (i, j) in self.check_map:
+                self.check_map[(i,j)] *= ChessBoard.check_mul[bWhite]
+
+    def get_check(self):
+        if self.b_is_empty:
+            return False
+        else:
+            res = []
+            for team in self.kings:
+                if self.check_map[self.kings[team]] % \
+                   ChessBoard.check_mul[not team] == 0:
+                    res += [team]
+            return '\n'.join(('Game #%d: %s king is in check'%(self.game_num, ('White' if x else 'Black')) for x in res))
+
+    def __str__(self):
+        res = ['']
+        for j in range(1, 9):
+            for i in range(1, 9):
+                point = self.board[(i, j)]
+                if point == '.':
+                    res += [' .']
+                elif issubclass(type(point), unit):
+                    res += ['%2s'%str(point)]
+            res += ['\n'] + ['--'] * 8 + ['\n']
+        return '|'.join(res)
+
+    def check_map_str(self):
+        res = ['']
+        for j in range(1, 9):
+            for i in range(1, 9):
+                point = self.check_map[(i, j)]
+                res += ['%2d'%point]
+            res += ['\n'] + ['--'] * 8 + ['\n']
+        return '|'.join(res)
+
+if __name__ == '__main__':
+    cb1 = ChessBoard()
+    cb1.get_board_from_str(ex1)
+    print(cb1)
+    print(cb1.check_map_str())
+    print(cb1.get_check())
+    cb2 = ChessBoard()
+    cb2.get_board_from_str(ex2)
+    print(cb2)
+    print(cb2.check_map_str())
+    print(cb2.get_check())
+</code></pre>
+
+<p>아이디어:
+소수인 2와 3을 이용한다. 체스판과 똑같은 크기의 보드를 하나 만든 뒤 모두 1로 초기화한다.
+백이 공격할 수 있는 자리엔 모두 2를 곱하고, 흑이 공격할 수 있는 자리엔 모두 3을 곱한다.
+최종적으로 백의 킹은 자신의 자리가 3의 배수면 체크, 흑의 킹은 자신의 자리가 2의 배수면 체크.</p>
+<p>파이썬 3.6에서 추가된 F-String을 이용했기 때문에 3.5 이하에서는 정상작동하지 않음. 코드를 줄이기 위해 컴파일과 exec로 반복되는 부분을 압축.</p>
+<p>파이썬 3.6.2 64</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/12/20 17:32</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Flair Sizz</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9832"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>haskell</p>
+<pre><code class="haskell">{-# LANGUAGE ScopedTypeVariables #-}
+
+import Data.List
+import Data.List.Split
+import qualified Data.Map as Map
+import Data.Ix
+import Data.Char
+import Data.Maybe
+import Control.Monad
+import Text.Printf
+
+vecAdd (a,b) (c,d) = (a+c, b+d)
+findKey v = fmap fst . find ((== v) . snd) . Map.assocs
+
+checkee board = elemIndex (Just True) $ fmap checked . flip findKey board &lt;$&gt; &quot;kK&quot;
+    where
+        checked o = any (uncurry hasEnemy) [
+            (&quot;rq&quot;, rays [(-1,0),(1,0),(0,-1),(1,0)]),
+            (&quot;bq&quot;, rays [(-1,-1),(-1,1),(1,-1),(1,1)]),
+            (&quot;n&quot; , units [(1,2),(1,-2),(-1,2),(-1,-2),(2,1),(2,-1),(-2,1),(-2,-1)]),
+            (&quot;k&quot; , units [(x,y) | x &lt;- [1,0,-1], y &lt;- [1,0,-1]]),
+            (&quot;p&quot; , units (if isWhite
+                            then [(1,-1),(-1,-1)]
+                            else [(1,1),(-1,1)]))
+            ] where
+                isWhite = isUpper $ board Map.! o
+                hasEnemy = any . flip elem . fmap (if isWhite then toLower else toUpper)
+                units = catMaybes . fmap (`Map.lookup` board) . (fmap (vecAdd o))
+                rays = head . transpose . fmap (units . take 8 . (iterate =&lt;&lt; vecAdd))
+
+display (Just 0) = &quot;black&quot;
+display (Just 1) = &quot;white&quot;
+display Nothing  = &quot;no&quot;
+
+main = do 
+    inputs &lt;- chunksOf 64 . filter (not.isSpace) &lt;$&gt; getContents
+    let boards = Map.fromList . filter ((/= '.') . snd) . zip (range ((0,0),(7,7))) &lt;$&gt; inputs
+    forM_ (zip [1..] $ init boards) $ \(i :: Int, b) -&gt; 
+        putStrLn $ printf &quot;Game #%d: %s king is in check.&quot; i (display $ checkee b)
+</code></pre>
+
+<pre><code>$ cat input | runhaskell solution
+Game #1: black king is in check.
+Game #2: white king is in check.
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/12/25 01:17</p>
+                                <p class="static-profile" style="margin:0;padding:0;">sodii</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13663"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def kingsearch(board):
+    r = [0,0]
+    for i in range(8):
+        a = board[i].find('k')
+        b = board[i].find('K')
+        if a != -1: r[0] = (i,a)
+        if b != -1: r[1] = (i,b)
+    return r
+
+def isincheck(board):
+    king = kingsearch(board)
+    pch = lambda s,id: (s.upper(),s)[id]
+
+    for k in range(2):
+        x,y = king[k]
+
+        # 가로 세로 판별
+        for i in range(1,8):
+            for m in (-1,1):
+                tmp1 = board[x+m*i][y] if 0&lt;x+m*i&lt;7 else 'x'
+                tmp2 = board[x][y+m*i] if 0&lt;y+m*i&lt;7 else 'x'
+                if tmp1 in pch('rq',k) or tmp2 in pch('rq',k): return ('black','white')[k]+' king is in check'
+
+        # 대각 판별
+        for i in range(1,8):
+            for m1 in (-1,1):
+                for m2 in (-1,1):
+                    tmp = board[x+i*m1][y+i*m2] if 0&lt;y+i*m2&lt;7 and 0&lt;x+i*m1&lt;7 else 'x'
+                    if tmp in pch('bq',k): return ('black','white')[k]+' king is in check'
+
+        # 폰 체크
+        for i in (-1,1):
+            tmp = board[x+(-1)**k][y+i] if 0&lt;x+(-1)**k&lt;7 and 0&lt;y+i&lt;7 else 'x'
+            if tmp == pch('p',k): return ('black','white')[k]+' king is in check'
+
+        # 나이트 체크
+        for i in (-2,2):
+            for j in (-1,1):
+                tmp1 = board[x+i][y+j] if 0&lt;x+i&lt;7 and 0&lt;y+j&lt;7 else 'x'
+                tmp2 = board[x+j][y+i] if 0&lt;x+j&lt;7 and 0&lt;y+i&lt;7 else 'x'
+                if tmp1 == pch('n',k) or tmp2 == pch('n',k): return ('black','white')[k]+' king is in check'
+
+    return 'no king is in check.'
+
+
+board = '''\
+..k.....
+ppp.pppp
+........
+.R...B..
+........
+........
+PPPPPPPP
+K.......'''
+print(isincheck(board.split('\n')))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/20 20:58</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14679"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import numpy as np
+
+
+# 말:(이동횟수, [이동방향들])
+def piecemove():
+    pb = {'p':(1, [(1,1), (1,-1)]),
+          'n': (1, [(-2,-1), (-2,1), (-1,-2), (-1,2), (1,-2), (1,2), (2,-1), (2,1)]),
+          'b': (8, [(-1,-1), (-1,1), (1,-1), (1,1)]),
+          'r': (8, [(-1,0), (1,0), (0,-1), (0,1)]),
+          'q': (8, [(-1,-1), (-1,1), (1,-1), (1,1), (-1,0), (1,0), (0,-1), (0,1)]),
+          'k': (1, [(-1,-1), (-1,1), (1,-1), (1,1), (-1,0), (1,0), (0,-1), (0,1)])
+          } # black
+    pw = {p.upper():(pb[p][0], [(-x, y) for (x, y) in pb[p][1]]) for p in pb} # white
+
+    return pb, pw
+
+
+# 각 방향dir으로 최대 cnt 횟수만큼 이동한다.
+def check_check(arr):
+    pb, pw = piecemove()
+    for x, y in zip(*np.where(arr !='.')):
+        p = arr[x,y]
+        cnt, dir, tg = (pb[p][0], pb[p][1], 'K') if p in pb else (pw[p][0], pw[p][1], 'k')
+        for dx, dy in dir:
+            xx, yy = x, y
+            for i in range(cnt):
+                xx, yy = xx + dx, yy + dy
+                if not(0 &lt;= xx &lt; 8 and 0 &lt;= yy &lt; 8):
+                    break
+                elif arr[xx,yy] == tg:
+                    return tg
+                elif arr[xx,yy] != '.':
+                    break
+
+    return ''
+
+
+inp_lst = inp_str.split('\n')
+gamenum = 0
+while True:
+    arr = np.array([list(line) for line in inp_lst[:8]])
+    inp_lst = inp_lst[9:]
+    if np.all(arr == '.'):
+        break
+
+    gamenum += 1
+    loser = {'K':'white', 'k':'black', '':'no'}[check_check(arr)]
+    print('Game #{}: {} king is in check'.format(gamenum, loser))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/18 18:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_30220"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>JAVA입니다.</p>
+<pre><code class="java">package question4.check_the_check;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+
+    public static void main(String[] args) throws FileNotFoundException, IOException {
+        BufferedReader br = new BufferedReader
+                (new FileReader(Main.class.getResource(&quot;input.txt&quot;).getPath()));
+        List&lt;Integer&gt; results = new ArrayList&lt;Integer&gt;();
+
+        while(true) {
+            boolean isEnd = true;
+            char[][] boardChars = new char[8][8];
+            for (int i = 0; i &lt; 8; i++) {
+                String line = br.readLine();
+                if(!line.equals(&quot;........&quot;)) {
+                    isEnd = false;
+                }
+                boardChars[i] = line.toCharArray();
+            }
+
+            if(isEnd) {
+                //모든 행이 ........이면 끝
+                break;
+            }
+
+            ChessBoard cb = new ChessBoard(boardChars);
+            results.add(cb.getCheck());
+
+            br.readLine();
+        }
+
+        for (int i = 0; i &lt; results.size(); i++) {
+            String checkedSide = &quot;&quot;;
+            switch (results.get(i)) {
+            case 1:
+                checkedSide = &quot;black&quot;;
+                break;
+            case -1:
+                checkedSide = &quot;white&quot;;
+                break;
+            default:
+                checkedSide = &quot;no&quot;;
+                break;
+            }
+
+            System.out.println
+                (&quot;Game #&quot; + (i+1) + &quot;: &quot; + checkedSide + &quot; king is in check.&quot;);
+        }
+    }
+
+}
+</code></pre>
+
+<hr />
+<pre><code class="java">package question4.check_the_check;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Piece {
+    Coord coord;
+    List&lt;Coord&gt; moveDirections;
+    int maxMove;
+    boolean side; //true: black, 소문자, false: white, 대문자
+
+    public Piece(int row, int column, boolean side) {
+        this.coord = new Coord(row, column);
+        this.side = side;
+        this.moveDirections = new ArrayList&lt;Coord&gt;();
+    }
+}
+</code></pre>
+
+<hr />
+<pre><code class="java">package question4.check_the_check;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ChessBoard {
+    public class Pawn extends Piece {
+        public Pawn(int row, int column, boolean side) {
+            super(row, column, side);
+
+            int vertDirection = (side) ? -1 : 1;
+
+            moveDirections.add(new Coord(vertDirection, 1));
+            moveDirections.add(new Coord(vertDirection, -1));
+            //폰이 킹을 체크할 수 있으려면 킹이 대각선상에 있어야 함, 폰의 이동 방향과는 무관
+
+            this.maxMove = 1;
+        }
+    }
+
+    public class Knight extends Piece {
+        public Knight(int row, int column, boolean side) {
+            super(row, column, side);
+
+            moveDirections.add(new Coord(2, 1));
+            moveDirections.add(new Coord(-2, 1));
+            moveDirections.add(new Coord(2, -1));
+            moveDirections.add(new Coord(-2, -1));
+
+            this.maxMove = 1;
+        }
+    }
+
+    public class Bishop extends Piece {
+        public Bishop(int row, int column, boolean side) {
+            super(row, column, side);
+
+            moveDirections.add(new Coord(1, 1));
+            moveDirections.add(new Coord(-1, 1));
+            moveDirections.add(new Coord(1, -1));
+            moveDirections.add(new Coord(-1, -1));
+
+            this.maxMove = 8;
+        }
+    }
+
+    public class Rook extends Piece {
+        public Rook(int row, int column, boolean side) {
+            super(row, column, side);
+
+            moveDirections.add(new Coord(1, 0));
+            moveDirections.add(new Coord(-1, 0));
+            moveDirections.add(new Coord(0, 1));
+            moveDirections.add(new Coord(0, -1));
+
+            this.maxMove = 8;
+        }
+    }
+
+    public class Queen extends Piece {
+        public Queen(int row, int column, boolean side) {
+            super(row, column, side);
+
+            moveDirections.add(new Coord(1, 1));
+            moveDirections.add(new Coord(-1, 1));
+            moveDirections.add(new Coord(1, -1));
+            moveDirections.add(new Coord(-1, -1));
+            moveDirections.add(new Coord(1, 0));
+            moveDirections.add(new Coord(-1, 0));
+            moveDirections.add(new Coord(0, 1));
+            moveDirections.add(new Coord(0, -1));
+
+            this.maxMove = 8;
+        }
+    }
+
+    public class King extends Piece {
+        public King(int row, int column, boolean side) {
+            super(row, column, side);
+
+            moveDirections.add(new Coord(1, 1));
+            moveDirections.add(new Coord(-1, 1));
+            moveDirections.add(new Coord(1, -1));
+            moveDirections.add(new Coord(-1, -1));
+            moveDirections.add(new Coord(1, 0));
+            moveDirections.add(new Coord(-1, 0));
+            moveDirections.add(new Coord(0, 1));
+            moveDirections.add(new Coord(0, -1));
+
+            this.maxMove = 1;
+        }
+    }
+
+    public class None extends Piece {
+        public None(int row, int column, boolean side) {
+            super(row, column, side);
+            this.maxMove = 0;
+        }
+    }
+
+    Piece[][] board;
+    List&lt;Piece&gt; blacks;
+    List&lt;Piece&gt; whites;
+
+    static boolean BLACK = true;
+    static boolean WHITE = false;
+
+    public ChessBoard(char[][] boardChar) {
+        board = new Piece[8][8];
+        blacks = new ArrayList&lt;Piece&gt;();
+        whites = new ArrayList&lt;Piece&gt;();
+
+        for (int i = 0; i &lt; 8; i++) {
+            for (int j = 0; j &lt; 8; j++) {
+                String cell = Character.toString(boardChar[i][j]);
+                String lowerCase = cell.toLowerCase();
+                boolean side = cell.equals(lowerCase); //소문자이면 black, 대문자이면 white
+
+                switch (lowerCase) {
+                case &quot;p&quot;:
+                    board[i][j] = new Pawn(i, j, side);
+                    break;
+                case &quot;n&quot;:
+                    board[i][j] = new Knight(i, j, side);
+                    break;
+                case &quot;b&quot;:
+                    board[i][j] = new Bishop(i, j, side);
+                    break;
+                case &quot;r&quot;:
+                    board[i][j] = new Rook(i, j, side);
+                    break;
+                case &quot;q&quot;:
+                    board[i][j] = new Queen(i, j, side);
+                    break;
+                case &quot;k&quot;:
+                    board[i][j] = new King(i, j, side);
+                    break;
+                default:
+                    board[i][j] = new None(i, j, side);
+                    break;
+                }
+
+                if(side) {
+                    if(!cell.equals(&quot;.&quot;)) {
+                        blacks.add(board[i][j]);
+                    }
+                }
+                else {
+                    whites.add(board[i][j]);
+                }
+            }
+        }
+    }
+
+    int getCheck() {
+        //1: black check, 0: no check, -1: white check
+        if(oneSideCheck(whites, BLACK)) {
+            return 1;
+        }
+        if(oneSideCheck(blacks, WHITE)) {
+            return -1;
+        }
+        return 0;
+    }
+
+    boolean oneSideCheck(List&lt;Piece&gt; enemyPieces, boolean checkSide) {
+        for (Piece piece : enemyPieces) {
+            for (Coord direction : piece.moveDirections) {
+                Coord moveCoord = piece.coord;
+                for (int i = 0; i &lt; piece.maxMove; i++) {
+                    moveCoord = Coord.addCoord(direction, moveCoord);
+                    try {
+                        Piece moveCell = board[moveCoord.row][moveCoord.column];
+                        if(moveCell instanceof None) {
+                            continue;
+                        }
+                        if(moveCell instanceof King &amp;&amp; moveCell.side == checkSide) {
+                            //이동했을 때 킹을 잡은 경우
+                            return true;
+                        }
+                        else {
+                            //이동할 칸이 다른 기물에 의해 가로막힌 경우 더 이상 이동 불가
+                            break;
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        break;
+                    }
+
+                }
+            }
+        }
+        return false;
+    }
+}
+</code></pre>
+
+<hr />
+<pre><code class="java">package question4.check_the_check;
+
+public class Coord {
+    int row;
+    int column;
+
+    public Coord(int row, int column) {
+        this.row = row;
+        this.column = column;
+    }
+
+    public static Coord addCoord(Coord c1, Coord c2) {
+        return new Coord(c1.row + c2.row, c1.column + c2.column);
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2025/02/25 22:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박준우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

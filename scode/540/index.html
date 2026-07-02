@@ -1,0 +1,3550 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="자연수 n이 있다. f(n)=(n의 양의 약수의 합)이라고고 하자.
+자연수 n이 어떤 k에 대하여 등식 n = 1 + k(f(n)-n-1)을 만족했을 때, n을 k-초완전수라고 부른다.
+n이 완전수라는 것은 n이 1-초완전수라는 것이라는 명제...">
+    <title>초완전수 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">초완전수</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">4</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 2</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>자연수 n이 있다. f(n)=(n의 양의 약수의 합)이라고고 하자.
+자연수 n이 어떤 k에 대하여 등식 n = 1 + k(f(n)-n-1)을 만족했을 때, n을 k-초완전수라고 부른다.
+n이 완전수라는 것은 n이 1-초완전수라는 것이라는 명제와 동치이다.
+예를 들어, 21은 2-초완전수이고 301은 6-초완전수이다.
+자연수 N을 입력받고 N 이하의 k-초완전수와 그때의 k를 순서쌍으로 출력하는 프로그램을 작성하라.</p>
+<p>&lt;예시&gt;
+1. 입력
+    1000
+2. 출력
+    (6,1) (21,2) (28,1) (301,6) (325,3) (496,1) (697,12)</p>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2016/12/29 05:21</p>
+                    <p class="static-profile" style="margin:0;padding:0;">박 시우</p>
+                </div>
+            </div>
+
+            
+                <a name="comment_1931"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">&gt; 1. 입력 1000 2. 출력 (6,1) (21,2) (28,1) (301,6) (325,3) (496,1) (697,12)  
+죄송하지만 위에 예시 입력값100을 넣을때 나오는 ,21, 301은 완전수가 아닌거같아요 다시 확인부탁드려요</span>
+                    -
+                    <span style="font-size:11px;">
+                        Daniel,
+                        2016/12/29 16:07
+                    </span>
+                </div>
+            
+                <a name="comment_1933"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">100을 넣었는데 왜 301이 나오죠? 혹시 입력으로 1000을 넣었을 때를 말씀하시는건가요?
+그렇다면 21은 2-초완전수이고, 301은 6-완전수가 맞을텐데요. 실수로 완전수와 초완전수를 헷갈리신게 아닐까요? 보충설명은 아래와 같습니다.
+A = {x | x는 21의 양의 약수} = {1, 3, 7, 21}
+B = {x | x는 301의 양의 약수} = {1, 7, 43, 301}
+21 = 1+ 2 * (1 + 3 + 7 + 21 - 21 - 1) = 1 + 2 * 10
+301 = 1 + 6 * (1 + 7 + 43 + 301 - 301 - 1) = 1 + 6 * 50</span>
+                    -
+                    <span style="font-size:11px;">
+                        박 시우,
+                        2016/12/29 20:18
+                    </span>
+                </div>
+            
+                <a name="comment_2172"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">k도 자연수인 것으로 추측되는데, 이에 대한 명시적인 내용이 있으면 문제를 이해하는데 한층 도움이 될 것 같습니다. 유익한 문제 출제 고맙습니다.</span>
+                    -
+                    <span style="font-size:11px;">
+                        justbegin,
+                        2018/01/21 00:26
+                    </span>
+                </div>
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>66개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_5792"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">3</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">
+N = int(input())
+for n in range(2,N+1):
+    div = 0; 
+
+    for i in range(1,n+1): #약수의 합
+        if n % i  == 0:
+            div+=i
+
+    if div - n - 1 != 0:
+        k = (n-1) / (div - n - 1)
+        if int(k) == k:
+            print('({},{})'.format(n,int(k)))
+    else:
+        continue
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/01/01 18:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Lee Jong Hwa</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1984"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">파이썬 풀이가 맞지요? 실행하니 자꾸 restart라고 뜨네요</span>
+                                -
+                                <span style="font-size:11px;">
+                                    고든,
+                                    2017/04/19 18:03
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1985"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">@고든 실행시키고 숫자를 입력해줘야합니다. 1000 쓰고 엔터를 한번 눌러보세요!</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Lee Jong Hwa,
+                                    2017/04/19 18:59
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7113"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">2</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3.4.2 범위 입력받아 초완전수 튜플 리스트로 출력하기
+한줄로 작성하고 싶었으나 실행속도를 올리기위해서 4줄로</p>
+<p>약수합찾기의 실행속도를 올릴려면 max sqrt(num) 로 하면 반복회수 반으로 줄일 수 있고,
+range(2,ran+1)로 약수가 있는 2부터 시작하면 range(0), range(1) 을 안할 수 있으므로 약간 더 줄이고</p>
+<pre><code class="python">from functools import reduce
+from math import sqrt
+
+def factors_sum_wo_1_self(num): # 1과 자기자신을 제외한 약수의 합 함수
+    return sum(reduce(list.__add__, ([i, num // i] for i in range(1, int(sqrt(num))+1) if num % i == 0))[2:])
+
+ran = int(input(&quot;Enter range: &quot;)) # 범위입력
+print([(n, int((n-1)/factors_sum_wo_1_self(n))) for n in range(2, ran+1) if factors_sum_wo_1_self(n) != 0 and (n-1)%factors_sum_wo_1_self(n) == 0]) # 결과는 튜플 리스트
+
+</code></pre>
+
+<p>실행결과</p>
+<pre><code class="actionscript">&gt;&gt;&gt; ran = int(input(&quot;Enter range: &quot;))
+Enter range: 1000
+&gt;&gt;&gt; print([(n, int((n-1)/factors_sum_wo_1_self(n)))for n in range(2, ran+1) if factors_sum_wo_1_self(n) != 0 and (n-1)%factors_sum_wo_1_self(n) == 0])
+[(6, 1), (21, 2), (28, 1), (301, 6), (325, 3), (496, 1), (697, 12)]
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/05/09 12:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">예강효빠</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5731"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<pre><code class="ruby">fsum = -&gt;n { (1..n).select {|f| n%f == 0 }.sum.to_f }
+find_k = -&gt;n { dn=fsum[n]-n-1; k=(n-1)/dn if dn &gt; 0; [n,k.to_i] if k==k.to_i }
+k_pnums = -&gt; { puts (1..gets.to_i).map(&amp;find_k).compact.map(&amp;:to_s).join(&quot; &quot;) }
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby">$stdin = StringIO.new(&quot;1000\n&quot;)
+result = &quot;[6, 1] [21, 2] [28, 1] [301, 6] [325, 3] [496, 1] [697, 12]\n&quot;
+expect{ k_pnums.call }.to output(result).to_stdout
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/12/29 13:45</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5734"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>k(f(n) - n - 1)은 약수의 합에서 1과 자기자신 제외하는거니까 애초부터 제외하고 합을 구하도록했습니다.</p>
+<pre><code class="cpp">#include &lt;stdio.h&gt;
+
+int f(int n) //약수의 합
+{
+    int i = 0;
+    int sum = 0;
+
+    for(i = 2; i &lt; n; i++)
+    {
+        if(n % i == 0)
+        {
+            sum += i;
+        }
+    }
+    return sum;
+}
+
+void isCompleteNumber(int N)
+{
+    int calcN = 0;
+    int k = 1;
+    int i = 0;
+    int fn = 0;
+
+    for(i = 2; i &lt;= N; i++)
+    {
+        fn = f(i);
+        for(k = 1; k &lt;= N; k++)
+        {
+            calcN = 1 + (k * fn);
+            if(calcN == i)
+            {
+                printf(&quot;(%d, %d) &quot;, i, k);
+            }
+        }
+    }
+}
+
+int main(int argc, char *argv[])
+{
+    isCompleteNumber(1000);
+    return 0;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/12/29 14:08</p>
+                                <p class="static-profile" style="margin:0;padding:0;">황 승태</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5799"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>매트랩으로 시도해보았습니다. 초보라서 간결하게는 안되는군요;;
+정리하면 k = (n-1)/(1과 자기자신을 제외한 약수의 합)으로 표현되므로
+i, k를 구하고 이때 k가 자연수인 경우만 출력하도록 하였습니다.</p>
+
+<pre><code class="matlab">N = input('Input number :');
+for i = 2 : N              % (1, 0)을 피하기 위해 2부터 시작
+    tmp = 0;
+    for j = 1 : i
+        if mod(i,j) == 0
+            tmp = tmp + j;  % 약수의 합
+        end
+    end
+    k = (i-1)/(tmp-1-i); % 약수의 합에서 1과 자기자신 제외
+    if mod(k,1) == 0
+        fprintf('(%d, %d) ', i, k)
+    end
+end
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/01/02 13:38</p>
+                                <p class="static-profile" style="margin:0;padding:0;">주 현태</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5825"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def fnat(a):
+    sum=0
+    for i in range(1,a+1):
+        if a%i :pass
+        else:
+            sum=sum+i
+    return sum
+N=input(&quot;number=&quot;)
+for i in range(2,int(N)+1):
+    j=fnat(i)-i-1
+    if j&gt;0:
+        if (i-1)%j: pass
+        else:
+            print(&quot;(&quot;,i,&quot;,&quot;,int((i-1)/j),&quot;)&quot; , end=&quot; &quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/01/04 17:32</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Dr.Choi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5843"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">
+#include &lt;stdio.h&gt;
+
+int main(void)
+{
+    int N,n,j,fn=0;
+    double k;
+
+    printf(&quot;자연수를 입력하시오\n&quot;);
+    scanf(&quot;%d&quot;,&amp;N);
+    for(n=2;n&lt;=N;n++)
+    {
+        for(j=1;j&lt;=n;j++)
+        {
+            if( n % j == 0)
+                fn += j;
+        }
+    k = (double)(n-1)/(double)(fn-n-1);
+    if (k/1.00 == (int)k) 
+        printf(&quot;(%d,%d)\n&quot;,n,(int)k);
+    fn = 0;
+    }
+    return 0;
+}
+
+c언어로 작성해봤습니다.
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/01/05 18:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김종현</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5855"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def f(N):
+    sum = 0
+    for i in range(1,N+1):
+        if N%i == 0:
+            sum +=i
+    return  sum
+
+def A(N):
+    for i in range(2,N+1):
+        try:
+            t = (i - 1) % (f(i) - i - 1)
+        except:
+            continue
+        k = (i - 1) / (f(i) - i - 1)
+        if t == 0:
+            print('(', i, ', ', k, ')')
+
+A(1000)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/01/06 02:06</p>
+                                <p class="static-profile" style="margin:0;padding:0;">서 현</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5869"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n=int(input(&quot;input:&quot;))
+for nn in range(1,n):
+    fn=sum(x for x in range(1,nn+1) if nn%x==0)
+    o=((nn,k) for i,k in enumerate(range(1,nn)) if nn==(1+k*(fn-nn-1)))
+    for ii in o:print(ii, end=&quot;&quot;)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/01/08 13:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Song Seoha</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5918"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">// C++
+
+// 양의 약수의 합을 구함..
+
+inline int FuncD( int nValue )
+{
+    int nSum    = 0;
+
+    int nTemp   = nValue;
+
+    while( nTemp &gt; 0 )
+    {
+        if( nValue  % nTemp == 0 )
+        {
+            nSum    += nTemp;
+        }
+
+        --nTemp;
+    }
+
+    return nSum;
+}
+
+// k = ( n - 1 ) / ( f( n ) - n - 1 )
+
+inline int GetK( int nValue )
+{
+    int nDiv = ( FuncD( nValue ) - nValue - 1 );
+
+    if( nDiv &lt;= 0 )
+    {
+        return -1;
+    }
+
+    nValue  = ( nValue - 1 ) / nDiv;
+
+    return nValue;
+}
+
+//n = 1 + k * ( f ( n ) - n - 1 )
+
+inline int GetN( int nValue )
+{
+    return ( 1 + GetK( nValue ) * ( FuncD( nValue ) - nValue - 1 ) );
+}
+
+int main()
+{
+    int nValue  = 0;
+
+    cin &gt;&gt; nValue;
+
+    for( int x = 0 ; x &lt;= nValue ; ++x )
+    {
+        if( x == GetN( x ) )
+        {
+            cout &lt;&lt; x &lt;&lt; &quot;,&quot; &lt;&lt; GetK( x ) &lt;&lt; &quot;\n&quot;;
+        }
+    }
+
+    return 0;
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/01/13 16:06</p>
+                                <p class="static-profile" style="margin:0;padding:0;">정 훈희</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5940"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">N = int(input())
+print(N)
+
+def f(n):
+    sum = 0
+    for k in range(1,N+1):
+        if n%k == 0:
+            sum = sum + k
+    return sum
+
+for i in range(3,N+1):
+    if (f(i)-i-1) != 0:
+        if (i-1)%(f(i) - i - 1) == 0:
+            k = (i-1)/(f(i) - i - 1)
+            print('(%d, %d)' % (i, k), end = ' ')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/01/16 16:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">강 웅규</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5955"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="scala">nombreHyperparfait(1000)
+
+def nombreHyperparfait(n: Int): Unit = {
+    (1 to n).foreach(i =&gt; {
+        val mv = mineralWater(i) - i - 1
+        if (mv &gt; 0 &amp;&amp; i &gt; 1) {
+            val fd = (i - 1) / mv
+            val fm = (i - 1) % mv
+            if (fd &gt; 0 &amp;&amp; fm == 0) print(&quot;(&quot; + i + &quot;,&quot; + fd + &quot;)&quot;)
+        }
+    })
+}
+
+def mineralWater(n: Int): Int = {
+    (1 to n).filter(i =&gt; n % i == 0).sum
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/01/17 10:45</p>
+                                <p class="static-profile" style="margin:0;padding:0;">genius.choi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5968"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">static final int INPUT = 1000;
+
+    public static void main(String argv[]) throws Exception {
+
+
+
+        for(int i = 2; i&lt;=1000; i++){
+
+            int sum = sumDivisor(i);
+
+            if(sum !=0 &amp;&amp; (i -1) % sum == 0){
+
+                    System.out.println(&quot;(&quot;+i+&quot;,&quot;+i/sum +&quot;)&quot; );
+
+            }
+
+        }
+
+    }
+
+
+    private static int sumDivisor(int val){
+
+
+        int rtnVal = 0;
+        for(int i = 1; i&lt;= val ; i++){
+
+            if(val%i == 0){
+
+                rtnVal+=i;
+            }
+
+        }
+
+        return rtnVal -1 - val;
+
+    }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/01/18 14:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">lhc</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6099"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#파이썬3.5.2
+
+from math import *
+from itertools import *
+
+def primedp(p):
+    dic = {}
+    a = p
+    for i in range(2, int(sqrt(p))+1):
+        c = 0
+        while a%i == 0:
+            a = a//i
+            c += 1
+        dic[i]=c
+    if a!= 1:
+        dic[a] = 1
+    dic = list(dic.items())
+    for i in range(len(dic), 0, -1):
+        if dic[i-1][1] == 0:
+            del dic[i-1]
+    dic = dict(dic)
+    return dic
+
+def divisors(n):
+    case = primedp(n)
+    def times(l):
+        n=1
+        for i in l:
+            n *= i
+        return n
+    r = eval('list(map(times,product('+str([[y**k for k in range(0,case[y]+1)] for y in case.keys()])[1:-1]+')))')
+    return r
+
+do = lambda x: sum(divisors(x))
+
+for i in range(2,int(input())+1):
+    try:
+        k = (i-1)/(do(i)-i-1)
+        if int(k)==k:
+            print((i,int(k)))
+    except ZeroDivisionError:
+        pass
+</code></pre>
+
+<pre><code>입력:
+1000
+</code></pre>
+
+<pre><code>출력:
+(6, 1)
+(21, 2)
+(28, 1)
+(301, 6)
+(325, 3)
+(496, 1)
+(697, 12)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/02/04 12:55</p>
+                                <p class="static-profile" style="margin:0;padding:0;">차우정</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6141"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>자바입니다.</p>
+<pre><code class="java">public class Hyper_Perf_Nu {
+    public static void calcPerfNu(int n) {
+        int tmp = 0;
+        String result = &quot;&quot;;
+        int sum = 0;
+        for (int i = 1; i &lt;= n; i++)
+            if (n % i == 0) {
+                sum += i;
+            }
+
+        for (int i = 1; i &lt;= n; i++) {
+
+            if (n == 1 + i * (sum - n - 1)) {
+                tmp = i;
+                result = &quot;(&quot; + n + &quot;,&quot; + tmp + &quot;)&quot;;
+                System.out.println(result);
+            }
+        }
+
+    }
+
+    public static void prnPerfNu(int n) {
+        for (int i = 1; i &lt;= n; i++) {
+            calcPerfNu(i);
+        }
+    }
+
+    public static void main(String[] args) {
+        prnPerfNu(1000);
+    }
+
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/02/13 10:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김희유 (밍밍한 자막)</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6153"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def hyper_perfect_num(n):
+    result=[]
+    for i in range(1,n+1):
+        for j in range(1,i):
+            if j*(sum(x for x in range(1,i) if i%x==0)-1)+1==i:
+                result+=[(i,j)]
+    print(result)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/02/13 19:29</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김구경</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6228"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.Scanner;
+
+public class numer_1 {
+
+    public static void main(String[] args) {
+        **int** num = 0;
+        **Divisor** divisor = new Divisor();
+
+        System.out.print(&quot;Input : &quot;);
+        **Scanner** scan = new Scanner(System.in);
+        num = scan.nextInt();
+
+        **for**(**int** i = 2; i &lt; num; i++){
+            **divisor.calc_divisor(i);**
+            **divisor.determind(i);**
+        }
+
+    }
+
+}
+
+
+public class Divisor {
+
+    **int** sum;
+    public Divisor(){
+        sum = 0;
+    }
+
+    public **void calc_divisor**(**int** num){
+        **for**(int i = 2; i &lt; num; i++){
+            **if**(num % i == 0)
+                sum += i;
+        }
+    }
+
+    public **void determind**(**int** num){
+        **int** k;
+        **if**(sum == 0)
+            **return;**
+        **if**((num - 1) % (sum) == 0){
+            **k = (num - 1) / (sum);**
+            System.out.print(&quot;(&quot; + num +&quot;,&quot; + k +&quot;)&quot;);
+        }
+        sum = 0;
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/02/17 19:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">KimSeonbin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6287"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package coading02;
+import java.lang.*;
+import java.util.*;
+public class Test01 {
+    public static void main(String[] args) {
+
+        Scanner robot = new Scanner(System.in);
+        int num;
+        System.out.print(&quot;입력 : &quot;);
+        num = robot.nextInt();
+
+        int tmp = 0;
+
+        for(int i = 1 ; i &lt;= num ; i++){
+            for(int j = 1 ; j &lt; i ; j++){
+                if(i%j == 0){
+                    tmp+=j;
+                }
+            }
+            //System.out.println(&quot;tmp = &quot;+tmp);
+            for(int k = 1 ; k &lt; i ; k++){
+                if(k*(tmp-1) == (i-1)){
+                    System.out.println(&quot;(&quot;+i+&quot;,&quot;+k+&quot;)&quot;);
+                    break;
+                }
+            }
+            tmp = 0;
+        }
+        System.out.println(&quot;종료&quot;);
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/02/20 16:32</p>
+                                <p class="static-profile" style="margin:0;padding:0;">SeonKi  Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6356"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="javascript">var arr = [];
+var input = prompt(&quot;input: &quot;)
+
+for(var i=1; i&lt;=input; i++){
+  var sum = 0;
+  for(var divisor=1; divisor&lt;=i; divisor++){
+    if(i%divisor == 0){
+      sum += divisor;
+    }
+  }
+  for(var k=1; k&lt;=i; k++){
+    if(i == (1+k*(sum-i-1))){
+      arr.push({&quot;n&quot;:i, &quot;k&quot;:k})
+    }
+  }
+}
+console.log(arr)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/02/26 00:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Sehun</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6378"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>MATLAB으로 짜보았습니다.</p>
+<pre><code class="matlab">clear all
+close all
+clc
+
+N=input('입력 : ');
+for n=1:N
+
+    % reset the value
+    f_n__minus__n_1=0; % f(n)-n-1
+
+    % accumulate the prime numbers
+    for p=2:floor(n/2)
+        if mod(n,p)==0
+            f_n__minus__n_1=f_n__minus__n_1+p;
+        end
+    end
+
+    % If n is a prime number, this number can be zero. As such, it should skip the loop.
+    if f_n__minus__n_1==0 
+        continue
+    end
+
+    % calculate k
+    k=(n-1)/f_n__minus__n_1;
+
+    % maybe... we are interested in only natural number k
+    if floor(k)~=k
+        continue
+    end
+
+    % display
+    disp(['(' num2str(n) ',' num2str(k) ')']);
+end
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/02/28 09:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">c0din9</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6441"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="objectivec">// Swift 3.0
+let inputNumber = 1000
+
+func main() {
+    for i in 1...inputNumber {
+        let divisor = divisorSumNum(num: Int(i))
+        printPerfectNumber(n: Double(i), divisor: divisor)
+    }
+}
+
+func divisorSumNum(num: Int) -&gt; Double {
+    var sum = 0
+    let endNum = sqrt(Double(num))
+
+    for i in 1...Int(endNum) {
+        if (num % i) == 0{
+            var tempNum = 0
+            sum += i
+
+            if endNum != Double(i) {
+                tempNum = num / i
+                sum += tempNum
+            }
+        }
+    }   
+    return Double(sum)
+}
+
+func printPerfectNumber(n : Double, divisor: Double) {
+    if (divisor - n - 1) &gt; 0 {
+        let k = (n - 1) / (divisor - n - 1)
+        if k == floor(k) {
+            print(Int(n), Int(k))
+        }
+    }
+}
+
+main()
+</code></pre>
+
+<p>다듬고 다듬었지만... 이렇습니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/03/03 19:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">YoungHee Jang</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6460"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="c">// 양의 약수의 합 출력 함수.
+int myPrintFn(int num)
+{
+    int sum = 0;
+    for (int i = 1; i &lt; num+1; i++)
+    {
+        if (num%i == 0)
+        {
+            sum += i;
+        }
+    }
+    return sum;
+}
+
+
+int main(void)
+{
+    int scannum = 0;
+    printf(&quot;입력하는 값 이하의 초완전수를 구합니다. : &quot;);
+    scanf(&quot;%d&quot;, &amp;scannum);
+
+    for (int i = 2; i &lt; scannum+1; i++)         //1은 해당x.
+    {
+        int result = myPrintFn(i) - i - 1;      //for문 내 반복계산을 피하기위함.
+        for (int j = 0; j &lt;= i; j++)
+        {
+            if ((double)j == (i - 1) / (double)result)
+            {
+                printf(&quot;(%d,%d)&quot;, i,j);
+            }
+        }
+    }
+    printf(&quot;\n&quot;);
+    return 0;
+}
+</code></pre>
+
+<p>c입니다. 조언부탁드립니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/03/05 00:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">강창기</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6520"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">_ = [*(((lambda a: (print(i, (i-1)//a) if a and (i-1)%a == 0 else 0))(sum(j for j in range(1, i+1) if i%j == 0)-i-1)) for i in range(2, int(input('&gt;&gt;&gt;'))+1))]
+</code></pre>
+
+<p><code>_ =</code>는 없어도 무관. 콘솔 실행 시는 사용 권장.</p>
+<p>파이썬 3.6.0 64</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/03/10 15:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Flair Sizz</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6859"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="no-highlight">n = 1 + k(f(n)-n-1)
+n = 1 + ka
+n-1 = ka
+k = (n-1)/a
+</code></pre>
+
+<p>으로 정리될 수 있기 때문에 루프를 한번 돌면서 계산식에 맞아 떨어지는 것만 가져옵니다.</p>
+<pre><code class="python">def find_k_supernum(max_n):
+    supernums = []
+    for n in range(1, max_n+1):
+        divisors_sum = sum([x for x in range(1,n+1) if n % x == 0])
+        a = (n - 1)
+        b = (divisors_sum - n - 1)
+        if b &gt; 0 and a % b == 0:
+            supernums.append('(%d, %d)' % (n,  a/b))
+    return ' '.join(supernums)
+print(find_k_supernum(1000))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/04/11 10:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">soleaf</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6903"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package training;
+
+import java.util.Scanner;
+
+/**
+ * 자연수 n이 있다. f(n)=(n의 양의 약수의 합)이라고고 하자. 자연수 n이 어떤 k에 대하여 등식 n = 1 + k(f(n)-n-1)을 만족했을 때, 
+ * n을 k-초완전수라고 부른다. n이 완전수라는 것은 n이 1-초완전수라는 것이라는 명제와 동치이다. 예를 들어, 21은 2-초완전수이고 301은 6-초완전수이다. 
+ * 자연수 N을 입력받고 N 이하의 k-초완전수와 그때의 k를 순서쌍으로 출력하는 프로그램을 작성하라.
+ * &lt;예시&gt; 1. 입력 1000 2. 출력 (6,1) (21,2) (28,1) (301,6) (325,3) (496,1) (697,12)
+ */
+public class ChoPerfectNum {
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        Scanner sc = new Scanner(System.in);
+        System.out.print(&quot;Please insert Number? &quot;);
+        int iNum = sc.nextInt();
+
+        for(int i=1; i&lt;=iNum; i++) {
+            for(int j=1; j&lt;i ; j++){
+                if(i==(1+j*(getPerfectNum(i)-i-1))){
+                    System.out.println(&quot;ChoPerfect Number ========&gt; (&quot; + i + &quot;,&quot;+j+&quot;)&quot;);
+                }
+            }
+        }
+    }
+
+    // f(n)=(n의 양의 약수의 합) 처리
+    public static int getPerfectNum(int iNum) {
+        int iSum = 0;
+        for(int i=1;i&lt;iNum+1;i++){
+            if(iNum % i == 0){
+                iSum = iSum + i;
+            }
+        }
+        return iSum;
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/04/16 19:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">acedo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6948"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3입니다</p>
+<pre><code class="python">print('N이하의 k-초완전수를 출력합니다.')
+int_N = input(&quot;N을 입력하세요 : &quot;)
+
+string = ''
+
+def divisor_sum(x):
+    dsum = 0
+    for i in range(1, x+1):
+        if x%i == 0:
+            dsum += i
+    return dsum
+
+for i in range(1, int(int_N) +1):
+    for k in range(1, i):
+        if i == 1 + k * (divisor_sum(i) - i - 1):
+            string += str((i,k)) + ''
+
+print(string)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/04/19 17:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">고든</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7140"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>아래와 같이 평이한 수준에서 풀었습니다. 파이썬 3.6.1입니다.</p>
+<pre><code class="python">def f(n):
+    s, k, l = 0, 2, n ** 0.5
+    while k &lt; l:
+        if n % k is 0:
+            s += k + (n // k)
+        k += 1
+    if k * k == n:
+        s += k
+    return s
+
+def do():
+    n = int(input())
+    result = []
+    if n &lt; 6:
+        return result
+    for i in range(6, n+1):
+        k, j = 1, f(i)
+        if j &gt; 0:
+            while i &gt; j * k:
+                if j * k + 1 == i:
+                    result.append((i, k))
+                    break
+                k += 1
+    return result
+
+print(&quot;, &quot;.join(str(x) for x in do()))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/05/11 11:33</p>
+                                <p class="static-profile" style="margin:0;padding:0;">룰루랄라</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7159"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>import sys
+sys.path.append("C:/")
+import time
+import faliquot</p>
+<h1 id="def-eperfectn">def eperfect(N):</h1>
+<pre><code>start_time = time.time()
+List2 = []
+temp = 0
+for n in range(N):
+    n = n + 1
+    if (n % 2) == 0 and n &gt; 2:
+        x = n / 2
+        temp = sum(faliquot.aliquot(x,2))
+        if (temp - n - 1) != 0 : 
+            k = (n-1) / (temp-n-1) 
+        else:
+            continue
+        if (k % 1) == 0:
+            List2.append((n,int(k)))
+
+    elif (n &gt; 3) and not(n % 2 == 0) :
+        x = n / 3
+        temp = sum(faliquot.aliquot(x,3))
+        if (temp - n - 1) != 0 : 
+            k = (n-1) / (temp-n-1)
+        else:
+            continue
+        if (k % 1) == 0:
+            List2.append((n,int(k)))
+
+end_time = time.time()          
+return List2, end_time - start_time
+</code></pre>
+<h2 id="def-aliquotn-t">def aliquot(n, t) :</h2>
+<pre><code>List1 = []
+temp = 0
+x =int(n)
+for i in range(x):
+
+    i = i + 1
+    print("i=%s" %i)
+    temp = ( t*n )% i
+    print("temp=%s" %temp)
+
+    if (temp == 0):                            
+        List1.append(i)
+        print("i=%s" %i)
+List1.append(n*t)
+print(List1)            
+return List1
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/05/14 01:12</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김순효</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7234"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def divisor(n):
+    l = []; i = 2
+    while i*i &lt;= n:
+        if n % i == 0:
+            l.append(i)
+            l.append(int(n/i))
+        i += 1
+    l = list(set(l))
+    return l
+
+def hyperperfect(n):
+    l = []
+    for i in range(1,n+1):
+        if sum(divisor(i)) != 0:
+            a = sum(divisor(i))
+            if (i-1) % a == 0: l.append([i,int((i-1) / a)])
+
+    return l
+</code></pre>
+
+<pre><code class="python">hyperperfect(10000)
+'''
+[[6, 1],
+ [21, 2],
+ [28, 1],
+ [301, 6],
+ [325, 3],
+ [496, 1],
+ [697, 12],
+ [1333, 18],
+ [1909, 18],
+ [2041, 12],
+ [2133, 2],
+ [3901, 30],
+ [8128, 1]]
+'''
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/05/23 20:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">겨털에뽀뽀</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7618"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def MinMul(n):
+    result = []
+    for i in range(1,n+1):
+        if n%i == 0:
+            result.append(i)
+
+    return sum(result)
+
+
+def K(n):
+    k = 0
+    remk = 0
+    if (MinMul(n)-n-1) == 0:
+        pass
+    else:
+        k = ((n-1) / (MinMul(n)-n-1))
+        remk = ((n-1) % (MinMul(n)-n-1))
+
+    return (k, remk)
+
+
+
+
+n = int(input(&quot;input : &quot;))
+for i in range(3,n+1):
+    if K(i)[1] == 0 and K(i)[0] != 0:
+        print (&quot;(%d,%d)&quot; %(i,int(K(i)[0])))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/22 12:56</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Bo Hyun Seo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7620"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>javascript</strong></p>
+<pre><code class="javascript">var aliquotSum = n =&gt; Array.from(Array(n), (v, i) =&gt; i + 1)
+                           .reduce((a, b) =&gt; a + (n % b === 0 ? b : 0), 0);                           
+
+var hyperperfect = n =&gt; {
+    var factor = aliquotSum(n) - n - 1;
+    var k = 0;
+    if (factor !== 0 &amp;&amp; Number.isInteger(k = (n - 1) / factor)) {
+        return [n, k];
+    }
+};
+
+var findhp = n =&gt; Array.from(Array(n - 1), (v, i) =&gt; i + 2)
+                       .map(hyperperfect)
+                       .forEach(v =&gt; v &amp;&amp; console.log(`(${v[0]}, ${v[1]})`));
+
+findhp(1000);
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/22 14:26</p>
+                                <p class="static-profile" style="margin:0;padding:0;">funnystyle</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7762"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def k_hyper_perfect_number(N):
+    lst = []
+    for n in range(3, N+1):
+        factorsum = sum([x for x in range(2, n) if n % x == 0])  # 1, n 제외 약수합
+        if factorsum &gt; 0:
+            k, r = divmod(n-1, factorsum)
+            if r == 0:
+                lst.append((n, k))
+
+    return lst
+
+
+print(k_hyper_perfect_number(1000))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/07/05 07:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8284"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def super_num(N):
+
+    list_ans = []
+    for n in range(2,N+1):
+        list_a = []
+        for i in range(1,n+1):
+            if n%i == 0:
+                list_a.append(i)
+        if list_a == [1,n]:
+            continue
+        fn = sum(list_a)
+        k = (n-1) / (fn -n-1)
+        if k.is_integer() == True:
+            list_ans.append([n,int(k)])
+    print(list_ans)
+
+super_num(1000)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/09 13:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이현우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8406"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># 약수의 합을 구하는 함수
+def f(n) :
+
+    result = 0
+    for i in range(1, n + 1) :
+
+        if n % i == 0 :
+            result += i
+        else :
+            pass
+
+    return result
+
+# 완전수와 k의 쌍을 튜플로 출력하는 함수
+def perfectNum(n) :
+
+    k = 1
+    while True :
+
+        if n == 1 + k * (f(n) - n - 1) :
+            return n, k
+
+        elif k == n :
+            break
+
+        else :
+            k += 1
+
+    return None
+
+#최종 프로그램
+N = int(input())
+
+for i in range(1, N + 1) :
+
+    if perfectNum(i) == None :
+        pass
+
+    else :
+        print(perfectNum(i), end = &quot; &quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/20 15:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">다크엔젤</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10245"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3.6</p>
+<pre><code class="python">def main(N):
+# f(n) = t
+    k,t = 0,0
+    factor = []   
+    for n in range(1,N+1):
+        for i in range(1,n+1):
+            if n%i == 0: factor.append(i)
+        t = sum(factor)
+        if t &gt; n and (t-n-1) != 0: k = (n-1)/(t-n-1)
+# k가 자연수인지 확인
+            if k%1 == 0: print(&quot;(%d,%d)&quot;%(n,int(k)))
+        factor = []
+
+if __name__ == &quot;__main__&quot;:
+    N = int(input(&quot;N = &quot;))
+    main(N)
+</code></pre>
+
+<p>*결과값</p>
+<pre><code class="python">N = 1000
+(6,1)
+(21,2)
+(28,1)
+(301,6)
+(325,3)
+(496,1)
+(697,12)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/01/21 00:14</p>
+                                <p class="static-profile" style="margin:0;padding:0;">justbegin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10272"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>r로 풀었습니다.</p>
+<pre><code class="r">pr&lt;-function(x){
+  k&lt;-NULL
+  r&lt;-NULL
+  f&lt;-function(n){
+    a&lt;-n%/%2
+    b&lt;-1
+    for(i in 2:a){
+      if(n%%i==0){
+        b&lt;-c(b,i)
+      }
+    }
+    for(j in 1:length(b)){
+      b&lt;-union(b, n/b[j])
+    }
+    sum(b)
+  }
+  for(l in 6:1000){
+    if((f(l)-l-1)&gt;0){
+      if(((l-1)%%(f(l)-l-1))==0){
+        k&lt;-(l-1)/(f(l)-l-1)
+        r&lt;-paste0(r, '(',l, ',',k,')')
+      }
+    }
+  }
+  print(r)
+}
+pr(1000)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/01/23 21:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Seunghyuck Kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10442"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># 파이썬
+
+
+def a_sum(i1):
+    r = 0
+    for m in range(1, int(i1**0.5+1)):
+        if i1 % m == 0:
+            r += int(m + i1 / m)
+    return r
+
+
+def k_p_number(i2):
+    denominator = a_sum(i2)-i2-1
+    if denominator:
+        k = (i2-1)/denominator
+        if k == int(k):
+            return k
+
+
+def kp_below(i3):
+    for m in range(1, i3+1):
+        rk = k_p_number(m)
+        if rk:
+            print(m, int(rk))
+
+
+kp_below(1000)
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/01 17:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">olclocr</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10698"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import math
+def sigma(n):
+    result = 0
+    if math.sqrt(n).is_integer():
+        result += math.sqrt(n)
+        for i in range(1, int(math.sqrt(n))):
+            if n%i == 0:
+                result += i + n/i
+    else:
+        for i in range(1, int(math.sqrt(n))+1):
+            if n%i == 0:
+                result += i + n/i
+    return result
+
+def supper(n):
+    result = list()
+    for i in range(2,n+1):
+        if sigma(i) == i+1:
+            pass
+        else:
+            m = (i - 1) / (sigma(i) - i - 1)
+            if m.is_integer():
+                result.append((i, int(m)))
+    return result
+
+
+print(supper(int(input())))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/14 12:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김동하</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11995"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">    static int f(int num) {
+        int answer = 0;```{.java}
+    static int f(int num) {
+        int answer = 0;
+        for(int i = 1; i&lt;=num/2; i++){
+          if(num%i==0){
+            answer+=i;
+          }
+        }
+        return answer+num;
+    }
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(br.readLine()); 
+        // n = 1 + k(f(n)-n-1)
+        int k=1;
+        for (int n=1; n&lt;=t; n++) {
+            int prev = 1+(f(n)-n-1); // 처음 값 저장
+            if (prev == n)
+                System.out.println(n + &quot; &quot; + 1);
+            else {
+                while(n &gt; 1+ k*(f(n)-n-1) &amp;&amp; 1+ k*(f(n)-n-1) &gt; 0) { // 이 조건 안에서만 루프를 돌아야합니다
+                    k++;
+                    if(prev == 1+ k*(f(n)-n-1)) // 이전 거랑 똑같으면 계속 루프 돌아버림, 그래서 break;
+                        break;
+                    if (n == 1+ k*(f(n)-n-1))
+                        System.out.println(n + &quot; &quot; + k);
+                }
+            }
+            k = 1; 
+        }
+    }
+}
+자바입니다. 코드가 되게 기네요 ㅠㅠ
+</code></pre>
+
+<pre><code>    for(int i = 1; i&lt;=num/2; i++){
+      if(num%i==0){
+        answer+=i;
+      }
+    }
+    return answer+num;
+}
+
+public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    int t = Integer.parseInt(br.readLine()); 
+    // n = 1 + k(f(n)-n-1)
+    int k=1;
+    for (int n=1; n&lt;=t; n++) {
+        int prev = 1+(f(n)-n-1); // 처음 값 저장
+        if (prev == n)
+            System.out.println(n + " " + 1);
+        else {
+            while(n &gt; 1+ k*(f(n)-n-1) &amp;&amp; 1+ k*(f(n)-n-1) &gt; 0) { // 이 조건 안에서만 루프를 돌아야합니다
+                k++;
+                if(prev == 1+ k*(f(n)-n-1)) // 이전 거랑 똑같으면 계속 루프 돌아버림, 그래서 break;
+                    break;
+                if (n == 1+ k*(f(n)-n-1))
+                    System.out.println(n + " " + k);
+            }
+        }
+        k = 1; 
+    }
+}
+</code></pre>
+<p>}
+자바입니다. 코드가 되게 기네요 ㅠㅠ
+```</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/03 13:45</p>
+                                <p class="static-profile" style="margin:0;padding:0;">정몽준</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12157"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def chowanjeonsu(number): # under number
+
+    dic = {}
+    # 약수의 합을 구하자
+    for x in range(1,number+1):
+        lst = []
+        for k in range(1,x+1):
+            if x % k == 0:
+                lst.append(k)
+        s = sum(lst)
+
+        for j in range(1,x+1):
+            if x == 1 + j*(s - x - 1):
+                dic[x] = j
+
+    for key in dic:
+        print((key,dic[key]), end = ' ')
+    return ' '
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/08 23:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">최우성</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12184"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬으로 작성했습니다.</p>
+<pre><code class="python">n=int(input('자연수 입력:'))
+for num in range(1,n+1):
+    f=sum( t for t in range(1,num+1) if num%t==0)
+    for k in range(1,num):
+        if num==1+k*(f-num-1):
+            print('(%d,%d)'%(num,k))
+            break
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/10 16:43</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박종범</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12991"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python</p>
+<pre><code class="python">N = 1000
+for n in range(1, N+1):
+    f_n = 0
+    k = 0
+    for i in range(1, n+1):
+        if n % i == 0:
+            f_n += i
+    if f_n-n-1 != 0 and n - 1 &gt;= f_n-n-1 and (n - 1) % (f_n-n-1) == 0:
+        k = (n - 1)//(f_n-n-1)
+        if k != 0:
+            print(n, k)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/15 14:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Taesoo Kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13739"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">k = lambda n: (n-1)/sum(sum({i,n//i}) for i in range(2,int(n**0.5)+1) if not n%i)
+n = int(input())
+for i in range(n+1):
+    try:
+        if k(i)%1 == 0: print(f'({i},{int(k(i))})')
+    except ZeroDivisionError: pass
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/24 21:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13983"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package practice;
+
+import java.util.TreeSet;
+
+public class test {
+    public static void main(String[] args) {
+        for (int n = 2; n &lt; 1001; n++) {
+            int a = Check(n);
+            if (a &gt; 0)
+                System.out.println(n + &quot; &quot; + a);
+        }
+
+    }
+
+    private static int Check(int n) {
+        int a = getNs(n) - n - 1;
+        if (a != 0 &amp;&amp; (n - 1) % a == 0)
+            return (n - 1) / a;
+        return 0;
+    }
+
+    private static int getNs(int n) {
+        TreeSet&lt;Integer&gt; nn = new TreeSet&lt;&gt;();
+        int sum = 0;
+        for (int i = 1; i &lt; n / 2 + 1; i++)
+            if (n % i == 0) {
+                nn.add(i);
+                nn.add(n / i);
+            }
+        for (Integer a : nn)
+            sum += a;
+        return sum;
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/08 20:33</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김지훈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14275"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># 다른 문제를 풀면서 만든 제곱근 함수를 가져왔습니다.
+
+def sqrt(a):
+    ip = 0
+    deci_len = 2
+
+    while (ip + 1) ** 2 &lt;= a:
+        ip = ip + 1
+
+    deci_list = list()
+    i = 1
+    approx = ip
+
+    while i &lt;= deci_len:
+        deci_dyn = 0
+        stck = 0.1 ** i
+        while (approx + stck) ** 2 &lt;= a:
+            deci_dyn = deci_dyn + stck
+            approx = approx + stck
+        deci_list.append(deci_dyn)
+        i = i + 1
+
+    approx_list = ip
+    for j in deci_list:
+        approx_list = approx_list + j
+
+    return approx_list
+
+N = int(input(&quot;put number&quot;))
+
+def sum_f(a):
+    summ = 0
+    if not a == 1:
+        for i in range(1, a):
+            if a % i == 0:
+                summ = summ + i
+    return summ - 1
+
+
+for i in range(1, N+1):
+    R = int(sqrt(i)+4)
+    for k in range(1, R):
+        if i == 1 + k*sum_f(i):
+            print(i, k)
+</code></pre>
+
+<p>저는 python을 사용하였습니다.
+처음엔 다중for문에서 i 는 초완전수를, k는 그 종류를 탐색하도록 알고리즘을 짰습니다.
+(예를 들어,입력값이 1000일때, 1-초완전수를 1~1000까지 살피고, 2-초완전수를 1~1000까지 살핍니다.)
+나아가 k의 범위를 추릴 순 없을까 고민한 결과 k를 sqrt(i)+3 까지만 살피면 됨을 보였습니다.
+(코드 짜는건 수월했는데 이걸 보이는게 너무 어려웠어요ㅜㅜ)
+확실히 돌아가는 속도가 차이가 나더군요 휴~</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/23 22:34</p>
+                                <p class="static-profile" style="margin:0;padding:0;">aa</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15197"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="r">len_p &lt;- 1000
+
+sum_div &lt;- function(x){
+  tar &lt;- 0
+  for (i in 1:floor(sqrt(x))){
+    if (x %% i == 0){
+      tar &lt;- tar + i + (x / i)
+    }
+  }
+  if (floor(sqrt(x)) == sqrt(x)){
+    tar &lt;- tar - sqrt(x)
+  }
+  return(tar)
+}
+
+answer &lt;- data.frame(NULL)
+
+for (i in 2:len_p){
+  for (j in 1:i){
+    if ((1 + j * (sum_div(i) - i - 1)) == i){
+      answer &lt;- rbind(answer, c(i, j))
+    }
+  }
+}
+names(answer) &lt;- c('n', 'k')
+
+answer
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/11/13 14:43</p>
+                                <p class="static-profile" style="margin:0;padding:0;">physche</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16494"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def f(n):
+    total = 0
+    for i in range(1, n+1):
+        if n % i == 0:
+            total += i
+    return total
+
+def hyper_perfect(n, x):
+    if x - n - 1 != 0:
+        k = (n - 1)/(x - n - 1)
+        if k == int(k):
+            return int(k)
+    else:
+        return False
+
+N = int(input())
+
+for i in range(2, N + 1):
+    x = f(i)
+    if hyper_perfect(i, x):
+        print((i, hyper_perfect(i, x)), end='')
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/02/07 15:13</p>
+                                <p class="static-profile" style="margin:0;padding:0;">D.H.</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17162"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3.7  </p>
+<pre><code class="python">def sum_ntps(n):  # = f(n)-n-1 = 진(proper)약수면서, 고유(non-trivial)약수의 합
+    return sum({divs for i in range(2, int(n ** 0.5) + 1) if n % i == 0 for divs in (i, n // i)})
+
+
+for n in range(1, int(input()) + 1):
+    check = sum_ntps(n)
+    if check == 0: continue
+    # k 값이 자연수인 경우 결과 쌍 출력
+    k = (n - 1) / check
+    if k.is_integer(): print(f&quot;({n},{int(k)}) &quot;, end='')
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/03/17 17:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17797"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n=int(input());ans=''
+
+for m in range(2,n+1):
+    fn=0
+    for i in range(1,m+1):
+        if m%i==0:
+            fn+=i
+
+    if fn-m-1&lt;=0:
+        continue
+    elif (m-1)%(fn-m-1)==0:
+        ans+='({},{}) '.format(m,int((m-1)/(fn-m-1)))
+
+print(ans)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/08 22:17</p>
+                                <p class="static-profile" style="margin:0;padding:0;">암살자까마귀</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20086"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">public class 초완전수 {
+
+    public static void main(String[] args) {
+
+        Scanner scan = new Scanner(System.in);
+        int N = scan.nextInt();
+        ArrayList&lt;Integer&gt; aliquot = new ArrayList&lt;Integer&gt;();
+
+        int F = aliquot.stream().mapToInt(Integer::intValue).sum();
+        for(int i=2; i&lt;=N; i++) {
+            for(int j=1; j&lt;=i; j++) {
+                if(i%j==0) {
+                    aliquot.add(j);
+                }
+            }
+            F = aliquot.stream().mapToInt(Integer::intValue).sum();
+            try{if((i-1)%(F-i-1)==0) {
+                System.out.println(i+&quot;,&quot;+(i-1)/(F-i-1));
+            }
+            }catch(ArithmeticException e) {}
+            finally{
+                aliquot.clear();
+            }
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/11/28 19:55</p>
+                                <p class="static-profile" style="margin:0;padding:0;">big Ko</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20714"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">N=int(input(&quot;&quot;&quot;N이하의 k-초완전수와 k를 출력합니다.
+자연수 N을 입력하십시오: &quot;&quot;&quot;))
+
+def HPN(n): #문제의 f(n)-n-1을 구하는 함수(n의 약수 집합에서 자기 자신과 1을 제외한 약수들의 합)
+    elst=[]
+    for i in range(2,int(n**(1/2))+1):
+        if n%i==0:
+            elst.append(i)
+            if n//i!=i:
+                elst.append(n//i)
+    sum=0
+    for num in elst:
+        sum+=num
+    return sum
+
+for n in range(1,N+1):
+    if HPN(n)==0: #소수의 경우  f(n)-n-1이 0인데 k를 구할 때 0으로 나눌 수 없으므로 f(n)-n-1이 0이면 continue
+        continue
+    k=(n-1)/HPN(n)
+    if int(k)*HPN(n)==(n-1): #k값이 자연수여야 int(k)값과 같아  n=1+k(f(n)-n-1)를 만족시킬 수 있음
+        print((n,int(k)), end=&quot; &quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/24 10:39</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박시원</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20758"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">num = int(input())
+for j in range(2,num+1):
+    measure = 0
+    k = 0
+    for i in range(1,j+1):
+        if j % i == 0:
+            measure += i
+    if (measure-j-1) &gt; 0:
+        k = (j-1)/(measure-j-1)
+        if int(k) == k:
+            print(j,int(k))
+
+</code></pre>
+
+<p>꾸역꾸역 작성 했는데.....</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/27 23:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">semipooh</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_21848"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def f(x):
+    sum=0
+    for i in range (1,x+1):
+        if x%i==0:
+            sum+=i
+    return (sum)
+
+n=int(input('n='))
+
+for i in range (1,n+1):
+    for k in range (1,n+1):
+        if i==((f(i)-i-1)*k)+1:
+            print('(',i,',',k,')')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/04/21 01:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Buckshot</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2696"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">&lt;결과&gt;
+
+n=1000
+( 6 , 1 )
+( 21 , 2 )
+( 28 , 1 )
+( 301 , 6 )
+( 325 , 3 )
+( 496 , 1 )
+( 697 , 12 )</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Buckshot,
+                                    2020/04/21 01:52
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22111"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import time
+def divisor_sum(n):
+    d = []
+    for i in range(1, int(n**0.5)+1):
+        if n%i == 0:
+            d.append(i)
+            d.append(n//i)
+    s1 = set(d)
+    return sum(s1)
+
+def hpn(in1):
+    output = []
+
+    for h in in1:
+        fn = divisor_sum(h)
+        try:
+            if (h-1)%(fn-h-1) == 0:
+                k = (h-1)//(fn-h-1)
+                print('({}, {}'.format(h, k))
+        except ZeroDivisionError:
+            continue
+
+if __name__ == '__main__':
+    t = time.time()
+    in1 = [i for i in range(2, 10001)]
+    hpn(in1)
+    print('time: {}'.format(time.time() - t))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/06 16:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hwaseong Nam</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2717"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">10000개 기준
+(697, 12)
+(1333, 18)
+(1909, 18)
+(2041, 12)
+(2133, 2)
+(3901, 30)
+(8128, 1)
+time: 0.06286954879760742</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Hwaseong Nam,
+                                    2020/05/06 17:11
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22350"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">N = int(input())
+for n in range(1,N+1):
+    yaksu = []
+    for j in range(1,n+1):
+        if n%j == 0:
+            yaksu.append(j)
+        else:
+            continue
+    fn = sum(yaksu) 
+    k = 1
+    while k &lt;= N:
+        if n == (1+k*(fn-n-1)):
+            print('%d는%d-초완전수'%(n,k))
+            k += 1
+        else:
+            k += 1
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/15 10:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Money_Coding</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22641"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬3입니다.</p>
+<p>계산 시간이 좀 많이 걸리는 느낌이데 어떻게 시간을 줄일 수 있을까요?</p>
+<pre><code class="python">def f(n) :
+    sum([x for x in range(1,n+1) if n % x == 0])
+    return sum([x for x in range(1,n+1) if n % x == 0])
+
+n = 1000
+nkList = [] # list of n, k set
+
+for x in range(1, n+1) :
+    for k in range(1, x+1) :
+        if x == 1 + k*(f(x) - x - 1) :
+            nkList.append([x,k])
+
+print(nkList)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/06/26 11:53</p>
+                                <p class="static-profile" style="margin:0;padding:0;">누마루</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_24238"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>def sum_per(number):</p>
+<pre><code>  total=0
+
+  for i in range(2,number,1):
+
+    if number%i==0:
+
+      total+=i
+
+  return total
+
+def real_perfect_number(number):
+
+  if sum_per(number)!=0:
+
+    check=(number-1)/sum_per(number)
+
+  else:
+
+    check=0.1
+
+  if check==int(check):
+
+    return [number,int(check)]
+
+def main():
+
+  for i in range(1,1001,1):
+
+    if real_perfect_number(i)!=None:
+
+      print(real_perfect_number(i))
+
+main()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/01/06 18:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">전준혁</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25015"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def Super(a):
+    for i in range(1,a+1):
+        b=[]
+        for j in range(1,i+1):
+            if i%j==0:
+                b.append(j)
+        try:
+            if (i-1)%(sum(b)-i-1)==0:
+                print(&quot;({},{})&quot;.format(i,int((i-1)/(sum(b)-i-1))))
+        except Exception:
+            pass
+        else:
+            pass
+
+Super(1000)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/03/22 22:33</p>
+                                <p class="static-profile" style="margin:0;padding:0;">fox.j</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25097"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def func1(n):
+    sum = 0
+    for i in range(1, n+1):
+        if n % i == 0:
+            sum += i    
+    # print(sum)
+    return sum
+
+def func2(n):
+    for i in range(3, n+1):
+        # print(i-1, func1(i)-i-1)
+        if (func1(i)-i-1) != 0 and (i-1) % (func1(i)-i-1) == 0:
+            k = (i-1)/(func1(i)-i-1)
+            print(i, int(k))
+
+func2(1000)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/04/02 10:27</p>
+                                <p class="static-profile" style="margin:0;padding:0;">DSHIN</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26137"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n = int(input(&quot;&quot;)) 
+num = 1
+while True : 
+    dsum = sum([x for x in range(1, num+ 1) if num %  x ==0])
+    for k in range(1, n):
+        if num == 1+ k*(dsum - num - 1):
+            print(&quot;(%d,%d)&quot;%(num,k), end=' ')
+        else : continue
+    if n == num:
+        break
+    num += 1
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/08/23 17:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">//python</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26154"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#codingdojing_hyperperfactnumber
+
+def sum_CD(n):
+
+    a = []
+    for i in range(1, int(n**0.5)+1):
+        if n%i == 0:
+            a.extend([i, n//i])
+
+    return sum(a)
+
+
+N = eval(input('N: '))
+for n in range(1, N+1):
+    M = (sum_CD(n) - n - 1)
+
+    if M:   #분모가 0이 아니면,
+        k = (n-1) / M
+        if k%1 == 0: #자연수면,
+            print((n, int(k)))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/08/24 15:33</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jaeman Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26449"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">n=int(input(&quot;자연수 n을 입력하세요: &quot;))
+for m in range(n+1):
+    k=[k for k in range(1,m+1) if 1+k*(sum([i for i in range(1,m+1) if m%i==0])-m-1)==m]
+    for i in k: print(f&quot;({m},{i})&quot;, end=' ')
+</code></pre>
+
+<p>잘 나오기는 하는데 실행 시간이 산으로 가버렸습니다</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/10/11 02:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">LSW</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26971"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">while True:
+    N = int(input(&quot;자연수 N을 입력하시오&quot;))
+    if N&gt;0 :
+        break
+
+def F(n):
+    sum = 0
+    for i in range(1,n+1):
+        if n%i ==0:
+            sum +=i
+    return sum
+
+
+for i in range(1,N+1):
+    try :
+        k = (i-1)/(F(i)-i-1)
+        if k == int(k) and k&gt;0:
+            print(&quot;(&quot;,i,&quot;,&quot;,k,&quot;)&quot;)
+    except ZeroDivisionError:
+        continue
+
+</code></pre>
+
+<p>약수 의 합 구하는 함수를 따로 정의했어요
+k값중에 분모부분이 0이되어서 'ZeroDivisionError' 는 예외처리했고,
+k값중에서도 자연수들만 필터링했습니다</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/07 15:55</p>
+                                <p class="static-profile" style="margin:0;padding:0;">양캠부부</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27157"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>// Rust</p>
+<p>// 약수 : HashSet으로 중간에 나왔던 약수가 나오면 바로 loop 중단</p>
+<p>// f_ = f - n - 1 : 1과 자신을 제외한 약수의 합이 0(소수)이면 k가 나올수 없으므로 건너뛰기(Option::None 반환)</p>
+<p>// N이하의 수를 검사하며 if let (pattern matching)으로 Option::Some 패턴만 결과 벡터에 추가</p>
+<p>// (Rust의 자료형은 훌륭합니다...)</p>
+<p>fn hyperfect_number(n: u32) -&gt; Option<u32> {</p>
+<pre><code>assert!(n&gt;2);
+
+// n의 약수 구하기 =&gt; f_ = f(n)-n-1
+// let f_ = (2..n).filter(|&amp;i| n % i == 0).sum();
+let mut set = HashSet::&lt;u32&gt;::new();
+for i in 2..n {
+    if n % i == 0 {
+        if !set.insert(i) { break; } } }
+let f_ = set.iter().sum::&lt;u32&gt;();
+
+// k 구하기 (n-1)/f_ : n이 소수이면 f_==0, k indefinite
+if f_ == 0 { return None; }
+if (n - 1) % f_ == 0 { return Some((n - 1) / f_); }
+else { return None; }
+</code></pre>
+<p>}
+fn range_hyperfect_number(n: u32) -&gt; Vec&lt;(u32, u32)&gt; {</p>
+<pre><code>let mut result = vec![];
+for i in 3..=n {    //n 이하의 k-초완전수
+    if let Some(k) = hyperfect_number(i) {
+        result.push((i, k));}}
+result
+</code></pre>
+<p>}</p>
+<h1 id="test">[test]</h1>
+<p>fn test() {</p>
+<pre><code>assert_eq!(hyperfect_number(21), Some(2));
+assert_eq!(hyperfect_number(301), Some(6));
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/28 12:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">JW KIM</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27357"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def f(n):
+    return sum([x for x in range(1,n+1) if n%x == 0])
+
+def super(n):
+
+    nk=[]
+    for i in range(2,n):
+        kl = [k for k in range(i) if i == (1 + k*(f(i)-i-1))]
+        if  len(kl) != 0:
+            nk.append((i,kl[0]))
+    return nk
+
+super(1000)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/02/16 19:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">로만가</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29714"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def f(n):
+    sf = 0
+    for i in range(1, n+1):
+        if n % i == 0:
+            sf += i
+    return sf
+
+N = int(input('자연수 N을 입력: '))
+for n in range(4, N+1):
+    ds = f(n) - n - 1
+    if ds &gt; 0 and (n-1) % ds == 0:
+        print('({0}, {1})'.format(n, (n-1) // ds), end= ' ')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/10/21 16:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

@@ -1,0 +1,1048 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="수많은 마라톤 선수들이 마라톤에 참여하였는데, 단 한 명의 선수를 제외하고는 모든 선수가 마라톤을 완주했음.
+
+마라톤에 참여한 선수들의 이름이 담긴 배열 &quot;participant&quot;와 완주한 선수들의 이름이 담긴 배열 &quot;completion&quot;이 주...">
+    <title>마라톤 미완주 선수 구하기 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">마라톤 미완주 선수 구하기</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">3</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 2</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>수많은 마라톤 선수들이 마라톤에 참여하였는데, 단 한 명의 선수를 제외하고는 모든 선수가 마라톤을 완주했음.</p>
+<p>마라톤에 참여한 선수들의 이름이 담긴 배열 "participant"와 완주한 선수들의 이름이 담긴 배열 "completion"이 주어질 때, 완주하지 못한 선수의 이름을 구하시오.</p>
+<p>&lt;제한사항&gt;</p>
+<p>•마라톤 경기에 참여한 선수의 수는 1명 이상 100,000명 이하.</p>
+<p>•completion의 길이는 participant의 길이보다 1 작음.</p>
+<p>•참가자의 이름은 1개 이상 20개 이하의 알파벳 소문자로 이루어져 있음.</p>
+<p>•참가자 중에는 동명이인이 있을 수 있음.</p>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2019/09/24 12:44</p>
+                    <p class="static-profile" style="margin:0;padding:0;">이경수</p>
+                </div>
+            </div>
+
+            
+                <a name="comment_2577"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">입출력 예제가 필요할 것 같습니다.</span>
+                    -
+                    <span style="font-size:11px;">
+                        d124412,
+                        2019/09/25 13:41
+                    </span>
+                </div>
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>19개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_19740"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">3</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>#python</strong></p>
+<pre><code class="python">from collections import Counter
+
+participant = []   # 마라톤 출전 명단(일부러 빈 값으로 하였음.)
+completion = []  # 완주자 명단(일부러 빈 값으로 하였음.)
+
+def solution(participant, completion):
+    answer = Counter(participant) - Counter(completion)
+    return list(answer.keys())[0]
+
+print(solution(participant, completion))   # solution() 함수 호출하여 반환 값 출력.
+</code></pre>
+
+<p>participant와 completion 리스트에는 어떠한 값이 들어갈지 모르므로 일부러 빈 값을 선언하였습니다. 리스트 값만 대입하면 정상 작동합니다.</p>
+<p>Counter(participant) 는 Counter 클래스를 이용해 participant 배열에 있는 명단의 갯수를 파악한 후 dictionary 형태로 표현됩니다.
+예를 들어 { 'woorim' : 3, 'jiho' : 2, 'soojin' : 1} 이면 배열 내 'woorim'은 3번, 'jiho'는 2번, 'soojin'은 1번 있는 것이죠.
+또한 Counter 클래스는 집합 연산이 가능한 장점도 있습니다.</p>
+<p>즉, answer = Counter(participant) - Counter(completion) 이렇게 하면 차집합 연산이 되어 participant 명단에는 없는 나머지 1인이 answer 변수에 저장됩니다.
+저장 될 때는 { 'soojin' : 1 }과 같은 형태로 저장되므로 키 값만 따로 출력하도록 하면 되겠지요.
+따라서, answer.keys()를 리스트로 형변환하고 0번지에 있는 값을 return하여 출력한 것입니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/10/24 05:45</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박우림</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19422"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>PHP</p>
+<pre><code class="php">$fn = function(array $participant, array $completion) : string {
+    $result = '';
+    $cnt_p  = count($participant);
+    $cnt_c  = count($completion);
+
+    if (!(1 &lt;= $cnt_p &amp;&amp; $cnt_p &lt;= 100000)) return $result;
+    if (!($cnt_c == $cnt_p - 1)) return $result;
+
+    $arr = [];
+    foreach ($participant as $v) {
+        if (!preg_match('/^[a-z]{1,20}$/i', $v)) return $result;
+        if (!isset($arr[$v])) $arr[$v] = 0;
+        $arr[$v]++;
+    }
+    foreach ($completion as $v) {
+        $arr[$v]--;
+    }
+    $arr = array_filter($arr);
+    $result = key($arr);
+
+    return $result;
+};
+</code></pre>
+
+<pre><code class="php">print_r($fn([&quot;abc&quot;, &quot;def&quot;, &quot;ghi&quot;, &quot;jkl&quot;], [&quot;abc&quot;, &quot;def&quot;, &quot;jkl&quot;])); // ghi
+print_r($fn([&quot;abc&quot;, &quot;def&quot;, &quot;ghi&quot;, &quot;jkl&quot;], [&quot;jkl&quot;, &quot;ghi&quot;, &quot;def&quot;])); // abc
+print_r($fn([&quot;abc&quot;, &quot;def&quot;, &quot;def&quot;, &quot;ghi&quot;, &quot;jkl&quot;], [&quot;jkl&quot;, &quot;def&quot;, &quot;abc&quot;, &quot;ghi&quot;])); // def
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/09/25 14:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">d124412</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19429"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C#</p>
+<pre><code class="cs">using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace CD242
+{
+    class Program
+    {
+        static void Main()
+        {
+            // 참가자, 완주자 생성
+            int numPlayers = int.Parse(Console.ReadLine());
+            var generated = GeneratePlayers(numPlayers);
+            var participants = generated.Item1;
+            var completions = generated.Item2;
+
+            // 참가자 리스트에서 완주자 요소 제거
+            foreach (string completion in completions)
+            {
+                participants.Remove(completion);
+            }
+            string incomplete = participants[0];
+            Console.WriteLine(incomplete);
+        }
+
+        // 선수 이름 생성 및 (참가자, 완주자) 튜플 반환
+        static (List&lt;string&gt;, List&lt;string&gt;) GeneratePlayers(int players)
+        {
+            List&lt;string&gt; participants = new List&lt;string&gt;();
+            Random rnd = new Random();
+            for (int player = 0; player &lt; players; player++)
+            {
+                int nameLength = rnd.Next(1, 21);
+                StringBuilder sb = new StringBuilder();
+                for (int len = 0; len &lt; nameLength; len++)
+                {
+                    sb.Append((char)rnd.Next('a', 'z' + 1));
+                }
+                participants.Add(sb.ToString());
+            }
+            List&lt;string&gt; completions = new List&lt;string&gt;(participants);
+            int removeIndex = rnd.Next(players);
+            completions.RemoveAt(removeIndex);
+
+            return (participants, completions);
+        }
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/09/25 16:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19437"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from collections import defaultdict
+
+
+def not_finished(participant, completion):
+    dic = defaultdict(int)
+
+    for name in participant:
+        dic[name] += 1
+
+    for name in completion:
+        dic[name] -= 1
+        if dic[name] &lt;= 0:
+            del dic[name]
+
+    return list(dic).pop()
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/09/26 11:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19460"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>아마 공식적인 풀이는 이 방법이지 않을까 싶네요.</p>
+<p>magical한 array를 이용해서 정답을 구한 함수입니다.
+build_data는 여러분들이 입력 데이터를 이것저것 넣어가보면서 테스트를 할 수 있게 만들려고 뭔가 이것저것 많은데....메인 아이디어는 main함수에 있습니다.</p>
+<p>시간복잡도는 O(n + m) (m은 문자열의 총 길이) 이고, 동작하는 내용이 별로 없어서 실제로는 굉장히 빠를 것입니다.</p>
+<pre><code class="cpp">#include&lt;stdio.h&gt;
+#include&lt;vector&gt;
+#include&lt;string&gt;
+#include&lt;algorithm&gt;
+void build_data(std::vector&lt;std::string&gt;&amp; p, std::vector&lt;std::string&gt;&amp; c) {
+    p.clear(); c.clear();
+    p.push_back(&quot;ABCDASDF&quot;);
+    p.push_back(&quot;Whatever you want&quot;);
+    p.push_back(&quot;length less then 20&quot;);
+    p.push_back(&quot;pichulia is god!&quot;);
+    p.push_back(&quot;same name&quot;);
+    p.push_back(&quot;same name&quot;);
+    p.push_back(&quot;substring of some&quot;);
+    p.push_back(&quot;substr&quot;);
+    p.push_back(&quot;ing of s&quot;);
+
+    int* random = new int[p.size()];
+    for (int i = 0; i &lt; p.size(); i++)random[i] = i;
+    std::random_shuffle(random, random + p.size());
+    for (int i = 1; i &lt; p.size(); i++)
+        c.push_back(p[random[i]]);
+    delete[] random;
+
+    printf(&quot;participant list :\n&quot;);
+    for (int i = 0; i &lt; p.size(); i++)printf(&quot; - %s\n&quot;, p[i].c_str());
+    printf(&quot;completion list :\n&quot;);
+    for (int i = 0; i &lt; c.size(); i++)printf(&quot; - %s\n&quot;, c[i].c_str());
+}
+int main()
+{
+    int t = 9;
+    int tv = 0;
+    while (t--) {
+        std::vector&lt;std::string&gt; participant;
+        std::vector&lt;std::string&gt; completion;
+
+        build_data(participant, completion);
+
+        int n = participant.size();
+        char magical_array[22];
+        for (int i = 0; i &lt; 22; i++)magical_array[i] = 0;
+        for (int i = 0; i &lt; n; i++)
+        {
+            for (int j = 0; j &lt; participant[i].size(); j++) {
+                magical_array[j] ^= participant[i][j];
+            }
+        }
+        for (int i = 0; i &lt; n - 1; i++)
+        {
+            for (int j = 0; j &lt; completion[i].size(); j++) {
+                magical_array[j] ^= completion[i][j];
+            }
+        }
+        printf(&quot;#%d Answer is ... %s!\n&quot;,++tv,  magical_array);
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/09/27 21:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">pichulia</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19918"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">participant = [ &quot;john&quot; , &quot;ed&quot; , &quot;joe&quot; , &quot;rick&quot; , &quot;john&quot;]
+completed = [&quot;john&quot;, &quot;ed&quot; , &quot;joe&quot; , &quot;john&quot;]
+
+loser = ''
+
+for i in range(len(completed)):
+  hasElem = participant.count(completed[i])
+  if hasElem &gt; 0 :
+      indexOfElem = participant.index(completed[i])
+      participant.pop(indexOfElem)
+else:
+  loser = participant[0]
+  print loser
+</code></pre>
+
+<p>파이썬 막 시작하느라 아직 미숙하지만 올려봅니다</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/11/14 00:23</p>
+                                <p class="static-profile" style="margin:0;padding:0;">ㅅㅅㅇㅁㅎ</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20431"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">participant=[]
+completion=[]
+fin=dict()
+
+######(참가자 및 완주자의 이름을 하나씩 입력 받는다고 가정했을 때의 코드)######
+
+num=int(input(&quot;마라톤 참가자의 인원수를 입력하십시오: &quot;))
+for k in range(num):
+    p=input(&quot;참가자 이름을 입력하십시오: &quot;)
+    participant.append(p)
+    print(&quot;남은 입력수: &quot;+str(num-(k+1)))
+print(&quot;======&quot;*6)
+for n in range(num-1):
+    c=input(&quot;완주자 이름을 입력하십시오: &quot;)
+    completion.append(c)
+
+######(part와 comple의 명단 리스트를 받아서 가져온다면 #사이의 코드는 무시 )######
+
+for name in participant:
+    fin[name]=fin.get(name,0)+1
+for name in completion:
+    fin[name]-=1
+    if fin[name]==0:
+        del fin[name]
+print(list(fin)[0])
+print(&quot;마라톤 미완주 선수의 이름은 &quot;+list(fin)[0]+&quot;입니다.&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/01 21:29</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박시원</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20485"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">int count=0;
+        for(int i = 0; i &lt; participant.length; i++) {
+            for(int j = 0; j &lt; completion.length; j++) {
+                if(participant[i].compareTo(completion[j]) == 0) {
+                    count++;
+                }
+            }
+            if(count == 0) {
+                System.out.println(participant[i]);
+            }
+            count=0;
+        }
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/07 16:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">초초보</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20572"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">    String[] participant = new String[10];
+    String[] completion = new String[9];
+  // 테스트 데이터는 알아서 넣으시고
+
+    public static String getMan() {
+        boolean isOK = false;
+        for (int i=0; i&lt;participant.length; i++) {
+            isOK = false;
+            for (int n=0; n&lt;completion.length; n++) {
+                if (participant[i].equals(completion[n])) {
+                    isOK = true;
+                    break;
+                }
+            }
+            if (!isOK) man = participant[i];
+        }
+
+        return man;
+    }
+
+  // 미완주자가 1명이라 동명이인은 의미없음.
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/16 14:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Ellung</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_21267"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>participant = []
+completion = []
+for someone in completion:
+    participant.remove(someone)
+result = participant[0]
+print(result)</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/03/06 22:28</p>
+                                <p class="static-profile" style="margin:0;padding:0;">정상헌</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22108"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#파이썬
+
+#이렇게 푸는것이 맞는건지 잘 모르겠습니다. 너무 간단하게 풀려서요 ㅠ
+#실수로 참가자들의 이름을 대문자로 했는데, 고치기 귀찮아서 이건 그냥 대문자 그대로 하겠습니다
+
+participant=['PARK', 'SMITH', 'YU', 'LEE', 'KENJI', 'SONG', 'PORORO', 'TAYO', 'SUE', 'SAM', 'BEN', 'TOM', 'TAYO', 'PORORO', 'PARK', 'DALE', 'LANCE', 'LANCE']
+print ('\n참가자',participant)
+
+completion=['PARK', 'SMITH', 'YU', 'LEE', 'KENJI', 'SONG', 'TAYO', 'SUE', 'SAM', 'BEN', 'TOM', 'TAYO', 'PORORO', 'PARK', 'DALE', 'LANCE', 'LANCE']
+print ('\n완주자',completion)
+
+not_com=participant
+for i in range (len(completion)):
+    not_com.remove(completion[i])
+
+print ('\n미완주자',not_com)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/06 13:53</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Buckshot</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2715"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">&lt;결과&gt; 
+참가자 [&#39;PARK&#39;, &#39;SMITH&#39;, &#39;YU&#39;, &#39;LEE&#39;, &#39;KENJI&#39;, &#39;SONG&#39;, &#39;PORORO&#39;, &#39;TAYO&#39;, &#39;SUE&#39;, &#39;SAM&#39;, &#39;BEN&#39;, &#39;TOM&#39;, &#39;TAYO&#39;, &#39;PORORO&#39;, &#39;PARK&#39;, &#39;DALE&#39;, &#39;LANCE&#39;, &#39;LANCE&#39;]
+
+완주자 [&#39;PARK&#39;, &#39;SMITH&#39;, &#39;YU&#39;, &#39;LEE&#39;, &#39;KENJI&#39;, &#39;SONG&#39;, &#39;TAYO&#39;, &#39;SUE&#39;, &#39;SAM&#39;, &#39;BEN&#39;, &#39;TOM&#39;, &#39;TAYO&#39;, &#39;PORORO&#39;, &#39;PARK&#39;, &#39;DALE&#39;, &#39;LANCE&#39;, &#39;LANCE&#39;]
+
+미완주자 [&#39;PORORO&#39;]</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Buckshot,
+                                    2020/05/06 13:54
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22133"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import random
+number_participants = random.randrange(1, 100001)      # 참가자 수 랜덤 선정
+participant = []
+completion = []
+alph = list(&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;)
+for i  in range(1, number_participants+1):   
+    name_len = random.randrange(1, 21)                       # 이름 길이는 알파벳 1~20자 사이
+    new_name = &quot;&quot;
+    for j in range(1, name_len + 1):                                # 랜덤한 이름 만들기
+        new_name = new_name + random.choice(alph)
+    participant.append(new_name)                                 # 참가자 리스트
+    completion.append(new_name)                                 # 완주자 리스트와 참가자 리스트가 동일
+del completion[random.randrange(0, number_participants+1)]                       # 미 완주자 랜덤하게 1명 제외
+# 미 완주자 확인
+p_set = set(participant)
+c_set = set(completion)
+print(&quot;총 참여자 수는 {}명이고, 미완주자는 {}입니다.&quot;.format(number_participants,p_set - c_set))
+print()
+</code></pre>
+
+<pre><code class="python"># 문제에 충실한 풀이를 해봤습니다.
+# 랜덤하게 10만명 내에서 참가자수 정하고, 이름도 랜덤하게 알파벳으로 20자 내에서 정하고, 완주 못한 사람을 랜덤하게 1사람 정했습니다. 당연히 프로그램 돌릴 때마다 결과값이 달라집니다.
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/06 21:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Stony Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22416"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from collections import Counter
+import random
+
+def marathon(p, c):
+    result = Counter(p) - Counter(c)
+    print(list(result.keys())[0])
+
+if __name__ == '__main__':
+    participant = []
+    #completion = []
+    for i in range(100):
+        name = ''
+        for j in range(random.randint(1, 20)):
+            name += random.choice([chr(c) for c in range(97, 123)])
+        participant.append(name)    # 최대 20개 길이의 이름 100개 생성
+    completion = participant.copy()
+    completion.remove(participant[random.randint(1, 100)])
+    marathon(participant, completion)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/25 10:56</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hwaseong Nam</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25577"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">p = ['a','b','c','d','e','f']
+c = ['a','c','d','e','f']
+[p.remove(i) for i in c]
+print(p)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/06/21 17:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">약사의혼자말</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25637"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>python 3.9.5입니다.
+집합 자료형의 차집합을 이용했습니다.
+소스 코드입니다.</p>
+<pre><code class="python">def not_complete(participant, completion):
+    par_set = set(participant)
+    com_set = set(completion)
+    return tuple(par_set - com_set)[0]
+
+a = input('input the participant list. ').split()
+b = input('input the completion list. ').split()
+
+print(not_complete(a, b))
+</code></pre>
+
+<p>실행 결과입니다.</p>
+<pre><code class="python">input the participant list. a b c d e f g
+input the completion list. d f c b g a 
+e
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/06/26 11:44</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이준우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25682"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def solution(participant, completion):
+    def m_start(participant):
+        start = dict()
+        for i in participant:
+            if i in start:
+                start[i] += 1
+            else:
+                start[i] = 1
+        return start
+
+    start = m_start(participant)
+    def m_end(completion):
+        end = dict()
+        for i in completion:
+            if i in end:
+                end[i] += 1
+            else:
+                end[i] = 1
+        return end
+    end = m_end(completion)
+
+    for i in start:
+        if i in end:
+            if start[i] == end[i]:
+                pass
+            else:
+                return i
+        else:
+            return i
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/07/03 17:25</p>
+                                <p class="static-profile" style="margin:0;padding:0;">whalerice</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27107"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">
+participant =['a','eda','dfadf','asd2','asd1ff']
+completion =['a','eda','dfadf','asd2']
+
+def fail (arr1,arr2):
+    a= set(arr1)
+    b= set(arr2)
+    return a-b
+
+print(fail(participant,completion))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/26 00:16</p>
+                                <p class="static-profile" style="margin:0;padding:0;">양캠부부</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29497"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def nameOfUncompletion(participant, completion):
+    participant.sort()
+    completion.sort()
+    idx = 0
+    while idx &lt; len(completion) and participant[idx] == completion[idx]:
+        idx += 1
+
+    if idx == len(completion):
+        print(participant[-1])
+    else:
+        print(participant[idx])
+
+
+pArr = [ s for s in input(&quot;마라톤에 참여 선수들은?:(예: aa ss aaa) &quot;).split(' ')]
+cArr = [s for s in input(&quot;마라톤에 완주한 선수들은?: &quot;).split(' ')]
+
+cDic = dict()
+for n in range(len(cArr)):
+    if cArr[n][0] not in cDic.keys():
+        cDic[cArr[n][0]] = []
+    cDic[cArr[n][0]].append(cArr[n])
+
+pDic = dict()
+for n in range(len(pArr)):
+    if pArr[n][0] not in pDic.keys():
+        pDic[pArr[n][0]] = []
+    pDic[pArr[n][0]].append(pArr[n])
+    if len(pDic[pArr[n][0]]) &gt; len(cDic[pArr[n][0]]):
+        nameOfUncompletion(pDic[pArr[n][0]], cDic[pArr[n][0]])
+        break
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/07/27 21:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29535"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">### part = ['a', 'b', 'c', 'd', 'a', 'c', 'c', 'f', 'e', 'e']
+### comp = ['a', 'b', 'c', 'd', 'a', 'c', 'c', 'e', 'e']
+
+from collections import Counter
+part = input().split()
+comp = input().split()
+lim_p = len(part) - len(set(part)) 
+lim_c = len(comp) - len(set(comp))
+multi_p = Counter(part).most_common(lim_p)
+multi_c = Counter(comp).most_common(lim_c)
+missing = ''
+
+if multi_p == multi_c:
+    missing = list(set(part) - set(comp))[0]
+else:
+    for el, cnt in multi_c:
+        for el_p, cnt_p in multi_p:
+            if el == el_p and cnt != cnt_p:
+                missing = el
+
+print(missing)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/08/10 15:34</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hawk Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

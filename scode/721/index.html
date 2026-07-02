@@ -1,0 +1,3021 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="0~9까지의 숫자를 한 번씩 사용하여 만든 세 자리 숫자를 맞추는 코드를 작성하시오.
+숫자와 자리가 맞으면 S이고 숫자만 맞으면 B입니다.
+
+컴퓨터가 세 자리 숫자를 설정하고 사용자에게 숫자를 입력받아 S와 B의 개수를 알려주십시오.
+정답...">
+    <title>숫자야구 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">숫자야구</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">8</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 2</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>0~9까지의 숫자를 한 번씩 사용하여 만든 세 자리 숫자를 맞추는 코드를 작성하시오.
+숫자와 자리가 맞으면 S이고 숫자만 맞으면 B입니다.</p>
+<p>컴퓨터가 세 자리 숫자를 설정하고 사용자에게 숫자를 입력받아 S와 B의 개수를 알려주십시오.
+정답을 맞히면 정답이라고 알려주고 사용자가 숫자를 룰에 어긋나게 입력 시
+경고문을 출력하고 다시 숫자를 입력할 수 있게 하십시오.</p>
+<p>예) 정답이 123일 때 사용자가 234를 입력 시 0S2B, 사용자가 109를 입력 시 1S0B, 사용자가 327을 입력 시 1S1B입니다.</p>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">random</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2022/07/15 13:59</p>
+                    <p class="static-profile" style="margin:0;padding:0;">Tae Joo</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>41개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_28272"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">2</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import random
+# 숫자추출
+nums=list(range(0,10))
+random.shuffle(nums)
+while nums[0]==0:
+    random.shuffle(nums)
+answer = str(nums[0]*100+nums[1]*10+nums[2]*1)
+print(answer)
+
+# 값 입력받기
+while True:
+    user_num = input(&quot;세자리 숫자를 입력하세요 : &quot;)
+    # 정답 확인
+    if user_num == answer:
+        print(&quot;정답을 맞추셨습니다. 게임을 종료합니다.&quot;)
+        break
+    # 입력값 확인
+    if user_num.isdigit()==False or len(user_num) != 3:
+        print(&quot;잘못된 입력을 하였습니다. 세자리 숫자를 입력하여 주세요.&quot;)
+        continue
+
+    #입력값과 정답비교
+    strike=0
+    ball=0
+    for i in range(3):
+        if answer[i]==user_num[i]:
+            strike+=1
+        elif user_num.count(answer[i])&gt;0:
+            ball+=1
+    print(&quot;{0}S{1}B&quot;.format(strike,ball))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/07/26 16:40</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김준성</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28222"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># 숫자야구 3자리 숫자
+
+import random as rd
+
+while 1:
+    real_a = rd.sample(range(10), 3)
+    real_b = (real_a[0] * 100) + (real_a[1] * 10) + (real_a[2])
+    if real_b &lt; 100:
+        continue
+    else:
+        break
+# print(real_b)
+print('숫자야구 게임입니다. 0~9까지의 숫자를 한번씩 사용하여 만든 세자리 숫자를 맞추십시오.')
+print('숫자와 자리가 맞으면 \'S\' 숫자만 맞으면 \'B\' 입니다.')
+c = 0
+
+while 1:
+    s = b = 0
+    input_n = int(input('세자리 숫자를 입력하십시오 : '))
+    if not 100 &lt;= input_n &lt; 1000:
+        continue
+    input_a = [(input_n // 100) % 10, (input_n // 10) % 10, input_n % 10]
+    if input_a[0] == input_a[1] or input_a[0] == input_a[2] or input_a[1] == input_a[2]:
+        print('서로다른 세가지의 숫자로 입력해주세요.')
+        continue
+    for ii in range(3):
+        if input_a[ii] == real_a[ii]:
+            s += 1
+        elif input_a[ii] in real_a:
+            b += 1
+    c += 1
+    if s == 3:
+        print('\'{}\'정답입니다. 정답을 \'{}\'번만에 맞추셨습니다. 축하드립니다.'.format(real_b, c))
+        exit(0)
+    print('{}S{}B'.format(s, b))
+    pass
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/07/15 14:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Tae Joo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28301"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">
+import java.util.Random; // 임의의 수를 입력하기 위한 랜덤 임포트
+import java.util.Scanner; // 플레이어 입력을 위한 스캐너 임포트
+
+public class NumGame { // 클래스 이름은 게임명
+    public static void main(String[] args) { // 메인메서드 시작
+        Random r = new Random(); // 랜덤메서드 객체 선언
+        Scanner sc = new Scanner(System.in); // 스캐너메서드 객체 선언
+        int[] rnums = new int[3]; // 랜덤숫자를 담을 배열 선언
+        int[] input_nums = { 0, 0, 0 }; // 플레이어 입력 변수를 담을 배열 선언 및 초기화
+        int times = 0; // 플레이어 문제풀이 횟수를 담을 변수 선언
+        System.out.println(&quot;Line13&quot;);
+        rnums[0] = r.nextInt(1, 9); // 랜덤숫자를 담을 변수 중 첫번째는 바로 입력
+        System.out.println(rnums[0]);
+        boolean num123 = (rnums[0] == rnums[1]) || (rnums[0] == rnums[2]) || (rnums[1] == rnums[2]);
+        // 랜덤숫자가 서로 같은 게 하나라도 있을 경우에 따른 boolean값을 담을 변수
+        while (true) { // 위 boolean값을 담은 값
+            rnums[1] = r.nextInt(1, 9); // 두번째 숫자에 랜덤숫자를 다시 대입
+            rnums[2] = r.nextInt(1, 9); // 세번째 숫자에 랜덤숫자를 다시 대입
+            if ((rnums[0] == rnums[1]) || (rnums[0] == rnums[2]) || (rnums[1] == rnums[2])) {
+                continue;
+            } else {
+                break;
+            }
+        }
+        System.out.println(rnums[1]);
+        System.out.println(rnums[2]);
+        System.out.println(&quot;Line21&quot;);
+        while (rnums[0] != input_nums[0] || rnums[1] != input_nums[1] || rnums[2] != input_nums[2]) {
+            // 랜덤숫자와 플레이어 입력 숫자가 하나라도 틀리면 while문 진입함.
+            // 반대로, 모두 같으면(정답이면) while문 진입하지 않음.
+            int strike = 0; // 게임기능 스트라이크를 담을 변수 선언 및 초기화
+            int ball = 0; // 게임기능 볼을 담을 변수 선언 및 초기화
+
+            try {
+                System.out.print(&quot;숫자 &gt;&gt; &quot;); // 입력 안내메시지
+                input_nums[0] = sc.nextInt(); // 첫번째자리 입력
+                input_nums[1] = sc.nextInt(); // 두번째자리 입력
+                input_nums[2] = sc.nextInt(); // 세번째자리 입력
+
+                boolean ip0 = (input_nums[0] &gt;= 10) ||  (input_nums[0] &lt;= 0);
+                boolean ip1 = (input_nums[1] &gt;= 10) ||  (input_nums[1] &lt;= 0);
+                boolean ip2 = (input_nums[2] &gt;= 10) ||  (input_nums[2] &lt;= 0);
+                if (ip0 || ip1 || ip2) {
+                    continue;
+                }
+
+            } catch (Exception e) {
+                System.err.println(&quot;잘못된 입력입니다. 다시 입력해주시기 바랍니다.&quot;);
+                continue;
+            }
+
+            times++; // 시도횟수 증감식. 제대로 입력했을 경우에만 증가하도록 함.
+
+            for (int i = 0; i &lt; input_nums.length; i++) {
+                if (rnums[i] == input_nums[i]) {
+                    strike += 1;
+                } else {
+                    if (i == 0) {
+                        if (rnums[0] == input_nums[1] || rnums[0] == input_nums[2]) {
+                            ball += 1;
+                        }
+                    } else if (i == 1) {
+                        if (rnums[1] == input_nums[0] || rnums[1] == input_nums[2]) {
+                            ball += 1;
+                        }
+                    } else if (i == 2) {
+                        if (rnums[2] == input_nums[1] || rnums[2] == input_nums[0]) {
+                            ball += 1;
+                        }
+                    }
+
+                }
+            }
+
+            System.out.printf(&quot;%dS %dB\n&quot;, strike, ball);
+            // 게임결과 출력
+            System.out.println();
+            // 가독성을 위한 줄바꿈
+
+        }
+
+        System.out.printf(&quot;축하합니다! %d번만에 문제를 맞혔습니다.&quot;, times);
+
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/07/30 12:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Miracle Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28305"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>#include&lt;stdio.h&gt;
+int main(void) {
+    int num[3] = { 0, 0, 0 }, i;
+
+    for (i = 0; i &lt; 3; i++)
+    {
+        num[i] = rand() % 9 + 1;    // 랜덤으로 숫자 생성(1~9)
+    }
+
+    int swi = 1;
+
+    while (swi == 1)    // swi는 스위치
+    {
+        char ans[4];    // 입력할 수는 ans
+        printf(&quot;숫자 입력(100의 자리까지) :&quot;);
+      scanf(&quot;%s&quot;, ans);    //입력된 숫자를 확인시켜주는 코드
+
+        for (i = 0; i &lt; 3; i++) printf(&quot;%c&quot;, ans[i]);
+        printf(&quot; 입력됨\n&quot;);
+
+        swi = check(num, ans);
+
+    }
+}
+
+int check(int* pnum, char* pans)
+{
+    int res[2] = { 0, 0 }, i, j;    // res[0]은 스트라이크, res[1]은 볼
+    for (i = 0; i &lt; 3; i++)
+    {
+        for (j = 0; j &lt; 3; j++)
+        {
+            if ((pnum[i] == (int)pans[j] - 48) &amp;&amp; (i == j))     // '1'의 정수형은 49
+            {
+                res[0]++;   // 스트라이크
+                break;
+            }
+            if ((pnum[i] == (int)pans[j]- 48) &amp;&amp; (i != j))
+            {
+                res[1]++;   // 볼
+                break;
+            }
+
+        }
+    }
+
+    if (res[0] == 3)
+    {
+        printf(&quot;축하합니다. 3 strikes!\n&quot;);
+        return 0;
+    }
+
+    else
+    {
+        printf(&quot;%d strikes, %d balls\n&quot;, res[0], res[1]);
+        return 1;
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/07/31 01:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">코딩재미</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28324"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>자바로 작성하였습니다.</p>
+<pre><code class="java">package baseball;
+
+import java.util.Scanner;
+
+public class main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int base1 = (int) (Math.random() * 9 + 1);
+        int base2 = (int) (Math.random() * 9 + 1);
+        int base3 = (int) (Math.random() * 9 + 1);
+        //이상 123은 정답 숫자
+        int s = 0;
+        int b = 0;
+        int homerun = 0;
+        int out = 0;
+
+        //3가지 숫자가 겹치지 않게금 해주는 코드
+        while (true) {
+            while (base1 == base2) {
+                base2 = (int) (Math.random() * 9 + 1);
+                if (base1 != base2) {
+                }
+            }
+            while (base3 == base1 &amp; base3 == base2) {
+                base3 = (int) (Math.random() * 9 + 1);
+                if (base3 != base1 &amp; base3 != base2) {
+                }
+            }
+            if (base1 != base2 &amp; base1 != base3 &amp; base2 != base3) {
+                break;
+            }
+        }
+        //코드 끝
+
+        exit: while (true) {
+            while (out != 3) {
+                System.out.println(&quot;------------&quot;);
+                System.out.println(&quot;당신의 카운트&quot; + out);
+                System.out.println(&quot;3이되면 패배합니다.&quot;);
+                System.out.println(&quot;------------&quot;);
+
+                System.out.println(&quot;첫번째 숫자를 입력하십시오&quot;);
+                int run1 = sc.nextInt();
+                System.out.println(&quot;두번째 숫자를 입력하십시오&quot;);
+                int run2 = sc.nextInt();
+                System.out.println(&quot;세번째 숫자를 입력하십시오&quot;);
+                int run3 = sc.nextInt();
+                //이상 유저의 입력을 받는 숫자.
+
+                if (run1 == base1) {
+                    s = s + 1;
+                }
+                if (run1 == base2) {
+                    b = b + 1;
+                }
+                if (run1 == base3) {
+                    b = b + 1;
+                }
+
+                if (run2 == base1) {
+                    b = b + 1;
+                }
+                if (run2 == base2) {
+                    s = s + 1;
+                }
+                if (run2 == base3) {
+                    b = b + 1;
+                }
+
+                if (run3 == base1) {
+                    b = b + 1;
+                }
+                if (run3 == base2) {
+                    b = b + 1;
+                }
+                if (run3 == base3) {
+                    s = s + 1;
+                }
+
+                if (s == 3) {
+                    System.out.println(&quot;홈런&quot;);
+                    homerun = homerun + 1;
+                }
+                if (s == 0 &amp; b == 0) {
+                    System.out.println(&quot;아웃&quot;);
+                    out = out + 1;
+                } else if (s != 3) {
+                    System.out.println(&quot;스트라이크: &quot; + s);
+                    System.out.println(&quot;볼: &quot; + b);
+                }
+                s = 0;
+                b = 0;
+                if (homerun == 1 | out == 3) {
+                    System.out.println(&quot;게임종료&quot;);
+                    if (homerun == 1) {
+                        System.out.println(&quot;승리하였습니다.&quot;);
+                        break exit;
+                    } else if (out == 3) {
+                        System.out.println(&quot;패배하였습니다.&quot;);
+                        break exit;
+                    }
+                }
+            }
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/08/02 16:15</p>
+                                <p class="static-profile" style="margin:0;padding:0;">부추부추</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28368"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.Random;
+import java.util.Scanner;
+import java.util.stream.IntStream;
+
+public class CountBaseBall {
+    public static final int DIGIT_NUM = 5;                      // 숫자야구게임 문제&amp;정답숫자 자릿수
+    private static String[] digitStr = new String[DIGIT_NUM];   // 정답숫자 
+    private static String[] inputStr = new String[DIGIT_NUM];   // 입력숫자
+    private static Scanner sc;                                  // 입력객체
+
+
+    public static void main(String[] args) {
+
+        int[] num = { 0 , 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 };  // int형 배열
+        Random r = new Random();
+        String bf = null;
+
+        for (int i = 0; i &lt; digitStr.length; i++) {
+
+            int idx = r.nextInt(num.length);
+            digitStr[i] = num[idx] + &quot;&quot;;
+            num = remove(num, idx);
+
+        }
+        System.out.println(&quot;:::::::::::::::::::: BaseBall Game Start ::::::::::::::::::::&quot;);
+        try {
+            sc = new Scanner(System.in);
+
+            while (true) {
+                System.out.print(&quot;[0-9까지] 서로다른 &quot;+DIGIT_NUM+&quot;자리의 값을 입력하시오 : &quot;);
+                bf = sc.nextLine();
+
+                if (bf != null &amp;&amp; bf.length() == DIGIT_NUM) {
+                    boolean isNumeric = bf.matches(&quot;[+-]?\\d*(\\.\\d+)?&quot;);  // 입력된 값 숫자여부 판단
+                    if (isNumeric &amp;&amp; dupCheck(bf)) {
+                        bf = bf.substring(0, DIGIT_NUM);
+                        System.out.println(&quot;입력한 답 : &quot; + bf);
+
+                        inputStr = bf.split(&quot;&quot;);
+                    } else {
+                        // 숫자로 다시입력
+                        continue;
+                    }
+
+                    int strike = 0;
+                    int ball = 0;
+
+                    for (int j = 0; j &lt; digitStr.length; j++) {
+                        for (int k = 0; k &lt; inputStr.length; k++) {
+                            if (digitStr[j].equals(inputStr[k])) {
+                                if (j == k) {
+                                    strike++;
+                                } else {
+                                    ball++;
+                                }
+                            }
+                        }
+                    }
+
+                    if (strike == digitStr.length) {
+                        System.out.println(&quot;정답입니다!! 축하합니다!&quot;);
+                        System.out.println(&quot;:::::::::::::::::::: BaseBall Game End ::::::::::::::::::::&quot;);
+                        break;
+                    } else {
+                        System.out.println(&quot;아쉽습니다.. [ &quot; + strike + &quot;S&quot; + ball + &quot;B ] 입니다&quot;);
+                    }
+                }
+            }           
+        } catch (Exception e) {
+            // 예외처리
+        }
+
+    }
+
+    private static boolean dupCheck(String bf) {
+        String[] str = bf.split(&quot;&quot;);
+
+        for (int i = 0; i &lt; str.length; i++) {
+            for (int j = (i+1); j &lt; str.length; j++) {
+                if ( str[i].equals(str[j])) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * 숫자야구게임에서 중복된 숫자를 허용하지 않도록 idx 값 사용 후 제거하는 기능
+     * @param num int형 숫자배열
+     * @param idx 삭제할 index 값
+     * @return 필터링 된 num 값
+     */
+    private static int[] remove(int[] num, int idx) {
+        return IntStream.range(0, num.length)
+                        .filter(i -&gt; i != idx)
+                        .map(i -&gt; num[i])
+                        .toArray();
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/08/09 23:55</p>
+                                <p class="static-profile" style="margin:0;padding:0;">조용환</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28415"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import random
+answer = [0,0,0]
+answer[0]=str(random.randint(0,9))
+i=1
+while True:  #중복 없는 랜덤값 설정
+    if i==3:
+        break
+    tmp=str(random.randint(0,9))
+    if tmp in answer:
+        continue
+    else:
+        answer[i]=tmp
+        i+=1    
+print(answer)
+while True:
+    input1 = input('맞춰보시오:')
+    if len(input1) != 3 or input1[0] in input1[1:] or input1[1] == input1[2]:  #3자리가 아니거나 중복이면 continue
+        print('조건에 맞게 입력하시오')
+        continue
+    if list(input1) == answer:  #정답이면 프로그램 끝냄
+        print(&quot;정답입니다.&quot;)
+        break
+    scnt=0
+    bcnt=0
+    for i in range(3):
+        if answer[i] == input1[i]:
+            scnt+=1
+        elif answer[i]!=input1[i] and input1[i] in answer:
+            bcnt+=1
+    print(f'{scnt}S{bcnt}B')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/08/18 21:09</p>
+                                <p class="static-profile" style="margin:0;padding:0;">kee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28439"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <ul>
+<li>strike : input value의 자리수와 random value의 자리수 match </li>
+<li>ball : 자리수가 맞지 않더라도 같은 값이 있는지르르 for loop로 search</li>
+</ul>
+<pre><code class="cpp">int num[3] = { 0,};
+int random_value[3] = { 0,};
+int input_value[3] = { 0,};
+char input_str[4];   
+
+for (i = 0; i &lt; 3; i++)
+    random_value[i] = rand() % 10;    // random (0~9)
+
+while(1)
+{
+   printf(&quot;숫자를 3자리 입력하세요 :&quot;);
+   scanf(&quot;%s&quot;, input_str);    //입력된 숫자를 확인시켜주는 코드
+
+   for (i = 0; i &lt; 3; i++) 
+   {
+     printf(&quot;%c&quot;, input_str[i]);
+     input_value[i] = input_str[i] - 0x30; #ascii code 48 --&gt; '0'  
+    }
+   strike = 0;
+   ball = 0;
+
+
+
+   for(j = 0 ; j &lt; 3; j++)
+   {    
+       for(i = 0; i&lt; 3; i++)
+       {
+          if((random_value[j] == input_value[i]) &amp;&amp; (i==j))
+              strike++
+          else if((random_value[j] == input_value[i]))
+            ball++;
+        }
+
+   }
+    print(&quot;%dS %B \r\n&quot;,strike,ball); 
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/08/23 12:56</p>
+                                <p class="static-profile" style="margin:0;padding:0;">michael Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28465"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def main():
+    given = input(&quot;Enter an integer with three positions&quot;)
+    if len(str(given)) != 3:
+        raise Exception(&quot;Please provide the number in the appropriate format&quot;)
+    answer = 123
+
+    # change to string to compare
+    s_given = given
+    s_answer = str(answer)
+
+    # check S
+    S = 0
+    indices = []
+    for idx, (g, a) in enumerate(zip(s_given, s_answer)):
+        if g == a:
+            S += 1
+            indices.append(idx)
+
+    # preparing for checking B
+    for idx in indices:
+        s_given = s_given.replace(s_given[idx], '*')
+        s_answer = s_answer.replace(s_answer[idx], '*')
+
+    # check B
+    B = 0
+    for c in set(s_given):
+        try:
+            int(c)
+            B += s_answer.count(c)
+        except:
+            pass
+
+    print(f&quot;{S}S{B}B&quot;)
+
+
+if __name__ == '__main__':
+    main()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/08/26 13:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">문덕종</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28485"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.HashSet;
+import java.util.Scanner;
+
+public class CD_baseball {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a;
+        int b;
+        int c;
+        int ball;
+        int strike;
+        while(true) {
+             a = (int)(Math.random()*10);
+             b = (int)(Math.random()*10);
+             c = (int)(Math.random()*10);
+            HashSet&lt;Integer&gt; p = new HashSet&lt;Integer&gt;();
+            p.add(a);
+            p.add(b);
+            p.add(c);
+            if(p.size()==3) {
+                break;
+            }
+        }
+        System.out.println(a*100+b*10+c);
+
+        while(true) {
+            strike = 0;
+            ball = 0;
+            System.out.println(&quot;1번 숫자 입력&quot;);
+            int s_a = sc.nextInt();
+            System.out.println(&quot;2번 숫자 입력&quot;);
+            int s_b = sc.nextInt();
+            System.out.println(&quot;3번 숫자 입력&quot;);
+            int s_c = sc.nextInt();
+
+            if(s_a==a||s_a==b||s_a==c) {
+                if(s_a==a) {
+                strike++;
+                }else {ball++;
+                }
+            }   
+            if(s_b==a||s_b==b||s_b==c) {
+                if(s_b==b) {
+                strike++;
+                }else {ball++;
+                }
+            }   
+            if(s_c==a||s_c==b||s_c==c) {
+                if(s_c==c) {
+                strike++;
+                }else {ball++;
+                }
+            }   
+            System.out.println(strike+&quot;스트라이크,&quot;+ball+&quot;볼&quot;);
+            if(s_a==a&amp;&amp;s_b==b&amp;&amp;s_c==c) {
+                System.out.println(&quot;축하합니다 다 맞추었습니다.&quot;);
+                break;
+            }
+        }
+
+        sc.close();
+    }
+
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/08/30 17:16</p>
+                                <p class="static-profile" style="margin:0;padding:0;">YR L</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28516"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import random
+num = [random.randint(1, 9)]    # 100의 자리는 0이 되면 안됨
+for i in range(2):  # 10의 자리나 1의 자리는 0이어도 상관 x
+    num.append(random.randint(0, 9))
+
+res = []    # 결과 리스트
+while res.count('s') != 3:  # s가 3개면 종료
+    res = []   # 계속 초기화함
+    ans = input(&quot;숫자 입력 : &quot;)  # 사용자가 입력한 숫자
+    num_ans = [int(x) for x in ans] #리스트로 만듦
+    for i in range(3):
+        if num_ans[i] in num:
+            if num_ans[i] == num[i]:
+                res.append('s')
+            else:
+                 res.append('b')
+    print(&quot;%ds %db&quot; % (res.count('s'), res.count('b')))
+print(&quot;정답!&quot;)
+</code></pre>
+
+<p>파이썬입니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/09/03 15:12</p>
+                                <p class="static-profile" style="margin:0;padding:0;">코딩재미</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28545"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def num_baseball(answer, try_num):
+    result = [0, 0, 0] # none, ball, strike count
+    for i in range(3):
+        if try_num[i] in answer:
+            result[int(try_num[i] in answer) + int(answer.index(try_num[i]) == i)] += 1
+    return result
+
+def make_num3():  # 난수 3개를 만드는 함수
+    num = [i for i in range(10)]
+    random.shuffle(num)
+    return num[:3]
+
+print(&quot;숫자 야구게임입니다.&quot;)
+answer, try_num = make_num3(), []
+while try_num != answer:
+    num = input('3자리 숫자를 입력하세요 : ')
+    try_num = [int(i) for i in num]
+    if len(try_num) != 3: continue
+    result = num_baseball(answer, try_num)
+    if result[2] == 3: break
+    print(f'결과는 {result[2]}S{result[1]}B 입니다.')
+print('정답입니다.')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/09/11 19:51</p>
+                                <p class="static-profile" style="margin:0;padding:0;">고양이</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28578"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>import random</p>
+<p>print('\n=== Baseball game ===\n')</p>
+<p>print('제한회수 : 9회')</p>
+<p>print('허용투구 : 012~987')</p>
+<p>while True:</p>
+<pre><code>ans=str(random.randint(0,999))
+if len(set(ans)) ==3:break
+</code></pre>
+<p>count=0</p>
+<p>while count&lt;9:</p>
+<pre><code>st,ball=0,0
+
+m=input('Throw 3-digit ball &gt; ')
+count+=1
+if not m.isdecimal():
+    print(f'&lt;{count}회&gt; 문자허용안함, Retry')
+    continue
+if len(m)!=3:
+    print(f'&lt;{count}회&gt; 3자리 숫자만 허용, Retry')
+    continue
+if len(set(m)) !=3:
+    print(f'&lt;{count}회&gt; 같은 숫자 허용 안함, Retry')
+    continue
+
+if m[0]==ans[0]:st+=1
+elif m[0] in ans: ball+=1
+if m[1]==ans[1]:st+=1
+elif m[1] in ans: ball+=1
+if m[2]==ans[2]:st+=1
+elif m[2] in ans: ball+=1
+print(f'&lt;{count}회&gt; {st} Strike, {ball} Ball')
+if st==3: 
+    print(' %%%  Good Hit~!!!')
+    break
+</code></pre>
+<p>if st!=3:
+    print('\n ~ Try Again ~ Bye')</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/09/15 16:38</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이진영</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28587"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.Scanner;
+public class Q1 {
+    static public String hunanswer = new Scanner(System.in).next();
+    static public char[] hun = hunanswer.toCharArray();
+    static public void main(String args[]) {
+        int j=0,S=0,B=0;
+        String input = new Scanner(System.in).next();
+        while(j!=3){
+            char c = input.charAt(j);
+            if(c==hun[j]) {
+                S++;
+                j++;
+            }
+            else {
+                if(c==hun[0]) {
+                    B++;
+                    j++;
+                }
+                else if(c==hun[1]) {
+                    B++;
+                    j++;
+                }
+                else if(c==hun[2]) {
+                    B++;
+                    j++;
+                }
+                else {
+                    j++;
+                }
+            }
+        }
+        System.out.printf(&quot;%dS%dB\n&quot;,S,B);
+        if(S==3) {
+            System.out.printf(&quot;정답\n&quot;);
+        }
+        else {
+            System.out.println(&quot;틀렸습니다.\n&quot;);
+            main(args);
+        }
+
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/09/20 15:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김민중</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28621"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="파이썬">
+
+print(&quot;!!!숫자야구 게임!!!&quot;)
+
+import random
+
+import sys
+
+a = random.randint(0,9)
+
+b = random.randint(0,9)
+
+c = random.randint(0,9)
+
+while True:
+    if a == b:
+        b = random.randint(0,9)
+    if b == c:
+        c = random.randint(0,9)
+    if a == c:
+        c = random.randint(0,9)
+    if a != b and b != c and c != a:
+        break
+
+while True:
+    n = input(&quot;세자리 숫자: &quot;)
+    if not n.isdigit() or len(n) != 3:
+        print(&quot;잘못된 입력입니다. 세자리 숫자를 입력해주세요.&quot;)
+        continue
+
+    x = int(n[0])
+    y = int(n[1])
+    z = int(n[2])
+
+    s = ball = 0
+    if a == x:
+        s += 1
+    elif a == y or a == z:
+        ball += 1
+
+    if b == y: 
+        s += 1
+    elif b == x or b == z:
+        ball += 1
+
+    if c == z:
+        s += 1
+    elif c == x or c == y:
+        ball += 1
+
+    if s == 3:
+        print(&quot;정답!!!&quot;)
+        sys.exit()
+    else:
+        print(f&quot;{s}S{ball}B 입니다&quot;)
+        continue
+
+```{.java}
+java
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class numberBassballGame 
+{
+    public static void main(String[] args) 
+    {
+        Random random = new Random();
+        int random_num1 = 0; //컴퓨터가 생성하는 랜덤값(정답)
+        int random_num2 = 0; //컴퓨터가 생성하는 랜덤값(정답)
+        int random_num3 = 0; //컴퓨터가 생성하는 랜덤값(정답)
+        int first = 0; //user 입력값의 백의자리
+        int second = 0; //user 입력값의 십의자리
+        int third = 0; //user 입력값의 일의자리
+
+        random_num1 = random.nextInt(9); //0~9
+        random_num2 = random.nextInt(9); //0~9
+        random_num3 = random.nextInt(9); //0~9
+        Scanner scanner = new Scanner(System.in);
+
+        while (true)
+        {
+            if (random_num1 == random_num2)
+            {
+                random_num2 = random.nextInt(9);
+            }
+            if (random_num2 == random_num3)
+            {
+                random_num3 = random.nextInt(9);
+            }
+            if (random_num1 == random_num3)
+            {
+                random_num3 = random.nextInt(9);
+            }
+            if (random_num1 != random_num2 &amp;&amp; random_num2 != random_num3 &amp;&amp; random_num3 != random_num1)
+            {
+                break;
+            }
+        }
+
+        while (true)
+        {
+            System.out.printf(&quot;백의자리 숫자를 입력해주세요&quot;);
+            first = scanner.nextInt();
+            System.out.printf(&quot;십의자리 숫자를 입력해주세요&quot;);
+            second = scanner.nextInt();
+            System.out.printf(&quot;일의자리 숫자를 입력해주세요&quot;);
+            third = scanner.nextInt();
+
+            int strike = 0;
+            int ball = 0;
+
+            if (first == second)
+            {
+                System.out.printf(&quot;서로다른 숫자를 입력해주세요&quot;);
+                continue;
+            }
+            if (second == third)
+            {
+                System.out.printf(&quot;서로다른 숫자를 입력해주세요&quot;);
+                continue;
+            }
+            if (first == third)
+            {
+                System.out.printf(&quot;서로다른 숫자를 입력해주세요&quot;);
+                continue;
+            }
+
+            if (random_num1 == first)
+            {
+            strike += 1;
+            }
+            else if (random_num1 == second || random_num1 == third)
+            {
+                ball += 1;
+            }
+
+            if (random_num2 == second)
+            {
+                strike += 1;
+            }
+            else if (random_num2 == first || random_num2 == third)
+            {
+                ball += 1;
+            }
+
+            if (random_num3 == third)
+            {
+                strike += 1;
+            }
+            else if (random_num3 == first || random_num3 == second)
+            {
+                ball += 1;
+            }
+
+            System.out.printf(&quot;strike: %d, ball: %d%n&quot;, strike, ball);
+
+            if (strike == 3) 
+            {
+                System.out.printf(&quot;정답!!!&quot;);
+                break;
+            }
+
+            else 
+            {
+                continue;
+            }
+            }
+    }
+    }
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/10/03 23:55</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김성범</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28631"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3.10</p>
+<pre><code class="python">&quot;&quot;&quot;숫자야구&quot;&quot;&quot;
+import random as rd
+
+
+def main():
+    game = Game(True)
+
+
+class Game:
+    def __init__(self, show_answer: bool = False):
+        # 3자리 중복 없는 난수 생성
+        self.answer = &quot;&quot;.join(map(str, rd.sample(range(10), 3)))
+        if show_answer:
+            print(self.answer)
+
+        while True:
+            self.guess = Game.get_guess()
+            (iscorrect, score) = Game.get_score(self.guess, self.answer)
+            if not iscorrect:
+                print(score)
+            else:
+                print(&quot;정답입니다. &quot;)
+                break
+
+    @staticmethod
+    def get_guess():
+        while True:
+            guess = input(&quot;중복없는 3자리 숫자를 입력하세요: &quot;)
+            if len(set(guess)) == 3 and guess.isdigit():
+                break
+            print(&quot;잘못된 입력입니다.&quot;)
+        return guess
+
+    @staticmethod
+    def get_score(guess: str, answer: str) -&gt; (bool, str):
+        score = [0, 0]  # [Strikes, Balls]
+        for gidx, gchar in enumerate(guess):
+            if gchar in answer:
+                if gchar == answer[gidx]:
+                    score[0] += 1
+                else:
+                    score[1] += 1
+        iscorrect = True if score[0] == 3 and score[1] == 0 else False
+        return iscorrect, f&quot;{score[0]}S{score[1]}B&quot;
+
+
+if __name__ == '__main__':
+    main()
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/10/05 10:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28647"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import random
+
+user = input(&quot;세자리 숫자를 입력하시오 : &quot;)
+
+user_num_list = list(user)
+
+num = random.randint(0,9)
+
+num_list = []
+for i in range(3):
+    while num in num_list:
+        num = random.randint(0,9)   
+    num_list.append(num)
+
+s=0
+b=0
+for i in range(0, len(user_num_list)):
+    for j in range(0,len(num_list)):
+        if user_num_list[i] == num_list[j] and i == j:
+            s += 1
+        elif user_num_list[i] == num_list[j] and i != j:
+            b += 1
+
+print(f&quot;{s}S{b}B&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/10/09 14:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">정준호</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28668"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import random
+a = random.sample(range(10), 3)
+#같은 숫자 및 앞자리가 0이 아니도록 셔플
+while 1:
+    if a[0]!=a[1]!=a[2]:
+        a = random.sample(range(10), 3)
+        if a[0]!=0: break
+
+print(&quot;게임 시작!&quot;)
+while 1:
+    u = input(&quot;숫자를 입력하여주세요(ex=123)&quot;)
+    # 3자리 숫자가 아닌경우 실행되지 않음
+    if len(u)==3:
+        #입력값 정답 비교문
+        for i in range(3):
+            if int(u[i]) == a[i]:
+                s += 1
+            elif int(u[i]) in a :
+                b += 1
+        # 정답 처리문
+        if s ==3:
+            print(&quot;{}S{}B&quot;.format(s,b))
+            print(&quot;정답을 맞추셨습니다. 정답은{}입니다.&quot;.format(a))
+            break
+        print(&quot;{}S{}B&quot;.format(s,b))
+    # 에러 처리 출력문
+    else:
+        print(&quot;3개의 숫자를 입력하여주세요&quot;)
+        continue
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/10/13 17:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Zikill_ Hide</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28692"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># 코딩 도장 숫쟈야구
+import random
+# 정답 뽑기!
+
+answer= &quot;&quot;
+while len(answer) &lt; 3:
+    temp = str(random.randint(0,9))
+    if temp not in answer:
+        answer += temp
+idx = 0
+while True:
+    idx += 1
+    print(f&quot;{idx}번째 도전!&quot;)
+    user_submit = input(&quot;세자리 숫자를 입력해주세요 : &quot;)
+    if user_submit == answer:
+        print(&quot;정답입니다!&quot;)
+        break
+    if len(user_submit) != 3:
+        print(&quot;세 자리를 입력해주세요!&quot;)
+    elif not user_submit.isdigit():
+        print(&quot;숫자를 입력해주세요!&quot;)
+    elif len(set(user_submit)) != 3:
+        print(&quot;중복된 값은 입력할 수 없습니다.&quot;)
+    else:
+        s,b= 0,0
+        for i in range(3):
+            if user_submit[i] == answer[i]:
+                s += 1
+            elif user_submit[i] in answer:
+                b += 1
+        print(f&quot;{s}S{b}B&quot;)
+
+
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/10/23 20:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Tony Woo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28695"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import random
+
+digits = &quot;0123456789&quot;
+n = 3
+answer = &quot;&quot;.join(random.sample(digits, n))
+
+print(f&quot;{answer = }&quot;)
+
+def NotMeetCon(numbers):
+    global n
+
+    result = False
+    if len(set(numbers)) != n:
+        result = True
+    else:
+        try:
+            int(numbers)
+        except:
+            result = True
+    return result
+
+while True:
+    guess = input(&quot;Guess the number: &quot;)
+
+    if NotMeetCon(guess):
+        print(&quot;Incorrect condition entered.\nGuess again.&quot;)
+        continue
+
+    S, B = 0, 0
+    for i in range(n):
+        if answer[i] == guess[i]:
+            S += 1
+        elif answer[i] in guess:
+            B += 1
+    print(&quot;{}S{}B&quot;.format(S, B), end = &quot; &quot;)
+    if S == 0 and B == 0:
+        print(&quot;Out!&quot;, end = &quot;&quot;)
+    if S == n:
+        print(&quot;Strick!!&quot;)
+        print(&quot;\nYou won!!&quot;)
+        break
+    print(&quot;&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/10/24 16:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">isaac024</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28703"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import random as rd
+number=[int(i) for i in range(0,10)]
+result=100
+random_number=rd.sample(number,3) # 랜덤 숫자 결정
+
+while result:
+     input_number=input('예상하는 숫자를 입력 하시오(스페이스로 구분):').split()
+     input_number=[int(j) for j in input_number] # 입력받은 값을 정수로 변환
+     set_number=set(random_number)
+     set_input_number=set(input_number)
+     mid_result=len(set_number&amp;set_input_number) # 입력받은 수와 정답의 교집합 갯수
+     mid_result_value=set_number&amp;set_input_number # 입력받은 수와 정답의 교집합 
+     mid_result_value_list=list(mid_result_value)
+
+     j=0
+     count_value=0
+     for j in range(0,3):
+         if random_number[j]==input_number[j]: # 스트라이크 카운트
+            count_value=count_value+1
+
+
+     ball=mid_result-count_value # 볼 계산   
+     print(&quot;%dS%dB&quot; %(count_value,ball))
+
+     if count_value==3:
+         result=0 # while문 빠져 나오기
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/10/26 23:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">나무늘보</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28744"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import random
+setnb = &quot;{0:0&gt;3}&quot;.format(str(random.randint(1,999)))
+
+#횟수 카운트 용 변수 선언
+cnt = 0
+
+#횟수가 3회 이하일 때까지만 작동하는 반복문
+while cnt&lt;3:
+    S = 0; B= 0
+    nb = input(&quot;세 자리 숫자를 입력하세요: &quot;)
+    #3자리 숫자가 맞는지 확인
+    if len(nb)!=3:
+        print(&quot;잘못 입력하셨습니다.&quot;)
+        continue
+    #S와 B가 몇개씩인지 확인
+    for i in range(3):
+        if setnb[i]==nb[i]:
+            S+=1
+            B-=1
+        if setnb[i] in nb:
+            B+=1
+    #정답일 경우 반복문 밖으로 탈출
+    if S==3:
+        print(&quot;축! 정답입니다!&quot;)
+        break
+    #정답이 아닐 경우 S와 B의 갯수를 표기하고, 횟수를 1회 증가시킴.
+    else:
+        if B&lt;=0: B=0
+        print(str(S)+&quot;S&quot;+str(B)+&quot;B&quot;)
+        cnt+=1
+
+print(&quot;프로그램 종료&quot;)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/11/03 21:01</p>
+                                <p class="static-profile" style="margin:0;padding:0;">피봇맨</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28781"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>좀 복잡하고 길긴 한데 제가 그냥 순간 원하는 대로 입력, 출력하고 싶어서 해봤습니다</p>
+<pre><code class="python">import random
+b = input()
+c = []
+c = set(c)
+a = random.randint(1,9)
+c.add(a)
+while len(c)&lt;3:
+    c.add(random.randint(0,9))
+c = list(c)
+c.remove(a)
+a = str(a)
+A = c.pop()
+
+B = c.pop()
+
+a = a + str(A) + str(B)
+
+
+def MatchingNumber(n):
+    N, M = 0, 0
+    for i in range(0,3):
+        N += n.count(a[i])
+    for i in range(0,3):
+        if a[i] == n[i] :
+            M += 1
+    if a == n:
+        print(&quot;정답입니다&quot;)
+    else:
+        print(&quot;%dS%dB&quot; % (M,N-M))
+        b = input()
+        return MatchingNumber(b)
+MatchingNumber(b)
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/11/08 16:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이웅기</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28827"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import random
+
+random_num=[]   #정답
+s=0
+b=0
+
+for i in range (0,3):
+    while(1):
+        temp=random.randint(0,9)
+        if not temp in random_num:
+            random_num.append(temp)
+            break
+
+while(1):
+    input_num=[]    #입력받을 수
+    temp=input('입력해주세요...')
+    for i in range (0,3):
+        input_num.append(int(temp[i]))
+
+    if len(temp)!=3:
+        print ('3자리의 숫자를 입력해주세요')
+    else:
+        if input_num[0]==input_num[1] or input_num[0]==input_num[2] or input_num[1]==input_num[2]:
+            print ('각각 다른 수를 입력해주세요')
+        else:
+            break
+
+for i in range (0,3):
+    if random_num[i]==input_num[i]:
+        s+=1
+        b-=1
+    if random_num[i] in input_num:
+        b+=1
+
+print ('정답 : ', random_num)
+print ('입력 : ', input_num)
+print ('%dS%dB' %(s,b))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/11/21 17:27</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Buckshot</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2936"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">입력해주세요...1234
+3자리의 숫자를 입력해주세요
+입력해주세요...133
+각각 다른 수를 입력해주세요
+입력해주세요...345
+정답 :  [4, 9, 8]
+입력 :  [3, 4, 5]
+0S1B</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Buckshot,
+                                    2022/11/21 17:27
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28829"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package main;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class NumberBaseball { // 최종 결과 출력
+    public static void main(String[] args) {
+        String a[];
+        a = ComPare.comPa();
+        System.out.println(&quot;유저 숫자 : &quot; + a[0]);
+        System.out.println(&quot;컴퓨터 숫자 : &quot; + a[1]);
+        System.out.println(&quot;결과 : &quot; + a[2]);
+    }
+}
+
+class UserNumberScan { // 유저 번호 적기
+    static int[] userNum() {
+        int userNumber[];
+        userNumber = new int[3];
+        Scanner UserScan = new Scanner(System.in);
+        for (int i = 0; i &lt; 3; i++) {
+            int num = UserScan.nextInt() ;
+            userNumber[i] = num;
+                if(num &lt; 0 || num &gt; 10){ // 1~9 사이 체크
+                    System.out.println(&quot;1~9 사이로 다시 입력하세요&quot;);
+                    i--;
+                }
+                else {  //중복 번호 확인
+                    for (int e = 0; e &lt; 3; e++) {
+                        if (e != i &amp;&amp; userNumber[i] == userNumber[e]) {
+                            System.out.println(&quot;중복된 값입니다.&quot;);
+                            i--;
+                            break;
+                        }
+                    }
+                }
+        }
+        UserScan.close();
+        return userNumber;
+    }
+}
+
+class ComNum { //컴퓨터 번호 출력
+    static int[] comNu() {
+        int ComNu[];
+        ComNu = new int[3];
+        for (int i = 0; i &lt; 3; i++) {
+            int random = (int) (Math.random() * 8) + 1;
+            ComNu[i] = random;
+            for (int e = 0; e &lt; 3; e++) {
+                if (e != i &amp;&amp; ComNu[i] == ComNu[e]) { //중복 번호 확인
+                    i--;
+                }
+            }
+        }
+        return ComNu;
+    }
+}
+
+class ComPare { // 유저와 컴퓨터 비교
+    public static String[] comPa() {
+        int ComNu[];
+        int UserSc[];
+        ComNu = ComNum.comNu();
+        UserSc = UserNumberScan.userNum();
+        int Strike = 0;
+        int Ball = 0;
+        for (int i = 0; i &lt; 3; i++) { //유저 숫자 위치
+            for (int e = 0; e &lt; 3; e++) { //컴퓨터 숫자 위치
+                if(i == e &amp;&amp; UserSc[i] == ComNu[e]){ //스트라이크 비교
+                    Strike++;
+                    break;
+                }
+                else if(UserSc[i] == ComNu[e]){ //볼 비교
+                    Ball++;
+                    break;
+                }
+            }
+        }
+        String[] Result = new String[3];  //int 배열을 string 배열로 변경 후 리턴
+        Result[0] = Arrays.toString(UserSc);
+        Result[1] = Arrays.toString(ComNu);
+        Result[2] = Strike + &quot;S&quot; + Ball + &quot;B&quot;;
+        return Result;
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/11/23 12:39</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Gi Lick</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28842"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#baseball
+import random as rd
+
+def baseball(x):
+    c = rd.randint(100,999) # RANDOM 세자리 생성
+    a = str(c)
+    while a[0] == a[1] or a[1] == a[2] or a[0] == a[2]: 
+        a = str(rd.randint(100,999))
+    b = str(x)
+    if b[0] == b[1] or b[1] == b[2] or b[0] == b[2]: # 입력 중복값 확인 
+        b = str(input(&quot;다시 숫자를 입력해 주세요: &quot;))
+    j = 1
+
+    while j &lt;= 9: # 10회 기회
+        S = 0
+        B = 0
+        for i in range(len(b)): # S, B 개수 확인
+            if b[i] == a[i]: 
+                S += 1
+            elif b[i] in a:
+                B += 1
+        if S == 0 and B == 0: # 결과 출력 및 새 숫자 입력
+            print(&quot;OUT 입니다. {}번 남았습니다&quot;.format(10-j))
+            b = str(input(&quot;다시 숫자를 입력해 주세요: &quot;))
+            if b[0] == b[1] or b[1] == b[2] or b[0] == b[2]:
+                b = str(input(&quot;다시 숫자를 입력해 주세요: &quot;))
+        elif S != 3: 
+            print(&quot;{}S{}B, {}번 남았습니다.&quot;.format(S,B,10-j))
+            b = str(input(&quot;다시 숫자를 입력해 주세요: &quot;))
+            if b[0] == b[1] or b[1] == b[2] or b[0] == b[2]:
+                b = str(input(&quot;다시 숫자를 입력해 주세요: &quot;))
+        elif S == 3:
+            return print(&quot;정답입니다.&quot;)
+        j += 1
+
+    return print(&quot;기회를 다 소진하였습니다. 정답은 {}입니다.&quot;.format(c))
+
+
+num = input(&quot;숫자를 입력해 주세요: &quot;)
+baseball(num)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/11/25 17:25</p>
+                                <p class="static-profile" style="margin:0;padding:0;">JY Y</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_28929"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import random
+
+answer = str(random.randint(100, 999))
+
+while True:
+    guess = input(&quot;세 자리 숫자를 입력하세요: &quot;)
+
+    if guess.isdigit() and len(guess) == 3:
+        s_count, b_count = 0, 0
+
+        for i in range(3):
+            if guess[i] == answer[i]:
+                s_count += 1
+            elif guess[i] in answer:
+                b_count += 1
+
+        if s_count == 3:
+            print(&quot;정답입니다!&quot;)
+            break
+        else:
+            print(f&quot;{s_count}S {b_count}B&quot;)
+    else:
+        print(&quot;세 자리 숫자를 입력해주세요.&quot;)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/01/15 18:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Beom Yeol Lim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29008"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">num = input(&quot;3자리 숫자 입력&quot;)
+
+rightAns = &quot;123&quot;
+
+if num == rightAns:
+    print(&quot;정답&quot;)
+else:
+    while(num != rightAns):
+        S_cnt = 0
+        B_cnt = 0
+        for i in range(3):
+            for j in range(3):
+                if rightAns[i] == num[j]:
+                    if i == j: 
+                        S_cnt +=1
+                    else:
+                        B_cnt +=1
+
+        print(str(S_cnt)+&quot;S&quot;+str(B_cnt)+&quot;B&quot;)
+        num = input(&quot;3자리 숫자 입력&quot;)
+    print(&quot;정답&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/02/07 15:02</p>
+                                <p class="static-profile" style="margin:0;padding:0;">최종오</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29036"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#예외처리는 안했어요!!
+import random
+
+
+set_com = { }
+com = 0
+strike=0
+
+while len(set_com) &lt;= 2:
+    com = random.randrange(0,999)
+    set_com = set(str(com))
+
+
+while strike &lt;= 2:
+    strike = 0
+    ball = 0
+    player = input(&quot;중복되지 않는 숫자 3개를 넣으시오:&quot; )
+    #print(&quot;player: &quot;, player)
+
+    #print(&quot;set_com : &quot;, set_com)
+    #print(&quot;com : &quot;, com)
+
+
+    for i,p in enumerate(player):
+        #print(&quot;======= i: &quot;, i, &quot;=========&quot;)
+        for j,c in enumerate(str(com)) :
+            #print(&quot;i: &quot;, i, &quot; p: &quot;, p)
+            #print(&quot;j: &quot;, j, &quot;c: &quot;, c)
+            if c == p and i == j :
+                strike += 1
+            elif c == p and i != j :
+                ball += 1
+    print(&quot;%dS%dB&quot; %(strike, ball))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/02/11 13:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">제작자</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29110"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>import random
+def rd():
+    f=random.randint(12,987)
+    f=str(f)
+    if len(f)==2:
+        f=&quot;0&quot;+f
+    if f[0]==f[1] or f[0]==f[2] or f[1]==f[2]:
+        f=rd()
+    return(f)
+def sf():
+    t=input(&quot;정답은?:&quot;)
+    if len(t)==3:
+        if t[0]==t[1] or t[0]==t[2] or t[1]==t[2]:
+            print(&quot;숫자 3개를 중복되지 않게 입력하세요&quot;)
+            t=sf()
+        return(t)
+    else:
+        print(&quot;숫자 3개를 입력하세요&quot;)
+        t=sf()
+        return(t)
+while True:
+    r=rd()
+    while True:
+        st=0
+        ba=0
+        e=sf()
+        if e==r:
+           break
+        else:
+            for d in range(-1,2):
+                if e[d]==r[d]:
+                    st+=1
+                for k in range(-1,2):
+                    if e[d]==r[k]:
+                        ba+=1
+                        break
+            ba-=st
+            print(&quot;%ds %db&quot;%(st,ba))
+    print(&quot;정답입니다!&quot;)
+    if input(&quot;계속하시려면 아무키,그만하시려면 'n'을 입력하세요.&quot;)==&quot;n&quot;:
+        break
+</code></pre>
+
+<p>파이썬입니다</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/03/08 19:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">조랭이떡</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29206"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import random
+
+ran_num = random.randrange(0, 1000)
+
+while(1):
+    input_num = input(&quot;3자리 숫자 입력 : &quot;)
+    if len(input_num) != 3:
+        print(&quot;잘못된 입력입니다. 다시 입력해 주세요&quot;)
+        continue
+    try:
+        ran_num = str(ran_num)
+        tmp = int(input_num)
+    except:
+        print(&quot;잘못된 입력입니다. 다시 입력해 주세요&quot;)
+    break
+
+while(len(ran_num) &lt; 3):
+    ran_num = '0' + ran_num
+
+S_num = 0
+B_num = 0
+
+for i in range(3):
+    if ran_num[i] == input_num[i]:
+        S_num += 1
+
+for i in input_num:
+    if i in ran_num:
+        B_num += 1
+
+print(&quot;{}S{}B&quot;.format(S_num, B_num))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/04/03 10:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">HoHyeon Kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29251"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>import random as rd
+def base():
+    a = rd.randint(0,9)
+    b = rd.randint(0,9)
+    c = rd.randint(0,9)</p>
+<pre><code>tp = (a,b,c)
+
+while True:
+    s = input()
+
+    if len(s) != 3 or s.isdigit() == False:
+        print('잘못된 입력')
+        continue
+
+    n = int(s)
+
+
+    f = n // 100
+    s = (n % 100) // 10 
+    t = n % 10
+
+
+
+
+    if f == a and s == b and t == c:
+        print('정답')
+        break
+
+    s_cnt = 0
+    b_cnt = 0
+
+    if f in tp:
+        b_cnt += 1
+        if f == a:
+            s_cnt += 1
+
+    if s in tp:
+        b_cnt += 1
+        if s == b:
+            s_cnt += 1
+
+    if t in tp:
+        b_cnt += 1
+        if t == c:
+            s_cnt += 1
+
+    print(f'{s_cnt}S{b_cnt}B')
+</code></pre>
+<p>base()</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/04/18 15:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">장지훈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29311"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import random
+
+nums = []
+while len(nums) &lt; 3:
+    num = str(random.randint(0,9))
+    if num not in nums:
+        nums += num
+print('숫자 야구게임입니다.', nums)
+
+while True:
+    inNum = input('서로 숫자 3개를 입력하세요(예: 123) : ')
+    s = 0
+    b = 0
+    for i, su in enumerate(inNum):
+        if su in nums:
+            if inNum[i] == nums[i]:
+                s += 1
+            else:
+                b += 1
+
+    if s == 3:
+        print(' 정답 입니다...!!')
+        break
+    else:
+        print('  {}S{}B 입니다.'.format(s,b))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/05/22 21:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29382"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <h3 id="1-">1. 입력값(타자)/랜던값(투수) -&gt; 문자 리스트로</h3>
+<h3 id="2">2. 타자 리스트의 인덱스 = 투수 리스트의 인덱스면 숫자 같은지 확인</h3>
+<h3 id="3-s-b">3. 숫자 같으면 S, 다르면 B</h3>
+<pre><code class="python">import random
+batter = list(input(&quot;Enter a 3-digit number: &quot;))
+pitcher = list(str(random.randint(100, 999)))
+print(batter, pitcher)
+
+def umpire(batter, pitcher):
+    strike, ball = 0, 0
+    call = f'{strike}S{ball}B'
+
+    for bIdx in range(len(batter)):
+        for pIdx in range(len(pitcher)):
+            if batter[bIdx] == pitcher[pIdx]:
+                if bIdx == pIdx:
+                    strike += 1
+                else:
+                    ball += 1
+    return call
+
+print(umpire(batter, pitcher))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/07/05 08:15</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hawk Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29395"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import random
+ran_num = []
+user = []
+num = 0
+S = 0
+B = 0
+O = 0
+for i in range(3):
+   num = random.randrange(9)
+      if num not in ran_num:
+         ran_num.append(num)
+user = list(map(int,input(&quot;Enter Number (ex: 1 2 3):&quot;.split()))
+for j in range(3):
+   if user[j] in ran_num:
+      B += 1
+for k in range(3):
+   if user[j] == ran_num[j]:
+      S += 1
+print(&quot;S:&quot;,S,&quot;B:&quot;,B-S,&quot;O:&quot;3-B)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/07/10 10:43</p>
+                                <p class="static-profile" style="margin:0;padding:0;">siu yoon</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29404"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import random
+
+nums = list(range(10))
+random.shuffle(nums)
+answer = nums.pop()*100 + nums.pop()*10 + nums.pop()
+answer_str = str(answer)
+
+while True:
+  S = 0; B = 0
+  guess = input()
+  guess_str = str(guess)
+  for i in range(3):
+    for j in range(3):
+      if guess_str[i] == answer_str[j]:
+        if i == j: 
+          S+=1
+        else:
+          B+=1
+  print(f&quot;{S}S{B}B&quot;)
+  if guess_str == answer_str:
+    print(&quot;Correct!&quot;)
+    break
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/07/12 19:32</p>
+                                <p class="static-profile" style="margin:0;padding:0;">스탠리</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29627"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import random as rd
+
+# 0~9에서 중복 없는 숫자 생성
+key = rd.sample(range(10), 3)
+print(key)
+
+
+while True:
+    a = input(&quot;세 자리 숫자를 입력하세요: &quot;)
+    # 예외처리
+    try:
+        ans = [int(digit) for digit in a]
+    except:
+        print(&quot;다시 입력하세요&quot;)
+        continue
+    if len(ans) != 3:
+        print(&quot;세 자리를 입력하세요.&quot;)
+        continue
+
+    strike = 0
+    ball = 0
+    # 각 자리 비교
+    for i in range(3):
+        if key[i] == ans[i] : strike += 1 # 각 자리가 맞을 경우 스트라이크 증가
+        elif key.count(ans[i]) != 0 : ball += 1 # 자리가 틀려도 해당 숫자가 포함되어 있으면 볼 증가
+
+    # 결과 값
+    if strike == 3 :
+        print(&quot;정답입니다!&quot;)
+        break
+    else: 
+        print(f&quot;{ball}B {strike}S 입니다.&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/09/09 16:24</p>
+                                <p class="static-profile" style="margin:0;padding:0;">남정청</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_29879"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>import random
+
+baseball = random.choices(range(0,10), k=3)
+print(f&quot;baseball ---&gt; {baseball}&quot;)
+correct = False
+
+while not correct:
+    try:
+        S = 0
+        B = 0
+
+        input_num = input(&quot;세자리 숫자를 입력하세요.&quot;)
+        input_num = list(map(int, str(input_num)))
+
+        if len(input_num) == 3:
+            for base, num in zip(baseball, input_num):
+                if base == num:
+                    S += 1
+                elif base in input_num:
+                    B += 1
+                else:
+                    pass
+            print(f&quot;{S}S{B}B&quot;)  
+            if S == 3:
+                correct = True               
+        else:
+            print(&quot;세자리 숫자를 입력하셔야 합니다.&quot;)
+            continue
+    except Exception as e:
+        print(e)
+        continue
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2024/02/12 21:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이용호</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_30059"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cpp">#include&lt;iostream&gt;
+#include&lt;vector&gt;
+#include&lt;cstdlib&gt;
+#include&lt;ctime&gt;
+using namespace std;
+
+int main() {
+    // 숫자 야구
+    int n;
+    int count = 0;
+    cout &lt;&lt; &quot;자릿수를 입력하시오(3 or 4): &quot;;
+    cin &gt;&gt; n;
+    srand(time(0));
+
+    vector&lt;int&gt; arr(n);
+    for (int i = 0; i &lt; n; i++) {
+        arr[i] = rand() % 10;
+        for (int j = 0; j &lt; i; j++) {
+            if (arr[i] == arr[j]) i--;  // 중복 방지
+        }
+    }
+
+    vector&lt;int&gt; user(n);  // 사용자 입력 벡터 크기를 n으로 설정
+    int s = 0, b = 0;
+
+    while (s != n) {  // 스트라이크 n개가 될 때까지 반복
+        s = b = 0;
+        count += 1;
+        cout &lt;&lt; n &lt;&lt; &quot;자리 숫자를 입력하세요: &quot;;
+        for (int i = 0; i &lt; n; i++) cin &gt;&gt; user[i];  // 사용자 입력
+
+        // 스트라이크와 볼 계산
+        for (int i = 0; i &lt; n; i++) {
+            if (user[i] == arr[i]) s++;  // 스트라이크
+            else if (find(arr.begin(), arr.end(), user[i]) != arr.end()) b++;  // 볼
+        }
+
+        cout &lt;&lt; s &lt;&lt; &quot;S &quot; &lt;&lt; b &lt;&lt; &quot;B&quot; &lt;&lt; endl;
+        if (s == n) cout &lt;&lt; &quot;정답입니다!&quot; &lt;&lt; endl;
+        else cout &lt;&lt; &quot;다시 시도하세요.&quot; &lt;&lt; endl;
+    }
+
+    // 정답 출력
+    cout &lt;&lt; &quot;정답은: &quot;;
+    for (int i = 0; i &lt; n; i++) cout &lt;&lt; arr[i];
+    cout &lt;&lt; endl;
+    cout &lt;&lt; &quot;시도횟수: &quot; &lt;&lt; count &lt;&lt; endl;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2024/09/30 20:24</p>
+                                <p class="static-profile" style="margin:0;padding:0;">아드구</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_30080"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import random
+
+randNums = random.sample(range(10), 3)
+randNumsStr = str(randNums[0])+str(randNums[1])+str(randNums[2])
+print(&quot;randNumsStr: &quot;, randNumsStr)
+
+inputNums = &quot;&quot;
+
+while (randNumsStr != inputNums):
+    inputNums = input(&quot;3자리의 서로 다른 숫자를 입력해 주세요: &quot;)
+    while len(inputNums) != 3:
+        print(&quot;!!!!!!!입력하신 숫자가 3자리의 서로 다른 숫자가 아닙니다!!!!!!&quot;)
+        inputNums = input(&quot;3자리의 서로 다른 숫자를 입력해 주세요: &quot;)
+
+    s = 0
+    b = 0
+
+    for i in range(3):
+        for j in range(3):
+            if randNumsStr[i] == inputNums[j]:
+                if i == j:
+                    s += 1
+                else:
+                    b += 1
+
+    print(str(s)+&quot;S&quot;+str(b)+&quot;B&quot;)
+    print(&quot;정답이 아닙니다!&quot;)
+
+print(&quot;정답을 맞추셨습니다!&quot;)
+print(&quot;========== 종료 ==========&quot;)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2024/10/16 13:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rgone6</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_30138"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package 숫자야구;
+
+import java.util.Scanner;
+
+public class NumberBaseball { //메인 클래스
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        Scanner scanner = new Scanner(System.in);
+        NumberGenerator ng = new NumberGenerator();
+        NumberCount nc = new NumberCount();
+        String answer = ng.getNum();
+
+        while(true) {
+            System.out.println(&quot;숫자를 입력하세요.&quot;);
+            String guess = scanner.next();
+            int[] score = nc.count(guess, answer);
+            System.out.println(&quot;S: &quot; + score[0] + &quot;, B: &quot; + score[1]);
+            if(score[0] == 3) {
+                System.out.println(&quot;정답!&quot;);
+                break;
+            }
+        }
+    }
+}
+</code></pre>
+
+<pre><code class="java">package 숫자야구;
+
+public class NumberCount {
+    int[] count(String number, String answer) {
+        int strike = 0;
+        int ball = 0;
+
+        char[] numberArray = number.toCharArray();
+        char[] answerArray = answer.toCharArray();
+
+        for (int i = 0; i &lt; numberArray.length; i++) {
+            for (int j = 0; j &lt; answerArray.length; j++) {
+                if(numberArray[i] == answerArray[j]) {
+                    if(i == j) {
+                        strike += 1;
+                    }
+                    else {
+                        ball += 1;
+                    }
+                }
+            }
+        }
+
+        return new int[] {strike, ball};
+    }
+}
+</code></pre>
+
+<pre><code class="java">package 숫자야구;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+public class NumberGenerator {
+    String getNum() {
+        String num = &quot;&quot;;
+        List&lt;String&gt; numbers = new ArrayList&lt;String&gt;();
+        for (int i = 0; i &lt; 10; i++) {
+            numbers.add(String.valueOf(i));
+        }
+
+        Random random = new Random();
+        for (int i = 0; i &lt; 3; i++) {
+            int rand = random.nextInt(numbers.size());
+            num = num + numbers.get(rand);
+            numbers.remove(rand);
+        }
+        return num;
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2025/01/07 21:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박준우</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

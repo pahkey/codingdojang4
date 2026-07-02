@@ -1,0 +1,919 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="(프로젝트 오일러 113번 문제입니다.)
+
+숫자를 왼쪽부터 오른쪽으로 읽어나갈 때, 오른쪽에 나오는 숫자가 왼쪽 숫자보다 작지 않다면 그 수를 증가수라고 합시다. 예를 들어 134468은 증가수입니다. 마찬가지로 오른쪽에 나오는 숫자가 왼쪽 ...">
+    <title>오락가락수가 아닌 수 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">오락가락수가 아닌 수</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">1</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 4</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>(프로젝트 오일러 113번 문제입니다.)</p>
+<p>숫자를 왼쪽부터 오른쪽으로 읽어나갈 때, 오른쪽에 나오는 숫자가 왼쪽 숫자보다 작지 않다면 그 수를 증가수라고 합시다. 예를 들어 134468은 증가수입니다. 마찬가지로 오른쪽에 나오는 숫자가 왼쪽 숫자보다 크지 않다면 그 수를 '감소수'라고 합시다. 66420은 감소수입니다.
+증가수도 감소수도 아닌 나머지 수들은 오락가락수라고 하겠습니다. 예를 들어 155349는 오락가락수입니다.</p>
+<p>수가 커질수록 오락가락수일 가능성은 높아집니다. 1,000,000 미만의 수 중 12,951개, 10^10 미만에서는 277,032개만이 증가수이거나 감소수입니다.</p>
+<p>10^100(구골) 미만의 자연수들 중에 오락가락수가 아닌 수는 모두 몇 개입니까?</p>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2017/08/04 08:13</p>
+                    <p class="static-profile" style="margin:0;padding:0;">P.Y.Thon</p>
+                </div>
+            </div>
+
+            
+                <a name="comment_2083"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">원문을 찾아보니 자연수라고 되어 있네요.</span>
+                    -
+                    <span style="font-size:11px;">
+                        Noname,
+                        2017/08/05 03:41
+                    </span>
+                </div>
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>14개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_8297"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>python3로 작성했고, 컴파일러는 repl.it이라는 웹 컴파일러를 사용했습니다. </p>
+<pre><code class="python">def factorial(n):
+    &quot;&quot;&quot;
+    어떤 수의 계승을 구하는 메소드
+    &quot;&quot;&quot;
+    if n &lt; 1: return 1
+    rst = 1
+    for i in range(1, n+1):
+        rst *= i
+    return rst
+
+def P(n, k):
+    &quot;&quot;&quot;
+    n개의 요소 중 k개의 요소를 뽑아 순열을 만드는 경우의 수를 구하는 메소드
+    &quot;&quot;&quot;
+    return factorial(n) // factorial(n-k)
+
+def C(n, k):
+    &quot;&quot;&quot;
+    n개의 요소 중 k개의 요소를 뽑아 조합을 만드는 경우의 수를 구하는 메소드
+    &quot;&quot;&quot;
+    return P(n, k) // factorial(k)
+
+def H(n, k):
+    &quot;&quot;&quot;
+    n개의 요소 중 k개의 요소를 뽑아 중복조합을 만드는 경우의 수를 구하는 메소드
+    &quot;&quot;&quot;
+    return C(n+k-1, k)
+
+def func(n):
+    &quot;&quot;&quot;
+    10^n 미만의 자연수 중에서 오락가락 수가 아닌 수의 개수를 구하는 메소드
+    &quot;&quot;&quot;
+
+    increase, decrease = 0, 0
+
+    for i in range(1, n+1):
+        for j in range(1, 9+1):
+            increase += H(j, i-1)
+
+    for i in range(1, n+1):
+        for j in range(2, 10+1):
+            decrease += H(j, i-1)
+
+    return increase + decrease - 9*n
+
+print(func(6))
+print(func(10))
+print(func(100))
+</code></pre>
+
+<pre><code class="no-highlight"># 실행결과
+12951
+277032
+51161058134250
+</code></pre>
+
+<p>이 문제는 고등학교 때 배운 확률과 통계로 쉽게 풀 수 있습니다. <strong>중복조합</strong>이라는 개념을 이용해서 푸는 문제였습니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/10 13:32</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Envil_Saintan</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8308"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<p>고등학교 수학 확률과 통계 중복조합, 
+rcomb(n, k) = 오름수 + 내림수 - case(flat nums) - case(zeros)</p>
+<pre><code class="ruby">comb = -&gt;n,k { [k, n-k].min.times.reduce(1) {|a,e| a * (n-e) / (e+1) } }
+rcomb = -&gt;n { comb[n+9, 9] + comb[n+10, 10] - n*10 - 2 } 
+rcomb[100] #=&gt; 51161058134250
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby">expect( rcomb[6] ).to eq 12951
+expect( rcomb[10] ).to eq 277032
+expect( rcomb[100] ).to eq 51161058134250
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/11 02:13</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8253"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">'''10**100까지 너무많아요. 10**6해봤더니 맞네요'''
+Bong=0
+for i in range(1,10**6):      # 1부터 10**100미만의 수에 대하여
+    i=str(i)     # i[0], i[1], ... , i[n]
+    n=len(i)     # n= i의 자리수
+    j=0
+    if n&gt;2:      #3자리수부터 오락가락수 생성
+        trash=[] #숫자가 커지면 1, 작아지면 -1저장
+        while  j&lt; n-1:
+            if i[j]&lt;i[j+1]: trash.append(1)
+            elif i[j]&gt;i[j+1]: trash.append(-1)
+            j=j+1
+
+            if 1 in trash and -1 in trash: #만약 trash에 1과 -1이 같이 있으면                
+                Bong+=1     #bong=오락가락수 갯수+1
+                break
+
+ans=10**6-1-Bong    #답=전체-오락가락수 갯수
+print(ans)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/07 16:19</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박봉경</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8576"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>자리수 별로 개수를 나눠서 구합니다.</p>
+<pre><code class="python">import math
+
+def num_combinations(n, r):
+    return math.factorial(n) // math.factorial(r) // math.factorial(n - r)
+
+
+def num_combinations_with_replacement(n, r):
+    return num_combinations(n + (r - 1), r)
+
+
+def incresing(n):
+    return num_combinations_with_replacement(9, n)
+
+
+def decresing(n):
+    return num_combinations_with_replacement(10, n) - 1
+
+
+def incresing_and_decresing(n):
+    return 9
+
+
+print(sum(
+    incresing(n) + decresing(n) - incresing_and_decresing(n)
+    for n in range(1, 100 + 1)
+))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/28 17:36</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김창동</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8620"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def F(n):           return 1 if n &lt;= 1 else n * F(n - 1)
+def P(n, k):        return F(n) // F(n - k)
+def C(n, k):        return P(n, k) // F(k)
+def H(n, k):        return C(n + k - 1, k)
+def inc(n):         return H(10, n) - 1
+def dec(n):         return sum([H(10, i) - 10 for i in range(1, n + 1)])
+def notbouncy(n):   return inc(n) + dec(n)
+
+print(notbouncy(6)) # 12951
+print(notbouncy(10)) # 277032
+print(notbouncy(100)) # 51161058134250
+</code></pre>
+
+<p>여기 <a href="http://codepractice.tistory.com/23">참고</a></p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/30 08:52</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8640"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from math import factorial
+def C(n,r):
+    return factorial(n)//(factorial(n-r)*factorial(r))
+def H(n,r):
+    return C(n+r-1,r)
+def getnnum(n):#n자리수까지
+    if(n==1):
+        return 9
+    num=0
+    for i in range(1,10):
+        num+=H(i+1,n-1)
+        num+=H(10-i,n-1)
+        num=num-1
+
+    num+=getnnum(n-1)
+
+
+    return num
+print(getnnum(100))
+
+</code></pre>
+
+<p>중복조합+재귀함수</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/31 00:56</p>
+                                <p class="static-profile" style="margin:0;padding:0;">impri</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8807"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def demincrease(x):
+  a=list(str(x))
+  bool=[]
+
+  c=0
+  for i in range(0,len(a)-1):
+    bool.append(a[c]&lt;=a[c+1])
+    c=c+1
+
+
+  if bool.count(False)==0:
+    return True
+  else:
+    return False
+
+def demdecrease(x):
+  a=list(str(x))
+  bool=[]
+
+  c=0
+  for i in range(0,len(a)-1):
+    bool.append(a[c]&gt;=a[c+1])
+    c=c+1
+
+  if bool.count(False)==0:
+    return True
+  else:
+    return False
+
+def demorak(x):
+  if demincrease(x)==False:
+    if demdecrease(x)==False:
+      return True
+    else:
+      return False
+  else:
+    return False
+
+
+
+score=10
+
+for i in range(10,10**6):
+
+  if demorak(i)==False:
+    score=score+1
+
+
+first=score
+
+
+
+
+
+score=10
+
+for i in range(10,10**10):
+
+  if demorak(i)==False:
+    score=score+1
+
+
+second=score
+
+
+
+
+score=10
+
+for i in range(10,10**100):
+
+  if demorak(i)==False:
+    score=score+1
+
+
+third=score
+
+
+print(&quot;%d\n%d\n%d&quot; % (first,second,third))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/09/13 11:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">lssac</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9761"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">fct = lambda n: eval('(%s)'%'*'.join(str(i) for i in range(1, n+1))) if n!=0 else 1
+h = lambda n, r: fct(n+r-1)//fct(r)//fct(n-1)
+calc = lambda M: sum(sum(h(j, i-1) for j in range(2, 10+1)) + sum(h(j, i-1) for j in range(9, 1-1, -1)) for i in range(1, M+1)) - 9*M
+
+if __name__ == '__main__':
+    for i in (6, 10, 100):
+        print(calc(i))
+</code></pre>
+
+<p>파이썬 3.6.2 64</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/12/21 02:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Flair Sizz</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9987"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>저는 증가수를 가려내는 함수, 감소수를 가려내는 함수를 짜고 (굉장히 겹치는 코드가 많아 수정해야 하는데...좀 가르쳐주시면 좋겠습니다.)</p>
+<p>증가수 가려내는 함수</p>
+<pre><code>def inc_checker(a):
+    str_a = str(a)
+    for i in range(len(str_a)):        
+        if i != len(str_a)-1:
+            if str_a[i] &gt; str_a[i+1]:
+                return 'False'
+                break
+            elif str_a[i] &lt; str_a[i+1]:                
+                continue
+            else:
+                continue
+        else:
+            return 'True'
+</code></pre>
+
+<p>감소수를 가려내는 함수</p>
+<pre><code class="python">def dec_checker(a):
+    str_a = str(a)
+    for i in range(len(str_a)):        
+        if i != len(str_a)-1:
+            if str_a[i] &lt; str_a[i+1]:
+                return 'False'
+                break
+            elif str_a[i] &gt; str_a[i+1]:                
+                continue
+            else:
+                continue
+        else:
+            return 'True'
+</code></pre>
+
+<p>for문을 활용한 counting</p>
+<pre><code>count = 0
+for i in range(10**6):
+    if i != (10**6)-1:
+        if inc_checker(i) == 'True' or dec_checker(i) == 'True':
+            count += 1
+        else:
+            continue
+    else:
+        print(count)
+</code></pre>
+
+<p>6일때는 돌아가는데 10일때와 100일 때는 커널이 죽어서...
+일단 6일 때는 12,951이 나옵니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/01/03 16:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">정재훈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13335"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def num():
+    m=0
+    n=0
+    up=0
+    down=0
+    ran=0
+    orag=10**100
+    for p in range(0,orag):
+        j=len(str(p))
+        cal=str(p)
+        m=0
+        n=0
+        for k in range(1,j):
+            if cal[k] &lt; cal[k-1]:
+                m=0
+                break
+            else:
+                m=1
+        for k in range(1,j):        
+            if cal[k] &gt; cal[k-1]:
+                n=0
+                break
+            else:
+                n=1
+
+        if m==1:        
+            up+=1
+        if n==1:
+            down+=1
+        if m==0 and n==0:
+            ran+=1
+    print(up)
+    print(down)
+    print(orag-ran)
+
+//본문에서는 1~9까지를 오락가락수로 본거같은데 전 어딘지모르겠네요 제코드는 up에 포함시켰습니다~
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/04 19:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김정연</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14477"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def cnt_inc_num(n):
+  cnt = [*range(9,0,-1)]
+  ret = 9 + sum(cnt)
+  for _ in range(n-2):
+    cnt = [sum(cnt[i:]) for i in range(9)]
+    ret += sum(cnt)
+  return ret
+
+def cnt_dec_num(n):
+  cnt = [*range(1,11)]
+  ret = sum(cnt[1:])
+  for _ in range(n-2):
+    cnt = [sum(cnt[:i+1]) for i in range(10)]
+    ret += sum(cnt[1:])
+  return ret
+
+cnt_incNdec_num = lambda n: cnt_inc_num(n) + cnt_dec_num(n) - 9*(n-1)
+for n in [6, 10, 100]: print(f'10^{n}', cnt_incNdec_num(n), sep=': ')
+</code></pre>
+
+<pre><code>10^6: 12951
+10^10: 277032
+10^100: 51161058134250
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/02 00:43</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15218"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>제 컴퓨터 에선 10^9 까지가 한계네요</p>
+<pre><code class="r">combn.cal &lt;- function(n, r){
+  nCr &lt;- factorial(n) / factorial(n - r) / factorial (r)
+  return(nCr)
+}
+
+len_exp &lt;- 6
+non_lunatic &lt;- 0
+
+for (i in 1:len_exp){
+  if ((i - 1) &gt; 9){
+    for (j in 1:9){
+      non_lunatic &lt;- non_lunatic + combn.cal(9, j) * combn.cal(i - 1, j - 1)
+    }
+  } else if ((i - 1) &lt;= 9){
+    for (j in 1:i){
+      non_lunatic &lt;- non_lunatic + combn.cal(9, j) * combn.cal(i - 1, j - 1)
+    }
+  }
+  if (i == 1){
+    next()
+  } else {
+    if ((i - 1) &gt; 10){
+      for (j in 2:10){
+        non_lunatic &lt;- non_lunatic + combn.cal(10, j) * combn.cal(i - 1, j - 1)
+      }
+    } else if ((i - 1) &lt;= 10){
+      for (j in 2:i){
+        non_lunatic &lt;- non_lunatic + combn.cal(10, j) * combn.cal(i - 1, j - 1)
+      }
+    }
+  }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/11/14 10:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">physche</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16648"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">num_cnt=range(1,pow(10,100))
+nums=0
+hig=0
+lowe=0
+mid=0
+for num2 in num_cnt:
+    num=list(str(num2))
+    a = 0
+    cur = 0
+    cur2 = 0
+    for eight in num:
+        eight=int(eight)
+
+        if nums&gt;=eight and a==1:
+            cur+=1
+        if nums&lt;=eight and a==1:
+            cur2+=1
+        if cur2==len(str(num2))-1:
+            hig+=1
+        elif cur==len(str(num2))-1:
+            lowe+=1
+        else:
+            mid+=1
+        nums=eight
+        a=1
+
+print(&quot;%s,%s,%s,%s&quot;%(hig,lowe,mid,hig+lowe))
+
+</code></pre>
+
+<p>10^100 은 시간이 너무너무 오래걸리네요.. 효율적인코딩을 위해 수정작업이필요할거같습니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/02/14 11:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">이정헌</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29689"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">using System;
+
+namespace solution
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine(&quot;10^100(구골) 미만의 자연수들 중에 오락가락수가 아닌 수는 ?&quot;);
+            int k = 100;
+            double incNum = H(10, k) - 1;     // 00000000 제외
+            double decNum = 0;
+            for (int i = 2; i &lt;= k; i++)
+                decNum += (H(10, i) - 10);   // 00,11,22, * * *, 99 위와 증복해서 제외
+            Console.WriteLine(&quot;\n     {0}&quot;, incNum+decNum);
+        }
+
+        private static double H(int n, int k)
+        {
+            //int res = factorial(n + k - 1) / (factorial(n - 1) * factorial(k));
+            return factorial(n + k - 1) / (factorial(n - 1) * factorial(k));
+        }
+
+        private static double factorial(int su)
+        {
+            double v = 1;
+            for (int i = 1; i &lt;= su; i++)
+                v *= i;
+            return v;
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/10/09 18:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

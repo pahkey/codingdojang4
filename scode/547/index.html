@@ -1,0 +1,2558 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="출처 : [프로젝트 오일러 11번문제](https://projecteuler.net/problem=11), [한글 번역판](http://euler.synap.co.kr/prob_detail.php?id=11)
+
+----
+
+아래와 같은 20...">
+    <title>Largest product in a grid - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">Largest product in a grid</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">5</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 2</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>출처 : <a href="https://projecteuler.net/problem=11">프로젝트 오일러 11번문제</a>, <a href="http://euler.synap.co.kr/prob_detail.php?id=11">한글 번역판</a></p>
+<hr />
+<p>아래와 같은 20×20 격자가 있습니다.</p>
+<pre>
+ 08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
+ 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
+ 81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
+ 52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91
+ 22 31 16 71 51 67 63 89 41 92 36 54 22 40 40 28 66 33 13 80
+ 24 47 32 60 99 03 45 02 44 75 33 53 78 36 84 20 35 17 12 50
+ 32 98 81 28 64 23 67 10 <font color="red">26</font> 38 40 67 59 54 70 66 18 38 64 70
+ 67 26 20 68 02 62 12 20 95 <font color="red">63</font> 94 39 63 08 40 91 66 49 94 21
+ 24 55 58 05 66 73 99 26 97 17 <font color="red">78</font> 78 96 83 14 88 34 89 63 72
+ 21 36 23 09 75 00 76 44 20 45 35 <font color="red">14</font> 00 61 33 97 34 31 33 95
+ 78 17 53 28 22 75 31 67 15 94 03 80 04 62 16 14 09 53 56 92
+ 16 39 05 42 96 35 31 47 55 58 88 24 00 17 54 24 36 29 85 57
+ 86 56 00 48 35 71 89 07 05 44 44 37 44 60 21 58 51 54 17 58
+ 19 80 81 68 05 94 47 69 28 73 92 13 86 52 17 77 04 89 55 40
+ 04 52 08 83 97 35 99 16 07 97 57 32 16 26 26 79 33 27 98 66
+ 88 36 68 87 57 62 20 72 03 46 33 67 46 55 12 32 63 93 53 69
+ 04 42 16 73 38 25 39 11 24 94 72 18 08 46 29 32 40 62 76 36
+ 20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16
+ 20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
+ 01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48 
+</pre>
+
+<p>위에서 대각선 방향으로 연속된 붉은 숫자 네 개의 곱은 26 × 63 × 78 × 14 = 1788696 입니다.</p>
+<p>그러면 수평, 수직, 또는 대각선 방향으로 연속된 숫자 네 개의 곱 중 최대값은 얼마입니까?</p>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2017/06/04 23:59</p>
+                    <p class="static-profile" style="margin:0;padding:0;">S ReolSt</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>33개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_8191"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">3</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">arr = [[int(x) for x in line.split()] for line in inp.split('\n')]
+
+maxmul = 1
+for i in range(20):
+    for j in range(20):
+        for dx, dy in [(0, 1), (1, 0), (1, 1), (1, -1)]:
+            try:
+                maxmul = max(
+                    maxmul,
+                    arr[i][j] * \
+                    arr[i+dx][j+dy] * \
+                    arr[i+dx*2][j+dy*2]* \
+                    arr[i+dx*3][j+dy*3]
+                    )
+            except:
+                pass
+
+print(maxmul) # 70600674
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/04 05:33</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2879"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">리스트로 가로 세로 인덱스 부여가 가능하네요..ㄷㄷ 한수배우고 갑니다</span>
+                                -
+                                <span style="font-size:11px;">
+                                    이성연,
+                                    2021/09/30 15:36
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7384"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>개인적으로 2차원 리스트를 사용하는 걸 별로 안좋아해서....
+파이선 3.6입니다. </p>
+<pre><code class="python">from functools import reduce
+
+s = &quot;&quot;&quot;08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
+49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
+81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
+52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91
+22 31 16 71 51 67 63 89 41 92 36 54 22 40 40 28 66 33 13 80
+24 47 32 60 99 03 45 02 44 75 33 53 78 36 84 20 35 17 12 50
+32 98 81 28 64 23 67 10 26 38 40 67 59 54 70 66 18 38 64 70
+67 26 20 68 02 62 12 20 95 63 94 39 63 08 40 91 66 49 94 21
+24 55 58 05 66 73 99 26 97 17 78 78 96 83 14 88 34 89 63 72
+21 36 23 09 75 00 76 44 20 45 35 14 00 61 33 97 34 31 33 95
+78 17 53 28 22 75 31 67 15 94 03 80 04 62 16 14 09 53 56 92
+16 39 05 42 96 35 31 47 55 58 88 24 00 17 54 24 36 29 85 57
+86 56 00 48 35 71 89 07 05 44 44 37 44 60 21 58 51 54 17 58
+19 80 81 68 05 94 47 69 28 73 92 13 86 52 17 77 04 89 55 40
+04 52 08 83 97 35 99 16 07 97 57 32 16 26 26 79 33 27 98 66
+88 36 68 87 57 62 20 72 03 46 33 67 46 55 12 32 63 93 53 69
+04 42 16 73 38 25 39 11 24 94 72 18 08 46 29 32 40 62 76 36
+20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16
+20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
+01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48&quot;&quot;&quot;
+s = s.replace('\n', ' ')
+n = [int(x) for x in s.split(' ')]
+def product(iterable):
+    return reduce(lambda x, y: x * y, iterable, 1)
+
+def gms(pos):
+    sum_h = 0 if pos % 20 &gt; 16 else product(n[pos:pos+4])
+    sum_v = 0 if pos // 20 &gt; 16 else product((n[pos+20*i] for i in range(4)))
+    sum_s = 0 if pos % 20 &gt; 16 or pos // 20 &gt; 16 else \
+        product((n[pos+21*i] for i in range(4)))
+    sum_t = 0 if pos % 20 &lt; 3 or pos // 20 &gt; 16 else \
+        product((n[pos+19*i] for i in range(4)))
+    return max(sum_h, sum_v, sum_s, sum_t)
+
+print max((gms(i) for i in range(20*20)))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/05 14:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">룰루랄라</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7386"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<pre><code class="ruby">grid = %w(08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
+          49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
+          81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
+          52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91
+          22 31 16 71 51 67 63 89 41 92 36 54 22 40 40 28 66 33 13 80
+          24 47 32 60 99 03 45 02 44 75 33 53 78 36 84 20 35 17 12 50
+          32 98 81 28 64 23 67 10 26 38 40 67 59 54 70 66 18 38 64 70
+          67 26 20 68 02 62 12 20 95 63 94 39 63 08 40 91 66 49 94 21
+          24 55 58 05 66 73 99 26 97 17 78 78 96 83 14 88 34 89 63 72
+          21 36 23 09 75 00 76 44 20 45 35 14 00 61 33 97 34 31 33 95
+          78 17 53 28 22 75 31 67 15 94 03 80 04 62 16 14 09 53 56 92
+          16 39 05 42 96 35 31 47 55 58 88 24 00 17 54 24 36 29 85 57
+          86 56 00 48 35 71 89 07 05 44 44 37 44 60 21 58 51 54 17 58
+          19 80 81 68 05 94 47 69 28 73 92 13 86 52 17 77 04 89 55 40
+          04 52 08 83 97 35 99 16 07 97 57 32 16 26 26 79 33 27 98 66
+          88 36 68 87 57 62 20 72 03 46 33 67 46 55 12 32 63 93 53 69
+          04 42 16 73 38 25 39 11 24 94 72 18 08 46 29 32 40 62 76 36
+          20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16
+          20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
+          01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48).
+          map(&amp;:to_i).each_slice(20).to_a
+
+diag = -&gt;a { (0..19).map {|r| [1]*r + a[r] + [1]*(19-r)}.transpose }
+gstm = -&gt;a { (a + a.transpose + diag[a] + diag[a.reverse]).
+               flat_map {|e| e.each_cons(4).map {|_|_.reduce :*}}.max }
+gstm[grid] #=&gt; 70600674
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/05 18:18</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7427"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3.6, 2D matrix 니까 2D 로 풀어야겠죠.</p>
+<p>20x20 으로 sweep, 20x20를 90도 돌려서 sweep 하면 vertical sweep, 20x20 updown flip으로  forward diagonals list 를 만들어서 sweep, 20x20 으로 20x20 backward diagonals list 를 만들어서 sweep 하여 max 를 골라냅니다.</p>
+<p>sweep 은 zip(a[0:], a[1:], a[2:], a[3:])의 tuple 로 묶어 product 하여 max 를 고릅니다.</p>
+<pre><code class="python">import numpy as np
+from functools import reduce
+
+
+def product_max(array_list):
+    z = reduce(list.__add__, [zip(a[0:], a[1:], a[2:], a[3:]) for a in array_list]) # make list of tuple (a,b,c,d)
+    return max(np.prod(x) for x in z) # find max of product of list[tuple(a,b,c,d)]
+
+
+grid_source = '''08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
+ 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
+ 81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
+ 52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91
+ 22 31 16 71 51 67 63 89 41 92 36 54 22 40 40 28 66 33 13 80
+ 24 47 32 60 99 03 45 02 44 75 33 53 78 36 84 20 35 17 12 50
+ 32 98 81 28 64 23 67 10 26 38 40 67 59 54 70 66 18 38 64 70
+ 67 26 20 68 02 62 12 20 95 63 94 39 63 08 40 91 66 49 94 21
+ 24 55 58 05 66 73 99 26 97 17 78 78 96 83 14 88 34 89 63 72
+ 21 36 23 09 75 00 76 44 20 45 35 14 00 61 33 97 34 31 33 95
+ 78 17 53 28 22 75 31 67 15 94 03 80 04 62 16 14 09 53 56 92
+ 16 39 05 42 96 35 31 47 55 58 88 24 00 17 54 24 36 29 85 57
+ 86 56 00 48 35 71 89 07 05 44 44 37 44 60 21 58 51 54 17 58
+ 19 80 81 68 05 94 47 69 28 73 92 13 86 52 17 77 04 89 55 40
+ 04 52 08 83 97 35 99 16 07 97 57 32 16 26 26 79 33 27 98 66
+ 88 36 68 87 57 62 20 72 03 46 33 67 46 55 12 32 63 93 53 69
+ 04 42 16 73 38 25 39 11 24 94 72 18 08 46 29 32 40 62 76 36
+ 20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16
+ 20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
+ 01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48'''
+
+grid_source = grid_source.replace('\n', ' ')
+grid_int = list(map(int, grid_source.split()))
+
+grid_matrix = np.array(grid_int).reshape(20,20) # 20x20
+grid_matrix_rot90 = np.rot90(grid_matrix) # rotate 90 of 20x20
+grid_matrix_fdiags = [np.flipud(grid_matrix).diagonal(i) for i in range(-19,20)] # forward diagonals of 20x20
+grid_matrix_bdiags = [grid_matrix.diagonal(i) for i in range(19,-20,-1)] # backward diagonals of 20x20
+
+&gt;&gt;&gt; print(max(product_max(grid_matrix), product_max(grid_matrix_rot90), product_max(grid_matrix_fdiags), product_max(grid_matrix_bdiags)))
+
+70600674 # (87, 97, 94, 89)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/10 17:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">예강효빠</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9226"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">grid = ''' 08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
+ 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
+ 81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
+ 52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91
+ 22 31 16 71 51 67 63 89 41 92 36 54 22 40 40 28 66 33 13 80
+ 24 47 32 60 99 03 45 02 44 75 33 53 78 36 84 20 35 17 12 50
+ 32 98 81 28 64 23 67 10 26 38 40 67 59 54 70 66 18 38 64 70
+ 67 26 20 68 02 62 12 20 95 63 94 39 63 08 40 91 66 49 94 21
+ 24 55 58 05 66 73 99 26 97 17 78 78 96 83 14 88 34 89 63 72
+ 21 36 23 09 75 00 76 44 20 45 35 14 00 61 33 97 34 31 33 95
+ 78 17 53 28 22 75 31 67 15 94 03 80 04 62 16 14 09 53 56 92
+ 16 39 05 42 96 35 31 47 55 58 88 24 00 17 54 24 36 29 85 57
+ 86 56 00 48 35 71 89 07 05 44 44 37 44 60 21 58 51 54 17 58
+ 19 80 81 68 05 94 47 69 28 73 92 13 86 52 17 77 04 89 55 40
+ 04 52 08 83 97 35 99 16 07 97 57 32 16 26 26 79 33 27 98 66
+ 88 36 68 87 57 62 20 72 03 46 33 67 46 55 12 32 63 93 53 69
+ 04 42 16 73 38 25 39 11 24 94 72 18 08 46 29 32 40 62 76 36
+ 20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16
+ 20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
+ 01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48'''
+
+mat = [[int(num) for num in row.strip().split()] for row in grid.split('\n')]
+
+maxi = 0
+#--#
+for i in range(20):
+    for j in range(20-3):
+        maxi = max(maxi, mat[i][j]*mat[i][j+1]*mat[i][j+2]*mat[i][j+3])
+#||#
+for i in range(20-3):
+    for j in range(20):
+        maxi = max(maxi, mat[i][j]*mat[i+1][j]*mat[i+2][j]*mat[i+3][j])
+#\\#
+for i in range(20-3):
+    for j in range(20-3):
+        maxi = max(maxi, mat[i][j]*mat[i+1][j+1]*mat[i+2][j+2]*mat[i+3][j+3])
+#//#
+for i in range(20-3):
+    for j in range(3, 20):
+        maxi = max(maxi, mat[i][j]*mat[i+1][j-1]*mat[i+2][j-2]*mat[i+3][j-3])
+
+print(maxi)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/11/09 17:03</p>
+                                <p class="static-profile" style="margin:0;padding:0;">songci</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26162"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#codingdojing_Largest product in a grid
+#풀이 참고
+
+grid = ''' 08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
+ 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
+ 81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
+ 52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91
+ 22 31 16 71 51 67 63 89 41 92 36 54 22 40 40 28 66 33 13 80
+ 24 47 32 60 99 03 45 02 44 75 33 53 78 36 84 20 35 17 12 50
+ 32 98 81 28 64 23 67 10 26 38 40 67 59 54 70 66 18 38 64 70
+ 67 26 20 68 02 62 12 20 95 63 94 39 63 08 40 91 66 49 94 21
+ 24 55 58 05 66 73 99 26 97 17 78 78 96 83 14 88 34 89 63 72
+ 21 36 23 09 75 00 76 44 20 45 35 14 00 61 33 97 34 31 33 95
+ 78 17 53 28 22 75 31 67 15 94 03 80 04 62 16 14 09 53 56 92
+ 16 39 05 42 96 35 31 47 55 58 88 24 00 17 54 24 36 29 85 57
+ 86 56 00 48 35 71 89 07 05 44 44 37 44 60 21 58 51 54 17 58
+ 19 80 81 68 05 94 47 69 28 73 92 13 86 52 17 77 04 89 55 40
+ 04 52 08 83 97 35 99 16 07 97 57 32 16 26 26 79 33 27 98 66
+ 88 36 68 87 57 62 20 72 03 46 33 67 46 55 12 32 63 93 53 69
+ 04 42 16 73 38 25 39 11 24 94 72 18 08 46 29 32 40 62 76 36
+ 20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16
+ 20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
+ 01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48 '''
+
+arr = [[int(i) for i in line.split()] for line in grid.split('\n')] #2차원 배열
+#(x, y) 형식으로 가능.
+
+result = []
+
+for i in range(20):
+    for j in range(20): # ㅡ | / \
+        for x, y in [(0, 1), (1, 0), (1, -1), (1, 1)]:
+            try:
+                result.append(arr[i][j]*arr[i+x][j+y]*arr[i+2*x][j+2*y]*arr[i+3*x][j+3*y])
+            except: # range error / pass
+                pass
+
+print(max(result)) #70600674
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/08/25 15:09</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jaeman Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7408"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">// 그리드 곱 찾기 - C#
+using System;
+
+namespace Grid
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[,] grid = {{8,2,22,97,38,15,0,40,0,75,4,5,7,78,52,12,50,77,91,8},
+                           {49,49,99,40,17,81,18,57,60,87,17,40,98,43,69,48,4,56,62,0},
+                           {81,49,31,73,55,79,14,29,93,71,40,67,53,88,30,3,49,13,36,65},
+                           {52,70,95,23,4,60,11,42,69,24,68,56,1,32,56,71,37,2,36,91},
+                           {22,31,16,71,51,67,63,89,41,92,36,54,22,40,40,28,66,33,13,80},
+                           {24,47,32,60,99,3,45,2,44,75,33,53,78,36,84,20,35,17,12,50},
+                           {32,98,81,28,64,23,67,10,26,38,40,67,59,54,70,66,18,38,64,70},
+                           {67,26,20,68,2,62,12,20,95,63,94,39,63,8,40,91,66,49,94,21},
+                           {24,55,58,5,66,73,99,26,97,17,78,78,96,83,14,88,34,89,63,72},
+                           {21,36,23,9,75,0,76,44,20,45,35,14,0,61,33,97,34,31,33,95},
+                           {78,17,53,28,22,75,31,67,15,94,3,80,4,62,16,14,9,53,56,92},
+                           {16,39,5,42,96,35,31,47,55,58,88,24,0,17,54,24,36,29,85,57},
+                           {86,56,0,48,35,71,89,7,5,44,44,37,44,60,21,58,51,54,17,58},
+                           {19,80,81,68,5,94,47,69,28,73,92,13,86,52,17,77,4,89,55,40},
+                           {04,52,8,83,97,35,99,16,7,97,57,32,16,26,26,79,33,27,98,66},
+                           {88,36,68,87,57,62,20,72,3,46,33,67,46,55,12,32,63,93,53,69},
+                           {4,42,16,73,38,25,39,11,24,94,72,18,8,46,29,32,40,62,76,36},
+                           {20,69,36,41,72,30,23,88,34,62,99,69,82,67,59,85,74,4,36,16},
+                           {20,73,35,29,78,31,90,1,74,31,49,71,48,86,81,16,23,57,5,54},
+                           {1,70,54,71,83,51,54,69,16,92,33,48,61,43,52,1,89,19,67,48}};
+            int larger = 0;
+            for (int i = 0; i &lt; 17; i++)
+            {
+                for (int j = 0; j &lt; 17; j++)
+                {
+                    if (grid[i, j] * grid[i + 1, j] * grid[i + 2, j] * grid[i + 3, j] &gt; larger)
+                        larger = grid[i, j] * grid[i + 1, j] * grid[i + 2, j] * grid[i + 3, j];
+                    if (grid[i, j] * grid[i, j + 1] * grid[i, j + 2] * grid[i, j + 3] &gt; larger)
+                        larger = grid[i, j] * grid[i, j + 1] * grid[i, j + 2] * grid[i, j + 3];
+                    if (grid[i, j] * grid[i + 1, j + 1] * grid[i + 2, j + 2] * grid[i + 3, j + 3] &gt; larger)
+                        larger = grid[i, j] * grid[i + 1, j + 1] * grid[i + 2, j + 2] * grid[i + 3, j + 3];
+                    if (grid[i + 3, j] * grid[i + 2, j + 1] * grid[i + 1, j + 2] * grid[i, j + 3] &gt; larger)
+                        larger = grid[i + 3, j] * grid[i + 2, j + 1] * grid[i + 1, j + 2] * grid[i, j + 3];
+                }
+            }
+            Console.WriteLine(larger);
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/07 12:25</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Jeong Hoon Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7465"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>javascript(ES6)</strong></p>
+<pre><code class="javascript">String.prototype.stripMargin = function() {
+    return this.split(&quot;\n&quot;).map(line =&gt; line.trim()).join(&quot;\n&quot;);
+}
+
+var matrix   = `08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
+                49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
+                81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
+                52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91
+                22 31 16 71 51 67 63 89 41 92 36 54 22 40 40 28 66 33 13 80
+                24 47 32 60 99 03 45 02 44 75 33 53 78 36 84 20 35 17 12 50
+                32 98 81 28 64 23 67 10 26 38 40 67 59 54 70 66 18 38 64 70
+                67 26 20 68 02 62 12 20 95 63 94 39 63 08 40 91 66 49 94 21
+                24 55 58 05 66 73 99 26 97 17 78 78 96 83 14 88 34 89 63 72
+                21 36 23 09 75 00 76 44 20 45 35 14 00 61 33 97 34 31 33 95
+                78 17 53 28 22 75 31 67 15 94 03 80 04 62 16 14 09 53 56 92
+                16 39 05 42 96 35 31 47 55 58 88 24 00 17 54 24 36 29 85 57
+                86 56 00 48 35 71 89 07 05 44 44 37 44 60 21 58 51 54 17 58
+                19 80 81 68 05 94 47 69 28 73 92 13 86 52 17 77 04 89 55 40
+                04 52 08 83 97 35 99 16 07 97 57 32 16 26 26 79 33 27 98 66
+                88 36 68 87 57 62 20 72 03 46 33 67 46 55 12 32 63 93 53 69
+                04 42 16 73 38 25 39 11 24 94 72 18 08 46 29 32 40 62 76 36
+                20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16
+                20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
+                01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48`
+    .stripMargin()
+    .split(&quot;\n&quot;).map(line =&gt; line.split(&quot; &quot;).map(v =&gt; parseInt(v, 10)));
+
+var getTuple = function(matrix, row, col, rowOffset, colOffset) {
+    return [
+        matrix[row                ][col                ], 
+        matrix[row + rowOffset    ][col + colOffset    ], 
+        matrix[row + rowOffset * 2][col + colOffset * 2], 
+        matrix[row + rowOffset * 3][col + colOffset * 3]
+    ];
+}
+
+var multiply = (x, y) =&gt; x * y;
+
+var max = 0;
+
+for (let i = 0; i &lt; 17; i++) {
+    for (let j = 0; j &lt; 17; j++) {
+        max = Math.max(max, getTuple(matrix, i, j, 0, 1).reduce(multiply));
+        max = Math.max(max, getTuple(matrix, i, j, 1, 0).reduce(multiply));
+        max = Math.max(max, getTuple(matrix, i, j, 1, 1).reduce(multiply));
+        max = Math.max(max, getTuple(matrix, i, j + 3, 1, -1).reduce(multiply));
+    }
+}
+
+console.log(max);
+
+&gt;&gt;&gt; 70600674
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/06/13 17:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">funnystyle</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7818"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class LargestProductionGrid {
+
+    static int numbers[][] = new int[20][20];
+    static List&lt;Integer&gt; result = new ArrayList();
+
+    public static void main(String[] args) throws FileNotFoundException {
+        String path = InvestmentInStocks.class.getResource(&quot;&quot;).getPath();
+        Scanner sc = new Scanner(new File(path + &quot;LargestProductionGrid.txt&quot;));
+
+        for (int i = 0; i &lt; 20; i++) {
+            for (int j = 0; j &lt; 20; j++) {
+                numbers[i][j] = sc.nextInt();
+            }
+        }
+
+        for (int i = 0; i &lt; 17; i++) {
+            for (int j = 0; j &lt; 17; j++) {
+                multiplication(i, j);
+            }
+        }
+
+        System.out.println(result.stream().max(Integer::compare));
+    }
+
+    private static void multiplication(int x, int y) {
+        Integer a = 1, b = 1, c = 1, d = 1, e = 1, f = 1, h = 1, i = 1;
+        for (int k = 0; k &lt; 4; k++) {
+            a *= numbers[x + k][y];
+            b *= numbers[x][y + k];
+            c *= numbers[x + k][y + k];
+            if (3 &lt; x &amp;&amp; 3 &lt; y) {
+                d *= numbers[x - k][y - k];
+                e *= numbers[x][y - k];
+                f *= numbers[x - k][y];
+                h *= numbers[x + k][y - k];
+                i *= numbers[x - k][y + k];
+            }
+            result.add(a);
+            result.add(b);
+            result.add(c);
+            result.add(d);
+            result.add(e);
+            result.add(f);
+            result.add(h);
+            result.add(i);
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/07/10 14:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">genius.choi</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2348"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">a = f
+b = e
+c = d
+h = i
+
+위의 값들은 동일하지 않나... 싶네요
+체크하시는 항목을 절반으로 줄여도 될듯합니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    김지훈,
+                                    2018/08/29 20:35
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7973"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3으로 풀었습니다.</p>
+<pre><code class="python">def largest_product_in(grid):
+    n = len(grid)
+    max_val = 0
+    for i in range(0, n-3):
+        for j in range(0, n-3):
+            max_val = max(max_val,
+                          grid[i][j] * grid[i+1][j+1] * grid[i+2][j+2] * grid[i+3][j+3],
+                          grid[i][j] * grid[i+1][j] * grid[i+2][j] * grid[i+3][j],
+                          grid[i][j] * grid[i][j+1] * grid[i][j+2] * grid[i][j+3],
+                          grid[i+3][j] * grid[i+2][j+1] * grid[i+1][j+2] * grid[i][j+3])
+    return max_val
+
+input = '''08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
+49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
+81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
+52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91
+22 31 16 71 51 67 63 89 41 92 36 54 22 40 40 28 66 33 13 80
+24 47 32 60 99 03 45 02 44 75 33 53 78 36 84 20 35 17 12 50
+32 98 81 28 64 23 67 10 26 38 40 67 59 54 70 66 18 38 64 70
+67 26 20 68 02 62 12 20 95 63 94 39 63 08 40 91 66 49 94 21
+24 55 58 05 66 73 99 26 97 17 78 78 96 83 14 88 34 89 63 72
+21 36 23 09 75 00 76 44 20 45 35 14 00 61 33 97 34 31 33 95
+78 17 53 28 22 75 31 67 15 94 03 80 04 62 16 14 09 53 56 92
+16 39 05 42 96 35 31 47 55 58 88 24 00 17 54 24 36 29 85 57
+86 56 00 48 35 71 89 07 05 44 44 37 44 60 21 58 51 54 17 58
+19 80 81 68 05 94 47 69 28 73 92 13 86 52 17 77 04 89 55 40
+04 52 08 83 97 35 99 16 07 97 57 32 16 26 26 79 33 27 98 66
+88 36 68 87 57 62 20 72 03 46 33 67 46 55 12 32 63 93 53 69
+04 42 16 73 38 25 39 11 24 94 72 18 08 46 29 32 40 62 76 36
+20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16
+20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
+01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48'''
+
+grid = [[int(x) for x in row.split()] for row in input.split('\n')]
+print(largest_product_in(grid))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/07/23 04:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">SOUP</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7981"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># Python 3.6
+data= '''08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
+49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
+81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
+52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91
+22 31 16 71 51 67 63 89 41 92 36 54 22 40 40 28 66 33 13 80
+24 47 32 60 99 03 45 02 44 75 33 53 78 36 84 20 35 17 12 50
+32 98 81 28 64 23 67 10 26 38 40 67 59 54 70 66 18 38 64 70
+67 26 20 68 02 62 12 20 95 63 94 39 63 08 40 91 66 49 94 21
+24 55 58 05 66 73 99 26 97 17 78 78 96 83 14 88 34 89 63 72
+21 36 23 09 75 00 76 44 20 45 35 14 00 61 33 97 34 31 33 95
+78 17 53 28 22 75 31 67 15 94 03 80 04 62 16 14 09 53 56 92
+16 39 05 42 96 35 31 47 55 58 88 24 00 17 54 24 36 29 85 57
+86 56 00 48 35 71 89 07 05 44 44 37 44 60 21 58 51 54 17 58
+19 80 81 68 05 94 47 69 28 73 92 13 86 52 17 77 04 89 55 40
+04 52 08 83 97 35 99 16 07 97 57 32 16 26 26 79 33 27 98 66
+88 36 68 87 57 62 20 72 03 46 33 67 46 55 12 32 63 93 53 69
+04 42 16 73 38 25 39 11 24 94 72 18 08 46 29 32 40 62 76 36
+20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16
+20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
+01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48'''
+
+gd = [[int(y) for y in x.split()] for x in data.split('\n')]
+
+x = y = m = 0
+m = max([max(gd[x][y] * gd[x][y+1] * gd[x][y+2] * gd[x][y+3],
+     gd[x][y] * gd[x+1][y] * gd[x+2][y] * gd[x+3][y],
+     gd[x][y] * gd[x+1][y+1] * gd[x+2][y+2] * gd[x+3][y+3],
+     gd[x+3][y] * gd[x+2][y+1] * gd[x+1][y+2] * gd[x][y+3]) for x in range(17) for y in range(17)])
+
+print(m)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/07/23 20:28</p>
+                                <p class="static-profile" style="margin:0;padding:0;">최우인</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2093"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">gd = [[int(y) for y in x.split()] for x in data.split(&#39;\n&#39;)]
+위의 문법을 한줄이 아닌 표현으로 하면 어떻게 되나요? 잘 모르겠네요. ㅠㅠ
+아래와 같은 표현일거 같은데 결과가 틀리네요 
+============================================================
+for x in data.split(&#39;\n&#39;):
+    for y in x.split():
+        gd.append(int(y))
+============================================================</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Jung Daehyun,
+                                    2017/08/21 22:46
+                                </span>
+                            </div>
+                        
+                            <a name="comment_2096"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">리스트 안에 리스트가 들어가는 거니까 그렇게 하시면 안되고요.
+아래와 같이 해보세요.
+
+gd = []
+for y in data.split(&#39;\n&#39;):
+    tmp = []
+    for x in y.split(&#39; &#39;):
+        tmp.append(int(x))
+    gd.append(tmp)
+
+print(gd)</span>
+                                -
+                                <span style="font-size:11px;">
+                                    최우인,
+                                    2017/08/22 15:41
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10248"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3.6</p>
+<pre><code class="python">data = &quot;&quot;&quot; 08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
+ 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
+ 81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
+ 52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91
+ 22 31 16 71 51 67 63 89 41 92 36 54 22 40 40 28 66 33 13 80
+ 24 47 32 60 99 03 45 02 44 75 33 53 78 36 84 20 35 17 12 50
+ 32 98 81 28 64 23 67 10 26 38 40 67 59 54 70 66 18 38 64 70
+ 67 26 20 68 02 62 12 20 95 63 94 39 63 08 40 91 66 49 94 21
+ 24 55 58 05 66 73 99 26 97 17 78 78 96 83 14 88 34 89 63 72
+ 21 36 23 09 75 00 76 44 20 45 35 14 00 61 33 97 34 31 33 95
+ 78 17 53 28 22 75 31 67 15 94 03 80 04 62 16 14 09 53 56 92
+ 16 39 05 42 96 35 31 47 55 58 88 24 00 17 54 24 36 29 85 57
+ 86 56 00 48 35 71 89 07 05 44 44 37 44 60 21 58 51 54 17 58
+ 19 80 81 68 05 94 47 69 28 73 92 13 86 52 17 77 04 89 55 40
+ 04 52 08 83 97 35 99 16 07 97 57 32 16 26 26 79 33 27 98 66
+ 88 36 68 87 57 62 20 72 03 46 33 67 46 55 12 32 63 93 53 69
+ 04 42 16 73 38 25 39 11 24 94 72 18 08 46 29 32 40 62 76 36
+ 20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16
+ 20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
+ 01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48&quot;&quot;&quot;
+
+array = data.split(&quot;\n&quot;)
+arraylist,tmp = [],[]
+multiplelist = []
+for i in array:
+    tmp = i.split(&quot; &quot;)
+    del tmp[0]
+    arraylist.append(tmp)
+for h in range(20-3):
+    for g in range(20-3):
+        if g &lt; 17: #수평
+            multiplelist.append(int(arraylist[h][g])*int(arraylist[h][g+1])*int(arraylist[h][g+2])*int(arraylist[h][g+3]))
+        if h &lt; 17:  #수직
+            multiplelist.append(int(arraylist[h][g])*int(arraylist[h+1][g])*int(arraylist[h+2][g])*int(arraylist[h+3][g]))
+        if h &lt; 17 and g &lt; 17: #대각선
+            multiplelist.append(int(arraylist[h][g])*int(arraylist[h+1][g+1])*int(arraylist[h+2][g+2])*int(arraylist[h+3][g+3]))
+print(max(multiplelist))
+
+* 결과값
+51267216
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/01/21 14:12</p>
+                                <p class="static-profile" style="margin:0;padding:0;">justbegin</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_10703"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def largestfour(a):
+    l = list()
+    for i in range(20):
+        for j in range(17):
+            l.append(([a[i][j], a[i][j+1], a[i][j+2], a[i][j+3]], a[i][j]*a[i][j+1]*a[i][j+2]*a[i][j+3]))
+            l.append(([a[j][i], a[j+1][i], a[j+2][i], a[j+3][i]], a[j][i]*a[j+1][i]*a[j+2][i]*a[j+3][i]))
+    for i in range(17):
+        for j in range(17):
+            l.append(([a[i][j], a[i+1][j+1], a[i+2][j+2], a[i+3][j+3]], a[i][j]*a[i+1][j+1]*a[i+2][j+2]*a[i+3][j+3]))
+            l.append(([a[i+3][j], a[i+2][j+1], a[i+1][j+2], a[i][j+3]], a[i+3][j]*a[i+2][j+1]*a[i+1][j+2]*a[i][j+3]))
+    l = sorted(l, key=lambda x: x[1])
+    return l[-1]
+
+
+l = [list(map(int, input().split(' '))) for i in range(20)]
+print(largestfour(l))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/02/14 15:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김동하</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12994"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python</p>
+<pre><code class="python">matrix = &quot;&quot;&quot;08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
+49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
+81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
+52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91
+22 31 16 71 51 67 63 89 41 92 36 54 22 40 40 28 66 33 13 80
+24 47 32 60 99 03 45 02 44 75 33 53 78 36 84 20 35 17 12 50
+32 98 81 28 64 23 67 10 26 38 40 67 59 54 70 66 18 38 64 70
+67 26 20 68 02 62 12 20 95 63 94 39 63 08 40 91 66 49 94 21
+24 55 58 05 66 73 99 26 97 17 78 78 96 83 14 88 34 89 63 72
+21 36 23 09 75 00 76 44 20 45 35 14 00 61 33 97 34 31 33 95
+78 17 53 28 22 75 31 67 15 94 03 80 04 62 16 14 09 53 56 92
+16 39 05 42 96 35 31 47 55 58 88 24 00 17 54 24 36 29 85 57
+86 56 00 48 35 71 89 07 05 44 44 37 44 60 21 58 51 54 17 58
+19 80 81 68 05 94 47 69 28 73 92 13 86 52 17 77 04 89 55 40
+04 52 08 83 97 35 99 16 07 97 57 32 16 26 26 79 33 27 98 66
+88 36 68 87 57 62 20 72 03 46 33 67 46 55 12 32 63 93 53 69
+04 42 16 73 38 25 39 11 24 94 72 18 08 46 29 32 40 62 76 36
+20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16
+20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
+01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48&quot;&quot;&quot;
+matrix = matrix.split(&quot;\n&quot;)
+for i in range(len(matrix)):
+    matrix[i] = list(map(int, matrix[i].split(' ')))
+n = len(matrix)
+print(*matrix, sep=&quot;\n&quot;)
+ans = 0
+for i in range(n):
+    for j in range(n):
+        for dx, dy in [[0,1],[1,0],[1,1],[1,-1]]:
+            try:
+                ans = max(ans,
+                          matrix[i][j] * matrix[i+dx][j+dy] * matrix[i+2*dx][j+2*dy] * matrix[i+3*dx][j+3*dy])
+            except:
+                pass
+print(ans)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/15 15:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Taesoo Kim</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13743"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def mul(*n):
+    r = 1
+    for i in n: r *= i
+    return r
+
+sample = '''\
+ 08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
+ 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
+ 81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
+ 52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91
+ 22 31 16 71 51 67 63 89 41 92 36 54 22 40 40 28 66 33 13 80
+ 24 47 32 60 99 03 45 02 44 75 33 53 78 36 84 20 35 17 12 50
+ 32 98 81 28 64 23 67 10 26 38 40 67 59 54 70 66 18 38 64 70
+ 67 26 20 68 02 62 12 20 95 63 94 39 63 08 40 91 66 49 94 21
+ 24 55 58 05 66 73 99 26 97 17 78 78 96 83 14 88 34 89 63 72
+ 21 36 23 09 75 00 76 44 20 45 35 14 00 61 33 97 34 31 33 95
+ 78 17 53 28 22 75 31 67 15 94 03 80 04 62 16 14 09 53 56 92
+ 16 39 05 42 96 35 31 47 55 58 88 24 00 17 54 24 36 29 85 57
+ 86 56 00 48 35 71 89 07 05 44 44 37 44 60 21 58 51 54 17 58
+ 19 80 81 68 05 94 47 69 28 73 92 13 86 52 17 77 04 89 55 40
+ 04 52 08 83 97 35 99 16 07 97 57 32 16 26 26 79 33 27 98 66
+ 88 36 68 87 57 62 20 72 03 46 33 67 46 55 12 32 63 93 53 69
+ 04 42 16 73 38 25 39 11 24 94 72 18 08 46 29 32 40 62 76 36
+ 20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16
+ 20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
+ 01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48'''
+sample = [int(i) for i in sample.split()]
+
+mm,tmp = 0,[]
+for i in range(400):
+    if i%20 &lt; 17: tmp.append(mul(*sample[i:i+4]))
+    if i//20 &lt; 17: tmp.append(mul(*sample[i:i+61:20]))
+    if i%20 &lt; 17 and i//20 &lt; 17: tmp.append(mul(*sample[i:i+64:21]))
+    if i%20 &gt; 2 and i//20 &lt; 17: tmp.append(mul(*sample[i:i+58:19]))
+    if tmp and mm &lt; max(tmp): mm = max(tmp)
+    tmp.clear()
+print(mm)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/24 23:16</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14255"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">string = &quot;&quot;&quot;08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
+ 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
+ 81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
+ 52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91
+ 22 31 16 71 51 67 63 89 41 92 36 54 22 40 40 28 66 33 13 80
+ 24 47 32 60 99 03 45 02 44 75 33 53 78 36 84 20 35 17 12 50
+ 32 98 81 28 64 23 67 10 26 38 40 67 59 54 70 66 18 38 64 70
+ 67 26 20 68 02 62 12 20 95 63 94 39 63 08 40 91 66 49 94 21
+ 24 55 58 05 66 73 99 26 97 17 78 78 96 83 14 88 34 89 63 72
+ 21 36 23 09 75 00 76 44 20 45 35 14 00 61 33 97 34 31 33 95
+ 78 17 53 28 22 75 31 67 15 94 03 80 04 62 16 14 09 53 56 92
+ 16 39 05 42 96 35 31 47 55 58 88 24 00 17 54 24 36 29 85 57
+ 86 56 00 48 35 71 89 07 05 44 44 37 44 60 21 58 51 54 17 58
+ 19 80 81 68 05 94 47 69 28 73 92 13 86 52 17 77 04 89 55 40
+ 04 52 08 83 97 35 99 16 07 97 57 32 16 26 26 79 33 27 98 66
+ 88 36 68 87 57 62 20 72 03 46 33 67 46 55 12 32 63 93 53 69
+ 04 42 16 73 38 25 39 11 24 94 72 18 08 46 29 32 40 62 76 36
+ 20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16
+ 20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
+ 01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48&quot;&quot;&quot;
+
+# 주어진 문자열을 20*20 의 2차원 리스트로 바꾸어 보자.
+tail = string.replace(&quot;\n&quot;, &quot; &quot;)
+lst_tail = tail.split(&quot; &quot;)
+for i in range(19):
+    lst_tail.remove('')
+
+print(lst_tail)
+
+def lst_to_matrix_20(a, b):
+    c = a * 20 + b
+    return c
+
+Matrix = [[0]*20 for i in range(20)]
+
+for i in range(20):
+    for j in range(20):
+        tail_num = lst_tail[lst_to_matrix_20(i, j)]
+        Matrix[i][j] = int(tail_num)
+
+# 지정 숫자 기준으로 나머지 3개의 수를 오른쪽, 아래로 지정. 대각선은 두 방향 모두 해주어야 한다.
+# mul_horz, mul_vert, mul_\, mul_/ 로 분류하자.
+Max = 0
+
+for i in range(20):
+    for j in range(0, 17):
+        val_horz = Matrix[i][j] * Matrix[i][j+1] * Matrix[i][j+2] * Matrix[i][j+3]
+        Max = max(Max, val_horz)
+
+for i in range(0,17):
+    for j in range(20):
+        val_vert = Matrix[i][j] * Matrix[i+1][j] * Matrix[i+2][j] * Matrix[i+3][j]
+        Max = max(Max, val_vert)
+
+for i in range(0, 17):
+    for j in range(0, 17):
+        val_bslash = Matrix[i][j] * Matrix[i+1][j+1] * Matrix[i+2][j+2] * Matrix[i+3][j+3]
+        Max = max(Max, val_bslash)
+
+for i in range(3, 20):
+    for j in range(0, 17):
+        val_slash = Matrix[i][j] * Matrix[i-1][j+1] * Matrix[i-2][j+2] * Matrix[i-3][j+3]
+        Max = max(Max, val_slash)
+
+print(Max)
+
+</code></pre>
+
+<p>저는 python을 사용하였습니다.
+역시.. 항상 간결하게 코드를 짜도록 노력해야 겠네요</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/23 02:39</p>
+                                <p class="static-profile" style="margin:0;padding:0;">aa</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14422"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">package test;
+
+public class test {
+
+    public static void main(String[] args) {
+        int[][] num = { { 8, 02, 22, 97, 38, 15, 00, 40, 00, 75, 04, 05, 07, 78, 52, 12, 50, 77, 91, 8 },
+                { 49, 49, 99, 40, 17, 81, 18, 57, 60, 87, 17, 40, 98, 43, 69, 48, 04, 56, 62, 00 },
+                { 81, 49, 31, 73, 55, 79, 14, 29, 93, 71, 40, 67, 53, 88, 30, 03, 49, 13, 36, 65 },
+                { 52, 70, 95, 23, 04, 60, 11, 42, 69, 24, 68, 56, 01, 32, 56, 71, 37, 02, 36, 91 },
+                { 22, 31, 16, 71, 51, 67, 63, 89, 41, 92, 36, 54, 22, 40, 40, 28, 66, 33, 13, 80 },
+                { 24, 47, 32, 60, 99, 03, 45, 02, 44, 75, 33, 53, 78, 36, 84, 20, 35, 17, 12, 50 },
+                { 32, 98, 81, 28, 64, 23, 67, 10, 26, 38, 40, 67, 59, 54, 70, 66, 18, 38, 64, 70 },
+                { 67, 26, 20, 68, 02, 62, 12, 20, 95, 63, 94, 39, 63, 8, 40, 91, 66, 49, 94, 21 },
+                { 24, 55, 58, 05, 66, 73, 99, 26, 97, 17, 78, 78, 96, 83, 14, 88, 34, 89, 63, 72 },
+                { 21, 36, 23, 9, 75, 00, 76, 44, 20, 45, 35, 14, 00, 61, 33, 97, 34, 31, 33, 95 },
+                { 78, 17, 53, 28, 22, 75, 31, 67, 15, 94, 03, 80, 04, 62, 16, 14, 9, 53, 56, 92 },
+                { 16, 39, 05, 42, 96, 35, 31, 47, 55, 58, 88, 24, 00, 17, 54, 24, 36, 29, 85, 57 },
+                { 86, 56, 00, 48, 35, 71, 89, 07, 05, 44, 44, 37, 44, 60, 21, 58, 51, 54, 17, 58 },
+                { 19, 80, 81, 68, 05, 94, 47, 69, 28, 73, 92, 13, 86, 52, 17, 77, 04, 89, 55, 40 },
+                { 04, 52, 8, 83, 97, 35, 99, 16, 07, 97, 57, 32, 16, 26, 26, 79, 33, 27, 98, 66 },
+                { 88, 36, 68, 87, 57, 62, 20, 72, 03, 46, 33, 67, 46, 55, 12, 32, 63, 93, 53, 69 },
+                { 04, 42, 16, 73, 38, 25, 39, 11, 24, 94, 72, 18, 8, 46, 29, 32, 40, 62, 76, 36 },
+                { 20, 69, 36, 41, 72, 30, 23, 88, 34, 62, 99, 69, 82, 67, 59, 85, 74, 04, 36, 16 },
+                { 20, 73, 35, 29, 78, 31, 90, 01, 74, 31, 49, 71, 48, 86, 81, 16, 23, 57, 05, 54 },
+                { 01, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 01, 89, 19, 67, 48 } };
+        int sum = 1;
+        int check = 0;
+        for (int i = 0; i &lt; num.length-3; i++)
+            for (int j = 0; j &lt; num[i].length-3; j++) {
+                check = j + 3 &lt; num[i].length
+                        ? (sum = num[i][j] * num[i][j + 1] * num[i][j + 2] * num[i][j + 3]) &gt; check ? sum : check
+                        : check;
+                check = i + 3 &lt; num.length
+                        ? (sum = num[j][i] * num[j][i + 1] * num[j][i + 2] * num[j][i + 3]) &gt; check ? sum : check
+                        : check;
+                check = i + 3 &lt; num.length &amp;&amp; j + 3 &lt; num.length
+                        ? (sum = num[i][j] * num[i + 1][j + 1] * num[i + 2][j + 2] * num[i + 3][j + 3]) &gt; check 
+                                ? sum : check
+                        : check;
+                check = i + 3 &lt; num.length &amp;&amp; j - 3 &gt; -1
+                        ? (sum = num[i][j] * num[i + 1][j - 1] * num[i + 2][j - 2] * num[i + 3][j - 3]) &gt; check 
+                                ? sum : check
+                        : check;
+            }
+        System.out.println(check);
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/29 20:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김지훈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16497"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">m = []
+for i in range(20):
+    m.append(list(map(int, input().split())))
+
+tempresult = []
+result = []
+for i in range(20):
+    if i &gt; 16:
+        continue
+    else:
+        for j in range(20):
+            tempresult.append(m[i][j]*m[i+1][j]*m[i+2][j]*m[i+3][j])
+#세로 곱셈
+
+tempresult.sort()
+result.append(tempresult[-1])
+tempresult.clear()
+
+for i in range(20):
+    for j in range(20):
+        if j &gt; 16:
+            continue
+        else:
+            tempresult.append(m[i][j]*m[i][j+1]*m[i][j+2]*m[i][j+3])
+#가로 곱셈
+
+tempresult.sort()
+result.append(tempresult[-1])
+tempresult.clear()
+
+for i in range(20):
+    for j in range(20):
+        if i &gt; 16 or j &gt; 16:
+            continue
+        else:
+            tempresult.append(m[i][j]*m[i+1][j+1]*m[i+2][j+2]*m[i+3][j+3])
+            tempresult.append(m[i+3][j]*m[i+2][j+1]*m[i+1][j+2]*m[i][j+3])
+#양 대각 곱셈
+
+tempresult.sort()
+result.append(tempresult[-1])
+
+result.sort()
+print(result[-1])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/02/07 16:28</p>
+                                <p class="static-profile" style="margin:0;padding:0;">D.H.</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16677"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">public static void main(String[] args) throws Exception {
+        FileReader fileReader = new FileReader(&quot;D:\\grid.txt&quot;);
+        BufferedReader br = new BufferedReader(fileReader);
+        String[] strArr = new String[30];
+        String tmp;
+        int idx = -1;
+        while ((tmp = br.readLine()) != null) {
+            strArr[++idx] = tmp;
+        }
+        int[][] data = new int[idx+1][idx+1];
+        for (int i = 0; i &lt; idx+1; i++) {
+            String[] eachrow = strArr[i].split(&quot; &quot;);
+            for (int j = 0; j &lt; idx+1; j++) {
+                data[i][j] = Integer.parseInt(eachrow[j]);
+            }
+        }
+        int max = 0;
+        for (int i = 0; i &lt; idx-3; i++) {
+            for (int j = 0; j &lt; idx+1; j++) {
+                int a = data[i][j] * data[i+1][j] * data[i+2][j] * data[i+3][j];
+                if (a &gt; max) max = a;
+            }
+        }
+        for (int i = 0; i &lt; idx+1; i++) {
+            for (int j = 0; j &lt; idx-3; j++) {
+                int a = data[i][j] * data[i][j+1] * data[i][j+2] * data[i][j+3];
+                if (a &gt; max) max = a;
+            }
+        }
+        for (int i = 0; i &lt; idx-3; i++) {
+            for (int j = 0; j &lt; idx-3; j++) {
+                int a = data[i][j] * data[i+1][j+1] * data[i+2][j+2] * data[i+3][j+3];
+                if (a &gt; max) max = a;
+            }
+        }
+        for (int i = 3; i &lt; idx+1; i++) {
+            for (int j = 0; j &lt; idx-3; j++) {
+                int a = data[i][j] * data[i-1][j+1] * data[i-2][j+2] * data[i-3][j+3];
+                if (a &gt; max) max = a;
+            }
+        }
+        System.out.println(max);
+        br.close();
+    }
+
+겁나 무식하게 했습니다...
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/02/14 22:15</p>
+                                <p class="static-profile" style="margin:0;padding:0;">JohnSuhr</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17164"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3.7  </p>
+<pre><code class="python">p_scale = 4
+raw_input = &quot;&quot;&quot;08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
+49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
+81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
+52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91
+22 31 16 71 51 67 63 89 41 92 36 54 22 40 40 28 66 33 13 80
+24 47 32 60 99 03 45 02 44 75 33 53 78 36 84 20 35 17 12 50
+32 98 81 28 64 23 67 10 26 38 40 67 59 54 70 66 18 38 64 70
+67 26 20 68 02 62 12 20 95 63 94 39 63 08 40 91 66 49 94 21
+24 55 58 05 66 73 99 26 97 17 78 78 96 83 14 88 34 89 63 72
+21 36 23 09 75 00 76 44 20 45 35 14 00 61 33 97 34 31 33 95
+78 17 53 28 22 75 31 67 15 94 03 80 04 62 16 14 09 53 56 92
+16 39 05 42 96 35 31 47 55 58 88 24 00 17 54 24 36 29 85 57
+86 56 00 48 35 71 89 07 05 44 44 37 44 60 21 58 51 54 17 58
+19 80 81 68 05 94 47 69 28 73 92 13 86 52 17 77 04 89 55 40
+04 52 08 83 97 35 99 16 07 97 57 32 16 26 26 79 33 27 98 66
+88 36 68 87 57 62 20 72 03 46 33 67 46 55 12 32 63 93 53 69
+04 42 16 73 38 25 39 11 24 94 72 18 08 46 29 32 40 62 76 36
+20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16
+20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
+01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48&quot;&quot;&quot;
+mtrx = [list(map(int, v.split())) for v in raw_input.split(&quot;\n&quot;)]
+y_max = len(mtrx)
+x_max = len(mtrx[0])
+
+
+def gv(x, y):  # get matrix value of position(x, y)
+    rst = mtrx[y][x] if (0 &lt;= x &lt; x_max and 0 &lt;= y &lt; y_max) else 0
+    return rst
+
+
+def product(iterable):  # 이터러블 내 모든 요소의 곱 반환
+    rst = 1
+    for v in iterable:
+        rst *= v
+    return rst
+
+
+def pos_max(x, y):  # position (x, y)에서 가능한 최대 곱 반환
+    rward = product(gv(x + d, y) for d in range(p_scale))
+    dward = product(gv(x, y + d) for d in range(p_scale))
+    ruward = product(gv(x + d, y - d) for d in range(p_scale))
+    rdward = product(gv(x + d, y + d) for d in range(p_scale))
+    return max(rward, dward, ruward, rdward)
+
+
+cal_max = 0
+for y in range(y_max):
+    for x in range(x_max):
+        cur_val = pos_max(x, y)
+        cal_max = cur_val if cur_val &gt; cal_max else cal_max
+
+print(cal_max)
+
+# 70600674
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/03/17 21:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17765"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">L = []
+for i in range(20):
+    L.append(list(map(int, input().split())))
+
+prd = 0
+for x in range(20):
+    for y in range(20):
+        if x &lt; 20 - 4:
+            temp = 1
+            for i in range(4):
+                temp *= L[x+i][y]
+            if temp &gt; prd:
+                prd = temp
+
+        if y &lt; 20 - 4:
+            temp = 1
+            for i in range(4):
+                temp *= L[x][y+i]
+            if temp &gt; prd:
+                prd = temp
+
+        if x &lt; 20 - 4 and y &lt; 20 - 4:
+            temp = 1
+            for i in range(4):
+                temp *= L[x+i][y+i]
+            if temp &gt; prd:
+                prd = temp
+
+        if x &gt;= 3 and y &lt; 20 - 4:
+            temp = 1
+            for i in range(4):
+                temp *= L[x-i][y+i]
+            if temp &gt; prd:
+                prd = temp
+
+print(prd)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/05/06 20:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">messi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19757"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">fhand=open('box.txt')
+
+number=list()
+
+for line in fhand:
+    go=list()
+    line.split('\n')
+    for num in line.split():
+        go.append(int(num))
+    number.append(go)
+
+max_1=0
+max_2=0
+max_3=0
+max_4=0
+
+for x in range(17):
+    for y in range(17):
+        max1=number[x][y]*number[x+1][y]*number[x+2][y]*number[x+3][y]
+        if max1&gt;max_1: max_1=max1
+        max2=number[x][y]*number[x][y+1]*number[x][y+2]*number[x][y+3]
+        if max2&gt;max_2: max_2=max2
+        max3=number[x][y]*number[x+1][y+1]*number[x+2][y+2]*number[x+3][y+3]
+        if max3&gt;max_3: max_3=max3
+        max4=number[x+3][y]*number[x+2][y+1]*number[x+1][y+2]*number[x][y+3]
+        if max4&gt;max_4: max_4=max4
+
+print(max(max_1,max_2,max_3,max_4))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/10/26 23:27</p>
+                                <p class="static-profile" style="margin:0;padding:0;">생선집알바</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20089"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>수평방향, 수직방향, 대각선 순,역방향 전부 나눠서 작성했습니다.</p>
+<pre><code class="java">public class LargestProductInAGrid {
+
+    static ArrayList&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;();
+    public static void main(String[] args) {
+
+        String str = &quot;08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08\r\n&quot; + 
+                &quot;49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00\r\n&quot; + 
+                &quot;81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65\r\n&quot; + 
+                &quot;52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91\r\n&quot; + 
+                &quot;22 31 16 71 51 67 63 89 41 92 36 54 22 40 40 28 66 33 13 80\r\n&quot; + 
+                &quot;24 47 32 60 99 03 45 02 44 75 33 53 78 36 84 20 35 17 12 50\r\n&quot; + 
+                &quot;32 98 81 28 64 23 67 10 26 38 40 67 59 54 70 66 18 38 64 70\r\n&quot; + 
+                &quot;67 26 20 68 02 62 12 20 95 63 94 39 63 08 40 91 66 49 94 21\r\n&quot; + 
+                &quot;24 55 58 05 66 73 99 26 97 17 78 78 96 83 14 88 34 89 63 72\r\n&quot; + 
+                &quot;21 36 23 09 75 00 76 44 20 45 35 14 00 61 33 97 34 31 33 95\r\n&quot; + 
+                &quot;78 17 53 28 22 75 31 67 15 94 03 80 04 62 16 14 09 53 56 92\r\n&quot; + 
+                &quot;16 39 05 42 96 35 31 47 55 58 88 24 00 17 54 24 36 29 85 57\r\n&quot; + 
+                &quot;86 56 00 48 35 71 89 07 05 44 44 37 44 60 21 58 51 54 17 58\r\n&quot; + 
+                &quot;19 80 81 68 05 94 47 69 28 73 92 13 86 52 17 77 04 89 55 40\r\n&quot; + 
+                &quot;04 52 08 83 97 35 99 16 07 97 57 32 16 26 26 79 33 27 98 66\r\n&quot; + 
+                &quot;88 36 68 87 57 62 20 72 03 46 33 67 46 55 12 32 63 93 53 69\r\n&quot; + 
+                &quot;04 42 16 73 38 25 39 11 24 94 72 18 08 46 29 32 40 62 76 36\r\n&quot; + 
+                &quot;20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16\r\n&quot; + 
+                &quot;20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54\r\n&quot; + 
+                &quot;01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48&quot;;
+
+        String[] line = str.split(&quot;\r\n&quot;);
+        int[][] nums = new int[20][20];
+        for(int i=0; i&lt;20; i++) {
+            String[] array = line[i].split(&quot; &quot;);
+            int[] array2 = Arrays.stream(array).mapToInt(Integer::parseInt).toArray();
+            for(int j=0; j&lt;20; j++) {
+                nums[i][j]=array2[j];
+            }
+        }
+        Level(nums);
+        Verticality(nums);
+        Diagonal(nums);
+        int MostBiggest = 0;
+        for(int i=0; i&lt;list.size(); i++) {
+            if(list.get(i)&gt;MostBiggest) {
+                MostBiggest = list.get(i);
+            }
+        }
+        System.out.println(&quot;그 중 가장 큰 값은 : &quot;+MostBiggest);
+    }
+
+
+    public static void Level(int[][] arr) {//수평 최댓값
+        int BiggestLevel = 0;
+        for(int i=0; i&lt;arr.length; i++) {
+            for(int j=0; j&lt;arr[0].length-4+1; j++) {
+                int a = arr[i][j]*arr[i][j+1]*arr[i][j+2]*arr[i][j+3];
+                if(BiggestLevel&lt;a) {
+                    BiggestLevel = a;
+                }
+            }
+        }
+        System.out.println(&quot;수평방향의 가장 큰 값은 : &quot;+BiggestLevel);
+        list.add(BiggestLevel);
+    }
+
+
+    public static void Verticality(int[][] arr) {//수직 최댓값
+        int BiggestVerticality = 0;
+        for(int i=0; i&lt;arr[0].length; i++) {
+            for(int j=0; j&lt;arr.length-4+1; j++) {
+                int a = arr[j][i]*arr[j+1][i]*arr[j+2][i]*arr[j+3][i];
+                if(BiggestVerticality&lt;a) {
+                    BiggestVerticality = a;
+                }
+            }
+        }
+        System.out.println(&quot;수직방향의 가장 큰 값은 : &quot;+BiggestVerticality);
+        list.add(BiggestVerticality);
+    }
+
+
+    public static void Diagonal(int[][] arr) { //(순, 역)대각선 최댓값
+        int ForwardBiggestDiagonal = 0;  //순방향 대각선 최댓값
+        for(int i=0; i&lt;arr[0].length-4+1; i++) {
+            for(int j=0; j&lt;arr.length-4+1; j++) {
+                int a = arr[i][j]*arr[i+1][j+1]*arr[i+2][j+2]*arr[i+3][j+3];
+                if(ForwardBiggestDiagonal&lt;a) {
+                    ForwardBiggestDiagonal = a;
+                }
+            }
+        }
+        System.out.println(&quot;순방향 대각선의 가장 큰 값은 : &quot;+ForwardBiggestDiagonal);
+        list.add(ForwardBiggestDiagonal);
+
+        int ReverseBiggestDiagonal = 0;  //정방향 대각선 최댓값
+        for(int i=0; i&lt;arr[0].length-4+1; i++) {
+            for(int j=arr.length-1; j&gt;2; j--) {
+                int a = arr[i][j]*arr[i+1][j-1]*arr[i+2][j-2]*arr[i+3][j-3];
+                if(ReverseBiggestDiagonal&lt;a) {
+                    ReverseBiggestDiagonal = a;
+                }
+            }
+        }
+        System.out.println(&quot;역방향 대각선의 가장 큰 값은 : &quot;+ReverseBiggestDiagonal);
+        list.add(ReverseBiggestDiagonal);
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/11/29 16:26</p>
+                                <p class="static-profile" style="margin:0;padding:0;">big Ko</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20767"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">map_ = ''' 08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
+ 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
+ 81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
+ 52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91
+ 22 31 16 71 51 67 63 89 41 92 36 54 22 40 40 28 66 33 13 80
+ 24 47 32 60 99 03 45 02 44 75 33 53 78 36 84 20 35 17 12 50
+ 32 98 81 28 64 23 67 10 26 38 40 67 59 54 70 66 18 38 64 70
+ 67 26 20 68 02 62 12 20 95 63 94 39 63 08 40 91 66 49 94 21
+ 24 55 58 05 66 73 99 26 97 17 78 78 96 83 14 88 34 89 63 72
+ 21 36 23 09 75 00 76 44 20 45 35 14 00 61 33 97 34 31 33 95
+ 78 17 53 28 22 75 31 67 15 94 03 80 04 62 16 14 09 53 56 92
+ 16 39 05 42 96 35 31 47 55 58 88 24 00 17 54 24 36 29 85 57
+ 86 56 00 48 35 71 89 07 05 44 44 37 44 60 21 58 51 54 17 58
+ 19 80 81 68 05 94 47 69 28 73 92 13 86 52 17 77 04 89 55 40
+ 04 52 08 83 97 35 99 16 07 97 57 32 16 26 26 79 33 27 98 66
+ 88 36 68 87 57 62 20 72 03 46 33 67 46 55 12 32 63 93 53 69
+ 04 42 16 73 38 25 39 11 24 94 72 18 08 46 29 32 40 62 76 36
+ 20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16
+ 20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
+ 01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48 '''
+
+map_list_1 = [list(map(int, i.split())) for i in map_.split('\n')]
+
+def cmp(li) :
+    res = []
+    for h in range(0, len(li)) : 
+        res.append(max(list(map(lambda x : eval('*'.join(map(str, x))), zip(li[h], li[h][1:], li[h][2:], li[h][3:])))))
+        if h &lt;= len(li)-4 :
+            res.append(max(list(map(lambda x : eval('*'.join(map(str, x))), zip(li[h], li[h+1], li[h+2], li[h+3])))))
+            res.append(max(list(map(lambda x : eval('*'.join(map(str, x))), zip(li[h], li[h+1][1:], li[h+2][2:], li[h+3][3:])))))
+            res.append(max(list(map(lambda x : eval('*'.join(map(str, x))), zip(li[h][3:], li[h+1][2:], li[h+2][1:], li[h+3])))))
+    return max(res)
+
+print(cmp(map_list_1))
+</code></pre>
+
+<p>zip을 활용해봤습니다.</p>
+<p>결과</p>
+<pre><code>70600674
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/28 14:35</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GG</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20781"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from functools import reduce
+
+num = '''08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
+49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
+81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
+52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91
+22 31 16 71 51 67 63 89 41 92 36 54 22 40 40 28 66 33 13 80
+24 47 32 60 99 03 45 02 44 75 33 53 78 36 84 20 35 17 12 50
+32 98 81 28 64 23 67 10 26 38 40 67 59 54 70 66 18 38 64 70
+67 26 20 68 02 62 12 20 95 63 94 39 63 08 40 91 66 49 94 21
+24 55 58 05 66 73 99 26 97 17 78 78 96 83 14 88 34 89 63 72
+21 36 23 09 75 00 76 44 20 45 35 14 00 61 33 97 34 31 33 95
+78 17 53 28 22 75 31 67 15 94 03 80 04 62 16 14 09 53 56 92
+16 39 05 42 96 35 31 47 55 58 88 24 00 17 54 24 36 29 85 57
+86 56 00 48 35 71 89 07 05 44 44 37 44 60 21 58 51 54 17 58
+19 80 81 68 05 94 47 69 28 73 92 13 86 52 17 77 04 89 55 40
+04 52 08 83 97 35 99 16 07 97 57 32 16 26 26 79 33 27 98 66
+88 36 68 87 57 62 20 72 03 46 33 67 46 55 12 32 63 93 53 69
+04 42 16 73 38 25 39 11 24 94 72 18 08 46 29 32 40 62 76 36
+20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16
+20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
+01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48'''
+
+num = num.replace('\n', ' ')
+num = [int(i) for i in num.split(' ')]
+
+def product(iterable):
+    return reduce(lambda x,y : x*y,iterable)
+
+def grid(x):
+    sum_h = 0 if x % 20 &gt;16 else product(num[x:x+4])
+    sum_v = 0 if x //20 &gt;16 else product(num[x+20 *i] for i in range(4))
+    sum_s = 0 if x % 20 &gt;16 or x // 20 &gt; 16 else product(num[x+21*i] for i in range(4))
+    sum_t = 0 if x % 20 &lt; 3 or x // 20 &gt; 16 else product(num[x+19*i] for i in range(4))
+    return max(sum_h,sum_v,sum_s,sum_t)
+
+max_value= 0
+temp = 0
+for i in range(20*20):
+    temp = grid(i)
+    if max_value &lt; temp:
+        max_value = temp
+print(max_value)
+</code></pre>
+
+<p>"2017/06/05 14:20  룰루랄라"님 코딩을 보고 하였습니다...일부만 수정하였습니다.</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/01/29 22:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">semipooh</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20886"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">inp=&quot;&quot;&quot;08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
+49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
+81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
+52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91
+22 31 16 71 51 67 63 89 41 92 36 54 22 40 40 28 66 33 13 80
+24 47 32 60 99 03 45 02 44 75 33 53 78 36 84 20 35 17 12 50
+32 98 81 28 64 23 67 10 26 38 40 67 59 54 70 66 18 38 64 70
+67 26 20 68 02 62 12 20 95 63 94 39 63 08 40 91 66 49 94 21
+24 55 58 05 66 73 99 26 97 17 78 78 96 83 14 88 34 89 63 72
+21 36 23 09 75 00 76 44 20 45 35 14 00 61 33 97 34 31 33 95
+78 17 53 28 22 75 31 67 15 94 03 80 04 62 16 14 09 53 56 92
+16 39 05 42 96 35 31 47 55 58 88 24 00 17 54 24 36 29 85 57
+86 56 00 48 35 71 89 07 05 44 44 37 44 60 21 58 51 54 17 58
+19 80 81 68 05 94 47 69 28 73 92 13 86 52 17 77 04 89 55 40
+04 52 08 83 97 35 99 16 07 97 57 32 16 26 26 79 33 27 98 66
+88 36 68 87 57 62 20 72 03 46 33 67 46 55 12 32 63 93 53 69
+04 42 16 73 38 25 39 11 24 94 72 18 08 46 29 32 40 62 76 36
+20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16
+20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
+01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48&quot;&quot;&quot;
+
+arr = [[int(n) for n in ln.split()] for ln in inp.split(&quot;\n&quot;)]
+Hlargest,Vlargest,Clargest,Rclargest=0,0,0,0 #가로곱의 최댓값, 세로곱의 최댓값, 대각곱의 최댓값, 역대각곱의 최댓값
+for i in range(20):
+    for j in range(20):
+        try:
+            Hmul=arr[i][j]*arr[i][j+1]*arr[i][j+2]*arr[i][j+3]  #연속된 4개의 숫자 가로곱
+            if Hmul&gt;Hlargest:
+                Hlargest=Hmul
+            Vmul=arr[i][j]*arr[i+1][j]*arr[i+2][j]*arr[i+3][j]  #연속된 4개의 숫자 세로곱
+            if Vmul&gt;Vlargest:
+                Vlargest=Vmul
+            Cmul=arr[i][j]*arr[i+1][j+1]*arr[i+2][j+2]*arr[i+3][j+3]  #연속된 4개의 숫자 대각곱
+            if Cmul&gt;Clargest:
+                Clargest=Cmul
+            Rcmul=arr[i][j]*arr[i+1][j-1]*arr[i+2][j-2]*arr[i+3][j-3]  #연속된 4개의 숫자 역대각곱
+            if Rcmul&gt;Rclargest:
+                Rclargest=Rcmul
+        except:
+            continue
+elst=[]
+elst.append([Hlargest,Vlargest,Clargest,Rclargest])
+print(max(elst[0])) #70600674
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/02/07 12:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박시원</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22109"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">num='''08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
+49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
+81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
+52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91
+22 31 16 71 51 67 63 89 41 92 36 54 22 40 40 28 66 33 13 80
+24 47 32 60 99 03 45 02 44 75 33 53 78 36 84 20 35 17 12 50
+32 98 81 28 64 23 67 10 26 38 40 67 59 54 70 66 18 38 64 70
+67 26 20 68 02 62 12 20 95 63 94 39 63 08 40 91 66 49 94 21
+24 55 58 05 66 73 99 26 97 17 78 78 96 83 14 88 34 89 63 72
+21 36 23 09 75 00 76 44 20 45 35 14 00 61 33 97 34 31 33 95
+78 17 53 28 22 75 31 67 15 94 03 80 04 62 16 14 09 53 56 92
+16 39 05 42 96 35 31 47 55 58 88 24 00 17 54 24 36 29 85 57
+86 56 00 48 35 71 89 07 05 44 44 37 44 60 21 58 51 54 17 58
+19 80 81 68 05 94 47 69 28 73 92 13 86 52 17 77 04 89 55 40
+04 52 08 83 97 35 99 16 07 97 57 32 16 26 26 79 33 27 98 66
+88 36 68 87 57 62 20 72 03 46 33 67 46 55 12 32 63 93 53 69
+04 42 16 73 38 25 39 11 24 94 72 18 08 46 29 32 40 62 76 36
+20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16
+20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
+01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48'''
+num=num.split('\n')
+
+for i in range (len(num)):
+    num[i]=num[i].split(' ')
+    for j in range (len(num[i])):
+        num[i][j]=int(num[i][j])
+
+def m(p,max):
+    if p&gt;max:
+        max=p
+    return (max)
+
+max=0
+for i in range (0,20):
+    for j in range (0,20):
+        if j+3&lt;20:
+            p=1
+            for k in range (0,4):
+                p*=num[i][j+k]
+            max=m(p,max)
+
+        if i+3&lt;20:
+            p=1
+            for k in range (0,4):
+                p*=num[i+k][j]
+            max=m(p,max)
+
+        if i+3&lt;20 and j+3&lt;20:
+            p=1
+            for k in range (0,4):
+                p*=num[i+k][j+k]
+            max=m(p,max)
+
+        if i+3&lt;20 and j-3&gt;=0:
+            p=1
+            for k in range (0,4):
+                p*=num[i+k][j-k]
+            max=m(p,max)
+
+print (max)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/06 13:55</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Buckshot</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2716"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">&lt;결과&gt;
+70600674</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Buckshot,
+                                    2020/05/06 13:55
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22150"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from functools import reduce
+def lpg(lines):
+    max_value = 1
+    for i in range(20):
+        for j in range(20):
+            for x, y in [(-1, 0), (1, -1), (0, 1), (1, 1), (1, 0), (1, -1), (0, -1), (-1, -1)]:
+                try:
+                    value = reduce(lambda x, y: x * y,
+                                                list(map(lambda a: lines[a[0]][a[1]],
+                                                         [(i, j), (i+x, j+y), (i+2*x, j+2*y), (i+3*x, j+3*y)])))
+                    max_value = max(max_value, value)
+                except:
+                    continue
+    return max_value
+
+if __name__ == '__main__':
+    with open('../codingdojang/lpg.txt', 'r') as f:
+        lines = [[int(w) for w in line.split()] for line in f.read().splitlines()]
+    print('연속된 네 개의 곱 중 최대값은 {}입니다.'.format(lpg(lines)))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/07 11:38</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hwaseong Nam</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23840"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">grid = &quot;&quot;&quot;08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
+49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
+81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
+52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91
+22 31 16 71 51 67 63 89 41 92 36 54 22 40 40 28 66 33 13 80
+24 47 32 60 99 03 45 02 44 75 33 53 78 36 84 20 35 17 12 50
+32 98 81 28 64 23 67 10 26 38 40 67 59 54 70 66 18 38 64 70
+67 26 20 68 02 62 12 20 95 63 94 39 63 08 40 91 66 49 94 21
+24 55 58 05 66 73 99 26 97 17 78 78 96 83 14 88 34 89 63 72
+21 36 23 09 75 00 76 44 20 45 35 14 00 61 33 97 34 31 33 95
+78 17 53 28 22 75 31 67 15 94 03 80 04 62 16 14 09 53 56 92
+16 39 05 42 96 35 31 47 55 58 88 24 00 17 54 24 36 29 85 57
+86 56 00 48 35 71 89 07 05 44 44 37 44 60 21 58 51 54 17 58
+19 80 81 68 05 94 47 69 28 73 92 13 86 52 17 77 04 89 55 40
+04 52 08 83 97 35 99 16 07 97 57 32 16 26 26 79 33 27 98 66
+88 36 68 87 57 62 20 72 03 46 33 67 46 55 12 32 63 93 53 69
+04 42 16 73 38 25 39 11 24 94 72 18 08 46 29 32 40 62 76 36
+20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16
+20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
+01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48&quot;&quot;&quot;
+a = grid.split(&quot;\n&quot;)
+b = []
+result = []
+for i in range(0, len(a)):
+    b.append((list(map(int, a[i].split(&quot; &quot;)))))
+for i in range(0, 17):  # 세로
+    for k in range(0, 17):  # 가로
+        result.append(b[i][k] * b[i][k + 1] * b[i][k + 2] * b[i][k + 3])
+        result.append(b[i][k] * b[i + 1][k] * b[i + 2][k] * b[i + 3][k])
+        result.append(b[i][k] * b[i + 1][k + 1] * b[i + 2][k + 2] * b[i + 3][k + 3])
+for i in range(0, 17):  # 세로
+    for k in range(3, 19):  # 가로
+        result.append(b[i][k] * b[i + 1][k - 1] * b[i + 2][k - 2] * b[i + 3][k - 3])
+print(max(result))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/11/30 20:20</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김우석</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25171"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def horizonal(_list):
+    result = []
+    result_index = []
+    for i in range(len(_list)):
+        for j in range(len(_list[0])):
+            try:
+                multiple = int(_list[i][j]) * int(_list[i][j+1]) * int(_list[i][j+2]) * int(_list[i][j+3])
+                result.append(multiple)
+                result_index.append([int(_list[i][j]) , int(_list[i][j+1]) , int(_list[i][j+2]) , int(_list[i][j+3])])
+                # print(result)
+            except: pass
+    # return [max(result), result_index[result.index(max(result))], len(result)]
+    return max(result)
+
+def vertical(_list):
+    result = []
+    result_index = []
+    for i in range(len(_list)):
+        for j in range(len(_list[0])):
+            try:
+                multiple = int(_list[i][j]) * int(_list[i+1][j]) * int(_list[i+2][j]) * int(_list[i+3][j])
+                result.append(multiple)
+                result_index.append([int(_list[i][j]) , int(_list[i+1][j]) , int(_list[i+2][j]) , int(_list[i+3][j])])
+                # print(result)
+            except: pass
+    # return [max(result), result_index[result.index(max(result))], len(result)]
+    return max(result)
+
+def diagonal(_list):
+    result = []
+    result_index = []
+    for i in range(len(_list)):
+        for j in range(len(_list[0])):
+            try:
+                multiple = int(_list[i][j]) * int(_list[i+1][j+1]) * int(_list[i+2][j+2]) * int(_list[i+3][j+3])
+                result.append(multiple)
+                result_index.append([int(_list[i][j]) , int(_list[i+1][j+1]) , int(_list[i+2][j+2]) , int(_list[i+3][j+3])])
+                # print(result)
+            except: pass
+    # return [max(result), result_index[result.index(max(result))], len(result)]
+    return max(result)
+
+def diagonal_back(_list):
+    result = []
+    result_index = []
+    for i in range(len(_list)):
+        for j in range(len(_list[0])):
+            if (i-3) &gt;= 0:
+                try:
+                    multiple = int(_list[i][j]) * int(_list[i-1][j+1]) * int(_list[i-2][j+2]) * int(_list[i-3][j+3])
+                    result.append(multiple)
+                    result_index.append([int(_list[i][j]) , int(_list[i-1][j+1]) , int(_list[i-2][j+2]) , int(_list[i-3][j+3])])
+                    # print(result)
+                except: pass
+    # return [max(result), result_index[result.index(max(result))], len(result)]
+    return max(result)
+
+
+def main():
+    f = open('_88.txt', 'r')
+    lines = f.readlines()
+    matrix = []
+    for line in lines:
+        matrix.append(line.split())
+    # print(matrix, len(matrix), len(matrix[0]))
+
+    result = []
+    result.append(horizonal(matrix))
+    result.append(vertical(matrix))
+    result.append(diagonal(matrix))
+    result.append(diagonal_back(matrix))
+
+    return print(max(result))
+
+main()
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/04/12 16:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">DSHIN</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26983"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">a= [[8,2,22,97,38,15,0,40,0,75,4,5,7,78,52,12,50,77,91,8],
+[49,49,99,40,17,81,18,57,60,87,17,40,98,43,69,48,4,56,62,0],
+[81,49,31,73,55,79,14,29,93,71,40,67,53,88,30,3,49,13,36,65],
+                        [52,70,95,23,4,60,11,42,69,24,68,56,1,32,56,71,37,2,36,91],
+                        [22,31,16,71,51,67,63,89,41,92,36,54,22,40,40,28,66,33,13,80],
+                        [24,47,32,60,99,3,45,2,44,75,33,53,78,36,84,20,35,17,12,50],
+                        [32,98,81,28,64,23,67,10,26,38,40,67,59,54,70,66,18,38,64,70],
+                        [67,26,20,68,2,62,12,20,95,63,94,39,63,8,40,91,66,49,94,21],
+                        [24,55,58,5,66,73,99,26,97,17,78,78,96,83,14,88,34,89,63,72],
+                        [21,36,23,9,75,0,76,44,20,45,35,14,0,61,33,97,34,31,33,95],
+                        [78,17,53,28,22,75,31,67,15,94,3,80,4,62,16,14,9,53,56,92],
+                        [16,39,5,42,96,35,31,47,55,58,88,24,0,17,54,24,36,29,85,57],
+                        [86,56,0,48,35,71,89,7,5,44,44,37,44,60,21,58,51,54,17,58],
+                        [19,80,81,68,5,94,47,69,28,73,92,13,86,52,17,77,4,89,55,40],
+                        [4,52,8,83,97,35,99,16,7,97,57,32,16,26,26,79,33,27,98,66],
+                        [88,36,68,87,57,62,20,72,3,46,33,67,46,55,12,32,63,93,53,69],
+                        [4,42,16,73,38,25,39,11,24,94,72,18,8,46,29,32,40,62,76,36],
+                        [20,69,36,41,72,30,23,88,34,62,99,69,82,67,59,85,74,4,36,16],
+                        [20,73,35,29,78,31,90,1,74,31,49,71,48,86,81,16,23,57,5,54],
+                        [1,70,54,71,83,51,54,69,16,92,33,48,61,43,52,1,89,19,67,48]]
+#수평
+def hori_max(arr):
+    sum_list=[]
+    for i in range(20):
+        for k in range(17):
+            sum=arr[i][k]*arr[i][k+1]*arr[i][k+2]*arr[i][k+3]
+            sum_list.append(sum)
+    return max(sum_list)
+
+#수직
+def verti_max(arr):
+    sum_list=[]
+    for i in range(20):
+        for k in range(17):
+            sum=arr[k][i]*arr[k+1][i]*arr[k+2][i]*arr[k+3][i]
+            sum_list.append(sum) 
+    return max(sum_list)
+
+#오른쪽대각
+def  Rdiag_max(arr):
+    sum_list=[]
+    for i in range(17):
+        for k in range(17):
+            while True:
+                try:
+                    sum=arr[i][k]*arr[i+1][k+1]*arr[i+2][k+2]*arr[i+3][k+3]
+                    sum_list.append(sum)
+                    i+=1
+                    k+=1
+                except IndexError:
+                    break
+    return max(sum_list)
+
+#왼쪽대각
+def  Ldiag_max(arr):
+    sum_list=[]
+    for i in range(17):
+        for k in range(19,3,-1):
+            while True:
+                try:
+                    sum=arr[i][k]*arr[i+1][k-1]*arr[i+2][k-2]*arr[i+3][k-3]
+                    sum_list.append(sum)
+                    i-=1
+                    k-=1
+                except IndexError:
+                    break
+    return max(sum_list)
+
+
+def final_max(a):
+    sum_list=[]
+    sum_list.append(hori_max(a))
+    sum_list.append(verti_max(a))
+    sum_list.append(Rdiag_max(a))
+    sum_list.append(Ldiag_max(a))
+    return max(sum_list)
+
+print(final_max(a))
+</code></pre>
+
+<p>원시적인 방법으로 풀어봤어요
+1. 수평
+2. 수직
+3. 오른쪽대각
+4. 왼쪽 대각
+위 4가지 함수를 구현하고 최대값을  Return 했습니다</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/08 15:54</p>
+                                <p class="static-profile" style="margin:0;padding:0;">양캠부부</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27159"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>// Rust</p>
+<p>fn product_in_grid() -&gt; u32{</p>
+<pre><code>let grid_ = "08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
+...
+01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48";
+
+let mut vec = vec![];
+for line in grid_.lines().map(|l| l.trim()) {
+    let v: Vec&lt;u32&gt; = line.split_whitespace().map(|n| n.parse::&lt;u32&gt;().unwrap()).collect();
+    vec.push(v);
+}
+
+// grid(i, j) =&gt; vec[i][j]
+let mut prod_max = 0;
+for i in 0..=16 {
+    for j in 0..=16 {
+        let mut prod = vec![1,1,1,1];
+        for k in 0..4 {
+            prod[0] *= vec[i][j+k];
+            prod[1] *= vec[i+k][j];
+            prod[2] *= vec[i+k][j+k];
+            if j &gt;= 3 {
+                prod[3] *= vec[i+k][j-k];
+            }
+        }
+        prod.sort();
+        prod_max = prod_max.max(prod.pop().unwrap());
+    }
+}
+prod_max
+</code></pre>
+<p>}</p>
+<h1 id="test">[test]</h1>
+<p>fn test() {</p>
+<pre><code>assert_eq!(product_in_grid(), 70600674);
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/28 14:08</p>
+                                <p class="static-profile" style="margin:0;padding:0;">JW KIM</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29709"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">using System;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string[] strGrid = {&quot;08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08&quot;,
+                &quot;49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00&quot;,
+                &quot;81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65&quot;,
+                &quot;52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91&quot;,
+                &quot;22 31 16 71 51 67 63 89 41 92 36 54 22 40 40 28 66 33 13 80&quot;,
+                &quot;24 47 32 60 99 03 45 02 44 75 33 53 78 36 84 20 35 17 12 50&quot;,
+                &quot;32 98 81 28 64 23 67 10 26 38 40 67 59 54 70 66 18 38 64 70&quot;,
+                &quot;67 26 20 68 02 62 12 20 95 63 94 39 63 08 40 91 66 49 94 21&quot;,
+                &quot;24 55 58 05 66 73 99 26 97 17 78 78 96 83 14 88 34 89 63 72&quot;,
+                &quot;21 36 23 09 75 00 76 44 20 45 35 14 00 61 33 97 34 31 33 95&quot;,
+                &quot;78 17 53 28 22 75 31 67 15 94 03 80 04 62 16 14 09 53 56 92&quot;,
+                &quot;16 39 05 42 96 35 31 47 55 58 88 24 00 17 54 24 36 29 85 57&quot;,
+                &quot;86 56 00 48 35 71 89 07 05 44 44 37 44 60 21 58 51 54 17 58&quot;,
+                &quot;19 80 81 68 05 94 47 69 28 73 92 13 86 52 17 77 04 89 55 40&quot;,
+                &quot;04 52 08 83 97 35 99 16 07 97 57 32 16 26 26 79 33 27 98 66&quot;,
+                &quot;88 36 68 87 57 62 20 72 03 46 33 67 46 55 12 32 63 93 53 69&quot;,
+                &quot;04 42 16 73 38 25 39 11 24 94 72 18 08 46 29 32 40 62 76 36&quot;,
+                &quot;20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16&quot;,
+                &quot;20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54&quot;,
+                &quot;01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48&quot; };
+
+            int[,] arrGrid = new int[20, 20];
+            for (int i = 0; i &lt; 20; i++)
+            {
+                string[] sp = strGrid[i].Split(' ');
+                for (int j = 0; j &lt; 20; j++)
+                {
+                    arrGrid[i, j] = int.Parse(sp[j]);
+                }
+            }
+            int maxVal = 0;
+            int[,] dxy = { { 1, 0 }, { 1, -1 }, { 0, 1 }, { 1, 1 } };
+            for (int i = 0; i &lt; 20; i++)
+            {
+                for (int j = 0; j &lt; 20; j++)
+                {
+                    for (int n = 0; n &lt; 4; n++)
+                    {
+                        try
+                        {
+                            maxVal = Math.Max(maxVal, arrGrid[i, j] * arrGrid[i + dxy[n, 0], j + dxy[n, 1]] *
+                                arrGrid[i + dxy[n, 0] * 2, j + dxy[n, 1] * 2] * arrGrid[i + dxy[n, 0] * 3, j + dxy[n, 1] * 3]);
+                        }
+                        catch (Exception) { continue; }
+                    }
+                }
+            }
+            Console.WriteLine(&quot;\n   {0}&quot;, maxVal);
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/10/18 21:53</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

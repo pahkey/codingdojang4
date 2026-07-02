@@ -1,0 +1,773 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="n과 d가 양의 정수이고 n&lt;d인 분수 n/d을 GCD(n, d) = 1일 때 기약 진분수라고 부르기로 합니다.
+d ≤ 8 인 기약 진분수들을 커지는 순으로 늘어놓으면 아래와 같습니다.
+
+1/8, 1/7, 1/6, 1/5, 1/4, 2/7,...">
+    <title>분모가 12,000 이하일 때 1/3과 1/2 사이에 위치한 기약 진분수의 개수 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">분모가 12,000 이하일 때 1/3과 1/2 사이에 위치한 기약 진분수의 개수</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">1</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 4</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>n과 d가 양의 정수이고 n&lt;d인 분수 n/d을 GCD(n, d) = 1일 때 기약 진분수라고 부르기로 합니다.
+d ≤ 8 인 기약 진분수들을 커지는 순으로 늘어놓으면 아래와 같습니다.</p>
+<p>1/8, 1/7, 1/6, 1/5, 1/4, 2/7, 1/3, 3/8, 2/5, 3/7, 1/2, 4/7, 3/5, 5/8, 2/3, 5/7, 3/4, 4/5, 5/6, 6/7, 7/8</p>
+<p>위에서 보듯이, 1/3과 1/2 사이에는 기약 진분수가 세 개 있습니다.</p>
+<p>그러면 d ≤ 12,000일 때 1/3과 1/2 사이의 기약 진분수는 몇 개나 있습니까?</p>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2017/08/02 13:16</p>
+                    <p class="static-profile" style="margin:0;padding:0;">P.Y.Thon</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>11개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_8404"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<p>페리수열 문제. 수열 2개 a/b, c/d가 주어지면 다음 수를 구할 수 있다. a/b는 1/3. c/d는 freshman sum 을 일반화한 식으로 구한다. a/b, c/d 로 다음 수를 계산한다. 1/2이 될 때 까지 반복한 횟수가 주어진 구간의 기약 진분수 개수.  </p>
+<pre><code class="ruby">def cnt_fseq(n, cnt=0)
+  t = (n-2)/3
+  a, b, c, d = 1, 3, t+1, 3*t+2
+  until c == 1 &amp;&amp; d == 2 do
+    k = (n + b) / d
+    a, b, c, d, cnt = c, d, k*c-a, k*d-b, cnt+1
+  end
+  cnt
+end
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby">expect(cnt_fseq(8)).to eq 3
+expect(cnt_fseq(12000)).to eq 7295372
+expect( Benchmark.realtime { cnt_fseq(12000) } ).to be_between(0.1, 1.0) #=&gt; 0.5sec
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/20 13:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8170"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>아무 생각 없는 풀이. 한 세월 걸립니다.</p>
+<pre><code class="python">def gcd(a, b): return a if b is 0 else gcd(b, a % b)
+cnt = 0
+for d in range(5, 12001):
+    for n in range(d//3 + 1, d//2 + 1):
+        cnt += gcd(d, n) is 1
+
+print(cnt) # 7295372
+</code></pre>
+
+<p>조금 낫지만 별 다를 바 없는 코드</p>
+<pre><code class="python">dic = dict()
+
+def gcd(a, b):
+    global dic
+
+    if (a, b) in dic: return dic[(a,b)]
+    if b == 0:        return a
+
+    ret = gcd(b, a % b)
+    dic[(a, b)] = ret
+    return ret
+
+cnt = 0
+for d in range(5, 12001):
+    for n in range(d//3 + 1, d//2 + 1):
+        cnt += gcd(d, n) == 1
+
+print(cnt) # 7295372, 30.682 sec
+</code></pre>
+
+<p>그리고 몇 가지 궁리 끝에...</p>
+<p>자연수 X와 Y가 서로소라면, X의 소인수 집합과 Y의 소인수 집합은 교집합이 없습니다.</p>
+<p>즉 Y는 "X의 소인수들을 약수로 가지지 않는" 수입니다. 여기에 착안해서</p>
+<p>.</p>
+<p>일단 소수를 전부 구해 놓고</p>
+<p>각 분모 d에 대해, </p>
+<ol>
+<li>
+<p>d의 소인수를 구합니다.</p>
+</li>
+<li>
+<p>분자로 올 수 있는 숫자 집합을 만들고, 여기서 d의 소인수의 배수들을 제거합니다.</p>
+</li>
+<li>
+<p>2의 집합에서 남은 숫자를 세면 기약 진분수 n/d 에서 n이 될 수 있는 숫자가 몇 개인지 나옵니다.</p>
+</li>
+</ol>
+<pre><code class="python">def sieve(max):
+    numbers, primes = set(range(2, max+1)), set()
+    sieves = dict()
+    while numbers:
+        m = min(numbers)
+        primes.add(m)
+        sieves[m] = set(range(m, max+1, m))  # 소수 m의 배수들. simple_fractions에서 재활용
+        numbers -= sieves[m]
+
+    return primes, sieves
+
+
+def simple_fractions(dmax):
+    cnt = 0
+    primes, sieves = sieve(dmax)
+    for d in range(5, dmax+1):
+        n_set = set(range(d//3+1, d//2+1))  # 1/3~1/2 사이의 분자 n
+        for p in (p for p in primes if d % p == 0):  # 분모 d의 소인수 p
+            n_set -= sieves[p]  # p의 배수들을 제거한다.
+        cnt += len(n_set)
+
+    return cnt
+
+
+print(simple_fractions(12000)) # 7295372, 3.346 sec
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/03 08:06</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8259"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import math
+
+Bong=0   #범위 내 기약진분수의 갯수
+d=12000     #d=12000부터 시작해 Whileloop를 돌때마다 1씩 줄어든다.
+while d&gt;7:
+    dmin=d/3    #문제에서의 n이 가질 수 있는 범위.
+    dmax=d/2
+
+    for i in range(math.ceil(dmin),math.floor(dmax)):
+        #i의 범위는 dmin의 올림~dmax의 내림.
+
+        j=2
+        while j&lt;=i:
+            if d%j==0 and i%j==0:pass #공약수를 가지면 pass
+            if j==i:
+                Bong+=1 #공약수를 가지지않으면 Bong+1
+            j+=1
+
+    d=d-1
+
+Bong=Bong+2
+print(Bong)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/08 10:07</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박봉경</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9108"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Lv4문제취고는 쉽네요 2번 밖에 안풀어 봤지만.
+기약 분수를 골라내는 법만 찾으면 간단하게 풀립니다.
+근데 수행 시간이 너무 오래 걸리네요
+줄인다고 줄여봤는데 아직도 오래걸리는거 보니 좀 더 파봐야 할것 같습니다.</p>
+<pre><code class="cs">using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lv4_gin
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //기약진분수
+            // n / d 
+            // 분모가 12000이하에서 1/3과 1/2의 기약 진분수 갯수
+
+            int n;
+            int d;
+            int dCount = 12000;
+            uint count = 0;
+            bool flag = false; //루프 탈출용
+
+            //진분수의 경우만 루프
+            for (d = 3; d &lt;= dCount; d++)
+            {
+                // (n &gt; d / 3 ) -&gt; 1/3보다 클 조건
+                for(n = (d / 3) + 1; n &lt; (d / 2.0); n++) // 1/3부터 1/2 까지
+                {
+                    //기약분수가 아닌 경우 break
+                    //2부터 시작해서 분자의 수로 분모 분자 모두 나누어 떨어지는 수가 있으면 그 수는 기약분수가 아니다.
+                    for (int i = 2; i &lt;= d / 2 ; i++) //분모의 절반 까지만 가보면 됨
+                    {
+                        if (n % i == 0 &amp;&amp; d % i == 0)
+                        {
+                            flag = true;
+                            break;
+                        }
+                    }
+                    if (flag == true)
+                    {
+                        flag = false;
+                        continue;
+                    }
+                    //Console.WriteLine(&quot;{0} / {1}&quot;, n, d); // 1/3 보다 크고 1/2보다 작은 기약분수 출력
+                    count++;
+                }
+            }
+            Console.WriteLine(&quot;1/3과 1/2 사이의 기약분수갯수 : {0}&quot;, count);
+        }
+    }
+}
+
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/10/26 23:15</p>
+                                <p class="static-profile" style="margin:0;padding:0;">와디더</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_9199"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">gcd = lambda a, b : b if not a%b else gcd(b, a%b)
+
+cnt = 0
+for d in range(12000, 4, -1):
+    for n in range(d//3+1, d//2+1):
+        if gcd(d, n) == 1:
+            cnt += 1
+
+print(cnt)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/11/07 11:04</p>
+                                <p class="static-profile" style="margin:0;padding:0;">songci</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12328"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Swift입니다.</p>
+<p>1부터 12,000까지, 각 수의 약수들을 미리 구해서 Dictionary에 넣고, 1/3이상 1/2이하의 숫자를 만드는 분자,분모의 약수들의 교집합 갯수가 1인 경우, 진분수라고 판단했습니다.</p>
+<pre><code class="no-highlight">import Foundation
+
+var divisors = [Int:[Int]]()
+
+func initDivisors(upto: Int) {
+    func getDivisors(_ number: Int) -&gt; [Int] {
+        var dividers = [Int]()
+        for i in 1...number {
+            if number % i == 0 {
+                dividers.append(i)
+            }
+        }
+        return dividers
+    }
+
+    for number in 1...upto {
+        divisors[number] = getDivisors(number)
+    }
+}
+
+func getNumberOfProperFraction(upto: Int) -&gt; Int {
+    let oneSecond = Double(1) / Double(2)
+    let oneThird = Double(1) / Double(3)
+    var count = 0
+    for d in stride(from: upto, to: 2, by: -1) {
+        var n = d / 3
+        let D = Double(d)
+        while Double(n) / D &lt;= oneSecond {
+            if Double(n) / D &gt; oneThird {
+                let divisorsD = Set(divisors[d]!)
+                let divisorsN = Set(divisors[n]!)
+
+                if divisorsD.intersection(divisorsN).count == 1 {
+                    count += 1
+                }
+            }
+            n += 1
+        }
+    }
+    return count
+}
+
+initDivisors(upto: 12000)
+print(getNumberOfProperFraction(upto: 8) )
+print(getNumberOfProperFraction(upto: 120) )
+print(getNumberOfProperFraction(upto: 12000) )
+</code></pre>
+
+<p>결과는...</p>
+<pre><code class="no-highlight">3
+731
+7295372
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/15 03:53</p>
+                                <p class="static-profile" style="margin:0;padding:0;">졸린하마</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13342"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def gcd(na,nu):
+    a=[]
+    b=[]
+    for i in range(2,na+1):
+        if na % i == 0:
+            a.append(i)
+    for j in range(2,nu+1):
+        if nu % j == 0:
+            b.append(j)
+    for k in range(0,len(b)):
+        if a.count(b[k]) != 0:
+            return 0
+            break
+        else:
+            return 1
+d = 12000
+count = 0
+for i in range(1,d+1):
+    for j in range(1,i):
+        if 1/3 &lt; j/i &lt;1/2:
+            if gcd(i,j):
+                count+=1
+print(count)
+
+</code></pre>
+
+<p>//8039930</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/04 21:17</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김정연</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13823"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>무식한 방법</p>
+<pre><code class="python">print(len({n/d for d in range(2,12001) for n in range(d//3+1,d//2+d%2)}))
+</code></pre>
+
+<p>위보다 대략 3.5배 빠른 방법</p>
+<pre><code class="python">def primefactor(n):
+    for i in range(2, int(n**0.5)+1):
+        if n%i == 0: return {i} | primefactor(n//i)
+    return {n}
+
+cnt,n = 0,12000
+
+for d in range(2,n+1):
+    s = d//3+1
+    e = (d&gt;&gt;1) + (d%2)
+
+    tmp = set(range(s,e))
+
+    for i in primefactor(d):
+        tmp -= set(range(s-s%i,e,i))
+    cnt += len(tmp)
+
+print(cnt)
+</code></pre>
+
+<pre><code>7295372
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/29 19:45</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_15866"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>첨에는 무식하게 짜니까 12000을 입력하니 한세월 걸리기에 ㄷㄷ.... 이렇게 바꾸니까 15초?정도 걸리네요
+분모값에 따른 분자들의 리스트(1~분모-1)를 만든 뒤 분모의 약수중 소수를 찾은뒤 그 소수들의 배수들을 분자들의 리스트에서 제거한 뒤 1/3~1/2인 값들을 찾아 prime_factor변수에 1씩 카운트 하는 식으로 했습니다</p>
+<pre><code class="python">from math import sqrt
+
+
+def check_prime_divisor(num):  # num 이 소수인지 확인하는 함수
+    for div in range(2, num):
+        if num % div == 0:
+            return 0
+    return 1
+
+
+def del_multiple(num, maximum):  # num의 배수가 되는 maximum이하 수들의 집합 생성
+    multiple_list = set()
+    for n in range(num, maximum + 1, num):
+        multiple_list.add(n)
+    return multiple_list
+
+
+def divisor_make(num):  # num의 약수들 구하기(1제외)
+    divisor_set = set()
+    for i in range(2, int(sqrt(num)) + 1):
+        if num % i == 0:
+            divisor_set.add(i)
+            divisor_set.add(num//i)
+    return divisor_set
+
+
+prime_factor = 0  # 기약진분수 개수 카운트
+denominator = 12000  # 분모를 입력
+for d in range(1, denominator + 1):
+    nominator = set(x for x in range(1, d))
+    divisor = []
+    for div in list(divisor_make(d)):
+        if check_prime_divisor(div):
+            divisor.append(div)
+    del_set = set()
+    for del_num in divisor:
+        del_set.update(del_multiple(del_num, d))
+    nominator = list(nominator - del_set)
+    for n in nominator:
+        if 1/3 &lt; n/d &lt; 1/2:
+            prime_factor += 1
+
+
+print(prime_factor)
+
+</code></pre>
+
+<p>추가로 이전에 답 해두신 분들의 답을 참고해서 분자들의 범위를 먼저 설정하니까 15초에서 4초로 시간이 줄었습니다.</p>
+<pre><code class="python">for d in range(1, denominator + 1):
+    nominator = set(x for x in range(int(d*(1/3)), int(d*(1/2))))
+    divisor = []
+    for div in list(divisor_make(d)):
+        if check_prime_divisor(div):
+            divisor.append(div)
+    del_set = set()
+    for del_num in divisor:
+        del_set.update(del_multiple(del_num, d))
+    nominator = list(nominator - del_set)
+    prime_factor += len(nominator)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/01/08 10:53</p>
+                                <p class="static-profile" style="margin:0;padding:0;">농창</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16999"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def gcd(a,b):
+    if b&gt;a: return gcd(b,a)
+    if b==0: return a
+    return gcd(b,a%b)
+
+count=0
+for d in range(1,12001):
+    for n in range(d//3,d//2+2):
+        if gcd(n,d)==1:
+            if 1/3&lt;n/d&lt;1/2:
+                count+=1
+
+print(count)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/03/04 18:00</p>
+                                <p class="static-profile" style="margin:0;padding:0;">ykleeac</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_19536"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from fractions import Fraction as fr
+def gcd(a, b) :                            #최대공약수 계산
+    if b == 0 :
+        return a
+    else :
+        return gcd(b, a % b)
+def gys(y) :                               #1/2와 1/3사이의 기약분수 계산
+    result = []
+    for i in range(1, y+1) :
+        if gcd(i, y) == 1 and fr(1, 2) &gt; fr(i, y) &gt; fr(1, 3) :
+            result.append('#')
+    return result.count('#')
+sais = 0
+for k in range(3, 12001) :                   #분모의 범위 내 gys함수 반복
+    sais += gys(k)
+print(sais)
+</code></pre>
+
+<p>결과</p>
+<p>분모 범위 ~8 :  3
+분모 범위 ~120 :  731
+분모 범위 ~12000:  7295372</p>
+<p>어떻게든 계산해보려고 했는데 역시 12000을 집어넣으니 계산하는데 한참 걸리네요 ㅠㅠ</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/10/04 13:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GG</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

@@ -1,0 +1,1272 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="끝없이 이어지는 무한소수 중 특정한 부분이 계속 반복되는 소수를 순환소수라고 하며, 반복되는 부분을 순환마디라고 한다. 
+
+모든 순환소수는 아래처럼 분수로 표현이 가능하다. 
+```
+x = 0.5555....
+10x = 5.55555.....">
+    <title>순환소수를 분수로 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">순환소수를 분수로</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">4</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 2</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>끝없이 이어지는 무한소수 중 특정한 부분이 계속 반복되는 소수를 순환소수라고 하며, 반복되는 부분을 순환마디라고 한다. </p>
+<p>모든 순환소수는 아래처럼 분수로 표현이 가능하다. </p>
+<pre><code>x = 0.5555....
+10x = 5.55555....
+9x(10x-x) = 5.5555... - 0.55555... = 5
+x = 5/9
+</code></pre>
+
+<p>순환소수와 순환마디를 입력하면 기약분수로 표현한 값을 출력하는 프로그램을 작성하시오.</p>
+<p>예시: </p>
+<pre><code>첫 번째 입력은 첫 번째 순환마디가 끝나는 부분까지의 순환소수, 
+두 번째 입력은 순환마디
+
+0.5     →    5/9
+5
+
+1.49    →    3/2
+9
+</code></pre>
+            </div>
+
+            <div class="buttons">
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2018/05/01 20:51</p>
+                    <p class="static-profile" style="margin:0;padding:0;">myyh2357</p>
+                </div>
+            </div>
+
+            
+                <a name="comment_2215"></a>
+                <div class="comment_line comment-content">
+                    
+                    <span style="white-space:pre-wrap;">x가 0.9999...인 경우, 9x = 9이고 x = 1/1이 됩니다. 1.49 -&gt; 3/2도 정확히는 3/2가 1.5입니다. 따라서 가장 가까운 정수로 된 분모,분자를 찾는게 명확하지 않을까요?</span>
+                    -
+                    <span style="font-size:11px;">
+                        졸린하마,
+                        2018/05/02 00:45
+                    </span>
+                </div>
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>21개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_11976"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>파이썬 3 입니다.</p>
+<pre><code class="python">def gcd(a, b):                # 최대공약수
+    if a &lt; b: (a, b) = (b, a)
+    while b != 0: (a, b) = (b, a % b)
+    return a
+
+
+p = input('변환할 순환소수를 첫번째 순환마디까지 입력하세요. : ')
+if '.' not in p: p += '.'          # p가 정수인 경우 뒤에 .을 추가해줌 ex 15 -&gt; 15.
+u = input('순환마디를 입력하세요. : ')
+f = len(p) - p.find('.') - 1       # f는 첫번째 입력값의 소수점 밑의 자리수
+pi, ui = float(p), int(u)
+
+# 결과값 = 첫번째 순환마디까지 + 나머지 파트
+#   &quot; &quot;  =         pi          + ui / ((10**f)*(10**len(u) - 1))
+
+# pi = (pi * 10**f) / 10**f  -&gt; pi 를 분수형태로 변경 후 덧셈을 실시
+# 나머지 파트 : ex) 순환마디가 456 -&gt; (456/999) / 10**f
+
+# upper 와 lower 는 결과값의 분자와 분모 (약분하기 전)
+upper = pi * (100**f) * (10**len(u) - 1) + ui*10**f
+lower = (100**f)*(10**len(u) - 1)
+g = gcd(upper, lower)   # 최대공약수로 나눠줌으로써 약분
+upper /= g
+lower /= g
+print(int(upper), '/', int(lower))
+print(int(upper)/int(lower))     # 최종결과 확인
+
+</code></pre>
+
+<p>결과</p>
+<pre><code class="python">변환할 순환소수를 첫번째 순환마디까지 입력하세요. : 15.064
+순환마디를 입력하세요. : 064
+15049 / 999
+15.064064064064064
+</code></pre>
+
+<pre><code class="python">변환할 순환소수를 첫번째 순환마디까지 입력하세요. : 156.654
+순환마디를 입력하세요. : 54
+8616 / 55
+156.65454545454546
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/02 19:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hyuk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13214"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def gcd(a, b):
+    if b == 0: return a
+    else: return gcd(b, a%b)
+
+x = float(input('순환소수 입력: '))
+y = int(input('순환마디 입력: '))
+
+i = int(10**len(str(x).split('.')[1]) * x) - int(10**(len(str(x).split('.')[1])-len(str(y))) * x)
+j = 10**len(str(x).split('.')[1]) - 10**(len(str(x).split('.')[1])-len(str(y)))
+
+print('출력: {}/{}'.format(int(i/gcd(i,j)),int(j/gcd(i,j))))
+
+</code></pre>
+
+<pre><code>순환소수 입력: 1.49
+순환마디 입력: 9
+출력: 3/2
+
+순환소수 입력: 1.254367
+순환마디 입력: 4367
+출력: 57011/45450
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/28 21:00</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12002"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.Scanner;
+
+public class bun{
+ public static void main(String[] args){
+  Scanner sc = new Scanner(System.in);
+
+  System.out.println(&quot;순환소수와 순환마디 입력&quot;);
+  String input1 = sc.nextLine();
+  String input2 = sc.nextLine();
+
+  String [] arr = input1.split(&quot;\\.&quot;);
+  String a1 = arr[0];
+  String b1 = &quot;&quot;;
+  int count = 0;
+
+  for(int i=0;i&lt;arr[1].length()-input2.length()+1;i++){
+   if((arr[1].substring(i,i+input2.length())).equals(input2) == false)
+     count++;
+  }   
+
+  a1 += arr[1];
+  int bun1 = Integer.parseInt(a1) - Integer.parseInt(input2);
+
+  for(int i=0; i&lt;input2.length();i++)
+   b1 += &quot;9&quot;;
+  for(int i=0; i&lt;count;i++)
+   b1 += &quot;0&quot;;
+
+  int a = bun1;
+  int b = Integer.parseInt(b1);
+
+  while( a!= 0) {
+   if( a &lt; b) {
+    int temp = a;
+    a = b;
+    b = temp;
+   }
+   a = a - b;
+  }
+
+  System.out.println(bun1/b + &quot;/&quot; + Integer.parseInt(b1)/b); 
+ }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/05/03 21:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">배혜민</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13573"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.Scanner;
+
+public class Javatutorial {
+    public static long gcd(long a, long b) {
+        if (b == 0)
+            return a;
+        else
+            return gcd(b, a % b);
+    }
+
+    public static void main(String[] args) {        
+        Scanner sc = new Scanner(System.in);
+        String n, rec;
+        int a, b;   
+        long bunmo, bunja, G;
+
+        // 입력
+        System.out.print(&quot;순환소수=&quot;);
+        n = sc.next();
+        System.out.print(&quot;순환마디=&quot;);
+        rec = sc.next();
+
+        // a: 마디 앞까지 10^a, b, 마디 끝까지 10^b
+        b = n.length() - n.indexOf(&quot;.&quot;) - 1;
+        a = b - rec.length();
+        n = n.replace(&quot;.&quot;,  &quot;&quot;); // 소숫점 제거
+
+        // 계산
+        bunmo = (long)(Math.pow(10, b) - Math.pow(10,  a));
+        bunja = Long.parseLong(n) - Long.parseLong(n.substring(0,  n.length() - rec.length()));
+
+        // 기약분수
+        G = gcd(bunja, bunmo);
+        bunja /= G;
+        bunmo /= G;
+
+        System.out.println(bunja + &quot;/&quot; + bunmo);
+        sc.close();
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/14 16:28</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14486"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>x = input()
+recurring = input()
+x_temp = (x.split('.')[0] + x.split('.')[1][:-1 * len(recurring)])
+q = int(x_temp + recurring) - int(x_temp)
+p = 10 ** len(x.split('.')[1]) - 10 ** len(x.split('.')[1][:-1 * len(recurring)])
+i = 2
+while i &lt;= p and i &lt;= q:
+    if p % i == 0 and q % i == 0:
+        p = p / i
+        q = q / i
+    else:
+        i += 1
+print(&quot;%d/%d&quot; % (q, p))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/02 21:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Thxios</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16247"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#순환소수를 분수로 나타내기
+y=float(input('순환마디가 끝나는 부분까지입력: '))
+x=int(input('순환마디 입력: '))
+
+stry=str(y)#문자열로
+strx=str(x)
+leny=len(stry)
+lenx=len(strx)
+geomy=stry.index(&quot;.&quot;)
+n10=leny-geomy-1
+
+#분모
+b=10**(n10)-10**(n10-lenx)
+#분자
+rsy=stry.rstrip(&quot;.&quot;)
+aa=y*(10**(n10-lenx))
+a=y*(10**(n10))-(aa//1)
+
+#기약분수로
+def irr(a,b):
+    j=2
+    while j&lt;=a:
+        if b%j==0 and a%j==0:
+            b=b//j
+            a=a//j
+            j=1
+        j+=1
+    print('답: ',int(a),'/',b)
+irr(a,b)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/01/25 15:41</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GammaKnight</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16291"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from math import gcd
+
+def cyclicnum(n,nd):
+    n,nd = str(n),str(nd)
+    n1 = str(float(n)*10**len(n[n.index('.')+1:]))
+    n1 = int(float(n1)-int((0,n1[:n1.index(nd)])[n1[:n1.index(nd)] != '']))
+    n2 = int('9'*len(nd)+'0'*len(n[n.index('.')+1:n.index(nd)]))
+    m = gcd(n1,n2)
+    print('%d/%d' %(int(n1/m),int(n2/m)))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/01/28 10:53</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김영성</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_16784"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import fractions
+
+#숫자 입력 함수
+def input_number():
+    num_1 = input()
+    num_2 = input()
+    return exchange_fountain(num_1,num_2)
+
+def exchange_fountain(num_1,num_2):
+    num = num_1
+    cycle_num = num_2
+    cycle_num_len = len(cycle_num)
+    #소수점 위치
+    place = num.find(&quot;.&quot;)
+    #순환 숫자 위치 찾기
+    cycle_place = 0
+    for i in range(place+1, len(num)):
+        if num[i:i+cycle_num_len]==cycle_num:
+            cycle_place=i
+            break
+    print(cycle_place)
+    #숫자에 따른 pow 값
+    #예:15.5 =&gt; 155-15 로 pow_cnt = 0
+    #   1.49 =&gt; 149-14 로 pow_cnt = 1
+    pow_cnt = 0        
+    if (cycle_place-place)&gt;=place :
+        pow_cnt = cycle_place-place-1
+    else :
+        pow_cnt = 0
+    #분자
+    result_1 = int((float(num)*pow(10,cycle_place-place))-float(num[:cycle_place])*pow(10,pow_cnt))
+    #분모
+    result_2 = pow(10,cycle_place-place)-pow(10,pow_cnt)
+    result = fractions.Fraction(result_1,result_2)
+    print(result_1)
+    print(result_2)
+    return result
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/02/18 23:10</p>
+                                <p class="static-profile" style="margin:0;padding:0;">쨔이</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17103"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">num = list(input())
+period = list(input())
+p = len(period)
+lgt = len(num) - num.index('.') - 1
+dnm = int(('9' * p) + ('0' * (lgt - p)))
+
+
+num.remove('.')
+
+temp = ''
+for i in num:
+    temp += i
+
+a = int(temp)
+
+for i in period:
+    for j in num:
+        if i == j:
+            num.remove(i)
+
+temp = ''
+for i in num:
+    temp += i
+
+b = int(temp)
+
+nm = abs(b - a)
+
+def gcd(a, b):
+    if a &lt; b:
+        (a, b) = (b, a)
+    while b != 0:
+        (a, b) = (b, a % b)
+    return a
+
+g = gcd(dnm, nm)
+
+print('{} / {}'.format(int(nm / g), int(dnm / g)))
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/03/13 10:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">D.H.</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17320"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C#</p>
+<pre><code class="cs">using System;
+using System.Linq;
+
+namespace CD162
+{
+    internal class Program
+    {
+        private static void Main(string[] args)
+        {
+            Console.Write(&quot;순환 소수: &quot;);
+            string repeatingDecimal = Console.ReadLine();
+            Console.Write(&quot;순환 마디: &quot;);
+            string repetend = Console.ReadLine();
+
+            Console.WriteLine(ToFraction(repeatingDecimal, repetend));
+            Console.ReadKey();
+        }
+
+        private static string ToFraction(string repeatingDecimal, string repetend)
+        {
+            // 소숫점 이하 길이 및 순환 마디의 길이로 부터 양변에 곱할 10^? 크기 구함
+            int decimalLenAfterPoint = repeatingDecimal.Split('.').Last().Length;
+            int nonRepetendLenAfterPoint = decimalLenAfterPoint - repetend.Length;
+            int powForDecimal = (int)(Math.Pow(10, decimalLenAfterPoint));
+            int powForRepentend = (int)(Math.Pow(10, nonRepetendLenAfterPoint));
+            // 좌변
+            int leftHand = powForDecimal - powForRepentend;
+            // 우변
+            int righrHand = (int)(decimal.Parse(repeatingDecimal) * powForDecimal)
+                - (int)(decimal.Parse(repeatingDecimal) * powForRepentend);
+            // 기약분수
+            int gcd = Gcd(leftHand, righrHand);
+            return $&quot;{righrHand / gcd}/{leftHand / gcd}&quot;;
+        }
+
+        private static int Gcd(int a, int b) // 최대공약수
+        {
+            int lg = a &gt; b ? a : b;
+            int sm = a &gt; b ? b : a;
+            return b == 0 ? a : Gcd(b, a % b);
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/03/28 09:55</p>
+                                <p class="static-profile" style="margin:0;padding:0;">mohenjo</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_19289"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from fractions import Fraction
+a=input(&quot;순환소수: &quot;)
+b=input(&quot;순환마디: &quot;)
+num=a+b+b+b
+c=num.index(b)
+if num[c+1]==num[c+2]==num[c+3]==b:
+    q=(10**(c-1))*float(num+b)-(10**(c-2))*float(num)
+    w=(10**(c-1))-(10**(c-2))
+print(Fraction(int(q),int(w)))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/09/13 13:41</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박재욱</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_21090"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def gcd(a,b):
+    value = 0
+    if a%b == 0 :
+        return int(b)
+    else :        
+        value = a%b
+        a=b
+        b=value
+    return gcd(a,b)
+
+s1 = float(input(&quot;순환소수 입력 : &quot;))
+s2 = int(input(&quot;순환 부분 : &quot;))
+
+x = int(10**(len(str(s1).split(&quot;.&quot;)[1]))*s1) - int(10**(len(str(s1).split(&quot;.&quot;)[1])-len(str(s2)))*s1)
+y = int(10**(len(str(s1).split(&quot;.&quot;)[1]))) - int(10**(len(str(s1).split(&quot;.&quot;)[1])-len(str(s2))))
+
+print(&quot;{}/{}&quot;.format(int(x/gcd(x,y)),int(y/gcd(x,y))))
+</code></pre>
+
+<p>앞의 내용(018/06/28 21:00 Creator)을 gcd만 변경하고 그대로 copy</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/02/26 23:21</p>
+                                <p class="static-profile" style="margin:0;padding:0;">semipooh</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22297"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import math
+def recnum(num, r):
+    b = int(10**len(str(num).split('.')[1]))
+    s = int(10**(len(str(num).split('.')[1])-len(str(r))))
+
+    numerator = int(num*b) - int(num*s)
+    denominator = int(b-s)
+    d = math.gcd(numerator, denominator)
+
+    return (int(denominator/d), int(numerator/d))
+
+if __name__ == '__main__':
+    num = 1.49
+    r = 9
+    print('{}/{}'.format(recnum(num, r)[1], recnum(num, r)[0]))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/05/12 15:11</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Hwaseong Nam</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_22485"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">#파이썬
+#이렇게 푸는것이 맞는건지 모르겠으나 답은 나오네요
+#아직 분수 다루는것도 능숙하지 못해서 불필요한 소스가 들어갔는지 모르겠습니다
+#하지만 재미있게 풀었습니다^^
+
+from math import *
+
+def cir_dec(x,y):
+    print ()
+    print (str(x)+str(y)+str(y)+str(y)+str(y)+str(y)+str(y))
+    a=10**len(str(y))   #x에 얼마를 곱할지                      
+    b=1/(10**len(str(str(x)[str(x).index('.')+1:])))    #y에 얼마를 곱할지
+    z=len(str(x)[int(str(x).index('.'))+1:int(str(x).index(str(y)))])
+
+    numer=round(((a-1)*x)+(b*y),z)
+    denom=a-1
+
+    while (numer!=int(numer)):  #소수가 없어질때까지 10을 곱해준다
+        numer*=10
+        denom*=10
+
+    if numer&lt;denom:
+        c=ceil(numer/2)
+    else:
+        c=ceil(denom/2)
+
+    i=2
+    while (i&lt;=c):
+        if numer%i==0 and denom%i==0:
+            numer/=i
+            denom/=i
+        else:
+            i+=1
+
+    print ('   ',int(numer))
+    print(' = -----')
+    print ('   ',int(denom))
+
+cir_dec(0.5,5)
+cir_dec(0.12,12)
+cir_dec(1.49,9)
+cir_dec(3.247,47)
+cir_dec(3.3,3)
+cir_dec(0.36,36)
+cir_dec(0.2571428,571428)
+cir_dec(0.142857,142857)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/06/04 10:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Buckshot</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2758"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">0.5555555       
+    5
+ = -----        
+    9
+
+0.12121212121212
+    4
+ = -----        
+    33
+
+1.49999999      
+    3
+ = -----        
+    2
+
+3.247474747474747
+    643
+ = -----
+    198
+
+3.3333333
+    10
+ = -----
+    3
+
+0.36363636363636
+    4
+ = -----
+    11
+
+0.2571428571428571428571428571428571428571428
+    9
+ = -----
+    35
+
+0.142857142857142857142857142857142857142857
+    1
+ = -----
+    7</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Buckshot,
+                                    2020/06/04 10:05
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_23847"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import math
+
+
+def divisor(n):
+    return set([k for k in range(1,n+1) if n%k==0 ])
+
+
+def cir2frac(n, r):
+    x = n * (10 ** (str(n).index(str(r)) - 2))
+    a = int(math.modf(10 * x)[1] - math.modf(x)[1])
+    b = 9 * (10 ** (str(n).index(str(r)) - 2))
+    c = int(a / max(divisor(a) &amp; divisor(b)))
+    b = int(b / max(divisor(a) &amp; divisor(b)))
+    print(str(c) + &quot;/&quot; + str(b))
+
+
+cir2frac(1.49, 9)
+cir2frac(0.5, 5)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/12/01 17:48</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김우석</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_25809"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def function1(num1, num2):
+    num1_left = num1.split(&quot;.&quot;)[0]
+    num1_right = num1.split(&quot;.&quot;)[1]
+    num1_tog = num1_left + num1_right
+    _upper = int(num1_tog) - int(num1_tog[:len(num1_tog)-len(num2)])
+    _lower_list = []
+
+    for i in range(len(num2)):
+        _lower_list.append('9')
+    for j in range(len(num1_right)-len(num2)):
+        _lower_list.append('0')
+    _lower = int(''.join(_lower_list))
+
+
+    return [_upper, _lower]
+
+
+
+def gcd(n1, n2):
+    yaksu_1 = []
+    yaksu_2 = []
+
+    for i in range(1, n1+1):
+        if n1 % i == 0:
+            yaksu_1.append(i)
+
+    for i in range(1, n2+1):
+        if n2 % i == 0:
+            yaksu_2.append(i) 
+
+    _gcd = 1
+
+    for member in yaksu_1:
+        if member in yaksu_2 and member &gt; _gcd:
+            _gcd = member
+
+    return _gcd
+
+if __name__ == '__main__':
+    num1 = input(' input 1 : ')
+    num2 = input(' input 2 : ')
+    _gcd = gcd(function1(num1, num2)[0], function1(num1, num2)[1])
+    print('{0:.0f} / {1:.0f}'.format(function1(num1, num2)[0] / _gcd, function1(num1, num2)[1] / _gcd))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/07/19 09:24</p>
+                                <p class="static-profile" style="margin:0;padding:0;">DSHIN</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26146"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import fractions
+
+N = float(input())
+M = int(input())
+check = str(N).find(str(M))-1
+print(fractions.Fraction( int(N*(10**check)) - int(N*(10**(check-1))), 10**check -(10**(check-1))))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/08/24 01:28</p>
+                                <p class="static-profile" style="margin:0;padding:0;">BlakeLee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_26401"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">from math import gcd
+
+n = input(&quot;순환소수 = &quot;) # EX. 1.495
+i = input(&quot;순환마디 = &quot;) # EX. 95
+
+n2 = float(n) * (10 ** len(i)) # EX. 1.495 * 100 = 149.5
+a = str(n2 - float(n[:-len(i)])) # EX. str(149.5 - 1.4) = 148.1
+k = 10 ** (len(a)-a.find(&quot;.&quot;)-1) # EX. 10
+ans1 = int(float(a) * k) # EX. 1481
+ans2 = int(((10 ** len(i)) - 1) * k) # EX. 990
+
+print(int(ans1/gcd(ans1, ans2)), &quot;/&quot;, int(ans2/gcd(ans1, ans2))) # EX. (1481/gcd)/(990/gcd)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2021/09/28 11:16</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Kim Hangil</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27181"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>// Rust</p>
+<p>// x에 10의 적당한 승수를 곱해서 반복되는 순환마디만 소수점이하에 나타나도록 하고,</p>
+<p>// 다시 여기에, 순환마디 한 세트가 소수점 위로 올라오도록 10의 적당한 승수를 곱해주고,</p>
+<p>// 두 수를 빼서, x에 곱해지는 left 숫자, = 오른쪽 right 숫자 간 gcd를 구해 나눠줍니다.</p>
+<p>fn recurring_decimal() {</p>
+<pre><code>let a = 1.49;
+let b = 1;                          //마지막의 반복되는 순환마디의 개수
+
+let a_ = a.to_string();
+let mut iter = a_.split('.');       // -&gt;{Option&lt;subslice&gt;}
+let mut d = iter.next().unwrap();
+let mut f = iter.next().unwrap();
+let n = f.len() - b;
+
+let x0: u32 = (d.to_string() + &amp;f[..n]).parse().unwrap();
+let x1: u32 = (d.to_string() + &amp;f.to_string()).parse().unwrap();
+
+// gcd로 나누기
+let mut left = 10u128.pow(n as u32) * (10u128.pow(b as u32)-1);
+let mut right = (x1 - x0) as u128;
+let gcd = gcd(left, right);
+left /= gcd;
+right /= gcd;
+
+println!("{}/{}", right, left);
+</code></pre>
+<p>}
+fn gcd(a_: u128, b_: u128) -&gt; u128 {</p>
+<pre><code>let mut a = a_;
+let mut b = b_;
+if a &lt; b {  let t = b;
+            b = a;
+            a = t;}
+while b != 0 {  let t = a;
+                a = b;
+                b = t % b;}
+a
+</code></pre>
+<p>}</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/01/30 00:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">JW KIM</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_27370"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">a,b = input('순환소수의  첫 번째 순환마디가 끝나는 부분과 순환마디를 space 로 분리해서 입력해주세요. ').split(' ')
+u,l = (float(a)*(10**len(b)) - float(a[:-len(b)])),((10**len(b)) - 1)
+u_i,l_i = int(u*10**len(a.split('.')[1])), int(l*10**len(a.split('.')[1]))
+
+import math
+math.gcd(u_i,l_i)
+
+print(f'{int(u_i/math.gcd(u_i,l_i))}/{int(l_i/math.gcd(u_i,l_i))}')
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2022/02/18 12:57</p>
+                                <p class="static-profile" style="margin:0;padding:0;">로만가</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29657"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def gcd(a, b):
+    if a &lt; b:
+        a, b = b, a
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+cpn = input('순환소수: ')
+cn = input('순환마디: ')
+
+bunmo = int('9'*len(cn) + '0'*(len(cpn)-cpn.find('.')-len(cn) - 1))
+str_bunja = ''.join([i for i in cpn if i != '.'])
+bunja = int(str_bunja) - int(str_bunja[:-1 * len(cn)])
+g = gcd(bunmo, bunja)
+print('\n {0}  -&gt; {1}/{2}'.format(cpn, bunja//g, bunmo//g))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/09/26 16:38</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

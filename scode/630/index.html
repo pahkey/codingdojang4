@@ -1,0 +1,387 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="```
+input과 같은 체스판이 있다.
+나이트의 시작 위치는 &#39;K&#39;(5,0)이다.
+나이트는 직진 한번 + 대각 한번으로 이동한다.
+나이트를 &#39;CEREBRUM&#39; 이라는 문자 순서대로 이동하시오.
+(3가지 경로가 존재함)
+
+input:...">
+    <title>[게임]rusty lake : roots - 체스 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">[게임]rusty lake : roots - 체스</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">3</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 3</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <pre><code>input과 같은 체스판이 있다.
+나이트의 시작 위치는 'K'(5,0)이다.
+나이트는 직진 한번 + 대각 한번으로 이동한다.
+나이트를 'CEREBRUM' 이라는 문자 순서대로 이동하시오.
+(3가지 경로가 존재함)
+
+input:
+RERSCM
+ECRUCU
+UBBSBV
+BCCRRR
+RVCERE
+KSEVEU
+
+output:
+[(3, 1), (4, 3), (3, 5), (4, 3), (2, 2), (3, 4), (1, 3), (0, 5)]
+[(3, 1), (1, 0), (0, 2), (1, 0), (2, 2), (3, 4), (1, 3), (0, 5)]
+[(4, 2), (5, 4), (3, 5), (4, 3), (2, 2), (3, 4), (1, 3), (0, 5)]
+</code></pre>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">재귀</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2018/09/17 15:05</p>
+                    <p class="static-profile" style="margin:0;padding:0;">박범수</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>5개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_14672"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">dr = [(2,1), (2,-1), (-2,1), (-2,-1), (1,2), (-1,2), (1,-2), (-1,-2)]
+wp = 'CEREBRUM'
+test = '''\
+RERSCM
+ECRUCU
+UBBSBV
+BCCRRR
+RVCERE
+KSEVEU'''
+brd = test.splitlines()
+
+def roots(*p):
+  ret = []
+  for i in p:
+    for dx, dy in dr:
+      x, y = i[-1]
+      if 0 &lt;= x+dx &lt; 6 and 0 &lt;= y+dy &lt; 6 and brd[x+dx][y+dy] == wp[len(i)-1]:
+        ret.append(i+[((x+dx), (y+dy))])
+  if ret == [] or len(ret[0]) == len(wp)+1: return ret
+  return roots(*ret)
+
+iloc = [(5,0)]
+for i in roots(iloc): print(i)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/18 10:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_14727"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def knight(x, y, stops, path):
+    global brd, X, Y
+
+    if not stops:
+        print(path)
+    else:
+        directions = [(-2, -1), (-2, 1), (-1, -2), (-1, 2), (1, -2), (1, 2), (2, -1), (2, 1)]
+        for xx, yy in [(x + dx, y + dy) for dx, dy in directions]:
+            if 0 &lt;= xx &lt; X and 0 &lt;= yy &lt; Y and brd[xx][yy] == stops[0]:
+                knight(xx, yy, stops[1:], path + [(xx, yy)])
+
+
+brd = '''RERSCM
+ECRUCU
+UBBSBV
+BCCRRR
+RVCERE
+KSEVEU'''.splitlines()
+X, Y = len(brd), len(brd[0])
+knight(5, 0, list('CEREBRUM'), [])
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/09/25 02:25</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17551"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">board = [[&quot;R&quot;,&quot;E&quot;,&quot;R&quot;,&quot;S&quot;,&quot;C&quot;,&quot;M&quot;],[&quot;E&quot;,&quot;C&quot;,&quot;R&quot;,&quot;U&quot;,&quot;C&quot;,&quot;U&quot;],[&quot;U&quot;,&quot;B&quot;,&quot;B&quot;,&quot;S&quot;,&quot;B&quot;,&quot;V&quot;],[&quot;B&quot;,&quot;C&quot;,&quot;C&quot;,&quot;R&quot;,&quot;R&quot;,&quot;R&quot;],[&quot;R&quot;,&quot;V&quot;,&quot;C&quot;,&quot;E&quot;,&quot;R&quot;,&quot;E&quot;],[&quot;K&quot;,&quot;S&quot;,&quot;E&quot;,&quot;V&quot;,&quot;E&quot;,&quot;U&quot;]]
+
+movelist = [(-2,-1),(-1,-2),(-2,1),(-1,2),(1,2),(2,1),(2,-1),(1,-2)]
+
+word = &quot;CEREBRUM&quot;
+
+result = [[(5,0)]]
+step = 0
+temp = []
+
+while step &lt; len(word):
+    for move in movelist:
+        for route in result:
+            if route[-1][0]+move[0] in range(6) and route[-1][1]+move[1] in range(6) and board[route[-1][0]+move[0]][route[-1][1]+move[1]] == word[step]:
+                temp.append(route+[(route[-1][0]+move[0],route[-1][1]+move[1])])
+    step += 1
+    result = temp
+    temp = [] 
+
+for fin in result:
+    print(fin[1:])
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/04/18 12:22</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Wonjin Park</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_21290"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">inp=&quot;&quot;&quot;RERSCM
+ECRUCU
+UBBSBV
+BCCRRR
+RVCERE
+KSEVEU&quot;&quot;&quot;
+lst=[list(map(str,ln)) for ln in inp.split(&quot;\n&quot;)]
+route=[(2,1), (2,-1), (-2,1), (-2,-1), (1,2), (-1,2), (1,-2), (-1,-2)]
+wrd=&quot;CEREBRUM&quot;
+n=0
+elst=[]
+def KM(x,y,wrd,elst):
+    if not wrd:
+        print(elst)
+    else:
+        for dx,dy in route:
+            if 0&lt;=x+dx&lt;6 and 0&lt;=y+dy&lt;6 and lst[x+dx][y+dy]==wrd[0]:
+                KM(x+dx,y+dy,wrd[1:],elst+[(x+dx,y+dy)])
+KM(5,0,wrd,elst)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2020/03/08 13:43</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박시원</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29584"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">using System;
+using System.Collections.Generic;
+
+namespace solution
+{
+    class Program
+    {
+        public static string[] map;
+        public static string alphabeticalOrder;
+
+        static void Main(string[] args)
+        {
+            map = new string[6]
+            { &quot;RERSCM&quot;, &quot;ECRUCU&quot;,&quot;UBBSBV&quot;,&quot;BCCRRR&quot;,&quot;RVCERE&quot;,&quot;KSEVEU&quot;};
+            alphabeticalOrder = &quot;CEREBRUM&quot;;
+
+            List&lt;List&lt;string&gt;&gt; root = new List&lt;List&lt;string&gt;&gt;();
+            moveK(5, 0, 0, new List&lt;string&gt;(), root);
+
+            Console.WriteLine(&quot;\n\n output:&quot;);
+            foreach (var ll in root)
+            {
+                Console.WriteLine(&quot;[{0}]&quot;, string.Join(&quot;, &quot;, ll));
+            }
+        }
+
+        private static void moveK(int r, int c, int idx, List&lt;string&gt; list, List&lt;List&lt;string&gt;&gt; root)
+        {
+            if(idx == alphabeticalOrder.Length)
+            {
+                root.Add(new List&lt;string&gt;(list));
+                return;
+            }
+            int[] dr = { -2, -2, -1, 1, 2, 2, 1, -1 };
+            int[] dc = { -1, 1, 2, 2, 1, -1, -2, -2 };
+            for (int i = 0; i &lt; 8; i++)
+            {
+                int R = r + dr[i];
+                int C = c + dc[i];
+                if(R&gt;=0 &amp;&amp; C&gt;=0 &amp;&amp; R&lt;6 &amp;&amp; C&lt;6 &amp;&amp; map[R][C] == alphabeticalOrder[idx])
+                {
+                    list.Add(&quot;(&quot; + R + &quot;, &quot; + C + &quot;)&quot;);
+                    moveK(R, C, idx + 1, list, root);
+                    list.RemoveAt(list.Count - 1);
+                }
+            }
+        }
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/08/25 19:31</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>

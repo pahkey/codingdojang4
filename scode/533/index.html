@@ -1,0 +1,2401 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LISP은 괄호로 유명한 언어다.
+이 문제는 LISP 형태로 표현된 4칙연산 산술식을 계산하는 계산기 프로그램을 작성하는 것이다.
+
+LISP 표현식은 여는 괄호와 공백으로 구분된 항(term)의 목록 그리고 닫는 괄호로 만들어진다.
+첫 번...">
+    <title>LISP 계산기 - 코딩도장</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/common/css/markdown.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="/static/scode/css/list.css">
+    <link rel="stylesheet" href="/static/scode/css/view.css">
+    <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+    <style>
+        .readonly-banner { margin: 20px 0; color: #777; font-size: 13px; }
+        .site-nav { margin: 0 0 20px; }
+        .site-nav a { color: #fff; }
+        .static-meta { color: #777; font-size: 12px; }
+        .static-profile { color: #555; }
+        .static-pagination { margin: 30px 0; }
+        .comment_line { word-break: break-word; }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top site-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">코딩도장</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+        <div class="readonly-banner">
+            이 페이지는 코딩도장 데이터의 읽기 전용 정적 보관본입니다.
+        </div>
+        
+    <h2 class="question-subject">LISP 계산기</h2>
+
+    <div class="row">
+        <div class="col-md-1 answer-info hidden-xs hidden-sm">
+            <div class="recommend-box" title="추천">
+                <div class="recommend-box-count">5</div>
+            </div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+            <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">Lv. 4</div>
+        </div>
+        <div class="col-md-11">
+            <div class="markdown_area answer-content">
+                <p>LISP은 괄호로 유명한 언어다.
+이 문제는 LISP 형태로 표현된 4칙연산 산술식을 계산하는 계산기 프로그램을 작성하는 것이다.</p>
+<p>LISP 표현식은 여는 괄호와 공백으로 구분된 항(term)의 목록 그리고 닫는 괄호로 만들어진다.
+첫 번째 항은 +, -, *, /와 같은 심볼이며 나머지 항은 1, 2, 10, -10 등의 정수 혹은 또다른 LISP 표현식이 될 수 있다. 말하자면 연산자들이 가변 길이 인자를 받는 셈이다.</p>
+<p>더하기의 경우 <code>(+ 1 2 3)</code>은 6이다. <code>(+)</code>만 단독으로 사용된 경우는 0이다. 곱하기의 경우는 기본 값이 1이고, 빼기와 나누기는 인자가 최소 하나 이상 있어야 한다. 아래는 빼기와 곱하기의 예를 보여준다. (화살표는 결과값을 나타낸다)</p>
+<pre><code>(- 10 3) → 7
+(- 10 3 5)  → 2
+(* 2 3) → 6
+(* 2 3 4) → 24
+(+) → 0
+-5 → -5
+</code></pre>
+
+<p>괄호가 중쳡된 경우는 아래와 같다.</p>
+<pre><code>(* (+ 2 3) (- 5 3)) → 10
+(/ (+ 9 1) (+ 2 3)) → 2
+</code></pre>
+
+<p>모두 괄호로 묶여있기 때문에 <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code> 연산자 사이의 우선순위는 따로 신경쓸 필요 없다.</p>
+            </div>
+
+            <div class="buttons">
+                
+                    <span class="label label-tag label-xs">recursive descent parser</span>
+                
+            </div>
+
+            <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                <div class="pull-right profile-block profile-block-writer">
+                    <p style="margin:0;padding:0;">2016/11/09 00:04</p>
+                    <p class="static-profile" style="margin:0;padding:0;">Han Jooyung</p>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+        <a name="answer-filter-area"></a>
+        <div class="clearfix answer-filter">
+            <p class="lead pull-left" style="margin:0">
+                <strong>23개의 풀이가 있습니다.</strong>
+            </p>
+        </div>
+    
+
+    <div class="answer-area">
+        
+            <div class="answer-line">
+                <a name="answer_5217"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">2</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>아래의 함수를 만들면 될 것 같다.</p>
+<pre><code class="c">int eval(const char* s);
+</code></pre>
+
+<p>그런데 리스트를 파싱하는 함수가 <code>(+ 1 (- 1 2) 3)</code>를 처리한다면, 중첩된 <code>(- 1 2)</code>에 대해서 재귀적으로 호출할 수 있어야 할 것 같다. 이때, 문자열 전체를 처리하지 않을 것이고 닫힌 괄호까지만 처리하면 된다. 그러면 원래의 리스트를 처리하는 함수는 파싱하고 남은 부분 <code>3)</code>을 재귀호출 함수에서 받아올 수 있어야 한다. 즉, 입력 커서 역할을 하는 <code>const char* s</code>만 전달해서는 소용없고 함수 호출하여 이 값을 업데이트 해야 한다. 이중포인터로 전달하는 것도 방법이겠지만 <code>context</code>라고 감싸서 전달하는 것이 낫다.</p>
+<pre><code class="c">typedef struct context context_t;
+
+struct context {
+    const char * s;
+};
+
+int eval(context_t* c);
+</code></pre>
+
+<p>그러면 <code>main()</code>은 다음처럼 만들어볼 수 있다. (<code>free</code>는 생략)</p>
+<pre><code class="c">context_t* context(const char* s) {
+    context_t* c = (context_t*)malloc(sizeof(context_t));
+    c-&gt;s = s;
+    return c;
+}
+
+int main(int argc, const char * argv[]) {
+    printf(&quot;%d\n&quot;, eval(context(&quot;1&quot;)));
+    printf(&quot;%d\n&quot;, eval(context(&quot;123&quot;)));
+    printf(&quot;%d\n&quot;, eval(context(&quot;(+)&quot;)));
+    printf(&quot;%d\n&quot;, eval(context(&quot;(+ 2 3)&quot;)));
+    printf(&quot;%d\n&quot;, eval(context(&quot;(+ 1 2)&quot;)));
+    printf(&quot;%d\n&quot;, eval(context(&quot;(* 1 2 (- 1 2 -3))&quot;)));
+
+    return 0;
+}
+</code></pre>
+
+<p>간단한 양의 정수만 고려해보자.</p>
+<pre><code class="c">int eval(context_t* c) {
+    return num(c);
+}
+
+int num(context_t* c) {
+    int n = 0;
+    while (isdigit(*c-&gt;s)) {
+        n *= 10;
+        n += *c-&gt;s - '0';
+        c-&gt;s++;
+    }
+    return n;
+}
+</code></pre>
+
+<p>음의 정수까지 고려한다면..</p>
+<pre><code class="c">int eval(context_t* c) {
+    if (isdigit(*c-&gt;s))
+        return num(c);
+    if (*c-&gt;s == '-') {
+        ++c-&gt;s;
+        return -num(c);
+    }
+
+    return 0;
+}
+</code></pre>
+
+<p>드디어 리스트를 처리해보자</p>
+<pre><code class="c">int eval(context_t* c) {
+    if (isdigit(*c-&gt;s))
+        return num(c);
+    if (*c-&gt;s == '-') {
+        ++c-&gt;s; // skip -
+        return -num(c);
+    }
+
+    assert(*c-&gt;s == '(');
+    ++c-&gt;s; // skip (
+    return list(c);
+}
+</code></pre>
+
+<p><code>list()</code> 는 첫 항이 +,-,*,/ 여야 한다. 나머지는 공백을 건너뛰고 닫힌 괄호까지 처리한다.
+그런데 -는 첫 항에서 나머지를 빼고, / 는 첫 항에서 나머지를 나눠나간다.</p>
+<pre><code class="c">void spaces(context_t* c) {
+    while (*c-&gt;s == ' ')
+        c-&gt;s++;
+}
+
+int list(context_t* c) {
+    char op = *c-&gt;s++;
+    int value;
+
+    if (op == '-' || op == '/') { // should have 1+ args
+        spaces(c);
+        value = eval(c);
+    } else if (op == '+') {
+        value = 0;
+    } else {
+        value = 1;
+    }
+
+    while (*c-&gt;s != ')') {
+        spaces(c);
+        value = calc(op, value, eval(c));
+    }
+    ++c-&gt;s; // skip )
+
+    return value;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/11/09 01:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Han Jooyung</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5239"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">1</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>첫번째 방법: 정규식 이용</p>
+<pre><code class="python">import re
+run = lambda e, *_tuple: str(eval(e.join(_tuple)))
+ins = lambda _string, start, end: _string[:start] + '&quot;' + _string[start:end] + '&quot;' + _string[end:]
+while __name__ == '__main__':
+    s = input('&gt;&gt;&gt;')
+    for i in reversed([*re.finditer(r'([^() ]+)', s)]):
+        s = ins(s, *i.span())
+    for i in [('(', 'run('), ' ,']:
+        exec('s = s.replace(&quot;%s&quot;, &quot;%s&quot;)'%(*i,))
+    print(eval(s))
+</code></pre>
+
+<p>두번째 방법: 정규식 없음</p>
+<pre><code class="python">def lisp_eval(args):
+    return eval(args[0].join(args[1:]))
+
+def divide_eval(_list):
+     res = []
+     k = 0
+     for n, i in enumerate(_list):
+          if i == '(':
+               k += 1
+          if i == ')':
+               k -= 1
+          if i == ' ' and k == 0:
+              res.append(n)
+     return res
+
+def divide(_list):
+     res = []
+     s = _list[:]
+     target = reversed(sorted(divide_eval(_list)))
+     for i in target:
+          res.append(s[i+1:])
+          s = s[:i]
+     res.append(_list[0])
+     res.reverse()
+     return res
+
+def interpret(s):
+     if len(s) == 3:
+          return 0
+     s = s[1:-1]
+     s_list = divide(s)
+     for i in range(1, len(s_list)):
+          if '(' in s_list[i]:
+               s_list[i] = str(interpret(s_list[i]))
+     return lisp_eval(s_list)
+
+while __name__ == '__main__':
+     print(interpret(input('&gt;&gt;&gt;')))
+</code></pre>
+
+<p>파이썬 3.5.2 64</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/11/10 14:05</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Flair Sizz</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5220"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p><strong>Ruby</strong></p>
+<p>eval 사용(풀이1), 스택 구현(풀이2). 두가지로 풀이. (수정 : 풀이 2 추가)</p>
+<p>풀이 1. s-expression을 람다 약기로 변환한 뒤 eval.</p>
+<pre><code class="ruby">calc = proc {|op,*args| args.reduce(op) || 0 }
+lisp_eval = -&gt;exp { eval exp.gsub(/[(\s)]/, '('=&gt;&quot;calc[:&quot;, ' '=&gt;',', ')'=&gt;']') }
+</code></pre>
+
+<p>풀이 2. 토큰을 차례차례 스택에 push. 토큰이 ")"면 스택에서 직전의 연산자까지 꺼내서 계산. 이를 반복.</p>
+<pre><code class="ruby">calc = proc {|op,*args| args.reduce(op) || 0 }
+eval_top = -&gt;s { t=[]; t.unshift(s.pop) until t[0].is_a? Symbol; s &lt;&lt; calc[*t] }
+lisp_eval = -&gt;str do
+  tokens = str.gsub(/[()]/, &quot;(&quot;=&gt;&quot;&quot;,&quot;)&quot;=&gt;&quot; )&quot;).split.
+               map {|e| e == &quot;)&quot; ? e : e =~ /[[:digit:]]/ ? e.to_i : e.to_sym }
+  tokens.reduce([]) {|stack,e| e == &quot;)&quot; ? eval_top[stack] : stack &lt;&lt; e }.pop 
+end
+</code></pre>
+
+<p><strong>Test</strong></p>
+<pre><code class="ruby"># tests : arity 1, 3, 4, nested s-exp, complex s-exp
+cases = [&quot;(+)&quot;] +
+        [&quot;(- 10 3)&quot;, &quot;(* 2 3)&quot;] +  
+        [&quot;(- 10 3 5)&quot;, &quot;(* 2 3 4)&quot;] + 
+        [&quot;(* (+ 2 3) (- 5 3))&quot;, &quot;(/ (+ 9 1) (+ 2 3))&quot;] +
+        [&quot;(* 1 (- 2 3) 4 (+ 2 -1) 3)&quot; ]
+expect( cases.map(&amp;lisp_eval) ).to eq [0, 7, 6, 2, 24, 10, 2, -12]
+</code></pre>
+
+<p><strong>Output</strong></p>
+<pre><code class="ruby">lisp_eval[&quot;(+ 2 3 5 (* 2 5) (* -2 5))&quot;] #=&gt; 10
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/11/09 10:47</p>
+                                <p class="static-profile" style="margin:0;padding:0;">rk</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5240"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>댓글을 본 뒤 수정했습니다.
+p.s. 그러고보니 그냥 스택을 쓸껄 그랬군요..</p>
+<pre><code class="cpp">
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;iostream&gt;
+
+using namespace std;
+
+#define PLUS 0
+#define MINU 1
+#define MULT 2
+#define DIVD 3
+
+int pos;
+
+float Lisp(string input)
+{
+    float result = 0;
+    int mark = -1;
+
+    float nFirstNum = 0.0;  //앞 숫자    
+    float nSecondNum = 0.0; //뒷 숫자
+    float returnResult = 0.0;
+    bool bFristInput = false;
+    bool bSecondInput = false;
+    //printf(&quot;input: %s\n&quot;, input.c_str());
+
+    while(1)
+    {
+        //입력받은 수식의 끝 체크
+        if(pos &gt;= input.length())
+        {            
+            break;
+        }
+
+        //닫는 괄호 연산 끝 리턴
+        if(input[pos] == ')')
+            break;
+
+        //여는 괄호가 나오면 다시 함수 호출
+        if(input[pos] == '(')
+        {
+            pos++;
+            returnResult = Lisp(input);
+
+            if(!bFristInput)
+            {
+                nFirstNum = returnResult;
+                bFristInput = true;
+            }
+            else
+            {
+                nSecondNum = returnResult;
+                bSecondInput = true;
+            }
+        }
+
+#pragma region 부호결정
+        //부호 결정
+        if(mark == -1)//부호가 아직 결정이 안됐다면
+        {
+            if(input[pos] == '+') 
+                mark = PLUS;
+            else if(input[pos] == '-' )
+                mark = MINU;
+            else if(input[pos] == '*' )
+                mark = MULT;
+            else if(input[pos] == '/' )
+                mark = DIVD;
+        }
+#pragma endregion
+
+#pragma region 문자열을 숫자로
+        //숫자 범위면
+        if(input[pos] &gt;= '0' &amp;&amp; input[pos] &lt;= '9')
+        {
+            int i = 0;
+            //첫 번째 숫자가 비어있으면
+            if(!bFristInput)
+            {
+                for(i = pos; input[i] &gt;= '0' &amp;&amp; input[i] &lt;= '9'; i++)
+                {
+                    nFirstNum *= 10; // 자리수 증가
+                    nFirstNum += input[i] - '0';
+                }
+                bFristInput = true;
+            }
+            //두 번째 숫자를 구한다.
+            else
+            {
+                for(i = pos; input[i] &gt;= '0' &amp;&amp; input[i] &lt;= '9'; i++)
+                {
+                    nSecondNum *= 10; // 자리수 증가
+                    nSecondNum += input[i] - '0';
+                }
+                bSecondInput = true;
+            }
+            pos = i - 1;
+        }
+#pragma endregion
+
+#pragma region 연산
+        //연산
+        if(bSecondInput)
+        {
+            switch(mark)
+            {
+            case PLUS:
+                //printf(&quot;%d + %d\n&quot;, nFirstNum, nSecondNum);
+                nFirstNum += nSecondNum;
+                break;
+            case MINU:
+                //printf(&quot;%d - %d\n&quot;, nFirstNum, nSecondNum);
+                nFirstNum -= nSecondNum;
+                break;
+            case MULT:
+                //printf(&quot;%d * %d\n&quot;, nFirstNum, nSecondNum);
+                nFirstNum *= nSecondNum;
+                break;
+            case DIVD:
+                if(nSecondNum == 0)
+                    return -999;
+                nFirstNum /= nSecondNum;
+                break;
+            }
+            nSecondNum = 0;
+            bSecondInput = false;
+        }
+#pragma endregion
+
+        pos++;
+
+        result = nFirstNum;
+
+    }
+    //printf(&quot;return: %d\n&quot;, result);
+    return result;
+}
+
+int main (int argc, char *argv[])
+{
+    string input[7];
+    input[0]= &quot;(* (+ 2 3) (- 5 3))&quot;;
+    input[1] =&quot;(/ (+ 9 1) (+ 2 3))&quot;;
+    input[2] = &quot;(* (- 10 3 5) (+ 2 5) (/ 10 2))&quot;;
+    input[3] = &quot;(/ (* 12 12 12 12) (* 2 6) (/ 10 5))&quot;;
+    input[4] = &quot;(+ (+ (- 3 5) (* 1 3)) (+ 2 5))&quot;;
+    input[5] = &quot;(* (/ (+ (- 3 5) (+ 4 1)) (+ 1 1)) (- 1 2)) &quot;;
+    input[6] = &quot;(+ (* 2 2 2 2) (/ 64 2 2 2))&quot;;
+
+    int i = 0; 
+    for(i = 0; i &lt; 7; i ++)
+    {
+        pos = 0;
+        printf(&quot;result: %.3f\n&quot;, Lisp(input[i]));
+    }
+    return 0;
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/11/10 16:37</p>
+                                <p class="static-profile" style="margin:0;padding:0;">황 승태</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1913"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">괄호가 3번 이상 중첩된 경우에 올바른 계산이 안되는 것 같습니다.
+중첩된 괄호를 만나서 Lisp()으로 계산한 다음 바로 )를 찾는게 문제 아닐지.. 짝이 맞는 괄호를 찾아야 하죠.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Han Jooyung,
+                                    2016/11/14 22:34
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1914"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">네 확인해보겠습니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    황 승태,
+                                    2016/11/15 14:29
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5263"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>아, LISP의 사칙 연산은 단순한 이항연산이 아니었네요;; 죄송합니다. 문제를 뜨문뜨문 보는 바람에 잘못 풀었네요...</p>
+<p>검색해보니 LIST의 연산자는 뒤에 몇 개의 피연산자가 오는지에 따라서 다르게 작동하네요.</p>
+<ul>
+<li><code>(+ 1)</code> : 단항연산자로 동작</li>
+<li><code>(+ 1 2)</code> : 이항연산자로 동작</li>
+<li><code>(+ 1 2 3...)</code> : 피연산자를 리스트로 보고 이를 fold함. </li>
+</ul>
+<p>Swift3으로 다시 작성해봤습니다. <a href="http://swiftlang.ng.bluemix.net/#/repl/5836a3dcdcb5f43d4f9395f8">이곳</a>에서 확인할 수 있습니다.</p>
+<p>풀이한 과정은 이렇습니다. </p>
+<ol>
+<li>수식의 기본 형태는 여는괄호, 바로다음에 연산자, 그 이후로 공백으로 나뉘어지는 피연산자..., 닫는 괄호</li>
+<li>이 때 피연산자는 역시 괄호로 둘러싸인 수식일 수 있음</li>
+</ol>
+<p>이를 파싱하면 (연산자, [피연산자의 리스트]) 형식의 데이터를 얻게 됩니다.</p>
+<p>기본적으로 피연산자가 정수라 가정하고 커서를 옮겨가면서 정수값으로 파싱합니다. 그러다 중간에 여는 괄호를 다시 만나면
+재귀호출을 통해서 중첩된 수식 부분을 파싱합니다. 파싱된 결과는 재귀 enum 타입으로 처리했고, 평가는 이 타입의 메소드로 구현했습니다.</p>
+<pre><code class="swift">enum Expression {
+    case op(Character)
+    case number(Int)
+    indirect case operand(Expression, [Expression])
+
+    func evaluate() -&gt; Int? {
+
+        func operation(_ x: Character) -&gt; ((Int?, Int) -&gt; Int?)? {
+            let op: (Int, Int) -&gt; Int?
+            switch x {
+            case &quot;*&quot;: op = { $0 * $1 }
+            case &quot;/&quot;: op = { x, y in return y != 0 ? x / y : nil }
+            case &quot;+&quot;: op = { $0 + $1 }
+            case &quot;-&quot;: op = { $0 - $1 }
+            default: return nil
+            }
+            return { x, y in 
+                guard let x = x else { return nil }
+                return op(x, y) 
+            }
+        }
+
+        switch self {
+        case let .number(i): return i 
+        case let .operand(.op(x), values):
+            guard values.count &gt; 0 else { return 0 }
+            guard let ops = operation(x) else { return nil }
+            let vs = values.flatMap{ $0.evaluate() }
+            return vs.dropFirst().reduce(vs[0], ops)
+
+        default: return nil
+        }
+    }
+
+}
+
+func parse(expr: String, at index: String.Index? = nil) -&gt; (Expression?, String.Index) {
+    var cursor = index ?? expr.startIndex
+    var operands: [Expression] = []
+
+    guard expr[cursor] == &quot;(&quot; else { return (nil, cursor) }
+
+    cursor = expr.index(after:cursor)
+    let op: Expression = Expression.op(expr[cursor])
+    var nodeStart = expr.index(after:cursor)
+
+    while expr[cursor] != &quot;)&quot; &amp;&amp; cursor &lt; expr.endIndex {
+
+        if expr[cursor] == &quot; &quot; { 
+            if let i = Int(expr[nodeStart..&lt;cursor]) {
+                operands.append(.number(i))
+            }
+            nodeStart = expr.index(after:cursor)
+        }
+        else if expr[cursor] == &quot;(&quot; {
+            let (subexpr, nextposition) = parse(expr:expr, at:cursor)
+            if let subexpr = subexpr { operands.append(subexpr) }
+            nodeStart = nextposition
+            cursor = expr.index(after:nodeStart)
+            continue
+        }
+        cursor = expr.index(after: cursor)
+    }
+    if nodeStart &lt; cursor, let i = Int(expr[nodeStart..&lt;cursor]) {
+        operands.append(.number(i))
+    }
+    return (Expression.operand(op, operands), cursor)
+}
+
+let s = &quot;(+ 10  9 8 (* 5 4) 7 (/ 8 2) 6)&quot;
+if case let (s?, _) = parse(expr:s), let result = s.evaluate() {
+    print(result)
+} else {
+    print(&quot;invalid expression&quot;)
+}
+
+</code></pre>
+
+<hr />
+<p>일단 입력에는 오류가 없다고 가정하고 시작합니다. 
+LISP 표현식은 전위식 표기와 동치이기 때문에 사실상 괄호는 무시해도 됩니다. 
+따라서 괄호를 제외한 문자들을 공백으로 나누고
+연산자와 피연산자를 구분, (피연산자는 정수만) 연산자는 문자 그대로, 피연산자는 정수로 변환해준 후
+이를 뒤집어서 스택으로 만듭니다. (사실 <code>.pop(0)</code> 해도 되기 때문에 뒤집지 않아도 됩니다.)</p>
+<p>평가방식은 다음과 같습니다. </p>
+<ol>
+<li>스택에서 토큰을 하나 꺼냅니다. 토큰이 정수이면 토큰은 그 값 그대로 평가됩니다.</li>
+<li>토큰이 연산자라면 하나의 값을 더 꺼내어 평가하고, 다시 한 번 더 값을 꺼내어 평가합니다. 그런 다음 두 값에 연산자마다 약속된 연산을 적용하여 리턴합니다. </li>
+<li>2에서 평가중에 연산자가 튀어나온다면 2를 재귀적으로 호출합니다.</li>
+</ol>
+<pre><code class="python">
+
+def do(s=None):
+    ops = {
+        '*': lambda x, y: x * y,
+        '/': lambda x, y: x / y,
+        '+': lambda x, y: x + y,
+        '-': lambda x, y: x - y,
+    }
+
+    def getInput():
+        nonlocal s
+        if s is not None:
+            inp = s
+        else:
+            inp = input()
+        inp = ''.join(x for x in inp if x not in '()').split()
+        temp = []
+        for token in inp:
+            if token.isdigit() or (token[0] == '-' and token[1:].isdigit()):
+                temp.append(int(token))
+            elif token in '+-/*':
+                    temp.append(token)
+        return temp[::-1]
+
+    def evaluate(st):
+        x = st.pop()
+        if isinstance(x, int):
+            return x, st
+        if x in ops:
+            a, st = evaluate(st)
+            b, st = evaluate(st)
+            return ops[x](a, b), st
+
+    return evaluate(getInput())[0]
+
+
+print(do('(- 10 3)'))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2016/11/14 14:59</p>
+                                <p class="static-profile" style="margin:0;padding:0;">룰루랄라</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_1912"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">전위식 표현식과 LISP 표현식은 다르기 때문에 전위식을 가정하고 푸신다면 답이 달라집니다.
+(- 10 3 5) 과 같은 경우도 있구요..</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Han Jooyung,
+                                    2016/11/14 22:30
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1921"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">Swift를 잘 모르지만 case에 op는 빼도 좋을 것 같네요. 그리고 parse 함수의 while 에서 expr[cursor] != &quot;)&quot; &amp;&amp; cursor &lt; expr.endIndex 조건 식은 순서가 바뀐 것 같아요. (물론 이 문제에서는 상관없지만..)</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Han Jooyung,
+                                    2016/12/01 16:41
+                                </span>
+                            </div>
+                        
+                            <a name="comment_1925"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">네 말씀대로 op를 case에서 빼고 표현식 타입을  단일값 | (연산자, 피연산자) 의 형태로만 구분하는게 더 깔끔할 듯 합니다. 그리고 지적하신 검사 순서는 수정해야 하겠네요. endIndex는 시퀀스의 길이값과 일치해서 문제가 됩니다.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    룰루랄라,
+                                    2016/12/14 16:17
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5864"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import re
+
+def eval(op, variables):
+    variable = list(map(int, variables.split()))
+    if op == '+':
+        out = sum(variable)
+    elif op == '-':
+        out = variable[0]
+        for i in range(2,len(variable)):
+            out -= variable[i]
+    elif op == '*':
+        out = 1
+        for i in range(len(variable)):
+            out *= variable[i]
+    elif op == '/':
+        out = variable[0]
+        for i in range(2,len(variable)):
+            out /= variable[i]
+    return out
+
+
+def f(input_string):
+    p = re.compile('\(([\+\-\*\/])\s(:?[^\(^\).]+)\)')
+    m = p.search(input_string)
+    out = eval(m.group(1),m.group(2))
+    output_string = input_string.replace(m.group(), str(out))
+    try:
+        f(output_string)
+    except:
+        print(output_string)
+        pass
+
+input_string = '(* (- 32 3) (- 32 4 8))'
+f(input_string)
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/01/07 18:42</p>
+                                <p class="static-profile" style="margin:0;padding:0;">서 현</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_5991"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>C(99)<br>
+gcc -std=c99 -pedantic-errors -W -Wall<br></p>
+<pre><code class="cpp">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;ctype.h&gt;
+#include &lt;stdbool.h&gt;
+#include &lt;assert.h&gt;
+
+// TokenStream 구조체
+typedef enum _type { OPERATOR, NUMBER } Type; // 연산자와 숫자 타입
+typedef struct _token
+{
+    Type type;
+    int content; 
+} Token;
+typedef struct _tokenStrem
+{
+    Token tokenArray[100];
+    int cursor; // 토큰스트림의 현재 가리키고 있는 인덱스
+    int size; // 토큰스트림 사이즈
+} TokenStream;
+
+// Stack 구조체
+typedef struct _stack
+{
+    Token arr[100]; // 토큰으로 이뤄진 배열스택
+    int cur; // 현재 가리키고 있는 인덱스
+} Stack;
+
+static TokenStream ts; // TokenStream은 접근하기 쉽게 전역변수로 선언
+
+// TokenStream Operator
+Token GetToken(void);
+void InitTokenStream(const char * expr);
+void ShowToken(Token t);
+void ShowTokenStream(void); // 디버깅용
+
+// Stack Operator
+Stack * StackInit(void);
+void StackPush(Stack * pstack, Token t);
+Token StackPop(Stack * pstack);
+bool StackIsEmpty(Stack * pstack);
+
+Token Calc(void)
+{
+    Token tmp, left, right, op;
+    Stack * peek = StackInit(); // 일단 담는다
+    Stack * calc = StackInit(); // ')'을 만나면 '('까지 따로 담아 계산한다
+    while (ts.cursor &lt; ts.size)
+    {
+        tmp = GetToken();
+        while (tmp.content != ')')
+        {
+            StackPush(peek, tmp);   
+            tmp = GetToken();
+        }
+        // tmp.content == ')'...')' 버려짐
+        while (tmp.content != '(')
+        {
+            tmp = StackPop(peek);
+            StackPush(calc, tmp); // 계산하기위한 스택에 넣는다
+        }
+        // tmp.content == '('
+        StackPop(calc); // '(' 버림
+
+        op = StackPop(calc); // 한항의 연산자
+        left = StackPop(calc); // 첫번째 숫자
+        while (! StackIsEmpty(calc))
+        {
+            right = StackPop(calc);
+            switch (op.content)
+            {
+                case '+': left.content = left.content + right.content; break;
+                case '-': left.content = left.content - right.content; break;
+                case '*': left.content = left.content * right.content; break;
+                case '/': left.content = left.content / right.content; break;
+                default: assert(0);
+            }
+        }
+        // calc 스택이 비었음
+        StackPush(peek, left); // 한항을 계산한 결과는 peek 스택에 다시 푸시
+    }
+    // TokenStream이 끝남
+    return left;
+}
+
+int main(void)
+{
+    const char * expr1 = &quot;(* (+ 1 1 3) (- 3 1) (+ 1 4) )&quot;;
+    printf(&quot;%s = &quot;, expr1);
+    InitTokenStream(expr1);
+    ShowToken(Calc());
+
+    const char * expr2 = &quot;(/ (+ 9 1) (+ 2 3))&quot;;
+    printf(&quot;%s = &quot;, expr2);
+    InitTokenStream(expr2);
+    ShowToken(Calc());
+
+    const char * expr3 = &quot;(- 10 3 5)&quot;;
+    printf(&quot;%s = &quot;, expr3);
+    InitTokenStream(expr3);
+    ShowToken(Calc());
+
+    const char * expr4 = &quot;(* (+ 2 3) (- 5 3))&quot;;
+    printf(&quot;%s = &quot;, expr4);
+    InitTokenStream(expr4);
+    ShowToken(Calc());
+
+    return 0;
+}
+
+// 토큰스트림에서 토큰 하나를 받음
+Token GetToken(void) { return ts.tokenArray[ts.cursor++]; }
+
+// 문자열을 TokenStream으로 변환
+void InitTokenStream(const char * expr)
+{
+    Token tmpToken;
+    int tmpNum;
+    int i = 0;
+
+    while (*expr)
+    {
+        if (isdigit(*expr))
+        {
+            sscanf(expr, &quot;%d&quot;, &amp;tmpNum);    
+            tmpToken.type = NUMBER;
+            tmpToken.content = tmpNum;
+            ts.tokenArray[i++] = tmpToken;
+            while (isdigit(*expr))
+                expr++;
+        }
+
+        else if (isspace(*expr))
+        {
+            expr++;
+        }
+
+        else
+        {
+            tmpToken.type = OPERATOR;
+            tmpToken.content = *expr;
+            ts.tokenArray[i++] = tmpToken;
+            expr++;
+        }
+    }
+    ts.size = i;
+    ts.cursor = 0;
+}
+
+// Token 하나를 타입에 맞게 출력한다
+void ShowToken(Token t)
+{
+    if (t.type == OPERATOR)
+        printf(&quot;%c \n&quot;, t.content);
+    else
+        printf(&quot;%d \n&quot;, t.content);
+}
+
+// 토큰스트림이 잘 됐는지 확인하는 디버깅용
+void ShowTokenStream(void)
+{
+    int i;
+    for (i = 0; i &lt; ts.size; i++)
+    {
+        if (ts.tokenArray[i].type == OPERATOR)
+            printf(&quot;[OPERATOR] %c \n&quot;, ts.tokenArray[i].content);
+        else
+            printf(&quot;[NUMBER] %d \n&quot;, ts.tokenArray[i].content);
+    }
+    printf(&quot;TokenStream size = %d \n&quot;, ts.size);
+    putchar('\n');
+}
+
+// 스택 초기화
+Stack * StackInit(void)
+{
+    Stack * ret = malloc(sizeof (Stack));
+    ret-&gt;cur = -1;
+    return ret;
+}
+
+void StackPush(Stack * pstack, Token t)
+{
+    pstack-&gt;arr[++pstack-&gt;cur] = t; 
+}
+
+Token StackPop(Stack * pstack) { return pstack-&gt;arr[pstack-&gt;cur--]; }
+
+bool StackIsEmpty(Stack * pstack) { return pstack-&gt;cur == -1; }
+/* 
+문자열을 토큰으로 쪼개어 토큰스트림을 만듭니다.
+토큰스트림에서 토큰 하나씩을 받아 peek 스택에 담습니다.
+')' 토큰을 만나면 peek 스택에 담아둔 토큰중 '('를 만날때까지 calc 스택으로 push하고,
+peek 스택에서는 pop을 합니다.
+calc 스택에서는 스택이 빌때까지 계산을 한뒤 peek스택으로 push합니다.
+스택을 두개 사용하여 한곳에서는 임시로 토큰을 받고, ( )사이의 숫자와 연산자는 calc스택에 다시
+담아 연산을 한뒤 다시 되돌려주는 방법으로 했습니다.
+*/
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/01/21 00:30</p>
+                                <p class="static-profile" style="margin:0;padding:0;">디디</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6102"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code>def func(s):
+    nums,X = list(), 0
+    for y in range(len(s)):
+        if s[y].isnumeric() and y &gt; X:
+            tmp,c = s[y],1
+            while s[y+c].isnumeric():
+                tmp += s[y+c]
+                c += 1
+                X = y+c
+            nums.append(tmp)
+    return str(eval(s[1].join(nums)))
+
+l,r = -1,-1
+s_list = ['(- 10 3)','(- 10 3 5)','(* 2 3)',\
+          '(* 2 3 4)','(* (+ 2 3) (- 5 3))','(/ (+ 9 1) (+ 2 3))']
+for string in s_list:
+    while '(' in string:
+        for x in range(len(string)):
+            if string[x] == '(':
+                l = x
+            elif string[x] == ')':
+                r = x
+                string = string[:l]+func(string[l:r+1])+string[r+1:]
+                break
+    print(string)
+
+#### 2017.02.04 D-383 ####
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/02/04 23:58</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GunBang</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6342"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>이제 막 String 클래스를 배우는 초보라서 아는 방법으로 열심히 해봤습니다ㅠㅠ
+문제점도 많지만....</p>
+<pre><code class="java">package coading.lisp;
+
+import java.util.*;
+
+public class Lisp_v2 {
+    public static void main(String[] args) {
+
+        System.out.print(&quot;Lisp 연산식을 입력하세요 : &quot;);
+        Scanner robot = new Scanner(System.in);
+        String input = robot.nextLine();
+
+        while (true) {
+
+            String tmp = input.substring(input.lastIndexOf(&quot;(&quot;, input.indexOf(&quot;)&quot;)) + 1, input.indexOf(&quot;)&quot;)) + &quot; &quot;;
+
+            String tmp_num_s = &quot;&quot;;
+            List&lt;Integer&gt; tmp_num = new ArrayList&lt;Integer&gt;();
+
+            char symbol = 0;
+            for (int i = 0; i &lt; tmp.length(); i++) {
+
+                if ((tmp.charAt(i) == '+' || tmp.charAt(i) == '-' || tmp.charAt(i) == '*' || tmp.charAt(i) == '/')
+                        &amp;&amp; i == 0) {
+                    symbol = tmp.charAt(i);
+
+                } else if (tmp.charAt(i) != ' ') {
+                    if (tmp.charAt(i) != ')') {
+                        tmp_num_s += tmp.charAt(i);
+                    }
+
+                } else {
+
+                    if (tmp_num_s != &quot;&quot;) {
+                        tmp_num.add(Integer.decode(tmp_num_s));
+                        tmp_num_s = &quot;&quot;;
+                    }
+                }
+            }
+
+            int temp = tmp_num.get(0);
+            for (int i = 1; i &lt; tmp_num.size(); i++) {
+                switch (symbol) {
+                case '+':
+                    temp += tmp_num.get(i);
+                    break;
+                case '-':
+                    temp -= tmp_num.get(i);
+                    break;
+                case '*':
+                    if (tmp_num.get(i) != 0)
+                        temp *= tmp_num.get(i);
+                    else
+                        temp *= 1;
+                    break;
+                case '/':
+                    if (tmp_num.get(i) != 0)
+                        temp /= tmp_num.get(i);
+                    else
+                        temp /= 1;
+                    break;
+                }
+            }
+
+            System.out.println(input.replace(&quot;(&quot; + tmp.trim() + &quot;)&quot;, String.valueOf(temp)));
+
+            input = input.replace(&quot;(&quot; + tmp.trim() + &quot;)&quot;, String.valueOf(temp));
+            if (input.indexOf('(') == -1) {
+                break;
+            }
+        }
+    }
+}
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/02/24 16:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">SeonKi  Lee</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6616"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="java">import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class LISPCalculator {
+
+    static Node root = null;
+    static Node current = null;
+    static Node key = null;
+
+    public static void main(String[] args) {
+        final String ss = &quot;(* (+ 2 3) (- 5 3))&quot;;
+        final Pattern p = Pattern.compile(&quot;\\*|\\+|/|-(?!\\d)|-?\\d{1,30}|\\)&quot;);
+        final Matcher m = p.matcher(ss);
+
+        while (m.find()) {
+            final String mg = m.group();
+            if (mg.equals(&quot;*&quot;) || mg.equals(&quot;/&quot;) | mg.equals(&quot;+&quot;) | mg.equals(&quot;-&quot;)) {
+                Node node = new Node(mg, new ArrayList&lt;&gt;());
+                if (root == null) {
+                    root = node;
+                    current = node;
+                    key = node;
+                } else if (current.left == null) {
+                    current.left = node;
+                    node.parent = current;
+                    key = node;
+                } else if (current.right == null) {
+                    current.right = node;
+                    node.parent = current;
+                    key = node;
+                    current = current.left;
+                }
+            } else if (mg.equals(&quot;)&quot;)) {
+                if (current.parent != null) current = current.parent;
+                key = current;
+            } else {
+                key.numbers.add(Integer.valueOf(mg));
+            }
+        }
+
+        recursive(root);
+        String o = root.operation;
+        System.out.println(root.numbers.stream().reduce((a, b) -&gt; operation(a, b, o)).orElse(0));
+    }
+
+    private static void recursive(Node node) {
+        if (node == null) return;
+        recursive(node.left);
+        recursive(node.right);
+        node.result = node.numbers.stream().reduce((a, b) -&gt; operation(a, b, node.operation)).orElse(0);
+        if (node != root) node.parent.numbers.add(node.result);
+    }
+
+    private static Integer operation(Integer a, Integer b, String o) {
+        if (o.equals(&quot;+&quot;)) return a + b;
+        if (o.equals(&quot;-&quot;)) return a - b;
+        if (o.equals(&quot;*&quot;)) return a * b;
+        if (o.equals(&quot;/&quot;)) return a / b;
+        return 0;
+    }
+}
+
+class Node {
+    Node left;
+    Node right;
+    Node parent = null;
+    String operation;
+    List&lt;Integer&gt; numbers;
+    Integer result = 0;
+
+    public Node(String operation, List&lt;Integer&gt; numbers) {
+        this.operation = operation;
+        this.numbers = numbers;
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/03/19 03:46</p>
+                                <p class="static-profile" style="margin:0;padding:0;">genius.choi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6678"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="cs">using System;
+
+public class Test
+{
+    public static void Main()
+    {
+        string[] input = new string[]{&quot;(&quot;,&quot;*&quot;,&quot;(&quot;,&quot;+&quot;,&quot;2&quot;,&quot;3&quot;,&quot;)&quot;,&quot;(&quot;,&quot;-&quot;,&quot;5&quot;,&quot;3&quot;,&quot;1&quot;,&quot;)&quot;,&quot;)&quot;};
+
+        foreach(string a in input){
+            Console.Write(a);
+        }
+            Console.WriteLine();
+        stack(input);
+    }
+
+    static void stack(string[] data){
+
+        string[] stk = new string[100];
+
+        for(int i=0;i&lt;100;i++){
+            stk[i]=null;
+        }
+
+        for(int i=0;i&lt;data.Length;i++){
+            Console.WriteLine(&quot;data[&quot;+i+&quot;] : &quot;+data[i]);
+            if(data[i] ==&quot;)&quot; ){
+                Console.WriteLine(&quot;pop start&quot;);
+                stk = pop(stk,data[i]);
+            }else{
+                stk = push(stk,data[i]);
+            }
+        }
+        Console.WriteLine();
+        foreach(string b in stk){
+            Console.Write(b);
+        }
+
+    }
+
+    static string[] push(string[] stk,string d){
+
+        for(int i=0;i&lt;100;i++){
+            if(stk[i] == null){
+                stk[i] = d;
+                //Console.WriteLine(&quot;push : &quot; + stk[i]);
+                break;
+            }
+        }
+
+
+
+
+        return stk;
+    }
+
+    static string[] pop(string[] stk,string d){
+
+        int sum = 0;
+        int[] num = new int[10];
+        string cal = &quot;&quot;;
+
+        for(int i=0;i&lt;10;i++){
+            num[i]=0;
+        }
+
+
+
+        for(int i=99;i&gt;=0;i--){
+        //  Console.WriteLine(&quot;stk : &quot; +stk[i]);
+            if(stk[i] != null){
+
+                if(stk[i] == &quot;(&quot;){
+                    Console.WriteLine(&quot;cal go&quot;);
+
+                    int cnt = 0;
+                    for(int j = 9;j&gt;=0;j--){
+                        if(num[j]!=0){
+                            sum = num[j];
+                            cnt = j;
+                            Console.WriteLine(&quot;cnt : &quot; + cnt);
+                            break;
+                        }
+                    }
+
+                    for(int j = 0;j&lt;cnt;j++){
+                        if(num[j]!=0){
+
+                            if(cal == &quot;+&quot;){
+                                sum += num[j];
+                            }else if(cal == &quot;-&quot;){
+                                sum = sum-num[j];
+                            }else if(cal == &quot;*&quot;){
+                                sum *= num[j];
+                            }else{
+                                sum /= num[j];
+                            }
+
+                        }
+                    }
+                    stk[i]=sum.ToString();
+                    Console.WriteLine(&quot;cal_data : &quot; + sum);
+                    Console.Write(&quot;stk : &quot;);
+                    foreach(string stkd in stk){
+                        Console.Write(stkd);
+                    }
+                    Console.WriteLine();
+                    break;
+                }else if(stk[i] ==&quot;*&quot; || stk[i] ==&quot;/&quot; || stk[i] ==&quot;+&quot; || stk[i] ==&quot;-&quot;){
+                    Console.WriteLine(&quot;cal save&quot; + stk[i]);
+                    cal = stk[i];
+                    stk[i]=null;
+                }else{
+                    Console.WriteLine(&quot;num save&quot;);
+                    for(int j = 0;j&lt;10;j++){
+                        if(num[j]==0){
+                            num[j]=Int32.Parse(stk[i]);
+                            stk[i]=null;
+                            Console.WriteLine(&quot;pop : &quot; + num[j]);
+                            break;
+                        }
+                    }
+
+                }
+
+            }
+        }
+        return stk;
+    }
+
+
+
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/03/27 12:53</p>
+                                <p class="static-profile" style="margin:0;padding:0;">오수진</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_6864"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def lisp_calc(exp_str):
+    # 공백을 제거하고 숫자와 기호를순서대로 배열로 만듦
+    exps = []
+    for s in exp_str.split(' '):
+        if s.isdigit():
+            exps.append(s)
+        else:
+            before_num = False
+            for x in s:
+                if x.isdigit():
+                    if before_num:
+                        exps.append(exps.pop()+x)
+                    else:
+                        before_num = True
+                        exps.append(x)
+                else:
+                    exps.append(x)
+                    before_num = False
+
+    # 순서대로 파싱하면서 괄호가 닫히면 계산
+    codes = []
+    nums = []
+    begin_bracket = False
+    for e in exps:
+        # 괄호가 끝나면 괄호가 닫히기 전 값들을 계산
+        if e == ')':
+            exp = codes.pop(-1).join(nums.pop())
+            res = str(eval(exp))
+            if len(nums) == 0:
+                nums.append([res])
+            else:
+                nums[-1].append(res)
+        # 숫자는 nums에 넣음
+        elif e.isdigit():
+            if begin_bracket:
+                nums.append([e])
+                begin_bracket = False
+            else:
+                nums[-1].append(e)
+        # 괄호가 시작되면 닫히기 전까지 같은 계산식 수준으로 숫자들을 넣도록 마크
+        elif e == '(':
+            begin_bracket = True
+        # 기호
+        else:
+            codes.append(e)
+    return nums[0]
+
+print(lisp_calc('(- 10 3)'))
+print(lisp_calc('(* (+ 2 3) (- 5 3))'))
+print(lisp_calc('(+ (* 5 2) (- 15 5) (/ 20 2))'))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/04/12 11:49</p>
+                                <p class="static-profile" style="margin:0;padding:0;">soleaf</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_7999"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python 3으로 풀었습니다.
+Stack을 이용했는데, 코드 라인수가 좀 길어지네요.
+고민을 더 해봐야겠습니다.</p>
+<pre><code class="python">def calculate(s):
+    def is_sign(c):
+        return c == '*' or c == '-' or c == '+' or c == '/'
+
+    def calc(sign, num, others):
+        if sign == '+': return num + sum(others)
+        if sign == '-': return num - sum(others)
+        if sign == '*':
+            val = num
+            for x in others:
+                val *= x
+            return val
+        if sign == '/':
+            val = num
+            for x in others:
+                val /= x
+            return val
+        return None
+
+    if s == '(+)':
+        return 0
+
+    S = []
+    prev = 0
+    for c in s:
+        if c.isdigit():
+            prev = prev * 10 + int(c)
+        else:
+            if prev != 0:
+                S.append(prev)
+                prev = 0
+            if c == '(' or c == ' ':
+                continue
+            elif c == ')':
+                nums = []
+                while not is_sign(S[-1]):
+                    nums.append(S.pop(-1))
+                S.append(calc(S.pop(-1), nums[-1], nums[:-1]))
+            else:
+                S.append(c)
+    return S[0]
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/07/24 17:53</p>
+                                <p class="static-profile" style="margin:0;padding:0;">SOUP</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8219"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Python3</p>
+<p>원래 개념에 가깝게 해 볼랬는데 딥따 어렵네요..-_-;</p>
+<p>E = (+) | (*) | (+ T) | (- T) | (/ T) | N</p>
+<p>T = '' | E | T T</p>
+<p>N = NN | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9</p>
+<p>리스트에 해당하는 T = T T 이 부분만 따로 처리했습니다. </p>
+<p>tsplit() 함수가 제일 앞의 (리스트가 아닌) term과 나머지 term을 잘라 줍니다.</p>
+<p>정규식 썼으면 패턴매칭해서 쉽게 될 듯</p>
+<p>계산할 때 eval() 함수를 쓰기 위해 숫자도 전부 문자열로 처리했습니다.</p>
+<pre><code class="python">def exp(E):
+    if E[0] != '(': return E
+    if E == '(+)':  return '0'
+    if E == '(*)':  return '1'
+    OP, T = E[1], E[3:-1]
+    return str(eval(OP.join(term(T))))
+
+def term(T):
+    if T == '': return []
+    head, tail = tsplit(T)
+    return [exp(head)] + term(tail)
+
+def tsplit(T):
+    if T[0] != '(':
+        p = (T+' ').find(' ')
+        return T[:p], T[p+1:]
+    else:
+        depth = 0
+        for p in range(len(T)):
+            depth += (T[p] == '(') - (T[p] == ')')
+            if depth == 0:
+                return T[:p+1], T[p+2:]
+
+
+print(exp('(- 10 3)'))
+print(exp('(* 2 3 4)'))
+print(exp('(*)'))
+print(exp('(/ 10 (*) 5)'))
+print(exp('(* (+ 2 3) (- 5 3))'))
+print(exp('(/ (+ 9 1) (+ 2 3))'))
+print(exp('(* (/ (+ 9 1) (+ 2 3)) 3)'))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/08/05 09:34</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Noname</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_8849"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python"># 사람이 계산하는 데로... 
+# 가장 안 쪽 연산한 결과를 문자열로 대체 후 다시 재귀
+def calc(s):
+    print(s)
+    p2 = s.find(')')  # 처음 찾은 ) 위치
+    p1 = s.rfind('(', 0, p2)  # p2 부터 왼쪽으로 처음 찾은 ( 위치
+
+    # 가장 안 쪽 연산
+    op = s[p1 + 1]  # +
+    sub = s[p1 + 3:p2]  # 1 2
+    sub = sub.replace(' ', op)  # 1+2
+    sub = eval(sub)  # 3
+    if p1 == 0:
+        return sub
+
+    # 연산한 결과를 문자열로 대체 후 다시 재귀
+    s = s[:p1] + str(sub) + s[p2 + 1:]
+    return calc(s)
+
+
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2017/09/19 18:34</p>
+                                <p class="static-profile" style="margin:0;padding:0;">박범수</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_11915"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>Swift입니다. 재귀호출 없이 풀었습니다.</p>
+<p>주어진 수식은 스페이스를 기준으로 문자열 배열로 변환합니다.
+변환한 후, 왼쪽에서 오른쪽으로 )를 찾습니다. )를 발견하면 방향을 바꿔 왼쪽으로 (를 찾습니다.
+이 때 중첩되지 않은 수식을 발견하게 되며, 계산을 한 후 결과를 발견한 (,) 구간과 바꿔 줍니다.</p>
+<p>위 계산을 반복하면 수식이 들어 있던 배열에 최종 결과만 남게 됩니다. </p>
+<pre><code class="no-highlight">import Foundation
+enum CalculationError: Error {
+    case invalidOperator
+    case missingOperand
+    case divideByZero
+}
+
+func calculateUnit(_ formula:[String], _ start:Int, _ end:Int) throws -&gt; Int {
+    let op = formula[start + 1]
+    if op != &quot;+&quot; &amp;&amp; op != &quot;-&quot; &amp;&amp; op != &quot;*&quot; &amp;&amp; op != &quot;/&quot; {
+        throw CalculationError.invalidOperator
+    }
+    let operandCount = end - start - 2
+    if (op == &quot;-&quot; || op == &quot;/&quot;) &amp;&amp; operandCount &lt; 1 {
+        throw CalculationError.missingOperand
+    }
+
+    let defaultValue = op == &quot;+&quot; ? 0 : 1 
+    var result = (start + 2 &lt; end) ? Int(formula[start + 2])! : defaultValue
+
+    var index = start + 3
+    while index &lt; end {
+        let value = Int(formula[index])!
+        switch op {
+            case &quot;+&quot;: result += value
+            case &quot;-&quot;: result -= value
+            case &quot;*&quot;: result *= value
+            case &quot;/&quot;: if value == 0 {throw CalculationError.divideByZero}
+                      result /= value
+            default: print(&quot;Unknown operator - \(op)&quot;); break;
+        }
+        index += 1
+    }
+    return result
+}
+
+func calculate(_ f:String) -&gt; String {
+    var formula = f.reduce(&quot;&quot;, {$0 + ($1 == &quot;(&quot; ? &quot;( &quot; : ($1 == &quot;)&quot; ? &quot; )&quot; : String($1))) }).split(separator: &quot; &quot;).map({String($0)})
+
+    do {
+        var closeIndex = 0
+        while closeIndex &lt; formula.count {
+            if formula[closeIndex] == &quot;)&quot; {
+                var openIndex = closeIndex
+                while openIndex &gt;= 0 {
+                    if formula[openIndex] == &quot;(&quot; {
+                        let result = try calculateUnit(formula, openIndex, closeIndex) 
+                        formula.removeSubrange(openIndex...closeIndex)
+                        formula.insert(String(result), at: openIndex)
+                        closeIndex = openIndex
+                        break
+                    }
+                    openIndex -= 1 
+                }
+            }
+            closeIndex += 1
+        }
+    } catch CalculationError.invalidOperator {
+        return &quot;Invalid operator&quot;
+    } catch CalculationError.missingOperand {
+        return &quot;Operand missed&quot;
+    } catch CalculationError.divideByZero {
+        return &quot;Division by Zero&quot;
+    } catch {
+        return &quot;Unexpected error: \(error).&quot;
+    }
+    return formula[0]
+}
+
+print(&quot;(- 10 3) = &quot;, calculate( &quot;(- 10 3)&quot;))
+print(&quot;(- 10 3 5) = &quot;, calculate( &quot;(- 10 3 5)&quot; ))
+print(&quot;(* 2 3) = &quot;, calculate( &quot;(* 2 3)&quot; ))
+print(&quot;(* 2 3 4) = &quot;, calculate( &quot;(* 2 3 4)&quot; ))
+print(&quot;(+) = &quot;, calculate( &quot;(+)&quot; ))
+print(&quot;(*) = &quot;, calculate( &quot;(*)&quot; ))
+print(&quot;(* 5) = &quot;, calculate( &quot;(* 5)&quot; ))
+print(&quot;(- 1) = &quot;, calculate( &quot;(- 1)&quot; ))
+print(&quot;-5 = &quot;, calculate( &quot;-5&quot; ))
+print(&quot;(+ 5 -3) = &quot;, calculate( &quot;(+ 5 -3)&quot; ) )
+print(&quot;(- 5 -3) = &quot;, calculate( &quot;(- 5 -3)&quot; ) )
+print(&quot;( * ( + 2 3) (- 5 3)) = &quot;, calculate( &quot;(* (+ 2 3) (- 5 3))&quot; ) )
+print(&quot;( / ( + 9 1) (+ 2 3)) = &quot;, calculate( &quot;(/ (+ 9 1) (+ 2 3))&quot; ) )
+print(&quot;(-) = &quot;, calculate( &quot;(-)&quot; ))
+print(&quot;(- 1) = &quot;, calculate( &quot;(- 1)&quot; ))
+print(&quot;(/) = &quot;, calculate( &quot;(/)&quot; ))
+print(&quot;(/ 1) = &quot;, calculate( &quot;(/ 1)&quot; ))
+print(&quot;(/ 1 0) = &quot;, calculate( &quot;(/ 1 0)&quot; ))
+print(&quot;($ 1 2) = &quot;, calculate( &quot;($ 1 2)&quot; ))
+
+</code></pre>
+
+<p>결과는...</p>
+<pre><code class="no-highlight">(- 10 3) =  7
+(- 10 3 5) =  2
+(* 2 3) =  6
+(* 2 3 4) =  24
+(+) =  0
+(*) =  1
+(* 5) =  5
+(- 1) =  1
+-5 =  -5
+(+ 5 -3) =  2
+(- 5 -3) =  8
+( * ( + 2 3) (- 5 3)) =  10
+( / ( + 9 1) (+ 2 3)) =  2
+(-) =  Operand missed
+(- 1) =  1
+(/) =  Operand missed
+(/ 1) =  1
+(/ 1 0) =  Division by Zero
+($ 1 2) =  Invalid operator
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/04/30 13:43</p>
+                                <p class="static-profile" style="margin:0;padding:0;">졸린하마</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2212"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">&quot;(+)만 단독으로 사용된 경우는 0이다.&quot; 요구 사항에서 더하기 곱하기는 인자가 없는 경우 기본값(각각 0, 1)으로 계산된다고 하였습니다. 요부분 따로 처리가 필요해 보이네요.</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Han Jooyung,
+                                    2018/04/30 15:02
+                                </span>
+                            </div>
+                        
+                            <a name="comment_2213"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">자세히 읽어보니 그런게 있었네요. 
+인자 없이 더하기, 곱셈인 경우 기본값으로 0 혹은 1이 되게 했고, 더불어 몇가지 에러 처리를 추가했습니다. 
+Swift Exception Handling에 관해서 좀 더 알아볼 수 있는 좋은 기회였습니다. 고맙습니다. *꾸벅*</span>
+                                -
+                                <span style="font-size:11px;">
+                                    졸린하마,
+                                    2018/05/01 02:29
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_12887"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <p>어렵네요.<br><br>
+아직 코딩 실력이 좋지 않아, 각 예외조항( (+), (*), (/2), -5 등)은 따로 IF 처리했습니다.<br>
+그 밖에 연산들은 재귀함수를 이용하여 가장 안의 ()부터 찾고, 찾은것을 계산하여 기존 식에 넣어주는 식으로 재귀를 돌렸습니다.<br></p>
+<pre><code class="java">
+public class LISP {
+    public static void main(String[] args) {
+        String[] temp = { &quot;(- 10 3)&quot;, &quot;(- 10 3 5)&quot;, &quot;(* 2 3)&quot;, &quot;(* 2 3 4)&quot;, &quot;(+)&quot;, &quot;-5&quot;, &quot;(* (+ 2 3) (- 5 3))&quot;,
+                &quot;(/ (+ 9 1) (+ 2 3))&quot;, &quot;(*)&quot;, &quot;(/ 2)&quot; };
+        for (int i = 0; i &lt; temp.length; i++)
+            System.out.println(temp[i] + &quot; -&gt; &quot; + Check(temp[i], temp[i]));
+    }
+
+    private static String Check(String temp, String temp1) {
+        for (int i = 0; i &lt; temp.length(); i++)
+            if (temp.charAt(i) == '(')
+                for (int j = 1; j &lt; temp.length() - 1; j++)
+                    if (temp.charAt(j) == '(')
+                        return Check(temp.substring(j), temp1);
+                    else if (temp.charAt(j) == ')')
+                        return Check(temp1 = temp1.replace(temp.substring(i, j + 1), cal(temp.substring(i, j + 1))),
+                                temp1);
+        if (!temp.contains(&quot;(&quot;))
+            return temp;
+        return cal(temp);
+    }
+
+    private static String cal(String str) {
+        if (str.equals(&quot;(+)&quot;))
+            return &quot;0&quot;;
+        if (str.equals(&quot;(*)&quot;))
+            return &quot;1&quot;;
+        String[] temp = str.split(&quot; &quot;);
+        int num = Integer.valueOf(temp[1].replaceAll(&quot;[^0-9]&quot;, &quot;&quot;));
+        if (temp.length &gt; 1)
+            switch (str.charAt(1)) {
+            case '+':
+                for (int i = 2; i &lt; temp.length; i++)
+                    num += Integer.valueOf(temp[i].replaceAll(&quot;[^0-9]&quot;, &quot;&quot;));
+            case '-':
+                for (int i = 2; i &lt; temp.length; i++)
+                    num -= Integer.valueOf(temp[i].replaceAll(&quot;[^0-9]&quot;, &quot;&quot;));
+            case '*':
+                for (int i = 2; i &lt; temp.length; i++)
+                    num *= Integer.valueOf(temp[i].replaceAll(&quot;[^0-9]&quot;, &quot;&quot;));
+            case '/':
+                for (int i = 2; i &lt; temp.length; i++)
+                    num /= Integer.valueOf(temp[i].replaceAll(&quot;[^0-9]&quot;, &quot;&quot;));
+            }
+        return num + &quot;&quot;;
+    }
+}
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/06/07 21:36</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김지훈</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13513"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">'''
+되도록 find 같은 편리한 함수같은거 안쓰고 쌩짜로 짜봤습니다.
+'''
+
+def calc_list(l, operator):
+    if operator == '+':
+        return sum(l)
+    elif operator == '-':
+        v = l[0]
+        for i in range(1,len(l)):
+            v -= l[i]
+        return v
+    elif operator == '*':
+        v = l[0]
+        for i in range(1,len(l)):
+            v *= l[i]
+        return v
+    elif operator == '/':
+        v = l[0]
+        for i in range(1,len(l)):
+            v /= l[i]
+        return int(v)
+    else:
+        return sum(l)
+
+def process_str(s,depth):
+    s = s.strip()
+    #print(&quot;{}{}&quot;.format('  '*depth, s))
+    depth += 1
+
+    if s[0] == '(' and s[len(s) - 1] != ')':
+        s = s[1:]
+    if s[0] != '(' and s[len(s) - 1] == ')':
+        s = s[:-1]
+    if s[0] == '(' and s[len(s) - 1] == ')':
+        s = s[1:-1]
+
+    l = []
+    operator = ''
+    digit = ''
+    digit_count = 0
+    open_count = 0
+    ret = 0
+    x = -1
+
+    for i in range(len(s)):
+        if i &lt;= x:
+            continue
+        if s[i] == '(':
+            x = i
+            open_count += 1
+            while open_count != 0:
+                x += 1
+                if s[x] == ')': open_count -= 1
+                if s[x] == '(': open_count += 1
+            digit = process_str(s[i:x+1], depth)
+            l.append(int(digit))
+            digit_count += 1
+            digit = ''
+        elif s[i] in ['+', '-', '*', '/']:
+            operator = s[i]
+        elif s[i].isdigit():
+            digit += s[i]
+        elif s[i] == ' ':
+            if digit != '':
+                #print(&quot;{}{}&quot;.format('  '*depth, digit))
+                l.append(int(digit))
+                digit_count += 1
+                digit = ''
+        else:
+            continue
+
+    if digit != '':
+        #print(&quot;{}{}&quot;.format('  '*depth, digit))
+        l.append(int(digit))
+        digit_count += 1
+        digit = ''
+
+    if digit_count == 0:
+        return 0
+    else:
+        return calc_list(l,operator)
+
+raw_s = input('&gt; ')
+
+depth = 0
+v = process_str(raw_s,depth)
+
+print(&quot;result : {}&quot;.format(v))
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/07/11 07:43</p>
+                                <p class="static-profile" style="margin:0;padding:0;">구름과비</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13877"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import re
+
+def calc(v):
+    tmp = v.group(1).split()
+    if tmp[0] == '+' and not tmp[1:]:   return '0'
+    elif tmp[0] == '*' and not tmp[1:]: return '1'
+    elif not tmp[1:]:                   raise Exception('{} must have argument'.format(tmp[0]))
+    elif len(tmp[1:]) == 1:             return tmp[1]
+    else:                               return str(eval(tmp[0].join(tmp[1:])))
+
+def lispcalc(v):
+    print(v, end=' → ')
+    while 1:
+        if v[0] != '(': break
+        v = re.sub('\(([+*/-]( [-]?\d+)*?)\)',calc,v)
+    print(eval(v))
+    return eval(v)
+
+inp = '''\
+(- 3)
+(*)
+(- 10 3)
+(- 10 3 5)
+(* 2 3)
+(* 2 3 4)
+(+)
+-5
+(* (+ 2 3) (- 5 3))
+(/ (+ 9 1) (+ 2 3))'''
+
+[lispcalc(i) for i in inp.split('\n')]
+
+</code></pre>
+
+<p>LISP 문법을 몰라서 인자가 하나일때는 그 인자를 반환하게 하였습니다</p>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/01 18:24</p>
+                                <p class="static-profile" style="margin:0;padding:0;">Creator</p>
+                            </div>
+                        </div>
+
+                        
+                            <a name="comment_2309"></a>
+                            <div class="comment_line comment-content">
+                                
+                                <span style="white-space:pre-wrap;">곱하기는 인자 리스트가 없을 때 기본 값이 1입니다 ^^</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Han Jooyung,
+                                    2018/08/01 19:51
+                                </span>
+                            </div>
+                        
+                            <a name="comment_2310"></a>
+                            <div class="comment_line comment-content">
+                                
+                                    <span style="color:orangered;">+1</span>
+                                
+                                <span style="white-space:pre-wrap;">제가 문제를 제대로 안 봤네요ㅎㅎ;; 감사합니다
+예외처리 하였습니다</span>
+                                -
+                                <span style="font-size:11px;">
+                                    Creator,
+                                    2018/08/02 00:20
+                                </span>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_13917"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def LISP(s1):
+     s2 = list(s1[2:-1])
+     s1 = [s1[1]]
+     for x in range(s2.count('(')):
+          n = ''.join(s2[:s2.index(')')+1][2:-1]).split()
+          a = n[1]
+          for x in n[2:]:
+               a = eval('%s%s%s' %(a,n[0],x))
+          s1.append(str(a))
+          del s2[:s2.index(')')+1]
+     a = s1[1]
+     for x in s1[2:]:
+          a = eval('%s%s%s' %(a,s1[0],x))
+     print(a)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2018/08/04 16:37</p>
+                                <p class="static-profile" style="margin:0;padding:0;">김영성</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_17576"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import re
+
+def g(lisp): #lisp가 최소단위일 때
+  L = re.findall('\d+', lisp)
+  L = list(map(int, L))
+  if lisp.find('*') &gt;= 0:
+    res = 1
+    for i in range(len(L)): res *= L[i]
+    return str(res)
+  if lisp.find('+') &gt;= 0:
+    res = 0
+    for i in range(len(L)): res += L[i]
+    return str(res)
+  if lisp.find('-') &gt;= 0:
+    res = L[0]
+    for i in range(1, len(L)): res -= L[i]
+    return str(res)
+  if lisp.find('/') &gt;= 0:
+    return str(L[0]/L[1])
+  return 'error' #사칙연산 기호가 없을 때 에러를 반환
+
+def f(lisp):
+  #괄호의 최소단위를 찾는 정규표현식은 '[(][^(^)]+[)]'
+  p = re.compile('[(][^(^)]+[)]')
+  if p.match(lisp): return g(lisp)
+  return f(p.sub(lambda m : f(m.group()), lisp))
+</code></pre>
+
+<pre><code>&gt;&gt;&gt; print(f('(* 2 3 4)')) 
+24
+&gt;&gt;&gt; print(f('(* (+ 2 3) (- 5 3))')) 
+10
+&gt;&gt;&gt; print(f('(* (+ (*3 2 1) (+1 2)) (- 5 3))')) 
+18
+&gt;&gt;&gt; 
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/04/23 07:37</p>
+                                <p class="static-profile" style="margin:0;padding:0;">messi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line">
+                <a name="answer_20168"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">import re
+
+INP,  exc = input(&quot;INPUT : &quot;), ['(*)', '1', '(+)', '0']
+lisp_com = re.compile('\({1}[*+-/]([ ]-?\d*\.?\d+)*\){1}')
+KEISAN = re.compile('[*+-/]|[ ]-?\d*\.?\d+')
+while lisp_com.search(INP) != None :
+    if lisp_com.search(INP).group() == '(*)' or lisp_com.search(INP).group() == '(+)' :
+        INP = lisp_com.sub(exc[exc.index(lisp_com.search(INP).group())+1], INP, count = 1)
+    else :
+        TA = lisp_com.search(INP).group()
+        TA = lisp_com.sub(str(eval('%s' %KEISAN.findall(TA)[0].join(KEISAN.findall(TA)[1:]))), TA, count = 1)
+        INP = lisp_com.sub(TA, INP, count = 1)
+print(INP)
+</code></pre>
+
+<p>소수점이나 음수의 계산도 가능합니다. (*)와 (+)의 처리 때문에 생각보다는 코드가 길어졌습니다. 아직도 배울게 많네요!</p>
+<p>결과</p>
+<pre><code>INPUT : (* (+ 2 3) (- 5 3) (*))
+10
+INPUT : (* (/ (+ 9 1) (+ 2 1 2)) 3 (*))
+6.0
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2019/12/13 15:03</p>
+                                <p class="static-profile" style="margin:0;padding:0;">GG</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="answer-line-last">
+                <a name="answer_29721"></a>
+                <div class="row">
+                    <div class="col-md-1 answer-info hidden-xs hidden-sm">
+                        <div class="recommend-box" title="추천">
+                            <div class="recommend-box-count">0</div>
+                        </div>
+                        <div class="btn btn-xs btn-default btn-block" style="margin-top:5px;">추천</div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="answer-content markdown_area">
+                            <pre><code class="python">def calLISP(s):
+    if len(s) &lt;= 4:
+        return 1 if s[1] == '*' else 0
+
+    op = s[1]
+    s = s[3:-1]
+    lst = [i for i in s.split()]
+    return str(eval(op.join(lst)))
+
+s = input('LISP 형태로 표현된 4칙연산 산술식: ')
+while s[0] == '(':
+    if len(s) == 3:
+        s = calLISP(s)
+        break
+    lidx = 0
+    curr = ''
+    for i, c in enumerate(s):
+        curr += c
+        if c == '(' and lidx != -1:
+            lidx = i
+        elif c == ')' and lidx != -1:
+            curr = curr.replace(curr[lidx:], calLISP(s[lidx:i+1]))
+            lidx = -1
+    s = curr
+print(' -&gt; ', s)
+</code></pre>
+                        </div>
+
+                        <div class="answer-buttons clearfix" style="margin-bottom:10px;">
+                            <div class="pull-right profile-block profile-block-writer">
+                                <p style="margin:0;padding:0;">2023/10/23 17:50</p>
+                                <p class="static-profile" style="margin:0;padding:0;">insperChoi</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="answer-write-area clearfix">
+        <a href="/" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-list"></i> 목록으로
+        </a>
+    </div>
+
+        <div class="footer">
+            코딩도장 &copy; 2014 · 정적 보관본
+        </div>
+    </div>
+    <script src="/static/highlight.js/highlight.pack.js"></script>
+    <script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+</body>
+</html>
